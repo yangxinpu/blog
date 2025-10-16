@@ -1,6 +1,7 @@
 import "./style.scss"
 import { useState } from "react"
-
+import catImg from "../../assets/images/cat.webp";
+import logo from "../../assets/images/logo.svg";
 import Rain from "./pages/rain";
 
 export default function Home() {
@@ -54,14 +55,14 @@ export default function Home() {
                     <div className="title">Welcome</div>
                     <div className="motto">{motto[Math.floor(Math.random() * motto.length)].text}</div>
                     <div className="info">
-                        <img className="avatar" src="/cat.webp" alt="" />
+                        <img className="avatar" src={catImg} alt="" />
                         <div className="text">
                             <span>naiLuo</span>
                             <span>—A enthusiast of technology</span>
                         </div>
                     </div>
                     <div className="logo">
-                        <img className="image" src="/logo.svg" alt="" />
+                        <img className="image" src={logo} alt="" />
                         {
                             tags.map((item) => {
                                 return (

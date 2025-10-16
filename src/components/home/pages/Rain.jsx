@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
 
 import "./Rain.scss"
 export default function Rain() {
@@ -130,8 +130,6 @@ export default function Rain() {
                 <canvas
                     className="canvas"
                     ref={canvasRef}
-                    onMouseOver={() => canvasHover()}
-                    onMouseLeave={() => canvasLeave()}
                 >
                 </canvas>
             </div>
