@@ -57,7 +57,6 @@ export default function Rain() {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-        let isWhite = false;
         // 设置canvas实际宽高
         canvas.width = 500;
         canvas.height = 500;
@@ -68,15 +67,6 @@ export default function Rain() {
         for (let i = 0; i < rainNum; i++){
             rainArr.push(new RainDrop(ctx,canvas.height,canvas.width));
         }
-        let timer2 = null;
-        const timer1 = setInterval(() => {
-            if (!timer2) clearInterval(timer2);
-            timer2 = setInterval(() => {
-                isWhite = !isWhite;
-                console.log(isWhite);
-            }, 200);
-            isWhite = true;
-        }, 1000);
         const animate = () => {
             // 清除整个画布区域
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -105,7 +95,7 @@ export default function Rain() {
             
             // 闭合路径
             ctx.closePath();
-            ctx.fillStyle =  isWhite ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 1)';
+            ctx.fillStyle =  'rgba(255, 255, 255, 1)';
             ctx.fill();
             ctx.restore();
             
@@ -121,7 +111,6 @@ export default function Rain() {
         // 清理函数
         return () => {
             cancelAnimationFrame(animate);
-            clearInterval(timer1);
         };
     }, []);
     return (

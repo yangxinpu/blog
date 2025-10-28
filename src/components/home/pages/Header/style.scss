@@ -1,0 +1,56 @@
+#HomeHeader {
+    height: 60px;
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        .logo{
+            height: 40px;
+            object-fit: cover;
+        }
+        .tickName{
+            font-size: 25px;
+            font-weight: 900;
+            font-family: monospace;
+            font-style: italic;
+            text-shadow: 1px 1px 2px var(--primary-color4);
+            color: var(--primary-color4);
+        }
+    }
+    .right{
+        button{
+            height: 30px;
+            width: 80px;
+            padding: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--primary-color4);
+            border-radius: 5px;
+            background-color: transparent;
+            color: var(--primary-color4);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            &:hover{
+                background-color: var(--primary-color3);
+                color: var(--bk-color);
+                border-color: var(--primary-color3);
+            }
+            &:touch{
+                background-color: var(--primary-color3);
+                color: var(--bk-color);
+                border-color: var(--primary-color3);
+            }
+            .language{
+                flex: 1;
+            }
+        }
+    }
+}

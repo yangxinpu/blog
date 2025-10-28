@@ -1,0 +1,54 @@
+@keyframes H-moveIn {// 从下往上移动进入
+    0%{
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#HomeContent{
+    height: calc(100svh - 60px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    .motto{
+        width: 80%;
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        line-height: 3rem;
+        white-space: pre-wrap;
+        text-shadow: 0 0 5px var(--primary-color4);
+        color: var(--primary-color4);
+        animation: H-moveIn 0.5s ease-in-out forwards;
+    }
+    .introduce{
+        width: 80%;
+        font-size: 1rem;
+        text-align: center;
+        letter-spacing: 2px;
+        color: var(--font-color);
+        opacity: 0;
+        animation: H-moveIn 1s ease-in-out forwards;
+    }
+    .techTags{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .techTag{
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--primary-color4) inset;
+            opacity: 0;
+            animation: H-moveIn 0.5s ease-in-out 0.5s forwards;
+        }
+    }
+}

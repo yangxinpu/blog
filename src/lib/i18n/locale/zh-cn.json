@@ -1,0 +1,14 @@
+{
+    "HomePage":{
+        "Header":{
+            "tickName":"奈落"
+        },
+        "Content":{
+            "motto1":"去发明,去创造,去做事实",
+            "motto2":"不是为了成就,而是为了追求成就",
+            "hobby":"一个前端开发爱好者",
+            "frontEnd":"前端",
+            "clientEnd":"客户端"
+        }
+    }
+}

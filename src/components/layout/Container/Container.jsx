@@ -1,11 +1,11 @@
 import "./style.scss"
 
-import Home from "../../home/Home"
+import Home from "../../Home/Home"
 
 export default function Container() {
-    let deviceWidth = window.innerWidth;
+    let deviceWidth = document.documentElement.clientWidth;
     window.addEventListener('resize', () => {
-        deviceWidth = window.innerWidth;
+        deviceWidth = document.documentElement.clientWidth;
     })
     return (
         <div id="Container" style={{width:deviceWidth}}>

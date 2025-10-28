@@ -1,14 +1,9 @@
-import { Suspense,lazy } from "react"
+import Container from './components/layout/Container/Container'
 
-import Loading from './components/layout/Loading/Loading';
-
-const Container = lazy(() => import('./components/layout/Container/Container'));
 function App() {
   return (
     <>
-      <Suspense fallback={<Loading></Loading>}>
         <Container />    
-      </Suspense>
     </>
   )
 }
