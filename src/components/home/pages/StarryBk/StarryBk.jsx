@@ -7,7 +7,7 @@ export default function StarryBk() {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-        canvas.width = document.documentElement.clientWidth;
+        canvas.width = Math.min(canvas.width, document.documentElement.clientWidth);
         canvas.height = document.documentElement.clientHeight - 60;
 
     // 流星类
