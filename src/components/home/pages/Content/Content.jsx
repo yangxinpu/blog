@@ -10,7 +10,7 @@ export default function Content({ motto, techTags }) {
             <div className="introduce">{t('HomePage.Content.hobby')}</div>
             <div className="techTags">
                 {techTags.map((tag) => (
-                    <div key={tag.id} className="techTag" style={{ border: `1px solid ${tag.color}`, color: tag.color }}>
+                    <div key={tag.id} className="techTag" style={{ border: `1px solid ${tag.color}`, color: tag.color, boxShadow: `0 0 15px ${tag.color} inset, 0 0 10px ${tag.color}` }}>
                         {tag.text}
                     </div>
                 ))}

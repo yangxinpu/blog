@@ -10,6 +10,10 @@
 }
 
 #HomeContent{
+    $animation-time: 1s;
+    z-index: 2;
+    position: absolute;
+    top: 60px;
     height: calc(100svh - 60px);
     width: 100%;
     display: flex;
@@ -17,38 +21,40 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    background-color: transparent;
     .motto{
         width: 80%;
         font-size: 3rem;
         font-weight: bold;
         text-align: center;
-        line-height: 3rem;
         white-space: pre-wrap;
-        text-shadow: 0 0 5px var(--primary-color4);
-        color: var(--primary-color4);
-        animation: H-moveIn 0.5s ease-in-out forwards;
+        color: transparent;
+        background: linear-gradient(45deg, #fff,var(--primary-color4));
+        background-clip: text;
+        -webkit-background-clip: text;
+
+        animation: H-moveIn $animation-time ease-in-out forwards;
     }
     .introduce{
         width: 80%;
-        font-size: 1rem;
+        font-size: 0.8rem;
         text-align: center;
         letter-spacing: 2px;
         color: var(--font-color);
         opacity: 0;
-        animation: H-moveIn 1s ease-in-out forwards;
+        animation: H-moveIn $animation-time ease-in-out $animation-time - 0.5s forwards;
     }
     .techTags{
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 1rem;
         .techTag{
             padding: 5px 10px;
-            font-size: 0.8rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px var(--primary-color4) inset;
+            font-size: 0.6rem;
+            border-radius: 5px;
             opacity: 0;
-            animation: H-moveIn 0.5s ease-in-out 0.5s forwards;
+            animation: H-moveIn $animation-time ease-in-out $animation-time - 0.5s forwards;
         }
     }
 }

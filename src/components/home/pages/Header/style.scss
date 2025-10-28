@@ -26,7 +26,7 @@
     .right{
         button{
             height: 30px;
-            width: 80px;
+            width: fit-content;
             padding: 0 5px;
             display: flex;
             justify-content: center;
@@ -35,7 +35,6 @@
             border-radius: 5px;
             background-color: transparent;
             color: var(--primary-color4);
-            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             &:hover{
@@ -43,13 +42,14 @@
                 color: var(--bk-color);
                 border-color: var(--primary-color3);
             }
-            &:touch{
-                background-color: var(--primary-color3);
-                color: var(--bk-color);
-                border-color: var(--primary-color3);
+            .icon{
+                font-size: 16px;
             }
             .language{
-                flex: 1;
+                width: 60px;
+                font-size: 12px;
+                font-weight: 600;
+                text-align: center;
             }
         }
     }

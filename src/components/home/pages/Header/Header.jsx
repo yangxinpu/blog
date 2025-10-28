@@ -14,8 +14,8 @@ export default function Header() {
             </div>
             <div className="right">
                 <button onClick={() => i18n.changeLanguage(i18n.language == 'en' ? 'zh' : 'en')}>
-                    <span>🌏</span>
-                    <span className="language">{i18n.language == 'en' ? 'English' : '中文'}</span>
+                    <span className="icon">⇌</span>
+                    <span className="language">{i18n.language == 'en' ? 'English' : 'Chinese'}</span>
                 </button>
             </div>
         </div>
