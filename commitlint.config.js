@@ -1,4 +1,4 @@
-// commitlint 配置文件, 用于校验 git commit 信息,格式为: <type>(<scope>): <subject>
+// commitlint 配置文件, 用于校验 git commit 信息,格式为: <type>(<scope>): <subject>(英文冒号)
 export default {
     extends: ['@commitlint/config-conventional'],
     rules: {
