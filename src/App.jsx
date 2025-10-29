@@ -1,11 +1,11 @@
-import Container from './components/layout/Container/Container'
+import Container from './components/layout/Container/Container';
 
 function App() {
-  return (
-    <>
-        <Container />    
-    </>
-  )
+    return (
+        <>
+            <Container />
+        </>
+    );
 }
 
-export default App
+export default App;

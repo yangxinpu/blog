@@ -8,12 +8,12 @@
 
 :root {
     //#0f0f0e #366454 #38967a #3bc8a0 #19fac6:颜色变量
-    --bk-color: #0f0f0e;//背景颜色
-    --font-color: #fff;//字体颜色
-    --primary-color1: #366454;//主要颜色1
-    --primary-color2: #38967a;//主要颜色2
-    --primary-color3: #3bc8a0;//主要颜色3
-    --primary-color4: #19fac6;//主要颜色4
+    --bk-color: #0f0f0e; //背景颜色
+    --font-color: #fff; //字体颜色
+    --primary-color1: #366454; //主要颜色1
+    --primary-color2: #38967a; //主要颜色2
+    --primary-color3: #3bc8a0; //主要颜色3
+    --primary-color4: #19fac6; //主要颜色4
 
     // 选择文本的背景颜色和字体颜色
     &::selection {
@@ -47,4 +47,3 @@ html {
     // 字体大小根据视口宽度变化，最小14px，最大30px
     font-size: calc(14px + (30 - 14) * ((100vw - 320px) / (1920 - 320)));
 }
-

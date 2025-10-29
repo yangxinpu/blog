@@ -1,3 +1,3 @@
-import throttle from "./models/throttle";
+import throttle from './models/throttle';
 
 export { throttle };

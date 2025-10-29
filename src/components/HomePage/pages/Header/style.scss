@@ -5,16 +5,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .left{
+    .left {
         height: 100%;
         display: flex;
         align-items: center;
         gap: 5px;
-        .logo{
+        .logo {
             height: 40px;
             object-fit: cover;
         }
-        .tickName{
+        .tickName {
             font-size: 25px;
             font-weight: 900;
             font-family: monospace;
@@ -23,8 +23,8 @@
             color: var(--primary-color4);
         }
     }
-    .right{
-        button{
+    .right {
+        button {
             height: 30px;
             width: fit-content;
             padding: 0 5px;
@@ -37,15 +37,15 @@
             color: var(--primary-color4);
             cursor: pointer;
             transition: all 0.3s ease-in-out;
-            &:hover{
+            &:hover {
                 background-color: var(--primary-color3);
                 color: var(--bk-color);
                 border-color: var(--primary-color3);
             }
-            .icon{
+            .icon {
                 font-size: 16px;
             }
-            .language{
+            .language {
                 width: 60px;
                 font-size: 12px;
                 font-weight: 600;

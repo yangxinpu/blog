@@ -1,4 +1,4 @@
-import "./style.scss"
+import './style.scss';
 export default function Loading() {
     return (
         <>
@@ -9,5 +9,5 @@ export default function Loading() {
                 </div>
             </div>
         </>
-    )
+    );
 }

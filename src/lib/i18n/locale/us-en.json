@@ -1,15 +1,15 @@
 {
-    "HomePage":{
-        "Header":{
-            "tickName":"NaiLuo"
-        },
-        "Content":{
-            "motto1":"The only way to do great work is to love what you do",
-            "motto2":"The only impossible journey is the one you never begin",
-            "motto3":"Every failure is a new beginning",
-            "hobby":"A enthusiast of frontend development",
-            "frontEnd":"Front-end",
-            "clientEnd":"Client-end"
-        }
+  "HomePage": {
+    "Header": {
+      "tickName": "NaiLuo"
+    },
+    "Content": {
+      "motto1": "The only way to do great work is to love what you do",
+      "motto2": "The only impossible journey is the one you never begin",
+      "motto3": "Every failure is a new beginning",
+      "hobby": "A enthusiast of frontend development",
+      "frontEnd": "Front-end",
+      "clientEnd": "Client-end"
     }
+  }
 }

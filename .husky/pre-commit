@@ -1,0 +1,3 @@
+# 运行Prettier格式化, 并运行eslint进行校验,运行stylelint进行校验
+pnpm run format && pnpm run lint && pnpm run stylelint
+

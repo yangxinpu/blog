@@ -1,15 +1,15 @@
 {
-    "HomePage":{
-        "Header":{
-            "tickName":"奈落"
-        },
-        "Content":{
-            "motto1":"做伟大的工作,唯一的方法就是热爱你所做的事情",
-            "motto2":"唯一的不可能的旅程,就是你从未开始的旅程",
-            "motto3":"每一个失败都是一个新的开始",
-            "hobby":"一个前端开发爱好者",
-            "frontEnd":"前端",
-            "clientEnd":"客户端"
-        }
+  "HomePage": {
+    "Header": {
+      "tickName": "奈落"
+    },
+    "Content": {
+      "motto1": "做伟大的工作,唯一的方法就是热爱你所做的事情",
+      "motto2": "唯一的不可能的旅程,就是你从未开始的旅程",
+      "motto3": "每一个失败都是一个新的开始",
+      "hobby": "一个前端开发爱好者",
+      "frontEnd": "前端",
+      "clientEnd": "客户端"
     }
+  }
 }

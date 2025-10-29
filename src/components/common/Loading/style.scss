@@ -1,11 +1,11 @@
-$c-color1:var(--color5);
-$c-color2:var(--color1);
-#Loading{
+$c-color1: var(--color5);
+$c-color2: var(--color1);
+#Loading {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
-    .content{
+    .content {
         width: 500px;
         height: 500px;
         display: flex;
@@ -14,14 +14,14 @@ $c-color2:var(--color1);
         align-items: center;
         gap: 2rem;
         @keyframes rotate {
-            0%{
+            0% {
                 transform: rotate(0);
             }
-            100%{
+            100% {
                 transform: rotate(-360deg);
             }
         }
-        .circle{
+        .circle {
             position: relative;
             width: 20%;
             height: 20%;
@@ -31,12 +31,12 @@ $c-color2:var(--color1);
             animation: rotate 1.5s linear infinite;
             box-shadow: 0 -5px 20px 1px $c-color1;
         }
-        .text{
+        .text {
             font-size: 1.4rem;
             font-weight: bold;
             background: linear-gradient(-45deg, $c-color2, $c-color1 50%);
             background-clip: text;
-            color:transparent;
+            color: transparent;
         }
     }
 }
