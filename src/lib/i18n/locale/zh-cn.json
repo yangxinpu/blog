@@ -1,7 +1,12 @@
 {
   "HomePage": {
     "Header": {
-      "tickName": "奈落"
+      "nickName": "奈落",
+      "theme0": "绿色",
+      "theme1": "蓝色",
+      "theme2": "红色",
+      "theme3": "橙色",
+      "custom": "自定义"
     },
     "Content": {
       "motto1": "做伟大的工作,唯一的方法就是热爱你所做的事情",

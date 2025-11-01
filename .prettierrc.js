@@ -3,7 +3,7 @@ export default {
     semi: true, // 语句是否需要分号
     tabWidth: 4, // 缩进空格数
     useTabs: false, // 使用空格而不是制表符缩进
-    printWidth: 100, // 每行字符长度
+    printWidth: 150, // 每行字符长度
 
     // 引号设置
     singleQuote: true, // 使用单引号而不是双引号

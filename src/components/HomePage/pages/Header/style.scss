@@ -1,3 +1,5 @@
+@use "sass:color";
+
 #HomeHeader {
     height: 60px;
     width: 100%;
@@ -14,7 +16,7 @@
             height: 40px;
             object-fit: cover;
         }
-        .tickName {
+        .nickName {
             font-size: 25px;
             font-weight: 900;
             font-family: monospace;
@@ -24,7 +26,10 @@
         }
     }
     .right {
-        button {
+        display: flex;
+        gap: 1rem;
+        .color-mode-btn {
+            position: relative;
             height: 30px;
             width: fit-content;
             padding: 0 5px;
@@ -38,9 +43,165 @@
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             &:hover {
+                font-weight: 700;
+                color: var(--primary-color3);
+                border: 1px solid var(--primary-color3);
+                box-shadow: 0px 0px 20px 10px var(--primary-color3);
+            }
+            .color-mode {
+                width: 30px;
+                font-size: 12px;
+                font-weight: 600;
+                text-align: center;
+            }
+        }
+        .theme-select {
+            position: relative;
+            height: 30px;
+            .theme-select-trigger {
+                height: 100%;
+                padding: 0 25px 0 8px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                border: 1px solid var(--primary-color4);
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                &::before {
+                    content: "";
+                    z-index: -1;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    height: 100%;
+                    width: 0%;
+                    border-radius: 5px;
+                    background-color: var(--primary-color3);
+                    transition: all 0.3s ease-in-out;
+                }
+                &:hover {
+                    font-weight: 700;
+                    box-shadow: 0px 0px 20px 10px var(--primary-color3);
+                    &::before {
+                        width: 100%;
+                    }
+                    & .theme-name,
+                    .theme-arrow {
+                        color: var(--bk-color);
+                    }
+                }
+                .theme-color {
+                    width: 14px;
+                    height: 14px;
+                    border-radius: 50%;
+                }
+                .theme-name {
+                    color: var(--primary-color4);
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                .theme-arrow {
+                    position: absolute;
+                    right: 8px;
+                    font-size: 10px;
+                    color: var(--primary-color4);
+                    transition: transform 0.3s ease;
+                    &.open {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+            .theme-select-dropdown {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                margin-top: 5px;
+                background-color: var(--bk-color);
+                border: 1px solid var(--primary-color4);
+                border-radius: 5px;
+                overflow: hidden;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 100;
+
+                .theme-option {
+                    padding: 8px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        background-color: rgba(25, 250, 198, 0.1);
+                    }
+
+                    &.selected {
+                        background-color: rgba(25, 250, 198, 0.2);
+                    }
+
+                    .theme-color {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+                    }
+
+                    .theme-name {
+                        font-size: 14px;
+                        color: var(--primary-color4);
+                    }
+                }
+                .color-picker-container {
+                    padding: 10px;
+                    display: flex;
+                    justify-content: center;
+                    background-color: var(--bk-color);
+                    .color-picker {
+                        width: 100%;
+                        height: 30px;
+                        border: none;
+                        outline: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .language-btn {
+            position: relative;
+            height: 30px;
+            width: fit-content;
+            padding: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--primary-color4);
+            border-radius: 5px;
+            background-color: transparent;
+            color: var(--primary-color4);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            &::before {
+                content: "";
+                z-index: -1;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0%;
+                border-radius: 5px;
                 background-color: var(--primary-color3);
+                transition: all 0.3s ease-in-out;
+            }
+            &:hover {
+                font-weight: 700;
                 color: var(--bk-color);
-                border-color: var(--primary-color3);
+                box-shadow: 0px 0px 20px 10px var(--primary-color3);
+                &::before {
+                    width: 100%;
+                }
             }
             .icon {
                 font-size: 16px;
@@ -52,5 +213,12 @@
                 text-align: center;
             }
         }
+    }
+}
+
+// 移动端不显示nickName
+@media screen and (max-width: 768px) {
+    .nickName {
+        display: none;
     }
 }

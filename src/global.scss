@@ -47,3 +47,10 @@ html {
     // 字体大小根据视口宽度变化，最小14px，最大30px
     font-size: calc(14px + (30 - 14) * ((100vw - 320px) / (1920 - 320)));
 }
+
+select:focus,
+option:focus,
+option {
+    border: none;
+    outline: none;
+}

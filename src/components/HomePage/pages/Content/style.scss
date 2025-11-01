@@ -30,10 +30,9 @@
         text-align: center;
         white-space: pre-wrap;
         color: transparent;
-        background: linear-gradient(45deg, #fff, var(--primary-color4));
+        background: linear-gradient(45deg, var(--font-color), var(--primary-color4));
         background-clip: text;
         -webkit-background-clip: text;
-
         animation: H-moveIn $animation-time ease-in-out forwards;
     }
     .introduce {

@@ -1,7 +1,12 @@
 {
   "HomePage": {
     "Header": {
-      "tickName": "NaiLuo"
+      "nickName": "NaiLuo",
+      "theme0": "Green",
+      "theme1": "Blue",
+      "theme2": " Red",
+      "theme3": "Orange",
+      "custom": "Custom"
     },
     "Content": {
       "motto1": "The only way to do great work is to love what you do",
