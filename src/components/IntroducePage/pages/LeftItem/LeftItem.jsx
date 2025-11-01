@@ -1,17 +1,22 @@
 import './style.scss';
 import { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import img from '../../../../assets/images/cat.webp';
 
 export default function LeftItem() {
+    const { t } = useTranslation();
     //创建全局观察器
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('showActive');
-            } else {
-                entry.target.classList.remove('showActive');
-            }
-        });
-    });
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        },
+        { threshold: 0.5, rootMargin: '0px 0px -20% 0px' }
+    );
     const observerRef = useRef([]); //将观察器存储在ref中
 
     useEffect(() => {
@@ -29,5 +34,29 @@ export default function LeftItem() {
         };
     }, []);
 
-    return <div id="IntroduceLeftItem"></div>;
+    return (
+        <div id="IntroduceLeftItem">
+            <div className="name" ref={el => observerRef.current.push(el)}>
+                <span className="text">NaiLu</span>
+                <img src={img} alt="" />
+            </div>
+            <div className="college" ref={el => observerRef.current.push(el)}>
+                <span>{t('IntroducePage.LeftItem.collegePart1')}</span>
+                <span>🌸</span>
+                <span>{t('IntroducePage.LeftItem.collegePart2')}</span>
+            </div>
+            <div className="persue" ref={el => observerRef.current.push(el)}>
+                <span>{t('IntroducePage.LeftItem.persuePart1')}</span>
+                <span>{t('IntroducePage.LeftItem.persuePart2')}</span>
+            </div>
+            <div className="dream" ref={el => observerRef.current.push(el)}>
+                <span>{t('IntroducePage.LeftItem.dreamPart1')}</span>
+                <span>⭐️</span>
+                <span>{t('IntroducePage.LeftItem.dreamPart2')}</span>
+                <span>🍀</span>
+                <span>{t('IntroducePage.LeftItem.dreamPart3')}</span>
+                
+            </div>
+        </div>
+    );
 }

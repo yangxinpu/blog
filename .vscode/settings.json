@@ -32,7 +32,7 @@
     "eslint.workingDirectories": ["./"],
     "eslint.nodePath": "./node_modules",
     "eslint.options": {
-        "configFile": "./eslint.config.js"
+        "configFile": "./.eslintrc.cjs"
     },
     "eslint.run": "onType",
     "eslint.alwaysShowStatus": true,
@@ -46,5 +46,25 @@
     "stylelint.run": "onType",
     "stylelint.packageManager": "pnpm",
     "css.validate": true,
-    "scss.validate": true
+    "scss.validate": true,
+    "stylelint.customSyntax": "postcss-scss",
+    "eslint.lintTask.enable": true,
+    "eslint.quiet": false,
+    "eslint.onIgnoredFiles": "warn",
+    "stylelint.configBasedir": "./",
+    "stylelint.trace.server": "verbose",
+    "eslint.trace.server": "verbose",
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "eslint.codeActionsOnSave.mode": "all",
+    "eslint.probe": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "vue",
+        "markdown"
+    ]
 }

@@ -11,5 +11,16 @@
       "frontEnd": "前端",
       "clientEnd": "客户端"
     }
+  },
+  "IntroducePage": {
+    "LeftItem": {
+      "collegePart1": "一个",
+      "collegePart2": "大学学生",
+      "persuePart1": "追求",
+      "persuePart2": "幽默，平静，热爱",
+      "dreamPart1": "梦想",
+      "dreamPart2": "成为一名优秀的",
+      "dreamPart3": "前端开发者"
+    }
   }
 }

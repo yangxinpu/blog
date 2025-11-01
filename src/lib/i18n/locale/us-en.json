@@ -11,5 +11,16 @@
       "frontEnd": "Front-end",
       "clientEnd": "Client-end"
     }
+  },
+  "IntroducePage": {
+    "LeftItem": {
+      "collegePart1": "A",
+      "collegePart2": "college student",
+      "persuePart1": "Persue",
+      "persuePart2": "humor, tranquil, and enthusiasm",
+      "dreamPart1": "Dream",
+      "dreamPart2": "to be a good",
+      "dreamPart3": "front-end developer"
+    }
   }
 }

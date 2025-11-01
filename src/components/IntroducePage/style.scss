@@ -1,5 +1,10 @@
 #IntroducePage {
     width: 100%;
-    height: 100svh;
     display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    #IntroducePage {
+        flex-direction: column;
+    }
 }

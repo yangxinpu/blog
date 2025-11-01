@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "format": "prettier --write .",
     "preview": "vite preview",
     "prepare": "husky",
-    "stylelint": "stylelint \"src/**/*.{css,scss}\""
+    "stylelint": "stylelint \"src/**/*.{css,scss}\"",
+    "lint": "eslint .",
+    "format": "prettier --write ." 
   },
   "dependencies": {
     "i18next": "^25.6.0",

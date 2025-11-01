@@ -1,5 +1,103 @@
+@keyframes I-textAppear {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+}
+@keyframes I-textUnderline {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 99%;
+    }
+}
+
 #IntroduceLeftItem {
+    $animation-time: 0.5s;
+    position: relative;
     width: 50%;
-    height: 100%;
-    border: 1px solid white;
+    height: 100svh;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--primary-color2);
+    .active {
+        &::before {
+            animation: I-textAppear $animation-time linear forwards;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -0.3rem;
+            left: 0;
+            width: 0;
+            height: 3px;
+            border-radius: 10px;
+            background-color: var(--primary-color2);
+            animation: I-textUnderline $animation-time linear 0.5s forwards;
+        }
+    }
+    .name,
+    .college,
+    .persue,
+    .dream {
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        width: fit-content;
+        &::before {
+            content: "";
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background-color: var(--bk-color);
+        }
+        &:hover {
+            color: var(--primary-color4);
+            transform: scale(1.1) translate(0.5rem, -0.1rem);
+        }
+    }
+    .name {
+        font-size: 3.5rem;
+        font-weight: bold;
+        color: var(--primary-color4);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-bottom: -1rem;
+            border-radius: 50%;
+            transform: rotate(30deg);
+        }
+    }
+    .college {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .persue {
+        position: relative;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .dream {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+}
+@media screen and (max-width: 768px) {
+    #IntroduceLeftItem {
+        flex-shrink: 0;
+        width: 100% !important;
+        gap: 3rem;
+    }
 }
