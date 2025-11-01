@@ -57,12 +57,7 @@ export default function RightItem() {
         <div id="IntroduceRightItem">
             <div className="wrap" ref={wrapRef}>
                 {images.map((img, index) => (
-                    <div
-                        className="item"
-                        draggable={false}
-                        key={index}
-                        ref={el => itemRef.current.push(el)}
-                    >
+                    <div className="item" draggable={false} key={index} ref={el => itemRef.current.push(el)}>
                         <div className="inner">
                             <img className="img" src={img} alt="" />
                         </div>

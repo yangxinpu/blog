@@ -55,7 +55,6 @@ export default function LeftItem() {
                 <span>{t('IntroducePage.LeftItem.dreamPart2')}</span>
                 <span>🍀</span>
                 <span>{t('IntroducePage.LeftItem.dreamPart3')}</span>
-                
             </div>
         </div>
     );

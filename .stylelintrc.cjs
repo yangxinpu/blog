@@ -12,15 +12,7 @@ module.exports = {
         'property-no-vendor-prefix': null,
         'scss/double-slash-comment-whitespace-inside': null,
     },
-    ignoreFiles: [
-        'docs/**/*',
-        'node_modules/**/*',
-        '*.min.css',
-        '*.min.scss',
-        'public/**/*',
-        'dist/**/*',
-        'build/**/*',
-    ],
+    ignoreFiles: ['docs/**/*', 'node_modules/**/*', '*.min.css', '*.min.scss', 'public/**/*', 'dist/**/*', 'build/**/*'],
     overrides: [
         {
             files: ['**/*.scss', '**/*.css'],
