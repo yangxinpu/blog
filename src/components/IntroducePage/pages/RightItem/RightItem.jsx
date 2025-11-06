@@ -2,11 +2,11 @@ import './style.scss';
 
 import { useRef, useEffect } from 'react';
 
-import star from '../../../../assets/images/introduce/star.jpg';
-import city from '../../../../assets/images/introduce/city.jpg';
-import grass from '../../../../assets/images/introduce/grass.jpg';
-import forest from '../../../../assets/images/introduce/forest.jpg';
-const images = [star, city, grass, forest];
+import hill from '../../../../assets/images/introduce/hill.webp';
+import aurora from '../../../../assets/images/introduce/aurora.webp';
+import grass from '../../../../assets/images/introduce/grass.webp';
+import forest from '../../../../assets/images/introduce/forest.webp';
+const images = [hill, aurora, grass, forest];
 
 export default function RightItem() {
     const itemRef = useRef([]); // 图片元素引用数组
