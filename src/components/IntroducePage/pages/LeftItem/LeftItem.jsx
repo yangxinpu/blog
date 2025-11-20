@@ -7,16 +7,13 @@ import img from '../../../../assets/images/cat.webp';
 export default function LeftItem() {
     const { t } = useTranslation();
     //创建全局观察器
-    const observer = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        },
-        { threshold: 0.5, rootMargin: '0px 0px -20% 0px' }
-    );
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    });
     const observerRef = useRef([]); //将观察器存储在ref中
 
     useEffect(() => {
@@ -35,7 +32,7 @@ export default function LeftItem() {
     }, []);
 
     return (
-        <div id="IntroduceLeftItem">
+        <div id="Introduce-left-item">
             <div className="name" ref={el => observerRef.current.push(el)}>
                 <span className="text">NaiLu</span>
                 <img src={img} alt="" />

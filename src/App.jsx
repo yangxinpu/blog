@@ -1,4 +1,4 @@
-import Container from './components/layout/Container/Container';
+import Container from './components/Layout/Container/Container';
 
 function App() {
     return (

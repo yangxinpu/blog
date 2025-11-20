@@ -1,0 +1,78 @@
+@keyframes W-item-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#Waterfall-page {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    .left-wrap,
+    .right-wrap {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5rem;
+        .item {
+            width: 70%;
+            aspect-ratio: 1/1.5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--primary-color4);
+            background-color: var(--primary-color1);
+            border-radius: 30px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                box-shadow: 0 0 50px var(--primary-color4);
+            }
+            .title {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 16px;
+            }
+            .content {
+                p {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        .itemActive {
+            animation: W-item-fade-in 1s ease-in-out forwards;
+        }
+        .item-first,
+        .item-last {
+            width: 70%;
+            aspect-ratio: 2;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #Waterfall-page {
+        .left-wrap,
+        .right-wrap {
+            .item{
+                width: 70%;
+                height: 300px;
+            }
+            .item-first,
+            .item-last {
+                width: 70%;
+                height: 100px;
+            }            
+        }
+
+    }
+}

@@ -15,7 +15,7 @@
     }
 }
 
-#IntroduceLeftItem {
+#Introduce-left-item {
     $animation-time: 0.5s;
     position: relative;
     width: 50%;
@@ -95,7 +95,7 @@
     }
 }
 @media screen and (max-width: 768px) {
-    #IntroduceLeftItem {
+    #Introduce-left-item {
         flex-shrink: 0;
         width: 100% !important;
         gap: 3rem;

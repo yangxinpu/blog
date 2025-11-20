@@ -54,7 +54,7 @@ export default function RightItem() {
         };
     }, []);
     return (
-        <div id="IntroduceRightItem">
+        <div id="Introduce-right-item">
             <div className="wrap" ref={wrapRef}>
                 {images.map((img, index) => (
                     <div className="item" draggable={false} key={index} ref={el => itemRef.current.push(el)}>
