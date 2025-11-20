@@ -1,12 +1,17 @@
 @use "sass:color";
 
-#HomeHeader {
+#Header {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 60px;
     width: 100%;
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(15, 15, 14, 0.8);
     .left {
         height: 100%;
         display: flex;
@@ -28,33 +33,6 @@
     .right {
         display: flex;
         gap: 1rem;
-        .color-mode-btn {
-            position: relative;
-            height: 30px;
-            width: fit-content;
-            padding: 0 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--primary-color4);
-            border-radius: 5px;
-            background-color: transparent;
-            color: var(--primary-color4);
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            &:hover {
-                font-weight: 700;
-                color: var(--primary-color3);
-                border: 1px solid var(--primary-color3);
-                box-shadow: 0px 0px 20px 10px var(--primary-color3);
-            }
-            .color-mode {
-                width: 30px;
-                font-size: 12px;
-                font-weight: 600;
-                text-align: center;
-            }
-        }
         .theme-select {
             position: relative;
             height: 30px;

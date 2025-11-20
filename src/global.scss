@@ -48,6 +48,12 @@ html {
     font-size: calc(14px + (30 - 14) * ((100vw - 320px) / (1920 - 320)));
 }
 
+// App元素样式，设置为相对定位，顶部为0，确保Header固定在顶部
+#root {
+    position: relative;
+    top: 0;
+}
+
 select:focus,
 option:focus,
 option {

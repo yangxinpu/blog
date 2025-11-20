@@ -1,7 +1,6 @@
 import './style.scss';
 import { useTranslation } from 'react-i18next';
 import Content from './pages/Content/Content.jsx';
-import Header from './pages/Header/Header.jsx';
 import StarryBk from './pages/StarryBk/StarryBk.jsx';
 
 export default function Home() {
@@ -32,7 +31,6 @@ export default function Home() {
     ];
     return (
         <section id="HomePage">
-            <Header />
             <Content motto={motto} techTags={techTags} />
             <StarryBk />
         </section>
