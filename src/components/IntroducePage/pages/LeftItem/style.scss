@@ -1,4 +1,4 @@
-@keyframes I-textAppear {
+@keyframes Introduce-text_appear {
     0% {
         width: 100%;
     }
@@ -6,7 +6,7 @@
         width: 0;
     }
 }
-@keyframes I-textUnderline {
+@keyframes Introduce-text_underline {
     0% {
         width: 0;
     }
@@ -16,7 +16,7 @@
 }
 
 #Introduce-left-item {
-    $animation-time: 0.5s;
+    $animation-time: 1s;
     position: relative;
     width: 50%;
     height: 100svh;
@@ -28,7 +28,7 @@
     color: var(--primary-color2);
     .active {
         &::before {
-            animation: I-textAppear $animation-time linear forwards;
+            animation: Introduce-text_appear $animation-time linear forwards;
         }
         &::after {
             content: "";
@@ -39,12 +39,12 @@
             height: 3px;
             border-radius: 10px;
             background-color: var(--primary-color2);
-            animation: I-textUnderline $animation-time linear 0.5s forwards;
+            animation: Introduce-text_underline $animation-time linear 0.5s forwards;
         }
     }
     .name,
     .college,
-    .persue,
+    .pursue,
     .dream {
         position: relative;
         transition: all 0.3s ease-in-out;
@@ -62,7 +62,6 @@
         }
         &:hover {
             color: var(--primary-color4);
-            transform: scale(1.1) translate(0.5rem, -0.1rem);
         }
     }
     .name {
@@ -84,13 +83,13 @@
         font-size: 2rem;
         font-weight: bold;
     }
-    .persue {
+    .pursue {
         position: relative;
         font-size: 1.5rem;
         font-weight: bold;
     }
     .dream {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: bold;
     }
 }

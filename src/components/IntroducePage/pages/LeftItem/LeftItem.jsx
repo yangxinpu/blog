@@ -42,9 +42,9 @@ export default function LeftItem() {
                 <span>🌸</span>
                 <span>{t('IntroducePage.LeftItem.collegePart2')}</span>
             </div>
-            <div className="persue" ref={el => observerRef.current.push(el)}>
-                <span>{t('IntroducePage.LeftItem.persuePart1')}</span>
-                <span>{t('IntroducePage.LeftItem.persuePart2')}</span>
+            <div className="pursue" ref={el => observerRef.current.push(el)}>
+                <span>{t('IntroducePage.LeftItem.pursuePart1')}</span>
+                <span>{t('IntroducePage.LeftItem.pursuePart2')}</span>
             </div>
             <div className="dream" ref={el => observerRef.current.push(el)}>
                 <span>{t('IntroducePage.LeftItem.dreamPart1')}</span>

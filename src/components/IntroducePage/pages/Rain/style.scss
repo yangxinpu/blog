@@ -1,0 +1,17 @@
+#Rain {
+    width: 50%;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .canvas {
+        width: 60%;
+        height: 60%;
+    }
+}
+@media screen and (max-width: 768px) {
+    #Rain {
+        width: 100% !important;
+        height: 100svh;
+    }
+}
