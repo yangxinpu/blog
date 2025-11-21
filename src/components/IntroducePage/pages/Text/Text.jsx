@@ -11,6 +11,8 @@ export default function LeftItem() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+            }else{
+                entry.target.classList.remove('active');
             }
         });
     });
@@ -32,7 +34,7 @@ export default function LeftItem() {
     }, []);
 
     return (
-        <div id="Introduce-left-item">
+        <div id="Introduce-text">
             <div className="name" ref={el => observerRef.current.push(el)}>
                 <span className="text">NaiLu</span>
                 <img src={img} alt="" />

@@ -26,5 +26,41 @@
       "dreamPart2": "to be a good",
       "dreamPart3": "front-end developer"
     }
+  },
+  "WaterfallPage": {
+    "LeftItem": {
+      "readingTitle": "Reading",
+      "readingContent": [
+        "Science Fiction - \"Three Body\" Series",
+        "Literary Classics - \"One Hundred Years of Solitude\", \"Dream of the Red Chamber\"",
+        "Psychology - \"Thinking, Fast and Slow\"",
+        "Historical Biography - \"Sapiens: A Brief History of Humankind\""
+      ],
+      "travelTitle": "Travel",
+      "travelContent": [
+        "Natural Scenery - Hiking in snow mountains, exploring forests",
+        "Urban Culture - Tasting cuisine, visiting museums",
+        "Photography - Capturing beautiful moments during journeys",
+        "Cultural Exchange - Learning about different regional cultures and histories"
+      ],
+      "description": "Everyone's interests and hobbies are unique, they shape our personalities and worldviews. I believe maintaining curiosity and an open mind, constantly exploring new things, is the best way to enrich life."
+    },
+    "RightItem": {
+      "description": "In addition to reading and traveling, I have many other hobbies. These activities allow me to relax, cultivate creativity, and make many like-minded friends.",
+      "musicTitle": "Music",
+      "musicContent": [
+        "Classical Music - Mozart, Beethoven",
+        "Pop Music - Independent bands, original soundtracks",
+        "Musical Instruments - Self-learning guitar and piano",
+        "Live Performances - Attending music festivals and concerts"
+      ],
+      "sportsTitle": "Sports",
+      "sportsContent": [
+        "Running - Morning runs and marathon training",
+        "Yoga - Maintaining physical and mental balance",
+        "Swimming - Favorite summer sport",
+        "Mountaineering - Challenging myself, enjoying beautiful scenery"
+      ]
+    }
   }
 }

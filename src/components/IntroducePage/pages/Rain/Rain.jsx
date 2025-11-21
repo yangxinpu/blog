@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 
 import './style.scss';
 export default function Rain() {
+    
     const canvasRef = useRef(null);
     class RainDrop {
         constructor(ctx, canvasH, canvasW) {
