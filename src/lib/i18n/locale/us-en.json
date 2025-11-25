@@ -3,7 +3,7 @@
     "Header": {
       "theme0": "Green",
       "theme1": "Blue",
-      "theme2": " Red",
+      "theme2": "Red",
       "theme3": "Orange",
       "custom": "Custom"
     },
@@ -64,6 +64,143 @@
     }
   },
   "TechPage": {
-    "title": "Technical Stack"
+    "title": "Technical Stack",
+    "logoAlt": "{{name}} logo",
+    "techStacks": {
+      "JavaScript": {
+        "description": "Core programming language for web front-end development, used to implement page interaction logic and dynamic effects, and also supports server-side development.",
+        "subTechs": {
+          "TypeScript": "TypeScript"
+        }
+      },
+      "CSS": {
+        "description": "Cascading Style Sheets, used to define the visual style and layout of web pages, and also supports responsive design.",
+        "subTechs": {
+          "TailwindCSS": "Tailwind CSS",
+          "SCSS": "SCSS",
+          "LESS": "LESS"
+        }
+      },
+      "HTML": {
+        "name": "HTML",
+        "description": "HyperText Markup Language, the foundation for building web page structures.",
+        "subTechs": {
+          "SVG": "SVG",
+          "Canvas": "Canvas",
+          "DOM": "DOM",
+          "BOM": "BOM"
+        }
+      },
+      "React": {
+        "description": "JavaScript library for building user interfaces, focused on component-based development and virtual DOM.",
+        "subTechs": {
+          "AntDesign": "Ant Design",
+          "ReactRouter": "React Router",
+          "Redux": "Redux",
+          "Zustand": "Zustand",
+          "Shadcn": "Shadcn"
+        }
+      },
+      "Vue": {
+        "description": "Progressive JavaScript framework, easy to learn and powerful.",
+        "subTechs": {
+          "Pinia": "Pinia",
+          "VueRouter": "Vue Router",
+          "Vuex": "Vuex",
+          "ElementPlus": "Element Plus"
+        }
+      },
+      "NextJS": {
+        "description": "Full-stack framework based on React, supporting server-side rendering and static site generation."
+      },
+      "NodeJS": {
+        "description": "JavaScript runtime environment based on Chrome V8 engine, used for server-side development.",
+        "subTechs": {
+          "Express": "Express",
+          "MySQL": "MySQL",
+          "JWT": "JWT",
+          "Nodemailer": "Nodemailer"
+        }
+      },
+      "Webpack": {
+        "description": "Static module bundler for modern JavaScript applications.",
+        "subTechs": {
+          "Loaders": "Loaders",
+          "Plugins": "Plugins"
+        }
+      },
+      "Vite": {
+        "description": "Next-generation front-end build tool, providing extremely fast development experience.",
+        "subTechs": {
+          "Rollup": "Rollup",
+          "ESBuild": "ESBuild"
+        }
+      },
+      "Babel": {
+        "description": "JavaScript compiler for converting ES6+ code to backward-compatible versions.",
+        "subTechs": {
+          "Presets": "Presets",
+          "Plugins": "Plugins"
+        }
+      },
+      "ESLint": {
+        "description": "JavaScript code checking tool used to identify and fix problems in code.",
+        "subTechs": {
+          "Presets": "Presets",
+          "Plugins": "Plugins"
+        }
+      },
+      "Prettier": {
+        "description": "Code formatting tool to ensure code style consistency.",
+        "subTechs": {
+          "Presets": "Presets"
+        }
+      },
+      "PostCSS": {
+        "description": "Tool for transforming CSS with JavaScript, providing modern CSS feature support.",
+        "subTechs": {
+          "Plugins": "Plugins"
+        }
+      },
+      "AnimationLib": {
+        "name": "Animation Libraries",
+        "description": "Libraries for implementing page animation effects",
+        "subTechs": {
+          "AnimateCSS": "Animate.css",
+          "GSAP": "GSAP",
+          "Lottie": "Lottie",
+          "Motion": "Motion"
+        }
+      },
+      "UniApp": {
+        "description": "Framework for developing cross-platform applications using Vue.js.",
+        "subTechs": {
+          "Vue3": "Vue3",
+          "WeChatMiniProgram": "WeChat Mini Program",
+          "App": "App",
+          "WebView": "WebView"
+        }
+      },
+      "Git": {
+        "description": "Distributed version control system for code management and collaborative development.",
+        "subTechs": {
+          "GitHub": "GitHub",
+          "GitLab": "GitLab",
+          "Gitee": "Gitee",
+          "Husky": "Husky",
+          "LintStaged": "Lint-Staged",
+          "CommitLint": "Commit-Lint"
+        }
+      },
+      "Network": {
+        "name": "Computer Network",
+        "description": "Basic knowledge of computer networks, including HTTP, TCP/IP and other protocols.",
+        "subTechs": {
+          "HTTP": "HTTP",
+          "TCPIP": "TCP/IP",
+          "DNS": "DNS"
+        }
+      }
+    }
   }
 }

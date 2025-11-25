@@ -1,15 +1,147 @@
+@keyframes TeckPage-left-movein {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes TeckPage-right-movein {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 #Tech-page {
-    height: 100svh;
     width: 100%;
-    border: 1px solid #ffffff;
+    min-height: 100svh;
     .header {
-        height: 10%;
         width: 100%;
-        border: 1px solid #ffffff;
+        .title-tech-stack {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 2px var(--font-color);
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1rem;
+        }
     }
     .content {
-        height: 90%;
+        margin-top: 2rem;
         width: 100%;
         display: flex;
+        .tech-stack-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: 100%;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary-color1), transparent);
+            .tech-item {
+                opacity: 0;
+                padding: 1.5rem;
+                border-radius: 20px;
+                background: rgba(59, 200, 160, 0.1);
+                border-left: 4px solid var(--primary-color3);
+                backdrop-filter: blur(5px);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 25px rgba(59, 200, 160, 0.3);
+                    border-left-color: var(--primary-color4);
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 100%;
+                    background: linear-gradient(90deg, rgba(59, 200, 160, 0.2), transparent);
+                    border-radius: 10px;
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: opacity 0.8s ease;
+                }
+                &:hover::before {
+                    opacity: 1;
+                }
+                .tech-name {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: var(--primary-color4);
+                }
+                .tech-description {
+                    color: var(--font-color);
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    margin-bottom: 0.8rem;
+                    padding-left: 0.5rem;
+                    border-left: 2px solid var(--primary-color2);
+                }
+                .tech-subtechs {
+                    color: var(--primary-color3);
+                    font-size: 0.9rem;
+                    font-style: italic;
+                    background: rgba(25, 250, 198, 0.1);
+                    padding: 0.5rem 1rem;
+                    border-radius: 4px;
+                    border-left: 2px dashed var(--primary-color4);
+                }
+            }
+        }
+        .tech-item-active {
+            opacity: 1;
+            transform: translateX(0);
+            &.tech-item-left {
+                animation: TeckPage-left-movein 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+            &.tech-item-right {
+                animation: TeckPage-right-movein 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+        }
+    }
+    // 响应式设计
+    @media (max-width: 768px) {
+        .header {
+            .title-tech-stack {
+                font-size: 1.5rem;
+                text-shadow: 0 0 1px var(--font-color);
+            }
+        }
+        .content {
+            flex-direction: column;
+            .tech-stack-container {
+                width: 100%;
+                padding: 1rem;
+                .tech-item {
+                    opacity: 0;
+                    transform: translateX(0);
+                    padding: 1rem;
+                    border-left: 4px solid var(--primary-color3);
+                    border-right: none;
+                    .tech-name {
+                        font-size: 1.3rem;
+                    }
+                    &:hover {
+                        border-left-color: var(--primary-color4);
+                        border-right-color: inherit;
+                    }
+                }
+                .tech-item-active {
+                    // 移除动画相关代码
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        }
     }
 }

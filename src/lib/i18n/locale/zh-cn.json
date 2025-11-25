@@ -64,6 +64,143 @@
     }
   },
   "TechPage": {
-    "title": "技术栈"
+    "title": "技术栈",
+    "logoAlt": "{{name}} 标志",
+    "techStacks": {
+      "JavaScript": {
+        "description": "Web前端开发的核心编程语言，用于实现页面交互逻辑和动态效果，同时也支持服务端开发。",
+        "subTechs": {
+          "TypeScript": "TypeScript"
+        }
+      },
+      "CSS": {
+        "description": "层叠样式表，用于定义网页的视觉样式和布局，同时也支持响应式设计。",
+        "subTechs": {
+          "TailwindCSS": "Tailwind CSS",
+          "SCSS": "SCSS",
+          "LESS": "LESS"
+        }
+      },
+      "HTML": {
+        "name": "HTML",
+        "description": "超文本标记语言，是构建网页结构的基础。",
+        "subTechs": {
+          "SVG": "SVG",
+          "Canvas": "Canvas",
+          "DOM": "DOM",
+          "BOM": "BOM"
+        }
+      },
+      "React": {
+        "description": "用于构建用户界面的JavaScript库，专注于组件化开发和虚拟DOM。",
+        "subTechs": {
+          "AntDesign": "Ant Design",
+          "ReactRouter": "React Router",
+          "Redux": "Redux",
+          "Zustand": "Zustand",
+          "Shadcn": "Shadcn"
+        }
+      },
+      "Vue": {
+        "description": "渐进式JavaScript框架，易于上手且功能强大。",
+        "subTechs": {
+          "Pinia": "Pinia",
+          "VueRouter": "Vue Router",
+          "Vuex": "Vuex",
+          "ElementPlus": "Element Plus"
+        }
+      },
+      "NextJS": {
+        "description": "基于React的全栈框架，支持服务端渲染和静态站点生成。"
+      },
+      "NodeJS": {
+        "description": "基于Chrome V8引擎的JavaScript运行环境，用于服务端开发。",
+        "subTechs": {
+          "Express": "Express",
+          "MySQL": "MySQL",
+          "JWT": "JWT",
+          "Nodemailer": "Nodemailer"
+        }
+      },
+      "Webpack": {
+        "description": "现代JavaScript应用的静态模块打包工具。",
+        "subTechs": {
+          "Loaders": "Loaders",
+          "Plugins": "Plugins"
+        }
+      },
+      "Vite": {
+        "description": "下一代前端构建工具，提供极速的开发体验。",
+        "subTechs": {
+          "Rollup": "Rollup",
+          "ESBuild": "ESBuild"
+        }
+      },
+      "Babel": {
+        "description": "JavaScript编译器，用于将ES6+代码转换为向后兼容的版本。",
+        "subTechs": {
+          "Presets": "Presets",
+          "Plugins": "Plugins"
+        }
+      },
+      "ESLint": {
+        "description": "JavaScript代码检查工具，用于识别和修复代码中的问题。",
+        "subTechs": {
+          "Presets": "Presets",
+          "Plugins": "Plugins"
+        }
+      },
+      "Prettier": {
+        "description": "代码格式化工具，确保代码风格一致性。",
+        "subTechs": {
+          "Presets": "Presets"
+        }
+      },
+      "PostCSS": {
+        "description": "使用JavaScript转换CSS的工具，提供现代CSS特性支持。",
+        "subTechs": {
+          "Plugins": "Plugins"
+        }
+      },
+      "AnimationLib": {
+        "name": "动画库",
+        "description": "用于实现页面动画效果的库",
+        "subTechs": {
+          "AnimateCSS": "Animate.css",
+          "GSAP": "GSAP",
+          "Lottie": "Lottie",
+          "Motion": "Motion"
+        }
+      },
+      "UniApp": {
+        "description": "使用Vue.js开发跨平台应用的框架。",
+        "subTechs": {
+          "Vue3": "Vue3",
+          "WeChatMiniProgram": "微信小程序",
+          "App": "App",
+          "WebView": "WebView"
+        }
+      },
+      "Git": {
+        "description": "分布式版本控制系统，用于代码管理和协作开发。",
+        "subTechs": {
+          "GitHub": "GitHub",
+          "GitLab": "GitLab",
+          "Gitee": "Gitee",
+          "Husky": "Husky",
+          "LintStaged": "Lint-Staged",
+          "CommitLint": "Commit-Lint"
+        }
+      },
+      "Network": {
+        "name": "计算机网络",
+        "description": "计算机网络基础知识，包括HTTP、TCP/IP等协议。",
+        "subTechs": {
+          "HTTP": "HTTP",
+          "TCPIP": "TCP/IP",
+          "DNS": "DNS"
+        }
+      }
+    }
   }
 }
