@@ -1,0 +1,21 @@
+#TechPage-Header {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .title {
+        font-size: 40px;
+        font-weight: bold;
+        color: var(--primary-color4);
+        transform: translateX(-100px);
+        transition: text-shadow 0.3s ease-in-out, transform 1s ease-in-out;
+        &:hover {
+            text-shadow:
+                0 0 10px var(--primary-color4),
+                0 0 20px var(--primary-color4);
+        }
+    }
+    .active {
+        transform: translateX(100px);
+    }
+}

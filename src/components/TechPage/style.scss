@@ -1,0 +1,15 @@
+#Tech-page {
+    height: 100svh;
+    width: 100%;
+    border: 1px solid #ffffff;
+    .header {
+        height: 10%;
+        width: 100%;
+        border: 1px solid #ffffff;
+    }
+    .content {
+        height: 90%;
+        width: 100%;
+        display: flex;
+    }
+}
