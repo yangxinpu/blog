@@ -1,13 +1,20 @@
-## blog
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-**一个个人展示网站，用于集中呈现我的个人信息、专业能力、作品成果与成长经历**
+# Run and deploy your AI Studio app
 
-### 页面实现介绍：
+This contains everything you need to run your app locally.
 
-**HomePage**：主页展示，包含Header，Content，StarryBk三个子组件；
+View your app in AI Studio: https://ai.studio/apps/temp/1
 
-Header：顶部栏，用于logo展示，国际化语言切换；
+## Run Locally
 
-Content：内容部分，包括格言，文字介绍，和技术标签；
+**Prerequisites:**  Node.js
 
-StarryBk：基于canvas实现的流星背景，有流星类，粒子类，椭圆圆弧绘制三部分；
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

@@ -1,2 +1,0 @@
-# 运行commitlint校验
-#  npx --no -- commitlint --edit $1
