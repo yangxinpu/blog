@@ -1,4 +1,4 @@
-import react from 'eslint-plugin-react';
+/* import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks'; // 导入react-hooks插件
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
@@ -38,4 +38,4 @@ export default [
       },
     },
   },
-];
+]; */

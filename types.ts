@@ -12,6 +12,7 @@ export interface TechItem {
   description: string;
   color: string;
   logo: string; // SVG path d attribute
+  tags?: string[]; // 添加tags字段用于显示技术特性
 }
 
 export interface ThoughtItem {

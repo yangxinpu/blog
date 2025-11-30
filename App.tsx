@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, Variants } from 'framer-motion';
 import { 
@@ -18,6 +17,7 @@ import MagicCard from './components/MagicCard';
 import PlayfulTextSection from './components/PlayfulTextSection';
 import ManifestoSection from './components/ManifestoSection';
 import VideoShowcase from './components/VideoShowcase';
+
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('zh');
   const [theme, setTheme] = useState<Theme>('dark');
@@ -100,8 +100,12 @@ const App: React.FC = () => {
 
       <FloatingControls theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} />
 
-      <main className="relative z-10">
-        
+      {/* Main Content Layer - Scrolls over fixed footer */}
+      {/* marginBottom: 100vh ensures we can scroll 'past' the content to reveal the footer */}
+      <div 
+        className={`relative z-10 shadow-2xl transition-colors duration-500 ${theme === 'dark' ? 'bg-[#0f0f0e]' : 'bg-[#f3f4f6]'}`}
+        style={{ marginBottom: '300px' }}
+      >
         {/* HERO SECTION */}
         <section className="min-h-screen flex flex-col items-center justify-center relative px-4 overflow-hidden">
           
@@ -312,7 +316,7 @@ const App: React.FC = () => {
                                 whileHover={{ y: -10 }}
                                 className={`
                                     relative p-8 rounded-3xl overflow-hidden
-                                    ${theme === 'dark' ? 'bg-nl-black/40 border border-nl-dark/30' : 'bg-white/80 border-gray-100 shadow-xl'}
+                                    ${theme === 'dark' ? 'bg-nl-black/40 border-nl-dark/30' : 'bg-white/80 border-gray-100 shadow-xl'}
                                 `}
                                 gradientColor={magicGradient}
                             >
@@ -342,19 +346,78 @@ const App: React.FC = () => {
             </div>
         </section>
         <VideoShowcase theme={theme} lang={lang} />
-        {/* FOOTER */}
-        <footer className="py-12 text-center relative z-10 border-t border-nl-dark/20 bg-nl-black/20 backdrop-blur-sm">
+        <footer className="w-full py-12 text-center relative z-20 border-t border-nl-dark/20 bg-nl-black">
             <div className="flex justify-center gap-8 mb-6">
-                <a href="https://github.com/yangxinpu/blog">
-                    <Github className="w-8 h-8 hover:text-nl-neon cursor-pointer transition-colors" />
+                <a href="https://github.com/yangxinpu/blog" target="_blank">
+                    <Github className="w-8 h-8 hover:text-white cursor-pointer transition-colors" />
                 </a>        
            </div>
            <p className="text-sm font-mono opacity-60">© {new Date().getFullYear()} NaiLuo. All rights reserved.</p>
-        </footer>
+        </footer>              
+      </div>
+      <div 
+        className={`fixed bottom-0 left-0 w-full z-0 flex flex-col justify-end overflow-hidden ${theme === 'dark' ? 'bg-nl-neon' : 'bg-nl-light'}`}
+      >
+        <motion.section
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className={`py-24 relative overflow-hidden flex-1 flex flex-col justify-center ${theme === 'dark' ? 'bg-nl-neon' : 'bg-nl-light'}`}
+        >
+            <div className="container mx-auto text-center">
+                <motion.div
+                    initial={{ y: 100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative inline-block"
+                >
+                    <h2 className="text-8xl md:text-[100px] lg:text-[200px] font-black tracking-tighter">
+                        {"NAILUO".split('').map((char, index) => (
+                            <motion.span
+                                key={index}
+                                initial={{ y: 50, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    delay: index * 0.1,
+                                    duration: 0.5,
+                                    ease: "easeOut"
+                                }}
+                                whileHover={{
+                                    scale: 1.2,
+                                    rotate: Math.sin(index) * 5,
+                                    color: "rgba(0,0,0,0.8)",
+                                    transition: { duration: 0.2 }
+                                }}
+                                whileTap={{
+                                    scale: 0.95,
+                                    transition: { duration: 0.1 }
+                                }}
+                                className="inline-block text-black cursor-pointer"
+                            >
+                                {char}
+                            </motion.span>
+                        ))}
+                    </h2>
+                    <motion.div
+                        className="absolute -bottom-6 left-0 h-1 bg-black/80"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '100%' }}
+                        viewport={{ once: true }}
+                        transition={{
+                            delay: 0.8,
+                            duration: 1,
+                            ease: "easeOut"
+                        }}
+                    />
+                </motion.div>
+            </div>
+        </motion.section>
+      </div>
 
-      </main>
     </div>
   );
 };
-
 export default App;

@@ -9,18 +9,18 @@ export const COLORS = {
 };
 
 const TECH_DATA_RAW = [
-  { id: 'js', name: 'JavaScript', color: '#F7DF1E', logo: '/images/javascript.png' },
-  { id: 'html', name: 'HTML5', color: '#E34F26', logo: '/images/html.png' },
-  { id: 'css', name: 'CSS3', color: '#1572B6', logo: '/images/css.png' },
-  { id: 'vue', name: 'Vue.js', color: '#4FC08D', logo: '/images/Vue.png' },
-  { id: 'react', name: 'React', color: '#61DAFB', logo: '/images/React.png' },
-  { id: 'vite', name: 'Vite', color: '#646CFF', logo: '/images/vitejs.png' },
-  { id: 'webpack', name: 'Webpack', color: '#8DD6F9', logo: '/images/webpack.png' },
-  { id: 'next', name: 'Next.js', color: '#FFFFFF', logo: '/images/nextjs.png' },
-  { id: 'babel', name: 'Babel', color: '#F9DC3E', logo: '/images/babel.png' },
-  { id: 'eslint', name: 'ESLint', color: '#4B32C3', logo: '/images/eslint.png' },
-  { id: 'prettier', name: 'Prettier', color: '#F7B93E', logo: '/images/prettier.png' },
-  { id: 'uniapp', name: 'Uniapp', color: '#2B9939', logo: '/images/uniapp.png' },
+  { id: 'js', name: 'JavaScript', color: '#F7DF1E', logo: '/images/javascript.png', tags: ['ES6+', '异步编程', '闭包'] },
+  { id: 'html', name: 'HTML5', color: '#E34F26', logo: '/images/html.png', tags: ['语义化', 'SEO友好', '可访问性'] },
+  { id: 'css', name: 'CSS3', color: '#1572B6', logo: '/images/css.png', tags: ['Flexbox', 'Grid', '动画'] },
+  { id: 'vue', name: 'Vue.js', color: '#4FC08D', logo: '/images/Vue.png', tags: ['组件化', '响应式', 'Composition API'] },
+  { id: 'react', name: 'React', color: '#61DAFB', logo: '/images/React.png', tags: ['Hooks', '虚拟DOM', '单向数据流'] },
+  { id: 'vite', name: 'Vite', color: '#646CFF', logo: '/images/vitejs.png', tags: ['快速开发', '热更新', '构建优化'] },
+  { id: 'webpack', name: 'Webpack', color: '#8DD6F9', logo: '/images/webpack.png', tags: ['模块打包', '代码分割', '构建流程'] },
+  { id: 'next', name: 'Next.js', color: '#FFFFFF', logo: '/images/nextjs.png', tags: ['SSR', '静态生成', '路由优化'] },
+  { id: 'babel', name: 'Babel', color: '#F9DC3E', logo: '/images/babel.png', tags: ['转译', '兼容性', '插件系统'] },
+  { id: 'eslint', name: 'ESLint', color: '#4B32C3', logo: '/images/eslint.png', tags: ['代码规范', '错误检测', '自动修复'] },
+  { id: 'prettier', name: 'Prettier', color: '#F7B93E', logo: '/images/prettier.png', tags: ['代码格式化', '一致性', '团队协作'] },
+  { id: 'uniapp', name: 'Uniapp', color: '#2B9939', logo: '/images/uniapp.png', tags: ['跨平台', '小程序', '多端适配'] },
 ];
 
 export const CONTENT: Record<Language, Content> = {
@@ -32,13 +32,27 @@ export const CONTENT: Record<Language, Content> = {
       scroll: "Scroll to Explore",
     },
     stack: {
-      title: "Tech Stack",
-      subtitle: "",
-      items: TECH_DATA_RAW.map(t => ({
-        ...t,
-        description: `Proficient in ${t.name}. I use it to build scalable, maintainable, and high-performance applications.`
-      }))
-    },
+        title: 'Tech Stack',
+        subtitle: '',
+        items: TECH_DATA_RAW.map(t => ({
+          ...t,
+          description: `Proficient in ${t.name}. I use it to build scalable, maintainable, and high-performance applications.`,
+          // 为英文添加tags
+          tags: t.id === 'js' ? ['ES6+', 'Async', 'Closures'] :
+                t.id === 'html' ? ['Semantic', 'SEO-friendly', 'Accessible'] :
+                t.id === 'css' ? ['Flexbox', 'Grid', 'Animations'] :
+                t.id === 'vue' ? ['Components', 'Reactive', 'Composition API'] :
+                t.id === 'react' ? ['Hooks', 'Virtual DOM', 'One-way Data Flow'] :
+                t.id === 'vite' ? ['Fast Dev', 'HMR', 'Build Optimization'] :
+                t.id === 'webpack' ? ['Module Bundling', 'Code Splitting', 'Build Pipeline'] :
+                t.id === 'next' ? ['SSR', 'Static Generation', 'Route Optimization'] :
+                t.id === 'babel' ? ['Transpilation', 'Compatibility', 'Plugin System'] :
+                t.id === 'eslint' ? ['Code Linting', 'Error Detection', 'Auto-fix'] :
+                t.id === 'prettier' ? ['Formatting', 'Consistency', 'Team Collaboration'] :
+                t.id === 'uniapp' ? ['Cross-platform', 'Mini Program', 'Multi-adaptation'] :
+                ['Development', 'Web', 'Frontend']
+        }))
+      },
     projects: {
       title: "Featured Projects",
       items: [
@@ -98,10 +112,10 @@ export const CONTENT: Record<Language, Content> = {
     },
     manifesto: [
       "en",
-      "In the digital realm🔮, we are the architects of the invisible Every line of code is a brick🧱, every function a doorway🚪",
-      "We don't just build websites; we create journeys🚀, inspire emotions🎈, and bridge the gap between human imagination and machine logic🎯",
-      "Precision is our tool🪀, creativity is our fuel🔥 We believe great design is not just seen—it is felt✨",
-      "This is where innovation breathes🌬️ This is where the future is written🌟 Like a rainbow🌈 after rain, or a glimmer in the darkness"
+      "In the digital realm🔮, we are the architects of the invisible Every line of code is a brick, every function a doorway",
+      "We don't just build websites; we create journeys🚀, inspire emotions🎈, and bridge the gap between human imagination and machine logic",
+      "Precision is our tool, creativity is our fuel🔥 We believe great design is not just seen—it is felt✨",
+      "This is where innovation breathes🌳s This is where the future is written🌟 Like a rainbow🌈 after rain, or a glimmer in the darkness"
     ],
     hobbies: {
       title: "Personal Interests",
@@ -178,8 +192,8 @@ export const CONTENT: Record<Language, Content> = {
       scroll: "向下滚动探索",
     },
     stack: {
-      title: "技术栈",
-      subtitle: "",
+      title: '技术栈',
+      subtitle: '',
       items: TECH_DATA_RAW.map(t => ({
         ...t,
         description: t.id === 'js' ? "JavaScript 是我技能的核心。深入理解 ES6+ 规范，闭包，原型链和异步编程。" :
@@ -187,7 +201,21 @@ export const CONTENT: Record<Language, Content> = {
                      t.id === 'vue' ? "拥有丰富的 Vue 2/3 开发经验，熟悉 Composition API 和 Vuex/Pinia 状态管理。" :
                      t.id === 'html' ? "编写语义化、可访问的 HTML5 标记，确保 SEO 友好和跨设备兼容性。" :
                      t.id === 'css' ? "熟练运用 CSS3，Flexbox, Grid 布局，以及 Tailwind CSS 等现代样式库进行复杂 UI 还原。" :
-                     `熟练使用 ${t.name} 进行高效开发，构建高性能、可维护的前端应用。`
+                     `熟练使用 ${t.name} 进行高效开发，构建高性能、可维护的前端应用。`,
+        // 为中文添加tags
+        tags: t.id === 'js' ? ['ES6+', '异步编程', '闭包'] :
+              t.id === 'html' ? ['语义化', 'SEO友好', '可访问性'] :
+              t.id === 'css' ? ['Flexbox', 'Grid', '动画'] :
+              t.id === 'vue' ? ['组件化', '响应式', 'Composition API'] :
+              t.id === 'react' ? ['Hooks', '虚拟DOM', '单向数据流'] :
+              t.id === 'vite' ? ['快速开发', '热更新', '构建优化'] :
+              t.id === 'webpack' ? ['模块打包', '代码分割', '构建流程'] :
+              t.id === 'next' ? ['SSR', '静态生成', '路由优化'] :
+              t.id === 'babel' ? ['转译', '兼容性', '插件系统'] :
+              t.id === 'eslint' ? ['代码规范', '错误检测', '自动修复'] :
+              t.id === 'prettier' ? ['代码格式化', '一致性', '团队协作'] :
+              t.id === 'uniapp' ? ['跨平台', '小程序', '多端适配'] :
+              ['开发', 'Web', '前端']
       }))
     },
     projects: {
@@ -249,10 +277,10 @@ export const CONTENT: Record<Language, Content> = {
     },
     manifesto: [
       "zh",
-      "在数字领域🔮，我们是无形的建筑师 每一行代码都是砖块🧱，每一个函数都是门口🚪",
-      "我们不仅构建网站；我们创造旅程🚀，激发情感🎈，并在人类想象力与机器逻辑之间架起桥梁🎯",
-      "精确是我们的工具🪀，创造力是我们的燃料🔥 我们相信伟大的设计不仅是被看到的——更是被感受到的✨",
-      "这是创新呼吸的地方🌬️ 这是未来被书写的地方🌟 如同雨后的彩虹🌈，或是黑暗中的微光"
+      "在数字领域🔮，我们是无形的建筑师 每一行代码都是砖块，每一个函数都是门口",
+      "我们不仅构建网站；我们创造旅程🚀，激发情感🎈，并在人类想象力与机器逻辑之间架起桥梁",
+      "精确是我们的工具，创造力是我们的燃料🔥 我们相信伟大的设计不仅是被看到的——更是被感受到的✨",
+      "这是创新呼吸的地方🌳 这是未来被书写的地方🌟 如同雨后的彩虹🌈，或是黑暗中的微光"
     ],
     hobbies: {
       title: "兴趣爱好",
