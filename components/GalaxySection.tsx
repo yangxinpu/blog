@@ -12,7 +12,7 @@ const GalaxySection: React.FC<GalaxySectionProps> = ({ theme }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ['start start', 'end start'],
   });
 
   // Map scroll progress to galaxy rotation and tilt
@@ -25,7 +25,7 @@ const GalaxySection: React.FC<GalaxySectionProps> = ({ theme }) => {
 
     // --- Scene Setup ---
     const scene = new THREE.Scene();
-    
+
     // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.z = 6;
@@ -36,7 +36,7 @@ const GalaxySection: React.FC<GalaxySectionProps> = ({ theme }) => {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       alpha: true,
-      antialias: true
+      antialias: true,
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -79,8 +79,8 @@ const GalaxySection: React.FC<GalaxySectionProps> = ({ theme }) => {
         // Position
         const radius = Math.random() * parameters.radius;
         const spinAngle = radius * parameters.spin;
-        const branchAngle = (i % parameters.branches) / parameters.branches * Math.PI * 2;
-        
+        const branchAngle = ((i % parameters.branches) / parameters.branches) * Math.PI * 2;
+
         const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
         const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
         const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
@@ -108,7 +108,7 @@ const GalaxySection: React.FC<GalaxySectionProps> = ({ theme }) => {
         blending: THREE.AdditiveBlending,
         vertexColors: true,
         transparent: true,
-        opacity: theme === 'dark' ? 0.9 : 0.6
+        opacity: theme === 'dark' ? 0.9 : 0.6,
       });
 
       points = new THREE.Points(geometry, material);
@@ -161,15 +161,10 @@ const GalaxySection: React.FC<GalaxySectionProps> = ({ theme }) => {
     <div ref={containerRef} className="relative h-[250vh] w-full bg-transparent">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas ref={canvasRef} className="w-full h-full block" />
-        
+
         {/* Optional overlay text that fades out */}
-        <motion.div 
-            style={{ opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]) }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-            <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-transparent opacity-30">
-                EXPLORE THE UNIVERSE
-            </h2>
+        <motion.div style={{ opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]) }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-transparent opacity-30">EXPLORE THE UNIVERSE</h2>
         </motion.div>
       </div>
     </div>

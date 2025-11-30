@@ -1,23 +1,32 @@
 {
   "name": "nailuo-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"components/*.{ts,tsx}\""
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.555.0",
-    "react-dom": "^19.2.0",
     "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "three": "0.160.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "prettier": "^3.7.2",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

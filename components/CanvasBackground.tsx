@@ -12,11 +12,9 @@ interface Point {
   vy: number;
 }
 
-const CanvasBackground: React.FC<CanvasBackgroundProps> = ({ 
-  theme = 'dark' 
-}) => {
+const CanvasBackground: React.FC<CanvasBackgroundProps> = ({ theme = 'dark' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -37,10 +35,10 @@ const CanvasBackground: React.FC<CanvasBackgroundProps> = ({
     const BG_COLOR = theme === 'dark' ? '#0f0f0e' : '#f3f4f6';
     const POINT_COUNT_FACTOR = 9000; // Screen area divided by this gives point count
     const CONNECTION_DISTANCE = 140; // Max distance to draw a line
-    const MOUSE_DISTANCE = 200;      // Interaction radius
+    const MOUSE_DISTANCE = 200; // Interaction radius
     const POINT_RADIUS = 1.5;
     const LINE_WIDTH = 0.5;
-    const SPEED_FACTOR = 0.4;        // Base movement speed
+    const SPEED_FACTOR = 0.4; // Base movement speed
 
     // Initialize Canvas and Points
     const init = () => {
@@ -88,7 +86,7 @@ const CanvasBackground: React.FC<CanvasBackgroundProps> = ({
           const forceDirectionX = dxMouse / distMouse;
           const forceDirectionY = dyMouse / distMouse;
           const force = (MOUSE_DISTANCE - distMouse) / MOUSE_DISTANCE;
-          
+
           // Gentle push
           const repelStrength = 2;
           p.x += forceDirectionX * force * repelStrength;
@@ -107,7 +105,7 @@ const CanvasBackground: React.FC<CanvasBackgroundProps> = ({
         for (let j = i + 1; j < points.length; j++) {
           const p1 = points[i];
           const p2 = points[j];
-          
+
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
@@ -115,37 +113,33 @@ const CanvasBackground: React.FC<CanvasBackgroundProps> = ({
           if (dist < CONNECTION_DISTANCE) {
             // Calculate opacity based on distance (closer = more opaque)
             const opacity = 1 - dist / CONNECTION_DISTANCE;
-            
+
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            
+
             // Use rgba with dynamic opacity
-            const rgbColor = THEME_COLOR === COLORS.neonGreen 
-              ? 'rgba(25, 250, 198, ' 
-              : 'rgba(54, 100, 84, ';
+            const rgbColor = THEME_COLOR === COLORS.neonGreen ? 'rgba(25, 250, 198, ' : 'rgba(54, 100, 84, ';
             ctx.strokeStyle = `${rgbColor}${opacity})`;
             ctx.lineWidth = LINE_WIDTH;
             ctx.stroke();
           }
         }
-        
+
         // Connect to mouse if close enough
         const dxMouse = points[i].x - mouse.x;
         const dyMouse = points[i].y - mouse.y;
         const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-        
+
         if (distMouse < CONNECTION_DISTANCE + 50) {
-             const opacity = 1 - distMouse / (CONNECTION_DISTANCE + 50);
-             ctx.beginPath();
-             ctx.moveTo(points[i].x, points[i].y);
-             ctx.lineTo(mouse.x, mouse.y);
-             const rgbColor = THEME_COLOR === COLORS.neonGreen 
-               ? 'rgba(25, 250, 198, ' 
-               : 'rgba(54, 100, 84, ';
-             ctx.strokeStyle = `${rgbColor}${opacity})`;
-             ctx.lineWidth = LINE_WIDTH;
-             ctx.stroke();
+          const opacity = 1 - distMouse / (CONNECTION_DISTANCE + 50);
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          const rgbColor = THEME_COLOR === COLORS.neonGreen ? 'rgba(25, 250, 198, ' : 'rgba(54, 100, 84, ';
+          ctx.strokeStyle = `${rgbColor}${opacity})`;
+          ctx.lineWidth = LINE_WIDTH;
+          ctx.stroke();
         }
       }
 
@@ -187,12 +181,7 @@ const CanvasBackground: React.FC<CanvasBackgroundProps> = ({
     };
   }, [theme]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-0"
-    />
-  );
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />;
 };
 
 export default CanvasBackground;

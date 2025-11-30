@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useInView, Variants } from 'framer-motion';
-
 interface BlurTextProps {
   text: string;
   className?: string;
@@ -8,14 +7,14 @@ interface BlurTextProps {
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'div';
 }
 
-const BlurText: React.FC<BlurTextProps> = ({ 
-  text, 
-  className = '', 
+const BlurText: React.FC<BlurTextProps> = ({
+  text,
+  className = '',
   delay = 0,
-  as: Component = 'span' // 改为默认使用 span 而不是 div，这样可以安全地放在 p 标签内
+  as: Component = 'span', // 改为默认使用 span 而不是 div，这样可以安全地放在 p 标签内
 }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   // Split text into words
   const words = text.split(' ');
@@ -31,17 +30,17 @@ const BlurText: React.FC<BlurTextProps> = ({
   const child: Variants = {
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 12,
         stiffness: 100,
       },
     },
     hidden: {
       opacity: 0,
-      filter: "blur(10px)",
+      filter: 'blur(10px)',
       y: 20,
     },
   };
@@ -54,16 +53,12 @@ const BlurText: React.FC<BlurTextProps> = ({
       ref={ref}
       variants={container}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       className={`${isInline ? 'inline' : 'block'} ${className}`}
       custom={1}
     >
       {words.map((word, index) => (
-        <motion.span 
-            key={index} 
-            variants={child} 
-            className="inline-block mr-[0.25em]"
-        >
+        <motion.span key={index} variants={child} className="inline-block mr-[0.25em]">
           {word}
         </motion.span>
       ))}

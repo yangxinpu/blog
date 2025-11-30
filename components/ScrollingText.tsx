@@ -1,14 +1,5 @@
-
-import React, { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValue,
-  useVelocity,
-  useAnimationFrame
-} from "framer-motion";
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform, useMotionValue, useVelocity, useAnimationFrame } from 'framer-motion';
 
 interface ParallaxProps {
   children: string;
@@ -21,10 +12,10 @@ const ParallaxText = ({ children, baseVelocity = 100 }: ParallaxProps) => {
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, {
     damping: 50,
-    stiffness: 400
+    stiffness: 400,
   });
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
+    clamp: false,
   });
 
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
