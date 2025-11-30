@@ -29,7 +29,6 @@ export const CONTENT: Record<Language, Content> = {
       motto: "Thinking in Code, Designing with Soul.",
       name: "NaiLuo",
       subtitle: "A frontend development enthusiast, crafting immersive web experiences with modern technology and pixel-perfect precision.",
-      scroll: "Scroll to Explore",
     },
     stack: {
         title: 'Tech Stack',
@@ -189,10 +188,9 @@ export const CONTENT: Record<Language, Content> = {
   },
   zh: {
     hero: {
-      motto: "以代码思考，注灵魂于设计。",
+      motto: "以代码思考，注灵魂于设计",
       name: "NaiLuo",
-      subtitle: "一个前端开发爱好者，使用现代技术和像素级的精度打造沉浸式网络体验。",
-      scroll: "向下滚动探索",
+      subtitle: "一个前端开发爱好者，使用现代技术和像素级的精度打造沉浸式网络体验",
     },
     stack: {
       title: '技术栈',

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, Variants } from 'framer-motion';
 import { 
-  ChevronDown, Layers, ExternalLink, Github, ArrowRight,
+  ChevronDown, Layers, Github, ArrowRight,
   BookOpen, Camera, Activity, Plane, Film, Music, Hash
 } from 'lucide-react';
 import { CONTENT } from './constants';
@@ -137,7 +137,7 @@ const App: React.FC = () => {
                     <img 
                         src="./images/cat.webp" 
                         alt="NaiLuo Avatar" 
-                        className="relative w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-nl-black object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                        className="relative w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-nl-black object-cover transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
                     />
                  </div>
                  
@@ -145,7 +145,7 @@ const App: React.FC = () => {
                      <BlurText 
                         text={t.hero.name} 
                         as="h2" 
-                        className="text-4xl md:text-5xl font-mono font-bold text-nl-light block"
+                        className="text-4xl md:text-9xl font-mono font-bold text-nl-light block"
                         delay={0.6}
                      />
                  </div>

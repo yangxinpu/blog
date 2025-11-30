@@ -41,7 +41,6 @@ export interface Content {
     motto: string;
     name: string;
     subtitle: string;
-    scroll: string;
   };
   stack: {
     title: string;
