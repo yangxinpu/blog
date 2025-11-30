@@ -7,7 +7,7 @@ interface MagicCardProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
 }
 
-const MagicCard: React.FC<MagicCardProps> = ({ children, className = '', gradientSize = 300, gradientColor = '#19fac6', ...props }) => {
+const MagicCard: React.FC<MagicCardProps> = ({ children, className = '', gradientSize = 300, gradientColor = '#19fac6', link, ...props }) => {
   const mouseX = useRef(0);
   const mouseY = useRef(0);
 
@@ -19,9 +19,11 @@ const MagicCard: React.FC<MagicCardProps> = ({ children, className = '', gradien
     currentTarget.style.setProperty('--mouse-x', `${mouseX.current}px`);
     currentTarget.style.setProperty('--mouse-y', `${mouseY.current}px`);
   }
-
+  function handleClick() {
+    window.open(link || '', '_blank');
+  }
   return (
-    <motion.div onMouseMove={handleMouseMove} className={`group relative overflow-hidden ${className}`} {...props}>
+    <motion.div onMouseMove={handleMouseMove} onClick={handleClick} className={`group relative overflow-hidden ${className}`} {...props}>
       {/* Spotlight Effect Layer */}
       <div
         className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0 transition duration-300 group-hover:opacity-100 z-10 mix-blend-plus-lighter"

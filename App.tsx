@@ -205,16 +205,16 @@ const App: React.FC = () => {
                         whileHover={{ y: -15, scale: 1.02 }}
                         className={`${cardClass} flex flex-col justify-between h-[400px]`}
                         gradientColor={magicGradient}
+                        link={project.link}
                     >
                         <div>
                             <div className="flex justify-between items-start mb-8">
                                 <div className="p-3 bg-gradient-to-br from-nl-dark to-nl-black rounded-xl shadow-lg group-hover:shadow-nl-neon/20 transition-shadow">
                                     <Layers className="w-8 h-8 text-nl-neon" />
                                 </div>
-                                <ExternalLink className="w-6 h-6 opacity-40 hover:text-nl-neon hover:opacity-100 cursor-pointer transition-all" />
                             </div>
                             <h3 className="text-2xl font-bold mb-4 group-hover:text-nl-light transition-colors">{project.title}</h3>
-                            <p className="text-lg opacity-70 mb-6">{project.description}</p>
+                            <p className="text-lg opacity-70 mb-6 overflow-hidden text-ellipsis line-clamp-3">{project.description}</p>
                         </div>
                         
                         <div className="mt-auto">

@@ -52,27 +52,30 @@ export const CONTENT: Record<Language, Content> = {
                 t.id === 'uniapp' ? ['Cross-platform', 'Mini Program', 'Multi-adaptation'] :
                 ['Development', 'Web', 'Frontend']
         }))
-      },
+    },
     projects: {
-      title: "Featured Projects",
+      title: "Project Experience",
       items: [
         {
           id: 1,
-          title: "E-Commerce Dashboard",
-          description: "A comprehensive analytics dashboard with real-time data visualization.",
-          tech: ["React", "D3.js", "Next.js"],
+          title: "Academic Tutor Assistant",
+          description: "Academic Tutor Assistant frontend page, solving the complex final assessment evaluation process for academic tutors, with large amounts of information, wide personnel involvement, and complex supporting material requirements, resulting in low information collection efficiency, increasing the college's final assessment workload, requiring centralized data collection and processing scenarios to improve efficiency",
+          tech: ["Vue3.js", "ElementPlus", "Pinia", "VueRouter"],
+          link: "https://gitee.com/yangxinpu/academic-tutor-assistant",
         },
         {
           id: 2,
-          title: "SaaS Landing Page",
-          description: "High-conversion landing page with complex scroll animations.",
-          tech: ["Vue", "GSAP", "Vite"],
+          title: "moee Keyboard Driver",
+          description: "moee Keyboard Driver is a React-based keyboard driver project used to add custom key functions to the keyboard driver, issue RT distance, stroke, and other commands",
+          tech: ["React", "Next.js", "Shadcn", "Tailwind CSS"],
+          link: "https://github.com/jerryn13/moee-vial",
         },
         {
           id: 3,
-          title: "Mobile Travel App",
-          description: "Cross-platform mobile application built for seamless travel booking.",
-          tech: ["Uniapp", "Vue", "CSS3"],
+          title: "TaskFlow",
+          description: "TaskFlow is a lightweight, high-performance web-based personal task management tool developed based on the Next.js full-stack framework, mainly used for Next.js developer practice",
+          tech: ["Next.js", "React", "Tailwind CSS"],
+          link: "https://github.com/yangxinpu/Next.js-TaskFlow",
         }
       ]
     },
@@ -219,25 +222,28 @@ export const CONTENT: Record<Language, Content> = {
       }))
     },
     projects: {
-      title: "精选项目",
+      title: "项目经历",
       items: [
         {
           id: 1,
-          title: "电商数据仪表盘",
-          description: "具有实时数据可视化的综合分析仪表盘。",
-          tech: ["React", "D3.js", "Next.js"],
+          title: "学业导师助手",
+          description: "学业导师助手前端页面，解决学业导师期末考核评价流程复杂，信息量大、涉及人员广，支撑材料要求复杂，导致收集信息效率较低，加大了学院期末考核工作量，需要集中收集数据处理数据的场景提高效率",
+          tech: ["Vue3.js", "ElementPlus", "Pinia", "VueRouter"],
+          link: "https://gitee.com/yangxinpu/academic-tutor-assistant",
         },
         {
           id: 2,
-          title: "SaaS 落地页",
-          description: "具有复杂滚动动画的高转化率落地页。",
-          tech: ["Vue", "GSAP", "Vite"],
+          title: "moee键盘驱动",
+          description: "moee键盘驱动是一个基于React的键盘驱动项目，用于给键盘驱动添加自定义按键功能，下发RT距离，行程等指令",
+          tech: ["React", "Next.js", "Shadcn", "Tailwind CSS"],
+          link: "https://github.com/jerryn13/moee-vial",
         },
         {
           id: 3,
-          title: "移动旅行应用",
-          description: "为无缝旅行预订而构建的跨平台移动应用程序。",
-          tech: ["Uniapp", "Vue", "CSS3"],
+          title: "TaskFlow",
+          description: "TaskFlow是一款基于Next.js全栈框架开发的轻量级、高性能的网页端个人任务管理工具，主要用于Next.js开发人员练习",
+          tech: ["Next.js", "React", "Tailwind CSS"],
+          link: "https://github.com/yangxinpu/Next.js-TaskFlow",
         }
       ]
     },
@@ -347,6 +353,6 @@ export const CONTENT: Record<Language, Content> = {
             category: "WebGl着色器"
           }
         ]
-      }
+    }
     }
 };
