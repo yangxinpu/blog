@@ -104,7 +104,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               className={styles.dropdownItem}
               onClick={() => handleSelect(option.path)}
               whileHover={{ backgroundColor: 'var(--accent)', color: 'white',borderRadius: 8 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.3 }}
             >
               {option.label}
             </motion.li>
