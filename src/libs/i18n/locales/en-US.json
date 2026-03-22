@@ -8,6 +8,22 @@
     "light": "Light mode"
   },
   "footer": {
-    "copyright": "© 2026 My Blog. All rights reserved."
+    "description": "A front-end technology blog, covering code details, engineering framework, and best practices. We hope that each article here will make the technology clearer.",
+    "techStack": "Tech Stack",
+    "resources": "Resources",
+    "about": "About",
+    "documentation": "Documentation",
+    "tutorials": "Tutorials",
+    "examples": "Examples",
+    "aboutUs": "About Us",
+    "joinUs": "Join Us",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "allRightsReserved": "All rights reserved",
+    "madeWith": "Made with",
+    "team": "Team",
+    "doubleClickToCopy": "Double click to copy email",
+    "emailCopied": "Email copied successfully!",
+    "emailCopyFailed": "Failed to copy email, please copy manually."
   }
 }

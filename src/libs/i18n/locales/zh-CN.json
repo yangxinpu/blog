@@ -8,6 +8,22 @@
     "light": "浅色模式"
   },
   "footer": {
-    "copyright": "© 2026 我的博客. 保留所有权利."
+    "description": "专注于前端技术分享，打造开发者的技术学习平台。每周更新优质技术文章。",
+    "techStack": "技术栈",
+    "resources": "资源",
+    "about": "关于",
+    "documentation": "文档",
+    "tutorials": "教程",
+    "examples": "示例",
+    "aboutUs": "关于我们",
+    "joinUs": "加入我们",
+    "contact": "联系方式",
+    "privacy": "隐私政策",
+    "allRightsReserved": "保留所有权利",
+    "madeWith": "由",
+    "team": "团队制作",
+    "doubleClickToCopy": "双击复制邮箱",
+    "emailCopied": "邮箱复制成功！",
+    "emailCopyFailed": "邮箱复制失败，请手动复制。"
   }
 }
