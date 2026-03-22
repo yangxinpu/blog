@@ -4,8 +4,9 @@ import { motion } from 'motion/react';
 import { Github, Mail, Moon, Sun } from 'lucide-react';
 import Home from './pages/Home/Home';
 import { personMeta, footerData } from './content/meta';
-import { Message } from './components';
+import { Message, Dropdown } from './components';
 import styles from './App.module.scss';
+import logoImage from './assets/Images/logo.png';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -70,36 +71,40 @@ function App() {
       )}
       {/* Header */}
       <header className={styles.header}>
-        <div className={styles.container}>
-          <div className={styles.logo}>
-            <a href="/">My Blog</a>
-          </div>
-          <nav className={styles.nav}>
-            <ul className={styles.navList}>
-              <li className={styles.navItem}>
-                <a href="/" className={styles.navLink}>{t('welcome')}</a>
-              </li>
-              <li className={styles.navItem}>
-                <a href="/about" className={styles.navLink}>{t('about')}</a>
-              </li>
-              <li className={styles.navItem}>
-                <a href="/posts" className={styles.navLink}>{t('posts')}</a>
-              </li>
-              <li className={styles.navItem}>
-                <a href="/contact" className={styles.navLink}>{t('contact')}</a>
-              </li>
-            </ul>
+        <div className={styles.logo}>
+          <a href="/">
+            <img 
+              src={logoImage} 
+              alt="Logo" 
+              className={styles.logoImg}
+            />
+          </a>
+        </div>
+        <div className={styles.rightSection}>
+          <nav className={styles.mainNav}>
+            <div className={styles.navMenu}>
+              <a href="/" className={styles.navMenuLink}>{t('home')}</a>
+              <Dropdown
+                  options={[
+                    { value: 'javascript', label: t('javascript'), path: '/javascript' },
+                    { value: 'vue', label: t('vue'), path: '/vue' },
+                    { value: 'react', label: t('react'), path: '/react' }
+                  ]}
+                  label={t('knowledgeBase')}
+              />
+              <a href="/contact" className={styles.navMenuLink}>{t('contact')}</a>
+            </div>
           </nav>
-          <div className={styles.headerActions}>
+          <div className={styles.controls}>
             <button 
-              className={styles.languageToggle}
+              className={styles.langToggle}
               onClick={() => changeLanguage(i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN')}
               aria-label="Change language"
             >
               {i18n.language === 'zh-CN' ? 'EN' : '中文'}
             </button>
             <button 
-              className={styles.themeToggle}
+              className={styles.themeSwitch}
               onClick={toggleTheme}
               aria-label={t(`theme.${theme === 'light' ? 'dark' : 'light'}`)}
             >

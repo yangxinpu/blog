@@ -1,8 +1,13 @@
 {
   "welcome": "Welcome to my blog",
+  "home": "Home",
   "about": "About me",
   "posts": "Posts",
   "contact": "Contact",
+  "knowledgeBase": "Knowledge Base",
+  "javascript": "JavaScript",
+  "vue": "Vue",
+  "react": "React",
   "theme": {
     "dark": "Dark mode",
     "light": "Light mode"
@@ -10,15 +15,7 @@
   "footer": {
     "description": "A front-end technology blog, covering code details, engineering framework, and best practices. We hope that each article here will make the technology clearer.",
     "techStack": "Tech Stack",
-    "resources": "Resources",
-    "about": "About",
-    "documentation": "Documentation",
-    "tutorials": "Tutorials",
-    "examples": "Examples",
-    "aboutUs": "About Us",
-    "joinUs": "Join Us",
-    "contact": "Contact",
-    "privacy": "Privacy Policy",
+
     "allRightsReserved": "All rights reserved",
     "madeWith": "Made with",
     "team": "Team",

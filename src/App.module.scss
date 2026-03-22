@@ -8,116 +8,113 @@
 
   // 头部样式
   .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5em;
     background-color: var(--bg);
     border-bottom: 1px solid var(--border);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
+    position: fixed;
     z-index: 100;
-    box-shadow: var(--shadow);
+    height: 60px;
 
-    .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 0 auto;
-      padding: 0 5em;
-
-      @media (max-width: 768px) {
-        padding: 0 16px;
-      }
+    @media (max-width: 768px) {
+      padding: 1rem 16px;
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-
-      @media (max-width: 768px) {
-        font-size: 1.25rem;
-      }
-
-      a {
-        color: var(--text);
-        text-decoration: none;
-
-        &:hover {
-          color: var(--accent);
-        }
+      display: flex;
+      align-items: center;
+      .logoImg {
+        height: 60px;
+        object-fit: contain;
       }
     }
 
-    .nav {
+    .rightSection {
+      height: 100%;
       display: flex;
       align-items: center;
-
+      gap: 2rem;
       @media (max-width: 768px) {
-        display: none;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
       }
 
-      .navList {
+      .mainNav {
+        height: 100%;
         display: flex;
-        list-style: none;
-        gap: 2rem;
+        align-items: center;
+        .navMenu {
+          height: 100%;
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+          }
 
-        .navItem {
-          a {
+          .navMenuLink {
+            padding: 4px 12px;
             color: var(--text);
             text-decoration: none;
-            transition: color 0.2s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
 
             &:hover {
               color: var(--accent);
+              outline: 1px solid var(--accent);
+              outline-offset: 2px;
+              border-radius: 4px;
             }
           }
         }
       }
-    }
 
-    .headerActions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+      .controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
 
-    .languageToggle {
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background-color: var(--bg-secondary);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
+        .langToggle,
+        .themeSwitch {
+          padding: 0.5rem;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background-color: var(--bg-secondary);
+          color: var(--text);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 0.9rem;
+          font-weight: 500;
 
-      &:hover {
-        background-color: var(--border);
-      }
+          &:hover {
+            background-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+          }
 
-      &:focus {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
-      }
-    }
+          &:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+          }
+        }
 
-    .themeToggle {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background-color: var(--bg-secondary);
-      }
-
-      &:focus {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
+        .themeSwitch {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          padding: 0;
+        }
       }
     }
   }
@@ -136,7 +133,7 @@
     .footerContent {
       background-color: var(--bg);
       border-top: 1px solid var(--border);
-      padding: 3rem 0 2rem;
+      padding: 1.5rem 0;
       position: relative;
       z-index: 2;
 
@@ -152,7 +149,6 @@
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          margin-bottom: 3rem;
 
           @media (max-width: 768px) {
             flex-direction: column;
@@ -230,7 +226,7 @@
         }
 
         .footerBottom {
-          margin-top: 2rem;
+          margin-top: 1rem;
           padding-top: 1.5rem;
           border-top: 1px solid var(--border);
 

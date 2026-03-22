@@ -1,8 +1,13 @@
 {
   "welcome": "欢迎来到我的博客",
+  "home": "首页",
   "about": "关于我",
   "posts": "文章",
   "contact": "联系我",
+  "knowledgeBase": "知识库",
+  "javascript": "JavaScript",
+  "vue": "Vue",
+  "react": "React",
   "theme": {
     "dark": "深色模式",
     "light": "浅色模式"
@@ -10,15 +15,7 @@
   "footer": {
     "description": "专注于前端技术分享，打造开发者的技术学习平台。每周更新优质技术文章。",
     "techStack": "技术栈",
-    "resources": "资源",
-    "about": "关于",
-    "documentation": "文档",
-    "tutorials": "教程",
-    "examples": "示例",
-    "aboutUs": "关于我们",
-    "joinUs": "加入我们",
-    "contact": "联系方式",
-    "privacy": "隐私政策",
+
     "allRightsReserved": "保留所有权利",
     "madeWith": "由",
     "team": "团队制作",

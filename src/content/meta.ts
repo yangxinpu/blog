@@ -13,16 +13,4 @@ export const footerData = {
     { name: 'Next.js', link: '#' },
     { name: 'Tailwind CSS', link: '#' }
   ],
-  resources: [
-    { name: 'documentation', link: '#' },
-    { name: 'tutorials', link: '#' },
-    { name: 'examples', link: '#' },
-    { name: 'API', link: '#' }
-  ],
-  about: [
-    { name: 'aboutUs', link: '#' },
-    { name: 'joinUs', link: '#' },
-    { name: 'contact', link: '#' },
-    { name: 'privacy', link: '#' }
-  ]
 };
