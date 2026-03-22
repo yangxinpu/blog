@@ -1,0 +1,187 @@
+:root {
+  // 主色调
+  --primary-100: #19fac6;
+  --primary-200: #00d5c4;
+  --primary-300: #00b0b7;
+  --primary-400: #008c9f;
+  --primary-500: #24697f;
+  --primary-600: #2f4858;
+
+  // 浅色主题变量
+  --text: #333333;
+  --text-secondary: #666666;
+  --bg: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --border: #e0e0e0;
+  --accent: var(--primary-300);
+  --accent-hover: var(--primary-400);
+  --shadow: rgba(0, 0, 0, 0.1) 0 2px 8px;
+
+  // 字体设置
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Inconsolata', 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Droid Sans Mono', 'Courier New', monospace;
+
+  // 基础样式
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+  transition: all 0.3s ease;
+}
+
+// 深色主题变量
+[data-theme="dark"] {
+  --text: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --bg: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --border: #404040;
+  --accent: var(--primary-200);
+  --accent-hover: var(--primary-100);
+  --shadow: rgba(0, 0, 0, 0.3) 0 2px 8px;
+}
+
+// 重置样式
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// 通用样式
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// 链接样式
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+// 按钮样式
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--border);
+  }
+
+  &:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+// 标题样式
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+// 段落样式
+p {
+  margin-bottom: 1rem;
+}
+
+// 列表样式
+ul, ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+// 卡片样式
+.card {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 4px 12px;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}
+
+// 动画效果
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}

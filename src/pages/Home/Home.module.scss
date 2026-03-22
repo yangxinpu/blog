@@ -1,0 +1,183 @@
+// Home 页面样式
+
+.home {
+  .hero {
+    background-color: var(--bg-secondary);
+    padding: 4rem 0;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      padding: 2rem 0;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    .heroTitle {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+
+    .heroSubtitle {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: var(--text-secondary);
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+
+    .heroButtons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .heroButton {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--accent);
+        color: white;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: var(--accent-hover);
+          color: white;
+        }
+      }
+
+      .heroButtonSecondary {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 4px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: var(--accent);
+          color: white;
+        }
+      }
+    }
+  }
+
+  .featured {
+    padding: 4rem 0;
+
+    @media (max-width: 768px) {
+      padding: 2rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+    }
+
+    .sectionTitle {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--text);
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .postsGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .postCard {
+        background-color: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+
+        &:hover {
+          box-shadow: rgba(0, 0, 0, 0.15) 0 4px 12px;
+          transform: translateY(-2px);
+        }
+
+        .postTitle {
+          font-size: 1.25rem;
+          margin-bottom: 0.75rem;
+
+          a {
+            color: var(--text);
+            text-decoration: none;
+
+            &:hover {
+              color: var(--accent);
+            }
+          }
+        }
+
+        .postExcerpt {
+          margin-bottom: 1rem;
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+        }
+
+        .postDate {
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .about {
+    padding: 4rem 0;
+    background-color: var(--bg-secondary);
+
+    @media (max-width: 768px) {
+      padding: 2rem 0;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    .sectionTitle {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--text);
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .aboutText {
+      margin-bottom: 1rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+  }
+}

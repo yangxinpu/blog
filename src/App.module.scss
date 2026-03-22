@@ -1,0 +1,332 @@
+
+// 主容器
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  // 内容容器
+  .contentContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    // 头部样式
+    .header {
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+
+        @media (max-width: 768px) {
+          padding: 0 16px;
+        }
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+
+        @media (max-width: 768px) {
+          font-size: 1.25rem;
+        }
+
+        a {
+          color: var(--text);
+          text-decoration: none;
+
+          &:hover {
+            color: var(--accent);
+          }
+        }
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+
+        .navList {
+          display: flex;
+          list-style: none;
+          gap: 2rem;
+
+          .navItem {
+            a {
+              color: var(--text);
+              text-decoration: none;
+              transition: color 0.2s ease;
+
+              &:hover {
+                color: var(--accent);
+              }
+            }
+          }
+        }
+      }
+
+      .headerActions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .languageToggle {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background-color: var(--bg-secondary);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: var(--border);
+        }
+
+        &:focus {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
+        }
+      }
+
+      .themeToggle {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: var(--bg-secondary);
+        }
+
+        &:focus {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
+        }
+      }
+    }
+
+    // 主内容区域
+    .main {
+      flex: 1;
+    }
+
+    // 页脚样式
+    .footer {
+      margin-top: auto;
+      position: relative;
+      z-index: 2;
+
+      .footerTop {
+        background-color: var(--bg);
+        border-top: 1px solid var(--border);
+        padding: 2rem 0;
+        position: relative;
+        z-index: 2;
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+
+          @media (max-width: 768px) {
+            padding: 0 16px;
+          }
+
+          .metaInfo {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+
+            @media (max-width: 768px) {
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
+            }
+
+            .metaItem {
+              display: block;
+              text-decoration: none;
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+              padding: 1.5rem;
+              border-radius: 12px;
+              background-color: var(--bg-secondary);
+              text-align: center;
+              position: relative;
+              overflow: hidden;
+
+              &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(25, 250, 198, 0.1), transparent);
+                transition: left 0.5s ease;
+              }
+
+              &:hover {
+                background-color: var(--bg);
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+                &::before {
+                  left: 100%;
+                }
+              }
+
+              &:focus {
+                outline: 2px solid var(--accent);
+                outline-offset: 2px;
+              }
+
+              .metaLabel {
+                font-weight: 600;
+                color: #000;
+                font-size: 1.2rem;
+                display: block;
+                position: relative;
+                z-index: 1;
+
+                @media (max-width: 768px) {
+                  font-size: 1.1rem;
+                }
+              }
+            }
+
+            // 黑色模式下的文字颜色
+            [data-theme="dark"] & {
+              .metaItem {
+                background-color: var(--bg);
+
+                &:hover {
+                  background-color: var(--bg-secondary);
+                }
+
+                .metaLabel {
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }    
+  }
+  
+  // Logo Section
+  .footerLogo {
+    background: linear-gradient(135deg, #19fac6 0%, #00d5c4 25%, #00b0b7 50%, #008c9f 75%, #24697f 100%);
+    display: flex;
+    width: 100%;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+
+    // 当滚动到页面底部时显示
+    .app.scrolled & {
+      transform: translateY(0);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    // 装饰性元素
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.8s ease, height 0.8s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+      height: 100%;
+    }
+
+    .logoContainer {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logoText {
+      font-size: 12rem;
+      font-weight: 900;
+      color: #000;
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      line-height: 1;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+
+      @media (max-width: 1200px) {
+        font-size: 10rem;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 6rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 4rem;
+      }
+    }
+
+    &:hover .logoText {
+      transform: scale(1.05);
+      text-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

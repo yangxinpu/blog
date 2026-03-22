@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome to my blog",
+  "about": "About me",
+  "posts": "Posts",
+  "contact": "Contact",
+  "theme": {
+    "dark": "Dark mode",
+    "light": "Light mode"
+  },
+  "footer": {
+    "copyright": "© 2026 My Blog. All rights reserved."
+  }
+}

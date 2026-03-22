@@ -1,0 +1,13 @@
+{
+  "welcome": "欢迎来到我的博客",
+  "about": "关于我",
+  "posts": "文章",
+  "contact": "联系我",
+  "theme": {
+    "dark": "深色模式",
+    "light": "浅色模式"
+  },
+  "footer": {
+    "copyright": "© 2026 我的博客. 保留所有权利."
+  }
+}
