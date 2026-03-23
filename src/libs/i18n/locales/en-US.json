@@ -22,7 +22,12 @@
     "light": "Light mode"
   },
   "mottoSection": {
-    "quote": "Build with technology, stay guided by life."
+    "quote": "Build with technology, stay guided by life",
+    "quotes": [
+      "Build with technology",
+      "Connect through design",
+      "Stay guided by life"
+    ]
   },
   "footer": {
     "description": "A front-end technology blog, covering code details, engineering framework, and best practices. We hope that each article here will make the technology clearer.",
@@ -226,6 +231,17 @@
         "title": "State of CSS in 2024",
         "description": "Container queries, cascade layers, and modern layout tools are redefining style systems."
       }
+    ]
+  },
+  "textAnimation": {
+    "words": [
+      "NAILUO",
+      "UNLIMITED",
+      "PROGRESS",
+      "GROWTH",
+      "COURAGE",
+      "FOCUS",
+      "CREATE"
     ]
   }
 }

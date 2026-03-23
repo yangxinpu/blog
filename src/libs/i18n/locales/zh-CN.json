@@ -22,7 +22,12 @@
     "light": "浅色模式"
   },
   "mottoSection": {
-    "quote": "用技术实现想法，用生活校准方向。"
+    "quote": "用技术实现想法 用生活校准方向",
+    "quotes": [
+      "用技术实现想法",
+      "用设计连接体验",
+      "用生活校准方向"
+    ]
   },
   "footer": {
     "description": "专注前端技术分享，覆盖代码细节、工程化实践与设计思路。希望每一篇文章都能让技术更清晰。",
@@ -226,6 +231,17 @@
         "title": "2024 年的 CSS 现状",
         "description": "容器查询、层叠层和新布局能力，正在重塑前端样式工程实践。"
       }
+    ]
+  },
+  "textAnimation": {
+    "words": [
+      "NAILUO",
+      "UNLIMITED",
+      "PROGRESS",
+      "GROWTH",
+      "COURAGE",
+      "FOCUS",
+      "CREATE"
     ]
   }
 }

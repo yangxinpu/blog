@@ -1,0 +1,261 @@
+.section {
+  position: relative;
+  padding: 4.2rem 20px 5.2rem;
+  background: var(--bg);
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 3rem 16px 3.8rem;
+  }
+}
+
+.inner {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+}
+
+.stage {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      color-mix(in srgb, var(--accent) 12%, transparent) 0%,
+      transparent 62%
+    ),
+    color-mix(in srgb, var(--bg) 95%, black 5%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent),
+    0 14px 30px rgba(0, 0, 0, 0.14);
+  padding: clamp(1.1rem, 2vw, 1.8rem);
+}
+
+.iconLayer {
+  position: absolute;
+  inset: 0 0 30% 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.iconBadge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.32rem 0.52rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+  color: color-mix(in srgb, var(--accent) 84%, var(--text));
+  background: color-mix(in srgb, var(--bg-secondary) 86%, var(--bg));
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
+}
+
+.iconOne {
+  left: 6%;
+  top: 10%;
+}
+
+.iconTwo {
+  left: 16%;
+  top: 30%;
+}
+
+.iconThree {
+  left: 24%;
+  top: 15%;
+}
+
+.iconFour {
+  right: 24%;
+  top: 10%;
+}
+
+.iconFive {
+  right: 6%;
+  top: 10%;
+}
+
+.iconSix {
+  right: 16%;
+  top: 30%;
+}
+
+.iconSeven {
+  right: 6%;
+  top: 48%;
+}
+
+.iconEight {
+  left: 6%;
+  top: 48%;
+}
+
+.iconNine {
+  left: 2%;
+  top: 63%;
+}
+
+.iconTen {
+  right: 2%;
+  top: 63%;
+}
+
+.wordViewport {
+  min-height: clamp(118px, 16vw, 180px);
+  display: grid;
+  place-items: center;
+  perspective: 680px;
+  position: relative;
+  z-index: 2;
+}
+
+.word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.04em;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.wordChar {
+  display: inline-block;
+  font-family: 'Unbounded', 'Space Grotesk', 'Segoe UI', sans-serif;
+  font-size: clamp(2rem, 8vw, 5.8rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--text) 92%, var(--accent));
+  text-shadow:
+    0 0 20px color-mix(in srgb, var(--accent) 26%, transparent),
+    0 0 34px color-mix(in srgb, var(--accent) 14%, transparent);
+  user-select: text;
+}
+
+.railMask {
+  margin-top: 0.72rem;
+  border-top: 1px dashed color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 24%, var(--border));
+  overflow: hidden;
+  padding: 0.55rem 0;
+  position: relative;
+  z-index: 3;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 82%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 94%, transparent) 100%
+    );
+}
+
+.railTrack {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 0.65rem;
+  padding-inline: 0.35rem;
+}
+
+.railItem {
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-secondary) 78%, var(--bg));
+  color: color-mix(in srgb, var(--accent) 82%, var(--text-secondary));
+  padding: 0.28rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.22s ease, color 0.22s ease, background-color 0.22s ease;
+}
+
+.selected {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  color: color-mix(in srgb, var(--accent) 96%, var(--text));
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+}
+
+@media (max-width: 900px) {
+  .iconLayer {
+    inset: 0 0 34% 0;
+  }
+
+  .iconTwo,
+  .iconSix,
+  .iconSeven,
+  .iconEight {
+    top: 36%;
+  }
+
+  .iconNine,
+  .iconTen {
+    top: 58%;
+  }
+}
+
+@media (max-width: 680px) {
+  .iconLayer {
+    inset: 0 0 42% 0;
+  }
+
+  .iconBadge {
+    padding: 0.28rem 0.42rem;
+    font-size: 0.66rem;
+
+    span {
+      display: none;
+    }
+  }
+
+  .iconOne {
+    left: 4%;
+    top: 10%;
+  }
+
+  .iconTwo {
+    left: 6%;
+    top: 30%;
+  }
+
+  .iconThree {
+    left: 20%;
+    top: 14%;
+  }
+
+  .iconFour {
+    right: 20%;
+    top: 10%;
+  }
+
+  .iconFive {
+    right: 4%;
+    top: 10%;
+  }
+
+  .iconSix {
+    right: 6%;
+    top: 30%;
+  }
+
+  .iconSeven {
+    right: 5%;
+    top: 50%;
+  }
+
+  .iconEight {
+    left: 5%;
+    top: 50%;
+  }
+
+  .iconNine,
+  .iconTen {
+    display: none;
+  }
+}
