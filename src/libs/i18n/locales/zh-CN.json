@@ -243,5 +243,196 @@
       "FOCUS",
       "CREATE"
     ]
+  },
+  "toolsPage": {
+    "eyebrow": "Tool Stack",
+    "title": "工具分享",
+    "subtitle": "整理前端开发、页面设计与计算机软件开发常用工具，点击卡片可直达对应官网",
+    "visit": "访问",
+    "groups": [
+      {
+        "key": "frontend",
+        "title": "前端开发工具",
+        "description": "覆盖日常编码、兼容性判断、包体积分析与构建流程的高频工具。",
+        "items": [
+          {
+            "name": "MDN Web Docs",
+            "description": "HTML、CSS、JavaScript 与 Web API 的权威文档入口。",
+            "url": "https://developer.mozilla.org/",
+            "tags": [
+              "文档",
+              "Web API"
+            ]
+          },
+          {
+            "name": "Can I Use",
+            "description": "快速查询浏览器对 CSS、JS 特性和 API 的支持情况。",
+            "url": "https://caniuse.com/",
+            "tags": [
+              "兼容性",
+              "浏览器"
+            ]
+          },
+          {
+            "name": "TypeScript Playground",
+            "description": "在线验证 TypeScript 语法、类型推导与编译结果。",
+            "url": "https://www.typescriptlang.org/play",
+            "tags": [
+              "TypeScript",
+              "Playground"
+            ]
+          },
+          {
+            "name": "Vite",
+            "description": "现代前端构建工具，拥有极速启动和高效热更新体验。",
+            "url": "https://vite.dev/",
+            "tags": [
+              "构建",
+              "开发体验"
+            ]
+          },
+          {
+            "name": "npm",
+            "description": "JavaScript 包管理与发布平台，支持依赖管理和版本分发。",
+            "url": "https://www.npmjs.com/",
+            "tags": [
+              "包管理",
+              "Registry"
+            ]
+          },
+          {
+            "name": "Bundlephobia",
+            "description": "在引入依赖前评估包体积、安装成本和依赖体量。",
+            "url": "https://bundlephobia.com/",
+            "tags": [
+              "包体积",
+              "审计"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "design",
+        "title": "页面设计工具",
+        "description": "用于界面设计、灵感采集、配色、图标素材和视觉表达的常用平台。",
+        "items": [
+          {
+            "name": "Figma",
+            "description": "多人协作的界面设计与原型工具，适合产品和前端联动。",
+            "url": "https://www.figma.com/",
+            "tags": [
+              "UI",
+              "原型"
+            ]
+          },
+          {
+            "name": "Dribbble",
+            "description": "获取界面灵感和动效创意的设计作品社区。",
+            "url": "https://dribbble.com/",
+            "tags": [
+              "灵感",
+              "展示"
+            ]
+          },
+          {
+            "name": "Behance",
+            "description": "包含品牌、视觉与交互案例的设计作品集平台。",
+            "url": "https://www.behance.net/",
+            "tags": [
+              "作品集",
+              "案例"
+            ]
+          },
+          {
+            "name": "Coolors",
+            "description": "快速生成和调整配色方案，便于统一页面色彩体系。",
+            "url": "https://coolors.co/",
+            "tags": [
+              "配色",
+              "色板"
+            ]
+          },
+          {
+            "name": "Excalidraw",
+            "description": "手绘风白板工具，适合画流程图、线框图和方案草图。",
+            "url": "https://excalidraw.com/",
+            "tags": [
+              "线框",
+              "流程"
+            ]
+          },
+          {
+            "name": "Iconify",
+            "description": "统一图标聚合平台，提供多套图标和便捷接入方式。",
+            "url": "https://iconify.design/",
+            "tags": [
+              "图标",
+              "素材"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dev",
+        "title": "计算机开发工具",
+        "description": "覆盖版本管理、协作、容器化、接口调试和文档检索的基础开发工具链。",
+        "items": [
+          {
+            "name": "GitHub",
+            "description": "代码托管与协作平台，支持 PR 评审、Issue 跟踪和自动化流程。",
+            "url": "https://github.com/",
+            "tags": [
+              "Git",
+              "协作"
+            ]
+          },
+          {
+            "name": "Stack Overflow",
+            "description": "开发问题检索与问答社区，适合排错和方案参考。",
+            "url": "https://stackoverflow.com/",
+            "tags": [
+              "问答",
+              "排错"
+            ]
+          },
+          {
+            "name": "Docker",
+            "description": "容器化平台，用于统一开发、测试与部署环境。",
+            "url": "https://www.docker.com/",
+            "tags": [
+              "容器",
+              "部署"
+            ]
+          },
+          {
+            "name": "Postman",
+            "description": "接口调试与测试平台，支持请求集合、Mock 与团队协作。",
+            "url": "https://www.postman.com/",
+            "tags": [
+              "API",
+              "测试"
+            ]
+          },
+          {
+            "name": "Visual Studio Code",
+            "description": "跨平台代码编辑器，扩展生态完整，适配多语言开发。",
+            "url": "https://code.visualstudio.com/",
+            "tags": [
+              "编辑器",
+              "扩展"
+            ]
+          },
+          {
+            "name": "DevDocs",
+            "description": "聚合多技术栈文档，提供快速检索和离线浏览体验。",
+            "url": "https://devdocs.io/",
+            "tags": [
+              "参考",
+              "检索"
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

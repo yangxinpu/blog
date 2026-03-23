@@ -243,5 +243,196 @@
       "FOCUS",
       "CREATE"
     ]
+  },
+  "toolsPage": {
+    "eyebrow": "Tool Stack",
+    "title": "Tools Share",
+    "subtitle": "Common picks for frontend development, page design, and computer software engineering. Click any card to open its official website.",
+    "visit": "Visit",
+    "groups": [
+      {
+        "key": "frontend",
+        "title": "Frontend Development",
+        "description": "Daily references for coding, compatibility checks, package analysis, and build workflow.",
+        "items": [
+          {
+            "name": "MDN Web Docs",
+            "description": "Authoritative documentation for HTML, CSS, JavaScript, and major Web APIs.",
+            "url": "https://developer.mozilla.org/",
+            "tags": [
+              "Docs",
+              "Web API"
+            ]
+          },
+          {
+            "name": "Can I Use",
+            "description": "Browser support matrix for modern CSS, JavaScript features, and API capabilities.",
+            "url": "https://caniuse.com/",
+            "tags": [
+              "Compat",
+              "Browser"
+            ]
+          },
+          {
+            "name": "TypeScript Playground",
+            "description": "Quickly prototype and verify TypeScript syntax, utility types, and compiler output.",
+            "url": "https://www.typescriptlang.org/play",
+            "tags": [
+              "TypeScript",
+              "Playground"
+            ]
+          },
+          {
+            "name": "Vite",
+            "description": "Modern frontend toolchain with fast startup and efficient local feedback loop.",
+            "url": "https://vite.dev/",
+            "tags": [
+              "Build",
+              "DX"
+            ]
+          },
+          {
+            "name": "npm",
+            "description": "Largest JavaScript package registry for dependency management and release workflow.",
+            "url": "https://www.npmjs.com/",
+            "tags": [
+              "Package",
+              "Registry"
+            ]
+          },
+          {
+            "name": "Bundlephobia",
+            "description": "Check install size and dependency cost before introducing a package.",
+            "url": "https://bundlephobia.com/",
+            "tags": [
+              "Bundle",
+              "Audit"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "design",
+        "title": "Page & UI Design",
+        "description": "Useful services for interface drafting, inspiration, color choices, icon assets, and visual communication.",
+        "items": [
+          {
+            "name": "Figma",
+            "description": "Collaborative interface and prototyping tool for web and product design teams.",
+            "url": "https://www.figma.com/",
+            "tags": [
+              "UI",
+              "Prototype"
+            ]
+          },
+          {
+            "name": "Dribbble",
+            "description": "Browse interface concepts and micro-interaction ideas from global designers.",
+            "url": "https://dribbble.com/",
+            "tags": [
+              "Inspiration",
+              "Showcase"
+            ]
+          },
+          {
+            "name": "Behance",
+            "description": "Case-study based design portfolio platform covering branding, UI, and motion.",
+            "url": "https://www.behance.net/",
+            "tags": [
+              "Portfolio",
+              "Cases"
+            ]
+          },
+          {
+            "name": "Coolors",
+            "description": "Fast color palette generator for building harmonious and accessible themes.",
+            "url": "https://coolors.co/",
+            "tags": [
+              "Color",
+              "Palette"
+            ]
+          },
+          {
+            "name": "Excalidraw",
+            "description": "Sketch-style whiteboard for rapid wireframes, flows, and architecture diagrams.",
+            "url": "https://excalidraw.com/",
+            "tags": [
+              "Wireframe",
+              "Flow"
+            ]
+          },
+          {
+            "name": "Iconify",
+            "description": "Unified icon collection with multiple packs and easy embedding options.",
+            "url": "https://iconify.design/",
+            "tags": [
+              "Icon",
+              "Assets"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dev",
+        "title": "Computer Development",
+        "description": "General development stack for source control, collaboration, containers, debugging, and docs lookup.",
+        "items": [
+          {
+            "name": "GitHub",
+            "description": "Source control collaboration hub for code review, issue tracking, and CI workflows.",
+            "url": "https://github.com/",
+            "tags": [
+              "Git",
+              "Collab"
+            ]
+          },
+          {
+            "name": "Stack Overflow",
+            "description": "Community Q&A archive for troubleshooting, language details, and implementation patterns.",
+            "url": "https://stackoverflow.com/",
+            "tags": [
+              "Q&A",
+              "Debug"
+            ]
+          },
+          {
+            "name": "Docker",
+            "description": "Container platform for consistent runtime environments and reproducible delivery.",
+            "url": "https://www.docker.com/",
+            "tags": [
+              "Container",
+              "Deploy"
+            ]
+          },
+          {
+            "name": "Postman",
+            "description": "API debugging workspace for request testing, collections, and team collaboration.",
+            "url": "https://www.postman.com/",
+            "tags": [
+              "API",
+              "Test"
+            ]
+          },
+          {
+            "name": "Visual Studio Code",
+            "description": "Extensible cross-platform editor with rich ecosystem for development tasks.",
+            "url": "https://code.visualstudio.com/",
+            "tags": [
+              "Editor",
+              "Extensions"
+            ]
+          },
+          {
+            "name": "DevDocs",
+            "description": "Fast aggregated documentation search across major programming ecosystems.",
+            "url": "https://devdocs.io/",
+            "tags": [
+              "Reference",
+              "Search"
+            ]
+          }
+        ]
+      }
+    ]
   }
 }
