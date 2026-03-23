@@ -89,7 +89,7 @@ const Home: React.FC = () => {
 
     // 粒子
     const particles: { x: number; y: number; vx: number; vy: number }[] = [];
-    const count = 100;
+    const count = 300;
 
     for (let i = 0; i < count; i++) {
       particles.push({

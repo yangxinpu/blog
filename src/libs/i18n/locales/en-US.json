@@ -8,14 +8,17 @@
   "javascript": "JavaScript",
   "vue": "Vue",
   "react": "React",
+  "motto": "Motto",
   "theme": {
     "dark": "Dark mode",
     "light": "Light mode"
   },
+  "mottoSection": {
+    "quote": "Build with technology, stay guided by life."
+  },
   "footer": {
     "description": "A front-end technology blog, covering code details, engineering framework, and best practices. We hope that each article here will make the technology clearer.",
     "techStack": "Tech Stack",
-
     "allRightsReserved": "All rights reserved",
     "madeWith": "Made with",
     "team": "Team",

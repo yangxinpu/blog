@@ -1,0 +1,267 @@
+
+.container {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 5rem 1.5rem 4rem;
+  background:
+    radial-gradient(
+      circle at 50% 12%,
+      color-mix(in srgb, var(--accent) 10%, transparent) 0%,
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 98%, black 2%) 0%,
+      color-mix(in srgb, var(--bg) 95%, var(--bg-secondary) 5%) 12%,
+      color-mix(in srgb, var(--bg-secondary) 90%, black 10%) 100%
+    );
+
+  @media (max-width: 768px) {
+    min-height: 56vh;
+    padding: 3.5rem 1rem 2.5rem;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 7rem;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+      transparent 100%
+    );
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+
+    .glow,
+    .glowSecondary {
+      position: absolute;
+      border-radius: 999px;
+      will-change: transform, opacity;
+    }
+
+    .glow {
+      left: -6%;
+      top: 10%;
+      width: 46rem;
+      height: 18rem;
+      background:
+        radial-gradient(
+          ellipse at center,
+          color-mix(in srgb, var(--accent) 20%, white 10%) 0%,
+          transparent 68%
+        );
+      opacity: 0.5;
+      filter: blur(54px);
+      animation: pulseGlow 5.8s ease-in-out infinite;
+    }
+
+    .glowSecondary {
+      right: -2%;
+      bottom: -6%;
+      width: 34rem;
+      height: 18rem;
+      background:
+        radial-gradient(
+          ellipse at center,
+          color-mix(in srgb, var(--accent) 16%, white 8%) 0%,
+          transparent 68%
+        );
+      opacity: 0.32;
+      filter: blur(48px);
+      animation: pulseGlowAlt 6.4s ease-in-out infinite;
+    }
+
+    .waveCanvas {
+      position: absolute;
+      inset: -2% -10%;
+      width: 120%;
+      height: 104%;
+      transform: translate3d(0, 0, 0);
+      overflow: visible;
+      will-change: transform, opacity;
+    }
+
+    .waveGroup {
+      opacity: var(--wave-opacity);
+      transform-origin: center center;
+      will-change: transform, opacity;
+      animation: waveSlideA var(--wave-duration) linear infinite;
+      animation-delay: var(--wave-delay);
+
+      .waveGlow,
+      .waveLine {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+        shape-rendering: geometricPrecision;
+      }
+
+      .waveGlow {
+        stroke: color-mix(in srgb, var(--accent) 58%, white 42%);
+        stroke-width: calc(var(--wave-width) * 2.8);
+        opacity: 0.12;
+      }
+
+      .waveLine {
+        stroke: color-mix(in srgb, var(--accent) 80%, white 20%);
+        stroke-width: var(--wave-width);
+        opacity: 0.92;
+        filter:
+          drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 28%, transparent))
+          drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 12%, transparent));
+      }
+
+      &:nth-child(2n) {
+        animation-name: waveSlideB;
+
+        .waveGlow {
+          opacity: 0.1;
+        }
+
+        .waveLine {
+          opacity: 0.68;
+        }
+      }
+
+      &:nth-child(3n) {
+        .waveLine {
+          stroke-width: calc(var(--wave-width) - 0.35px);
+        }
+      }
+    }
+  }
+
+  .quote {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-family: 'Unbounded', 'Space Grotesk', 'Segoe UI', sans-serif;
+    font-size: clamp(1.1rem, 3.25vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+    color: var(--text);
+    will-change: transform, opacity, filter;
+    text-shadow:
+      0 0 18px color-mix(in srgb, var(--accent) 14%, transparent),
+      0 0 40px color-mix(in srgb, var(--accent) 8%, transparent);
+
+    @media (max-width: 768px) {
+      font-size: clamp(0.9rem, 3.8vw, 1.35rem);
+      letter-spacing: -0.04em;
+    }
+  }
+
+  &.visible {
+    .background {
+      .waveGroup {
+        animation-play-state: running;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .background {
+      .glow,
+      .glowSecondary,
+      .waveGroup {
+        animation: none !important;
+      }
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .container {
+    background:
+      radial-gradient(
+        circle at 50% 12%,
+        color-mix(in srgb, var(--accent) 18%, transparent) 0%,
+        transparent 26%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 94%, black 6%) 0%,
+        color-mix(in srgb, var(--bg) 88%, black 12%) 12%,
+        color-mix(in srgb, var(--bg-secondary) 70%, black 30%) 100%
+      );
+  }
+}
+
+@keyframes waveSlideA {
+  0% {
+    transform: translate3d(-2.2%, 0.8%, 0);
+  }
+
+  50% {
+    transform: translate3d(0.6%, -0.6%, 0);
+  }
+
+  100% {
+    transform: translate3d(2.8%, 0.2%, 0);
+  }
+}
+
+@keyframes waveSlideB {
+  0% {
+    transform: translate3d(2.2%, -0.8%, 0);
+  }
+
+  50% {
+    transform: translate3d(-0.4%, 0.5%, 0);
+  }
+
+  100% {
+    transform: translate3d(-2.6%, -0.2%, 0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.28;
+    transform: translate3d(0, 0, 0) scale(0.94);
+  }
+
+  50% {
+    opacity: 0.56;
+    transform: translate3d(2%, 1%, 0) scale(1.04);
+  }
+
+  100% {
+    opacity: 0.34;
+    transform: translate3d(4%, -1%, 0) scale(0.98);
+  }
+}
+
+@keyframes pulseGlowAlt {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 0, 0) scale(0.92);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: translate3d(-2%, -2%, 0) scale(1.02);
+  }
+
+  100% {
+    opacity: 0.24;
+    transform: translate3d(-4%, 1%, 0) scale(0.96);
+  }
+}

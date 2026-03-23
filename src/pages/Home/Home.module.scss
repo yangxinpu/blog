@@ -20,10 +20,10 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 7vw 20px;
+    padding: 5vw 20px;
 
     .title {
-      font-size: 48px;
+      font-size: 6rem;
       font-weight: 800;
       color: var(--accent);
       text-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
@@ -34,13 +34,14 @@
     }
 
     .subtitle {
-      margin-top: 10px;
+      font-size: 2.4rem;
       font-family: monospace;
       opacity: 0.8;
     }
 
     .desc {
-      margin-top: 10px;
+      font-size: 2rem;
+      font-family: monospace;
       color: var(--text-secondary);
     }
   }

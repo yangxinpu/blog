@@ -8,14 +8,17 @@
   "javascript": "JavaScript",
   "vue": "Vue",
   "react": "React",
+  "motto": "格言",
   "theme": {
     "dark": "深色模式",
     "light": "浅色模式"
   },
+  "mottoSection": {
+    "quote": "用技术实现想法，用生活校准方向。"
+  },
   "footer": {
     "description": "专注于前端技术分享，打造开发者的技术学习平台。每周更新优质技术文章。",
     "techStack": "技术栈",
-
     "allRightsReserved": "保留所有权利",
     "madeWith": "由",
     "team": "团队制作",

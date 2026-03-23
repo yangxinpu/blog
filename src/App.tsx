@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
 import { Github, Mail, Moon, Sun } from 'lucide-react';
 import Home from './pages/Home/Home';
+import Motto from './pages/Motto/Motto';
 import { personMeta, footerData } from './content/meta';
 import { Message, Dropdown } from './components';
 import styles from './App.module.scss';
@@ -160,7 +161,6 @@ function App() {
                 ]}
                 label={t('knowledgeBase')}
               />
-
               <a href="/contact" className={styles.navMenuLink}>{t('contact')}</a>
             </div>
           </nav>
@@ -188,6 +188,7 @@ function App() {
       {/* Main */}
       <main className={styles.main}>
         <Home />
+        <Motto />
       </main>
 
       {/* Footer */}
