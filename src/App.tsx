@@ -217,9 +217,12 @@ function App() {
                     <Mail size={20} />
                   </motion.a>
                 </div>
+
+                <div className={styles.footerCopyright}>
+                  © {new Date().getFullYear()} {personMeta.capitalNickname}. {t('footer.allRightsReserved')}
+                </div>
               </div>
 
-              {/* ⭐ 技术栈区域 */}
               <div
                 className={styles.footerTechStack}
                 ref={techStackRef}
