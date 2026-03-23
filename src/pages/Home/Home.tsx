@@ -159,13 +159,47 @@ const Home: React.FC = () => {
       <motion.div
         className={styles.hero}
         style={{ background: 'transparent' }}
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        <h1 className={styles.title}>{heroContent.title}</h1>
-        <p className={styles.subtitle}>{heroContent.subtitle}</p>
-        <p className={styles.desc}>{heroContent.desc}</p>
+        <h1 className={styles.title}>
+          {heroContent.title.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 50, scale: 0.5, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                type: 'spring',
+                stiffness: 100
+              }}
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.3 }
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </h1>
+        <motion.p 
+          className={styles.subtitle}
+          initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {heroContent.subtitle}
+        </motion.p>
+        <motion.p 
+          className={styles.desc}
+          initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          {heroContent.desc}
+        </motion.p>
       </motion.div>
 
       <section className={styles.content}>
@@ -173,8 +207,13 @@ const Home: React.FC = () => {
           <motion.div
             className={styles.card}
             style={{ gridColumn: '1 / 3', gridRow: '1 / 3' }}
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: -40, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            whileHover={{ 
+              boxShadow: '0 0 30px rgba(0, 255, 200, 0.3)',
+              borderColor: 'rgba(0, 255, 200, 0.5)'
+            }}
           >
             <h3>{messageBoardContent.title}</h3>
             <p className={styles.text}>{messageBoardContent.text}</p>
@@ -188,9 +227,14 @@ const Home: React.FC = () => {
 
           <motion.div
             className={styles.techCard}
-            whileHover={{ scale: 1.05, y: -8 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ 
+              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
+              borderColor: 'rgba(0, 255, 200, 0.5)',
+              color: 'rgba(0, 255, 200, 1)'
+            }}
           >
             <div
               className={styles.icon}
@@ -205,10 +249,14 @@ const Home: React.FC = () => {
           {/* 右下 - Vue */}
           <motion.div
             className={styles.techCard}
-            whileHover={{ scale: 1.05, y: -8 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ 
+              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
+              borderColor: 'rgba(0, 255, 200, 0.5)',
+              color: 'rgba(0, 255, 200, 1)'
+            }}
           >
             <div
               className={styles.icon}
@@ -223,10 +271,14 @@ const Home: React.FC = () => {
           {/* 左下 - Vite */}
           <motion.div
             className={styles.techCard}
-            whileHover={{ scale: 1.05, y: -8 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            whileHover={{ 
+              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
+              borderColor: 'rgba(0, 255, 200, 0.5)',
+              color: 'rgba(0, 255, 200, 1)'
+            }}
           >
             <div
               className={styles.icon}
@@ -241,10 +293,14 @@ const Home: React.FC = () => {
           {/* 中下 - Uniapp */}
           <motion.div
             className={styles.techCard}
-            whileHover={{ scale: 1.05, y: -8 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            whileHover={{ 
+              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
+              borderColor: 'rgba(0, 255, 200, 0.5)',
+              color: 'rgba(0, 255, 200, 1)'
+            }}
           >
             <div
               className={styles.icon}
@@ -259,10 +315,14 @@ const Home: React.FC = () => {
           {/* 右下 - JavaScript */}
           <motion.div
             className={styles.techCard}
-            whileHover={{ scale: 1.05, y: -8 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            whileHover={{ 
+              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
+              borderColor: 'rgba(0, 255, 200, 0.5)',
+              color: 'rgba(0, 255, 200, 1)'
+            }}
           >
             <div
               className={styles.icon}

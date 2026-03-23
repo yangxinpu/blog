@@ -20,13 +20,17 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 100px 20px;
+    padding: 7vw 20px;
 
     .title {
       font-size: 48px;
       font-weight: 800;
       color: var(--accent);
       text-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
     }
 
     .subtitle {
@@ -60,10 +64,15 @@
       /* 卡片 */
       .card {
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(0, 255, 200, 0.3);
         backdrop-filter: blur(10px);
         padding: 24px;
         border-radius: 16px;
+        box-shadow: 
+          0 0 10px rgba(0, 255, 200, 0.1),
+          0 0 20px rgba(0, 255, 200, 0.05);
+        position: relative;
+        overflow: hidden;
 
         h3 {
           color: var(--accent);
@@ -75,7 +84,7 @@
 
         .divider {
           height: 1px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(0, 255, 200, 0.2);
           margin: 16px 0;
         }
 
@@ -94,15 +103,16 @@
       /* 技术栈卡片 */
       .techCard {
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(0, 255, 200, 0.3);
         backdrop-filter: blur(10px);
         padding: 20px;
         border-radius: 16px;
-        transition: transform 0.3s, box-shadow 0.3s;
-
-        &:hover {
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+        transition: all 0.3s ease;
+        box-shadow: 
+          0 0 10px rgba(0, 255, 200, 0.1),
+          0 0 20px rgba(0, 255, 200, 0.05);
+        position: relative;
+        overflow: hidden;
 
         .icon {
           width: 60px;
@@ -111,15 +121,27 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover .icon {
+          transform: scale(1.1);
         }
 
         h4 {
           margin-top: 10px;
+          transition: color 0.3s ease;
         }
 
         p {
           font-size: 14px;
           color: var(--text-secondary);
+          transition: color 0.3s ease;
+        }
+
+        &:hover h4,
+        &:hover p {
+          color: rgba(0, 255, 200, 1);
         }
       }
     }
