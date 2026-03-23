@@ -13,24 +13,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 5rem;
-    background-color: var(--bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     position: fixed;
     z-index: 100;
     height: 70px;
-
-    @media (max-width: 1024px) {
-      padding: 0 1.5rem;
-    }
 
     @media (max-width: 768px) {
       padding: 0 1rem;
       height: 60px;
     }
 
-    @media (max-width: 480px) {
-      padding: 0 0.75rem;
-    }
 
     .logo {
       display: flex;
@@ -112,14 +106,15 @@
           }
 
           .navMenuLink {
-            padding: 4px 12px;
+            padding: 4px 16px;
             color: var(--text);
             text-decoration: none;
             font-size: 1rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
+            border-radius: 6px;
 
             @media (max-width: 768px) {
               font-size: 0.9rem;
@@ -128,9 +123,7 @@
 
             &:hover {
               color: var(--accent);
-              outline: 1px solid var(--accent);
-              outline-offset: 2px;
-              border-radius: 4px;
+              background-color: var(--bg-secondary);
             }
           }
         }
@@ -165,7 +158,6 @@
           &:hover {
             background-color: var(--accent);
             color: #fff;
-            transform: translateY(-2px);
           }
 
           &:focus {
