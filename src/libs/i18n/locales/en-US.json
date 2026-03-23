@@ -24,6 +24,156 @@
     "team": "Team",
     "doubleClickToCopy": "Double click to copy email",
     "emailCopied": "Email copied successfully!",
-    "emailCopyFailed": "Failed to copy email, please copy manually."
+    "emailCopyFailed": "Failed to copy email, please copy manually.",
+    "wordmark": "Nailuo",
+    "wordmarkHint": "Scroll to reveal"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Overthinker",
+      "subtitle": "Build / Think / Create",
+      "desc": "A personal corner for engineering notes, product-minded thinking, and continuous frontend craftsmanship."
+    },
+    "profile": {
+      "label": "Profile",
+      "title": "Self-introduction and personal statement",
+      "description": "I focus on turning ideas into maintainable interfaces, balancing user experience, engineering quality, and long-term scalability.",
+      "items": [
+        {
+          "label": "Role",
+          "value": "Frontend Engineer"
+        },
+        {
+          "label": "Direction",
+          "value": "React / Vue / Engineering"
+        },
+        {
+          "label": "Style",
+          "value": "Pragmatic, detail-oriented, delivery-focused"
+        }
+      ]
+    },
+    "interests": {
+      "label": "Interests",
+      "title": "Who I am outside coding",
+      "description": "Interests keep me creative and disciplined, and they often inspire better product and interaction decisions.",
+      "items": [
+        "Hiking and basketball to stay physically active",
+        "Reading tech, design, and history books",
+        "Writing blog notes to summarize lessons learned",
+        "Exploring UI/UX details in real products"
+      ]
+    },
+    "openDoc": "Open Documentation",
+    "cards": {
+      "react": {
+        "name": "React",
+        "focus": "Component architecture",
+        "description": "Build interactive interfaces with declarative rendering and reusable component boundaries.",
+        "highlights": [
+          "Composable UI for medium and large apps",
+          "Strong ecosystem for routing and state management"
+        ]
+      },
+      "vue": {
+        "name": "Vue",
+        "focus": "Progressive development",
+        "description": "Delivers rapid implementation with clean templates, reactive APIs, and mature tooling.",
+        "highlights": [
+          "Easy adoption from small pages to full systems",
+          "Great single-file component workflow"
+        ]
+      },
+      "typescript": {
+        "name": "TypeScript",
+        "focus": "Type safety",
+        "description": "Improves reliability with static contracts and safer refactoring in collaborative projects.",
+        "highlights": [
+          "Safer interfaces across modules",
+          "Better editor feedback and maintainability"
+        ]
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "focus": "Language fundamentals",
+        "description": "Core runtime language for web applications, interaction logic, and platform APIs.",
+        "highlights": [
+          "Essential for browser and Node.js development",
+          "Flexible syntax for diverse application scenarios"
+        ]
+      },
+      "nextjs": {
+        "name": "Next.js",
+        "focus": "Full-stack React",
+        "description": "Provides hybrid rendering, routing conventions, and server capabilities for modern web apps.",
+        "highlights": [
+          "SSR, SSG, and App Router for flexible architecture",
+          "Good defaults for performance and SEO"
+        ]
+      },
+      "nuxtjs": {
+        "name": "Nuxt",
+        "focus": "Full-stack Vue",
+        "description": "A production-ready framework to build Vue applications with routing, data fetching, and SSR support.",
+        "highlights": [
+          "Convention-driven structure for fast setup",
+          "Balanced DX for content and product websites"
+        ]
+      },
+      "vite": {
+        "name": "Vite",
+        "focus": "Build speed",
+        "description": "Optimizes local development and production build pipelines with fast startup and HMR.",
+        "highlights": [
+          "Very fast feedback loop in development",
+          "Modern build tooling with broad framework support"
+        ]
+      },
+      "webpack": {
+        "name": "Webpack",
+        "focus": "Bundling strategy",
+        "description": "A highly customizable bundler for complex build requirements and legacy compatibility.",
+        "highlights": [
+          "Flexible plugin ecosystem",
+          "Fine-grained control of assets and optimization"
+        ]
+      },
+      "tailwindcss": {
+        "name": "Tailwind CSS",
+        "focus": "Utility-first styling",
+        "description": "Speeds up UI delivery through composable utility classes and consistent design tokens.",
+        "highlights": [
+          "Fast styling iterations in product teams",
+          "Strong consistency with design systems"
+        ]
+      },
+      "sass": {
+        "name": "Sass",
+        "focus": "Style engineering",
+        "description": "Extends CSS with variables, mixins, and modular patterns to keep style architecture scalable.",
+        "highlights": [
+          "Improves code organization for large stylesheets",
+          "Reusable patterns for design consistency"
+        ]
+      },
+      "redux": {
+        "name": "Redux",
+        "focus": "State management",
+        "description": "Predictable state container for complex client applications and cross-module data flow.",
+        "highlights": [
+          "Clear unidirectional data flow",
+          "Great debugging with devtools and middleware"
+        ]
+      },
+      "nodejs": {
+        "name": "Node.js",
+        "focus": "Tooling runtime",
+        "description": "Powers frontend tooling, API services, and automation scripts with an event-driven runtime.",
+        "highlights": [
+          "Shared JavaScript language across stack",
+          "Rich package ecosystem for engineering tasks"
+        ]
+      }
+    }
   }
 }

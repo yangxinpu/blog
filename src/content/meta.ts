@@ -1,25 +1,66 @@
 export const personMeta = {
-    nickname: 'NaiLuo',
-    capitalNickname: 'NAILUO',
-    githubLink: 'https://github.com/Nailuo',
-    email: 'nailuo@example.com',
+  nickname: 'NaiLuo',
+  capitalNickname: 'NAILUO',
+  githubLink: 'https://github.com/Nailuo',
+  email: 'nailuo@example.com'
 };
 
 export const footerData = {
-  description: '一个记录成长的前端技术博客，从代码细节到工程体系，从踩坑经验到最佳实践。希望这里的每一篇文章，都能让技术更清晰一点',
   techStack: [
-    { name: 'React', link: '#', color: '#61DAFB' },
-    { name: 'TypeScript', link: '#', color: '#3178C6' },
-    { name: 'Next.js', link: '#', color: '#000000' },
-    { name: 'Tailwind CSS', link: '#', color: '#38B2AC' },
-    { name: 'JavaScript', link: '#', color: '#F7DF1E' },
-    { name: 'HTML', link: '#', color: '#E34F26' },
-    { name: 'CSS', link: '#', color: '#1572B6' },
-    { name: 'Vue', link: '#', color: '#4FC08D' },
-    { name: 'Vite', link: '#', color: '#646CFF' },
-    { name: 'WebPack', link: '#', color: '#8DD6F9' },
-    { name: 'Uniapp', link: '#', color: '#007AFF' },
-    { name: 'Node.js', link: '#', color: '#339933' },
-    { name: 'Bun.js', link: '#', color: '#F7B500' }
-  ],
+    {
+      name: 'React',
+      link: 'https://react.dev/',
+      icon: 'https://cdn.simpleicons.org/react/61DAFB'
+    },
+    {
+      name: 'TypeScript',
+      link: 'https://www.typescriptlang.org/',
+      icon: 'https://cdn.simpleicons.org/typescript/3178C6'
+    },
+    {
+      name: 'Next.js',
+      link: 'https://nextjs.org/',
+      icon: 'https://cdn.simpleicons.org/nextdotjs/00D5C4'
+    },
+    {
+      name: 'Tailwind CSS',
+      link: 'https://tailwindcss.com/',
+      icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4'
+    },
+    {
+      name: 'JavaScript',
+      link: 'https://developer.mozilla.org/docs/Web/JavaScript',
+      icon: 'https://cdn.simpleicons.org/javascript/F7DF1E'
+    },
+    {
+      name: 'Vue',
+      link: 'https://vuejs.org/',
+      icon: 'https://cdn.simpleicons.org/vuedotjs/4FC08D'
+    },
+    {
+      name: 'Vite',
+      link: 'https://vite.dev/',
+      icon: 'https://cdn.simpleicons.org/vite/646CFF'
+    },
+    {
+      name: 'Webpack',
+      link: 'https://webpack.js.org/',
+      icon: 'https://cdn.simpleicons.org/webpack/8DD6F9'
+    },
+    {
+      name: 'Sass',
+      link: 'https://sass-lang.com/',
+      icon: 'https://cdn.simpleicons.org/sass/CC6699'
+    },
+    {
+      name: 'Node.js',
+      link: 'https://nodejs.org/',
+      icon: 'https://cdn.simpleicons.org/nodedotjs/5FA04E'
+    },
+    {
+      name: 'Bun',
+      link: 'https://bun.sh/',
+      icon: 'https://bun.sh/logo.svg'
+    }
+  ]
 };

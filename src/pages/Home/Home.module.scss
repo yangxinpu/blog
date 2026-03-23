@@ -1,151 +1,309 @@
 .home {
   position: relative;
   min-height: 100vh;
-  color: var(--text);
   overflow: hidden;
-  background: var(--bg);
+  color: var(--text);
+  isolation: isolate;
 
-  .canvas {
+  &::before,
+  &::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    inset: 0;
-    z-index: 0;
     pointer-events: none;
+    z-index: 0;
+    border-radius: 999px;
+    filter: blur(56px);
   }
 
-  .hero {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 5vw 20px;
-
-    .title {
-      font-size: 6rem;
-      font-weight: 800;
-      color: var(--accent);
-      text-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
-      font-family: 'Arial', sans-serif;
-      letter-spacing: 2px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .subtitle {
-      font-size: 2.4rem;
-      font-family: monospace;
-      opacity: 0.8;
-    }
-
-    .desc {
-      font-size: 2rem;
-      font-family: monospace;
-      color: var(--text-secondary);
-    }
+  &::before {
+    width: 560px;
+    height: 320px;
+    top: -140px;
+    right: -180px;
+    opacity: 0.22;
+    background: radial-gradient(circle at center, var(--primary-200) 0%, transparent 68%);
   }
-  
-  .content {
-    position: relative;
-    z-index: 1;
-    padding: 40px 20px;
 
-    .gridLayout {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 30px;
-
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-      }
-
-      /* 卡片 */
-      .card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 2px solid rgba(0, 255, 200, 0.3);
-        backdrop-filter: blur(10px);
-        padding: 24px;
-        border-radius: 16px;
-        box-shadow: 
-          0 0 10px rgba(0, 255, 200, 0.1),
-          0 0 20px rgba(0, 255, 200, 0.05);
-        position: relative;
-        overflow: hidden;
-
-        h3 {
-          color: var(--accent);
-        }
-
-        .text {
-          margin-top: 10px;
-        }
-
-        .divider {
-          height: 1px;
-          background: rgba(0, 255, 200, 0.2);
-          margin: 16px 0;
-        }
-
-        .messageItem {
-          h4 {
-            margin-bottom: 5px;
-          }
-
-          span {
-            font-size: 14px;
-            color: var(--text-secondary);
-          }
-        }
-      }
-
-      /* 技术栈卡片 */
-      .techCard {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(0, 255, 200, 0.3);
-        backdrop-filter: blur(10px);
-        padding: 20px;
-        border-radius: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 
-          0 0 10px rgba(0, 255, 200, 0.1),
-          0 0 20px rgba(0, 255, 200, 0.05);
-        position: relative;
-        overflow: hidden;
-
-        .icon {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.3s ease;
-        }
-
-        &:hover .icon {
-          transform: scale(1.1);
-        }
-
-        h4 {
-          margin-top: 10px;
-          transition: color 0.3s ease;
-        }
-
-        p {
-          font-size: 14px;
-          color: var(--text-secondary);
-          transition: color 0.3s ease;
-        }
-
-        &:hover h4,
-        &:hover p {
-          color: rgba(0, 255, 200, 1);
-        }
-      }
-    }
+  &::after {
+    width: 440px;
+    height: 260px;
+    top: 34%;
+    left: -130px;
+    opacity: 0.18;
+    background: radial-gradient(circle at center, var(--primary-400) 0%, transparent 68%);
   }
 }
 
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 56%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: clamp(72px, 9vw, 132px) 20px 36px;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+
+  span {
+    display: inline-block;
+  }
+}
+
+.subtitle {
+  margin-bottom: 8px;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.desc {
+  margin: 0 auto;
+  max-width: 820px;
+  font-size: clamp(0.96rem, 1.9vw, 1.14rem);
+  color: var(--text-secondary);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 14px 20px 56px;
+}
+
+.gridLayout {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.featuredCard,
+.interestCard,
+.techCard {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.featuredCard {
+  grid-column: span 8;
+  padding: 24px;
+}
+
+.interestCard {
+  grid-column: span 4;
+  padding: 24px;
+}
+
+.cardLabel {
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.featuredText {
+  margin-bottom: 18px;
+  color: var(--text-secondary);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.featureItem {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+}
+
+.featureItemLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.featureItemValue {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.interestList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+
+  li {
+    position: relative;
+    margin: 0;
+    padding-left: 16px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary-200);
+  }
+}
+
+.techCard {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    border-color: var(--accent);
+    box-shadow:
+      var(--shadow),
+      0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent);
+  }
+}
+
+.techHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 70%, var(--bg));
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  img {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.25s ease;
+  }
+}
+
+.techCard:hover .logoBox img {
+  transform: scale(1.06);
+}
+
+.techNameWrap {
+  h4 {
+    margin: 0;
+    font-size: 1.04rem;
+    color: var(--text);
+  }
+
+  span {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+}
+
+.techDescription {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.highlightList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+
+  li {
+    position: relative;
+    padding-left: 16px;
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+}
+
+.cardAction {
+  margin-top: auto;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--primary-300);
+}
+
+@media (max-width: 1080px) {
+  .featuredCard {
+    grid-column: span 12;
+  }
+
+  .interestCard {
+    grid-column: span 12;
+  }
+
+  .techCard {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridLayout {
+    gap: 14px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .techCard {
+    grid-column: span 12;
+  }
+}

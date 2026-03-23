@@ -1,342 +1,385 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { Code2, Activity, Zap } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
 
-const techStacks = [
-  {
-    name: 'React',
-    icon: <Zap size={36} />,
-    description: '组件化开发，生态强大，适合大型应用。',
-    color: '#61DAFB'
-  },
-  {
-    name: 'Vue',
-    icon: <Activity size={36} />,
-    description: '渐进式框架，轻量高效，生态完善。',
-    color: '#4FC08D'
-  },
-  {
-    name: 'JavaScript',
-    icon: <Code2 size={36} />,
-    description: 'Web核心语言，驱动现代前端。',
-    color: '#F7DF1E'
-  },
-  {
-    name: 'Node.js',
-    icon: <Zap size={36} />,
-    description: '服务器端运行JavaScript，构建高性能后端。',
-    color: '#339933'
-  },
-  {
-    name: 'Next.js',
-    icon: <Code2 size={36} />,
-    description: 'React框架，支持服务端渲染和静态生成。',
-    color: '#000000'
-  },
-  {
-    name: 'Vite',
-    icon: <Zap size={36} />,
-    description: '现代前端构建工具，快速开发和构建。',
-    color: '#646CFF'
-  },
-  {
-    name: 'Uniapp',
-    icon: <Activity size={36} />,
-    description: '跨平台应用框架，一次开发多端运行。',
-    color: '#007AFF'
-  }
+type TechKey =
+  | 'react'
+  | 'vue'
+  | 'typescript'
+  | 'javascript'
+  | 'nextjs'
+  | 'nuxtjs'
+  | 'vite'
+  | 'webpack'
+  | 'tailwindcss'
+  | 'sass'
+  | 'redux'
+  | 'nodejs';
+
+type LogoSource =
+  | string
+  | {
+    light: string;
+    dark: string;
+  };
+
+type ProfileItem = {
+  label: string;
+  value: string;
+};
+
+type TechCardI18n = {
+  name: string;
+  focus: string;
+  description: string;
+  highlights: string[];
+};
+
+const techCardOrder: TechKey[] = [
+  'react',
+  'vue',
+  'typescript',
+  'javascript',
+  'nextjs',
+  'nuxtjs',
+  'vite',
+  'webpack',
+  'tailwindcss',
+  'sass',
+  'redux',
+  'nodejs'
 ];
 
-const heroContent = {
-  title: 'Overthinker',
-  subtitle: 'Build · Think · Create',
-  desc: '这是我的个人博客，记录技术与思考'
+const techAssets: Record<TechKey, { logo: LogoSource; link: string }> = {
+  react: {
+    logo: 'https://cdn.simpleicons.org/react/61DAFB',
+    link: 'https://react.dev/'
+  },
+  vue: {
+    logo: 'https://cdn.simpleicons.org/vuedotjs/4FC08D',
+    link: 'https://vuejs.org/'
+  },
+  typescript: {
+    logo: 'https://cdn.simpleicons.org/typescript/3178C6',
+    link: 'https://www.typescriptlang.org/'
+  },
+  javascript: {
+    logo: 'https://cdn.simpleicons.org/javascript/F7DF1E',
+    link: 'https://developer.mozilla.org/docs/Web/JavaScript'
+  },
+  nextjs: {
+    logo: {
+      light: 'https://cdn.simpleicons.org/nextdotjs/000000',
+      dark: 'https://cdn.simpleicons.org/nextdotjs/FFFFFF'
+    },
+    link: 'https://nextjs.org/'
+  },
+  nuxtjs: {
+    logo: 'https://cdn.simpleicons.org/nuxtdotjs/00DC82',
+    link: 'https://nuxt.com/'
+  },
+  vite: {
+    logo: 'https://cdn.simpleicons.org/vite/646CFF',
+    link: 'https://vite.dev/'
+  },
+  webpack: {
+    logo: 'https://cdn.simpleicons.org/webpack/8DD6F9',
+    link: 'https://webpack.js.org/'
+  },
+  tailwindcss: {
+    logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+    link: 'https://tailwindcss.com/'
+  },
+  sass: {
+    logo: 'https://cdn.simpleicons.org/sass/CC6699',
+    link: 'https://sass-lang.com/'
+  },
+  redux: {
+    logo: 'https://cdn.simpleicons.org/redux/764ABC',
+    link: 'https://redux.js.org/'
+  },
+  nodejs: {
+    logo: 'https://cdn.simpleicons.org/nodedotjs/5FA04E',
+    link: 'https://nodejs.org/'
+  }
 };
 
-const messageBoardContent = {
-  title: 'Message Board',
-  text: '快来留言吧 (≧▽≦)',
-  messageTitle: '简单自我介绍',
-  messageInfo: '2025-03-08 · OverThinker'
-};
-const Home: React.FC = () => {
+function resolveLogo(source: LogoSource, isDark: boolean): string {
+  if (typeof source === 'string') return source;
+  return isDark ? source.dark : source.light;
+}
+
+function Home() {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [isDark, setIsDark] = useState(
+    () => document.documentElement.getAttribute('data-theme') === 'dark'
+  );
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext('2d')!;
+    const root = document.documentElement;
+    const updateTheme = () =>
+      setIsDark(root.getAttribute('data-theme') === 'dark');
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let animationId = 0;
+
+    const accent =
+      getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() ||
+      '#00d5c4';
+    const mouse = { x: width / 2, y: height / 2 };
 
     canvas.width = width;
     canvas.height = height;
 
-    const mouse = { x: width / 2, y: height / 2 };
+    const handleMouseMove = (event: MouseEvent) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    };
 
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-    });
+    };
 
-    // 粒子
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize);
+
     const particles: { x: number; y: number; vx: number; vy: number }[] = [];
-    const count = 300;
+    const particleCount = 180;
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 1,
-        vy: (Math.random() - 0.5) * 1,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8
       });
     }
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // 绘制粒子
-      particles.forEach((p) => {
-        // 鼠标引力
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+      particles.forEach((particle) => {
+        const dx = mouse.x - particle.x;
+        const dy = mouse.y - particle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 150) {
-          p.x -= dx * 0.01;
-          p.y -= dy * 0.01;
+        if (distance < 140) {
+          particle.x -= dx * 0.006;
+          particle.y -= dy * 0.006;
         }
 
-        p.x += p.vx;
-        p.y += p.vy;
+        particle.x += particle.vx;
+        particle.y += particle.vy;
 
-        // 边界反弹
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
+        if (particle.x < 0 || particle.x > width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > height) particle.vy *= -1;
 
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0,255,200,0.8)';
+        ctx.arc(particle.x, particle.y, 1.7, 0, Math.PI * 2);
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = isDark ? 0.45 : 0.3;
         ctx.fill();
+        ctx.globalAlpha = 1;
       });
 
-      // 连线
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 120) {
+          if (distance < 120) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0,255,200,${1 - dist / 120})`;
+            ctx.strokeStyle = accent;
+            ctx.globalAlpha = Math.max(0, 0.45 - distance / 220);
             ctx.lineWidth = 1;
             ctx.stroke();
+            ctx.globalAlpha = 1;
           }
         }
       }
 
-      requestAnimationFrame(draw);
+      animationId = requestAnimationFrame(draw);
     };
 
     draw();
-  }, []);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isDark]);
+
+  const profileItems = t('homePage.profile.items', {
+    returnObjects: true
+  }) as unknown as ProfileItem[];
+
+  const interests = t('homePage.interests.items', {
+    returnObjects: true
+  }) as unknown as string[];
+
+  const techCards = techCardOrder.map((key) => {
+    const item = t(`homePage.cards.${key}`, {
+      returnObjects: true
+    }) as unknown as TechCardI18n;
+
+    return {
+      key,
+      ...item,
+      logo: resolveLogo(techAssets[key].logo, isDark),
+      link: techAssets[key].link
+    };
+  });
 
   return (
     <div className={styles.home}>
-      <canvas ref={canvasRef} className={styles.canvas}></canvas>
+      <canvas ref={canvasRef} className={styles.canvas} />
 
       <motion.div
         className={styles.hero}
-        style={{ background: 'transparent' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.8 }}
       >
         <h1 className={styles.title}>
-          {heroContent.title.split('').map((char, index) => (
+          {t('homePage.hero.title').split('').map((char, index) => (
             <motion.span
-              key={index}
-              initial={{ opacity: 0, y: 50, scale: 0.5, filter: 'blur(10px)' }}
+              key={`${char}-${index}`}
+              initial={{ opacity: 0, y: 44, scale: 0.7, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
               transition={{
-                duration: 0.5,
-                delay: index * 0.1,
+                duration: 0.45,
+                delay: index * 0.06,
                 type: 'spring',
-                stiffness: 100
+                stiffness: 120
               }}
-              whileHover={{
-                scale: 1.2,
-                transition: { duration: 0.3 }
-              }}
+              whileHover={{ scale: 1.08 }}
             >
               {char}
             </motion.span>
           ))}
         </h1>
-        <motion.p 
+
+        <motion.p
           className={styles.subtitle}
-          initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+          initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.12 }}
         >
-          {heroContent.subtitle}
+          {t('homePage.hero.subtitle')}
         </motion.p>
-        <motion.p 
+
+        <motion.p
           className={styles.desc}
-          initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+          initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.24 }}
         >
-          {heroContent.desc}
+          {t('homePage.hero.desc')}
         </motion.p>
       </motion.div>
 
       <section className={styles.content}>
         <div className={styles.gridLayout}>
-          <motion.div
-            className={styles.card}
-            style={{ gridColumn: '1 / 3', gridRow: '1 / 3' }}
-            initial={{ opacity: 0, y: -40, filter: 'blur(5px)' }}
+          <motion.article
+            className={styles.featuredCard}
+            initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{ 
-              boxShadow: '0 0 30px rgba(0, 255, 200, 0.3)',
-              borderColor: 'rgba(0, 255, 200, 0.5)'
-            }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            whileHover={{ y: -4 }}
           >
-            <h3>{messageBoardContent.title}</h3>
-            <p className={styles.text}>{messageBoardContent.text}</p>
-            <div className={styles.divider}></div>
+            <p className={styles.cardLabel}>{t('homePage.profile.label')}</p>
+            <h3>{t('homePage.profile.title')}</h3>
+            <p className={styles.featuredText}>{t('homePage.profile.description')}</p>
 
-            <div className={styles.messageItem}>
-              <h4>{messageBoardContent.messageTitle}</h4>
-              <span>{messageBoardContent.messageInfo}</span>
+            <div className={styles.featureGrid}>
+              {profileItems.map((item) => (
+                <div key={item.label} className={styles.featureItem}>
+                  <span className={styles.featureItemLabel}>{item.label}</span>
+                  <span className={styles.featureItemValue}>{item.value}</span>
+                </div>
+              ))}
             </div>
-          </motion.div>
+          </motion.article>
 
-          <motion.div
-            className={styles.techCard}
-            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+          <motion.article
+            className={styles.interestCard}
+            initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            whileHover={{ 
-              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
-              borderColor: 'rgba(0, 255, 200, 0.5)',
-              color: 'rgba(0, 255, 200, 1)'
-            }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -4 }}
           >
-            <div
-              className={styles.icon}
-              style={{ background: `${techStacks[0].color}22` }}
+            <p className={styles.cardLabel}>{t('homePage.interests.label')}</p>
+            <h3>{t('homePage.interests.title')}</h3>
+            <p className={styles.featuredText}>{t('homePage.interests.description')}</p>
+
+            <ul className={styles.interestList}>
+              {interests.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </motion.article>
+
+          {techCards.map((card, index) => (
+            <motion.a
+              key={card.key}
+              href={card.link}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.techCard}
+              initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
+              whileHover={{ y: -4 }}
             >
-              {techStacks[0].icon}
-            </div>
-            <h4>{techStacks[0].name}</h4>
-            <p>{techStacks[0].description}</p>
-          </motion.div>
+              <div className={styles.techHead}>
+                <span className={styles.logoBox}>
+                  <img src={card.logo} alt={`${card.name} logo`} loading="lazy" />
+                </span>
 
-          {/* 右下 - Vue */}
-          <motion.div
-            className={styles.techCard}
-            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ 
-              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
-              borderColor: 'rgba(0, 255, 200, 0.5)',
-              color: 'rgba(0, 255, 200, 1)'
-            }}
-          >
-            <div
-              className={styles.icon}
-              style={{ background: `${techStacks[1].color}22` }}
-            >
-              {techStacks[1].icon}
-            </div>
-            <h4>{techStacks[1].name}</h4>
-            <p>{techStacks[1].description}</p>
-          </motion.div>
+                <div className={styles.techNameWrap}>
+                  <h4>{card.name}</h4>
+                  <span>{card.focus}</span>
+                </div>
+              </div>
 
-          {/* 左下 - Vite */}
-          <motion.div
-            className={styles.techCard}
-            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            whileHover={{ 
-              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
-              borderColor: 'rgba(0, 255, 200, 0.5)',
-              color: 'rgba(0, 255, 200, 1)'
-            }}
-          >
-            <div
-              className={styles.icon}
-              style={{ background: `${techStacks[5].color}22` }}
-            >
-              {techStacks[5].icon}
-            </div>
-            <h4>{techStacks[5].name}</h4>
-            <p>{techStacks[5].description}</p>
-          </motion.div>
+              <p className={styles.techDescription}>{card.description}</p>
 
-          {/* 中下 - Uniapp */}
-          <motion.div
-            className={styles.techCard}
-            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            whileHover={{ 
-              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
-              borderColor: 'rgba(0, 255, 200, 0.5)',
-              color: 'rgba(0, 255, 200, 1)'
-            }}
-          >
-            <div
-              className={styles.icon}
-              style={{ background: `${techStacks[6].color}22` }}
-            >
-              {techStacks[6].icon}
-            </div>
-            <h4>{techStacks[6].name}</h4>
-            <p>{techStacks[6].description}</p>
-          </motion.div>
+              <ul className={styles.highlightList}>
+                {card.highlights.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
 
-          {/* 右下 - JavaScript */}
-          <motion.div
-            className={styles.techCard}
-            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            whileHover={{ 
-              boxShadow: '0 0 25px rgba(0, 255, 200, 0.3)',
-              borderColor: 'rgba(0, 255, 200, 0.5)',
-              color: 'rgba(0, 255, 200, 1)'
-            }}
-          >
-            <div
-              className={styles.icon}
-              style={{ background: `${techStacks[2].color}22` }}
-            >
-              {techStacks[2].icon}
-            </div>
-            <h4>{techStacks[2].name}</h4>
-            <p>{techStacks[2].description}</p>
-          </motion.div>
+              <span className={styles.cardAction}>{t('homePage.openDoc')}</span>
+            </motion.a>
+          ))}
         </div>
       </section>
     </div>
   );
-};
+}
 
 export default Home;
