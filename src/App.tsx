@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { Github, Mail, Moon, Sun } from 'lucide-react';
 import Home from './pages/Home/Home';
 import Motto from './pages/Motto/Motto';
+import Thoughts from './pages/Thoughts/Thoughts';
 import { personMeta, footerData } from './content/meta';
 import { Message, Dropdown } from './components';
 import styles from './App.module.scss';
@@ -76,6 +77,8 @@ function App() {
 
   const wordmarkText = t('footer.wordmark');
   const wordmarkChars = wordmarkText.split('');
+  const langToggleText =
+    i18n.language === 'zh-CN' ? t('common.lang.enShort') : t('common.lang.zhShort');
 
   return (
     <div className={styles.app}>
@@ -91,7 +94,7 @@ function App() {
       <header className={styles.header}>
         <div className={styles.logo}>
           <a href="/" className={styles.logoLink}>
-            <img src={logoImage} alt="Logo" className={styles.logoImg} />
+            <img src={logoImage} alt={t('common.logoAlt')} className={styles.logoImg} />
             <span className={styles.logoText}>{personMeta.capitalNickname}</span>
           </a>
         </div>
@@ -120,7 +123,7 @@ function App() {
                 changeLanguage(i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN')
               }
             >
-              {i18n.language === 'zh-CN' ? 'EN' : 'CN'}
+              {langToggleText}
             </button>
 
             <button className={styles.themeSwitch} onClick={toggleTheme}>
@@ -133,6 +136,7 @@ function App() {
       <main className={styles.main}>
         <Home />
         <Motto />
+        <Thoughts />
       </main>
 
       <footer className={styles.footer}>
@@ -186,7 +190,7 @@ function App() {
                     >
                       <motion.img
                         src={item.icon}
-                        alt={`${item.name} logo`}
+                        alt={t('common.logoWithName', { name: item.name })}
                         loading="lazy"
                         className={styles.techTagIcon}
                         whileHover={{ rotate: [0, -8, 8, 0], scale: 1.1 }}

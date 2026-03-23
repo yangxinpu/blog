@@ -356,7 +356,7 @@ function Home() {
             >
               <div className={styles.techHead}>
                 <span className={styles.logoBox}>
-                  <img src={card.logo} alt={`${card.name} logo`} loading="lazy" />
+                  <img src={card.logo} alt={t('common.logoWithName', { name: card.name })} loading="lazy" />
                 </span>
 
                 <div className={styles.techNameWrap}>

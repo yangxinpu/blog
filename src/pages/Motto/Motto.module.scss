@@ -2,24 +2,13 @@
 .container {
   position: relative;
   isolation: isolate;
-  min-height: calc(100vh - 70px);
+  min-height: clamp(520px, 78vh, 860px);
   display: grid;
   place-items: center;
   overflow: hidden;
   margin: 0;
-  padding: 5rem 1.5rem 4rem;
-  background:
-    radial-gradient(
-      circle at 50% 12%,
-      color-mix(in srgb, var(--accent) 10%, transparent) 0%,
-      transparent 26%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 98%, black 2%) 0%,
-      color-mix(in srgb, var(--bg) 95%, var(--bg-secondary) 5%) 12%,
-      color-mix(in srgb, var(--bg-secondary) 90%, black 10%) 100%
-    );
+  padding: 5rem 1.5rem 7.2rem;
+  background: var(--bg);
 
   @media (max-width: 768px) {
     min-height: 56vh;
@@ -32,11 +21,17 @@
     inset: 0 0 auto;
     height: 7rem;
     z-index: 0;
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 92%, transparent) 0%,
-      transparent 100%
-    );
+    background: transparent;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 9.2rem;
+    z-index: 1;
+    pointer-events: none;
+    background: transparent;
   }
 
   .background {
@@ -189,18 +184,11 @@
 
 [data-theme='dark'] {
   .container {
-    background:
-      radial-gradient(
-        circle at 50% 12%,
-        color-mix(in srgb, var(--accent) 18%, transparent) 0%,
-        transparent 26%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--bg) 94%, black 6%) 0%,
-        color-mix(in srgb, var(--bg) 88%, black 12%) 12%,
-        color-mix(in srgb, var(--bg-secondary) 70%, black 30%) 100%
-      );
+    background: var(--bg);
+
+    &::after {
+      background: transparent;
+    }
   }
 }
 

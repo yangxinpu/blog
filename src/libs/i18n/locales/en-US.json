@@ -9,6 +9,14 @@
   "vue": "Vue",
   "react": "React",
   "motto": "Motto",
+  "common": {
+    "logoAlt": "Site logo",
+    "logoWithName": "{{name}} logo",
+    "lang": {
+      "enShort": "EN",
+      "zhShort": "CN"
+    }
+  },
   "theme": {
     "dark": "Dark mode",
     "light": "Light mode"
@@ -175,5 +183,49 @@
         ]
       }
     }
+  },
+  "thoughtsPage": {
+    "title": "Thoughts",
+    "subtitle": "Reflections on code, design, and digital craft.",
+    "action": "Read Article ->",
+    "articles": [
+      {
+        "date": "October 24, 2023",
+        "tags": [
+          "Architecture",
+          "Clean Code"
+        ],
+        "title": "The Art of Minimal Code",
+        "description": "Why writing less code is often harder, but better. A practical look at clean architecture.",
+        "featured": true
+      },
+      {
+        "date": "September 15, 2023",
+        "tags": [
+          "React",
+          "Performance"
+        ],
+        "title": "Embracing React Server Components",
+        "description": "How RSC changes the way we think about data fetching and rendering boundaries."
+      },
+      {
+        "date": "August 2, 2023",
+        "tags": [
+          "A11y",
+          "UX"
+        ],
+        "title": "Accessibility First",
+        "description": "Treating accessibility as a default quality gate leads to better and more durable products."
+      },
+      {
+        "date": "July 10, 2023",
+        "tags": [
+          "CSS",
+          "Frontend"
+        ],
+        "title": "State of CSS in 2024",
+        "description": "Container queries, cascade layers, and modern layout tools are redefining style systems."
+      }
+    ]
   }
 }

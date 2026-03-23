@@ -9,6 +9,14 @@
   "vue": "Vue",
   "react": "React",
   "motto": "格言",
+  "common": {
+    "logoAlt": "站点标志",
+    "logoWithName": "{{name}} 标志",
+    "lang": {
+      "enShort": "EN",
+      "zhShort": "CN"
+    }
+  },
   "theme": {
     "dark": "深色模式",
     "light": "浅色模式"
@@ -175,5 +183,49 @@
         ]
       }
     }
+  },
+  "thoughtsPage": {
+    "title": "个人感想",
+    "subtitle": "关于代码、设计和数字世界的思考。",
+    "action": "阅读文章 ->",
+    "articles": [
+      {
+        "date": "2023年10月24日",
+        "tags": [
+          "架构",
+          "Clean Code"
+        ],
+        "title": "代码中的极简艺术",
+        "description": "为什么写更少的代码往往更难，但却好得多。探索整洁架构的益处。",
+        "featured": true
+      },
+      {
+        "date": "2023年9月15日",
+        "tags": [
+          "React",
+          "性能优化"
+        ],
+        "title": "拥抱 React 服务端组件",
+        "description": "深入探讨 React 的未来，以及 RSC 如何改变我们对数据获取的思考方式。"
+      },
+      {
+        "date": "2023年8月2日",
+        "tags": [
+          "A11y",
+          "用户体验"
+        ],
+        "title": "无障碍设计优先",
+        "description": "把无障碍从“补充项”变成“默认项”，产品会更稳、更普适。"
+      },
+      {
+        "date": "2023年7月10日",
+        "tags": [
+          "CSS",
+          "前端开发"
+        ],
+        "title": "2024 年的 CSS 现状",
+        "description": "容器查询、层叠层和新布局能力，正在重塑前端样式工程实践。"
+      }
+    ]
   }
 }
