@@ -4,187 +4,125 @@
   color: var(--text);
   overflow: hidden;
   background: var(--bg);
-}
 
-/* 🌌 背景层 */
-.background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-/* Canvas背景 */
-.canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* 网格 */
-.grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: moveGrid 20s linear infinite;
-}
-
-/* 渐变光 */
-.glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -200px;
-  left: -200px;
-  background: radial-gradient(circle, #00ffcc33, transparent 70%);
-  animation: floatGlow 10s ease-in-out infinite;
-}
-
-/* 漂浮球 */
-.orb {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  bottom: -100px;
-  right: -100px;
-  background: radial-gradient(circle, #4fc3ff33, transparent 70%);
-  animation: floatGlow 12s ease-in-out infinite;
-}
-
-/* 🚀 Hero */
-.hero {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 40px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-
-  .title {
-    font-size: 48px;
-    font-weight: 800;
-    color: var(--accent);
-    text-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+  .canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
   }
 
-  .subtitle {
-    margin-top: 10px;
-    font-family: monospace;
-    opacity: 0.8;
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 100px 20px;
+
+    .title {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-family: monospace;
+      opacity: 0.8;
+    }
+
+    .desc {
+      margin-top: 10px;
+      color: var(--text-secondary);
+    }
   }
+  
+  .content {
+    position: relative;
+    z-index: 1;
+    padding: 40px 20px;
 
-  .desc {
-    margin-top: 10px;
-    color: var(--text-secondary);
-  }
-}
+    .gridLayout {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
 
-/* 📦 内容 */
-.content {
-  position: relative;
-  z-index: 1;
-  padding: 40px 20px;
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
 
-  .gridLayout {
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+      /* 卡片 */
+      .card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        padding: 24px;
+        border-radius: 16px;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+        h3 {
+          color: var(--accent);
+        }
+
+        .text {
+          margin-top: 10px;
+        }
+
+        .divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          margin: 16px 0;
+        }
+
+        .messageItem {
+          h4 {
+            margin-bottom: 5px;
+          }
+
+          span {
+            font-size: 14px;
+            color: var(--text-secondary);
+          }
+        }
+      }
+
+      /* 技术栈卡片 */
+      .techCard {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 16px;
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        h4 {
+          margin-top: 10px;
+        }
+
+        p {
+          font-size: 14px;
+          color: var(--text-secondary);
+        }
+      }
     }
   }
 }
 
-/* 卡片 */
-.card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  padding: 24px;
-  border-radius: 16px;
-
-  h3 {
-    color: var(--accent);
-  }
-
-  .text {
-    margin-top: 10px;
-  }
-
-  .divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 16px 0;
-  }
-}
-
-/* 技术栈 */
-.tech {
-  display: grid;
-  gap: 20px;
-}
-
-.techCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 16px;
-  transition: transform 0.3s, box-shadow 0.3s;
-
-  &:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-
-  h4 {
-    margin-top: 10px;
-  }
-
-  p {
-    font-size: 14px;
-    color: var(--text-secondary);
-  }
-}
-
-/* icon */
-.icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🎬 动画 */
-@keyframes moveGrid {
-  from {
-    transform: translate(0, 0);
-  }
-
-  to {
-    transform: translate(40px, 40px);
-  }
-}
-
-@keyframes floatGlow {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-40px);
-  }
-}

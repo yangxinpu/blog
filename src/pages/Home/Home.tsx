@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Code2, Activity, Zap } from 'lucide-react';
 import styles from './Home.module.scss';
 
-const TECH_STACKS = [
+const techStacks = [
   {
     name: 'React',
     icon: <Zap size={36} />,
@@ -48,6 +48,18 @@ const TECH_STACKS = [
   }
 ];
 
+const heroContent = {
+  title: 'Overthinker',
+  subtitle: 'Build · Think · Create',
+  desc: '这是我的个人博客，记录技术与思考'
+};
+
+const messageBoardContent = {
+  title: 'Message Board',
+  text: '快来留言吧 (≧▽≦)',
+  messageTitle: '简单自我介绍',
+  messageInfo: '2025-03-08 · OverThinker'
+};
 const Home: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -76,7 +88,7 @@ const Home: React.FC = () => {
     });
 
     // 粒子
-    const particles: any[] = [];
+    const particles: { x: number; y: number; vx: number; vy: number }[] = [];
     const count = 100;
 
     for (let i = 0; i < count; i++) {
@@ -142,42 +154,38 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.home}>
-      {/* Canvas背景 */}
       <canvas ref={canvasRef} className={styles.canvas}></canvas>
 
-      {/* 🚀 Hero - 最顶部 */}
       <motion.div
         className={styles.hero}
+        style={{ background: 'transparent' }}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className={styles.title}>Overthinker</h1>
-        <p className={styles.subtitle}>Build · Think · Create</p>
-        <p className={styles.desc}>这是我的个人博客，记录技术与思考</p>
+        <h1 className={styles.title}>{heroContent.title}</h1>
+        <p className={styles.subtitle}>{heroContent.subtitle}</p>
+        <p className={styles.desc}>{heroContent.desc}</p>
       </motion.div>
 
-      {/* 📦 内容 */}
       <section className={styles.content}>
         <div className={styles.gridLayout}>
-          {/* 左上和中上 - Message Board */}
           <motion.div
             className={styles.card}
             style={{ gridColumn: '1 / 3', gridRow: '1 / 3' }}
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h3>Message Board</h3>
-            <p className={styles.text}>快来留言吧 (≧▽≦)</p>
+            <h3>{messageBoardContent.title}</h3>
+            <p className={styles.text}>{messageBoardContent.text}</p>
             <div className={styles.divider}></div>
 
             <div className={styles.messageItem}>
-              <h4>简单自我介绍</h4>
-              <span>2025-03-08 · OverThinker</span>
+              <h4>{messageBoardContent.messageTitle}</h4>
+              <span>{messageBoardContent.messageInfo}</span>
             </div>
           </motion.div>
 
-          {/* 右上 - React */}
           <motion.div
             className={styles.techCard}
             whileHover={{ scale: 1.05, y: -8 }}
@@ -186,12 +194,12 @@ const Home: React.FC = () => {
           >
             <div
               className={styles.icon}
-              style={{ background: `${TECH_STACKS[0].color}22` }}
+              style={{ background: `${techStacks[0].color}22` }}
             >
-              {TECH_STACKS[0].icon}
+              {techStacks[0].icon}
             </div>
-            <h4>{TECH_STACKS[0].name}</h4>
-            <p>{TECH_STACKS[0].description}</p>
+            <h4>{techStacks[0].name}</h4>
+            <p>{techStacks[0].description}</p>
           </motion.div>
 
           {/* 右下 - Vue */}
@@ -204,12 +212,12 @@ const Home: React.FC = () => {
           >
             <div
               className={styles.icon}
-              style={{ background: `${TECH_STACKS[1].color}22` }}
+              style={{ background: `${techStacks[1].color}22` }}
             >
-              {TECH_STACKS[1].icon}
+              {techStacks[1].icon}
             </div>
-            <h4>{TECH_STACKS[1].name}</h4>
-            <p>{TECH_STACKS[1].description}</p>
+            <h4>{techStacks[1].name}</h4>
+            <p>{techStacks[1].description}</p>
           </motion.div>
 
           {/* 左下 - Vite */}
@@ -222,12 +230,12 @@ const Home: React.FC = () => {
           >
             <div
               className={styles.icon}
-              style={{ background: `${TECH_STACKS[5].color}22` }}
+              style={{ background: `${techStacks[5].color}22` }}
             >
-              {TECH_STACKS[5].icon}
+              {techStacks[5].icon}
             </div>
-            <h4>{TECH_STACKS[5].name}</h4>
-            <p>{TECH_STACKS[5].description}</p>
+            <h4>{techStacks[5].name}</h4>
+            <p>{techStacks[5].description}</p>
           </motion.div>
 
           {/* 中下 - Uniapp */}
@@ -240,12 +248,12 @@ const Home: React.FC = () => {
           >
             <div
               className={styles.icon}
-              style={{ background: `${TECH_STACKS[6].color}22` }}
+              style={{ background: `${techStacks[6].color}22` }}
             >
-              {TECH_STACKS[6].icon}
+              {techStacks[6].icon}
             </div>
-            <h4>{TECH_STACKS[6].name}</h4>
-            <p>{TECH_STACKS[6].description}</p>
+            <h4>{techStacks[6].name}</h4>
+            <p>{techStacks[6].description}</p>
           </motion.div>
 
           {/* 右下 - JavaScript */}
@@ -258,12 +266,12 @@ const Home: React.FC = () => {
           >
             <div
               className={styles.icon}
-              style={{ background: `${TECH_STACKS[2].color}22` }}
+              style={{ background: `${techStacks[2].color}22` }}
             >
-              {TECH_STACKS[2].icon}
+              {techStacks[2].icon}
             </div>
-            <h4>{TECH_STACKS[2].name}</h4>
-            <p>{TECH_STACKS[2].description}</p>
+            <h4>{techStacks[2].name}</h4>
+            <p>{techStacks[2].description}</p>
           </motion.div>
         </div>
       </section>
