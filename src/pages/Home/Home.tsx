@@ -163,7 +163,7 @@ function Home() {
     window.addEventListener('resize', handleResize);
 
     const particles: { x: number; y: number; vx: number; vy: number }[] = [];
-    const particleCount = 180;
+    const particleCount = 200;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({

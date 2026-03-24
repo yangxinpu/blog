@@ -1,0 +1,47 @@
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.glowOne,
+.glowTwo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(56px);
+}
+
+.glowOne {
+  left: 62%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: 54vmin;
+  height: 54vmin;
+  background: color-mix(in srgb, var(--accent) 28%, #6dbbff 72%);
+  opacity: 0.24;
+}
+
+.glowTwo {
+  left: 62%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: 38vmin;
+  height: 38vmin;
+  background: color-mix(in srgb, var(--accent) 22%, #6dffe8 78%);
+  opacity: 0.2;
+}
+
+.ring {
+  position: absolute;
+  left: 62%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border-style: solid;
+  border-color: currentcolor;
+  box-shadow:
+    0 0 18px color-mix(in srgb, currentcolor 24%, transparent),
+    inset 0 0 10px color-mix(in srgb, currentcolor 20%, transparent);
+}

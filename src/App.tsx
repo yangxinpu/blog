@@ -6,6 +6,8 @@ import Home from './pages/Home/Home';
 import Motto from './pages/Motto/Motto';
 import Thoughts from './pages/Thoughts/Thoughts';
 import TextAnimation from './pages/TextAnimation/TextAnimation';
+import AuroraRisePage from './pages/AuroraRisePage/AuroraRisePage';
+import NeonSprintPage from './pages/NeonSprintPage/NeonSprintPage';
 import { personMeta, footerData } from './content/meta';
 import { Message, Dropdown } from './components';
 import styles from './App.module.scss';
@@ -139,6 +141,8 @@ function App() {
         <Motto />
         <Thoughts />
         <TextAnimation />
+        <AuroraRisePage />
+        <NeonSprintPage />
       </main>
 
       <footer className={styles.footer}>

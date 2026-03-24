@@ -1,0 +1,124 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  min-height: 74vh;
+  padding: 2.8rem 20px;
+  background: var(--bg);
+
+  @media (max-width: 900px) {
+    min-height: 64vh;
+    padding: 2.2rem 16px;
+  }
+}
+
+.inner {
+  width: min(1360px, 100%);
+  margin: 0 auto;
+  min-height: 70vh;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.78fr) minmax(520px, 1.22fr);
+  gap: 1.2rem;
+  align-items: center;
+
+  @media (max-width: 980px) {
+    min-height: 58vh;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.textPane {
+  position: relative;
+  z-index: 1;
+}
+
+.copy {
+  margin: 0;
+  max-width: 62ch;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  color: var(--text);
+  font-size: clamp(1.2rem, 2.8vw, 2.3rem);
+  line-height: 1.36;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+
+  @media (max-width: 980px) {
+    max-width: 100%;
+    font-size: clamp(1.05rem, 4.2vw, 1.7rem);
+  }
+}
+
+.copyToken {
+  display: inline-block;
+  transform-origin: 50% 80%;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--text) 96%, white 4%) 0%,
+    color-mix(in srgb, var(--accent) 62%, var(--text) 38%) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  will-change: transform, opacity, filter;
+}
+
+.visualPane {
+  position: relative;
+  min-height: 560px;
+  border-radius: 22px;
+  background: var(--bg);
+  overflow: hidden;
+  cursor: crosshair;
+
+  @media (max-width: 980px) {
+    min-height: 420px;
+  }
+}
+
+.metaBalls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.filterSvg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.gooWrap {
+  position: absolute;
+  inset: 0;
+  filter: url('#neon-meta-goo');
+}
+
+.ballWrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.ball {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.95;
+}
+
+.mouseBallWrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.mouseBall {
+  display: block;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent);
+}
