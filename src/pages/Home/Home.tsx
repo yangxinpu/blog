@@ -308,7 +308,6 @@ function Home() {
             initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.12 }}
-            whileHover={{ y: -4 }}
           >
             <p className={styles.cardLabel}>{t('homePage.profile.label')}</p>
             <h3>{t('homePage.profile.title')}</h3>
@@ -329,7 +328,6 @@ function Home() {
             initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -4 }}
           >
             <p className={styles.cardLabel}>{t('homePage.interests.label')}</p>
             <h3>{t('homePage.interests.title')}</h3>
@@ -352,7 +350,6 @@ function Home() {
               initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
-              whileHover={{ y: -4 }}
             >
               <div className={styles.techHead}>
                 <span className={styles.logoBox}>

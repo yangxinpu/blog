@@ -47,7 +47,6 @@ function Thoughts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: index * 0.06, ease: 'easeOut' }}
-              whileHover={{ y: -4 }}
             >
               <div className={styles.meta}>
                 <time>{item.date}</time>
