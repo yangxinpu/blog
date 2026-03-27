@@ -19,7 +19,7 @@ function Thoughts() {
   }) as unknown as ThoughtArticle[];
 
   return (
-    <section className={styles.section}>
+    <section id="thoughts" className={styles.section}>
       <div className={styles.fireflies} aria-hidden="true">
         {Array.from({ length: fireflyCount }).map((_, index) => (
           <span key={index} className={styles.firefly} />

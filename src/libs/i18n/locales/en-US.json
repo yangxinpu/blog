@@ -9,6 +9,9 @@
   "vue": "Vue",
   "react": "React",
   "motto": "Motto",
+  "thoughts": "Thoughts",
+  "frontendEngineering": "Frontend Engineering",
+  "nodejs": "Node.js",
   "common": {
     "logoAlt": "Site logo",
     "logoWithName": "{{name}} logo",

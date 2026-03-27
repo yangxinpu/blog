@@ -116,6 +116,10 @@
   display: inline-flex;
   align-items: center;
   border-radius: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 
   @media (max-width: 768px) {
     font-size: 0.9rem;

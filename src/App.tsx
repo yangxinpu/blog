@@ -119,6 +119,13 @@ function App() {
     i18n.changeLanguage(lang);
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const copyEmail = useCallback(() => {
     navigator.clipboard
       .writeText(personMeta.email)
@@ -171,17 +178,38 @@ function App() {
         <div className={styles.rightSection}>
           <nav className={styles.mainNav}>
             <div className={styles.navMenu}>
-              <a href="/" className={styles.navMenuLink}>{t('home')}</a>
+              <button
+                type="button"
+                className={styles.navMenuLink}
+                onClick={() => scrollToSection('home')}
+              >
+                {t('home')}
+              </button>
+              <button
+                type="button"
+                className={styles.navMenuLink}
+                onClick={() => scrollToSection('thoughts')}
+              >
+                {t('thoughts')}
+              </button>
+              <button
+                type="button"
+                className={styles.navMenuLink}
+                onClick={() => scrollToSection('contact')}
+              >
+                {t('contact')}
+              </button>
 
               <Dropdown
                 options={[
-                  { value: 'javascript', label: t('javascript'), path: '/javascript' },
+                  { value: 'react', label: t('react'), path: '/react' },
                   { value: 'vue', label: t('vue'), path: '/vue' },
-                  { value: 'react', label: t('react'), path: '/react' }
+                  { value: 'javascript', label: t('javascript'), path: '/javascript' },
+                  { value: 'frontendEngineering', label: t('frontendEngineering'), path: '/frontend-engineering' },
+                  { value: 'nodejs', label: t('nodejs'), path: '/nodejs' }
                 ]}
                 label={t('knowledgeBase')}
               />
-              <a href="/contact" className={styles.navMenuLink}>{t('contact')}</a>
             </div>
           </nav>
 
@@ -211,7 +239,7 @@ function App() {
         <NeonSprintPage />
       </main>
 
-      <footer className={styles.footer}>
+      <footer id="contact" className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.container}>
             <div className={styles.footerTop}>

@@ -232,7 +232,7 @@ function Home() {
   });
 
   return (
-    <div className={styles.home}>
+    <div id="home" className={styles.home}>
       <canvas ref={canvasRef} className={styles.canvas} />
 
       <motion.div

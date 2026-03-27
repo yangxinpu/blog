@@ -9,6 +9,9 @@
   "vue": "Vue",
   "react": "React",
   "motto": "格言",
+  "thoughts": "个人感想",
+  "frontendEngineering": "前端工程化",
+  "nodejs": "Node.js",
   "common": {
     "logoAlt": "站点标志",
     "logoWithName": "{{name}} 标志",
