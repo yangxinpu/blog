@@ -19,7 +19,7 @@ function App() {
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme === 'dark' ? 'dark' : 'light';
+    return savedTheme === 'light' ? 'light' : 'dark';
   });
 
   const [message, setMessage] = useState({

@@ -206,18 +206,21 @@
 }
 
 .logoBox {
-  width: 44px;
+  min-width: 44px;
   height: 44px;
   border-radius: 12px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg-secondary) 70%, var(--bg));
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 8px;
   flex-shrink: 0;
 
   img {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     transition: transform 0.25s ease;
   }
 }

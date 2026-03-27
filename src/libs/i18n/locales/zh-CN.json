@@ -30,14 +30,14 @@
     ]
   },
   "footer": {
-    "description": "专注前端技术分享，覆盖代码细节、工程化实践与设计思路。希望每一篇文章都能让技术更清晰。",
+    "description": "专注前端技术分享，覆盖代码细节、工程化实践与设计思路希望每一篇文章都能让技术更清晰",
     "techStack": "技术栈",
     "allRightsReserved": "保留所有权利",
     "madeWith": "使用",
     "team": "团队制作",
     "doubleClickToCopy": "双击复制邮箱",
     "emailCopied": "邮箱复制成功！",
-    "emailCopyFailed": "邮箱复制失败，请手动复制。",
+    "emailCopyFailed": "邮箱复制失败，请手动复制",
     "wordmark": "Nailuo",
     "wordmarkHint": "向下滚动，逐步显现"
   },
@@ -45,12 +45,12 @@
     "hero": {
       "title": "Overthinker",
       "subtitle": "Build / Think / Create",
-      "desc": "这里记录工程实践、产品思考与前端成长，把复杂问题拆解成可落地方案。"
+      "desc": "记录前端成长、页面设计与产品思考"
     },
     "profile": {
       "label": "自我介绍",
       "title": "个人简介与自述",
-      "description": "我专注于前端工程化与交互体验，重视代码可维护性、用户价值与长期迭代能力。",
+      "description": "我专注于前端工程化与交互体验，重视代码可维护性、用户价值与长期迭代能力",
       "items": [
         {
           "label": "身份",
@@ -69,7 +69,7 @@
     "interests": {
       "label": "兴趣爱好",
       "title": "代码之外的我",
-      "description": "兴趣让我保持持续输入和稳定节奏，也会反哺到产品理解和界面设计判断中。",
+      "description": "兴趣让我保持持续输入和稳定节奏，也会反哺到产品理解和界面设计判断中",
       "items": [
         "徒步和篮球，保持体能与专注力",
         "阅读技术、设计与历史类书籍",
@@ -82,7 +82,7 @@
       "react": {
         "name": "React",
         "focus": "组件化架构",
-        "description": "通过声明式渲染与可复用组件边界，构建可扩展的交互型前端应用。",
+        "description": "通过声明式渲染与可复用组件边界，构建可扩展的交互型前端应用",
         "highlights": [
           "适配中大型项目的组件复用能力",
           "路由与状态管理生态成熟稳定"
@@ -91,97 +91,34 @@
       "vue": {
         "name": "Vue",
         "focus": "渐进式开发",
-        "description": "以清晰模板和响应式能力提升开发效率，兼顾灵活性与可维护性。",
+        "description": "以清晰模板和响应式能力提升开发效率，兼顾灵活性与可维护性",
         "highlights": [
           "从小页面到完整系统都易落地",
           "单文件组件开发体验高效直观"
         ]
       },
-      "typescript": {
-        "name": "TypeScript",
-        "focus": "类型安全",
-        "description": "在多人协作中通过静态类型约束接口，降低回归风险并增强重构信心。",
-        "highlights": [
-          "跨模块接口约束更稳健",
-          "编辑器提示完善，维护成本更低"
-        ]
-      },
       "javascript": {
         "name": "JavaScript",
         "focus": "语言基础",
-        "description": "Web 平台核心语言，支撑浏览器交互逻辑、异步流程与运行时能力。",
+        "description": "Web 平台核心语言，支撑浏览器交互逻辑、异步流程与运行时能力",
         "highlights": [
           "前后端与工具链都离不开的基础能力",
           "生态广泛，适配不同业务场景"
         ]
       },
-      "nextjs": {
-        "name": "Next.js",
-        "focus": "全栈 React",
-        "description": "集成路由、服务端渲染与构建能力，适合追求性能与 SEO 的现代应用。",
+      "frontendEngineering": {
+        "name": "前端工程化",
+        "focus": "构建与工具链",
+        "description": "通过 Vite 与 Webpack 等现代构建工具，提升开发效率与项目可维护性",
         "highlights": [
-          "SSR、SSG 与 App Router 组合灵活",
-          "默认工程体验完善，易于快速上线"
-        ]
-      },
-      "nuxtjs": {
-        "name": "Nuxt",
-        "focus": "全栈 Vue",
-        "description": "面向生产的 Vue 框架，提供约定式目录、数据获取与服务端渲染能力。",
-        "highlights": [
-          "结构清晰，适合快速搭建中大型项目",
-          "在内容型与产品型站点中表现稳定"
-        ]
-      },
-      "vite": {
-        "name": "Vite",
-        "focus": "构建速度",
-        "description": "通过极速启动与热更新显著提升本地开发效率，同时保持可靠产物构建。",
-        "highlights": [
-          "开发反馈快，迭代成本低",
-          "现代工具链能力完整，框架支持广"
-        ]
-      },
-      "webpack": {
-        "name": "Webpack",
-        "focus": "打包策略",
-        "description": "高度可配置的打包工具，适合复杂工程场景和定制化构建流程。",
-        "highlights": [
-          "插件生态丰富，可扩展性强",
-          "资源处理与构建优化粒度细"
-        ]
-      },
-      "tailwindcss": {
-        "name": "Tailwind CSS",
-        "focus": "原子化样式",
-        "description": "基于工具类快速构建界面，在保持设计一致性的同时提升交付效率。",
-        "highlights": [
-          "团队协作下样式规范更统一",
-          "快速原型与业务页面开发效率高"
-        ]
-      },
-      "sass": {
-        "name": "Sass",
-        "focus": "样式工程",
-        "description": "提供变量、混入和模块化能力，适合维护结构化的大型样式系统。",
-        "highlights": [
-          "样式组织更清晰，可复用性更强",
-          "有助于统一设计语言与代码规范"
-        ]
-      },
-      "redux": {
-        "name": "Redux",
-        "focus": "状态管理",
-        "description": "可预测的数据流管理方案，适合状态复杂、模块协作多的前端项目。",
-        "highlights": [
-          "单向数据流让状态变化更可追踪",
-          "DevTools 与中间件生态完善"
+          "Vite 极速热更新，开发体验流畅",
+          "Webpack 生态成熟，打包策略灵活"
         ]
       },
       "nodejs": {
         "name": "Node.js",
         "focus": "工具运行时",
-        "description": "支撑前端脚手架、构建流程与自动化脚本，也是接口服务的重要基础。",
+        "description": "支撑前端脚手架、构建流程与自动化脚本，也是接口服务的重要基础",
         "highlights": [
           "前后端统一语言，协作链路更顺滑",
           "包生态丰富，工程能力扩展性强"
@@ -191,7 +128,7 @@
   },
   "thoughtsPage": {
     "title": "个人感想",
-    "subtitle": "关于代码、设计和数字世界的思考。",
+    "subtitle": "关于代码、设计和数字世界的思考",
     "action": "阅读文章 ->",
     "articles": [
       {
@@ -201,7 +138,7 @@
           "Clean Code"
         ],
         "title": "代码中的极简艺术",
-        "description": "为什么写更少的代码往往更难，但却好得多。探索整洁架构的益处。",
+        "description": "为什么写更少的代码往往更难，但却好得多探索整洁架构的益处",
         "featured": true
       },
       {
@@ -211,7 +148,7 @@
           "性能优化"
         ],
         "title": "拥抱 React 服务端组件",
-        "description": "深入探讨 React 的未来，以及 RSC 如何改变我们对数据获取的思考方式。"
+        "description": "深入探讨 React 的未来，以及 RSC 如何改变我们对数据获取的思考方式"
       },
       {
         "date": "2023年8月2日",
@@ -220,7 +157,7 @@
           "用户体验"
         ],
         "title": "无障碍设计优先",
-        "description": "把无障碍从“补充项”变成“默认项”，产品会更稳、更普适。"
+        "description": "把无障碍从「补充项」变成「默认项」，产品会更稳、更普适"
       },
       {
         "date": "2023年7月10日",
@@ -229,7 +166,7 @@
           "前端开发"
         ],
         "title": "2024 年的 CSS 现状",
-        "description": "容器查询、层叠层和新布局能力，正在重塑前端样式工程实践。"
+        "description": "容器查询、层叠层和新布局能力，正在重塑前端样式工程实践"
       }
     ]
   },

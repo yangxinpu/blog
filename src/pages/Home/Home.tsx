@@ -6,15 +6,8 @@ import styles from './Home.module.scss';
 type TechKey =
   | 'react'
   | 'vue'
-  | 'typescript'
   | 'javascript'
-  | 'nextjs'
-  | 'nuxtjs'
-  | 'vite'
-  | 'webpack'
-  | 'tailwindcss'
-  | 'sass'
-  | 'redux'
+  | 'frontendEngineering'
   | 'nodejs';
 
 type LogoSource =
@@ -23,6 +16,11 @@ type LogoSource =
     light: string;
     dark: string;
   };
+
+type MultiLogoItem = {
+  logo: LogoSource[];
+  link: string;
+};
 
 type ProfileItem = {
   label: string;
@@ -39,19 +37,12 @@ type TechCardI18n = {
 const techCardOrder: TechKey[] = [
   'react',
   'vue',
-  'typescript',
   'javascript',
-  'nextjs',
-  'nuxtjs',
-  'vite',
-  'webpack',
-  'tailwindcss',
-  'sass',
-  'redux',
+  'frontendEngineering',
   'nodejs'
 ];
 
-const techAssets: Record<TechKey, { logo: LogoSource; link: string }> = {
+const techAssets: Record<TechKey, { logo: LogoSource; link: string } | MultiLogoItem> = {
   react: {
     logo: 'https://cdn.simpleicons.org/react/61DAFB',
     link: 'https://react.dev/'
@@ -60,50 +51,26 @@ const techAssets: Record<TechKey, { logo: LogoSource; link: string }> = {
     logo: 'https://cdn.simpleicons.org/vuedotjs/4FC08D',
     link: 'https://vuejs.org/'
   },
-  typescript: {
-    logo: 'https://cdn.simpleicons.org/typescript/3178C6',
-    link: 'https://www.typescriptlang.org/'
-  },
   javascript: {
     logo: 'https://cdn.simpleicons.org/javascript/F7DF1E',
     link: 'https://developer.mozilla.org/docs/Web/JavaScript'
   },
-  nextjs: {
-    logo: {
-      light: 'https://cdn.simpleicons.org/nextdotjs/000000',
-      dark: 'https://cdn.simpleicons.org/nextdotjs/FFFFFF'
-    },
-    link: 'https://nextjs.org/'
-  },
-  nuxtjs: {
-    logo: 'https://cdn.simpleicons.org/nuxtdotjs/00DC82',
-    link: 'https://nuxt.com/'
-  },
-  vite: {
-    logo: 'https://cdn.simpleicons.org/vite/646CFF',
+  frontendEngineering: {
+    logo: [
+      'https://cdn.simpleicons.org/vite/646CFF',
+      'https://cdn.simpleicons.org/webpack/8DD6F9'
+    ],
     link: 'https://vite.dev/'
-  },
-  webpack: {
-    logo: 'https://cdn.simpleicons.org/webpack/8DD6F9',
-    link: 'https://webpack.js.org/'
-  },
-  tailwindcss: {
-    logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
-    link: 'https://tailwindcss.com/'
-  },
-  sass: {
-    logo: 'https://cdn.simpleicons.org/sass/CC6699',
-    link: 'https://sass-lang.com/'
-  },
-  redux: {
-    logo: 'https://cdn.simpleicons.org/redux/764ABC',
-    link: 'https://redux.js.org/'
   },
   nodejs: {
     logo: 'https://cdn.simpleicons.org/nodedotjs/5FA04E',
     link: 'https://nodejs.org/'
   }
 };
+
+function isMultiLogoItem(asset: { logo: LogoSource; link: string } | MultiLogoItem): asset is MultiLogoItem {
+  return Array.isArray(asset.logo);
+}
 
 function resolveLogo(source: LogoSource, isDark: boolean): string {
   if (typeof source === 'string') return source;
@@ -245,11 +212,22 @@ function Home() {
       returnObjects: true
     }) as unknown as TechCardI18n;
 
+    const asset = techAssets[key];
+
+    if (isMultiLogoItem(asset)) {
+      return {
+        key,
+        ...item,
+        logos: asset.logo.map((src) => resolveLogo(src, isDark)),
+        link: asset.link
+      };
+    }
+
     return {
       key,
       ...item,
-      logo: resolveLogo(techAssets[key].logo, isDark),
-      link: techAssets[key].link
+      logo: resolveLogo(asset.logo, isDark),
+      link: asset.link
     };
   });
 
@@ -353,7 +331,18 @@ function Home() {
             >
               <div className={styles.techHead}>
                 <span className={styles.logoBox}>
-                  <img src={card.logo} alt={t('common.logoWithName', { name: card.name })} loading="lazy" />
+                  {'logos' in card ? (
+                    card.logos.map((logo, i) => (
+                      <img
+                        key={`${logo}-${i}`}
+                        src={logo}
+                        alt={t('common.logoWithName', { name: card.name })}
+                        loading="lazy"
+                      />
+                    ))
+                  ) : (
+                    <img src={card.logo} alt={t('common.logoWithName', { name: card.name })} loading="lazy" />
+                  )}
                 </span>
 
                 <div className={styles.techNameWrap}>
