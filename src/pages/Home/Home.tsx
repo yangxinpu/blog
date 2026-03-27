@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
+import avatarImage from '../../assets/Images/cat.webp';
 
 type TechKey =
   | 'react'
@@ -20,11 +21,6 @@ type LogoSource =
 type MultiLogoItem = {
   logo: LogoSource[];
   link: string;
-};
-
-type ProfileItem = {
-  label: string;
-  value: string;
 };
 
 type TechCardI18n = {
@@ -199,9 +195,9 @@ function Home() {
     };
   }, [isDark]);
 
-  const profileItems = t('homePage.profile.items', {
+  const profileTags = t('homePage.profile.tags', {
     returnObjects: true
-  }) as unknown as ProfileItem[];
+  }) as unknown as string[];
 
   const interests = t('homePage.interests.items', {
     returnObjects: true
@@ -287,16 +283,37 @@ function Home() {
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.12 }}
           >
-            <p className={styles.cardLabel}>{t('homePage.profile.label')}</p>
-            <h3>{t('homePage.profile.title')}</h3>
+            <div className={styles.profileHeader}>
+              <motion.img
+                src={avatarImage}
+                alt="Avatar"
+                className={styles.avatar}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
+              <div className={styles.profileInfo}>
+                <p className={styles.nickname}>
+                  <span className={styles.nicknameEn}>{t('homePage.profile.nickname')}</span>
+                  <span className={styles.nicknameCn}>{t('homePage.profile.nicknameCn')}</span>
+                </p>
+                <p className={styles.roleText}>{t('homePage.profile.role')}</p>
+              </div>
+            </div>
             <p className={styles.featuredText}>{t('homePage.profile.description')}</p>
 
-            <div className={styles.featureGrid}>
-              {profileItems.map((item) => (
-                <div key={item.label} className={styles.featureItem}>
-                  <span className={styles.featureItemLabel}>{item.label}</span>
-                  <span className={styles.featureItemValue}>{item.value}</span>
-                </div>
+            <div className={styles.tagsGrid}>
+              {profileTags.map((tag, index) => (
+                <motion.span
+                  key={`${tag}-${index}`}
+                  className={styles.tag}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.3 + index * 0.01 }}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                >
+                  {tag}
+                </motion.span>
               ))}
             </div>
           </motion.article>

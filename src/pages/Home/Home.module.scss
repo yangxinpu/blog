@@ -114,6 +114,57 @@
   padding: 24px;
 }
 
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.profileTitle {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.roleText {
+  margin: 6px 0 0 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.nickname {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.nicknameEn {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.nicknameCn {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
 .cardLabel {
   margin-bottom: 8px;
   font-size: 0.78rem;
@@ -127,31 +178,28 @@
   color: var(--text-secondary);
 }
 
-.featureGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+.tagsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.featureItem {
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
-}
-
-.featureItemLabel {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-}
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: default;
+  transition: all 0.2s ease;
 
-.featureItemValue {
-  font-weight: 600;
-  color: var(--text);
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 15%, var(--bg));
+  }
 }
 
 .interestList {
@@ -302,8 +350,22 @@
     gap: 14px;
   }
 
-  .featureGrid {
-    grid-template-columns: 1fr;
+  .profileHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .nickname {
+    justify-content: center;
+  }
+
+  .tagsGrid {
+    justify-content: center;
   }
 
   .techCard {

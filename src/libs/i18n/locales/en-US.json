@@ -51,22 +51,19 @@
       "desc": "Recording frontend growth, page design and product thinking"
     },
     "profile": {
-      "label": "Profile",
       "title": "Self-introduction and personal statement",
       "description": "I focus on turning ideas into maintainable interfaces, balancing user experience, engineering quality, and long-term scalability.",
-      "items": [
-        {
-          "label": "Role",
-          "value": "Frontend Engineer"
-        },
-        {
-          "label": "Direction",
-          "value": "React / Vue / Engineering"
-        },
-        {
-          "label": "Style",
-          "value": "Pragmatic, detail-oriented, delivery-focused"
-        }
+      "nickname": "NaiLuo",
+      "nicknameCn": "奈落",
+      "role": "Frontend Engineer · React / Vue / Engineering",
+      "tags": [
+        "Suppress", "Despair", "Breakthrough", "Self", "Prove", "Peak", "Chains", "Answer",
+        "Depend", "End", "Interpret", "Calm", "Adversity", "Confidence", "Unlimited", "Break",
+        "Dilemma", "Question", "Reverse", "Temper", "Limit", "Break free", "Constraint", "Domain",
+        "Detail", "Talent", "Focus", "Technique", "Mindset", "Ceiling", "Breakthrough", "See through",
+        "Hope", "Despair", "Strength", "Eventually", "Indulge", "Hone", "Responsibility", "Expect",
+        "Regain", "Emotion", "Fate", "Chase", "Release", "Miracle", "Give up", "Sincere",
+        "Defeat", "Trajectory", "Fate"
       ]
     },
     "interests": {
