@@ -63,18 +63,17 @@
         "Detail", "Talent", "Focus", "Technique", "Mindset", "Ceiling", "Breakthrough", "See through",
         "Hope", "Despair", "Strength", "Eventually", "Indulge", "Hone", "Responsibility", "Expect",
         "Regain", "Emotion", "Fate", "Chase", "Release", "Miracle", "Give up", "Sincere",
-        "Defeat", "Trajectory", "Fate"
+        "Defeat", "Trajectory", "Fate", "Persist"
       ]
     },
     "interests": {
-      "label": "Interests",
       "title": "Who I am outside coding",
       "description": "Interests keep me creative and disciplined, and they often inspire better product and interaction decisions.",
       "items": [
-        "Hiking and basketball to stay physically active",
-        "Reading tech, design, and history books",
-        "Writing blog notes to summarize lessons learned",
-        "Exploring UI/UX details in real products"
+        { "icon": "🏸", "text": "Badminton and table tennis to stay physically active" },
+        { "icon": "📚", "text": "Reading tech, design, and history books" },
+        { "icon": "✍️", "text": "Writing blog notes to summarize lessons learned" },
+        { "icon": "🔍", "text": "Exploring UI/UX details in real products" }
       ]
     },
     "openDoc": "Open Documentation",

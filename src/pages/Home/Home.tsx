@@ -201,7 +201,7 @@ function Home() {
 
   const interests = t('homePage.interests.items', {
     returnObjects: true
-  }) as unknown as string[];
+  }) as unknown as { icon: string; text: string }[];
 
   const techCards = techCardOrder.map((key) => {
     const item = t(`homePage.cards.${key}`, {
@@ -324,13 +324,15 @@ function Home() {
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className={styles.cardLabel}>{t('homePage.interests.label')}</p>
             <h3>{t('homePage.interests.title')}</h3>
             <p className={styles.featuredText}>{t('homePage.interests.description')}</p>
 
             <ul className={styles.interestList}>
-              {interests.map((item) => (
-                <li key={item}>{item}</li>
+              {interests.map((item, index) => (
+                <li key={`interest-${index}`}>
+                  <span className={styles.interestIcon}>{item.icon}</span>
+                  {item.text}
+                </li>
               ))}
             </ul>
           </motion.article>
