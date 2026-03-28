@@ -5,7 +5,18 @@ export default defineConfig({
   description: '前端技术知识库 - React, Vue',
   lang: 'zh-CN',
 
+  vite: {
+    server: {
+      port: 8080
+    }
+  },
+
   markdown: {
+    theme: {
+      light: 'github-light',
+      dark: 'github-dark'
+    },
+    lineNumbers: true,
     config: (md) => {
       md.options.html = true
     }

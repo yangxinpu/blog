@@ -8,7 +8,7 @@ Fiber架构则将任务切分成多个小的单元（Fiber节点），这样，R
 
 - Fiber节点：每个Fiber节点表示一个任务单元（一个Fiber节点通常对应一个组件），包含组件的状态、UI元素的信息以及与其关联的其他任务；每个节点存储着一些重要的属性，如`effectTag`（表示需要更新的DOM类型），`nextEffect`（下一个更新节点），`return`（指向父节点），Hook链；
 
-  ```
+  ```text
   //Fiber节点的结构
   type Fiber = {
     tag: WorkTag;              // 类型（函数组件 / 类组件 / DOM）

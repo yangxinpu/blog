@@ -80,7 +80,7 @@ MVC的工作流程：
 
 - Generate：阶段负责将 Transform 阶段生成的 VNode 调用结构（JS AST）递归转换为字符串形式的 render 函数代码，同时处理 helper 引入、静态提升变量输出等，使模板最终变成可执行的函数；
 
-```
+```text
 template 模板
    ↓（编译器 @vue/compiler-dom）
 AST（抽象语法树）
@@ -96,7 +96,7 @@ VNode（虚拟DOM）
 
 每个 Vue 组件在运行时都会对应一个 render 函数，而 `.vue` 文件在编译后会变成一个 ES Module，其中包含 render 函数、组件配置对象，并通过 `export default` 导出组件；
 
-```
+```vue
 <template>
   <div>{{ msg }}</div>
 </template>
@@ -152,7 +152,7 @@ export default script
   5. 标记状态：设置 `instance.isMounted = false`，标记组件还未挂载到 DOM；
 - **创建渲染副作用**：
 
-```
+```js
 instance.update = effect(
   () => renderComponentRoot(instance),  // 核心：执行渲染函数生成VNode
   { scheduler: queueJob }               // 优化：更新时不立即执行，先入队列（避免频繁更新）
@@ -193,7 +193,7 @@ instance.update = effect(
 - 频繁操作真实DOM，会引发频繁的重排和重绘，而虚拟DOM能够减少不必要的 DOM 操作；
 - 提供跨平台能力（VNode 不依赖浏览器的DOM），可以进行SSR（服务端渲染），小程序渲染，移动端原生渲染（Weex、React Native），Canvas / WebGL 渲染；
 
-```
+```html
 <div id="app">
   <p class="title">hello</p>
 </div>
@@ -220,7 +220,7 @@ instance.update = effect(
 
 - **双端比较**（前后置比较）：双指针首尾比较，找出首尾开始不相同的元素，快速跳过两端不需要处理的节点；
 
-```
+```text
 旧: a b c d e f
 新: a b x y e f
 
@@ -253,7 +253,7 @@ f == f  e == e
   - 存在但不在 LIS 中 → 移动位置
   - 在 LIS 中 → 复用并跳过
 
-```
+```text
 新：e   c   d
 旧：c   d   e
 
@@ -289,7 +289,7 @@ newIndexSequence = [3, 4, 2] //最长递增子序列为 [3, 4]// 对应 c、d，
 - 第一个参数为import的组件；
 - 第二个参数为传入组件的props参数；
 
-```
+```vue
 //第一种写法
 const vnode = h(
     'div',
