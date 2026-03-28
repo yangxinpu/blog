@@ -1,16 +1,17 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Github, Mail, Moon, Sun } from 'lucide-react';
 import Home from './pages/Home/Home';
-import Motto from './pages/Motto/Motto';
-import Thoughts from './pages/Thoughts/Thoughts';
-import TextAnimation from './pages/TextAnimation/TextAnimation';
-import AuroraRisePage from './pages/AuroraRisePage/AuroraRisePage';
-import NeonSprintPage from './pages/NeonSprintPage/NeonSprintPage';
-import { Message, Dropdown } from './components';
+import { Message, Dropdown, LazySection } from './components';
 import styles from './App.module.scss';
 import logoImage from './assets/Images/logo.png';
+
+const Motto = lazy(() => import('./pages/Motto/Motto'));
+const Thoughts = lazy(() => import('./pages/Thoughts/Thoughts'));
+const TextAnimation = lazy(() => import('./pages/TextAnimation/TextAnimation'));
+const AuroraRisePage = lazy(() => import('./pages/AuroraRisePage/AuroraRisePage'));
+const NeonSprintPage = lazy(() => import('./pages/NeonSprintPage/NeonSprintPage'));
 
 const personMeta = {
   nickname: 'NaiLuo',
@@ -232,11 +233,11 @@ function App() {
 
       <main className={styles.main}>
         <Home />
-        <Motto />
-        <Thoughts />
-        <TextAnimation />
-        <AuroraRisePage />
-        <NeonSprintPage />
+        <LazySection lazyComponent={Motto} minHeight="200px" />
+        <LazySection lazyComponent={Thoughts} minHeight="400px" />
+        <LazySection lazyComponent={TextAnimation} minHeight="300px" />
+        <LazySection lazyComponent={AuroraRisePage} minHeight="500px" />
+        <LazySection lazyComponent={NeonSprintPage} minHeight="500px" />
       </main>
 
       <footer id="contact" className={styles.footer}>
