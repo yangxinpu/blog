@@ -21,7 +21,7 @@ export default defineConfig({
   },
 
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }]
+    ['link', { rel: 'icon', type: 'image/png', href: '/assets/logo.png' }]
   ],
 
   locales: {
@@ -140,7 +140,7 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/logo.png',
+    logo: '/assets/logo.png',
     socialLinks: [
       { icon: 'github', link: 'https://github.com/yangxinpu' }
     ],

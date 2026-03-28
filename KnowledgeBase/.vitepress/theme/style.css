@@ -127,3 +127,14 @@
 .VPFooter {
   border-top: 1px solid var(--vp-c-divider);
 }
+
+/* 左侧 Logo 放大 */
+.VPNavBarTitle .logo {
+  height: 32px;
+  width: auto;
+}
+
+.VPNavBarTitle:hover .logo {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
