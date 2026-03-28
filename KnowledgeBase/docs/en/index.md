@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: React Notes
-      link: /docs/en/React/
+      link: /docs/en/React/React基础
     - theme: alt
       text: Vue Notes
-      link: /docs/en/Vue/
+      link: /docs/en/Vue/Vue基础
 
 features:
   - icon: 

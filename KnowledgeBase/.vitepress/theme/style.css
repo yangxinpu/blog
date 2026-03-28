@@ -22,7 +22,108 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* 首页 Logo 动画容器 */
+.home-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+/* 首页特征卡片动画 */
+.VPFeature {
+  transition: all 0.3s ease;
+}
+
 /* 代码块样式 */
 .vp-code-group .tabs label {
   font-weight: 500;
+}
+
+/* 自定义容器动画 */
+.custom-block {
+  transition: all 0.3s ease;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-2);
+}
+
+/* 选择文本样式 */
+::selection {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+/* 链接悬停效果 */
+.vp-doc a {
+  transition: all 0.2s ease;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 侧边栏项目悬停效果 */
+.VPSidebarItem .item:hover {
+  background: var(--vp-c-brand-soft);
+  border-radius: 8px;
+}
+
+/* 导航栏悬停效果 */
+.VPNavBarMenuLink:hover {
+  color: var(--vp-c-brand-1);
+}
+
+/* 按钮动画 */
+.VPButton {
+  transition: all 0.3s ease;
+}
+
+.VPButton:hover {
+  box-shadow: 0 10px 30px rgba(0, 213, 196, 0.3);
+}
+
+/* 图片悬停效果 */
+.vp-doc img {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.vp-doc img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* 表格样式 */
+.vp-doc table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.vp-doc th {
+  background: var(--vp-c-brand-soft);
+}
+
+/* 页脚样式 */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider);
 }

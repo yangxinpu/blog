@@ -362,7 +362,7 @@ describe('Counter', () => {
 
 #### Component Organization
 
-```
+```text
 components/
   ├── common/
   │   ├── Button.vue
