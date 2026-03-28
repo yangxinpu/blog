@@ -14,12 +14,14 @@ hero:
       link: /docs/en/Vue/
 
 features:
-  - icon: ⚛️
+  - icon: 
+      src: https://cdn.simpleicons.org/react/61DAFB
     title: React
     details: React Basics, React Advanced, React Principles
-    link: /docs/en/React/
-  - icon: 🖐️
+    link: /docs/en/React/React基础
+  - icon: 
+      src: https://cdn.simpleicons.org/vuedotjs/4FC08D
     title: Vue
     details: Vue Basics, Vue3 Basics, Vue3 Advanced
-    link: /docs/en/Vue/
+    link: /docs/en/Vue/Vue基础
 ---

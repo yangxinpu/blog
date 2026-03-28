@@ -36,7 +36,7 @@ export default defineConfig({
           { text: '首页', link: '/docs/zh/' },
           { text: 'React', link: '/docs/zh/React/React基础' },
           { text: 'Vue', link: '/docs/zh/Vue/Vue基础' },
-          { text: '博客', link: 'https://nailuo.github.io' }
+          { text: '博客', link: 'https://github.com/yangxinpu' }
         ],
         sidebar: {
           '/docs/zh/React/': [
@@ -92,7 +92,7 @@ export default defineConfig({
           { text: 'Home', link: '/docs/en/' },
           { text: 'React', link: '/docs/en/React/React基础' },
           { text: 'Vue', link: '/docs/en/Vue/Vue基础' },
-          { text: 'Blog', link: 'https://nailuo.github.io' }
+          { text: 'Blog', link: 'https://github.com/yangxinpu' }
         ],
         sidebar: {
           '/docs/en/React/': [
@@ -142,7 +142,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.png',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/Nailuo' }
+      { icon: 'github', link: 'https://github.com/yangxinpu' }
     ],
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} NaiLuo`

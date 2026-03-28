@@ -16,8 +16,8 @@ const NeonSprintPage = lazy(() => import('./pages/NeonSprintPage/NeonSprintPage'
 const personMeta = {
   nickname: 'NaiLuo',
   capitalNickname: 'NAILUO',
-  githubLink: 'https://github.com/Nailuo',
-  email: 'nailuo@example.com'
+  githubLink: 'https://github.com/yangxinpu',
+  email: '1813481502@qq.com'
 };
 
 const footerData = {
