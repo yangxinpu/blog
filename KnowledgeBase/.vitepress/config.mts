@@ -90,8 +90,8 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/docs/en/' },
-          { text: 'React', link: '/docs/en/React/' },
-          { text: 'Vue', link: '/docs/en/Vue/' },
+          { text: 'React', link: '/docs/en/React/React基础' },
+          { text: 'Vue', link: '/docs/en/Vue/Vue基础' },
           { text: 'Blog', link: 'https://nailuo.github.io' }
         ],
         sidebar: {
@@ -100,9 +100,9 @@ export default defineConfig({
               text: 'React',
               collapsed: false,
               items: [
-                { text: 'React Basics', link: '/docs/en/React/' },
-                { text: 'React Advanced', link: '/docs/en/React/advanced' },
-                { text: 'React Principles', link: '/docs/en/React/principles' }
+                { text: 'React Basics', link: '/docs/en/React/React基础' },
+                { text: 'React Advanced', link: '/docs/en/React/React提高' },
+                { text: 'React Principles', link: '/docs/en/React/React原理' }
               ]
             }
           ],
@@ -111,9 +111,9 @@ export default defineConfig({
               text: 'Vue',
               collapsed: false,
               items: [
-                { text: 'Vue Basics', link: '/docs/en/Vue/' },
-                { text: 'Vue3 Basics', link: '/docs/en/Vue/vue3-basics' },
-                { text: 'Vue3 Advanced', link: '/docs/en/Vue/vue3-advanced' }
+                { text: 'Vue Basics', link: '/docs/en/Vue/Vue基础' },
+                { text: 'Vue3 Basics', link: '/docs/en/Vue/Vue3基础' },
+                { text: 'Vue3 Advanced', link: '/docs/en/Vue/Vue3提高' }
               ]
             }
           ]
