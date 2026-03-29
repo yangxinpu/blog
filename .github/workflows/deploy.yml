@@ -50,6 +50,7 @@ jobs:
       - name: Merge dist directories
         run: |
           mkdir -p dist
+          mkdir -p dist/kb
           cp -r apps/Blog/dist/* dist/
           cp -r apps/KnowledgeBase/.vitepress/dist/* dist/kb/
 
