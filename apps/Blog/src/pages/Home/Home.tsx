@@ -265,7 +265,6 @@ function Home() {
                   type: 'spring',
                   stiffness: 120,
                 }}
-                whileHover={{ scale: 1.08 }}
               >
                 {char}
               </motion.span>

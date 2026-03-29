@@ -12,9 +12,10 @@ interface DropdownOption {
 interface DropdownProps {
   options: DropdownOption[];
   label: string;
+  mainPath?: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ options, label }) => {
+const Dropdown: React.FC<DropdownProps> = ({ options, label, mainPath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
@@ -56,6 +57,14 @@ const Dropdown: React.FC<DropdownProps> = ({ options, label }) => {
     setIsOpen(false);
   };
 
+  const handleToggleClick = () => {
+    if (mainPath) {
+      window.open(mainPath, '_blank');
+    } else {
+      setIsOpen(!isOpen);
+    }
+  };
+
   return (
     <div
       className={styles.dropdown}
@@ -65,7 +74,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, label }) => {
     >
       <button
         className={styles.dropdownToggle}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggleClick}
         aria-haspopup="true"
         aria-expanded={isOpen}
       >

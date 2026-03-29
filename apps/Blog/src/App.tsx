@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Github, Mail, Moon, Sun } from 'lucide-react';
 import Home from './pages/Home/Home';
 import Motto from './pages/Motto/Motto';
@@ -9,6 +9,7 @@ import TextAnimation from './pages/TextAnimation/TextAnimation';
 import AuroraRisePage from './pages/AuroraRisePage/AuroraRisePage';
 import NeonSprintPage from './pages/NeonSprintPage/NeonSprintPage';
 import { Message, Dropdown } from './components';
+import Loading from '@blog/ui';
 import styles from './App.module.scss';
 import logoImage from './assets/Images/logo.png';
 
@@ -83,6 +84,8 @@ function App() {
   const { t, i18n } = useTranslation();
   const wordmarkRef = useRef<HTMLDivElement | null>(null);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'light' ? 'light' : 'dark';
@@ -98,6 +101,14 @@ function App() {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: wordmarkRef,
@@ -163,15 +174,20 @@ function App() {
       : t('common.lang.zhShort');
 
   return (
-    <div className={styles.app}>
-      {message.visible && (
-        <Message
-          type={message.type}
-          message={message.text}
-          duration={3000}
-          onClose={() => setMessage((prev) => ({ ...prev, visible: false }))}
-        />
-      )}
+    <>
+      <AnimatePresence>
+        {isLoading && <Loading logo={logoImage} text="NAILUO" />}
+      </AnimatePresence>
+
+      <div className={styles.app}>
+        {message.visible && (
+          <Message
+            type={message.type}
+            message={message.text}
+            duration={3000}
+            onClose={() => setMessage((prev) => ({ ...prev, visible: false }))}
+          />
+        )}
 
       <header className={styles.header}>
         <div className={styles.logo}>
@@ -241,6 +257,7 @@ function App() {
                   },
                 ]}
                 label={t('knowledgeBase')}
+                mainPath={`${import.meta.env.VITE_KB_BASE_URL}/zh/`}
               />
             </div>
           </nav>
@@ -371,7 +388,8 @@ function App() {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }
 
