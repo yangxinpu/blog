@@ -19,8 +19,3 @@ pnpm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
-
-# Environment
-.env
-.env.local
-.env.*.local
