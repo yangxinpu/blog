@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Github, Mail } from 'lucide-react';
