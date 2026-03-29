@@ -105,11 +105,48 @@
 .featuredCard,
 .interestCard,
 .techCard {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 20px;
   background: color-mix(in srgb, var(--bg) 84%, transparent);
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow);
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+  --light-radius: 120px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: radial-gradient(
+      circle var(--light-radius) at var(--mouse-x) var(--mouse-y),
+      var(--accent),
+      color-mix(in srgb, var(--accent) 40%, transparent) 40%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  &.cardLightActive::before {
+    opacity: 1;
+  }
+
+  &.cardLightActive {
+    border-color: transparent;
+  }
 }
 
 .featuredCard {
@@ -246,16 +283,6 @@
   padding: 20px;
   text-decoration: none;
   color: inherit;
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-
-  &:hover {
-    border-color: var(--accent);
-    box-shadow:
-      var(--shadow),
-      0 0 0 1px color-mix(in srgb, var(--accent) 42%, transparent);
-  }
 }
 
 .techHead {

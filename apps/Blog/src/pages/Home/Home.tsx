@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
@@ -84,11 +84,109 @@ function resolveLogo(source: LogoSource, isDark: boolean): string {
   return isDark ? source.dark : source.light;
 }
 
+const BORDER_LIGHT_RADIUS = 120;
+
 function Home() {
   const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const gridRef = useRef<HTMLDivElement | null>(null);
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') === 'dark'
+  );
+  const [cardLightPositions, setCardLightPositions] = useState<
+    Record<string, { x: number; y: number; visible: boolean }>
+  >({});
+  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const rafRef = useRef<number>(0);
+  const cardsDataRef = useRef<Map<string, { rect: DOMRect; element: HTMLElement }>>(
+    new Map()
+  );
+
+  const updateCardLightPositions = useCallback(() => {
+    if (!gridRef.current) return;
+
+    const mouse = mouseRef.current;
+    const newPositions: Record<string, { x: number; y: number; visible: boolean }> = {};
+
+    cardsDataRef.current.forEach((data, id) => {
+      const { rect, element } = data;
+
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distanceToCenter = Math.sqrt(
+        (mouse.x - centerX) ** 2 + (mouse.y - centerY) ** 2
+      );
+
+      const maxDistance = BORDER_LIGHT_RADIUS + Math.max(rect.width, rect.height) / 2;
+
+      if (distanceToCenter <= maxDistance) {
+        const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
+        const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
+        const distanceToEdge = Math.sqrt(
+          (mouse.x - closestX) ** 2 + (mouse.y - closestY) ** 2
+        );
+
+        if (distanceToEdge <= BORDER_LIGHT_RADIUS) {
+          const relativeX = mouse.x - rect.left;
+          const relativeY = mouse.y - rect.top;
+
+          element.style.setProperty('--mouse-x', `${relativeX}px`);
+          element.style.setProperty('--mouse-y', `${relativeY}px`);
+          element.style.setProperty('--light-radius', `${BORDER_LIGHT_RADIUS}px`);
+
+          newPositions[id] = { x: relativeX, y: relativeY, visible: true };
+          return;
+        }
+      }
+
+      newPositions[id] = { x: 0, y: 0, visible: false };
+    });
+
+    setCardLightPositions(newPositions);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(updateCardLightPositions);
+    };
+
+    const updateCardsData = () => {
+      if (!gridRef.current) return;
+      const cards = gridRef.current.querySelectorAll('[data-card-id]');
+      cardsDataRef.current.clear();
+      cards.forEach((card) => {
+        const element = card as HTMLElement;
+        const id = element.dataset.cardId;
+        if (id) {
+          cardsDataRef.current.set(id, {
+            rect: element.getBoundingClientRect(),
+            element,
+          });
+        }
+      });
+    };
+
+    updateCardsData();
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', updateCardsData);
+    window.addEventListener('scroll', updateCardsData, true);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', updateCardsData);
+      window.removeEventListener('scroll', updateCardsData, true);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [updateCardLightPositions]);
+
+  const getCardLightClass = useCallback(
+    (id: string) => {
+      const pos = cardLightPositions[id];
+      return pos?.visible ? styles.cardLightActive : '';
+    },
+    [cardLightPositions]
   );
 
   useEffect(() => {
@@ -299,9 +397,10 @@ function Home() {
       </motion.div>
 
       <section className={styles.content}>
-        <div className={styles.gridLayout}>
+        <div className={styles.gridLayout} ref={gridRef}>
           <motion.article
-            className={styles.featuredCard}
+            data-card-id="profile"
+            className={`${styles.featuredCard} ${getCardLightClass('profile')}`}
             initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.12 }}
@@ -348,7 +447,8 @@ function Home() {
           </motion.article>
 
           <motion.article
-            className={styles.interestCard}
+            data-card-id="interests"
+            className={`${styles.interestCard} ${getCardLightClass('interests')}`}
             initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -371,7 +471,8 @@ function Home() {
           {techCards.map((card, index) => (
             <motion.article
               key={card.key}
-              className={styles.techCard}
+              data-card-id={card.key}
+              className={`${styles.techCard} ${getCardLightClass(card.key)}`}
               initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
