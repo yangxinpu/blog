@@ -127,7 +127,7 @@
         { "icon": "🔍", "text": "Exploring UI/UX details in real products" }
       ]
     },
-    "openDoc": "Open Documentation",
+    "openKb": "Knowledge Base",
     "cards": {
       "react": {
         "name": "React",

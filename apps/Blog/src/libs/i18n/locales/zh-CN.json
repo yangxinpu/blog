@@ -37,8 +37,7 @@
     "doubleClickToCopy": "双击复制邮箱",
     "emailCopied": "邮箱复制成功！",
     "emailCopyFailed": "邮箱复制失败，请手动复制",
-    "wordmark": "Nailuo",
-    "wordmarkHint": "向下滚动，逐步显现"
+    "wordmark": "Nailuo"
   },
   "homePage": {
     "hero": {
@@ -117,7 +116,7 @@
         { "icon": "🔍", "text": "观察优秀产品的交互细节与信息架构" }
       ]
     },
-  "openDoc": "查阅知识库",
+  "openKb": "知识库",
   "cards": {
     "react": {
       "name": "React",

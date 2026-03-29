@@ -334,12 +334,21 @@
   }
 }
 
-.cardAction {
+.cardActions {
   margin-top: auto;
+}
+
+.cardAction {
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;
-  color: var(--primary-300);
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 @media (max-width: 1080px) {

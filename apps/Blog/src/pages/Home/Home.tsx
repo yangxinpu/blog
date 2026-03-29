@@ -21,6 +21,7 @@ type LogoSource =
 type MultiLogoItem = {
   logo: LogoSource[];
   link: string;
+  kbLink?: string;
 };
 
 type TechCardI18n = {
@@ -40,19 +41,22 @@ const techCardOrder: TechKey[] = [
 
 const techAssets: Record<
   TechKey,
-  { logo: LogoSource; link: string } | MultiLogoItem
+  { logo: LogoSource; link: string; kbLink?: string } | MultiLogoItem
 > = {
   react: {
     logo: 'https://cdn.simpleicons.org/react/61DAFB',
     link: 'https://react.dev/',
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础.html`,
   },
   vue: {
     logo: 'https://cdn.simpleicons.org/vuedotjs/4FC08D',
     link: 'https://vuejs.org/',
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础.html`,
   },
   javascript: {
     logo: 'https://cdn.simpleicons.org/javascript/F7DF1E',
     link: 'https://developer.mozilla.org/docs/Web/JavaScript',
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
   },
   frontendEngineering: {
     logo: [
@@ -60,10 +64,12 @@ const techAssets: Record<
       'https://cdn.simpleicons.org/webpack/8DD6F9',
     ],
     link: 'https://vite.dev/',
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
   },
   nodejs: {
     logo: 'https://cdn.simpleicons.org/nodedotjs/5FA04E',
     link: 'https://nodejs.org/',
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
   },
 };
 
@@ -225,6 +231,7 @@ function Home() {
         ...item,
         logos: asset.logo.map((src) => resolveLogo(src, isDark)),
         link: asset.link,
+        kbLink: asset.kbLink,
       };
     }
 
@@ -233,6 +240,7 @@ function Home() {
       ...item,
       logo: resolveLogo(asset.logo, isDark),
       link: asset.link,
+      kbLink: asset.kbLink,
     };
   });
 
@@ -361,11 +369,8 @@ function Home() {
           </motion.article>
 
           {techCards.map((card, index) => (
-            <motion.a
+            <motion.article
               key={card.key}
-              href={card.link}
-              target="_blank"
-              rel="noreferrer"
               className={styles.techCard}
               initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -405,8 +410,19 @@ function Home() {
                 ))}
               </ul>
 
-              <span className={styles.cardAction}>{t('homePage.openDoc')}</span>
-            </motion.a>
+              <div className={styles.cardActions}>
+                {card.kbLink && (
+                  <a
+                    href={card.kbLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.cardAction}
+                  >
+                    {t('homePage.openKb')}
+                  </a>
+                )}
+              </div>
+            </motion.article>
           ))}
         </div>
       </section>
