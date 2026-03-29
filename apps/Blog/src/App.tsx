@@ -222,27 +222,27 @@ function App() {
                   {
                     value: 'react',
                     label: t('react'),
-                    path: 'http://localhost:8080/docs/zh/React/React基础.html',
+                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础.html`,
                   },
                   {
                     value: 'vue',
                     label: t('vue'),
-                    path: 'http://localhost:8080/docs/zh/Vue/Vue基础.html',
+                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础.html`,
                   },
                   {
                     value: 'javascript',
                     label: t('javascript'),
-                    path: 'http://localhost:8080/docs/zh/',
+                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
                   },
                   {
                     value: 'frontendEngineering',
                     label: t('frontendEngineering'),
-                    path: 'http://localhost:8080/docs/zh/',
+                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
                   },
                   {
                     value: 'nodejs',
                     label: t('nodejs'),
-                    path: 'http://localhost:8080/docs/zh/',
+                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
                   },
                 ]}
                 label={t('knowledgeBase')}

@@ -1,7 +1,11 @@
 import { defineConfig } from 'vitepress';
 
+const base = process.env.VITEPRESS_BASE || '/';
+const blogUrl = process.env.VITEPRESS_BLOG_URL || 'http://localhost:3000';
+
 export default defineConfig({
   title: 'NaiLuo 知识库',
+  base,
 
   vite: {
     server: {
@@ -30,34 +34,34 @@ export default defineConfig({
       lang: 'zh-CN',
       title: 'NaiLuo 知识库',
       description: '前端技术知识库 - React, Vue',
-      link: '/docs/zh/',
+      link: '/zh/',
       themeConfig: {
         nav: [
-          { text: '首页', link: '/docs/zh/' },
-          { text: 'React', link: '/docs/zh/React/React基础' },
-          { text: 'Vue', link: '/docs/zh/Vue/Vue基础' },
-          { text: '博客', link: 'http://localhost:3000' },
+          { text: '首页', link: '/zh/' },
+          { text: 'React', link: '/zh/React/React基础' },
+          { text: 'Vue', link: '/zh/Vue/Vue基础' },
+          { text: '博客', link: blogUrl },
         ],
         sidebar: {
-          '/docs/zh/React/': [
+          '/zh/React/': [
             {
               text: 'React',
               collapsed: false,
               items: [
-                { text: 'React 基础', link: '/docs/zh/React/React基础' },
-                { text: 'React 提高', link: '/docs/zh/React/React提高' },
-                { text: 'React 原理', link: '/docs/zh/React/React原理' },
+                { text: 'React 基础', link: '/zh/React/React基础' },
+                { text: 'React 提高', link: '/zh/React/React提高' },
+                { text: 'React 原理', link: '/zh/React/React原理' },
               ],
             },
           ],
-          '/docs/zh/Vue/': [
+          '/zh/Vue/': [
             {
               text: 'Vue',
               collapsed: false,
               items: [
-                { text: 'Vue 基础', link: '/docs/zh/Vue/Vue基础' },
-                { text: 'Vue3 基础', link: '/docs/zh/Vue/Vue3基础' },
-                { text: 'Vue3 提高', link: '/docs/zh/Vue/Vue3提高' },
+                { text: 'Vue 基础', link: '/zh/Vue/Vue基础' },
+                { text: 'Vue3 基础', link: '/zh/Vue/Vue3基础' },
+                { text: 'Vue3 提高', link: '/zh/Vue/Vue3提高' },
               ],
             },
           ],
@@ -86,34 +90,34 @@ export default defineConfig({
       lang: 'en-US',
       title: 'NaiLuo Knowledge Base',
       description: 'Frontend Tech Knowledge Base - React, Vue',
-      link: '/docs/en/',
+      link: '/en/',
       themeConfig: {
         nav: [
-          { text: 'Home', link: '/docs/en/' },
-          { text: 'React', link: '/docs/en/React/React基础' },
-          { text: 'Vue', link: '/docs/en/Vue/Vue基础' },
-          { text: 'Blog', link: 'http://localhost:3000' },
+          { text: 'Home', link: '/en/' },
+          { text: 'React', link: '/en/React/React基础' },
+          { text: 'Vue', link: '/en/Vue/Vue基础' },
+          { text: 'Blog', link: blogUrl },
         ],
         sidebar: {
-          '/docs/en/React/': [
+          '/en/React/': [
             {
               text: 'React',
               collapsed: false,
               items: [
-                { text: 'React Basics', link: '/docs/en/React/React基础' },
-                { text: 'React Advanced', link: '/docs/en/React/React提高' },
-                { text: 'React Principles', link: '/docs/en/React/React原理' },
+                { text: 'React Basics', link: '/en/React/React基础' },
+                { text: 'React Advanced', link: '/en/React/React提高' },
+                { text: 'React Principles', link: '/en/React/React原理' },
               ],
             },
           ],
-          '/docs/en/Vue/': [
+          '/en/Vue/': [
             {
               text: 'Vue',
               collapsed: false,
               items: [
-                { text: 'Vue Basics', link: '/docs/en/Vue/Vue基础' },
-                { text: 'Vue3 Basics', link: '/docs/en/Vue/Vue3基础' },
-                { text: 'Vue3 Advanced', link: '/docs/en/Vue/Vue3提高' },
+                { text: 'Vue Basics', link: '/en/Vue/Vue基础' },
+                { text: 'Vue3 Basics', link: '/en/Vue/Vue3基础' },
+                { text: 'Vue3 Advanced', link: '/en/Vue/Vue3提高' },
               ],
             },
           ],
