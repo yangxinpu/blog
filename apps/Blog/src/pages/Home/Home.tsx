@@ -84,7 +84,7 @@ function resolveLogo(source: LogoSource, isDark: boolean): string {
   return isDark ? source.dark : source.light;
 }
 
-const BORDER_LIGHT_RADIUS = 120;
+const BORDER_LIGHT_RADIUS = 300;
 
 function Home() {
   const { t } = useTranslation();
