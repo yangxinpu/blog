@@ -1,0 +1,32 @@
+{
+  "name": "blog-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "博客 Monorepo 项目，包含博客应用和知识库",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "dev:blog": "pnpm --filter blog dev",
+    "dev:kb": "pnpm --filter knowledge-base dev",
+    "build": "pnpm -r build",
+    "build:blog": "pnpm --filter blog build",
+    "build:kb": "pnpm --filter knowledge-base build",
+    "lint": "pnpm -r lint",
+    "lint:root": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "preview": "pnpm -r preview",
+    "clean": "pnpm -r clean"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

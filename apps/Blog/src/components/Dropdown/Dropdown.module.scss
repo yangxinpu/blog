@@ -1,0 +1,76 @@
+.dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+
+  .dropdownToggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.3s ease;
+    border-radius: 4px;
+
+    &:hover {
+      color: var(--accent);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  // Dark theme adjustments for dropdown toggle
+  [data-theme='dark'] {
+    .dropdownToggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .dropdownArrow {
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 0;
+    margin-top: 4px;
+    min-width: 120px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    list-style: none;
+
+    .dropdownItem {
+      padding: 8px 16px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--accent);
+        color: white;
+      }
+    }
+  }
+}
+
+// Dark theme adjustments
+[data-theme='dark'] {
+  .dropdown {
+    .dropdownMenu {
+      background: rgba(42, 42, 42, 0.95);
+      box-shadow: var(--shadow);
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "welcome": "欢迎来到我的博客",
+  "home": "首页",
+  "about": "关于我",
+  "posts": "文章",
+  "contact": "联系我",
+  "knowledgeBase": "知识库",
+  "javascript": "JavaScript",
+  "vue": "Vue",
+  "react": "React",
+  "motto": "格言",
+  "thoughts": "个人感想",
+  "frontendEngineering": "前端工程化",
+  "nodejs": "Node.js",
+  "common": {
+    "logoAlt": "站点标志",
+    "logoWithName": "{{name}} 标志",
+    "lang": {
+      "enShort": "EN",
+      "zhShort": "CN"
+    }
+  },
+  "theme": {
+    "dark": "深色模式",
+    "light": "浅色模式"
+  },
+  "mottoSection": {
+    "quote": "用技术实现想法 用生活校准方向",
+    "quotes": ["用技术实现想法", "用设计连接体验", "用生活校准方向"]
+  },
+  "footer": {
+    "description": "专注前端技术分享，覆盖代码细节、工程化实践与设计思路希望每一篇文章都能让技术更清晰",
+    "techStack": "技术栈",
+    "allRightsReserved": "保留所有权利",
+    "madeWith": "使用",
+    "team": "团队制作",
+    "doubleClickToCopy": "双击复制邮箱",
+    "emailCopied": "邮箱复制成功！",
+    "emailCopyFailed": "邮箱复制失败，请手动复制",
+    "wordmark": "Nailuo",
+    "wordmarkHint": "向下滚动，逐步显现"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Overthinker",
+      "subtitle": "Build / Think / Create",
+      "desc": "记录前端成长、页面设计与产品思考"
+    },
+    "profile": {
+      "title": "个人简介与自述",
+      "description": "我专注于前端工程化与交互体验，重视代码可维护性、用户价值与长期迭代能力",
+      "nickname": "NaiLuo",
+      "nicknameCn": "奈落",
+      "role": "前端工程师 · React / Vue / 工程化",
+      "tags": [
+        "压制",
+        "绝境",
+        "突破",
+        "自我",
+        "证明",
+        "巅峰",
+        "枷锁",
+        "答案",
+        "依赖",
+        "尽头",
+        "诠释",
+        "冷静",
+        "逆境",
+        "自信",
+        "无限",
+        "打破",
+        "困局",
+        "质疑",
+        "逆转",
+        "磨炼",
+        "极限",
+        "挣脱",
+        "限制",
+        "领域",
+        "细节",
+        "天赋",
+        "专注",
+        "手法",
+        "心态",
+        "上限",
+        "破局",
+        "看破",
+        "希望",
+        "绝望",
+        "实力",
+        "终究",
+        "沉溺",
+        "磨练",
+        "责任",
+        "期盼",
+        "重拾",
+        "情绪",
+        "宿命",
+        "追逐",
+        "释怀",
+        "奇迹",
+        "放弃",
+        "真诚",
+        "击败",
+        "轨迹",
+        "缘分",
+        "坚持"
+      ]
+    },
+    "interests": {
+      "title": "代码之外的我",
+      "description": "兴趣让我保持持续输入和稳定节奏，也会反哺到产品理解和界面设计判断中",
+      "items": [
+        { "icon": "🏸", "text": "羽毛球和乒乓球，保持体能与专注力" },
+        { "icon": "📚", "text": "阅读技术、设计与历史类书籍" },
+        { "icon": "✍️", "text": "写博客复盘项目中的经验与教训" },
+        { "icon": "🔍", "text": "观察优秀产品的交互细节与信息架构" }
+      ]
+    },
+    "openDoc": "查看官方文档",
+    "cards": {
+      "react": {
+        "name": "React",
+        "focus": "组件化架构",
+        "description": "通过声明式渲染与可复用组件边界，构建可扩展的交互型前端应用",
+        "highlights": [
+          "适配中大型项目的组件复用能力",
+          "路由与状态管理生态成熟稳定"
+        ]
+      },
+      "vue": {
+        "name": "Vue",
+        "focus": "渐进式开发",
+        "description": "以清晰模板和响应式能力提升开发效率，兼顾灵活性与可维护性",
+        "highlights": [
+          "从小页面到完整系统都易落地",
+          "单文件组件开发体验高效直观"
+        ]
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "focus": "语言基础",
+        "description": "Web 平台核心语言，支撑浏览器交互逻辑、异步流程与运行时能力",
+        "highlights": [
+          "前后端与工具链都离不开的基础能力",
+          "生态广泛，适配不同业务场景"
+        ]
+      },
+      "frontendEngineering": {
+        "name": "前端工程化",
+        "focus": "构建与工具链",
+        "description": "通过 Vite 与 Webpack 等现代构建工具，提升开发效率与项目可维护性",
+        "highlights": [
+          "Vite 极速热更新，开发体验流畅",
+          "Webpack 生态成熟，打包策略灵活"
+        ]
+      },
+      "nodejs": {
+        "name": "Node.js",
+        "focus": "工具运行时",
+        "description": "支撑前端脚手架、构建流程与自动化脚本，也是接口服务的重要基础",
+        "highlights": [
+          "前后端统一语言，协作链路更顺滑",
+          "包生态丰富，工程能力扩展性强"
+        ]
+      }
+    }
+  },
+  "thoughtsPage": {
+    "title": "个人感想",
+    "subtitle": "关于代码、设计和数字世界的思考",
+    "action": "阅读文章 ->",
+    "articles": [
+      {
+        "date": "2023年10月24日",
+        "tags": ["架构", "Clean Code"],
+        "title": "代码中的极简艺术",
+        "description": "为什么写更少的代码往往更难，但却好得多探索整洁架构的益处",
+        "featured": true
+      },
+      {
+        "date": "2023年9月15日",
+        "tags": ["React", "性能优化"],
+        "title": "拥抱 React 服务端组件",
+        "description": "深入探讨 React 的未来，以及 RSC 如何改变我们对数据获取的思考方式"
+      },
+      {
+        "date": "2023年8月2日",
+        "tags": ["A11y", "用户体验"],
+        "title": "无障碍设计优先",
+        "description": "把无障碍从「补充项」变成「默认项」，产品会更稳、更普适"
+      },
+      {
+        "date": "2023年7月10日",
+        "tags": ["CSS", "前端开发"],
+        "title": "2024 年的 CSS 现状",
+        "description": "容器查询、层叠层和新布局能力，正在重塑前端样式工程实践"
+      }
+    ]
+  },
+  "textAnimation": {
+    "words": [
+      "NAILUO",
+      "UNLIMITED",
+      "PROGRESS",
+      "GROWTH",
+      "COURAGE",
+      "FOCUS",
+      "CREATE"
+    ]
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "welcome": "Welcome to my blog",
+  "home": "Home",
+  "about": "About me",
+  "posts": "Posts",
+  "contact": "Contact",
+  "knowledgeBase": "Knowledge Base",
+  "javascript": "JavaScript",
+  "vue": "Vue",
+  "react": "React",
+  "motto": "Motto",
+  "thoughts": "Thoughts",
+  "frontendEngineering": "Frontend Engineering",
+  "nodejs": "Node.js",
+  "common": {
+    "logoAlt": "Site logo",
+    "logoWithName": "{{name}} logo",
+    "lang": {
+      "enShort": "EN",
+      "zhShort": "CN"
+    }
+  },
+  "theme": {
+    "dark": "Dark mode",
+    "light": "Light mode"
+  },
+  "mottoSection": {
+    "quote": "Build with technology, stay guided by life",
+    "quotes": [
+      "Build with technology",
+      "Connect through design",
+      "Stay guided by life"
+    ]
+  },
+  "footer": {
+    "description": "A front-end technology blog, covering code details, engineering framework, and best practices. We hope that each article here will make the technology clearer.",
+    "techStack": "Tech Stack",
+    "allRightsReserved": "All rights reserved",
+    "madeWith": "Made with",
+    "team": "Team",
+    "doubleClickToCopy": "Double click to copy email",
+    "emailCopied": "Email copied successfully!",
+    "emailCopyFailed": "Failed to copy email, please copy manually.",
+    "wordmark": "Nailuo",
+    "wordmarkHint": "Scroll to reveal"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Overthinker",
+      "subtitle": "Build / Think / Create",
+      "desc": "Recording frontend growth, page design and product thinking"
+    },
+    "profile": {
+      "title": "Self-introduction and personal statement",
+      "description": "I focus on turning ideas into maintainable interfaces, balancing user experience, engineering quality, and long-term scalability.",
+      "nickname": "NaiLuo",
+      "nicknameCn": "奈落",
+      "role": "Frontend Engineer · React / Vue / Engineering",
+      "tags": [
+        "Suppress",
+        "Despair",
+        "Breakthrough",
+        "Self",
+        "Prove",
+        "Peak",
+        "Chains",
+        "Answer",
+        "Depend",
+        "End",
+        "Interpret",
+        "Calm",
+        "Adversity",
+        "Confidence",
+        "Unlimited",
+        "Break",
+        "Dilemma",
+        "Question",
+        "Reverse",
+        "Temper",
+        "Limit",
+        "Break free",
+        "Constraint",
+        "Domain",
+        "Detail",
+        "Talent",
+        "Focus",
+        "Technique",
+        "Mindset",
+        "Ceiling",
+        "Breakthrough",
+        "See through",
+        "Hope",
+        "Despair",
+        "Strength",
+        "Eventually",
+        "Indulge",
+        "Hone",
+        "Responsibility",
+        "Expect",
+        "Regain",
+        "Emotion",
+        "Fate",
+        "Chase",
+        "Release",
+        "Miracle",
+        "Give up",
+        "Sincere",
+        "Defeat",
+        "Trajectory",
+        "Fate",
+        "Persist"
+      ]
+    },
+    "interests": {
+      "title": "Who I am outside coding",
+      "description": "Interests keep me creative and disciplined, and they often inspire better product and interaction decisions.",
+      "items": [
+        {
+          "icon": "🏸",
+          "text": "Badminton and table tennis to stay physically active"
+        },
+        { "icon": "📚", "text": "Reading tech, design, and history books" },
+        {
+          "icon": "✍️",
+          "text": "Writing blog notes to summarize lessons learned"
+        },
+        { "icon": "🔍", "text": "Exploring UI/UX details in real products" }
+      ]
+    },
+    "openDoc": "Open Documentation",
+    "cards": {
+      "react": {
+        "name": "React",
+        "focus": "Component architecture",
+        "description": "Build interactive interfaces with declarative rendering and reusable component boundaries.",
+        "highlights": [
+          "Composable UI for medium and large apps",
+          "Strong ecosystem for routing and state management"
+        ]
+      },
+      "vue": {
+        "name": "Vue",
+        "focus": "Progressive development",
+        "description": "Delivers rapid implementation with clean templates, reactive APIs, and mature tooling.",
+        "highlights": [
+          "Easy adoption from small pages to full systems",
+          "Great single-file component workflow"
+        ]
+      },
+      "javascript": {
+        "name": "JavaScript",
+        "focus": "Language fundamentals",
+        "description": "Core runtime language for web applications, interaction logic, and platform APIs.",
+        "highlights": [
+          "Essential for browser and Node.js development",
+          "Flexible syntax for diverse application scenarios"
+        ]
+      },
+      "frontendEngineering": {
+        "name": "Frontend Engineering",
+        "focus": "Build & Tooling",
+        "description": "Modern build tools like Vite and Webpack to improve development efficiency and maintainability.",
+        "highlights": [
+          "Vite offers instant HMR for smooth DX",
+          "Webpack has mature ecosystem and flexible bundling"
+        ]
+      },
+      "nodejs": {
+        "name": "Node.js",
+        "focus": "Tooling runtime",
+        "description": "Powers frontend tooling, API services, and automation scripts with an event-driven runtime.",
+        "highlights": [
+          "Shared JavaScript language across stack",
+          "Rich package ecosystem for engineering tasks"
+        ]
+      }
+    }
+  },
+  "thoughtsPage": {
+    "title": "Thoughts",
+    "subtitle": "Reflections on code, design, and digital craft.",
+    "action": "Read Article ->",
+    "articles": [
+      {
+        "date": "October 24, 2023",
+        "tags": ["Architecture", "Clean Code"],
+        "title": "The Art of Minimal Code",
+        "description": "Why writing less code is often harder, but better. A practical look at clean architecture.",
+        "featured": true
+      },
+      {
+        "date": "September 15, 2023",
+        "tags": ["React", "Performance"],
+        "title": "Embracing React Server Components",
+        "description": "How RSC changes the way we think about data fetching and rendering boundaries."
+      },
+      {
+        "date": "August 2, 2023",
+        "tags": ["A11y", "UX"],
+        "title": "Accessibility First",
+        "description": "Treating accessibility as a default quality gate leads to better and more durable products."
+      },
+      {
+        "date": "July 10, 2023",
+        "tags": ["CSS", "Frontend"],
+        "title": "State of CSS in 2024",
+        "description": "Container queries, cascade layers, and modern layout tools are redefining style systems."
+      }
+    ]
+  },
+  "textAnimation": {
+    "words": [
+      "NAILUO",
+      "UNLIMITED",
+      "PROGRESS",
+      "GROWTH",
+      "COURAGE",
+      "FOCUS",
+      "CREATE"
+    ]
+  }
+}
