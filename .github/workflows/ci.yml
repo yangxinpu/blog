@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint Blog
+        run: pnpm --filter blog run lint
+
+      - name: Format check
+        run: pnpm run format:check
+
+  typecheck:
+    name: TypeCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: TypeCheck Blog
+        run: pnpm --filter blog exec tsc --noEmit
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Blog
+        run: pnpm --filter blog run build
+        env:
+          VITE_BASE_URL: /
+
+      - name: Build KnowledgeBase
+        run: pnpm --filter knowledge-base run build
+        env:
+          VITEPRESS_BASE: /kb/
+          VITEPRESS_BLOG_URL: /
+
+      - name: Upload Blog artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-dist
+          path: apps/Blog/dist
+          retention-days: 1
+
+      - name: Upload KnowledgeBase artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kb-dist
+          path: apps/KnowledgeBase/.vitepress/dist
+          retention-days: 1
