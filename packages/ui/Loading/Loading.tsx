@@ -113,15 +113,6 @@ const Loading: React.FC<LoadingProps> = ({
             ))}
           </motion.h2>
 
-          <div className={styles.progressContainer}>
-            <motion.div
-              className={styles.progressBar}
-              initial={{ width: '0%' }}
-              animate={{ width: '100%' }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
-
           <motion.p
             className={styles.loadingText}
             animate={{ opacity: [0.5, 1, 0.5] }}

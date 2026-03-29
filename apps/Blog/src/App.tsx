@@ -1,17 +1,18 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Github, Mail, Moon, Sun } from 'lucide-react';
 import Home from './pages/Home/Home';
-import Motto from './pages/Motto/Motto';
-import Thoughts from './pages/Thoughts/Thoughts';
-import TextAnimation from './pages/TextAnimation/TextAnimation';
-import AuroraRisePage from './pages/AuroraRisePage/AuroraRisePage';
-import NeonSprintPage from './pages/NeonSprintPage/NeonSprintPage';
 import { Message, Dropdown } from './components';
 import Loading from '@blog/ui';
 import styles from './App.module.scss';
 import logoImage from './assets/Images/logo.png';
+
+const Motto = lazy(() => import('./pages/Motto/Motto'));
+const Thoughts = lazy(() => import('./pages/Thoughts/Thoughts'));
+const TextAnimation = lazy(() => import('./pages/TextAnimation/TextAnimation'));
+const AuroraRisePage = lazy(() => import('./pages/AuroraRisePage/AuroraRisePage'));
+const NeonSprintPage = lazy(() => import('./pages/NeonSprintPage/NeonSprintPage'));
 
 const personMeta = {
   nickname: 'NaiLuo',
@@ -80,11 +81,26 @@ const footerData = {
   ],
 };
 
+interface LazyWrapperProps {
+  children: React.ReactNode;
+  onLoaded: () => void;
+}
+
+function LazyWrapper({ children, onLoaded }: LazyWrapperProps) {
+  useEffect(() => {
+    onLoaded();
+  }, [onLoaded]);
+
+  return <>{children}</>;
+}
+
 function App() {
   const { t, i18n } = useTranslation();
   const wordmarkRef = useRef<HTMLDivElement | null>(null);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadedCount, setLoadedCount] = useState(0);
+  const totalLazyComponents = 5;
+  const isLoading = loadedCount < totalLazyComponents;
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -102,12 +118,8 @@ function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
+  const handleComponentLoaded = useCallback(() => {
+    setLoadedCount((prev) => prev + 1);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -189,205 +201,225 @@ function App() {
           />
         )}
 
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <a href="/" className={styles.logoLink}>
-            <img
-              src={logoImage}
-              alt={t('common.logoAlt')}
-              className={styles.logoImg}
-            />
-            <span className={styles.logoText}>
-              {personMeta.capitalNickname}
-            </span>
-          </a>
-        </div>
-
-        <div className={styles.rightSection}>
-          <nav className={styles.mainNav}>
-            <div className={styles.navMenu}>
-              <button
-                type="button"
-                className={styles.navMenuLink}
-                onClick={() => scrollToSection('home')}
-              >
-                {t('home')}
-              </button>
-              <button
-                type="button"
-                className={styles.navMenuLink}
-                onClick={() => scrollToSection('thoughts')}
-              >
-                {t('thoughts')}
-              </button>
-              <button
-                type="button"
-                className={styles.navMenuLink}
-                onClick={() => scrollToSection('contact')}
-              >
-                {t('contact')}
-              </button>
-
-              <Dropdown
-                options={[
-                  {
-                    value: 'react',
-                    label: t('react'),
-                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础.html`,
-                  },
-                  {
-                    value: 'vue',
-                    label: t('vue'),
-                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础.html`,
-                  },
-                  {
-                    value: 'javascript',
-                    label: t('javascript'),
-                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
-                  },
-                  {
-                    value: 'frontendEngineering',
-                    label: t('frontendEngineering'),
-                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
-                  },
-                  {
-                    value: 'nodejs',
-                    label: t('nodejs'),
-                    path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
-                  },
-                ]}
-                label={t('knowledgeBase')}
-                mainPath={`${import.meta.env.VITE_KB_BASE_URL}/zh/`}
+        <header className={styles.header}>
+          <div className={styles.logo}>
+            <a href="/" className={styles.logoLink}>
+              <img
+                src={logoImage}
+                alt={t('common.logoAlt')}
+                className={styles.logoImg}
               />
-            </div>
-          </nav>
-
-          <div className={styles.controls}>
-            <button
-              className={styles.langToggle}
-              onClick={() =>
-                changeLanguage(i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN')
-              }
-            >
-              {langToggleText}
-            </button>
-
-            <button className={styles.themeSwitch} onClick={toggleTheme}>
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
+              <span className={styles.logoText}>
+                {personMeta.capitalNickname}
+              </span>
+            </a>
           </div>
-        </div>
-      </header>
 
-      <main className={styles.main}>
-        <Home />
-        <Motto />
-        <Thoughts />
-        <TextAnimation />
-        <AuroraRisePage />
-        <NeonSprintPage />
-      </main>
+          <div className={styles.rightSection}>
+            <nav className={styles.mainNav}>
+              <div className={styles.navMenu}>
+                <button
+                  type="button"
+                  className={styles.navMenuLink}
+                  onClick={() => scrollToSection('home')}
+                >
+                  {t('home')}
+                </button>
+                <button
+                  type="button"
+                  className={styles.navMenuLink}
+                  onClick={() => scrollToSection('thoughts')}
+                >
+                  {t('thoughts')}
+                </button>
+                <button
+                  type="button"
+                  className={styles.navMenuLink}
+                  onClick={() => scrollToSection('contact')}
+                >
+                  {t('contact')}
+                </button>
 
-      <footer id="contact" className={styles.footer}>
-        <div className={styles.footerContent}>
-          <div className={styles.container}>
-            <div className={styles.footerTop}>
-              <div className={styles.footerInfo}>
-                <h3>{personMeta.capitalNickname}</h3>
-                <p>{t('footer.description')}</p>
-
-                <div className={styles.footerSocial}>
-                  <motion.a
-                    href={personMeta.githubLink}
-                    className={styles.socialLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    <Github size={20} />
-                  </motion.a>
-
-                  <motion.button
-                    className={styles.socialLink}
-                    onClick={copyEmail}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    <Mail size={20} />
-                  </motion.button>
-                </div>
-
-                <div className={styles.footerCopyright}>
-                  (c) {new Date().getFullYear()} {personMeta.capitalNickname}.{' '}
-                  {t('footer.allRightsReserved')}
-                </div>
+                <Dropdown
+                  options={[
+                    {
+                      value: 'react',
+                      label: t('react'),
+                      path: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础.html`,
+                    },
+                    {
+                      value: 'vue',
+                      label: t('vue'),
+                      path: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础.html`,
+                    },
+                    {
+                      value: 'javascript',
+                      label: t('javascript'),
+                      path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
+                    },
+                    {
+                      value: 'frontendEngineering',
+                      label: t('frontendEngineering'),
+                      path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
+                    },
+                    {
+                      value: 'nodejs',
+                      label: t('nodejs'),
+                      path: `${import.meta.env.VITE_KB_BASE_URL}/zh/`,
+                    },
+                  ]}
+                  label={t('knowledgeBase')}
+                  mainPath={`${import.meta.env.VITE_KB_BASE_URL}/zh/`}
+                />
               </div>
+            </nav>
 
-              <div className={styles.footerTechStack}>
-                <h4>{t('footer.techStack')}</h4>
+            <div className={styles.controls}>
+              <button
+                className={styles.langToggle}
+                onClick={() =>
+                  changeLanguage(i18n.language === 'zh-CN' ? 'en-US' : 'zh-CN')
+                }
+              >
+                {langToggleText}
+              </button>
 
-                <div className={styles.techStackTags}>
-                  {footerData.techStack.map((item, index) => (
+              <button className={styles.themeSwitch} onClick={toggleTheme}>
+                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main className={styles.main}>
+          <Home />
+          <Suspense fallback={null}>
+            <LazyWrapper onLoaded={handleComponentLoaded}>
+              <Motto />
+            </LazyWrapper>
+          </Suspense>
+          <Suspense fallback={null}>
+            <LazyWrapper onLoaded={handleComponentLoaded}>
+              <Thoughts />
+            </LazyWrapper>
+          </Suspense>
+          <Suspense fallback={null}>
+            <LazyWrapper onLoaded={handleComponentLoaded}>
+              <TextAnimation />
+            </LazyWrapper>
+          </Suspense>
+          <Suspense fallback={null}>
+            <LazyWrapper onLoaded={handleComponentLoaded}>
+              <AuroraRisePage />
+            </LazyWrapper>
+          </Suspense>
+          <Suspense fallback={null}>
+            <LazyWrapper onLoaded={handleComponentLoaded}>
+              <NeonSprintPage />
+            </LazyWrapper>
+          </Suspense>
+        </main>
+
+        <footer id="contact" className={styles.footer}>
+          <div className={styles.footerContent}>
+            <div className={styles.container}>
+              <div className={styles.footerTop}>
+                <div className={styles.footerInfo}>
+                  <h3>{personMeta.capitalNickname}</h3>
+                  <p>{t('footer.description')}</p>
+
+                  <div className={styles.footerSocial}>
                     <motion.a
-                      key={`${item.name}-${index}`}
-                      href={item.link}
+                      href={personMeta.githubLink}
+                      className={styles.socialLink}
                       target="_blank"
                       rel="noreferrer"
-                      className={styles.techTag}
-                      whileHover={{ y: -5, scale: 1.04 }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 360,
-                        damping: 18,
-                      }}
-                      title={item.name}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
                     >
-                      <motion.img
-                        src={item.icon}
-                        alt={t('common.logoWithName', { name: item.name })}
-                        loading="lazy"
-                        className={styles.techTagIcon}
-                        whileHover={{ rotate: [0, -8, 8, 0], scale: 1.1 }}
-                        transition={{ duration: 0.45, ease: 'easeInOut' }}
-                      />
-                      <span>{item.name}</span>
+                      <Github size={20} />
                     </motion.a>
-                  ))}
+
+                    <motion.button
+                      className={styles.socialLink}
+                      onClick={copyEmail}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <Mail size={20} />
+                    </motion.button>
+                  </div>
+
+                  <div className={styles.footerCopyright}>
+                    (c) {new Date().getFullYear()} {personMeta.capitalNickname}.{' '}
+                    {t('footer.allRightsReserved')}
+                  </div>
+                </div>
+
+                <div className={styles.footerTechStack}>
+                  <h4>{t('footer.techStack')}</h4>
+
+                  <div className={styles.techStackTags}>
+                    {footerData.techStack.map((item, index) => (
+                      <motion.a
+                        key={`${item.name}-${index}`}
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.techTag}
+                        whileHover={{ y: -5, scale: 1.04 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{
+                          type: 'spring',
+                          stiffness: 360,
+                          damping: 18,
+                        }}
+                        title={item.name}
+                      >
+                        <motion.img
+                          src={item.icon}
+                          alt={t('common.logoWithName', { name: item.name })}
+                          loading="lazy"
+                          className={styles.techTagIcon}
+                          whileHover={{ rotate: [0, -8, 8, 0], scale: 1.1 }}
+                          transition={{ duration: 0.45, ease: 'easeInOut' }}
+                        />
+                        <span>{item.name}</span>
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.footerWordmark} ref={wordmarkRef}>
-          <div className={styles.footerWordmarkSticky}>
-            <motion.div
-              className={styles.footerWordmarkStage}
-              style={{ y: wordmarkY, opacity: wordmarkOpacity }}
-            >
-              <h2 className={styles.footerWordmarkGhost}>{wordmarkText}</h2>
-              <motion.h2
-                className={styles.footerWordmarkFill}
-                style={{ width: wordmarkFillWidth }}
+          <div className={styles.footerWordmark} ref={wordmarkRef}>
+            <div className={styles.footerWordmarkSticky}>
+              <motion.div
+                className={styles.footerWordmarkStage}
+                style={{ y: wordmarkY, opacity: wordmarkOpacity }}
               >
-                {wordmarkChars.map((char, index) => (
-                  <motion.span
-                    key={`${char}-${index}`}
-                    whileHover={{
-                      y: -18,
-                      rotate: index % 2 === 0 ? -6 : 6,
-                      scale: 1.12,
-                    }}
-                    transition={{ type: 'spring', stiffness: 340, damping: 15 }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </motion.span>
-                ))}
-              </motion.h2>
-            </motion.div>
+                <h2 className={styles.footerWordmarkGhost}>{wordmarkText}</h2>
+                <motion.h2
+                  className={styles.footerWordmarkFill}
+                  style={{ width: wordmarkFillWidth }}
+                >
+                  {wordmarkChars.map((char, index) => (
+                    <motion.span
+                      key={`${char}-${index}`}
+                      whileHover={{
+                        y: -18,
+                        rotate: index % 2 === 0 ? -6 : 6,
+                        scale: 1.12,
+                      }}
+                      transition={{ type: 'spring', stiffness: 340, damping: 15 }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </motion.span>
+                  ))}
+                </motion.h2>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
       </div>
     </>
   );

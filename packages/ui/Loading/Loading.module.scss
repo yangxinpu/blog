@@ -205,26 +205,6 @@
   text-shadow: 0 0 20px var(--accent);
 }
 
-.progressContainer {
-  width: 200px;
-  height: 3px;
-  background: var(--border-color);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.progressBar {
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--accent),
-    color-mix(in srgb, var(--accent) 60%, white),
-    var(--accent)
-  );
-  border-radius: 2px;
-  box-shadow: 0 0 10px var(--accent);
-}
-
 .loadingText {
   font-size: 0.875rem;
   color: var(--text-secondary);

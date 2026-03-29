@@ -117,7 +117,7 @@
         { "icon": "🔍", "text": "观察优秀产品的交互细节与信息架构" }
       ]
     },
-  "openDoc": "查阅官方文档",
+  "openDoc": "查阅知识库",
   "cards": {
     "react": {
       "name": "React",

@@ -131,47 +131,52 @@
     "cards": {
       "react": {
         "name": "React",
-        "focus": "Component architecture",
-        "description": "Build interactive interfaces with declarative rendering and reusable component boundaries.",
+        "focus": "Declarative UI & Scheduling Architecture",
+        "description": "Using components as the fundamental unit, React enables predictable updates and high-performance rendering through declarative rendering and Fiber scheduling, ideal for structured development of medium to large frontend systems",
         "highlights": [
-          "Composable UI for medium and large apps",
-          "Strong ecosystem for routing and state management"
+          "Build composable, reusable UI abstraction layers based on component models",
+          "Fiber architecture supports task splitting and priority scheduling, enhancing rendering performance and responsiveness",
+          "Mature ecosystem (routing, state management, SSR), suitable for engineering system construction"
         ]
       },
       "vue": {
         "name": "Vue",
-        "focus": "Progressive development",
-        "description": "Delivers rapid implementation with clean templates, reactive APIs, and mature tooling.",
+        "focus": "Reactive System & Progressive Architecture",
+        "description": "Through reactive data-driven view updates, combined with template syntax and Composition API, Vue balances development efficiency with system maintainability, suitable for progressive construction from simple pages to complex applications",
         "highlights": [
-          "Easy adoption from small pages to full systems",
-          "Great single-file component workflow"
+          "Reactive dependency tracking mechanism for fine-grained updates and intuitive data flow",
+          "Single File Components (SFC) enhance development consistency and module cohesion",
+          "Unified ecosystem (Vue Router / Pinia), ideal for rapid delivery and team collaboration"
         ]
       },
       "javascript": {
         "name": "JavaScript",
-        "focus": "Language fundamentals",
-        "description": "Core runtime language for web applications, interaction logic, and platform APIs.",
+        "focus": "Runtime Mechanisms & Language Model",
+        "description": "As the core language of the Web platform, JavaScript covers event loops, prototype inheritance, closures, and asynchronous programming models, serving as the foundation for understanding browser runtime mechanisms and building complex interactive systems",
         "highlights": [
-          "Essential for browser and Node.js development",
-          "Flexible syntax for diverse application scenarios"
+          "Single-threaded concurrency model driven by Event Loop",
+          "Coexistence of functional and object-oriented paradigms, supporting flexible abstractions",
+          "Unified language foundation spanning frontend, server-side (Node.js), and build toolchains"
         ]
       },
       "frontendEngineering": {
         "name": "Frontend Engineering",
-        "focus": "Build & Tooling",
-        "description": "Modern build tools like Vite and Webpack to improve development efficiency and maintainability.",
+        "focus": "Build Systems & Engineering Abstraction",
+        "description": "Centered on modularization, build optimization, and development process automation, establishing a stable and efficient frontend engineering system to address code organization, performance optimization, and team collaboration challenges",
         "highlights": [
-          "Vite offers instant HMR for smooth DX",
-          "Webpack has mature ecosystem and flexible bundling"
+          "Module bundling and build optimization based on Vite / Webpack (Code Splitting / Tree Shaking)",
+          "Unified code standards (Lint / Format) and quality assurance (Testing / CI/CD)",
+          "Engineering implementation capabilities supporting Monorepo, Micro-frontend, and other complex architectures"
         ]
       },
       "nodejs": {
         "name": "Node.js",
-        "focus": "Tooling runtime",
-        "description": "Powers frontend tooling, API services, and automation scripts with an event-driven runtime.",
+        "focus": "Server Runtime & Tooling Ecosystem",
+        "description": "A server-side runtime based on event-driven and non-blocking I/O, Node.js not only supports backend service development but also serves as the core foundation for frontend build toolchains and automation processes",
         "highlights": [
-          "Shared JavaScript language across stack",
-          "Rich package ecosystem for engineering tasks"
+          "Event-driven + async I/O model, suitable for high-concurrency scenarios",
+          "Indispensable as frontend toolchain runtime (build, scaffolding, CLI)",
+          "Rich ecosystem (npm), supporting full-stack development from script tools to server applications"
         ]
       }
     }
