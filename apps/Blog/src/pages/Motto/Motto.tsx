@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
@@ -42,7 +42,7 @@ const waves = [
   },
 ];
 
-const Motto: React.FC = () => {
+function Motto() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -116,60 +116,34 @@ const Motto: React.FC = () => {
 
       <motion.div
         className={styles.quoteStack}
-        initial={{ opacity: 0, y: 14 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-        transition={{ duration: 0.55 }}
+        initial={{ opacity: 0 }}
+        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.3 }}
       >
         {quoteLines.map((line, index) => (
-          <motion.p
+          <motion.div
             key={`${line}-${index}`}
-            initial={{
-              opacity: 0,
-              y: 24,
-              filter: 'blur(10px)',
-              clipPath: 'inset(0 0 100% 0 round 10px)',
-            }}
+            className={styles.quoteLineWrapper}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={
               isVisible
-                ? {
-                    opacity: 1,
-                    y: 0,
-                    filter: 'blur(0px)',
-                    clipPath: 'inset(0 0 0% 0 round 10px)',
-                  }
-                : {
-                    opacity: 0,
-                    y: 24,
-                    filter: 'blur(10px)',
-                    clipPath: 'inset(0 0 100% 0 round 10px)',
-                  }
+                ? { opacity: 1, y: 0, scale: 1 }
+                : { opacity: 0, y: 30, scale: 0.95 }
             }
-            transition={{ duration: 0.86, delay: 0.14 + index * 0.2 }}
-            className={`${styles.quoteLine} ${index === 0 ? styles.primaryLine : ''}`}
+            transition={{
+              duration: 0.8,
+              delay: 0.1 + index * 0.15,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
           >
-            {Array.from(line).map((char, charIndex) => (
-              <motion.span
-                key={`${char}-${charIndex}`}
-                className={styles.quoteChar}
-                initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
-                animate={
-                  isVisible
-                    ? { opacity: 1, y: 0, filter: 'blur(0px)' }
-                    : { opacity: 0, y: 16, filter: 'blur(8px)' }
-                }
-                transition={{
-                  duration: 0.58,
-                  delay: 0.2 + index * 0.2 + charIndex * 0.028,
-                }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
-          </motion.p>
+            <p className={`${styles.quoteLine} ${index === 0 ? styles.primaryLine : ''}`}>
+              {line}
+            </p>
+          </motion.div>
         ))}
       </motion.div>
     </section>
   );
-};
+}
 
 export default Motto;
