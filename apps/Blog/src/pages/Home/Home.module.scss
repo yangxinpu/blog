@@ -110,7 +110,9 @@
   border-radius: 20px;
   background: color-mix(in srgb, var(--bg) 84%, transparent);
   backdrop-filter: blur(12px);
-  box-shadow: var(--shadow);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.08);
   --mouse-x: 0px;
   --mouse-y: 0px;
   --light-radius: 200px;
