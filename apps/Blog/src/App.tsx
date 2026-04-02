@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import Loading from '@blog/ui';
 import logoImage from './assets/Images/logo.png';
 
-const MainContent = lazy(() => import('./components/MainContent/MainContent'));
+const MainContent = lazy(() => import('./Layout/MainContent/MainContent'));
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {

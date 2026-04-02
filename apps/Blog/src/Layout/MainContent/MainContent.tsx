@@ -1,20 +1,19 @@
-import { useState, useCallback, useEffect, lazy, Suspense } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Message } from '../index';
+import { Message } from '../../components/index';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Home from '../../pages/Home/Home';
+import Motto from '../../pages/Motto/Motto';
+import Thoughts from '../../pages/Thoughts/Thoughts';
+import TextAnimation from '../../pages/TextAnimation/TextAnimation';
+import AuroraRisePage from '../../pages/AuroraRisePage/AuroraRisePage';
+import NeonSprintPage from '../../pages/NeonSprintPage/NeonSprintPage';
 import styles from './MainContent.module.scss';
 
 const personMeta = {
   email: '1813481502@qq.com',
 };
-
-const Header = lazy(() => import('../Header/Header'));
-const Footer = lazy(() => import('../Footer/Footer'));
-const Home = lazy(() => import('../../pages/Home/Home'));
-const Motto = lazy(() => import('../../pages/Motto/Motto'));
-const Thoughts = lazy(() => import('../../pages/Thoughts/Thoughts'));
-const TextAnimation = lazy(() => import('../../pages/TextAnimation/TextAnimation'));
-const AuroraRisePage = lazy(() => import('../../pages/AuroraRisePage/AuroraRisePage'));
-const NeonSprintPage = lazy(() => import('../../pages/NeonSprintPage/NeonSprintPage'));
 
 interface MainContentProps {
   theme: 'light' | 'dark';
@@ -87,42 +86,24 @@ function MainContent({ theme, toggleTheme }: MainContentProps) {
       )}
 
       {showHeaderFooter && (
-        <Suspense fallback={null}>
-          <Header
-            theme={theme}
-            toggleTheme={toggleTheme}
-            changeLanguage={changeLanguage}
-            scrollToSection={scrollToSection}
-          />
-        </Suspense>
+        <Header
+          theme={theme}
+          toggleTheme={toggleTheme}
+          changeLanguage={changeLanguage}
+          scrollToSection={scrollToSection}
+        />
       )}
 
       <main className={styles.main}>
-        <Suspense fallback={null}>
-          <Home />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Motto />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Thoughts />
-        </Suspense>
-        <Suspense fallback={null}>
-          <TextAnimation />
-        </Suspense>
-        <Suspense fallback={null}>
-          <AuroraRisePage />
-        </Suspense>
-        <Suspense fallback={null}>
-          <NeonSprintPage />
-        </Suspense>
+        <Home />
+        <Motto />
+        <Thoughts />
+        <TextAnimation />
+        <AuroraRisePage />
+        <NeonSprintPage />
       </main>
 
-      {showHeaderFooter && (
-        <Suspense fallback={null}>
-          <Footer onCopyEmail={copyEmail} />
-        </Suspense>
-      )}
+      {showHeaderFooter && <Footer onCopyEmail={copyEmail} />}
     </div>
   );
 }

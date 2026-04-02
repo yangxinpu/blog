@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Moon, Sun } from 'lucide-react';
-import { Dropdown } from '../index';
+import { Dropdown } from '../../components/index';
 import styles from './Header.module.scss';
 import logoImage from '../../assets/Images/logo.png';
 

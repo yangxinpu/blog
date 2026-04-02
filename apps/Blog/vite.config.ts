@@ -1,13 +1,16 @@
 import { defineConfig } from 'vite';
-import react, { reactCompilerPreset } from '@vitejs/plugin-react';
-import babel from '@rolldown/plugin-babel';
+import react from '@vitejs/plugin-react';
 import path from 'path';
 
 const base = process.env.VITE_BASE_URL || '/';
 
 export default defineConfig({
   base,
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+  plugins: [
+    react({
+      include: '**/*.{jsx,tsx}',
+    }),
+  ],
   resolve: {
     alias: {
       '@blog/ui': path.resolve(__dirname, '../../packages/ui'),
@@ -16,5 +19,8 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+  },
+  build: {
+    cssCodeSplit: true,
   },
 });
