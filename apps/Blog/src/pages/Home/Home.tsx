@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
 import avatarImage from '../../assets/Images/cat.webp';
+import { FloatingLines } from '../../components/index';
 
 type TechKey =
   | 'react'
@@ -88,7 +89,6 @@ const BORDER_LIGHT_RADIUS = 300;
 
 function Home() {
   const { t } = useTranslation();
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') === 'dark'
@@ -101,6 +101,14 @@ function Home() {
   const cardsDataRef = useRef<Map<string, { rect: DOMRect; element: HTMLElement }>>(
     new Map()
   );
+
+  const themeGradientColors = [
+    '#d3fff3',
+    '#97fce4',
+    '#19fac6',
+    '#13d6aa',
+    '#0ea387',
+  ];
 
   const updateCardLightPositions = useCallback(() => {
     if (!gridRef.current) return;
@@ -203,111 +211,6 @@ function Home() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let animationId = 0;
-
-    const accent =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--accent')
-        .trim() || '#00d5c4';
-    const mouse = { x: width / 2, y: height / 2 };
-
-    canvas.width = width;
-    canvas.height = height;
-
-    const handleMouseMove = (event: MouseEvent) => {
-      mouse.x = event.clientX;
-      mouse.y = event.clientY;
-    };
-
-    const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', handleResize);
-
-    const particles: { x: number; y: number; vx: number; vy: number }[] = [];
-    const particleCount = 300;
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-      });
-    }
-
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      particles.forEach((particle) => {
-        const dx = mouse.x - particle.x;
-        const dy = mouse.y - particle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 140) {
-          particle.x -= dx * 0.006;
-          particle.y -= dy * 0.006;
-        }
-
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x < 0 || particle.x > width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > height) particle.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, 1.7, 0, Math.PI * 2);
-        ctx.fillStyle = accent;
-        ctx.globalAlpha = isDark ? 0.45 : 0.3;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      });
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = accent;
-            ctx.globalAlpha = Math.max(0, 0.45 - distance / 220);
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            ctx.globalAlpha = 1;
-          }
-        }
-      }
-
-      animationId = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [isDark]);
-
   const profileTags = t('homePage.profile.tags', {
     returnObjects: true,
   }) as unknown as string[];
@@ -344,7 +247,17 @@ function Home() {
 
   return (
     <div id="home" className={styles.home}>
-      <canvas ref={canvasRef} className={styles.canvas} />
+      <div className={styles.floatingLinesBackground}>
+        <FloatingLines
+          linesGradient={themeGradientColors}
+          enabledWaves={['top', 'middle', 'bottom']}
+          lineCount={[4, 6, 3]}
+          lineDistance={[4, 3, 5]}
+          animationSpeed={0.6}
+          mixBlendMode="screen"
+          isDark={isDark}
+        />
+      </div>
 
       <motion.div
         className={styles.hero}
