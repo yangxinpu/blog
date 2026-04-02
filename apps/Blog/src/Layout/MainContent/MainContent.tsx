@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Message } from '../../components/index';
 import Header from '../Header/Header';
@@ -11,9 +11,9 @@ import AuroraRisePage from '../../pages/AuroraRisePage/AuroraRisePage';
 import NeonSprintPage from '../../pages/NeonSprintPage/NeonSprintPage';
 import styles from './MainContent.module.scss';
 
-const personMeta = {
-  email: '1813481502@qq.com',
-};
+const PERSON_EMAIL = '1813481502@qq.com';
+
+type MessageType = 'success' | 'error' | 'warning' | 'info';
 
 interface MainContentProps {
   theme: 'light' | 'dark';
@@ -22,21 +22,11 @@ interface MainContentProps {
 
 function MainContent({ theme, toggleTheme }: MainContentProps) {
   const { t, i18n } = useTranslation();
-
-  const [showHeaderFooter, setShowHeaderFooter] = useState(false);
-
-  const [message, setMessage] = useState({
-    visible: false,
-    type: 'success' as 'success' | 'error' | 'warning' | 'info',
-    text: '',
-  });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowHeaderFooter(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+  const [message, setMessage] = useState<{
+    visible: boolean;
+    type: MessageType;
+    text: string;
+  }>({ visible: false, type: 'success', text: '' });
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -44,33 +34,19 @@ function MainContent({ theme, toggleTheme }: MainContentProps) {
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const copyEmail = useCallback(() => {
     navigator.clipboard
-      .writeText(personMeta.email)
+      .writeText(PERSON_EMAIL)
       .then(() => {
-        setMessage({
-          visible: true,
-          type: 'success',
-          text: t('footer.emailCopied'),
-        });
-        setTimeout(() => {
-          setMessage((prev) => ({ ...prev, visible: false }));
-        }, 3000);
+        setMessage({ visible: true, type: 'success', text: t('footer.emailCopied') });
+        setTimeout(() => setMessage((prev) => ({ ...prev, visible: false })), 3000);
       })
       .catch(() => {
-        setMessage({
-          visible: true,
-          type: 'error',
-          text: t('footer.emailCopyFailed'),
-        });
-        setTimeout(() => {
-          setMessage((prev) => ({ ...prev, visible: false }));
-        }, 3000);
+        setMessage({ visible: true, type: 'error', text: t('footer.emailCopyFailed') });
+        setTimeout(() => setMessage((prev) => ({ ...prev, visible: false })), 3000);
       });
   }, [t]);
 
@@ -85,14 +61,12 @@ function MainContent({ theme, toggleTheme }: MainContentProps) {
         />
       )}
 
-      {showHeaderFooter && (
-        <Header
-          theme={theme}
-          toggleTheme={toggleTheme}
-          changeLanguage={changeLanguage}
-          scrollToSection={scrollToSection}
-        />
-      )}
+      <Header
+        theme={theme}
+        toggleTheme={toggleTheme}
+        changeLanguage={changeLanguage}
+        scrollToSection={scrollToSection}
+      />
 
       <main className={styles.main}>
         <Home />
@@ -103,7 +77,7 @@ function MainContent({ theme, toggleTheme }: MainContentProps) {
         <NeonSprintPage />
       </main>
 
-      {showHeaderFooter && <Footer onCopyEmail={copyEmail} />}
+      <Footer onCopyEmail={copyEmail} />
     </div>
   );
 }
