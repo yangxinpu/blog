@@ -1,15 +1,41 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import MagicRingsBackground from '../../components/MagicRingsBackground/MagicRingsBackground';
+import FlowingLinesBackground from '../../components/FlowingLinesBackground/FlowingLinesBackground';
 import styles from './AuroraRisePage.module.scss';
 
 function AuroraRisePage() {
   const { i18n } = useTranslation();
   const isZh = i18n.language === 'zh-CN';
+  const [isDark, setIsDark] = useState(
+    () => document.documentElement.getAttribute('data-theme') === 'dark'
+  );
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const observer = new MutationObserver(() => {
+      setIsDark(root.getAttribute('data-theme') === 'dark');
+    });
+
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className={styles.section}>
-      <MagicRingsBackground />
+      <FlowingLinesBackground
+        primaryColor="#19fac6"
+        secondaryColor="#13d6aa"
+        accentColor="#0ea387"
+        speed={0.08}
+        glowIntensity={0.25}
+        isDark={isDark}
+      />
 
       <div className={styles.inner}>
         <motion.h2
