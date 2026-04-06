@@ -385,7 +385,7 @@ function Home() {
             <motion.article
               key={card.key}
               data-card-id={card.key}
-              className={`${styles.techCard} ${getCardLightClass(card.key)}`}
+              className={`${styles.techCard} ${styles[`techCard${index + 1}`]} ${getCardLightClass(card.key)}`}
               initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
