@@ -74,19 +74,19 @@ const orbitCount = {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: linear-gradient(180deg, #0d0d1a 0%, #0a0a15 50%, #0d0d1a 100%);
+    background: linear-gradient(180deg, #1c2433 0%, #151c28 50%, #1c2433 100%);
   }
 
   .gradient-base {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(25, 250, 198, 0.05) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(100, 120, 180, 0.03) 0%, transparent 60%);
   }
 
   .nebula {
     position: absolute;
     inset: 0;
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   .nebula-layer {
@@ -98,17 +98,17 @@ const orbitCount = {
   }
 
   .nebula-1 {
-    background: radial-gradient(ellipse at 30% 40%, rgba(25, 250, 198, 0.15), transparent 50%);
+    background: radial-gradient(ellipse at 30% 40%, rgba(100, 110, 140, 0.12), transparent 50%);
     animation-delay: 0s;
   }
 
   .nebula-2 {
-    background: radial-gradient(ellipse at 70% 60%, rgba(151, 252, 228, 0.1), transparent 50%);
+    background: radial-gradient(ellipse at 70% 60%, rgba(90, 100, 130, 0.1), transparent 50%);
     animation-delay: -20s;
   }
 
   .nebula-3 {
-    background: radial-gradient(ellipse at 50% 50%, rgba(25, 250, 198, 0.08), transparent 50%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(110, 120, 150, 0.08), transparent 50%);
     animation-delay: -40s;
   }
 
@@ -152,7 +152,7 @@ const orbitCount = {
     left: 50%;
     width: var(--size);
     height: var(--size);
-    border: 1px solid rgba(25, 250, 198, 0.2);
+    border: 1px solid rgba(140, 150, 180, 0.2);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: orbitRotate 10s linear var(--delay) infinite;
@@ -166,7 +166,7 @@ const orbitCount = {
     transform: translateX(-50%);
     width: 6px;
     height: 6px;
-    background: radial-gradient(circle, rgba(25, 250, 198, 0.8), transparent);
+    background: radial-gradient(circle, rgba(180, 190, 220, 0.9), transparent);
     border-radius: 50%;
   }
 
@@ -185,7 +185,7 @@ const orbitCount = {
   .nucleus {
     width: 12px;
     height: 12px;
-    background: radial-gradient(circle, rgba(25, 250, 198, 0.8), rgba(151, 252, 228, 0.4));
+    background: radial-gradient(circle, rgba(200, 210, 240, 0.9), rgba(150, 160, 190, 0.5));
     border-radius: 50%;
     animation: nucleusPulse 2s ease-in-out infinite;
   }
@@ -206,7 +206,7 @@ const orbitCount = {
     top: 0;
     width: 100px;
     height: 1px;
-    background: linear-gradient(90deg, rgba(25, 250, 198, 0.8), transparent);
+    background: linear-gradient(90deg, rgba(200, 210, 240, 0.9), transparent);
     transform: rotate(45deg);
     animation: shootingStarMove 8s ease-out var(--delay) infinite;
   }
