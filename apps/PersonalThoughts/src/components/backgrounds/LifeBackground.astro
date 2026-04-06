@@ -1,0 +1,209 @@
+---
+export interface Props {
+  intensity?: 'low' | 'medium' | 'high';
+}
+
+const { intensity = 'medium' } = Astro.props;
+
+const cellCount = {
+  low: 8,
+  medium: 15,
+  high: 25,
+};
+---
+
+<div class="life-background">
+  <div class="gradient-base"></div>
+  <div class="dna-helix">
+    {Array.from({ length: 20 }).map((_, i) => (
+      <div
+        class="dna-pair"
+        style={{
+          '--delay': `${i * 0.3}s`,
+          '--y': `${i * 5}%`,
+        }}
+      >
+        <div class="dna-strand strand-a"></div>
+        <div class="dna-bridge"></div>
+        <div class="dna-strand strand-b"></div>
+      </div>
+    ))}
+  </div>
+  <div class="cells-container">
+    {Array.from({ length: cellCount[intensity] }).map((_, i) => (
+      <div
+        class="cell"
+        style={{
+          '--delay': `${Math.random() * 10}s`,
+          '--duration': `${15 + Math.random() * 10}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--size': `${30 + Math.random() * 40}px`,
+        }}
+      >
+        <div class="cell-nucleus"></div>
+        <div class="cell-membrane"></div>
+      </div>
+    ))}
+  </div>
+  <div class="particles-flow">
+    {Array.from({ length: 40 }).map((_, i) => (
+      <div
+        class="flow-particle"
+        style={{
+          '--delay': `${Math.random() * 8}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--y': `${Math.random() * 100}%`,
+        }}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .life-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #FDF2E9 0%, #F5EEF8 30%, #D5F5E3 60%, #FADBD8 100%);
+  }
+
+  .gradient-base {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(155, 89, 182, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(231, 76, 60, 0.2) 0%, transparent 50%);
+    animation: breathe 8s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .dna-helix {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100%;
+    opacity: 0.3;
+  }
+
+  .dna-pair {
+    position: absolute;
+    top: var(--y);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    animation: rotateHelix 4s linear var(--delay) infinite;
+  }
+
+  @keyframes rotateHelix {
+    0% { transform: translateX(-50%) rotateY(0deg); }
+    100% { transform: translateX(-50%) rotateY(360deg); }
+  }
+
+  .dna-strand {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
+
+  .strand-a {
+    background: linear-gradient(135deg, #9B59B6, #8E44AD);
+    box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+  }
+
+  .strand-b {
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+  }
+
+  .dna-bridge {
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, #9B59B6, #E74C3C);
+    border-radius: 2px;
+  }
+
+  .cells-container {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cell {
+    position: absolute;
+    left: var(--x);
+    top: -60px;
+    width: var(--size);
+    height: var(--size);
+    animation: cellFloat var(--duration) linear var(--delay) infinite;
+  }
+
+  @keyframes cellFloat {
+    0% {
+      transform: translateY(-60px) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .cell-membrane {
+    position: absolute;
+    inset: 0;
+    border: 3px solid rgba(155, 89, 182, 0.4);
+    border-radius: 50%;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .cell-nucleus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(circle, rgba(231, 76, 60, 0.6), transparent);
+    border-radius: 50%;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .particles-flow {
+    position: absolute;
+    inset: 0;
+  }
+
+  .flow-particle {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 4px;
+    height: 4px;
+    background: rgba(155, 89, 182, 0.5);
+    border-radius: 50%;
+    animation: flowMove 6s ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes flowMove {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(30px, -30px);
+      opacity: 0.8;
+    }
+  }
+</style>

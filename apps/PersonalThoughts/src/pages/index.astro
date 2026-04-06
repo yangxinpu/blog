@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WarmBackground from '../components/backgrounds/WarmBackground.astro';
+import IntenseBackground from '../components/backgrounds/IntenseBackground.astro';
+import NatureBackground from '../components/backgrounds/NatureBackground.astro';
+import LifeBackground from '../components/backgrounds/LifeBackground.astro';
+import ResilienceBackground from '../components/backgrounds/ResilienceBackground.astro';
+import TechBackground from '../components/backgrounds/TechBackground.astro';
+import ScienceBackground from '../components/backgrounds/ScienceBackground.astro';
+
+const themes = [
+  { id: 'warm', name: '温馨', desc: '温暖的阳光，柔和的光芒', color: '#FF6B6B' },
+  { id: 'intense', name: '激烈', desc: '燃烧的激情，迸发的能量', color: '#FF2E63' },
+  { id: 'nature', name: '自然', desc: '翠绿的森林，飘落的树叶', color: '#2ECC71' },
+  { id: 'life', name: '生命', desc: 'DNA的螺旋，细胞的律动', color: '#9B59B6' },
+  { id: 'resilience', name: '坚韧', desc: '岩石的纹理，不屈的力量', color: '#34495E' },
+  { id: 'tech', name: '技术', desc: '代码的矩阵，数据的流动', color: '#00D9FF' },
+  { id: 'science', name: '科学', desc: '浩瀚的星空，原子的轨迹', color: '#7C4DFF' },
+];
+---
+
+<BaseLayout title="思想集 - 个人感想">
+  <WarmBackground slot="background" />
+  
+  <div class="hero">
+    <h1 class="title">思想集</h1>
+    <p class="subtitle">记录生活中的点滴感悟，探索思想的无限可能</p>
+  </div>
+  
+  <div class="themes-grid">
+    {themes.map((theme) => (
+      <a href={`/${theme.id}`} class="theme-card" style={`--theme-color: ${theme.color}`}>
+        <div class="theme-icon"></div>
+        <h3 class="theme-name">{theme.name}</h3>
+        <p class="theme-desc">{theme.desc}</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.5)); }
+    50% { filter: drop-shadow(0 0 40px rgba(255, 230, 109, 0.8)); }
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .theme-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--theme-color), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .theme-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-color: var(--theme-color);
+  }
+
+  .theme-card:hover::before {
+    opacity: 0.1;
+  }
+
+  .theme-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--theme-color);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .theme-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .theme-desc {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.5rem;
+    }
+
+    .themes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,170 @@
+---
+export interface Props {
+  intensity?: 'low' | 'medium' | 'high';
+}
+
+const { intensity = 'medium' } = Astro.props;
+
+const lightningCount = {
+  low: 3,
+  medium: 6,
+  high: 10,
+};
+---
+
+<div class="intense-background">
+  <div class="dark-gradient"></div>
+  <div class="energy-waves">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <div
+        class="wave"
+        style={{
+          '--delay': `${i * 2}s`,
+          '--size': `${100 + i * 20}%`,
+        }}
+      />
+    ))}
+  </div>
+  <div class="lightning-container">
+    {Array.from({ length: lightningCount[intensity] }).map((_, i) => (
+      <svg
+        class="lightning"
+        style={{
+          '--delay': `${Math.random() * 8}s`,
+          '--x': `${10 + Math.random() * 80}%`,
+        }}
+        viewBox="0 0 100 200"
+      >
+        <path
+          d="M50 0 L45 60 L60 65 L40 130 L55 135 L30 200"
+          stroke="url(#lightning-gradient)"
+          stroke-width="3"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <defs>
+          <linearGradient id="lightning-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF2E63" />
+            <stop offset="50%" stop-color="#08D9D6" />
+            <stop offset="100%" stop-color="#FF2E63" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ))}
+  </div>
+  <div class="particles">
+    {Array.from({ length: 30 }).map((_, i) => (
+      <div
+        class="particle"
+        style={{
+          '--delay': `${Math.random() * 5}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--duration': `${3 + Math.random() * 4}s`,
+        }}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .intense-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+  }
+
+  .dark-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 46, 99, 0.15) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .energy-waves {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wave {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border: 2px solid rgba(8, 217, 214, 0.3);
+    border-radius: 50%;
+    animation: waveExpand 8s ease-out var(--delay) infinite;
+  }
+
+  @keyframes waveExpand {
+    0% {
+      transform: scale(0.5);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  .lightning-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .lightning {
+    position: absolute;
+    left: var(--x);
+    top: 0;
+    width: 60px;
+    height: 200px;
+    opacity: 0;
+    filter: drop-shadow(0 0 10px #08D9D6) drop-shadow(0 0 20px #FF2E63);
+    animation: lightningFlash 10s ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes lightningFlash {
+    0%, 100% { opacity: 0; }
+    5% { opacity: 1; }
+    10% { opacity: 0.3; }
+    15% { opacity: 1; }
+    20% { opacity: 0; }
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+  }
+
+  .particle {
+    position: absolute;
+    left: var(--x);
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    background: #FF2E63;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FF2E63, 0 0 20px #08D9D6;
+    animation: rise var(--duration) linear var(--delay) infinite;
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) scale(0);
+      opacity: 0;
+    }
+  }
+</style>

@@ -1,0 +1,164 @@
+---
+interface Props {
+  title: string;
+  theme?: 'warm' | 'intense' | 'nature' | 'life' | 'resilience' | 'tech' | 'science';
+}
+
+const { title, theme = 'warm' } = Astro.props;
+
+const themeColors = {
+  warm: { primary: '#FF6B6B', secondary: '#FFE66D', bg: '#FFF5F5' },
+  intense: { primary: '#FF2E63', secondary: '#08D9D6', bg: '#1A1A2E' },
+  nature: { primary: '#2ECC71', secondary: '#27AE60', bg: '#F0FFF0' },
+  life: { primary: '#9B59B6', secondary: '#E74C3C', bg: '#FDF2E9' },
+  resilience: { primary: '#34495E', secondary: '#95A5A6', bg: '#2C3E50' },
+  tech: { primary: '#00D9FF', secondary: '#0D47A1', bg: '#0A192F' },
+  science: { primary: '#7C4DFF', secondary: '#64FFDA', bg: '#0D0D1A' },
+};
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="个人感想 - 思想的栖息地" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body data-theme={theme}>
+    <div class="background-container">
+      <slot name="background" />
+    </div>
+    <nav class="nav">
+      <a href="/" class="logo">思想集</a>
+      <div class="nav-links">
+        <a href="/warm">温馨</a>
+        <a href="/intense">激烈</a>
+        <a href="/nature">自然</a>
+        <a href="/life">生命</a>
+        <a href="/resilience">坚韧</a>
+        <a href="/tech">技术</a>
+        <a href="/science">科学</a>
+      </div>
+    </nav>
+    <main class="main">
+      <slot />
+    </main>
+    <footer class="footer">
+      <p>© 2024 个人感想集 · 思想的栖息地</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    color: #333;
+  }
+
+  body[data-theme='warm'] { color: #4A4A4A; }
+  body[data-theme='intense'] { color: #E0E0E0; }
+  body[data-theme='nature'] { color: #2C3E50; }
+  body[data-theme='life'] { color: #5D4E37; }
+  body[data-theme='resilience'] { color: #ECF0F1; }
+  body[data-theme='tech'] { color: #E6F1FF; }
+  body[data-theme='science'] { color: #E0E0E0; }
+</style>
+
+<style>
+  .background-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    font-size: 0.95rem;
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+  }
+
+  .main {
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    opacity: 0.7;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .main {
+      padding: 8rem 1rem 2rem;
+    }
+  }
+</style>

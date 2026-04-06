@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResilienceBackground from '../components/backgrounds/ResilienceBackground.astro';
+
+const thoughts = [
+  {
+    date: '2024年4月5日',
+    title: '岩石的沉默',
+    content: '岩石不言，却承受着风雨的洗礼。真正的坚韧，不是大声呐喊，而是默默承受，在沉默中积蓄力量。时间会证明一切。'
+  },
+  {
+    date: '2024年3月10日',
+    title: '裂缝中的光',
+    content: '生活总会给我们留下伤痕，但正是这些裂缝，让光得以照进。坚韧不是没有伤痛，而是带着伤痛依然前行。'
+  },
+  {
+    date: '2024年2月5日',
+    title: '不屈的灵魂',
+    content: '高山之巅的松树，在风雪中傲然挺立。它告诉我们，坚韧是一种选择，是对生命最深沉的热爱与尊重。'
+  }
+];
+---
+
+<BaseLayout title="坚韧 - 思想集" theme="resilience">
+  <ResilienceBackground slot="background" />
+  
+  <div class="theme-header">
+    <h1 class="theme-title">坚韧</h1>
+    <p class="theme-subtitle">岩石的纹理，不屈的力量，见证生命最坚韧的姿态</p>
+  </div>
+  
+  <div class="thoughts-container">
+    {thoughts.map((thought) => (
+      <article class="thought-card">
+        <time class="thought-date">{thought.date}</time>
+        <h2 class="thought-title">{thought.title}</h2>
+        <p class="thought-content">{thought.content}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .theme-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .theme-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ECF0F1, #95A5A6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .theme-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .thoughts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .thought-card {
+    background: rgba(44, 62, 80, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(149, 165, 166, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .thought-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(149, 165, 166, 0.2);
+  }
+
+  .thought-date {
+    font-size: 0.875rem;
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .thought-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ECF0F1;
+  }
+
+  .thought-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+</style>

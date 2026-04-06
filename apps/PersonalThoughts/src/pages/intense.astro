@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IntenseBackground from '../components/backgrounds/IntenseBackground.astro';
+
+const thoughts = [
+  {
+    date: '2024年3月20日',
+    title: '燃烧的斗志',
+    content: '当挑战来临时，内心的火焰开始燃烧。不是所有的战斗都需要胜利，但每一场战斗都值得全力以赴。激情，是生命最绚烂的色彩。'
+  },
+  {
+    date: '2024年2月28日',
+    title: '突破极限',
+    content: '站在悬崖边缘，才知道自己能飞多高。极限不是终点，而是新的起点。每一次突破，都是对自我的重新定义。'
+  },
+  {
+    date: '2024年1月15日',
+    title: '逆风而行',
+    content: '风暴中前行，每一步都是对意志的考验。但正是这些逆风的时刻，塑造了最坚韧的灵魂。不畏惧，不退缩。'
+  }
+];
+---
+
+<BaseLayout title="激烈 - 思想集" theme="intense">
+  <IntenseBackground slot="background" />
+  
+  <div class="theme-header">
+    <h1 class="theme-title">激烈</h1>
+    <p class="theme-subtitle">燃烧的激情，迸发的能量，记录那些激荡心灵的时刻</p>
+  </div>
+  
+  <div class="thoughts-container">
+    {thoughts.map((thought) => (
+      <article class="thought-card">
+        <time class="thought-date">{thought.date}</time>
+        <h2 class="thought-title">{thought.title}</h2>
+        <p class="thought-content">{thought.content}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .theme-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .theme-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #FF2E63, #08D9D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(255, 46, 99, 0.5);
+  }
+
+  .theme-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .thoughts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .thought-card {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 46, 99, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .thought-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(255, 46, 99, 0.3);
+    border-color: rgba(255, 46, 99, 0.6);
+  }
+
+  .thought-date {
+    font-size: 0.875rem;
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .thought-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #FF2E63, #08D9D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .thought-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+</style>

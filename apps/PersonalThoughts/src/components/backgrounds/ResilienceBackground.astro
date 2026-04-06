@@ -1,0 +1,186 @@
+---
+export interface Props {
+  intensity?: 'low' | 'medium' | 'high';
+}
+
+const { intensity = 'medium' } = Astro.props;
+
+const crackCount = {
+  low: 5,
+  medium: 10,
+  high: 18,
+};
+---
+
+<div class="resilience-background">
+  <div class="stone-texture"></div>
+  <div class="mountain-silhouette"></div>
+  <div class="cracks-container">
+    {Array.from({ length: crackCount[intensity] }).map((_, i) => (
+      <svg
+        class="crack"
+        style={{
+          '--delay': `${Math.random() * 5}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--y': `${Math.random() * 100}%`,
+          '--rotation': `${Math.random() * 360}deg`,
+        }}
+        viewBox="0 0 100 100"
+      >
+        <path
+          d={`M50 50 L${30 + Math.random() * 20} ${20 + Math.random() * 20} L${40 + Math.random() * 20} ${10 + Math.random() * 20} L${50 + Math.random() * 20} ${30 + Math.random() * 20}`}
+          stroke="rgba(149, 165, 166, 0.6)"
+          stroke-width="2"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <path
+          d={`M50 50 L${60 + Math.random() * 20} ${70 + Math.random() * 20} L${70 + Math.random() * 20} ${80 + Math.random() * 20}`}
+          stroke="rgba(149, 165, 166, 0.4)"
+          stroke-width="1.5"
+          fill="none"
+          stroke-linecap="round"
+        />
+      </svg>
+    ))}
+  </div>
+  <div class="light-rays">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <div
+        class="ray"
+        style={{
+          '--delay': `${i * 0.5}s`,
+          '--rotation': `${i * 45}deg`,
+        }}
+      />
+    ))}
+  </div>
+  <div class="dust-particles">
+    {Array.from({ length: 30 }).map((_, i) => (
+      <div
+        class="dust"
+        style={{
+          '--delay': `${Math.random() * 10}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--y': `${Math.random() * 100}%`,
+          '--duration': `${8 + Math.random() * 8}s`,
+        }}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .resilience-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(180deg, #2C3E50 0%, #34495E 50%, #1A252F 100%);
+  }
+
+  .stone-texture {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(52, 73, 94, 0.8) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(44, 62, 80, 0.8) 0%, transparent 50%);
+    opacity: 0.5;
+  }
+
+  .mountain-silhouette {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, transparent 0%, rgba(26, 37, 47, 0.8) 100%);
+    clip-path: polygon(
+      0% 100%,
+      10% 70%,
+      20% 85%,
+      30% 60%,
+      40% 75%,
+      50% 50%,
+      60% 70%,
+      70% 55%,
+      80% 80%,
+      90% 65%,
+      100% 100%
+    );
+  }
+
+  .cracks-container {
+    position: absolute;
+    inset: 0;
+  }
+
+  .crack {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 80px;
+    height: 80px;
+    transform: rotate(var(--rotation));
+    opacity: 0;
+    animation: crackAppear 8s ease-out var(--delay) infinite;
+  }
+
+  @keyframes crackAppear {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+  }
+
+  .light-rays {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+  }
+
+  .ray {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(236, 240, 241, 0.8), transparent);
+    transform-origin: top center;
+    transform: rotate(var(--rotation));
+    animation: rayPulse 4s ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes rayPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+
+  .dust-particles {
+    position: absolute;
+    inset: 0;
+  }
+
+  .dust {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 3px;
+    height: 3px;
+    background: rgba(236, 240, 241, 0.4);
+    border-radius: 50%;
+    animation: dustFloat var(--duration) ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes dustFloat {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0.2;
+    }
+    50% {
+      transform: translate(20px, -40px);
+      opacity: 0.6;
+    }
+  }
+</style>

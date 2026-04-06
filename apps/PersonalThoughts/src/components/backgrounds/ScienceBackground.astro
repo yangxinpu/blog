@@ -1,0 +1,279 @@
+---
+export interface Props {
+  intensity?: 'low' | 'medium' | 'high';
+}
+
+const { intensity = 'medium' } = Astro.props;
+
+const starCount = {
+  low: 50,
+  medium: 150,
+  high: 300,
+};
+---
+
+<div class="science-background">
+  <div class="deep-space"></div>
+  <div class="nebula">
+    <div class="nebula-cloud cloud-1"></div>
+    <div class="nebula-cloud cloud-2"></div>
+    <div class="nebula-cloud cloud-3"></div>
+  </div>
+  <div class="stars-container">
+    {Array.from({ length: starCount[intensity] }).map((_, i) => (
+      <div
+        class="star"
+        style={{
+          '--delay': `${Math.random() * 5}s`,
+          '--duration': `${2 + Math.random() * 3}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--y': `${Math.random() * 100}%`,
+          '--size': `${1 + Math.random() * 2}px`,
+        }}
+      />
+    ))}
+  </div>
+  <div class="constellation">
+    <svg class="constellation-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <circle cx="20" cy="30" r="0.5" fill="#64FFDA" class="constellation-star" />
+      <circle cx="35" cy="20" r="0.5" fill="#64FFDA" class="constellation-star" style="--delay: 0.5s;" />
+      <circle cx="50" cy="35" r="0.5" fill="#64FFDA" class="constellation-star" style="--delay: 1s;" />
+      <circle cx="65" cy="25" r="0.5" fill="#64FFDA" class="constellation-star" style="--delay: 1.5s;" />
+      <circle cx="80" cy="40" r="0.5" fill="#64FFDA" class="constellation-star" style="--delay: 2s;" />
+      <line x1="20" y1="30" x2="35" y2="20" stroke="rgba(100, 255, 218, 0.3)" stroke-width="0.1" class="constellation-line" />
+      <line x1="35" y1="20" x2="50" y2="35" stroke="rgba(100, 255, 218, 0.3)" stroke-width="0.1" class="constellation-line" style="--delay: 0.5s;" />
+      <line x1="50" y1="35" x2="65" y2="25" stroke="rgba(100, 255, 218, 0.3)" stroke-width="0.1" class="constellation-line" style="--delay: 1s;" />
+      <line x1="65" y1="25" x2="80" y2="40" stroke="rgba(100, 255, 218, 0.3)" stroke-width="0.1" class="constellation-line" style="--delay: 1.5s;" />
+    </svg>
+  </div>
+  <div class="atoms">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <div
+        class="atom"
+        style={{
+          '--delay': `${i * 2}s`,
+          '--x': `${20 + Math.random() * 60}%`,
+          '--y': `${20 + Math.random() * 60}%`,
+        }}
+      >
+        <div class="nucleus"></div>
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+      </div>
+    ))}
+  </div>
+  <div class="shooting-stars">
+    {Array.from({ length: 3 }).map((_, i) => (
+      <div
+        class="shooting-star"
+        style={{
+          '--delay': `${i * 5 + Math.random() * 3}s`,
+          '--x': `${Math.random() * 50}%`,
+          '--y': `${Math.random() * 30}%`,
+        }}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .science-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #0D0D1A 50%, #000000 100%);
+  }
+
+  .deep-space {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(124, 77, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(100, 255, 218, 0.05) 0%, transparent 50%);
+  }
+
+  .nebula {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+  }
+
+  .nebula-cloud {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: nebulaFloat 20s ease-in-out infinite;
+  }
+
+  .cloud-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(124, 77, 255, 0.5), transparent);
+    top: 10%;
+    left: 20%;
+  }
+
+  .cloud-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.3), transparent);
+    top: 50%;
+    right: 10%;
+    animation-delay: -7s;
+  }
+
+  .cloud-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 100, 218, 0.2), transparent);
+    bottom: 10%;
+    left: 40%;
+    animation-delay: -14s;
+  }
+
+  @keyframes nebulaFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+  }
+
+  .stars-container {
+    position: absolute;
+    inset: 0;
+  }
+
+  .star {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: #FFFFFF;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .constellation {
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+  }
+
+  .constellation-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .constellation-star {
+    animation: starPulse 2s ease-in-out var(--delay, 0s) infinite;
+  }
+
+  @keyframes starPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .constellation-line {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: lineDraw 4s ease-in-out var(--delay, 0s) infinite;
+  }
+
+  @keyframes lineDraw {
+    0%, 100% { stroke-dashoffset: 20; opacity: 0.3; }
+    50% { stroke-dashoffset: 0; opacity: 0.8; }
+  }
+
+  .atoms {
+    position: absolute;
+    inset: 0;
+  }
+
+  .atom {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 80px;
+    height: 80px;
+    animation: atomFloat 10s ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes atomFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .nucleus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #7C4DFF, #64FFDA);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(124, 77, 255, 0.8);
+  }
+
+  .orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-1 {
+    width: 40px;
+    height: 40px;
+    animation: orbitRotate 3s linear infinite;
+  }
+
+  .orbit-2 {
+    width: 60px;
+    height: 60px;
+    animation: orbitRotate 5s linear infinite reverse;
+    transform: translate(-50%, -50%) rotateX(60deg);
+  }
+
+  .orbit-3 {
+    width: 80px;
+    height: 80px;
+    animation: orbitRotate 7s linear infinite;
+    transform: translate(-50%, -50%) rotateY(60deg);
+  }
+
+  @keyframes orbitRotate {
+    from { transform: translate(-50%, -50%) rotateZ(0deg); }
+    to { transform: translate(-50%, -50%) rotateZ(360deg); }
+  }
+
+  .shooting-stars {
+    position: absolute;
+    inset: 0;
+  }
+
+  .shooting-star {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #64FFDA, transparent);
+    transform: rotate(-45deg);
+    opacity: 0;
+    animation: shoot 8s ease-out var(--delay) infinite;
+  }
+
+  @keyframes shoot {
+    0% { opacity: 0; transform: rotate(-45deg) translateX(0); }
+    5% { opacity: 1; }
+    15% { opacity: 0; transform: rotate(-45deg) translateX(300px); }
+    100% { opacity: 0; }
+  }
+</style>

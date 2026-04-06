@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TechBackground from '../components/backgrounds/TechBackground.astro';
+
+const thoughts = [
+  {
+    date: '2024年4月10日',
+    title: '代码的诗意',
+    content: '每一行代码都是一首诗，逻辑是它的韵脚，功能是它的意境。在0和1的世界里，我们创造着无限可能。技术，是人类智慧的结晶。'
+  },
+  {
+    date: '2024年3月15日',
+    title: '架构之美',
+    content: '优秀的架构如同精密的建筑，每一部分都恰到好处。简洁而不简单，复杂而不混乱。好的设计，是对混乱世界的秩序回应。'
+  },
+  {
+    date: '2024年2月10日',
+    title: '开源的精神',
+    content: '代码共享，知识传递。开源不仅是技术选择，更是一种精神。我们站在巨人的肩膀上，也为后来者搭建阶梯。'
+  }
+];
+---
+
+<BaseLayout title="技术 - 思想集" theme="tech">
+  <TechBackground slot="background" />
+  
+  <div class="theme-header">
+    <h1 class="theme-title">技术</h1>
+    <p class="theme-subtitle">代码的矩阵，数据的流动，探索技术的无限可能</p>
+  </div>
+  
+  <div class="thoughts-container">
+    {thoughts.map((thought) => (
+      <article class="thought-card">
+        <time class="thought-date">{thought.date}</time>
+        <h2 class="thought-title">{thought.title}</h2>
+        <p class="thought-content">{thought.content}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .theme-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .theme-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #00D9FF, #0D47A1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
+  }
+
+  .theme-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .thoughts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .thought-card {
+    background: rgba(10, 25, 47, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .thought-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+    border-color: rgba(0, 217, 255, 0.5);
+  }
+
+  .thought-date {
+    font-size: 0.875rem;
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .thought-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #00D9FF;
+  }
+
+  .thought-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+</style>
