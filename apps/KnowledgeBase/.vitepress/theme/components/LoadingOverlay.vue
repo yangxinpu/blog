@@ -12,6 +12,8 @@ const INITIAL_DURATION = 1100;
 const ROUTE_DURATION = 650;
 const FADE_DURATION = 420;
 
+const LOADED_KEY = 'kb-loaded';
+
 let closeTimer: number | null = null;
 let hideTimer: number | null = null;
 
@@ -27,8 +29,26 @@ function clearTimers() {
   }
 }
 
+function hasLoadedBefore(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  return sessionStorage.getItem(LOADED_KEY) === 'true';
+}
+
+function markAsLoaded() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  sessionStorage.setItem(LOADED_KEY, 'true');
+}
+
 function playOverlay(duration: number) {
   if (typeof window === 'undefined') {
+    return;
+  }
+
+  if (hasLoadedBefore()) {
     return;
   }
 
@@ -44,6 +64,7 @@ function playOverlay(duration: number) {
 
     hideTimer = window.setTimeout(() => {
       isVisible.value = false;
+      markAsLoaded();
     }, FADE_DURATION);
   }, duration);
 }
@@ -56,6 +77,10 @@ watch(
   () => route.path,
   (nextPath, previousPath) => {
     if (!previousPath || nextPath === previousPath) {
+      return;
+    }
+
+    if (hasLoadedBefore()) {
       return;
     }
 
