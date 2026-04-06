@@ -4,10 +4,19 @@
   padding: 5.5rem 20px 4.2rem;
   background: var(--bg);
   overflow: hidden;
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 680px;
 
   @media (max-width: 900px) {
     margin-top: -2rem;
     padding: 4.2rem 16px 3rem;
+  }
+}
+
+.active {
+  .firefly {
+    animation-play-state: running;
   }
 }
 
@@ -33,6 +42,7 @@
   animation:
     fireflyDrift var(--duration) ease-in-out infinite,
     fireflyBlink 3.2s ease-in-out infinite;
+  animation-play-state: paused;
 }
 
 .firefly:nth-child(1) {

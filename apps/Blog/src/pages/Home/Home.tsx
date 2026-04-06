@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
 import avatarImage from '../../assets/Images/cat.webp';
 import { FloatingLines } from '../../components/index';
+import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
 type TechKey =
   | 'react'
@@ -90,17 +91,19 @@ const BORDER_LIGHT_RADIUS = 300;
 function Home() {
   const { t } = useTranslation();
   const gridRef = useRef<HTMLDivElement | null>(null);
+  const { ref: sectionRef, isActive: isHomeActive } =
+    useSectionActivity<HTMLDivElement>({
+      rootMargin: '35% 0px 25% 0px',
+      threshold: 0.05,
+    });
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') === 'dark'
   );
-  const [cardLightPositions, setCardLightPositions] = useState<
-    Record<string, { x: number; y: number; visible: boolean }>
-  >({});
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
-  const cardsDataRef = useRef<Map<string, { rect: DOMRect; element: HTMLElement }>>(
-    new Map()
-  );
+  const cardsDataRef = useRef<
+    Array<{ rect: DOMRect; element: HTMLElement }>
+  >([]);
 
   const themeGradientColors = [
     '#d3fff3',
@@ -110,92 +113,128 @@ function Home() {
     '#0ea387',
   ];
 
-  const updateCardLightPositions = useCallback(() => {
-    if (!gridRef.current) return;
-
-    const mouse = mouseRef.current;
-    const newPositions: Record<string, { x: number; y: number; visible: boolean }> = {};
-
-    cardsDataRef.current.forEach((data, id) => {
-      const { rect, element } = data;
-
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const distanceToCenter = Math.sqrt(
-        (mouse.x - centerX) ** 2 + (mouse.y - centerY) ** 2
-      );
-
-      const maxDistance = BORDER_LIGHT_RADIUS + Math.max(rect.width, rect.height) / 2;
-
-      if (distanceToCenter <= maxDistance) {
-        const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
-        const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
-        const distanceToEdge = Math.sqrt(
-          (mouse.x - closestX) ** 2 + (mouse.y - closestY) ** 2
-        );
-
-        if (distanceToEdge <= BORDER_LIGHT_RADIUS) {
-          const relativeX = mouse.x - rect.left;
-          const relativeY = mouse.y - rect.top;
-
-          element.style.setProperty('--mouse-x', `${relativeX}px`);
-          element.style.setProperty('--mouse-y', `${relativeY}px`);
-          element.style.setProperty('--light-radius', `${BORDER_LIGHT_RADIUS}px`);
-
-          newPositions[id] = { x: relativeX, y: relativeY, visible: true };
-          return;
-        }
-      }
-
-      newPositions[id] = { x: 0, y: 0, visible: false };
-    });
-
-    setCardLightPositions(newPositions);
-  }, []);
-
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(updateCardLightPositions);
-    };
+    const grid = gridRef.current;
+    if (!grid || !isHomeActive) {
+      cardsDataRef.current.forEach(({ element }) => {
+        element.classList.remove(styles.cardLightActive);
+      });
+      return;
+    }
 
-    const updateCardsData = () => {
-      if (!gridRef.current) return;
-      const cards = gridRef.current.querySelectorAll('[data-card-id]');
-      cardsDataRef.current.clear();
-      cards.forEach((card) => {
-        const element = card as HTMLElement;
-        const id = element.dataset.cardId;
-        if (id) {
-          cardsDataRef.current.set(id, {
-            rect: element.getBoundingClientRect(),
-            element,
-          });
-        }
+    const activeClassName = styles.cardLightActive;
+    let isPointerInside = false;
+    let resizeObserver: ResizeObserver | null = null;
+    let viewportFrame = 0;
+
+    const clearCardLight = () => {
+      cardsDataRef.current.forEach(({ element }) => {
+        element.classList.remove(activeClassName);
       });
     };
 
+    const updateCardsData = () => {
+      const cards = Array.from(
+        grid.querySelectorAll<HTMLElement>('[data-card-id]')
+      );
+      cardsDataRef.current = cards.map((element) => ({
+        rect: element.getBoundingClientRect(),
+        element,
+      }));
+    };
+
+    const updateCardLightPositions = () => {
+      rafRef.current = 0;
+
+      if (!isPointerInside) {
+        clearCardLight();
+        return;
+      }
+
+      const mouse = mouseRef.current;
+
+      cardsDataRef.current.forEach(({ rect, element }) => {
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const distanceToCenter = Math.hypot(mouse.x - centerX, mouse.y - centerY);
+        const maxDistance =
+          BORDER_LIGHT_RADIUS + Math.max(rect.width, rect.height) / 2;
+
+        if (distanceToCenter > maxDistance) {
+          element.classList.remove(activeClassName);
+          return;
+        }
+
+        const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
+        const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
+        const distanceToEdge = Math.hypot(mouse.x - closestX, mouse.y - closestY);
+
+        if (distanceToEdge > BORDER_LIGHT_RADIUS) {
+          element.classList.remove(activeClassName);
+          return;
+        }
+
+        element.style.setProperty('--mouse-x', `${mouse.x - rect.left}px`);
+        element.style.setProperty('--mouse-y', `${mouse.y - rect.top}px`);
+        element.style.setProperty('--light-radius', `${BORDER_LIGHT_RADIUS}px`);
+        element.classList.add(activeClassName);
+      });
+    };
+
+    const requestCardLightUpdate = () => {
+      if (rafRef.current !== 0) return;
+      rafRef.current = requestAnimationFrame(updateCardLightPositions);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      isPointerInside = true;
+      mouseRef.current = { x: event.clientX, y: event.clientY };
+      requestCardLightUpdate();
+    };
+
+    const handlePointerLeave = () => {
+      isPointerInside = false;
+      clearCardLight();
+    };
+
+    const flushViewportChange = () => {
+      viewportFrame = 0;
+      updateCardsData();
+
+      if (isPointerInside) {
+        requestCardLightUpdate();
+      } else {
+        clearCardLight();
+      }
+    };
+
+    const handleViewportChange = () => {
+      if (viewportFrame !== 0) return;
+      viewportFrame = requestAnimationFrame(flushViewportChange);
+    };
+
     updateCardsData();
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', updateCardsData);
-    window.addEventListener('scroll', updateCardsData, true);
+    resizeObserver = new ResizeObserver(handleViewportChange);
+    resizeObserver.observe(grid);
+    cardsDataRef.current.forEach(({ element }) => resizeObserver?.observe(element));
+
+    grid.addEventListener('pointermove', handlePointerMove);
+    grid.addEventListener('pointerleave', handlePointerLeave);
+    window.addEventListener('resize', handleViewportChange);
+    window.addEventListener('scroll', handleViewportChange, true);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', updateCardsData);
-      window.removeEventListener('scroll', updateCardsData, true);
+      grid.removeEventListener('pointermove', handlePointerMove);
+      grid.removeEventListener('pointerleave', handlePointerLeave);
+      window.removeEventListener('resize', handleViewportChange);
+      window.removeEventListener('scroll', handleViewportChange, true);
+      resizeObserver?.disconnect();
       cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(viewportFrame);
+      rafRef.current = 0;
+      clearCardLight();
     };
-  }, [updateCardLightPositions]);
-
-  const getCardLightClass = useCallback(
-    (id: string) => {
-      const pos = cardLightPositions[id];
-      return pos?.visible ? styles.cardLightActive : '';
-    },
-    [cardLightPositions]
-  );
+  }, [isHomeActive]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -246,7 +285,7 @@ function Home() {
   });
 
   return (
-    <div id="home" className={styles.home}>
+    <div id="home" ref={sectionRef} className={styles.home}>
       <div className={styles.floatingLinesBackground}>
         <FloatingLines
           linesGradient={themeGradientColors}
@@ -256,6 +295,7 @@ function Home() {
           animationSpeed={0.6}
           mixBlendMode="screen"
           isDark={isDark}
+          isActive={isHomeActive}
         />
       </div>
 
@@ -275,9 +315,8 @@ function Home() {
                   opacity: 0,
                   y: 44,
                   scale: 0.7,
-                  filter: 'blur(10px)',
                 }}
-                animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{
                   duration: 0.45,
                   delay: index * 0.06,
@@ -292,8 +331,8 @@ function Home() {
 
         <motion.p
           className={styles.subtitle}
-          initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.12 }}
         >
           {t('homePage.hero.subtitle')}
@@ -301,8 +340,8 @@ function Home() {
 
         <motion.p
           className={styles.desc}
-          initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.24 }}
         >
           {t('homePage.hero.desc')}
@@ -313,9 +352,9 @@ function Home() {
         <div className={styles.gridLayout} ref={gridRef}>
           <motion.article
             data-card-id="profile"
-            className={`${styles.featuredCard} ${getCardLightClass('profile')}`}
-            initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            className={styles.featuredCard}
+            initial={{ opacity: 0, y: -28 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.12 }}
           >
             <div className={styles.profileHeader}>
@@ -361,9 +400,9 @@ function Home() {
 
           <motion.article
             data-card-id="interests"
-            className={`${styles.interestCard} ${getCardLightClass('interests')}`}
-            initial={{ opacity: 0, y: -28, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            className={styles.interestCard}
+            initial={{ opacity: 0, y: -28 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3>{t('homePage.interests.title')}</h3>
@@ -385,9 +424,9 @@ function Home() {
             <motion.article
               key={card.key}
               data-card-id={card.key}
-              className={`${styles.techCard} ${styles[`techCard${index + 1}`]} ${getCardLightClass(card.key)}`}
-              initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              className={`${styles.techCard} ${styles[`techCard${index + 1}`]}`}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
             >
               <div className={styles.techHead}>

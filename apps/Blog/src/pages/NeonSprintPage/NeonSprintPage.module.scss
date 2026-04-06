@@ -4,10 +4,19 @@
   min-height: 74vh;
   padding: 2.8rem 20px;
   background: var(--bg);
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 720px;
 
   @media (max-width: 900px) {
     min-height: 64vh;
     padding: 2.2rem 16px;
+  }
+}
+
+.active {
+  .visualPane {
+    will-change: transform;
   }
 }
 

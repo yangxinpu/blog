@@ -1,30 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Motto.module.scss';
 import CanvasWaves from './CanvasWaves';
+import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
 function Motto() {
   const { t } = useTranslation();
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const { ref: sectionRef, isActive, hasEnteredView } =
+    useSectionActivity<HTMLElement>({
+      rootMargin: '30% 0px 30% 0px',
+      threshold: 0.2,
+    });
   const sparkleCount = 12;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setIsVisible(true);
-        observer.disconnect();
-      },
-      { threshold: 0.2 }
-    );
-
-    const element = sectionRef.current;
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
 
   const quoteLinesRaw = t('mottoSection.quotes', {
     returnObjects: true,
@@ -38,7 +25,7 @@ function Motto() {
   return (
     <section
       ref={sectionRef}
-      className={`${styles.container} ${isVisible ? styles.visible : ''}`}
+      className={`${styles.container} ${hasEnteredView ? styles.visible : ''} ${isActive ? styles.active : ''}`}
     >
       <div className={styles.background} aria-hidden="true">
         <div className={styles.aurora} />
@@ -52,7 +39,8 @@ function Motto() {
         </div>
 
         <CanvasWaves
-          isVisible={isVisible}
+          isVisible={hasEnteredView}
+          isActive={isActive}
           options={{
             speed: 1.2,
             density: 5,
@@ -64,7 +52,7 @@ function Motto() {
       <motion.div
         className={styles.quoteStack}
         initial={{ opacity: 0 }}
-        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+        animate={hasEnteredView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
         {quoteLines.map((line, index) => (
@@ -73,7 +61,7 @@ function Motto() {
             className={styles.quoteLineWrapper}
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={
-              isVisible
+              hasEnteredView
                 ? { opacity: 1, y: 0, scale: 1 }
                 : { opacity: 0, y: 30, scale: 0.95 }
             }

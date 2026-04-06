@@ -8,9 +8,25 @@
   margin: 0;
   padding: 4.8rem 1.25rem 6rem;
   background: var(--bg);
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 720px;
   @media (max-width: 768px) {
     min-height: 54vh;
     padding: 3.3rem 1rem 3.4rem;
+  }
+}
+
+.visible {
+  visibility: visible;
+}
+
+.active {
+  .aurora,
+  .auroraSecondary,
+  .gridPulse,
+  .sparkle {
+    animation-play-state: running;
   }
 }
 
@@ -69,6 +85,7 @@
   position: absolute;
   border-radius: 999px;
   will-change: transform, opacity;
+  animation-play-state: paused;
 }
 
 .aurora {
@@ -138,6 +155,7 @@
     transparent 72%
   );
   animation: gridShift 14s linear infinite;
+  animation-play-state: paused;
 }
 
 .sparkleField {
@@ -160,6 +178,7 @@
   animation:
     sparkleDrift var(--duration) ease-in-out infinite,
     sparkleBlink 3.4s ease-in-out infinite;
+  animation-play-state: paused;
 }
 
 .sparkle:nth-child(1) {

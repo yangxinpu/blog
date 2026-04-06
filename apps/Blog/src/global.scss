@@ -27,7 +27,10 @@
   line-height: 1.5;
   color: var(--text);
   background-color: var(--bg);
-  transition: all 0.3s ease;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 [data-theme='dark'] {

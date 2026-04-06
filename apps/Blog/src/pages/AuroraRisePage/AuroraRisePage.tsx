@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './AuroraRisePage.module.scss';
+import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
 interface SilkLine {
   y: number;
@@ -23,6 +24,7 @@ function FlowingLinesBackground({
   speed,
   glowIntensity,
   isDark,
+  isActive,
 }: {
   primaryColor: string;
   secondaryColor: string;
@@ -30,6 +32,7 @@ function FlowingLinesBackground({
   speed: number;
   glowIntensity: number;
   isDark: boolean;
+  isActive: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
@@ -115,12 +118,22 @@ function FlowingLinesBackground({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    if (!isActive) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
+    let width = 0;
+    let height = 0;
+
     const handleResize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+      width = rect.width;
+      height = rect.height;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       initLines(rect.width, rect.height);
     };
 
@@ -128,20 +141,19 @@ function FlowingLinesBackground({
     window.addEventListener('resize', handleResize);
 
     const animate = () => {
-      const rect = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      ctx.clearRect(0, 0, width, height);
       
       timeRef.current += 0.016;
       
-      linesRef.current.forEach(line => {
+      linesRef.current.forEach((line) => {
         line.y += line.speed * 15;
         
-        if (line.y > rect.height + 100) {
+        if (line.y > height + 100) {
           line.y = -50;
           line.baseY = -50;
         }
         
-        drawLine(ctx, line, timeRef.current, rect.width, rect.height);
+        drawLine(ctx, line, timeRef.current, width, height);
       });
 
       animationRef.current = requestAnimationFrame(animate);
@@ -153,7 +165,7 @@ function FlowingLinesBackground({
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationRef.current);
     };
-  }, [initLines, drawLine]);
+  }, [drawLine, initLines, isActive]);
 
   return (
     <canvas
@@ -174,6 +186,10 @@ function FlowingLinesBackground({
 function AuroraRisePage() {
   const { i18n } = useTranslation();
   const isZh = i18n.language === 'zh-CN';
+  const { ref: sectionRef, isActive } = useSectionActivity<HTMLElement>({
+    rootMargin: '30% 0px 30% 0px',
+    threshold: 0.15,
+  });
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') === 'dark'
   );
@@ -194,7 +210,10 @@ function AuroraRisePage() {
   }, []);
 
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${isActive ? styles.active : ''}`}
+    >
       <FlowingLinesBackground
         primaryColor="#19fac6"
         secondaryColor="#13d6aa"
@@ -202,13 +221,14 @@ function AuroraRisePage() {
         speed={0.08}
         glowIntensity={0.25}
         isDark={isDark}
+        isActive={isActive}
       />
 
       <div className={styles.inner}>
         <motion.h2
           className={styles.title}
-          initial={{ opacity: 0, y: 28, filter: 'blur(10px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.38 }}
           transition={{ duration: 0.62, ease: 'easeOut' }}
         >
@@ -220,8 +240,8 @@ function AuroraRisePage() {
 
       <motion.p
         className={styles.bottomNote}
-        initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
-        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.45, delay: 0.2, ease: 'easeOut' }}
       >

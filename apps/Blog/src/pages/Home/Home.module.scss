@@ -12,7 +12,7 @@
     pointer-events: none;
     z-index: 0;
     border-radius: 999px;
-    filter: blur(56px);
+    filter: blur(40px);
   }
 
   &::before {
@@ -109,7 +109,7 @@
   border: 1px solid var(--border);
   border-radius: 20px;
   background: color-mix(in srgb, var(--bg) 84%, transparent);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 4px 12px rgba(0, 0, 0, 0.08);

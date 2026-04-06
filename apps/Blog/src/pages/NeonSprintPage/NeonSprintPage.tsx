@@ -2,8 +2,9 @@ import { useMemo, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './NeonSprintPage.module.scss';
+import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
-function GeometricAnimation() {
+function GeometricAnimation({ isActive }: { isActive: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const timeRef = useRef(0);
@@ -15,12 +16,22 @@ function GeometricAnimation() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    if (!isActive) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
+    let width = 0;
+    let height = 0;
+
     const handleResize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+      width = rect.width;
+      height = rect.height;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     handleResize();
@@ -34,9 +45,6 @@ function GeometricAnimation() {
     ];
 
     const animate = () => {
-      const rect = canvas.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
       const centerX = width / 2;
       const centerY = height / 2;
       const maxRadius = Math.min(width, height) * 0.45;
@@ -163,7 +171,7 @@ function GeometricAnimation() {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationRef.current);
     };
-  }, []);
+  }, [isActive]);
 
   return (
     <canvas
@@ -181,6 +189,10 @@ function GeometricAnimation() {
 
 function NeonSprintPage() {
   const { t, i18n } = useTranslation();
+  const { ref: sectionRef, isActive } = useSectionActivity<HTMLElement>({
+    rootMargin: '30% 0px 30% 0px',
+    threshold: 0.15,
+  });
   const isZh = i18n.language === 'zh-CN';
 
   const copy = t('neonSprintPage.copy');
@@ -191,7 +203,10 @@ function NeonSprintPage() {
   );
 
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${isActive ? styles.active : ''}`}
+    >
       <div className={styles.inner}>
         <div className={styles.textPane}>
           <p className={styles.copy}>
@@ -202,13 +217,11 @@ function NeonSprintPage() {
                 initial={{
                   opacity: 0,
                   y: 28,
-                  filter: 'blur(10px)',
                   rotateX: 70,
                 }}
                 whileInView={{
                   opacity: 1,
                   y: 0,
-                  filter: 'blur(0px)',
                   rotateX: 0,
                 }}
                 viewport={{ once: true, amount: 0.6 }}
@@ -226,7 +239,7 @@ function NeonSprintPage() {
         </div>
 
         <div className={styles.visualPane}>
-          <GeometricAnimation />
+          <GeometricAnimation isActive={isActive} />
         </div>
       </div>
     </section>

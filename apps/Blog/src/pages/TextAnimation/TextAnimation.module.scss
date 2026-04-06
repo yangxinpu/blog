@@ -3,9 +3,18 @@
   padding: 4.2rem 20px 5.2rem;
   background: var(--bg);
   overflow: hidden;
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 640px;
 
   @media (max-width: 768px) {
     padding: 3rem 16px 3.8rem;
+  }
+}
+
+.active {
+  .stage {
+    will-change: transform;
   }
 }
 

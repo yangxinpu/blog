@@ -10,10 +10,19 @@
     color-mix(in srgb, var(--bg) 94%, #040a12 6%),
     var(--bg)
   );
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 760px;
 
   @media (max-width: 768px) {
     min-height: calc(100vh - 60px);
     padding: 1rem 16px 3.2rem;
+  }
+}
+
+.active {
+  canvas {
+    opacity: 1;
   }
 }
 

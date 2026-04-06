@@ -8,6 +8,7 @@ interface WaveOptions {
 
 interface CanvasWavesProps {
   isVisible: boolean;
+  isActive: boolean;
   options?: WaveOptions;
 }
 
@@ -21,7 +22,11 @@ interface WaveConfig {
   opacity: number;
 }
 
-export default function CanvasWaves({ isVisible, options = {} }: CanvasWavesProps) {
+export default function CanvasWaves({
+  isVisible,
+  isActive,
+  options = {},
+}: CanvasWavesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wavesRef = useRef<WaveConfig[]>([]);
   const progressRef = useRef(0);
@@ -91,6 +96,11 @@ export default function CanvasWaves({ isVisible, options = {} }: CanvasWavesProp
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
+    if (!isActive) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
     let w = canvas.clientWidth;
     let h = canvas.clientHeight;
     let dpr = window.devicePixelRatio || 1;
@@ -106,7 +116,7 @@ export default function CanvasWaves({ isVisible, options = {} }: CanvasWavesProp
         canvas.height = rect.height * dpr;
         w = rect.width;
         h = rect.height;
-        ctx.scale(dpr, dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       });
     };
     handleResize();
@@ -175,7 +185,7 @@ export default function CanvasWaves({ isVisible, options = {} }: CanvasWavesProp
       if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [isVisible, themeColor]);
+  }, [isActive, isVisible, themeColor]);
 
   return (
     <canvas

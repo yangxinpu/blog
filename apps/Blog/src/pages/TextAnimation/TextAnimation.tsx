@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import styles from './TextAnimation.module.scss';
+import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
 type IconItem = {
   key: string;
@@ -25,6 +26,10 @@ type IconItem = {
 
 function TextAnimation() {
   const { t } = useTranslation();
+  const { ref: sectionRef, isActive } = useSectionActivity<HTMLElement>({
+    rootMargin: '25% 0px 25% 0px',
+    threshold: 0.15,
+  });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const words = useMemo(
@@ -42,13 +47,13 @@ function TextAnimation() {
   const railWords = useMemo(() => [...words, ...words], [words]);
 
   useEffect(() => {
-    if (words.length === 0) return undefined;
+    if (!isActive || words.length === 0) return undefined;
     const timer = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % words.length);
     }, 2400);
 
     return () => window.clearInterval(timer);
-  }, [words]);
+  }, [isActive, words]);
 
   const iconItems: IconItem[] = [
     { key: 'rocket', label: 'Launch', className: styles.iconOne, Icon: Rocket },
@@ -85,7 +90,10 @@ function TextAnimation() {
   };
 
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${isActive ? styles.active : ''}`}
+    >
       <div className={styles.inner}>
         <div className={styles.stage}>
           <div className={styles.iconLayer} aria-hidden="true">
@@ -93,14 +101,18 @@ function TextAnimation() {
               <motion.div
                 key={key}
                 className={`${styles.iconBadge} ${className}`}
-                animate={{
-                  y: [0, -9, 0, 7, 0],
-                  rotate: [0, 5, -4, 0],
-                  scale: [1, 1.06, 1],
-                }}
+                animate={
+                  isActive
+                    ? {
+                        y: [0, -9, 0, 7, 0],
+                        rotate: [0, 5, -4, 0],
+                        scale: [1, 1.06, 1],
+                      }
+                    : { y: 0, rotate: 0, scale: 1 }
+                }
                 transition={{
                   duration: 4.2 + index * 0.5,
-                  repeat: Infinity,
+                  repeat: isActive ? Infinity : 0,
                   ease: 'easeInOut',
                   delay: index * 0.25,
                 }}
@@ -116,9 +128,9 @@ function TextAnimation() {
               <motion.div
                 key={activeWord}
                 className={styles.word}
-                initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -24, filter: 'blur(10px)' }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -24 }}
                 transition={{ duration: 0.66, ease: 'easeInOut' }}
               >
                 {Array.from(activeWord).map((char, index) => (
@@ -143,8 +155,12 @@ function TextAnimation() {
           <div className={styles.railMask}>
             <motion.div
               className={styles.railTrack}
-              animate={{ x: ['0%', '-50%'] }}
-              transition={{ duration: 20, ease: 'linear', repeat: Infinity }}
+              animate={isActive ? { x: ['0%', '-50%'] } : { x: '0%' }}
+              transition={{
+                duration: 20,
+                ease: 'linear',
+                repeat: isActive ? Infinity : 0,
+              }}
             >
               {railWords.map((word, index) => {
                 const originalIndex = index % words.length;

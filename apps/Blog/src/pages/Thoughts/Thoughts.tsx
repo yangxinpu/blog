@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Thoughts.module.scss';
+import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
 type ThoughtArticle = {
   date: string;
@@ -12,6 +13,10 @@ type ThoughtArticle = {
 
 function Thoughts() {
   const { t } = useTranslation();
+  const { ref: sectionRef, isActive } = useSectionActivity<HTMLElement>({
+    rootMargin: '25% 0px 25% 0px',
+    threshold: 0.15,
+  });
   const fireflyCount = 10;
 
   const articles = t('thoughtsPage.articles', {
@@ -19,7 +24,11 @@ function Thoughts() {
   }) as unknown as ThoughtArticle[];
 
   return (
-    <section id="thoughts" className={styles.section}>
+    <section
+      id="thoughts"
+      ref={sectionRef}
+      className={`${styles.section} ${isActive ? styles.active : ''}`}
+    >
       <div className={styles.fireflies} aria-hidden="true">
         {Array.from({ length: fireflyCount }).map((_, index) => (
           <span key={index} className={styles.firefly} />

@@ -176,6 +176,7 @@ interface FloatingLinesProps {
   animationSpeed?: number;
   mixBlendMode?: React.CSSProperties['mixBlendMode'];
   isDark?: boolean;
+  isActive?: boolean;
 }
 
 function hexToVec3(hex: string): Vector3 {
@@ -213,6 +214,7 @@ function FloatingLines({
   animationSpeed = 1,
   mixBlendMode = 'screen',
   isDark = false,
+  isActive = true,
 }: FloatingLinesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<WebGLRenderer | null>(null);
@@ -221,6 +223,9 @@ function FloatingLines({
   const rafRef = useRef<number>(0);
   const clockRef = useRef<Clock | null>(null);
   const lastTimeRef = useRef<number>(0);
+  const isActiveRef = useRef(isActive);
+  const startLoopRef = useRef<() => void>(() => {});
+  const stopLoopRef = useRef<() => void>(() => {});
 
   const brightness = useMemo(() => {
     return isDark ? 0.3 : 0.6;
@@ -278,6 +283,17 @@ function FloatingLines({
   const gradientCount = useMemo(() => {
     return linesGradient?.length ?? 0;
   }, [linesGradient]);
+
+  useEffect(() => {
+    isActiveRef.current = isActive;
+
+    if (isActive && !document.hidden) {
+      startLoopRef.current();
+      return;
+    }
+
+    stopLoopRef.current();
+  }, [isActive]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -369,8 +385,15 @@ function FloatingLines({
 
     const FPS_LIMIT = 30;
     const FRAME_DURATION = 1000 / FPS_LIMIT;
+    let destroyed = false;
 
     const renderLoop = () => {
+      rafRef.current = 0;
+
+      if (destroyed || !isActiveRef.current || document.hidden) {
+        return;
+      }
+
       if (!materialRef.current || !rendererRef.current || !sceneRef.current || !clockRef.current) return;
 
       const currentTime = performance.now();
@@ -386,10 +409,42 @@ function FloatingLines({
 
       rafRef.current = requestAnimationFrame(renderLoop);
     };
-    renderLoop();
+
+    const startLoop = () => {
+      if (destroyed || rafRef.current !== 0) return;
+      lastTimeRef.current = performance.now();
+      rafRef.current = requestAnimationFrame(renderLoop);
+    };
+
+    const stopLoop = () => {
+      if (rafRef.current === 0) return;
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop();
+        return;
+      }
+
+      if (isActiveRef.current) {
+        startLoop();
+      }
+    };
+
+    startLoopRef.current = startLoop;
+    stopLoopRef.current = stopLoop;
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    if (isActiveRef.current && !document.hidden) {
+      startLoop();
+    }
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
+      destroyed = true;
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      stopLoop();
       ro.disconnect();
 
       geometry.dispose();
