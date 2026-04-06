@@ -1,9 +1,20 @@
-import { ssrRenderAttrs } from "vue/server-renderer";
-import { useSSRContext } from "vue";
-import { _ as _export_sfc } from "./plugin-vue_export-helper.1tPrXgE0.js";
-const __pageData = JSON.parse('{"title":"React原理","description":"","frontmatter":{},"headers":[],"relativePath":"zh/React/React原理.md","filePath":"zh/React/React原理.md"}');
-const _sfc_main = { name: "zh/React/React原理.md" };
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+import { ssrRenderAttrs } from 'vue/server-renderer';
+import { useSSRContext } from 'vue';
+import { _ as _export_sfc } from './plugin-vue_export-helper.1tPrXgE0.js';
+const __pageData = JSON.parse(
+  '{"title":"React原理","description":"","frontmatter":{},"headers":[],"relativePath":"zh/React/React原理.md","filePath":"zh/React/React原理.md"}'
+);
+const _sfc_main = { name: 'zh/React/React原理.md' };
+function _sfc_ssrRender(
+  _ctx,
+  _push,
+  _parent,
+  _attrs,
+  $props,
+  $setup,
+  $data,
+  $options
+) {
   _push(`<div${ssrRenderAttrs(_attrs)}><h1 id="react原理" tabindex="-1">React原理 <a class="header-anchor" href="#react原理" aria-label="Permalink to &quot;React原理&quot;">​</a></h1><h3 id="fiber-架构" tabindex="-1">Fiber 架构 <a class="header-anchor" href="#fiber-架构" aria-label="Permalink to &quot;Fiber 架构&quot;">​</a></h3><p>原来的React架构是同步渲染的（堆栈协调器，通过树形结构 + 递归对比新旧DOM），即所有的DOM更新和计算都在主线程中完成，直到所有任务完成；这个过程无法打断，因此如果渲染过程中发生复杂计算或者长时间的同步任务，UI就会卡顿，用户体验较差；</p><p>Fiber架构则将任务切分成多个小的单元（Fiber节点），这样，React可以在渲染过程中暂停当前任务，并根据不同任务的优先级来动态调整任务执行的顺序，确保关键任务能够尽快完成，而不会因为长时间的计算而影响用户体验；</p><ul><li><p>Fiber节点：每个Fiber节点表示一个任务单元（一个Fiber节点通常对应一个组件），包含组件的状态、UI元素的信息以及与其关联的其他任务；每个节点存储着一些重要的属性，如<code>effectTag</code>（表示需要更新的DOM类型），<code>nextEffect</code>（下一个更新节点），<code>return</code>（指向父节点），Hook链；</p><div class="language-text vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>//Fiber节点的结构</span></span>
 <span class="line"><span>type Fiber = {</span></span>
 <span class="line"><span>  tag: WorkTag;              // 类型（函数组件 / 类组件 / DOM）</span></span>
@@ -29,11 +40,12 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("zh/React/React原理.md");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    'zh/React/React原理.md'
+  );
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const React__ = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
-export {
-  __pageData,
-  React__ as default
-};
+const React__ = /* @__PURE__ */ _export_sfc(_sfc_main, [
+  ['ssrRender', _sfc_ssrRender],
+]);
+export { __pageData, React__ as default };

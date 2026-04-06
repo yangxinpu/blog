@@ -38,10 +38,28 @@ function GeometricAnimation({ isActive }: { isActive: boolean }) {
     window.addEventListener('resize', handleResize);
 
     const rings = [
-      { radius: 0.18, speed: 0.3, opacity: 0.15, dashArray: [8, 12], width: 1.5 },
-      { radius: 0.26, speed: -0.25, opacity: 0.12, dashArray: [12, 8], width: 1.2 },
+      {
+        radius: 0.18,
+        speed: 0.3,
+        opacity: 0.15,
+        dashArray: [8, 12],
+        width: 1.5,
+      },
+      {
+        radius: 0.26,
+        speed: -0.25,
+        opacity: 0.12,
+        dashArray: [12, 8],
+        width: 1.2,
+      },
       { radius: 0.34, speed: 0.2, opacity: 0.1, dashArray: [6, 10], width: 1 },
-      { radius: 0.42, speed: -0.15, opacity: 0.08, dashArray: [10, 6], width: 0.8 },
+      {
+        radius: 0.42,
+        speed: -0.15,
+        opacity: 0.08,
+        dashArray: [10, 6],
+        width: 0.8,
+      },
     ];
 
     const animate = () => {
@@ -145,8 +163,12 @@ function GeometricAnimation({ isActive }: { isActive: boolean }) {
       const corePulse = 1 + Math.sin(timeRef.current * 2) * 0.15;
 
       const gradient = ctx.createRadialGradient(
-        centerX, centerY, 0,
-        centerX, centerY, coreRadius * corePulse * 2
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        coreRadius * corePulse * 2
       );
       gradient.addColorStop(0, 'rgba(25, 250, 198, 0.4)');
       gradient.addColorStop(0.5, 'rgba(25, 250, 198, 0.15)');

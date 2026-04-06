@@ -16,7 +16,7 @@ Attributes of the script tag:
 - **NaN**: Produced by mathematical operation errors or failed type conversions; it's a Number type and not equal to any value, including itself;
 
 ```js
-typeof age // Result is undefined, won't throw an undefined variable error
+typeof age; // Result is undefined, won't throw an undefined variable error
 ```
 
 #### Symbol
@@ -32,19 +32,19 @@ const a = Symbol('a');
 const b = Symbol('b');
 
 const obj = {
-    [a]: 'value for a',
-    [b]: 'value for b',
-    [Symbol("c")]: "c",
+  [a]: 'value for a',
+  [b]: 'value for b',
+  [Symbol('c')]: 'c',
 };
 
-console.log(obj[Symbol("c")]) // undefined
+console.log(obj[Symbol('c')]); // undefined
 ```
 
 - `Symbol.for()` method: Creates global symbols; checks the global runtime registry; if no symbol exists for the string, creates and adds it to the registry; if one exists, returns that symbol;
 
 ```js
-const a = Symbol.for("123");
-const b = Symbol.for("123");
+const a = Symbol.for('123');
+const b = Symbol.for('123');
 console.log(a === b);
 ```
 
@@ -64,17 +64,11 @@ let a = BigInt(1234);
 let a = 1234n;
 
 // Serialization and deserialization
-JSON.stringify(
-  { a: 1n },
-  (key, value) =>
-    typeof value === "bigint" ? value.toString() : value
+JSON.stringify({ a: 1n }, (key, value) =>
+  typeof value === 'bigint' ? value.toString() : value
 );
-JSON.parse(
-  '{"a":"1"}',
-  (key, value) =>
-    typeof value === "string" && /^\d+$/.test(value)
-      ? BigInt(value)
-      : value
+JSON.parse('{"a":"1"}', (key, value) =>
+  typeof value === 'string' && /^\d+$/.test(value) ? BigInt(value) : value
 );
 ```
 
@@ -91,11 +85,11 @@ Install: `npm i decimal.js`
 ```js
 let a = new Decimal(0.3);
 
-let b = a.plus(0.2);    // Addition
-let b = a.minus(0.2);   // Subtraction
-let b = a.times(0.2);   // Multiplication
-let b = a.div(0.2);     // Division
-let b = a.mod(0.2);     // Modulo
+let b = a.plus(0.2); // Addition
+let b = a.minus(0.2); // Subtraction
+let b = a.times(0.2); // Multiplication
+let b = a.div(0.2); // Division
+let b = a.mod(0.2); // Modulo
 ```
 
 #### Infinity
@@ -107,13 +101,13 @@ let b = a.mod(0.2);     // Modulo
 ```js
 let a = Infinity;
 let b = -Infinity;
-console.log(1 / 0);     // Can also generate infinity
+console.log(1 / 0); // Can also generate infinity
 console.log(-1 / 0);
 
 // Special usage
-console.log(a + 1 === a);   // true
+console.log(a + 1 === a); // true
 console.log(10 < Infinity); // Always true
-console.log(1 / Infinity);  // 0
+console.log(1 / Infinity); // 0
 ```
 
 #### Object Boxing & Unboxing
@@ -158,18 +152,18 @@ The hint parameter of `Symbol.toPrimitive` is automatically determined by the JS
 ```js
 // Configure custom obj's Symbol.toPrimitive method
 let obj = {
-    [Symbol.toPrimitive](hint) {
-        if (hint === "string") {
-            return "Hello Yang";
-        } 
-        if (hint === "number") {
-            return 42;
-        }
-        if (hint === "boolean") {
-            return true;
-        }
+  [Symbol.toPrimitive](hint) {
+    if (hint === 'string') {
+      return 'Hello Yang';
     }
-}
+    if (hint === 'number') {
+      return 42;
+    }
+    if (hint === 'boolean') {
+      return true;
+    }
+  },
+};
 ```
 
 **valueOf**
@@ -184,7 +178,7 @@ let obj = {
 let num = new Number(10);
 console.log(num.valueOf()); // Primitive value
 
-let str = new String("Hello");
+let str = new String('Hello');
 console.log(str.valueOf()); // Primitive value
 ```
 
@@ -204,9 +198,9 @@ console.log(str.valueOf()); // Primitive value
 - `.toString()` essentially calls the object prototype method; `String()` executes the ToString abstract operation;
 
 ```js
-let fn = function(){
-    console.log("Hello Yang");
-}
+let fn = function () {
+  console.log('Hello Yang');
+};
 console.log(fn.toString()); // Function's string format
 
 let arr = [1, 2, 3, 4, 5];
@@ -278,8 +272,8 @@ false == ![]:
 
 ```js
 console.log(a); // Outputs function body
-function a(){
-    console.log('function');
+function a() {
+  console.log('function');
 }
 var a = 0;
 console.log(a); // Outputs 0
@@ -307,45 +301,46 @@ true && a = 100;
 
 ```js
 let obj = {
-    name: 'aaa',
-    age: 18,
-    hobby: ['basketball', 'pingpong'],
-    family: {
-        father: 'bbb',
-        mother: 'ccc',
-    },
-    [Symbol('key')]: '1',
-}
+  name: 'aaa',
+  age: 18,
+  hobby: ['basketball', 'pingpong'],
+  family: {
+    father: 'bbb',
+    mother: 'ccc',
+  },
+  [Symbol('key')]: '1',
+};
 
 function deepCopy(obj, weakmap = new WeakMap()) {
-    // Primitive type handling
-    if (obj === null || typeof obj !== 'object') {
-        return obj;
-    }
+  // Primitive type handling
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
 
-    // Complex type handling
+  // Complex type handling
 
-    // Handle circular reference; if object already copied, return stored copy
-    if (weakmap.has(obj)) {
-        return weakmap.get(obj);
-    }
+  // Handle circular reference; if object already copied, return stored copy
+  if (weakmap.has(obj)) {
+    return weakmap.get(obj);
+  }
 
-    let result = Array.isArray(obj) ? [] : {}; // Initialize new object
-    
-    weakmap.set(obj, result); // Key indicates object has been copied, value is copy result storage
-    for (let k in obj) {
-        if (obj.hasOwnProperty(k)) { // Only copy properties on the object itself, not prototype chain
-            result[k] = deepCopy(obj[k], weakmap); // Recursively copy reference properties
-        }
+  let result = Array.isArray(obj) ? [] : {}; // Initialize new object
+
+  weakmap.set(obj, result); // Key indicates object has been copied, value is copy result storage
+  for (let k in obj) {
+    if (obj.hasOwnProperty(k)) {
+      // Only copy properties on the object itself, not prototype chain
+      result[k] = deepCopy(obj[k], weakmap); // Recursively copy reference properties
     }
-    let symbolArr = Object.getOwnPropertySymbols(obj); // Get non-iterable Symbol properties
-    for (let k of symbolArr) {
-        result[k] = deepCopy(obj[k]);
-    }
-    return result; // Return the copied object
+  }
+  let symbolArr = Object.getOwnPropertySymbols(obj); // Get non-iterable Symbol properties
+  for (let k of symbolArr) {
+    result[k] = deepCopy(obj[k]);
+  }
+  return result; // Return the copied object
 }
 let newobj = deepCopy(obj);
-console.log(newobj)
+console.log(newobj);
 ```
 
 **structuredClone**
@@ -354,14 +349,14 @@ Built-in JS deep copy method
 
 ```js
 let obj = {
-     name: 'aaa',
-     age: 18,
-     hobby: ['basketball', 'pingpong'],
-     family: {
-         father: 'bbb',
-         mother: 'ccc',
-     }
- }
+  name: 'aaa',
+  age: 18,
+  hobby: ['basketball', 'pingpong'],
+  family: {
+    father: 'bbb',
+    mother: 'ccc',
+  },
+};
 let newObj = structuredClone(obj);
 ```
 
@@ -384,15 +379,15 @@ Limitations:
 
 ```js
 let obj = {
-     name: 'aaa',
-     age: 18,
-     hobby: ['basketball', 'pingpong'],
-     family: {
-         father: 'bbb',
-         mother: 'ccc',
-     }
- }
- let newobj = JSON.parse(JSON.stringify(obj));
+  name: 'aaa',
+  age: 18,
+  hobby: ['basketball', 'pingpong'],
+  family: {
+    father: 'bbb',
+    mother: 'ccc',
+  },
+};
+let newobj = JSON.parse(JSON.stringify(obj));
 ```
 
 ### Statements
@@ -407,13 +402,13 @@ Used to iterate over enumerable property keys of an object; for arrays, iterates
 
 ```js
 const obj = {
-    '3': 'three',
-    b: 'B',
-    '1': 'one',
-    a: 'A'
+  3: 'three',
+  b: 'B',
+  1: 'one',
+  a: 'A',
 };
 for (let key in obj) {
-    console.log(key, obj[key]);
+  console.log(key, obj[key]);
 }
 ```
 
@@ -426,9 +421,9 @@ Used to iterate over iterable values;
 - Can use `break / continue`; forEach cannot;
 
 ```js
-let obj = [1, 2, 3, 4]
+let obj = [1, 2, 3, 4];
 for (let v of obj) {
-   v; // Represents array values
+  v; // Represents array values
 }
 ```
 
@@ -442,15 +437,15 @@ In async functions, try-catch-finally's return value is the Promise's then param
 
 ```js
 async function fn2() {
-    try {
-        const res = await Promise.resolve("aaa");
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const res = await Promise.resolve('aaa');
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-console.log(fn2().then(res => console.log(res))); // Outputs aaa
+console.log(fn2().then((res) => console.log(res))); // Outputs aaa
 ```
 
 ### Destructuring Assignment
@@ -461,18 +456,21 @@ console.log(fn2().then(res => console.log(res))); // Outputs aaa
 
 ```js
 let obj = {
-   name: 'aaa',
-   age: 18,
-   address: {city: 'New York', country: 'USA'},
-}
+  name: 'aaa',
+  age: 18,
+  address: { city: 'New York', country: 'USA' },
+};
 
-let {name, age} = obj;
+let { name, age } = obj;
 
-let {name: myName = 'bbb', age: myAge = 134} = obj // Rename destructured data, set default values
+let { name: myName = 'bbb', age: myAge = 134 } = obj; // Rename destructured data, set default values
 
-let {address, address: {city, country}} = obj; // Nested destructuring, destructure both nested object and values
+let {
+  address,
+  address: { city, country },
+} = obj; // Nested destructuring, destructure both nested object and values
 
-let {address} = structuredClone(obj); // Deep copy then destructure, solves reference sharing issue
+let { address } = structuredClone(obj); // Deep copy then destructure, solves reference sharing issue
 ```
 
 ### Spread Operator
@@ -489,7 +487,7 @@ const arr2 = [3, 4];
 const merged = [...arr1, ...arr2]; // [1, 2, 3, 4]
 
 // Convert string to single character array
-[...'abc']
+[...'abc'];
 
 // Convert pseudo-array to real array
 const arr = [...document.querySelectorAll('p')];
@@ -515,9 +513,9 @@ Promise wraps an async operation and provides an object to get the async operati
 ```js
 let promise = new Promise((resolve, reject) => {
   // executor
-})
+});
 
-promise.then(onFulfilled, onRejected)
+promise.then(onFulfilled, onRejected);
 ```
 
 Chain Call Mechanism:
@@ -537,17 +535,17 @@ then/catch return a new Promise whose state is determined by the callback functi
 ```js
 Promise.resolve(1)
   .finally(() => 999)
-  .then(res => console.log(res)) // 👉 1
+  .then((res) => console.log(res)); // 👉 1
 
 Promise.resolve(1)
   .finally(() => Promise.resolve(999))
-  .then(res => console.log(res)) // 👉 1
+  .then((res) => console.log(res)); // 👉 1
 
 Promise.resolve(1)
   .finally(() => {
-    throw new Error("err")
+    throw new Error('err');
   })
-  .catch(e => console.log(e.message)) // 👉 "err"
+  .catch((e) => console.log(e.message)); // 👉 "err"
 ```
 
 #### Promise Static Methods
@@ -555,27 +553,27 @@ Promise.resolve(1)
 `resolve()` directly generates a resolved Promise object
 
 ```js
-Promise.resolve('aaa').then(value => {
-    console.log(value); // Outputs aaa
-})
+Promise.resolve('aaa').then((value) => {
+  console.log(value); // Outputs aaa
+});
 ```
 
 `reject()` directly generates a rejected Promise object
 
 ```js
-Promise.reject('aaa').then(value => {
-    console.log(value); // Outputs aaa
-})
+Promise.reject('aaa').then((value) => {
+  console.log(value); // Outputs aaa
+});
 ```
 
 `all([])` takes a Promise array as parameter; when every Promise in the array succeeds, returns a successful Promise; otherwise returns a failed Promise;
 
 ```js
 const p1 = new Promise((resolve) => {
-    resolve(1);
+  resolve(1);
 });
 const p2 = new Promise((resolve) => {
-    resolve(1);
+  resolve(1);
 });
 const p3 = Promise.resolve('ok');
 
@@ -589,8 +587,8 @@ const result = Promise.all([p1, p2, p3]);
 ```js
 const p1 = Promise.resolve(1);
 const p2 = Promise.reject(-1);
-Promise.allSettled([p1, p2]).then(res => {
-    console.log(res);
+Promise.allSettled([p1, p2]).then((res) => {
+  console.log(res);
 });
 // Output:
 /*
@@ -605,14 +603,14 @@ Promise.allSettled([p1, p2]).then(res => {
 
 ```js
 const p1 = new Promise((resolve, reject) => {
-    reject(1);
+  reject(1);
 });
 const p2 = new Promise((resolve, reject) => {
-    reject(2);
+  reject(2);
 });
-const p3 = Promise.resolve("ok");
+const p3 = Promise.resolve('ok');
 
 Promise.any([p1, p2, p3]).then(
-    console.log(r), // Outputs 'ok'
+  console.log(r) // Outputs 'ok'
 );
 ```

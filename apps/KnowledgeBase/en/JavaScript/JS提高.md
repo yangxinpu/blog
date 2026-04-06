@@ -23,22 +23,22 @@ Task queues are divided into microtask queue and macrotask queue:
 
 ```js
 setTimeout(() => {
-  console.log("macro");
+  console.log('macro');
   Promise.resolve().then(() => {
-    console.log("micro");
+    console.log('micro');
     Promise.resolve().then(() => {
-        console.log("micro2");
+      console.log('micro2');
     });
-   });
+  });
   Promise.resolve().then(() => {
-    console.log("micro3");
+    console.log('micro3');
   });
 });
 // Output order: macro, micro, micro3, micro2 (micro2 is a microtask added to queue later)
 
-
-queueMicrotask(() => { // Standard microtask API
-    console.log('microtask');
+queueMicrotask(() => {
+  // Standard microtask API
+  console.log('microtask');
 });
 
 // Microtask in Node.js
@@ -74,30 +74,34 @@ console.log(arr[Symbol.iterator]().next());
 
 // Custom iterator for custom object
 let obj = {
-    a: 1,
-    b: 2,
-    c: 3,
-    [Symbol.iterator]() {
-        var index = 0;
-        let map = new Map([["a", 1], ["b", 2], ["c", 3]]);
-        return {
-            // Return next() method
-            next() {
-                var mapEntries = [...map.entries()];
-                if (index < map.size) {
-                    return {
-                        value: mapEntries[index++],
-                        done: false
-                    }
-                }
-                return {value: undefined, done: true};
-            }
+  a: 1,
+  b: 2,
+  c: 3,
+  [Symbol.iterator]() {
+    var index = 0;
+    let map = new Map([
+      ['a', 1],
+      ['b', 2],
+      ['c', 3],
+    ]);
+    return {
+      // Return next() method
+      next() {
+        var mapEntries = [...map.entries()];
+        if (index < map.size) {
+          return {
+            value: mapEntries[index++],
+            done: false,
+          };
         }
-    }
-}
+        return { value: undefined, done: true };
+      },
+    };
+  },
+};
 
 for (let i of obj) {
-    console.log(i);
+  console.log(i);
 }
 ```
 
@@ -119,38 +123,42 @@ Generator is a function that can pause execution and resume later, defined by `f
 
 ```js
 function* gen() {
-  const a = yield 1
-  console.log('a:', a)
+  const a = yield 1;
+  console.log('a:', a);
 
-  const b = yield 2
-  console.log('b:', b)
+  const b = yield 2;
+  console.log('b:', b);
 
-  return 3
+  return 3;
 }
 // Get generator object
-const g = gen() 
-g.next() // Returns { value: 1, done: false }, stops at: yield 1, a not assigned yet
-g.next("X") // "X" assigned to a, outputs 'X', executes yield 2, returns { value: 2, done: false }
-g.next("Y") // "Y" assigned to b, outputs 'Y', executes return 3, returns { value: 3, done: true }
+const g = gen();
+g.next(); // Returns { value: 1, done: false }, stops at: yield 1, a not assigned yet
+g.next('X'); // "X" assigned to a, outputs 'X', executes yield 2, returns { value: 2, done: false }
+g.next('Y'); // "Y" assigned to b, outputs 'Y', executes return 3, returns { value: 3, done: true }
 // Subsequent g.next calls all return { value: undefined, done: true }
-g.return(100)   // { value: 100, done: true } // Can directly terminate generator
+g.return(100); // { value: 100, done: true } // Can directly terminate generator
 
 // Use generator to create iterator
 let obj = {
-    a: 1,
-    b: 2,
-    c: 3,
-    [Symbol.iterator]: function* () {
-        var index = 0;
-        let map = new Map([["a", 1], ["b", 2], ["c", 3]]);
-        var mapEntries = [...map.entries()];
-        while (index < mapEntries.length) {
-            yield mapEntries[index++];
-        }
+  a: 1,
+  b: 2,
+  c: 3,
+  [Symbol.iterator]: function* () {
+    var index = 0;
+    let map = new Map([
+      ['a', 1],
+      ['b', 2],
+      ['c', 3],
+    ]);
+    var mapEntries = [...map.entries()];
+    while (index < mapEntries.length) {
+      yield mapEntries[index++];
     }
-}
+  },
+};
 for (let i of obj) {
-    console.log(i);
+  console.log(i);
 }
 ```
 
@@ -173,22 +181,22 @@ A module represents an independent JavaScript file that can define variables, fu
 ```js
 // Named export
 export const fn = function () {
-    console.log('module');
-}
+  console.log('module');
+};
 // Import
-import { fn } from './jsmodule.js'
+import { fn } from './jsmodule.js';
 
 // Default export
 export default function () {
-    console.log('module1');
+  console.log('module1');
 }
 // Import
-import fn from './jsmodule.js'
+import fn from './jsmodule.js';
 
 // Alias import
-import {fn as Fn} from './jsmodule.js'
+import { fn as Fn } from './jsmodule.js';
 // Namespace import
-import * as Fn from './jsmodule.js' // Collects exports into an Fn object
+import * as Fn from './jsmodule.js'; // Collects exports into an Fn object
 ```
 
 #### Dynamic Module Loading
@@ -201,10 +209,10 @@ Allows runtime on-demand loading of modules in local scope; dynamic import retur
 
 ```js
 if (1) {
-    import('./jsmodule.js').then(module => {
-        module.default(); // Default exported object
-        module.fn();
-    })
+  import('./jsmodule.js').then((module) => {
+    module.default(); // Default exported object
+    module.fn();
+  });
 }
 ```
 
@@ -317,7 +325,7 @@ Garbage collection refers to: the process of deleting objects in heap memory tha
 let obj = {};
 let wm = new WeakMap();
 
-wm.set(obj, "data"); // When GC judges whether obj is reachable, it won't count the WeakMap reference
+wm.set(obj, 'data'); // When GC judges whether obj is reachable, it won't count the WeakMap reference
 ```
 
 **Garbage Collection Methods**:

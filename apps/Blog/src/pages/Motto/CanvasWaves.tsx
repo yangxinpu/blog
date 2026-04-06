@@ -33,14 +33,10 @@ export default function CanvasWaves({
   const animationRef = useRef<number>(0);
   const [themeColor, setThemeColor] = useState({
     line: 'rgba(255, 255, 255, 0.8)',
-    glow: 'rgba(255, 255, 255, 0.2)'
+    glow: 'rgba(255, 255, 255, 0.2)',
   });
 
-  const {
-    speed = 1.2,
-    density = 5,
-    lineWidthMultiplier = 1.5,
-  } = options;
+  const { speed = 1.2, density = 5, lineWidthMultiplier = 1.5 } = options;
 
   // Update theme color based on CSS variables
   useEffect(() => {
@@ -48,15 +44,16 @@ export default function CanvasWaves({
       const root = document.documentElement;
       const computedStyle = getComputedStyle(root);
       // Fallback to a teal/blue if not found
-      const accent = computedStyle.getPropertyValue('--accent').trim() || '#13d6aa';
-      
+      const accent =
+        computedStyle.getPropertyValue('--accent').trim() || '#13d6aa';
+
       // In a real app we'd parse the color, but for Canvas context
       // we can rely on standard CSS color strings.
       // Since --accent might be a hex or rgb, we'll construct the strings
       // We will use globalAlpha in canvas for transparency instead of parsing
       setThemeColor({
         line: accent,
-        glow: accent
+        glow: accent,
       });
     };
 
@@ -151,25 +148,28 @@ export default function CanvasWaves({
           ctx.beginPath();
           // Animate the line drawing from left to right
           const drawWidth = w * p;
-          
+
           for (let x = 0; x <= drawWidth; x += 10) {
             // Add a slight tilt or offset for visual interest
-            const y = h / 2 + wave.yOffset + 
-                     Math.sin(x * wave.frequency + wave.phase + time * wave.speed) * wave.amplitude;
-            
+            const y =
+              h / 2 +
+              wave.yOffset +
+              Math.sin(x * wave.frequency + wave.phase + time * wave.speed) *
+                wave.amplitude;
+
             if (x === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           }
-          
+
           // Add glow effect
           ctx.shadowBlur = 12;
           ctx.shadowColor = themeColor.glow;
-          
+
           ctx.lineWidth = wave.width;
           ctx.strokeStyle = themeColor.line;
           ctx.globalAlpha = wave.opacity * (0.2 + 0.8 * p); // Fade in opacity while sweeping
           ctx.stroke();
-          
+
           // Reset shadow for next path to avoid compounded glow issues
           ctx.shadowBlur = 0;
         });

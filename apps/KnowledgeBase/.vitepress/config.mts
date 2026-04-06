@@ -55,7 +55,10 @@ export default defineConfig({
                 { text: 'DOM', link: '/zh/JavaScript/DOM' },
                 { text: 'DOM 事件', link: '/zh/JavaScript/DOM事件' },
                 { text: '内置对象', link: '/zh/JavaScript/内置对象' },
-                { text: '函数&面向对象', link: '/zh/JavaScript/函数&面向对象：' },
+                {
+                  text: '函数&面向对象',
+                  link: '/zh/JavaScript/函数&面向对象：',
+                },
                 { text: '前后端通信', link: '/zh/JavaScript/前后端通信' },
                 { text: 'Web API', link: '/zh/JavaScript/Web  API' },
               ],
@@ -129,8 +132,14 @@ export default defineConfig({
                 { text: 'DOM', link: '/en/JavaScript/DOM' },
                 { text: 'DOM Events', link: '/en/JavaScript/DOM事件' },
                 { text: 'Built-in Objects', link: '/en/JavaScript/内置对象' },
-                { text: 'Functions & OOP', link: '/en/JavaScript/函数&面向对象：' },
-                { text: 'Client-Server Communication', link: '/en/JavaScript/前后端通信' },
+                {
+                  text: 'Functions & OOP',
+                  link: '/en/JavaScript/函数&面向对象：',
+                },
+                {
+                  text: 'Client-Server Communication',
+                  link: '/en/JavaScript/前后端通信',
+                },
                 { text: 'Web API', link: '/en/JavaScript/Web  API' },
               ],
             },

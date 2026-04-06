@@ -19,21 +19,25 @@ This skill is intended for frontend-heavy workflows and personal branding sites.
 Trigger this skill when user intent includes:
 
 ### Blog Creation
+
 - "build a blog"
 - "create personal website"
 - "portfolio site"
 
 ### UI Optimization
+
 - "optimize my blog UI"
 - "make my blog look modern"
 - "improve readability"
 
 ### Content System
+
 - "markdown blog system"
 - "article rendering"
 - "docs website"
 
 ### Performance / SEO
+
 - "improve lighthouse score"
 - "SEO optimization"
 
@@ -57,6 +61,7 @@ If user does NOT specify:
 ## 4. Architecture Design
 
 ### 4.1 Project Structure
+
 /src
 /components
 Header.tsx
@@ -74,21 +79,23 @@ hello-world.md
 /router
 main.tsx
 
-
 ---
 
 ### 4.2 Core Modules
 
 #### (1) Layout System
+
 - Header (navigation + branding)
 - Footer (social + copyright)
 - Container (max-width + padding)
 
 #### (2) Blog List
+
 - Card-based layout
 - Title / description / date / tags
 
 #### (3) Article Page
+
 - Markdown renderer
 - Code highlighting
 - Anchor navigation (optional)
@@ -280,3 +287,4 @@ This skill can evolve into:
 full knowledge-base system
 documentation platform
 AI-powered blog generator
+```

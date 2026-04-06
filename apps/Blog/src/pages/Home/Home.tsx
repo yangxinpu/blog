@@ -101,9 +101,9 @@ function Home() {
   );
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
-  const cardsDataRef = useRef<
-    Array<{ rect: DOMRect; element: HTMLElement }>
-  >([]);
+  const cardsDataRef = useRef<Array<{ rect: DOMRect; element: HTMLElement }>>(
+    []
+  );
 
   const themeGradientColors = [
     '#d3fff3',
@@ -156,7 +156,10 @@ function Home() {
       cardsDataRef.current.forEach(({ rect, element }) => {
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        const distanceToCenter = Math.hypot(mouse.x - centerX, mouse.y - centerY);
+        const distanceToCenter = Math.hypot(
+          mouse.x - centerX,
+          mouse.y - centerY
+        );
         const maxDistance =
           BORDER_LIGHT_RADIUS + Math.max(rect.width, rect.height) / 2;
 
@@ -167,7 +170,10 @@ function Home() {
 
         const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
         const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
-        const distanceToEdge = Math.hypot(mouse.x - closestX, mouse.y - closestY);
+        const distanceToEdge = Math.hypot(
+          mouse.x - closestX,
+          mouse.y - closestY
+        );
 
         if (distanceToEdge > BORDER_LIGHT_RADIUS) {
           element.classList.remove(activeClassName);
@@ -216,7 +222,9 @@ function Home() {
     updateCardsData();
     resizeObserver = new ResizeObserver(handleViewportChange);
     resizeObserver.observe(grid);
-    cardsDataRef.current.forEach(({ element }) => resizeObserver?.observe(element));
+    cardsDataRef.current.forEach(({ element }) =>
+      resizeObserver?.observe(element)
+    );
 
     grid.addEventListener('pointermove', handlePointerMove);
     grid.addEventListener('pointerleave', handlePointerLeave);

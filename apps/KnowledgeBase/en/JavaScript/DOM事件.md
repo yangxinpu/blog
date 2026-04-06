@@ -30,10 +30,10 @@ Operations that trigger JS responses; every element in a webpage can produce cer
 
 ```js
 document.addEventListener('copy', (event) => {
-    console.log('Copy operation triggered');
-    event.preventDefault(); // Prevent copying currently selected content to system clipboard
-    event.clipboardData.setData('text/plain', 'plain text'); // Set clipboard content
-})
+  console.log('Copy operation triggered');
+  event.preventDefault(); // Prevent copying currently selected content to system clipboard
+  event.clipboardData.setData('text/plain', 'plain text'); // Set clipboard content
+});
 ```
 
 #### Keyboard Events
@@ -57,17 +57,17 @@ document.addEventListener('copy', (event) => {
 `DOMContentLoaded`: Triggered when page HTML document is fully loaded and parsed, without waiting for CSS files, images, and sub-frames to load;
 
 ```js
-window.addEventListener('DOMContentLoaded', function() {
-    console.log("DOMContentLoaded");
+window.addEventListener('DOMContentLoaded', function () {
+  console.log('DOMContentLoaded');
 });
 ```
 
 `load`: Triggered after waiting for all page resources (like images, videos, JS files, CSS files) to finish loading;
 
 ```js
-window.addEventListener('load', function() {
-     console.log('All page resources loaded');
-})
+window.addEventListener('load', function () {
+  console.log('All page resources loaded');
+});
 ```
 
 #### Scroll Events
@@ -75,10 +75,10 @@ window.addEventListener('load', function() {
 Triggered when scrollbar scrolls, generally added to window; no default behavior, can't prevent scrolling through this;
 
 ```js
-window.addEventListener('scroll', function() {
-     document.documentElement.scrollTop;  // Get entire page scroll distance
-     document.documentElement.scrollTop = 800; // Scroll directly to 800px, no unit needed
-})
+window.addEventListener('scroll', function () {
+  document.documentElement.scrollTop; // Get entire page scroll distance
+  document.documentElement.scrollTop = 800; // Scroll directly to 800px, no unit needed
+});
 ```
 
 #### Page Resize Events
@@ -86,9 +86,9 @@ window.addEventListener('scroll', function() {
 Triggered when browser window size changes;
 
 ```js
-window.addEventListener('resize', function() {
-     console.log('Page size changed');
-})
+window.addEventListener('resize', function () {
+  console.log('Page size changed');
+});
 ```
 
 #### Drag Events
@@ -107,26 +107,26 @@ const dragDiv = document.querySelector('.drag');
 const targetDiv = document.querySelector('.target');
 // Dragged box events
 dragDiv.addEventListener('dragstart', (event) => {
-    console.log('Box started being dragged')
-    event.preventDefault(); // Prevent initializing drag operation, create semi-transparent copy of dragged element following mouse
-    event.dataTransfer.setData('text/plain', dragDiv.outerHTML); // Set transfer data string
-})
+  console.log('Box started being dragged');
+  event.preventDefault(); // Prevent initializing drag operation, create semi-transparent copy of dragged element following mouse
+  event.dataTransfer.setData('text/plain', dragDiv.outerHTML); // Set transfer data string
+});
 
 dragDiv.addEventListener('drag', () => {
-    console.log('Box is being dragged');
-})
+  console.log('Box is being dragged');
+});
 
 // Dragged box enters target box event
 targetDiv.addEventListener('dragover', (event) => {
-    console.log('Dragged box hovering over target box')
-    event.preventDefault(); // Prevent rejecting box placement, otherwise drop event won't trigger
-})
+  console.log('Dragged box hovering over target box');
+  event.preventDefault(); // Prevent rejecting box placement, otherwise drop event won't trigger
+});
 
 targetDiv.addEventListener('drop', (event) => {
-    console.log('Dragged box dropped on target box')
-    event.preventDefault(); // Prevent rejecting box content placement
-    targetDiv.innerHTML += event.dataTransfer.getData('text/plain');
-})
+  console.log('Dragged box dropped on target box');
+  event.preventDefault(); // Prevent rejecting box content placement
+  targetDiv.innerHTML += event.dataTransfer.getData('text/plain');
+});
 ```
 
 #### DOMContentLoaded
@@ -135,8 +135,8 @@ Used to listen for HTML document being fully loaded and parsed (DOM tree constru
 
 ```js
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOMContentLoaded");
-})
+  console.log('DOMContentLoaded');
+});
 ```
 
 #### load
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 Triggered only after all page resources (including HTML, CSS, JavaScript, images, videos, fonts, etc.) are fully loaded
 
 ```js
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   console.log('All resources loaded!');
 });
 ```
@@ -156,9 +156,9 @@ A collection of event-related data, like mouse click coordinates, or which keybo
 #### Basic Event Object
 
 ```js
-btn.onclick = function(event) {
-   console.log(event);
-}
+btn.onclick = function (event) {
+  console.log(event);
+};
 ```
 
 `event.target`: Returns the clicked element (not necessarily the element with event attached);
@@ -176,23 +176,23 @@ btn.onclick = function(event) {
 Can get mouse coordinate values, all without units, need to add px yourself;
 
 ```js
-divs.addEventListener('click', function(event) {
-    event.clientX;  // Returns mouse's x coordinate relative to viewport
-    event.clientY;
-    event.pageX;    // Returns mouse's x coordinate relative to entire page
-    event.pageY;
-    event.screenX;  // Returns mouse's x coordinate relative to computer screen
-    event.screenY;
-})
+divs.addEventListener('click', function (event) {
+  event.clientX; // Returns mouse's x coordinate relative to viewport
+  event.clientY;
+  event.pageX; // Returns mouse's x coordinate relative to entire page
+  event.pageY;
+  event.screenX; // Returns mouse's x coordinate relative to computer screen
+  event.screenY;
+});
 ```
 
 #### Keyboard Event Object
 
 ```js
-divs.addEventListener('keydown', function(event) {
-    event.keyCode;  // Returns ASCII value of pressed key; keyup and keydown don't distinguish case, like a and A are both 65; keypress distinguishes
-    event.key;      // Returns string of pressed key like Enter, Space, ArrowLeft
-})
+divs.addEventListener('keydown', function (event) {
+  event.keyCode; // Returns ASCII value of pressed key; keyup and keydown don't distinguish case, like a and A are both 65; keypress distinguishes
+  event.key; // Returns string of pressed key like Enter, Space, ArrowLeft
+});
 ```
 
 ### Registering Events
@@ -202,9 +202,9 @@ divs.addEventListener('keydown', function(event) {
 Same event can only bind one handler function; later bound ones override earlier ones;
 
 ```js
-btn.onclick = function() {
-    console.log('Element clicked');
-}
+btn.onclick = function () {
+  console.log('Element clicked');
+};
 ```
 
 #### Listener Event Registration
@@ -212,13 +212,13 @@ btn.onclick = function() {
 Format: `element.addEventListener(event type, event callback function, event flow);`
 
 ```js
-btn.addEventListener('click', function() {
-   alert('hi');
-})
+btn.addEventListener('click', function () {
+  alert('hi');
+});
 
-btn.addEventListener('click', function() {
-   alert('aaaaa');
-})
+btn.addEventListener('click', function () {
+  alert('aaaaa');
+});
 // This will pop up two alerts consecutively
 ```
 
@@ -232,16 +232,16 @@ When event is triggered, capture phase starts first, traversing window, document
 
 ```js
 // Traditional method:
-btn.onclick = function() {
-   alert('aa');
-   btn.onclick = null;
-}
+btn.onclick = function () {
+  alert('aa');
+  btn.onclick = null;
+};
 ```
 
 ```js
 // Listener method:
 function fn() {
-   alert('a');
+  alert('a');
 }
 btn.addEventListener('click', fn);
 btn.removeEventListener('click', fn);

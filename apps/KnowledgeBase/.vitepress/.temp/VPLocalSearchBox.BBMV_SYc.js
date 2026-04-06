@@ -1,55 +1,156 @@
 var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { shallowRef, computed, toValue, watch, defineComponent, ref, watchEffect, onMounted, nextTick, onBeforeUnmount, unref, markRaw, createApp, useSSRContext } from "vue";
-import { ssrRenderTeleport, ssrRenderAttr, ssrRenderClass, ssrIncludeBooleanAttr, ssrRenderList, ssrInterpolate } from "vue/server-renderer";
-import { t as toArray, u as unrefElement, n as notNullish, a as tryOnScopeDispose, b as useData, c as computedAsync, d as useSessionStorage, e as useLocalStorage, w as watchDebounced, o as onKeyStroke, f as useRouter, g as createSearchTranslate, h as useEventListener, i as useScrollLock, j as dataSymbol, p as pathToFile, k as inBrowser, l as escapeRegExp } from "./app.js";
-import { _ as _export_sfc } from "./plugin-vue_export-helper.1tPrXgE0.js";
-const localSearchIndex = { "en": () => import("./@localSearchIndexen.C_ibtrXm.js"), "root": () => import("./@localSearchIndexroot.G1WijXY4.js") };
-/*!
-* tabbable 6.4.0
-* @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
-*/
-var candidateSelectors = ["input:not([inert]):not([inert] *)", "select:not([inert]):not([inert] *)", "textarea:not([inert]):not([inert] *)", "a[href]:not([inert]):not([inert] *)", "button:not([inert]):not([inert] *)", "[tabindex]:not(slot):not([inert]):not([inert] *)", "audio[controls]:not([inert]):not([inert] *)", "video[controls]:not([inert]):not([inert] *)", '[contenteditable]:not([contenteditable="false"]):not([inert]):not([inert] *)', "details>summary:first-of-type:not([inert]):not([inert] *)", "details:not([inert]):not([inert] *)"];
-var candidateSelector = /* @__PURE__ */ candidateSelectors.join(",");
-var NoElement = typeof Element === "undefined";
-var matches = NoElement ? function() {
-} : Element.prototype.matches || Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-var getRootNode = !NoElement && Element.prototype.getRootNode ? function(element) {
-  var _element$getRootNode;
-  return element === null || element === void 0 ? void 0 : (_element$getRootNode = element.getRootNode) === null || _element$getRootNode === void 0 ? void 0 : _element$getRootNode.call(element);
-} : function(element) {
-  return element === null || element === void 0 ? void 0 : element.ownerDocument;
+var __defNormalProp = (obj, key, value) =>
+  key in obj
+    ? __defProp(obj, key, {
+        enumerable: true,
+        configurable: true,
+        writable: true,
+        value,
+      })
+    : (obj[key] = value);
+var __publicField = (obj, key, value) =>
+  __defNormalProp(obj, typeof key !== 'symbol' ? key + '' : key, value);
+import {
+  shallowRef,
+  computed,
+  toValue,
+  watch,
+  defineComponent,
+  ref,
+  watchEffect,
+  onMounted,
+  nextTick,
+  onBeforeUnmount,
+  unref,
+  markRaw,
+  createApp,
+  useSSRContext,
+} from 'vue';
+import {
+  ssrRenderTeleport,
+  ssrRenderAttr,
+  ssrRenderClass,
+  ssrIncludeBooleanAttr,
+  ssrRenderList,
+  ssrInterpolate,
+} from 'vue/server-renderer';
+import {
+  t as toArray,
+  u as unrefElement,
+  n as notNullish,
+  a as tryOnScopeDispose,
+  b as useData,
+  c as computedAsync,
+  d as useSessionStorage,
+  e as useLocalStorage,
+  w as watchDebounced,
+  o as onKeyStroke,
+  f as useRouter,
+  g as createSearchTranslate,
+  h as useEventListener,
+  i as useScrollLock,
+  j as dataSymbol,
+  p as pathToFile,
+  k as inBrowser,
+  l as escapeRegExp,
+} from './app.js';
+import { _ as _export_sfc } from './plugin-vue_export-helper.1tPrXgE0.js';
+const localSearchIndex = {
+  en: () => import('./@localSearchIndexen.C_ibtrXm.js'),
+  root: () => import('./@localSearchIndexroot.G1WijXY4.js'),
 };
+/*!
+ * tabbable 6.4.0
+ * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
+ */
+var candidateSelectors = [
+  'input:not([inert]):not([inert] *)',
+  'select:not([inert]):not([inert] *)',
+  'textarea:not([inert]):not([inert] *)',
+  'a[href]:not([inert]):not([inert] *)',
+  'button:not([inert]):not([inert] *)',
+  '[tabindex]:not(slot):not([inert]):not([inert] *)',
+  'audio[controls]:not([inert]):not([inert] *)',
+  'video[controls]:not([inert]):not([inert] *)',
+  '[contenteditable]:not([contenteditable="false"]):not([inert]):not([inert] *)',
+  'details>summary:first-of-type:not([inert]):not([inert] *)',
+  'details:not([inert]):not([inert] *)',
+];
+var candidateSelector = /* @__PURE__ */ candidateSelectors.join(',');
+var NoElement = typeof Element === 'undefined';
+var matches = NoElement
+  ? function () {}
+  : Element.prototype.matches ||
+    Element.prototype.msMatchesSelector ||
+    Element.prototype.webkitMatchesSelector;
+var getRootNode =
+  !NoElement && Element.prototype.getRootNode
+    ? function (element) {
+        var _element$getRootNode;
+        return element === null || element === void 0
+          ? void 0
+          : (_element$getRootNode = element.getRootNode) === null ||
+              _element$getRootNode === void 0
+            ? void 0
+            : _element$getRootNode.call(element);
+      }
+    : function (element) {
+        return element === null || element === void 0
+          ? void 0
+          : element.ownerDocument;
+      };
 var _isInert = function isInert(node, lookUp) {
   var _node$getAttribute;
   if (lookUp === void 0) {
     lookUp = true;
   }
-  var inertAtt = node === null || node === void 0 ? void 0 : (_node$getAttribute = node.getAttribute) === null || _node$getAttribute === void 0 ? void 0 : _node$getAttribute.call(node, "inert");
-  var inert = inertAtt === "" || inertAtt === "true";
-  var result = inert || lookUp && node && // closest does not exist on shadow roots, so we fall back to a manual
-  // lookup upward, in case it is not defined.
-  (typeof node.closest === "function" ? node.closest("[inert]") : _isInert(node.parentNode));
+  var inertAtt =
+    node === null || node === void 0
+      ? void 0
+      : (_node$getAttribute = node.getAttribute) === null ||
+          _node$getAttribute === void 0
+        ? void 0
+        : _node$getAttribute.call(node, 'inert');
+  var inert = inertAtt === '' || inertAtt === 'true';
+  var result =
+    inert ||
+    (lookUp &&
+      node && // closest does not exist on shadow roots, so we fall back to a manual
+      // lookup upward, in case it is not defined.
+      (typeof node.closest === 'function'
+        ? node.closest('[inert]')
+        : _isInert(node.parentNode)));
   return result;
 };
 var isContentEditable = function isContentEditable2(node) {
   var _node$getAttribute2;
-  var attValue = node === null || node === void 0 ? void 0 : (_node$getAttribute2 = node.getAttribute) === null || _node$getAttribute2 === void 0 ? void 0 : _node$getAttribute2.call(node, "contenteditable");
-  return attValue === "" || attValue === "true";
+  var attValue =
+    node === null || node === void 0
+      ? void 0
+      : (_node$getAttribute2 = node.getAttribute) === null ||
+          _node$getAttribute2 === void 0
+        ? void 0
+        : _node$getAttribute2.call(node, 'contenteditable');
+  return attValue === '' || attValue === 'true';
 };
 var getCandidates = function getCandidates2(el, includeContainer, filter) {
   if (_isInert(el)) {
     return [];
   }
-  var candidates = Array.prototype.slice.apply(el.querySelectorAll(candidateSelector));
+  var candidates = Array.prototype.slice.apply(
+    el.querySelectorAll(candidateSelector)
+  );
   if (includeContainer && matches.call(el, candidateSelector)) {
     candidates.unshift(el);
   }
   candidates = candidates.filter(filter);
   return candidates;
 };
-var _getCandidatesIteratively = function getCandidatesIteratively(elements, includeContainer, options) {
+var _getCandidatesIteratively = function getCandidatesIteratively(
+  elements,
+  includeContainer,
+  options
+) {
   var candidates = [];
   var elementsToCheck = Array.from(elements);
   while (elementsToCheck.length) {
@@ -57,7 +158,7 @@ var _getCandidatesIteratively = function getCandidatesIteratively(elements, incl
     if (_isInert(element, false)) {
       continue;
     }
-    if (element.tagName === "SLOT") {
+    if (element.tagName === 'SLOT') {
       var assigned = element.assignedElements();
       var content = assigned.length ? assigned : element.children;
       var nestedCandidates = _getCandidatesIteratively(content, true, options);
@@ -66,25 +167,37 @@ var _getCandidatesIteratively = function getCandidatesIteratively(elements, incl
       } else {
         candidates.push({
           scopeParent: element,
-          candidates: nestedCandidates
+          candidates: nestedCandidates,
         });
       }
     } else {
       var validCandidate = matches.call(element, candidateSelector);
-      if (validCandidate && options.filter(element) && (includeContainer || !elements.includes(element))) {
+      if (
+        validCandidate &&
+        options.filter(element) &&
+        (includeContainer || !elements.includes(element))
+      ) {
         candidates.push(element);
       }
-      var shadowRoot = element.shadowRoot || // check for an undisclosed shadow
-      typeof options.getShadowRoot === "function" && options.getShadowRoot(element);
-      var validShadowRoot = !_isInert(shadowRoot, false) && (!options.shadowRootFilter || options.shadowRootFilter(element));
+      var shadowRoot =
+        element.shadowRoot || // check for an undisclosed shadow
+        (typeof options.getShadowRoot === 'function' &&
+          options.getShadowRoot(element));
+      var validShadowRoot =
+        !_isInert(shadowRoot, false) &&
+        (!options.shadowRootFilter || options.shadowRootFilter(element));
       if (shadowRoot && validShadowRoot) {
-        var _nestedCandidates = _getCandidatesIteratively(shadowRoot === true ? element.children : shadowRoot.children, true, options);
+        var _nestedCandidates = _getCandidatesIteratively(
+          shadowRoot === true ? element.children : shadowRoot.children,
+          true,
+          options
+        );
         if (options.flatten) {
           candidates.push.apply(candidates, _nestedCandidates);
         } else {
           candidates.push({
             scopeParent: element,
-            candidates: _nestedCandidates
+            candidates: _nestedCandidates,
           });
         }
       } else {
@@ -95,14 +208,18 @@ var _getCandidatesIteratively = function getCandidatesIteratively(elements, incl
   return candidates;
 };
 var hasTabIndex = function hasTabIndex2(node) {
-  return !isNaN(parseInt(node.getAttribute("tabindex"), 10));
+  return !isNaN(parseInt(node.getAttribute('tabindex'), 10));
 };
 var getTabIndex = function getTabIndex2(node) {
   if (!node) {
-    throw new Error("No node provided");
+    throw new Error('No node provided');
   }
   if (node.tabIndex < 0) {
-    if ((/^(AUDIO|VIDEO|DETAILS)$/.test(node.tagName) || isContentEditable(node)) && !hasTabIndex(node)) {
+    if (
+      (/^(AUDIO|VIDEO|DETAILS)$/.test(node.tagName) ||
+        isContentEditable(node)) &&
+      !hasTabIndex(node)
+    ) {
       return 0;
     }
   }
@@ -116,18 +233,22 @@ var getSortOrderTabIndex = function getSortOrderTabIndex2(node, isScope) {
   return tabIndex;
 };
 var sortOrderedTabbables = function sortOrderedTabbables2(a, b) {
-  return a.tabIndex === b.tabIndex ? a.documentOrder - b.documentOrder : a.tabIndex - b.tabIndex;
+  return a.tabIndex === b.tabIndex
+    ? a.documentOrder - b.documentOrder
+    : a.tabIndex - b.tabIndex;
 };
 var isInput = function isInput2(node) {
-  return node.tagName === "INPUT";
+  return node.tagName === 'INPUT';
 };
 var isHiddenInput = function isHiddenInput2(node) {
-  return isInput(node) && node.type === "hidden";
+  return isInput(node) && node.type === 'hidden';
 };
 var isDetailsWithSummary = function isDetailsWithSummary2(node) {
-  var r = node.tagName === "DETAILS" && Array.prototype.slice.apply(node.children).some(function(child) {
-    return child.tagName === "SUMMARY";
-  });
+  var r =
+    node.tagName === 'DETAILS' &&
+    Array.prototype.slice.apply(node.children).some(function (child) {
+      return child.tagName === 'SUMMARY';
+    });
   return r;
 };
 var getCheckedRadio = function getCheckedRadio2(nodes, form) {
@@ -143,16 +264,25 @@ var isTabbableRadio = function isTabbableRadio2(node) {
   }
   var radioScope = node.form || getRootNode(node);
   var queryRadios = function queryRadios2(name) {
-    return radioScope.querySelectorAll('input[type="radio"][name="' + name + '"]');
+    return radioScope.querySelectorAll(
+      'input[type="radio"][name="' + name + '"]'
+    );
   };
   var radioSet;
-  if (typeof window !== "undefined" && typeof window.CSS !== "undefined" && typeof window.CSS.escape === "function") {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.CSS !== 'undefined' &&
+    typeof window.CSS.escape === 'function'
+  ) {
     radioSet = queryRadios(window.CSS.escape(node.name));
   } else {
     try {
       radioSet = queryRadios(node.name);
     } catch (err) {
-      console.error("Looks like you have a radio button with a name attribute containing invalid CSS selector characters and need the CSS.escape polyfill: %s", err.message);
+      console.error(
+        'Looks like you have a radio button with a name attribute containing invalid CSS selector characters and need the CSS.escape polyfill: %s',
+        err.message
+      );
       return false;
     }
   }
@@ -160,7 +290,7 @@ var isTabbableRadio = function isTabbableRadio2(node) {
   return !checked || checked === node;
 };
 var isRadio = function isRadio2(node) {
-  return isInput(node) && node.type === "radio";
+  return isInput(node) && node.type === 'radio';
 };
 var isNonTabbableRadio = function isNonTabbableRadio2(node) {
   return isRadio(node) && !isTabbableRadio(node);
@@ -168,28 +298,54 @@ var isNonTabbableRadio = function isNonTabbableRadio2(node) {
 var isNodeAttached = function isNodeAttached2(node) {
   var _nodeRoot;
   var nodeRoot = node && getRootNode(node);
-  var nodeRootHost = (_nodeRoot = nodeRoot) === null || _nodeRoot === void 0 ? void 0 : _nodeRoot.host;
+  var nodeRootHost =
+    (_nodeRoot = nodeRoot) === null || _nodeRoot === void 0
+      ? void 0
+      : _nodeRoot.host;
   var attached = false;
   if (nodeRoot && nodeRoot !== node) {
     var _nodeRootHost, _nodeRootHost$ownerDo, _node$ownerDocument;
-    attached = !!((_nodeRootHost = nodeRootHost) !== null && _nodeRootHost !== void 0 && (_nodeRootHost$ownerDo = _nodeRootHost.ownerDocument) !== null && _nodeRootHost$ownerDo !== void 0 && _nodeRootHost$ownerDo.contains(nodeRootHost) || node !== null && node !== void 0 && (_node$ownerDocument = node.ownerDocument) !== null && _node$ownerDocument !== void 0 && _node$ownerDocument.contains(node));
+    attached = !!(
+      ((_nodeRootHost = nodeRootHost) !== null &&
+        _nodeRootHost !== void 0 &&
+        (_nodeRootHost$ownerDo = _nodeRootHost.ownerDocument) !== null &&
+        _nodeRootHost$ownerDo !== void 0 &&
+        _nodeRootHost$ownerDo.contains(nodeRootHost)) ||
+      (node !== null &&
+        node !== void 0 &&
+        (_node$ownerDocument = node.ownerDocument) !== null &&
+        _node$ownerDocument !== void 0 &&
+        _node$ownerDocument.contains(node))
+    );
     while (!attached && nodeRootHost) {
       var _nodeRoot2, _nodeRootHost2, _nodeRootHost2$ownerD;
       nodeRoot = getRootNode(nodeRootHost);
-      nodeRootHost = (_nodeRoot2 = nodeRoot) === null || _nodeRoot2 === void 0 ? void 0 : _nodeRoot2.host;
-      attached = !!((_nodeRootHost2 = nodeRootHost) !== null && _nodeRootHost2 !== void 0 && (_nodeRootHost2$ownerD = _nodeRootHost2.ownerDocument) !== null && _nodeRootHost2$ownerD !== void 0 && _nodeRootHost2$ownerD.contains(nodeRootHost));
+      nodeRootHost =
+        (_nodeRoot2 = nodeRoot) === null || _nodeRoot2 === void 0
+          ? void 0
+          : _nodeRoot2.host;
+      attached = !!(
+        (_nodeRootHost2 = nodeRootHost) !== null &&
+        _nodeRootHost2 !== void 0 &&
+        (_nodeRootHost2$ownerD = _nodeRootHost2.ownerDocument) !== null &&
+        _nodeRootHost2$ownerD !== void 0 &&
+        _nodeRootHost2$ownerD.contains(nodeRootHost)
+      );
     }
   }
   return attached;
 };
 var isZeroArea = function isZeroArea2(node) {
-  var _node$getBoundingClie = node.getBoundingClientRect(), width = _node$getBoundingClie.width, height = _node$getBoundingClie.height;
+  var _node$getBoundingClie = node.getBoundingClientRect(),
+    width = _node$getBoundingClie.width,
+    height = _node$getBoundingClie.height;
   return width === 0 && height === 0;
 };
 var isHidden = function isHidden2(node, _ref) {
-  var displayCheck = _ref.displayCheck, getShadowRoot = _ref.getShadowRoot;
-  if (displayCheck === "full-native") {
-    if ("checkVisibility" in node) {
+  var displayCheck = _ref.displayCheck,
+    getShadowRoot = _ref.getShadowRoot;
+  if (displayCheck === 'full-native') {
+    if ('checkVisibility' in node) {
       var visible = node.checkVisibility({
         // Checking opacity might be desirable for some use cases, but natively,
         // opacity zero elements _are_ focusable and tabbable.
@@ -201,28 +357,36 @@ var isHidden = function isHidden2(node, _ref) {
         // support both. However, this alias has wider browser support (Chrome
         // >= 105 and Firefox >= 106, vs. Chrome >= 121 and Firefox >= 122), so
         // we include it anyway.
-        checkVisibilityCSS: true
+        checkVisibilityCSS: true,
       });
       return !visible;
     }
   }
-  if (getComputedStyle(node).visibility === "hidden") {
+  if (getComputedStyle(node).visibility === 'hidden') {
     return true;
   }
-  var isDirectSummary = matches.call(node, "details>summary:first-of-type");
+  var isDirectSummary = matches.call(node, 'details>summary:first-of-type');
   var nodeUnderDetails = isDirectSummary ? node.parentElement : node;
-  if (matches.call(nodeUnderDetails, "details:not([open]) *")) {
+  if (matches.call(nodeUnderDetails, 'details:not([open]) *')) {
     return true;
   }
-  if (!displayCheck || displayCheck === "full" || // full-native can run this branch when it falls through in case
-  // Element#checkVisibility is unsupported
-  displayCheck === "full-native" || displayCheck === "legacy-full") {
-    if (typeof getShadowRoot === "function") {
+  if (
+    !displayCheck ||
+    displayCheck === 'full' || // full-native can run this branch when it falls through in case
+    // Element#checkVisibility is unsupported
+    displayCheck === 'full-native' ||
+    displayCheck === 'legacy-full'
+  ) {
+    if (typeof getShadowRoot === 'function') {
       var originalNode = node;
       while (node) {
         var parentElement = node.parentElement;
         var rootNode = getRootNode(node);
-        if (parentElement && !parentElement.shadowRoot && getShadowRoot(parentElement) === true) {
+        if (
+          parentElement &&
+          !parentElement.shadowRoot &&
+          getShadowRoot(parentElement) === true
+        ) {
           return isZeroArea(node);
         } else if (node.assignedSlot) {
           node = node.assignedSlot;
@@ -237,10 +401,10 @@ var isHidden = function isHidden2(node, _ref) {
     if (isNodeAttached(node)) {
       return !node.getClientRects().length;
     }
-    if (displayCheck !== "legacy-full") {
+    if (displayCheck !== 'legacy-full') {
       return true;
     }
-  } else if (displayCheck === "non-zero-area") {
+  } else if (displayCheck === 'non-zero-area') {
     return isZeroArea(node);
   }
   return false;
@@ -249,11 +413,13 @@ var isDisabledFromFieldset = function isDisabledFromFieldset2(node) {
   if (/^(INPUT|BUTTON|SELECT|TEXTAREA)$/.test(node.tagName)) {
     var parentNode = node.parentElement;
     while (parentNode) {
-      if (parentNode.tagName === "FIELDSET" && parentNode.disabled) {
+      if (parentNode.tagName === 'FIELDSET' && parentNode.disabled) {
         for (var i = 0; i < parentNode.children.length; i++) {
           var child = parentNode.children.item(i);
-          if (child.tagName === "LEGEND") {
-            return matches.call(parentNode, "fieldset[disabled] *") ? true : !child.contains(node);
+          if (child.tagName === 'LEGEND') {
+            return matches.call(parentNode, 'fieldset[disabled] *')
+              ? true
+              : !child.contains(node);
           }
         }
         return true;
@@ -263,21 +429,36 @@ var isDisabledFromFieldset = function isDisabledFromFieldset2(node) {
   }
   return false;
 };
-var isNodeMatchingSelectorFocusable = function isNodeMatchingSelectorFocusable2(options, node) {
-  if (node.disabled || isHiddenInput(node) || isHidden(node, options) || // For a details element with a summary, the summary element gets the focus
-  isDetailsWithSummary(node) || isDisabledFromFieldset(node)) {
+var isNodeMatchingSelectorFocusable = function isNodeMatchingSelectorFocusable2(
+  options,
+  node
+) {
+  if (
+    node.disabled ||
+    isHiddenInput(node) ||
+    isHidden(node, options) || // For a details element with a summary, the summary element gets the focus
+    isDetailsWithSummary(node) ||
+    isDisabledFromFieldset(node)
+  ) {
     return false;
   }
   return true;
 };
-var isNodeMatchingSelectorTabbable = function isNodeMatchingSelectorTabbable2(options, node) {
-  if (isNonTabbableRadio(node) || getTabIndex(node) < 0 || !isNodeMatchingSelectorFocusable(options, node)) {
+var isNodeMatchingSelectorTabbable = function isNodeMatchingSelectorTabbable2(
+  options,
+  node
+) {
+  if (
+    isNonTabbableRadio(node) ||
+    getTabIndex(node) < 0 ||
+    !isNodeMatchingSelectorFocusable(options, node)
+  ) {
     return false;
   }
   return true;
 };
 var isShadowRootTabbable = function isShadowRootTabbable2(shadowHostNode) {
-  var tabIndex = parseInt(shadowHostNode.getAttribute("tabindex"), 10);
+  var tabIndex = parseInt(shadowHostNode.getAttribute('tabindex'), 10);
   if (isNaN(tabIndex) || tabIndex >= 0) {
     return true;
   }
@@ -286,40 +467,55 @@ var isShadowRootTabbable = function isShadowRootTabbable2(shadowHostNode) {
 var _sortByOrder = function sortByOrder(candidates) {
   var regularTabbables = [];
   var orderedTabbables = [];
-  candidates.forEach(function(item, i) {
+  candidates.forEach(function (item, i) {
     var isScope = !!item.scopeParent;
     var element = isScope ? item.scopeParent : item;
     var candidateTabindex = getSortOrderTabIndex(element, isScope);
     var elements = isScope ? _sortByOrder(item.candidates) : element;
     if (candidateTabindex === 0) {
-      isScope ? regularTabbables.push.apply(regularTabbables, elements) : regularTabbables.push(element);
+      isScope
+        ? regularTabbables.push.apply(regularTabbables, elements)
+        : regularTabbables.push(element);
     } else {
       orderedTabbables.push({
         documentOrder: i,
         tabIndex: candidateTabindex,
         item,
         isScope,
-        content: elements
+        content: elements,
       });
     }
   });
-  return orderedTabbables.sort(sortOrderedTabbables).reduce(function(acc, sortable) {
-    sortable.isScope ? acc.push.apply(acc, sortable.content) : acc.push(sortable.content);
-    return acc;
-  }, []).concat(regularTabbables);
+  return orderedTabbables
+    .sort(sortOrderedTabbables)
+    .reduce(function (acc, sortable) {
+      sortable.isScope
+        ? acc.push.apply(acc, sortable.content)
+        : acc.push(sortable.content);
+      return acc;
+    }, [])
+    .concat(regularTabbables);
 };
 var tabbable = function tabbable2(container, options) {
   options = options || {};
   var candidates;
   if (options.getShadowRoot) {
-    candidates = _getCandidatesIteratively([container], options.includeContainer, {
-      filter: isNodeMatchingSelectorTabbable.bind(null, options),
-      flatten: false,
-      getShadowRoot: options.getShadowRoot,
-      shadowRootFilter: isShadowRootTabbable
-    });
+    candidates = _getCandidatesIteratively(
+      [container],
+      options.includeContainer,
+      {
+        filter: isNodeMatchingSelectorTabbable.bind(null, options),
+        flatten: false,
+        getShadowRoot: options.getShadowRoot,
+        shadowRootFilter: isShadowRootTabbable,
+      }
+    );
   } else {
-    candidates = getCandidates(container, options.includeContainer, isNodeMatchingSelectorTabbable.bind(null, options));
+    candidates = getCandidates(
+      container,
+      options.includeContainer,
+      isNodeMatchingSelectorTabbable.bind(null, options)
+    );
   }
   return _sortByOrder(candidates);
 };
@@ -327,31 +523,41 @@ var focusable = function focusable2(container, options) {
   options = options || {};
   var candidates;
   if (options.getShadowRoot) {
-    candidates = _getCandidatesIteratively([container], options.includeContainer, {
-      filter: isNodeMatchingSelectorFocusable.bind(null, options),
-      flatten: true,
-      getShadowRoot: options.getShadowRoot
-    });
+    candidates = _getCandidatesIteratively(
+      [container],
+      options.includeContainer,
+      {
+        filter: isNodeMatchingSelectorFocusable.bind(null, options),
+        flatten: true,
+        getShadowRoot: options.getShadowRoot,
+      }
+    );
   } else {
-    candidates = getCandidates(container, options.includeContainer, isNodeMatchingSelectorFocusable.bind(null, options));
+    candidates = getCandidates(
+      container,
+      options.includeContainer,
+      isNodeMatchingSelectorFocusable.bind(null, options)
+    );
   }
   return candidates;
 };
 var isTabbable = function isTabbable2(node, options) {
   options = options || {};
   if (!node) {
-    throw new Error("No node provided");
+    throw new Error('No node provided');
   }
   if (matches.call(node, candidateSelector) === false) {
     return false;
   }
   return isNodeMatchingSelectorTabbable(options, node);
 };
-var focusableCandidateSelector = /* @__PURE__ */ candidateSelectors.concat("iframe:not([inert]):not([inert] *)").join(",");
+var focusableCandidateSelector = /* @__PURE__ */ candidateSelectors
+  .concat('iframe:not([inert]):not([inert] *)')
+  .join(',');
 var isFocusable = function isFocusable2(node, options) {
   options = options || {};
   if (!node) {
-    throw new Error("No node provided");
+    throw new Error('No node provided');
   }
   if (matches.call(node, focusableCandidateSelector) === false) {
     return false;
@@ -359,9 +565,9 @@ var isFocusable = function isFocusable2(node, options) {
   return isNodeMatchingSelectorFocusable(options, node);
 };
 /*!
-* focus-trap 7.8.0
-* @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
-*/
+ * focus-trap 7.8.0
+ * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
+ */
 function _arrayLikeToArray(r, a) {
   (null == a || a > r.length) && (a = r.length);
   for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
@@ -371,114 +577,158 @@ function _arrayWithoutHoles(r) {
   if (Array.isArray(r)) return _arrayLikeToArray(r);
 }
 function _createForOfIteratorHelper(r, e) {
-  var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  var t =
+    ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
   if (!t) {
     if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e) {
       t && (r = t);
-      var n = 0, F = function() {
-      };
+      var n = 0,
+        F = function () {};
       return {
         s: F,
-        n: function() {
-          return n >= r.length ? {
-            done: true
-          } : {
-            done: false,
-            value: r[n++]
-          };
+        n: function () {
+          return n >= r.length
+            ? {
+                done: true,
+              }
+            : {
+                done: false,
+                value: r[n++],
+              };
         },
-        e: function(r2) {
+        e: function (r2) {
           throw r2;
         },
-        f: F
+        f: F,
       };
     }
-    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    throw new TypeError(
+      'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+    );
   }
-  var o, a = true, u = false;
+  var o,
+    a = true,
+    u = false;
   return {
-    s: function() {
+    s: function () {
       t = t.call(r);
     },
-    n: function() {
+    n: function () {
       var r2 = t.next();
-      return a = r2.done, r2;
+      return ((a = r2.done), r2);
     },
-    e: function(r2) {
-      u = true, o = r2;
+    e: function (r2) {
+      ((u = true), (o = r2));
     },
-    f: function() {
+    f: function () {
       try {
         a || null == t.return || t.return();
       } finally {
         if (u) throw o;
       }
-    }
+    },
   };
 }
 function _defineProperty(e, r, t) {
-  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
-    value: t,
-    enumerable: true,
-    configurable: true,
-    writable: true
-  }) : e[r] = t, e;
+  return (
+    (r = _toPropertyKey(r)) in e
+      ? Object.defineProperty(e, r, {
+          value: t,
+          enumerable: true,
+          configurable: true,
+          writable: true,
+        })
+      : (e[r] = t),
+    e
+  );
 }
 function _iterableToArray(r) {
-  if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+  if (
+    ('undefined' != typeof Symbol && null != r[Symbol.iterator]) ||
+    null != r['@@iterator']
+  )
+    return Array.from(r);
 }
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  throw new TypeError(
+    'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+  );
 }
 function ownKeys(e, r) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
-    r && (o = o.filter(function(r2) {
-      return Object.getOwnPropertyDescriptor(e, r2).enumerable;
-    })), t.push.apply(t, o);
+    (r &&
+      (o = o.filter(function (r2) {
+        return Object.getOwnPropertyDescriptor(e, r2).enumerable;
+      })),
+      t.push.apply(t, o));
   }
   return t;
 }
 function _objectSpread2(e) {
   for (var r = 1; r < arguments.length; r++) {
     var t = null != arguments[r] ? arguments[r] : {};
-    r % 2 ? ownKeys(Object(t), true).forEach(function(r2) {
-      _defineProperty(e, r2, t[r2]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r2) {
-      Object.defineProperty(e, r2, Object.getOwnPropertyDescriptor(t, r2));
-    });
+    r % 2
+      ? ownKeys(Object(t), true).forEach(function (r2) {
+          _defineProperty(e, r2, t[r2]);
+        })
+      : Object.getOwnPropertyDescriptors
+        ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t))
+        : ownKeys(Object(t)).forEach(function (r2) {
+            Object.defineProperty(
+              e,
+              r2,
+              Object.getOwnPropertyDescriptor(t, r2)
+            );
+          });
   }
   return e;
 }
 function _toConsumableArray(r) {
-  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
+  return (
+    _arrayWithoutHoles(r) ||
+    _iterableToArray(r) ||
+    _unsupportedIterableToArray(r) ||
+    _nonIterableSpread()
+  );
 }
 function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t) return t;
+  if ('object' != typeof t || !t) return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r);
-    if ("object" != typeof i) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
+    if ('object' != typeof i) return i;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
   }
-  return ("string" === r ? String : Number)(t);
+  return ('string' === r ? String : Number)(t);
 }
 function _toPropertyKey(t) {
-  var i = _toPrimitive(t, "string");
-  return "symbol" == typeof i ? i : i + "";
+  var i = _toPrimitive(t, 'string');
+  return 'symbol' == typeof i ? i : i + '';
 }
 function _unsupportedIterableToArray(r, a) {
   if (r) {
-    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    if ('string' == typeof r) return _arrayLikeToArray(r, a);
     var t = {}.toString.call(r).slice(8, -1);
-    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+    return (
+      'Object' === t && r.constructor && (t = r.constructor.name),
+      'Map' === t || 'Set' === t
+        ? Array.from(r)
+        : 'Arguments' === t ||
+            /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+          ? _arrayLikeToArray(r, a)
+          : void 0
+    );
   }
 }
 var activeFocusTraps = {
   // Returns the trap from the top of the stack.
   getActiveTrap: function getActiveTrap(trapStack) {
-    if ((trapStack === null || trapStack === void 0 ? void 0 : trapStack.length) > 0) {
+    if (
+      (trapStack === null || trapStack === void 0 ? void 0 : trapStack.length) >
+      0
+    ) {
       return trapStack[trapStack.length - 1];
     }
     return null;
@@ -508,7 +758,9 @@ var activeFocusTraps = {
   // Pauses the trap at the top of the stack.
   pauseTrap: function pauseTrap(trapStack) {
     var activeTrap = activeFocusTraps.getActiveTrap(trapStack);
-    activeTrap === null || activeTrap === void 0 || activeTrap._setPausedState(true);
+    activeTrap === null ||
+      activeTrap === void 0 ||
+      activeTrap._setPausedState(true);
   },
   // Unpauses the trap at the top of the stack.
   unpauseTrap: function unpauseTrap(trapStack) {
@@ -516,16 +768,27 @@ var activeFocusTraps = {
     if (activeTrap && !activeTrap._isManuallyPaused()) {
       activeTrap._setPausedState(false);
     }
-  }
+  },
 };
 var isSelectableInput = function isSelectableInput2(node) {
-  return node.tagName && node.tagName.toLowerCase() === "input" && typeof node.select === "function";
+  return (
+    node.tagName &&
+    node.tagName.toLowerCase() === 'input' &&
+    typeof node.select === 'function'
+  );
 };
 var isEscapeEvent = function isEscapeEvent2(e) {
-  return (e === null || e === void 0 ? void 0 : e.key) === "Escape" || (e === null || e === void 0 ? void 0 : e.key) === "Esc" || (e === null || e === void 0 ? void 0 : e.keyCode) === 27;
+  return (
+    (e === null || e === void 0 ? void 0 : e.key) === 'Escape' ||
+    (e === null || e === void 0 ? void 0 : e.key) === 'Esc' ||
+    (e === null || e === void 0 ? void 0 : e.keyCode) === 27
+  );
 };
 var isTabEvent = function isTabEvent2(e) {
-  return (e === null || e === void 0 ? void 0 : e.key) === "Tab" || (e === null || e === void 0 ? void 0 : e.keyCode) === 9;
+  return (
+    (e === null || e === void 0 ? void 0 : e.key) === 'Tab' ||
+    (e === null || e === void 0 ? void 0 : e.keyCode) === 9
+  );
 };
 var isKeyForward = function isKeyForward2(e) {
   return isTabEvent(e) && !e.shiftKey;
@@ -537,26 +800,43 @@ var delay = function delay2(fn) {
   return setTimeout(fn, 0);
 };
 var valueOrHandler = function valueOrHandler2(value) {
-  for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+  for (
+    var _len = arguments.length,
+      params = new Array(_len > 1 ? _len - 1 : 0),
+      _key = 1;
+    _key < _len;
+    _key++
+  ) {
     params[_key - 1] = arguments[_key];
   }
-  return typeof value === "function" ? value.apply(void 0, params) : value;
+  return typeof value === 'function' ? value.apply(void 0, params) : value;
 };
 var getActualTarget = function getActualTarget2(event) {
-  return event.target.shadowRoot && typeof event.composedPath === "function" ? event.composedPath()[0] : event.target;
+  return event.target.shadowRoot && typeof event.composedPath === 'function'
+    ? event.composedPath()[0]
+    : event.target;
 };
 var internalTrapStack = [];
 var createFocusTrap = function createFocusTrap2(elements, userOptions) {
-  var doc = (userOptions === null || userOptions === void 0 ? void 0 : userOptions.document) || document;
-  var trapStack = (userOptions === null || userOptions === void 0 ? void 0 : userOptions.trapStack) || internalTrapStack;
-  var config = _objectSpread2({
-    returnFocusOnDeactivate: true,
-    escapeDeactivates: true,
-    delayInitialFocus: true,
-    isolateSubtrees: false,
-    isKeyForward,
-    isKeyBackward
-  }, userOptions);
+  var doc =
+    (userOptions === null || userOptions === void 0
+      ? void 0
+      : userOptions.document) || document;
+  var trapStack =
+    (userOptions === null || userOptions === void 0
+      ? void 0
+      : userOptions.trapStack) || internalTrapStack;
+  var config = _objectSpread2(
+    {
+      returnFocusOnDeactivate: true,
+      escapeDeactivates: true,
+      delayInitialFocus: true,
+      isolateSubtrees: false,
+      isKeyForward,
+      isKeyBackward,
+    },
+    userOptions
+  );
   var state = {
     // containers given to createFocusTrap()
     /** @type {Array<HTMLElement>} */
@@ -600,29 +880,51 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     //  has been delayed during activation
     delayInitialFocusTimer: void 0,
     // the most recent KeyboardEvent for the configured nav key (typically [SHIFT+]TAB), if any
-    recentNavEvent: void 0
+    recentNavEvent: void 0,
   };
   var trap;
-  var getOption = function getOption2(configOverrideOptions, optionName, configOptionName) {
-    return configOverrideOptions && configOverrideOptions[optionName] !== void 0 ? configOverrideOptions[optionName] : config[configOptionName || optionName];
+  var getOption = function getOption2(
+    configOverrideOptions,
+    optionName,
+    configOptionName
+  ) {
+    return configOverrideOptions && configOverrideOptions[optionName] !== void 0
+      ? configOverrideOptions[optionName]
+      : config[configOptionName || optionName];
   };
   var findContainerIndex = function findContainerIndex2(element, event) {
-    var composedPath = typeof (event === null || event === void 0 ? void 0 : event.composedPath) === "function" ? event.composedPath() : void 0;
-    return state.containerGroups.findIndex(function(_ref) {
-      var container = _ref.container, tabbableNodes = _ref.tabbableNodes;
-      return container.contains(element) || // fall back to explicit tabbable search which will take into consideration any
-      //  web components if the `tabbableOptions.getShadowRoot` option was used for
-      //  the trap, enabling shadow DOM support in tabbable (`Node.contains()` doesn't
-      //  look inside web components even if open)
-      (composedPath === null || composedPath === void 0 ? void 0 : composedPath.includes(container)) || tabbableNodes.find(function(node) {
-        return node === element;
-      });
+    var composedPath =
+      typeof (event === null || event === void 0
+        ? void 0
+        : event.composedPath) === 'function'
+        ? event.composedPath()
+        : void 0;
+    return state.containerGroups.findIndex(function (_ref) {
+      var container = _ref.container,
+        tabbableNodes = _ref.tabbableNodes;
+      return (
+        container.contains(element) || // fall back to explicit tabbable search which will take into consideration any
+        //  web components if the `tabbableOptions.getShadowRoot` option was used for
+        //  the trap, enabling shadow DOM support in tabbable (`Node.contains()` doesn't
+        //  look inside web components even if open)
+        (composedPath === null || composedPath === void 0
+          ? void 0
+          : composedPath.includes(container)) ||
+        tabbableNodes.find(function (node) {
+          return node === element;
+        })
+      );
     });
   };
   var getNodeForOption = function getNodeForOption2(optionName) {
-    var _ref2 = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, _ref2$hasFallback = _ref2.hasFallback, hasFallback = _ref2$hasFallback === void 0 ? false : _ref2$hasFallback, _ref2$params = _ref2.params, params = _ref2$params === void 0 ? [] : _ref2$params;
+    var _ref2 =
+        arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {},
+      _ref2$hasFallback = _ref2.hasFallback,
+      hasFallback = _ref2$hasFallback === void 0 ? false : _ref2$hasFallback,
+      _ref2$params = _ref2.params,
+      params = _ref2$params === void 0 ? [] : _ref2$params;
     var optionValue = config[optionName];
-    if (typeof optionValue === "function") {
+    if (typeof optionValue === 'function') {
       optionValue = optionValue.apply(void 0, _toConsumableArray(params));
     }
     if (optionValue === true) {
@@ -632,59 +934,83 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       if (optionValue === void 0 || optionValue === false) {
         return optionValue;
       }
-      throw new Error("`".concat(optionName, "` was specified but was not a node, or did not return a node"));
+      throw new Error(
+        '`'.concat(
+          optionName,
+          '` was specified but was not a node, or did not return a node'
+        )
+      );
     }
     var node = optionValue;
-    if (typeof optionValue === "string") {
+    if (typeof optionValue === 'string') {
       try {
         node = doc.querySelector(optionValue);
       } catch (err) {
-        throw new Error("`".concat(optionName, '` appears to be an invalid selector; error="').concat(err.message, '"'));
+        throw new Error(
+          '`'
+            .concat(optionName, '` appears to be an invalid selector; error="')
+            .concat(err.message, '"')
+        );
       }
       if (!node) {
         if (!hasFallback) {
-          throw new Error("`".concat(optionName, "` as selector refers to no known node"));
+          throw new Error(
+            '`'.concat(optionName, '` as selector refers to no known node')
+          );
         }
       }
     }
     return node;
   };
   var getInitialFocusNode = function getInitialFocusNode2() {
-    var node = getNodeForOption("initialFocus", {
-      hasFallback: true
+    var node = getNodeForOption('initialFocus', {
+      hasFallback: true,
     });
     if (node === false) {
       return false;
     }
-    if (node === void 0 || node && !isFocusable(node, config.tabbableOptions)) {
+    if (
+      node === void 0 ||
+      (node && !isFocusable(node, config.tabbableOptions))
+    ) {
       if (findContainerIndex(doc.activeElement) >= 0) {
         node = doc.activeElement;
       } else {
         var firstTabbableGroup = state.tabbableGroups[0];
-        var firstTabbableNode = firstTabbableGroup && firstTabbableGroup.firstTabbableNode;
-        node = firstTabbableNode || getNodeForOption("fallbackFocus");
+        var firstTabbableNode =
+          firstTabbableGroup && firstTabbableGroup.firstTabbableNode;
+        node = firstTabbableNode || getNodeForOption('fallbackFocus');
       }
     } else if (node === null) {
-      node = getNodeForOption("fallbackFocus");
+      node = getNodeForOption('fallbackFocus');
     }
     if (!node) {
-      throw new Error("Your focus-trap needs to have at least one focusable element");
+      throw new Error(
+        'Your focus-trap needs to have at least one focusable element'
+      );
     }
     return node;
   };
   var updateTabbableNodes = function updateTabbableNodes2() {
-    state.containerGroups = state.containers.map(function(container) {
+    state.containerGroups = state.containers.map(function (container) {
       var tabbableNodes = tabbable(container, config.tabbableOptions);
       var focusableNodes = focusable(container, config.tabbableOptions);
-      var firstTabbableNode = tabbableNodes.length > 0 ? tabbableNodes[0] : void 0;
-      var lastTabbableNode = tabbableNodes.length > 0 ? tabbableNodes[tabbableNodes.length - 1] : void 0;
-      var firstDomTabbableNode = focusableNodes.find(function(node) {
+      var firstTabbableNode =
+        tabbableNodes.length > 0 ? tabbableNodes[0] : void 0;
+      var lastTabbableNode =
+        tabbableNodes.length > 0
+          ? tabbableNodes[tabbableNodes.length - 1]
+          : void 0;
+      var firstDomTabbableNode = focusableNodes.find(function (node) {
         return isTabbable(node);
       });
-      var lastDomTabbableNode = focusableNodes.slice().reverse().find(function(node) {
-        return isTabbable(node);
-      });
-      var posTabIndexesFound = !!tabbableNodes.find(function(node) {
+      var lastDomTabbableNode = focusableNodes
+        .slice()
+        .reverse()
+        .find(function (node) {
+          return isTabbable(node);
+        });
+      var posTabIndexesFound = !!tabbableNodes.find(function (node) {
         return getTabIndex(node) > 0;
       });
       return {
@@ -717,32 +1043,50 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
          * @returns {HTMLElement|undefined} The next tabbable node, if any.
          */
         nextTabbableNode: function nextTabbableNode(node) {
-          var forward = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : true;
+          var forward =
+            arguments.length > 1 && arguments[1] !== void 0
+              ? arguments[1]
+              : true;
           var nodeIdx = tabbableNodes.indexOf(node);
           if (nodeIdx < 0) {
             if (forward) {
-              return focusableNodes.slice(focusableNodes.indexOf(node) + 1).find(function(el) {
+              return focusableNodes
+                .slice(focusableNodes.indexOf(node) + 1)
+                .find(function (el) {
+                  return isTabbable(el);
+                });
+            }
+            return focusableNodes
+              .slice(0, focusableNodes.indexOf(node))
+              .reverse()
+              .find(function (el) {
                 return isTabbable(el);
               });
-            }
-            return focusableNodes.slice(0, focusableNodes.indexOf(node)).reverse().find(function(el) {
-              return isTabbable(el);
-            });
           }
           return tabbableNodes[nodeIdx + (forward ? 1 : -1)];
-        }
+        },
       };
     });
-    state.tabbableGroups = state.containerGroups.filter(function(group) {
+    state.tabbableGroups = state.containerGroups.filter(function (group) {
       return group.tabbableNodes.length > 0;
     });
-    if (state.tabbableGroups.length <= 0 && !getNodeForOption("fallbackFocus")) {
-      throw new Error("Your focus-trap must have at least one container with at least one tabbable node in it at all times");
+    if (
+      state.tabbableGroups.length <= 0 &&
+      !getNodeForOption('fallbackFocus')
+    ) {
+      throw new Error(
+        'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
+      );
     }
-    if (state.containerGroups.find(function(g) {
-      return g.posTabIndexesFound;
-    }) && state.containerGroups.length > 1) {
-      throw new Error("At least one node with a positive tabindex was found in one of your focus-trap's multiple containers. Positive tabindexes are only supported in single-container focus-traps.");
+    if (
+      state.containerGroups.find(function (g) {
+        return g.posTabIndexesFound;
+      }) &&
+      state.containerGroups.length > 1
+    ) {
+      throw new Error(
+        "At least one node with a positive tabindex was found in one of your focus-trap's multiple containers. Positive tabindexes are only supported in single-container focus-traps."
+      );
     }
   };
   var _getActiveElement = function getActiveElement(el) {
@@ -750,7 +1094,10 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     if (!activeElement) {
       return;
     }
-    if (activeElement.shadowRoot && activeElement.shadowRoot.activeElement !== null) {
+    if (
+      activeElement.shadowRoot &&
+      activeElement.shadowRoot.activeElement !== null
+    ) {
       return _getActiveElement(activeElement.shadowRoot);
     }
     return activeElement;
@@ -767,7 +1114,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       return;
     }
     node.focus({
-      preventScroll: !!config.preventScroll
+      preventScroll: !!config.preventScroll,
     });
     state.mostRecentlyFocusedNode = node;
     if (isSelectableInput(node)) {
@@ -775,58 +1122,90 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     }
   };
   var getReturnFocusNode = function getReturnFocusNode2(previousActiveElement) {
-    var node = getNodeForOption("setReturnFocus", {
-      params: [previousActiveElement]
+    var node = getNodeForOption('setReturnFocus', {
+      params: [previousActiveElement],
     });
     return node ? node : node === false ? false : previousActiveElement;
   };
   var findNextNavNode = function findNextNavNode2(_ref3) {
-    var target = _ref3.target, event = _ref3.event, _ref3$isBackward = _ref3.isBackward, isBackward = _ref3$isBackward === void 0 ? false : _ref3$isBackward;
+    var target = _ref3.target,
+      event = _ref3.event,
+      _ref3$isBackward = _ref3.isBackward,
+      isBackward = _ref3$isBackward === void 0 ? false : _ref3$isBackward;
     target = target || getActualTarget(event);
     updateTabbableNodes();
     var destinationNode = null;
     if (state.tabbableGroups.length > 0) {
       var containerIndex = findContainerIndex(target, event);
-      var containerGroup = containerIndex >= 0 ? state.containerGroups[containerIndex] : void 0;
+      var containerGroup =
+        containerIndex >= 0 ? state.containerGroups[containerIndex] : void 0;
       if (containerIndex < 0) {
         if (isBackward) {
-          destinationNode = state.tabbableGroups[state.tabbableGroups.length - 1].lastTabbableNode;
+          destinationNode =
+            state.tabbableGroups[state.tabbableGroups.length - 1]
+              .lastTabbableNode;
         } else {
           destinationNode = state.tabbableGroups[0].firstTabbableNode;
         }
       } else if (isBackward) {
-        var startOfGroupIndex = state.tabbableGroups.findIndex(function(_ref4) {
-          var firstTabbableNode = _ref4.firstTabbableNode;
-          return target === firstTabbableNode;
-        });
-        if (startOfGroupIndex < 0 && (containerGroup.container === target || isFocusable(target, config.tabbableOptions) && !isTabbable(target, config.tabbableOptions) && !containerGroup.nextTabbableNode(target, false))) {
+        var startOfGroupIndex = state.tabbableGroups.findIndex(
+          function (_ref4) {
+            var firstTabbableNode = _ref4.firstTabbableNode;
+            return target === firstTabbableNode;
+          }
+        );
+        if (
+          startOfGroupIndex < 0 &&
+          (containerGroup.container === target ||
+            (isFocusable(target, config.tabbableOptions) &&
+              !isTabbable(target, config.tabbableOptions) &&
+              !containerGroup.nextTabbableNode(target, false)))
+        ) {
           startOfGroupIndex = containerIndex;
         }
         if (startOfGroupIndex >= 0) {
-          var destinationGroupIndex = startOfGroupIndex === 0 ? state.tabbableGroups.length - 1 : startOfGroupIndex - 1;
+          var destinationGroupIndex =
+            startOfGroupIndex === 0
+              ? state.tabbableGroups.length - 1
+              : startOfGroupIndex - 1;
           var destinationGroup = state.tabbableGroups[destinationGroupIndex];
-          destinationNode = getTabIndex(target) >= 0 ? destinationGroup.lastTabbableNode : destinationGroup.lastDomTabbableNode;
+          destinationNode =
+            getTabIndex(target) >= 0
+              ? destinationGroup.lastTabbableNode
+              : destinationGroup.lastDomTabbableNode;
         } else if (!isTabEvent(event)) {
           destinationNode = containerGroup.nextTabbableNode(target, false);
         }
       } else {
-        var lastOfGroupIndex = state.tabbableGroups.findIndex(function(_ref5) {
+        var lastOfGroupIndex = state.tabbableGroups.findIndex(function (_ref5) {
           var lastTabbableNode = _ref5.lastTabbableNode;
           return target === lastTabbableNode;
         });
-        if (lastOfGroupIndex < 0 && (containerGroup.container === target || isFocusable(target, config.tabbableOptions) && !isTabbable(target, config.tabbableOptions) && !containerGroup.nextTabbableNode(target))) {
+        if (
+          lastOfGroupIndex < 0 &&
+          (containerGroup.container === target ||
+            (isFocusable(target, config.tabbableOptions) &&
+              !isTabbable(target, config.tabbableOptions) &&
+              !containerGroup.nextTabbableNode(target)))
+        ) {
           lastOfGroupIndex = containerIndex;
         }
         if (lastOfGroupIndex >= 0) {
-          var _destinationGroupIndex = lastOfGroupIndex === state.tabbableGroups.length - 1 ? 0 : lastOfGroupIndex + 1;
+          var _destinationGroupIndex =
+            lastOfGroupIndex === state.tabbableGroups.length - 1
+              ? 0
+              : lastOfGroupIndex + 1;
           var _destinationGroup = state.tabbableGroups[_destinationGroupIndex];
-          destinationNode = getTabIndex(target) >= 0 ? _destinationGroup.firstTabbableNode : _destinationGroup.firstDomTabbableNode;
+          destinationNode =
+            getTabIndex(target) >= 0
+              ? _destinationGroup.firstTabbableNode
+              : _destinationGroup.firstDomTabbableNode;
         } else if (!isTabEvent(event)) {
           destinationNode = containerGroup.nextTabbableNode(target);
         }
       }
     } else {
-      destinationNode = getNodeForOption("fallbackFocus");
+      destinationNode = getNodeForOption('fallbackFocus');
     }
     return destinationNode;
   };
@@ -843,7 +1222,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
         //  `returnFocus: true`, we'll attempt to re-focus the node originally-focused
         //  on activation (or the configured `setReturnFocus` node), whether the
         //  outside click was on a focusable node or not
-        returnFocus: config.returnFocusOnDeactivate
+        returnFocus: config.returnFocusOnDeactivate,
       });
       return;
     }
@@ -865,10 +1244,13 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       var navAcrossContainers = true;
       if (state.mostRecentlyFocusedNode) {
         if (getTabIndex(state.mostRecentlyFocusedNode) > 0) {
-          var mruContainerIdx = findContainerIndex(state.mostRecentlyFocusedNode);
-          var tabbableNodes = state.containerGroups[mruContainerIdx].tabbableNodes;
+          var mruContainerIdx = findContainerIndex(
+            state.mostRecentlyFocusedNode
+          );
+          var tabbableNodes =
+            state.containerGroups[mruContainerIdx].tabbableNodes;
           if (tabbableNodes.length > 0) {
-            var mruTabIdx = tabbableNodes.findIndex(function(node) {
+            var mruTabIdx = tabbableNodes.findIndex(function (node) {
               return node === state.mostRecentlyFocusedNode;
             });
             if (mruTabIdx >= 0) {
@@ -886,11 +1268,13 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
             }
           }
         } else {
-          if (!state.containerGroups.some(function(g) {
-            return g.tabbableNodes.some(function(n) {
-              return getTabIndex(n) > 0;
-            });
-          })) {
+          if (
+            !state.containerGroups.some(function (g) {
+              return g.tabbableNodes.some(function (n) {
+                return getTabIndex(n) > 0;
+              });
+            })
+          ) {
             navAcrossContainers = false;
           }
         }
@@ -902,7 +1286,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
           // move FROM the MRU node, not event-related node (which will be the node that is
           //  outside the trap causing the focus escape we're trying to fix)
           target: state.mostRecentlyFocusedNode,
-          isBackward: config.isKeyBackward(state.recentNavEvent)
+          isBackward: config.isKeyBackward(state.recentNavEvent),
         });
       }
       if (nextNode) {
@@ -914,11 +1298,12 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     state.recentNavEvent = void 0;
   };
   var checkKeyNav = function checkKeyNav2(event) {
-    var isBackward = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
+    var isBackward =
+      arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
     state.recentNavEvent = event;
     var destinationNode = findNextNavNode({
       event,
-      isBackward
+      isBackward,
     });
     if (destinationNode) {
       if (isTabEvent(event)) {
@@ -933,7 +1318,10 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     }
   };
   var checkEscapeKey = function checkEscapeKey2(event) {
-    if (isEscapeEvent(event) && valueOrHandler(config.escapeDeactivates, event) !== false) {
+    if (
+      isEscapeEvent(event) &&
+      valueOrHandler(config.escapeDeactivates, event) !== false
+    ) {
       event.preventDefault();
       trap.deactivate();
     }
@@ -957,27 +1345,29 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       return;
     }
     activeFocusTraps.activateTrap(trapStack, trap);
-    state.delayInitialFocusTimer = config.delayInitialFocus ? delay(function() {
-      _tryFocus(getInitialFocusNode());
-    }) : _tryFocus(getInitialFocusNode());
-    doc.addEventListener("focusin", checkFocusIn, true);
-    doc.addEventListener("mousedown", checkPointerDown, {
+    state.delayInitialFocusTimer = config.delayInitialFocus
+      ? delay(function () {
+          _tryFocus(getInitialFocusNode());
+        })
+      : _tryFocus(getInitialFocusNode());
+    doc.addEventListener('focusin', checkFocusIn, true);
+    doc.addEventListener('mousedown', checkPointerDown, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener("touchstart", checkPointerDown, {
+    doc.addEventListener('touchstart', checkPointerDown, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener("click", checkClick, {
+    doc.addEventListener('click', checkClick, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener("keydown", checkTabKey, {
+    doc.addEventListener('keydown', checkTabKey, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener("keydown", checkEscapeKey);
+    doc.addEventListener('keydown', checkEscapeKey);
     return trap;
   };
   var collectAdjacentElements = function collectAdjacentElements2(containers) {
@@ -988,12 +1378,15 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     state.alreadySilent.clear();
     var containerAncestors = /* @__PURE__ */ new Set();
     var adjacentElements = /* @__PURE__ */ new Set();
-    var _iterator = _createForOfIteratorHelper(containers), _step;
+    var _iterator = _createForOfIteratorHelper(containers),
+      _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done; ) {
         var container = _step.value;
         containerAncestors.add(container);
-        var insideShadowRoot = typeof ShadowRoot !== "undefined" && container.getRootNode() instanceof ShadowRoot;
+        var insideShadowRoot =
+          typeof ShadowRoot !== 'undefined' &&
+          container.getRootNode() instanceof ShadowRoot;
         var current = container;
         while (current) {
           containerAncestors.add(current);
@@ -1004,9 +1397,12 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
           } else if (!parent && insideShadowRoot) {
             siblings = current.getRootNode().children;
             parent = current.getRootNode().host;
-            insideShadowRoot = typeof ShadowRoot !== "undefined" && parent.getRootNode() instanceof ShadowRoot;
+            insideShadowRoot =
+              typeof ShadowRoot !== 'undefined' &&
+              parent.getRootNode() instanceof ShadowRoot;
           }
-          var _iterator2 = _createForOfIteratorHelper(siblings), _step2;
+          var _iterator2 = _createForOfIteratorHelper(siblings),
+            _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
               var child = _step2.value;
@@ -1025,8 +1421,8 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     } finally {
       _iterator.f();
     }
-    containerAncestors.forEach(function(el) {
-      adjacentElements["delete"](el);
+    containerAncestors.forEach(function (el) {
+      adjacentElements['delete'](el);
     });
     state.adjacentElements = adjacentElements;
   };
@@ -1034,18 +1430,18 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     if (!state.active) {
       return;
     }
-    doc.removeEventListener("focusin", checkFocusIn, true);
-    doc.removeEventListener("mousedown", checkPointerDown, true);
-    doc.removeEventListener("touchstart", checkPointerDown, true);
-    doc.removeEventListener("click", checkClick, true);
-    doc.removeEventListener("keydown", checkTabKey, true);
-    doc.removeEventListener("keydown", checkEscapeKey);
+    doc.removeEventListener('focusin', checkFocusIn, true);
+    doc.removeEventListener('mousedown', checkPointerDown, true);
+    doc.removeEventListener('touchstart', checkPointerDown, true);
+    doc.removeEventListener('click', checkClick, true);
+    doc.removeEventListener('keydown', checkTabKey, true);
+    doc.removeEventListener('keydown', checkEscapeKey);
     return trap;
   };
   var checkDomRemoval = function checkDomRemoval2(mutations) {
-    var isFocusedNodeRemoved = mutations.some(function(mutation) {
+    var isFocusedNodeRemoved = mutations.some(function (mutation) {
       var removedNodes = Array.from(mutation.removedNodes);
-      return removedNodes.some(function(node) {
+      return removedNodes.some(function (node) {
         return node === state.mostRecentlyFocusedNode;
       });
     });
@@ -1053,17 +1449,20 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       _tryFocus(getInitialFocusNode());
     }
   };
-  var mutationObserver = typeof window !== "undefined" && "MutationObserver" in window ? new MutationObserver(checkDomRemoval) : void 0;
+  var mutationObserver =
+    typeof window !== 'undefined' && 'MutationObserver' in window
+      ? new MutationObserver(checkDomRemoval)
+      : void 0;
   var updateObservedNodes = function updateObservedNodes2() {
     if (!mutationObserver) {
       return;
     }
     mutationObserver.disconnect();
     if (state.active && !state.paused) {
-      state.containers.map(function(container) {
+      state.containers.map(function (container) {
         mutationObserver.observe(container, {
           subtree: true,
-          childList: true
+          childList: true,
         });
       });
     }
@@ -1079,14 +1478,17 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       if (state.active) {
         return this;
       }
-      var onActivate = getOption(activateOptions, "onActivate");
-      var onPostActivate = getOption(activateOptions, "onPostActivate");
-      var checkCanFocusTrap = getOption(activateOptions, "checkCanFocusTrap");
+      var onActivate = getOption(activateOptions, 'onActivate');
+      var onPostActivate = getOption(activateOptions, 'onPostActivate');
+      var checkCanFocusTrap = getOption(activateOptions, 'checkCanFocusTrap');
       var preexistingTrap = activeFocusTraps.getActiveTrap(trapStack);
       var revertState = false;
       if (preexistingTrap && !preexistingTrap.paused) {
         var _preexistingTrap$_set;
-        (_preexistingTrap$_set = preexistingTrap._setSubtreeIsolation) === null || _preexistingTrap$_set === void 0 || _preexistingTrap$_set.call(preexistingTrap, false);
+        (_preexistingTrap$_set = preexistingTrap._setSubtreeIsolation) ===
+          null ||
+          _preexistingTrap$_set === void 0 ||
+          _preexistingTrap$_set.call(preexistingTrap, false);
         revertState = true;
       }
       try {
@@ -1106,17 +1508,28 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
           if (config.isolateSubtrees) {
             trap._setSubtreeIsolation(true);
           }
-          onPostActivate === null || onPostActivate === void 0 || onPostActivate();
+          onPostActivate === null ||
+            onPostActivate === void 0 ||
+            onPostActivate();
         };
         if (checkCanFocusTrap) {
-          checkCanFocusTrap(state.containers.concat()).then(finishActivation, finishActivation);
+          checkCanFocusTrap(state.containers.concat()).then(
+            finishActivation,
+            finishActivation
+          );
           return this;
         }
         finishActivation();
       } catch (error) {
-        if (preexistingTrap === activeFocusTraps.getActiveTrap(trapStack) && revertState) {
+        if (
+          preexistingTrap === activeFocusTraps.getActiveTrap(trapStack) &&
+          revertState
+        ) {
           var _preexistingTrap$_set2;
-          (_preexistingTrap$_set2 = preexistingTrap._setSubtreeIsolation) === null || _preexistingTrap$_set2 === void 0 || _preexistingTrap$_set2.call(preexistingTrap, true);
+          (_preexistingTrap$_set2 = preexistingTrap._setSubtreeIsolation) ===
+            null ||
+            _preexistingTrap$_set2 === void 0 ||
+            _preexistingTrap$_set2.call(preexistingTrap, true);
         }
         throw error;
       }
@@ -1126,11 +1539,14 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       if (!state.active) {
         return this;
       }
-      var options = _objectSpread2({
-        onDeactivate: config.onDeactivate,
-        onPostDeactivate: config.onPostDeactivate,
-        checkCanReturnFocus: config.checkCanReturnFocus
-      }, deactivateOptions);
+      var options = _objectSpread2(
+        {
+          onDeactivate: config.onDeactivate,
+          onPostDeactivate: config.onPostDeactivate,
+          checkCanReturnFocus: config.checkCanReturnFocus,
+        },
+        deactivateOptions
+      );
       clearTimeout(state.delayInitialFocusTimer);
       state.delayInitialFocusTimer = void 0;
       if (!state.paused) {
@@ -1142,21 +1558,29 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       state.paused = false;
       updateObservedNodes();
       activeFocusTraps.deactivateTrap(trapStack, trap);
-      var onDeactivate = getOption(options, "onDeactivate");
-      var onPostDeactivate = getOption(options, "onPostDeactivate");
-      var checkCanReturnFocus = getOption(options, "checkCanReturnFocus");
-      var returnFocus = getOption(options, "returnFocus", "returnFocusOnDeactivate");
+      var onDeactivate = getOption(options, 'onDeactivate');
+      var onPostDeactivate = getOption(options, 'onPostDeactivate');
+      var checkCanReturnFocus = getOption(options, 'checkCanReturnFocus');
+      var returnFocus = getOption(
+        options,
+        'returnFocus',
+        'returnFocusOnDeactivate'
+      );
       onDeactivate === null || onDeactivate === void 0 || onDeactivate();
       var finishDeactivation = function finishDeactivation2() {
-        delay(function() {
+        delay(function () {
           if (returnFocus) {
             _tryFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation));
           }
-          onPostDeactivate === null || onPostDeactivate === void 0 || onPostDeactivate();
+          onPostDeactivate === null ||
+            onPostDeactivate === void 0 ||
+            onPostDeactivate();
         });
       };
       if (returnFocus && checkCanReturnFocus) {
-        checkCanReturnFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation)).then(finishDeactivation, finishDeactivation);
+        checkCanReturnFocus(
+          getReturnFocusNode(state.nodeFocusedBeforeActivation)
+        ).then(finishDeactivation, finishDeactivation);
         return this;
       }
       finishDeactivation();
@@ -1179,10 +1603,14 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       }
       return this._setPausedState(false, unpauseOptions);
     },
-    updateContainerElements: function updateContainerElements(containerElements) {
+    updateContainerElements: function updateContainerElements(
+      containerElements
+    ) {
       var elementsAsArray = [].concat(containerElements).filter(Boolean);
-      state.containers = elementsAsArray.map(function(element) {
-        return typeof element === "string" ? doc.querySelector(element) : element;
+      state.containers = elementsAsArray.map(function (element) {
+        return typeof element === 'string'
+          ? doc.querySelector(element)
+          : element;
       });
       if (config.isolateSubtrees) {
         collectAdjacentElements(state.containers);
@@ -1195,13 +1623,13 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       }
       updateObservedNodes();
       return this;
-    }
+    },
   };
   Object.defineProperties(trap, {
     _isManuallyPaused: {
       value: function value() {
         return state.manuallyPaused;
-      }
+      },
     },
     _setPausedState: {
       value: function value(paused, options) {
@@ -1210,16 +1638,16 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
         }
         state.paused = paused;
         if (paused) {
-          var onPause = getOption(options, "onPause");
-          var onPostPause = getOption(options, "onPostPause");
+          var onPause = getOption(options, 'onPause');
+          var onPostPause = getOption(options, 'onPostPause');
           onPause === null || onPause === void 0 || onPause();
           removeListeners();
           updateObservedNodes();
           trap._setSubtreeIsolation(false);
           onPostPause === null || onPostPause === void 0 || onPostPause();
         } else {
-          var onUnpause = getOption(options, "onUnpause");
-          var onPostUnpause = getOption(options, "onPostUnpause");
+          var onUnpause = getOption(options, 'onUnpause');
+          var onPostUnpause = getOption(options, 'onPostUnpause');
           onUnpause === null || onUnpause === void 0 || onUnpause();
           trap._setSubtreeIsolation(true);
           updateTabbableNodes();
@@ -1228,45 +1656,51 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
           onPostUnpause === null || onPostUnpause === void 0 || onPostUnpause();
         }
         return this;
-      }
+      },
     },
     _setSubtreeIsolation: {
       value: function value(isEnabled) {
         if (config.isolateSubtrees) {
-          state.adjacentElements.forEach(function(el) {
+          state.adjacentElements.forEach(function (el) {
             var _el$getAttribute;
             if (isEnabled) {
               switch (config.isolateSubtrees) {
-                case "aria-hidden":
-                  if (el.ariaHidden === "true" || ((_el$getAttribute = el.getAttribute("aria-hidden")) === null || _el$getAttribute === void 0 ? void 0 : _el$getAttribute.toLowerCase()) === "true") {
+                case 'aria-hidden':
+                  if (
+                    el.ariaHidden === 'true' ||
+                    ((_el$getAttribute = el.getAttribute('aria-hidden')) ===
+                      null || _el$getAttribute === void 0
+                      ? void 0
+                      : _el$getAttribute.toLowerCase()) === 'true'
+                  ) {
                     state.alreadySilent.add(el);
                   }
-                  el.setAttribute("aria-hidden", "true");
+                  el.setAttribute('aria-hidden', 'true');
                   break;
                 default:
-                  if (el.inert || el.hasAttribute("inert")) {
+                  if (el.inert || el.hasAttribute('inert')) {
                     state.alreadySilent.add(el);
                   }
-                  el.setAttribute("inert", true);
+                  el.setAttribute('inert', true);
                   break;
               }
             } else {
-              if (state.alreadySilent.has(el)) ;
+              if (state.alreadySilent.has(el));
               else {
                 switch (config.isolateSubtrees) {
-                  case "aria-hidden":
-                    el.removeAttribute("aria-hidden");
+                  case 'aria-hidden':
+                    el.removeAttribute('aria-hidden');
                     break;
                   default:
-                    el.removeAttribute("inert");
+                    el.removeAttribute('inert');
                     break;
                 }
               }
             }
           });
         }
-      }
-    }
+      },
+    },
   });
   trap.updateContainerElements(elements);
   return trap;
@@ -1292,33 +1726,31 @@ function useFocusTrap(target, options = {}) {
   };
   const targets = computed(() => {
     const _targets = toValue(target);
-    return toArray(_targets).map((el) => {
-      const _el = toValue(el);
-      return typeof _el === "string" ? _el : unrefElement(_el);
-    }).filter(notNullish);
+    return toArray(_targets)
+      .map((el) => {
+        const _el = toValue(el);
+        return typeof _el === 'string' ? _el : unrefElement(_el);
+      })
+      .filter(notNullish);
   });
   watch(
     targets,
     (els) => {
-      if (!els.length)
-        return;
+      if (!els.length) return;
       trap = createFocusTrap(els, {
         ...focusTrapOptions,
         onActivate() {
           hasFocus.value = true;
-          if (options.onActivate)
-            options.onActivate();
+          if (options.onActivate) options.onActivate();
         },
         onDeactivate() {
           hasFocus.value = false;
-          if (options.onDeactivate)
-            options.onDeactivate();
-        }
+          if (options.onDeactivate) options.onDeactivate();
+        },
       });
-      if (immediate)
-        activate();
+      if (immediate) activate();
     },
-    { flush: "post" }
+    { flush: 'post' }
   );
   tryOnScopeDispose(() => deactivate());
   return {
@@ -1327,7 +1759,7 @@ function useFocusTrap(target, options = {}) {
     activate,
     deactivate,
     pause,
-    unpause
+    unpause,
   };
 }
 class DOMIterator {
@@ -1359,7 +1791,14 @@ class DOMIterator {
    * @access public
    */
   static matches(element, selector) {
-    const selectors = typeof selector === "string" ? [selector] : selector, fn = element.matches || element.matchesSelector || element.msMatchesSelector || element.mozMatchesSelector || element.oMatchesSelector || element.webkitMatchesSelector;
+    const selectors = typeof selector === 'string' ? [selector] : selector,
+      fn =
+        element.matches ||
+        element.matchesSelector ||
+        element.msMatchesSelector ||
+        element.mozMatchesSelector ||
+        element.oMatchesSelector ||
+        element.webkitMatchesSelector;
     if (fn) {
       let match = false;
       selectors.every((sel) => {
@@ -1380,24 +1819,24 @@ class DOMIterator {
    * @access protected
    */
   getContexts() {
-    let ctx, filteredCtx = [];
-    if (typeof this.ctx === "undefined" || !this.ctx) {
+    let ctx,
+      filteredCtx = [];
+    if (typeof this.ctx === 'undefined' || !this.ctx) {
       ctx = [];
     } else if (NodeList.prototype.isPrototypeOf(this.ctx)) {
       ctx = Array.prototype.slice.call(this.ctx);
     } else if (Array.isArray(this.ctx)) {
       ctx = this.ctx;
-    } else if (typeof this.ctx === "string") {
-      ctx = Array.prototype.slice.call(
-        document.querySelectorAll(this.ctx)
-      );
+    } else if (typeof this.ctx === 'string') {
+      ctx = Array.prototype.slice.call(document.querySelectorAll(this.ctx));
     } else {
       ctx = [this.ctx];
     }
     ctx.forEach((ctx2) => {
-      const isDescendant = filteredCtx.filter((contexts) => {
-        return contexts.contains(ctx2);
-      }).length > 0;
+      const isDescendant =
+        filteredCtx.filter((contexts) => {
+          return contexts.contains(ctx2);
+        }).length > 0;
       if (filteredCtx.indexOf(ctx2) === -1 && !isDescendant) {
         filteredCtx.push(ctx2);
       }
@@ -1416,14 +1855,13 @@ class DOMIterator {
    * @param {function} [errorFn]
    * @access protected
    */
-  getIframeContents(ifr, successFn, errorFn = () => {
-  }) {
+  getIframeContents(ifr, successFn, errorFn = () => {}) {
     let doc;
     try {
       const ifrWin = ifr.contentWindow;
       doc = ifrWin.document;
       if (!ifrWin || !doc) {
-        throw new Error("iframe inaccessible");
+        throw new Error('iframe inaccessible');
       }
     } catch (e) {
       errorFn();
@@ -1439,7 +1877,9 @@ class DOMIterator {
    * @access protected
    */
   isIframeBlank(ifr) {
-    const bl = "about:blank", src = ifr.getAttribute("src").trim(), href = ifr.contentWindow.location.href;
+    const bl = 'about:blank',
+      src = ifr.getAttribute('src').trim(),
+      href = ifr.contentWindow.location.href;
     return href === bl && src !== bl && src;
   }
   /**
@@ -1453,7 +1893,8 @@ class DOMIterator {
    * @access protected
    */
   observeIframeLoad(ifr, successFn, errorFn) {
-    let called = false, tout = null;
+    let called = false,
+      tout = null;
     const listener = () => {
       if (called) {
         return;
@@ -1462,14 +1903,14 @@ class DOMIterator {
       clearTimeout(tout);
       try {
         if (!this.isIframeBlank(ifr)) {
-          ifr.removeEventListener("load", listener);
+          ifr.removeEventListener('load', listener);
           this.getIframeContents(ifr, successFn, errorFn);
         }
       } catch (e) {
         errorFn();
       }
     };
-    ifr.addEventListener("load", listener);
+    ifr.addEventListener('load', listener);
     tout = setTimeout(listener, this.iframesTimeout);
   }
   /**
@@ -1493,7 +1934,7 @@ class DOMIterator {
    */
   onIframeReady(ifr, successFn, errorFn) {
     try {
-      if (ifr.contentWindow.document.readyState === "complete") {
+      if (ifr.contentWindow.document.readyState === 'complete') {
         if (this.isIframeBlank(ifr)) {
           this.observeIframeLoad(ifr, successFn, errorFn);
         } else {
@@ -1518,18 +1959,23 @@ class DOMIterator {
    */
   waitForIframes(ctx, done) {
     let eachCalled = 0;
-    this.forEachIframe(ctx, () => true, (ifr) => {
-      eachCalled++;
-      this.waitForIframes(ifr.querySelector("html"), () => {
-        if (!--eachCalled) {
+    this.forEachIframe(
+      ctx,
+      () => true,
+      (ifr) => {
+        eachCalled++;
+        this.waitForIframes(ifr.querySelector('html'), () => {
+          if (!--eachCalled) {
+            done();
+          }
+        });
+      },
+      (handled) => {
+        if (!handled) {
           done();
         }
-      });
-    }, (handled) => {
-      if (!handled) {
-        done();
       }
-    });
+    );
   }
   /**
    * Callback allowing to filter an iframe. Must return true when the element
@@ -1558,9 +2004,10 @@ class DOMIterator {
    * @param {DOMIterator~forEachIframeEndCallback} [end] - End callback
    * @access protected
    */
-  forEachIframe(ctx, filter, each, end = () => {
-  }) {
-    let ifr = ctx.querySelectorAll("iframe"), open = ifr.length, handled = 0;
+  forEachIframe(ctx, filter, each, end = () => {}) {
+    let ifr = ctx.querySelectorAll('iframe'),
+      open = ifr.length,
+      handled = 0;
     ifr = Array.prototype.slice.call(ifr);
     const checkEnd = () => {
       if (--open <= 0) {
@@ -1574,13 +2021,17 @@ class DOMIterator {
       if (DOMIterator.matches(ifr2, this.exclude)) {
         checkEnd();
       } else {
-        this.onIframeReady(ifr2, (con) => {
-          if (filter(ifr2)) {
-            handled++;
-            each(con);
-          }
-          checkEnd();
-        }, checkEnd);
+        this.onIframeReady(
+          ifr2,
+          (con) => {
+            if (filter(ifr2)) {
+              handled++;
+              each(con);
+            }
+            checkEnd();
+          },
+          checkEnd
+        );
       }
     });
   }
@@ -1603,7 +2054,7 @@ class DOMIterator {
    * @access protected
    */
   createInstanceOnIframe(contents) {
-    return new DOMIterator(contents.querySelector("html"), this.iframes);
+    return new DOMIterator(contents.querySelector('html'), this.iframes);
   }
   /**
    * Checks if an iframe occurs between two nodes, more specifically if an
@@ -1616,10 +2067,12 @@ class DOMIterator {
    * @access protected
    */
   compareNodeIframe(node, prevNode, ifr) {
-    const compCurr = node.compareDocumentPosition(ifr), prev = Node.DOCUMENT_POSITION_PRECEDING;
+    const compCurr = node.compareDocumentPosition(ifr),
+      prev = Node.DOCUMENT_POSITION_PRECEDING;
     if (compCurr & prev) {
       if (prevNode !== null) {
-        const compPrev = prevNode.compareDocumentPosition(ifr), after = Node.DOCUMENT_POSITION_FOLLOWING;
+        const compPrev = prevNode.compareDocumentPosition(ifr),
+          after = Node.DOCUMENT_POSITION_FOLLOWING;
         if (compPrev & after) {
           return true;
         }
@@ -1652,7 +2105,7 @@ class DOMIterator {
     }
     return {
       prevNode,
-      node
+      node,
     };
   }
   /**
@@ -1682,7 +2135,8 @@ class DOMIterator {
    * @access protected
    */
   checkIframeFilter(node, prevNode, currIfr, ifr) {
-    let key = false, handled = false;
+    let key = false,
+      handled = false;
     ifr.forEach((ifrDict, i) => {
       if (ifrDict.val === currIfr) {
         key = i;
@@ -1693,7 +2147,7 @@ class DOMIterator {
       if (key === false && !handled) {
         ifr.push({
           val: currIfr,
-          handled: true
+          handled: true,
         });
       } else if (key !== false && !handled) {
         ifr[key].handled = true;
@@ -1703,7 +2157,7 @@ class DOMIterator {
     if (key === false) {
       ifr.push({
         val: currIfr,
-        handled: false
+        handled: false,
       });
     }
     return false;
@@ -1721,11 +2175,7 @@ class DOMIterator {
     ifr.forEach((ifrDict) => {
       if (!ifrDict.handled) {
         this.getIframeContents(ifrDict.val, (con) => {
-          this.createInstanceOnIframe(con).forEachNode(
-            whatToShow,
-            eCb,
-            fCb
-          );
+          this.createInstanceOnIframe(con).forEachNode(whatToShow, eCb, fCb);
         });
       }
     });
@@ -1742,24 +2192,29 @@ class DOMIterator {
    */
   iterateThroughNodes(whatToShow, ctx, eachCb, filterCb, doneCb) {
     const itr = this.createIterator(ctx, whatToShow, filterCb);
-    let ifr = [], elements = [], node, prevNode, retrieveNodes = () => {
-      ({
-        prevNode,
-        node
-      } = this.getIteratorNode(itr));
-      return node;
-    };
+    let ifr = [],
+      elements = [],
+      node,
+      prevNode,
+      retrieveNodes = () => {
+        ({ prevNode, node } = this.getIteratorNode(itr));
+        return node;
+      };
     while (retrieveNodes()) {
       if (this.iframes) {
-        this.forEachIframe(ctx, (currIfr) => {
-          return this.checkIframeFilter(node, prevNode, currIfr, ifr);
-        }, (con) => {
-          this.createInstanceOnIframe(con).forEachNode(
-            whatToShow,
-            (ifrNode) => elements.push(ifrNode),
-            filterCb
-          );
-        });
+        this.forEachIframe(
+          ctx,
+          (currIfr) => {
+            return this.checkIframeFilter(node, prevNode, currIfr, ifr);
+          },
+          (con) => {
+            this.createInstanceOnIframe(con).forEachNode(
+              whatToShow,
+              (ifrNode) => elements.push(ifrNode),
+              filterCb
+            );
+          }
+        );
       }
       elements.push(node);
     }
@@ -1789,8 +2244,7 @@ class DOMIterator {
    * @param {DOMIterator~forEachNodeEndCallback} done - End callback
    * @access public
    */
-  forEachNode(whatToShow, each, filter, done = () => {
-  }) {
+  forEachNode(whatToShow, each, filter, done = () => {}) {
     const contexts = this.getContexts();
     let open = contexts.length;
     if (!open) {
@@ -1834,7 +2288,7 @@ let Mark$1 = class Mark {
     this.ctx = ctx;
     this.ie = false;
     const ua = window.navigator.userAgent;
-    if (ua.indexOf("MSIE") > -1 || ua.indexOf("Trident") > -1) {
+    if (ua.indexOf('MSIE') > -1 || ua.indexOf('Trident') > -1) {
       this.ie = true;
     }
   }
@@ -1847,32 +2301,33 @@ let Mark$1 = class Mark {
    * @access protected
    */
   set opt(val) {
-    this._opt = Object.assign({}, {
-      "element": "",
-      "className": "",
-      "exclude": [],
-      "iframes": false,
-      "iframesTimeout": 5e3,
-      "separateWordSearch": true,
-      "diacritics": true,
-      "synonyms": {},
-      "accuracy": "partially",
-      "acrossElements": false,
-      "caseSensitive": false,
-      "ignoreJoiners": false,
-      "ignoreGroups": 0,
-      "ignorePunctuation": [],
-      "wildcards": "disabled",
-      "each": () => {
+    this._opt = Object.assign(
+      {},
+      {
+        element: '',
+        className: '',
+        exclude: [],
+        iframes: false,
+        iframesTimeout: 5e3,
+        separateWordSearch: true,
+        diacritics: true,
+        synonyms: {},
+        accuracy: 'partially',
+        acrossElements: false,
+        caseSensitive: false,
+        ignoreJoiners: false,
+        ignoreGroups: 0,
+        ignorePunctuation: [],
+        wildcards: 'disabled',
+        each: () => {},
+        noMatch: () => {},
+        filter: () => true,
+        done: () => {},
+        debug: false,
+        log: window.console,
       },
-      "noMatch": () => {
-      },
-      "filter": () => true,
-      "done": () => {
-      },
-      "debug": false,
-      "log": window.console
-    }, val);
+      val
+    );
   }
   get opt() {
     return this._opt;
@@ -1897,12 +2352,12 @@ let Mark$1 = class Mark {
    * <code>error</code>, <code>debug</code>
    * @access protected
    */
-  log(msg, level = "debug") {
+  log(msg, level = 'debug') {
     const log = this.opt.log;
     if (!this.opt.debug) {
       return;
     }
-    if (typeof log === "object" && typeof log[level] === "function") {
+    if (typeof log === 'object' && typeof log[level] === 'function') {
       log[level](`mark.js: ${msg}`);
     }
   }
@@ -1913,7 +2368,7 @@ let Mark$1 = class Mark {
    * @access protected
    */
   escapeStr(str) {
-    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
   }
   /**
    * Creates a regular expression string to match the specified search
@@ -1923,7 +2378,7 @@ let Mark$1 = class Mark {
    * @access protected
    */
   createRegExp(str) {
-    if (this.opt.wildcards !== "disabled") {
+    if (this.opt.wildcards !== 'disabled') {
       str = this.setupWildcardsRegExp(str);
     }
     str = this.escapeStr(str);
@@ -1940,7 +2395,7 @@ let Mark$1 = class Mark {
     if (this.opt.ignoreJoiners || this.opt.ignorePunctuation.length) {
       str = this.createJoinersRegExp(str);
     }
-    if (this.opt.wildcards !== "disabled") {
+    if (this.opt.wildcards !== 'disabled') {
       str = this.createWildcardsRegExp(str);
     }
     str = this.createAccuracyRegExp(str);
@@ -1953,17 +2408,30 @@ let Mark$1 = class Mark {
    * @access protected
    */
   createSynonymsRegExp(str) {
-    const syn = this.opt.synonyms, sens = this.opt.caseSensitive ? "" : "i", joinerPlaceholder = this.opt.ignoreJoiners || this.opt.ignorePunctuation.length ? "\0" : "";
+    const syn = this.opt.synonyms,
+      sens = this.opt.caseSensitive ? '' : 'i',
+      joinerPlaceholder =
+        this.opt.ignoreJoiners || this.opt.ignorePunctuation.length ? '\0' : '';
     for (let index in syn) {
       if (syn.hasOwnProperty(index)) {
-        const value = syn[index], k1 = this.opt.wildcards !== "disabled" ? this.setupWildcardsRegExp(index) : this.escapeStr(index), k2 = this.opt.wildcards !== "disabled" ? this.setupWildcardsRegExp(value) : this.escapeStr(value);
-        if (k1 !== "" && k2 !== "") {
+        const value = syn[index],
+          k1 =
+            this.opt.wildcards !== 'disabled'
+              ? this.setupWildcardsRegExp(index)
+              : this.escapeStr(index),
+          k2 =
+            this.opt.wildcards !== 'disabled'
+              ? this.setupWildcardsRegExp(value)
+              : this.escapeStr(value);
+        if (k1 !== '' && k2 !== '') {
           str = str.replace(
             new RegExp(
               `(${this.escapeStr(k1)}|${this.escapeStr(k2)})`,
               `gm${sens}`
             ),
-            joinerPlaceholder + `(${this.processSynomyms(k1)}|${this.processSynomyms(k2)})` + joinerPlaceholder
+            joinerPlaceholder +
+              `(${this.processSynomyms(k1)}|${this.processSynomyms(k2)})` +
+              joinerPlaceholder
           );
         }
       }
@@ -1990,10 +2458,10 @@ let Mark$1 = class Mark {
    */
   setupWildcardsRegExp(str) {
     str = str.replace(/(?:\\)*\?/g, (val) => {
-      return val.charAt(0) === "\\" ? "?" : "";
+      return val.charAt(0) === '\\' ? '?' : '';
     });
     return str.replace(/(?:\\)*\*/g, (val) => {
-      return val.charAt(0) === "\\" ? "*" : "";
+      return val.charAt(0) === '\\' ? '*' : '';
     });
   }
   /**
@@ -2004,8 +2472,10 @@ let Mark$1 = class Mark {
    * @access protected
    */
   createWildcardsRegExp(str) {
-    let spaces = this.opt.wildcards === "withSpaces";
-    return str.replace(/\u0001/g, spaces ? "[\\S\\s]?" : "\\S?").replace(/\u0002/g, spaces ? "[\\S\\s]*?" : "\\S*");
+    let spaces = this.opt.wildcards === 'withSpaces';
+    return str
+      .replace(/\u0001/g, spaces ? '[\\S\\s]?' : '\\S?')
+      .replace(/\u0002/g, spaces ? '[\\S\\s]*?' : '\\S*');
   }
   /**
    * Sets up the regular expression string to allow later insertion of
@@ -2017,10 +2487,10 @@ let Mark$1 = class Mark {
   setupIgnoreJoinersRegExp(str) {
     return str.replace(/[^(|)\\]/g, (val, indx, original) => {
       let nextChar = original.charAt(indx + 1);
-      if (/[(|)\\]/.test(nextChar) || nextChar === "") {
+      if (/[(|)\\]/.test(nextChar) || nextChar === '') {
         return val;
       } else {
-        return val + "\0";
+        return val + '\0';
       }
     });
   }
@@ -2037,12 +2507,14 @@ let Mark$1 = class Mark {
     let joiner = [];
     const ignorePunctuation = this.opt.ignorePunctuation;
     if (Array.isArray(ignorePunctuation) && ignorePunctuation.length) {
-      joiner.push(this.escapeStr(ignorePunctuation.join("")));
+      joiner.push(this.escapeStr(ignorePunctuation.join('')));
     }
     if (this.opt.ignoreJoiners) {
-      joiner.push("\\u00ad\\u200b\\u200c\\u200d");
+      joiner.push('\\u00ad\\u200b\\u200c\\u200d');
     }
-    return joiner.length ? str.split(/\u0000+/).join(`[${joiner.join("")}]*`) : str;
+    return joiner.length
+      ? str.split(/\u0000+/).join(`[${joiner.join('')}]*`)
+      : str;
   }
   /**
    * Creates a regular expression string to match diacritics
@@ -2051,62 +2523,62 @@ let Mark$1 = class Mark {
    * @access protected
    */
   createDiacriticsRegExp(str) {
-    const sens = this.opt.caseSensitive ? "" : "i", dct = this.opt.caseSensitive ? [
-      "aàáảãạăằắẳẵặâầấẩẫậäåāą",
-      "AÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÄÅĀĄ",
-      "cçćč",
-      "CÇĆČ",
-      "dđď",
-      "DĐĎ",
-      "eèéẻẽẹêềếểễệëěēę",
-      "EÈÉẺẼẸÊỀẾỂỄỆËĚĒĘ",
-      "iìíỉĩịîïī",
-      "IÌÍỈĨỊÎÏĪ",
-      "lł",
-      "LŁ",
-      "nñňń",
-      "NÑŇŃ",
-      "oòóỏõọôồốổỗộơởỡớờợöøō",
-      "OÒÓỎÕỌÔỒỐỔỖỘƠỞỠỚỜỢÖØŌ",
-      "rř",
-      "RŘ",
-      "sšśșş",
-      "SŠŚȘŞ",
-      "tťțţ",
-      "TŤȚŢ",
-      "uùúủũụưừứửữựûüůū",
-      "UÙÚỦŨỤƯỪỨỬỮỰÛÜŮŪ",
-      "yýỳỷỹỵÿ",
-      "YÝỲỶỸỴŸ",
-      "zžżź",
-      "ZŽŻŹ"
-    ] : [
-      "aàáảãạăằắẳẵặâầấẩẫậäåāąAÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÄÅĀĄ",
-      "cçćčCÇĆČ",
-      "dđďDĐĎ",
-      "eèéẻẽẹêềếểễệëěēęEÈÉẺẼẸÊỀẾỂỄỆËĚĒĘ",
-      "iìíỉĩịîïīIÌÍỈĨỊÎÏĪ",
-      "lłLŁ",
-      "nñňńNÑŇŃ",
-      "oòóỏõọôồốổỗộơởỡớờợöøōOÒÓỎÕỌÔỒỐỔỖỘƠỞỠỚỜỢÖØŌ",
-      "rřRŘ",
-      "sšśșşSŠŚȘŞ",
-      "tťțţTŤȚŢ",
-      "uùúủũụưừứửữựûüůūUÙÚỦŨỤƯỪỨỬỮỰÛÜŮŪ",
-      "yýỳỷỹỵÿYÝỲỶỸỴŸ",
-      "zžżźZŽŻŹ"
-    ];
+    const sens = this.opt.caseSensitive ? '' : 'i',
+      dct = this.opt.caseSensitive
+        ? [
+            'aàáảãạăằắẳẵặâầấẩẫậäåāą',
+            'AÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÄÅĀĄ',
+            'cçćč',
+            'CÇĆČ',
+            'dđď',
+            'DĐĎ',
+            'eèéẻẽẹêềếểễệëěēę',
+            'EÈÉẺẼẸÊỀẾỂỄỆËĚĒĘ',
+            'iìíỉĩịîïī',
+            'IÌÍỈĨỊÎÏĪ',
+            'lł',
+            'LŁ',
+            'nñňń',
+            'NÑŇŃ',
+            'oòóỏõọôồốổỗộơởỡớờợöøō',
+            'OÒÓỎÕỌÔỒỐỔỖỘƠỞỠỚỜỢÖØŌ',
+            'rř',
+            'RŘ',
+            'sšśșş',
+            'SŠŚȘŞ',
+            'tťțţ',
+            'TŤȚŢ',
+            'uùúủũụưừứửữựûüůū',
+            'UÙÚỦŨỤƯỪỨỬỮỰÛÜŮŪ',
+            'yýỳỷỹỵÿ',
+            'YÝỲỶỸỴŸ',
+            'zžżź',
+            'ZŽŻŹ',
+          ]
+        : [
+            'aàáảãạăằắẳẵặâầấẩẫậäåāąAÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÄÅĀĄ',
+            'cçćčCÇĆČ',
+            'dđďDĐĎ',
+            'eèéẻẽẹêềếểễệëěēęEÈÉẺẼẸÊỀẾỂỄỆËĚĒĘ',
+            'iìíỉĩịîïīIÌÍỈĨỊÎÏĪ',
+            'lłLŁ',
+            'nñňńNÑŇŃ',
+            'oòóỏõọôồốổỗộơởỡớờợöøōOÒÓỎÕỌÔỒỐỔỖỘƠỞỠỚỜỢÖØŌ',
+            'rřRŘ',
+            'sšśșşSŠŚȘŞ',
+            'tťțţTŤȚŢ',
+            'uùúủũụưừứửữựûüůūUÙÚỦŨỤƯỪỨỬỮỰÛÜŮŪ',
+            'yýỳỷỹỵÿYÝỲỶỸỴŸ',
+            'zžżźZŽŻŹ',
+          ];
     let handled = [];
-    str.split("").forEach((ch) => {
+    str.split('').forEach((ch) => {
       dct.every((dct2) => {
         if (dct2.indexOf(ch) !== -1) {
           if (handled.indexOf(dct2) > -1) {
             return false;
           }
-          str = str.replace(
-            new RegExp(`[${dct2}]`, `gm${sens}`),
-            `[${dct2}]`
-          );
+          str = str.replace(new RegExp(`[${dct2}]`, `gm${sens}`), `[${dct2}]`);
           handled.push(dct2);
         }
         return true;
@@ -2123,7 +2595,7 @@ let Mark$1 = class Mark {
    * @access protected
    */
   createMergedBlanksRegExp(str) {
-    return str.replace(/[\s]+/gmi, "[\\s]+");
+    return str.replace(/[\s]+/gim, '[\\s]+');
   }
   /**
    * Creates a regular expression string to match the specified string with
@@ -2136,19 +2608,22 @@ let Mark$1 = class Mark {
    * @access protected
    */
   createAccuracyRegExp(str) {
-    const chars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~¡¿";
-    let acc = this.opt.accuracy, val = typeof acc === "string" ? acc : acc.value, ls = typeof acc === "string" ? [] : acc.limiters, lsJoin = "";
+    const chars = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~¡¿';
+    let acc = this.opt.accuracy,
+      val = typeof acc === 'string' ? acc : acc.value,
+      ls = typeof acc === 'string' ? [] : acc.limiters,
+      lsJoin = '';
     ls.forEach((limiter) => {
       lsJoin += `|${this.escapeStr(limiter)}`;
     });
     switch (val) {
-      case "partially":
+      case 'partially':
       default:
         return `()(${str})`;
-      case "complementary":
-        lsJoin = "\\s" + (lsJoin ? lsJoin : this.escapeStr(chars));
+      case 'complementary':
+        lsJoin = '\\s' + (lsJoin ? lsJoin : this.escapeStr(chars));
         return `()([^${lsJoin}]*${str}[^${lsJoin}]*)`;
-      case "exactly":
+      case 'exactly':
         return `(^|\\s${lsJoin})(${str})(?=$|\\s${lsJoin})`;
     }
   }
@@ -2173,7 +2648,7 @@ let Mark$1 = class Mark {
           stack.push(kw);
         }
       } else {
-        kw.split(" ").forEach((kwSplitted) => {
+        kw.split(' ').forEach((kwSplitted) => {
           if (kwSplitted.trim() && stack.indexOf(kwSplitted) === -1) {
             stack.push(kwSplitted);
           }
@@ -2182,10 +2657,10 @@ let Mark$1 = class Mark {
     });
     return {
       // sort because of https://git.io/v6USg
-      "keywords": stack.sort((a, b) => {
+      keywords: stack.sort((a, b) => {
         return b.length - a.length;
       }),
-      "length": stack.length
+      length: stack.length,
     };
   }
   /**
@@ -2220,24 +2695,32 @@ let Mark$1 = class Mark {
    * @access protected
    */
   checkRanges(array) {
-    if (!Array.isArray(array) || Object.prototype.toString.call(array[0]) !== "[object Object]") {
-      this.log("markRanges() will only accept an array of objects");
+    if (
+      !Array.isArray(array) ||
+      Object.prototype.toString.call(array[0]) !== '[object Object]'
+    ) {
+      this.log('markRanges() will only accept an array of objects');
       this.opt.noMatch(array);
       return [];
     }
     const stack = [];
     let last2 = 0;
-    array.sort((a, b) => {
-      return a.start - b.start;
-    }).forEach((item) => {
-      let { start, end, valid } = this.callNoMatchOnInvalidRanges(item, last2);
-      if (valid) {
-        item.start = start;
-        item.length = end - start;
-        stack.push(item);
-        last2 = end;
-      }
-    });
+    array
+      .sort((a, b) => {
+        return a.start - b.start;
+      })
+      .forEach((item) => {
+        let { start, end, valid } = this.callNoMatchOnInvalidRanges(
+          item,
+          last2
+        );
+        if (valid) {
+          item.start = start;
+          item.length = end - start;
+          stack.push(item);
+          last2 = end;
+        }
+      });
     return stack;
   }
   /**
@@ -2250,20 +2733,27 @@ let Mark$1 = class Mark {
    * calculated end range is valid
    */
   /**
-    * Initial validation of ranges for markRanges. Preliminary checks are done
-    * to ensure the start and length values exist and are not zero or non-
-    * numeric
-    * @param {Mark~rangeObject} range - the current range object
-    * @param {number} last - last index of range
-    * @return {Mark~validObject}
-    * @access protected
-    */
+   * Initial validation of ranges for markRanges. Preliminary checks are done
+   * to ensure the start and length values exist and are not zero or non-
+   * numeric
+   * @param {Mark~rangeObject} range - the current range object
+   * @param {number} last - last index of range
+   * @return {Mark~validObject}
+   * @access protected
+   */
   callNoMatchOnInvalidRanges(range, last2) {
-    let start, end, valid = false;
-    if (range && typeof range.start !== "undefined") {
+    let start,
+      end,
+      valid = false;
+    if (range && typeof range.start !== 'undefined') {
       start = parseInt(range.start, 10);
       end = start + parseInt(range.length, 10);
-      if (this.isNumeric(range.start) && this.isNumeric(range.length) && end - last2 > 0 && end - start > 0) {
+      if (
+        this.isNumeric(range.start) &&
+        this.isNumeric(range.length) &&
+        end - last2 > 0 &&
+        end - start > 0
+      ) {
         valid = true;
       } else {
         this.log(
@@ -2278,7 +2768,7 @@ let Mark$1 = class Mark {
     return {
       start,
       end,
-      valid
+      valid,
     };
   }
   /**
@@ -2293,7 +2783,11 @@ let Mark$1 = class Mark {
    * @access protected
    */
   checkWhitespaceRanges(range, originalLength, string) {
-    let end, valid = true, max = string.length, offset = originalLength - max, start = parseInt(range.start, 10) - offset;
+    let end,
+      valid = true,
+      max = string.length,
+      offset = originalLength - max,
+      start = parseInt(range.start, 10) - offset;
     start = start > max ? max : start;
     end = start + parseInt(range.length, 10);
     if (end > max) {
@@ -2304,15 +2798,15 @@ let Mark$1 = class Mark {
       valid = false;
       this.log(`Invalid range: ${JSON.stringify(range)}`);
       this.opt.noMatch(range);
-    } else if (string.substring(start, end).replace(/\s+/g, "") === "") {
+    } else if (string.substring(start, end).replace(/\s+/g, '') === '') {
       valid = false;
-      this.log("Skipping whitespace only range: " + JSON.stringify(range));
+      this.log('Skipping whitespace only range: ' + JSON.stringify(range));
       this.opt.noMatch(range);
     }
     return {
       start,
       end,
-      valid
+      valid,
     };
   }
   /**
@@ -2339,25 +2833,31 @@ let Mark$1 = class Mark {
    * @access protected
    */
   getTextNodes(cb) {
-    let val = "", nodes = [];
-    this.iterator.forEachNode(NodeFilter.SHOW_TEXT, (node) => {
-      nodes.push({
-        start: val.length,
-        end: (val += node.textContent).length,
-        node
-      });
-    }, (node) => {
-      if (this.matchesExclude(node.parentNode)) {
-        return NodeFilter.FILTER_REJECT;
-      } else {
-        return NodeFilter.FILTER_ACCEPT;
+    let val = '',
+      nodes = [];
+    this.iterator.forEachNode(
+      NodeFilter.SHOW_TEXT,
+      (node) => {
+        nodes.push({
+          start: val.length,
+          end: (val += node.textContent).length,
+          node,
+        });
+      },
+      (node) => {
+        if (this.matchesExclude(node.parentNode)) {
+          return NodeFilter.FILTER_REJECT;
+        } else {
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      },
+      () => {
+        cb({
+          value: val,
+          nodes,
+        });
       }
-    }, () => {
-      cb({
-        value: val,
-        nodes
-      });
-    });
+    );
   }
   /**
    * Checks if an element matches any of the specified exclude selectors. Also
@@ -2368,14 +2868,17 @@ let Mark$1 = class Mark {
    * @access protected
    */
   matchesExclude(el) {
-    return DOMIterator.matches(el, this.opt.exclude.concat([
-      // ignores the elements itself, not their childrens (selector *)
-      "script",
-      "style",
-      "title",
-      "head",
-      "html"
-    ]));
+    return DOMIterator.matches(
+      el,
+      this.opt.exclude.concat([
+        // ignores the elements itself, not their childrens (selector *)
+        'script',
+        'style',
+        'title',
+        'head',
+        'html',
+      ])
+    );
   }
   /**
    * Wraps the instance element and class around matches that fit the start
@@ -2388,11 +2891,13 @@ let Mark$1 = class Mark {
    * @access protected
    */
   wrapRangeInTextNode(node, start, end) {
-    const hEl = !this.opt.element ? "mark" : this.opt.element, startNode = node.splitText(start), ret = startNode.splitText(end - start);
+    const hEl = !this.opt.element ? 'mark' : this.opt.element,
+      startNode = node.splitText(start),
+      ret = startNode.splitText(end - start);
     let repl = document.createElement(hEl);
-    repl.setAttribute("data-markjs", "true");
+    repl.setAttribute('data-markjs', 'true');
     if (this.opt.className) {
-      repl.setAttribute("class", this.opt.className);
+      repl.setAttribute('class', this.opt.className);
     }
     repl.textContent = startNode.textContent;
     startNode.parentNode.replaceChild(repl, startNode);
@@ -2435,11 +2940,14 @@ let Mark$1 = class Mark {
   wrapRangeInMappedTextNode(dict, start, end, filterCb, eachCb) {
     dict.nodes.every((n, i) => {
       const sibl = dict.nodes[i + 1];
-      if (typeof sibl === "undefined" || sibl.start > start) {
+      if (typeof sibl === 'undefined' || sibl.start > start) {
         if (!filterCb(n.node)) {
           return false;
         }
-        const s = start - n.start, e = (end > n.end ? n.end : end) - n.start, startStr = dict.value.substr(0, n.start), endStr = dict.value.substr(e + n.start);
+        const s = start - n.start,
+          e = (end > n.end ? n.end : end) - n.start,
+          startStr = dict.value.substr(0, n.start),
+          endStr = dict.value.substr(e + n.start);
         n.node = this.wrapRangeInTextNode(n.node, s, e);
         dict.value = startStr + endStr;
         dict.nodes.forEach((k, j) => {
@@ -2493,7 +3001,10 @@ let Mark$1 = class Mark {
       dict.nodes.forEach((node) => {
         node = node.node;
         let match;
-        while ((match = regex.exec(node.textContent)) !== null && match[matchIdx] !== "") {
+        while (
+          (match = regex.exec(node.textContent)) !== null &&
+          match[matchIdx] !== ''
+        ) {
           if (!filterCb(match[matchIdx], node)) {
             continue;
           }
@@ -2545,7 +3056,10 @@ let Mark$1 = class Mark {
     const matchIdx = ignoreGroups === 0 ? 0 : ignoreGroups + 1;
     this.getTextNodes((dict) => {
       let match;
-      while ((match = regex.exec(dict.value)) !== null && match[matchIdx] !== "") {
+      while (
+        (match = regex.exec(dict.value)) !== null &&
+        match[matchIdx] !== ''
+      ) {
         let start = match.index;
         if (matchIdx !== 0) {
           for (let i = 1; i < matchIdx; i++) {
@@ -2553,12 +3067,18 @@ let Mark$1 = class Mark {
           }
         }
         const end = start + match[matchIdx].length;
-        this.wrapRangeInMappedTextNode(dict, start, end, (node) => {
-          return filterCb(match[matchIdx], node);
-        }, (node, lastIndex) => {
-          regex.lastIndex = lastIndex;
-          eachCb(node);
-        });
+        this.wrapRangeInMappedTextNode(
+          dict,
+          start,
+          end,
+          (node) => {
+            return filterCb(match[matchIdx], node);
+          },
+          (node, lastIndex) => {
+            regex.lastIndex = lastIndex;
+            eachCb(node);
+          }
+        );
       }
       endCb();
     });
@@ -2601,16 +3121,22 @@ let Mark$1 = class Mark {
           dict.value
         );
         if (valid) {
-          this.wrapRangeInMappedTextNode(dict, start, end, (node) => {
-            return filterCb(
-              node,
-              range,
-              dict.value.substring(start, end),
-              counter
-            );
-          }, (node) => {
-            eachCb(node, range);
-          });
+          this.wrapRangeInMappedTextNode(
+            dict,
+            start,
+            end,
+            (node) => {
+              return filterCb(
+                node,
+                range,
+                dict.value.substring(start, end),
+                counter
+              );
+            },
+            (node) => {
+              eachCb(node, range);
+            }
+          );
         }
       });
       endCb();
@@ -2711,22 +3237,29 @@ let Mark$1 = class Mark {
   markRegExp(regexp, opt) {
     this.opt = opt;
     this.log(`Searching with expression "${regexp}"`);
-    let totalMatches = 0, fn = "wrapMatches";
+    let totalMatches = 0,
+      fn = 'wrapMatches';
     const eachCb = (element) => {
       totalMatches++;
       this.opt.each(element);
     };
     if (this.opt.acrossElements) {
-      fn = "wrapMatchesAcrossElements";
+      fn = 'wrapMatchesAcrossElements';
     }
-    this[fn](regexp, this.opt.ignoreGroups, (match, node) => {
-      return this.opt.filter(node, match, totalMatches);
-    }, eachCb, () => {
-      if (totalMatches === 0) {
-        this.opt.noMatch(regexp);
+    this[fn](
+      regexp,
+      this.opt.ignoreGroups,
+      (match, node) => {
+        return this.opt.filter(node, match, totalMatches);
+      },
+      eachCb,
+      () => {
+        if (totalMatches === 0) {
+          this.opt.noMatch(regexp);
+        }
+        this.opt.done(totalMatches);
       }
-      this.opt.done(totalMatches);
-    });
+    );
   }
   /**
    * Callback for each marked element
@@ -2846,32 +3379,41 @@ let Mark$1 = class Mark {
    */
   mark(sv, opt) {
     this.opt = opt;
-    let totalMatches = 0, fn = "wrapMatches";
-    const {
-      keywords: kwArr,
-      length: kwArrLen
-    } = this.getSeparatedKeywords(typeof sv === "string" ? [sv] : sv), sens = this.opt.caseSensitive ? "" : "i", handler = (kw) => {
-      let regex = new RegExp(this.createRegExp(kw), `gm${sens}`), matches2 = 0;
-      this.log(`Searching with expression "${regex}"`);
-      this[fn](regex, 1, (term, node) => {
-        return this.opt.filter(node, kw, totalMatches, matches2);
-      }, (element) => {
-        matches2++;
-        totalMatches++;
-        this.opt.each(element);
-      }, () => {
-        if (matches2 === 0) {
-          this.opt.noMatch(kw);
-        }
-        if (kwArr[kwArrLen - 1] === kw) {
-          this.opt.done(totalMatches);
-        } else {
-          handler(kwArr[kwArr.indexOf(kw) + 1]);
-        }
-      });
-    };
+    let totalMatches = 0,
+      fn = 'wrapMatches';
+    const { keywords: kwArr, length: kwArrLen } = this.getSeparatedKeywords(
+        typeof sv === 'string' ? [sv] : sv
+      ),
+      sens = this.opt.caseSensitive ? '' : 'i',
+      handler = (kw) => {
+        let regex = new RegExp(this.createRegExp(kw), `gm${sens}`),
+          matches2 = 0;
+        this.log(`Searching with expression "${regex}"`);
+        this[fn](
+          regex,
+          1,
+          (term, node) => {
+            return this.opt.filter(node, kw, totalMatches, matches2);
+          },
+          (element) => {
+            matches2++;
+            totalMatches++;
+            this.opt.each(element);
+          },
+          () => {
+            if (matches2 === 0) {
+              this.opt.noMatch(kw);
+            }
+            if (kwArr[kwArrLen - 1] === kw) {
+              this.opt.done(totalMatches);
+            } else {
+              handler(kwArr[kwArr.indexOf(kw) + 1]);
+            }
+          }
+        );
+      };
     if (this.opt.acrossElements) {
-      fn = "wrapMatchesAcrossElements";
+      fn = 'wrapMatchesAcrossElements';
     }
     if (kwArrLen === 0) {
       this.opt.done(totalMatches);
@@ -2918,10 +3460,11 @@ let Mark$1 = class Mark {
    */
   markRanges(rawRanges, opt) {
     this.opt = opt;
-    let totalMatches = 0, ranges = this.checkRanges(rawRanges);
+    let totalMatches = 0,
+      ranges = this.checkRanges(rawRanges);
     if (ranges && ranges.length) {
       this.log(
-        "Starting to mark with the following ranges: " + JSON.stringify(ranges)
+        'Starting to mark with the following ranges: ' + JSON.stringify(ranges)
       );
       this.wrapRangeFromIndex(
         ranges,
@@ -2948,22 +3491,28 @@ let Mark$1 = class Mark {
    */
   unmark(opt) {
     this.opt = opt;
-    let sel = this.opt.element ? this.opt.element : "*";
-    sel += "[data-markjs]";
+    let sel = this.opt.element ? this.opt.element : '*';
+    sel += '[data-markjs]';
     if (this.opt.className) {
       sel += `.${this.opt.className}`;
     }
     this.log(`Removal selector "${sel}"`);
-    this.iterator.forEachNode(NodeFilter.SHOW_ELEMENT, (node) => {
-      this.unwrapMatches(node);
-    }, (node) => {
-      const matchesSel = DOMIterator.matches(node, sel), matchesExclude = this.matchesExclude(node);
-      if (!matchesSel || matchesExclude) {
-        return NodeFilter.FILTER_REJECT;
-      } else {
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    }, this.opt.done);
+    this.iterator.forEachNode(
+      NodeFilter.SHOW_ELEMENT,
+      (node) => {
+        this.unwrapMatches(node);
+      },
+      (node) => {
+        const matchesSel = DOMIterator.matches(node, sel),
+          matchesExclude = this.matchesExclude(node);
+        if (!matchesSel || matchesExclude) {
+          return NodeFilter.FILTER_REJECT;
+        } else {
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      },
+      this.opt.done
+    );
   }
 };
 function Mark2(ctx) {
@@ -2986,10 +3535,10 @@ function Mark2(ctx) {
   };
   return this;
 }
-const ENTRIES = "ENTRIES";
-const KEYS = "KEYS";
-const VALUES = "VALUES";
-const LEAF = "";
+const ENTRIES = 'ENTRIES';
+const KEYS = 'KEYS';
+const VALUES = 'VALUES';
+const LEAF = '';
 class TreeIterator {
   constructor(set, type) {
     const node = set._tree;
@@ -3028,7 +3577,13 @@ class TreeIterator {
     this.backtrack();
   }
   key() {
-    return this.set._prefix + this._path.map(({ keys }) => last$1(keys)).filter((key) => key !== LEAF).join("");
+    return (
+      this.set._prefix +
+      this._path
+        .map(({ keys }) => last$1(keys))
+        .filter((key) => key !== LEAF)
+        .join('')
+    );
   }
   value() {
     return last$1(this._path).node.get(LEAF);
@@ -3052,16 +3607,13 @@ const last$1 = (array) => {
 };
 const fuzzySearch = (node, query, maxDistance) => {
   const results = /* @__PURE__ */ new Map();
-  if (query === void 0)
-    return results;
+  if (query === void 0) return results;
   const n = query.length + 1;
   const m = n + maxDistance;
   const matrix = new Uint8Array(m * n).fill(maxDistance + 1);
-  for (let j = 0; j < n; ++j)
-    matrix[j] = j;
-  for (let i = 1; i < m; ++i)
-    matrix[i * n] = i;
-  recurse(node, query, maxDistance, results, matrix, 1, n, "");
+  for (let j = 0; j < n; ++j) matrix[j] = j;
+  for (let i = 1; i < m; ++i) matrix[i * n] = i;
+  recurse(node, query, maxDistance, results, matrix, 1, n, '');
   return results;
 };
 const recurse = (node, query, maxDistance, results, matrix, m, n, prefix) => {
@@ -3086,15 +3638,27 @@ const recurse = (node, query, maxDistance, results, matrix, m, n, prefix) => {
           const rpl = matrix[prevRowOffset + j] + +different;
           const del = matrix[prevRowOffset + j + 1] + 1;
           const ins = matrix[thisRowOffset + j] + 1;
-          const dist = matrix[thisRowOffset + j + 1] = Math.min(rpl, del, ins);
-          if (dist < minDistance)
-            minDistance = dist;
+          const dist = (matrix[thisRowOffset + j + 1] = Math.min(
+            rpl,
+            del,
+            ins
+          ));
+          if (dist < minDistance) minDistance = dist;
         }
         if (minDistance > maxDistance) {
           continue key;
         }
       }
-      recurse(node.get(key), query, maxDistance, results, matrix, i, n, prefix + key);
+      recurse(
+        node.get(key),
+        query,
+        maxDistance,
+        results,
+        matrix,
+        i,
+        n,
+        prefix + key
+      );
     }
   }
 };
@@ -3108,7 +3672,7 @@ class SearchableMap {
    * The constructor arguments are for internal use, when creating derived
    * mutable views of a map at a prefix.
    */
-  constructor(tree = /* @__PURE__ */ new Map(), prefix = "") {
+  constructor(tree = /* @__PURE__ */ new Map(), prefix = '') {
     this._size = void 0;
     this._tree = tree;
     this._prefix = prefix;
@@ -3144,9 +3708,12 @@ class SearchableMap {
    */
   atPrefix(prefix) {
     if (!prefix.startsWith(this._prefix)) {
-      throw new Error("Mismatched prefix");
+      throw new Error('Mismatched prefix');
     }
-    const [node, path] = trackDown(this._tree, prefix.slice(this._prefix.length));
+    const [node, path] = trackDown(
+      this._tree,
+      prefix.slice(this._prefix.length)
+    );
     if (node === void 0) {
       const [parentNode, key] = last(path);
       for (const k of parentNode.keys()) {
@@ -3254,8 +3821,8 @@ class SearchableMap {
    * @return The {@link SearchableMap} itself, to allow chaining
    */
   set(key, value) {
-    if (typeof key !== "string") {
-      throw new Error("key must be a string");
+    if (typeof key !== 'string') {
+      throw new Error('key must be a string');
     }
     this._size = void 0;
     const node = createPath(this._tree, key);
@@ -3271,8 +3838,7 @@ class SearchableMap {
     }
     this._size = 0;
     const iter = this.entries();
-    while (!iter.next().done)
-      this._size += 1;
+    while (!iter.next().done) this._size += 1;
     return this._size;
   }
   /**
@@ -3296,8 +3862,8 @@ class SearchableMap {
    * @return The {@link SearchableMap} itself, to allow chaining
    */
   update(key, fn) {
-    if (typeof key !== "string") {
-      throw new Error("key must be a string");
+    if (typeof key !== 'string') {
+      throw new Error('key must be a string');
     }
     this._size = void 0;
     const node = createPath(this._tree, key);
@@ -3321,14 +3887,14 @@ class SearchableMap {
    * @return The existing or new value at the given key
    */
   fetch(key, initial) {
-    if (typeof key !== "string") {
-      throw new Error("key must be a string");
+    if (typeof key !== 'string') {
+      throw new Error('key must be a string');
     }
     this._size = void 0;
     const node = createPath(this._tree, key);
     let value = node.get(LEAF);
     if (value === void 0) {
-      node.set(LEAF, value = initial());
+      node.set(LEAF, (value = initial()));
     }
     return value;
   }
@@ -3379,7 +3945,7 @@ const trackDown = (tree, key, path = []) => {
     }
   }
   path.push([tree, key]);
-  return trackDown(void 0, "", path);
+  return trackDown(void 0, '', path);
 };
 const lookup = (tree, key) => {
   if (key.length === 0 || tree == null) {
@@ -3398,8 +3964,7 @@ const createPath = (node, key) => {
       if (k !== LEAF && key[pos] === k[0]) {
         const len = Math.min(keyLength - pos, k.length);
         let offset = 1;
-        while (offset < len && key[pos + offset] === k[offset])
-          ++offset;
+        while (offset < len && key[pos + offset] === k[offset]) ++offset;
         const child2 = node.get(k);
         if (offset === k.length) {
           node = child2;
@@ -3459,9 +4024,9 @@ const merge = (path, key, value) => {
 const last = (array) => {
   return array[array.length - 1];
 };
-const OR = "or";
-const AND = "and";
-const AND_NOT = "and_not";
+const OR = 'or';
+const AND = 'and';
+const AND_NOT = 'and_not';
 class MiniSearch {
   /**
    * @param options  Configuration options
@@ -3525,16 +4090,27 @@ class MiniSearch {
    * ```
    */
   constructor(options) {
-    if ((options === null || options === void 0 ? void 0 : options.fields) == null) {
+    if (
+      (options === null || options === void 0 ? void 0 : options.fields) == null
+    ) {
       throw new Error('MiniSearch: option "fields" must be provided');
     }
-    const autoVacuum = options.autoVacuum == null || options.autoVacuum === true ? defaultAutoVacuumOptions : options.autoVacuum;
+    const autoVacuum =
+      options.autoVacuum == null || options.autoVacuum === true
+        ? defaultAutoVacuumOptions
+        : options.autoVacuum;
     this._options = {
       ...defaultOptions,
       ...options,
       autoVacuum,
-      searchOptions: { ...defaultSearchOptions, ...options.searchOptions || {} },
-      autoSuggestOptions: { ...defaultAutoSuggestOptions, ...options.autoSuggestOptions || {} }
+      searchOptions: {
+        ...defaultSearchOptions,
+        ...(options.searchOptions || {}),
+      },
+      autoSuggestOptions: {
+        ...defaultAutoSuggestOptions,
+        ...(options.autoSuggestOptions || {}),
+      },
     };
     this._index = new SearchableMap();
     this._documentCount = 0;
@@ -3557,10 +4133,19 @@ class MiniSearch {
    * @param document  The document to be indexed
    */
   add(document2) {
-    const { extractField, stringifyField, tokenize, processTerm, fields, idField } = this._options;
+    const {
+      extractField,
+      stringifyField,
+      tokenize,
+      processTerm,
+      fields,
+      idField,
+    } = this._options;
     const id = extractField(document2, idField);
     if (id == null) {
-      throw new Error(`MiniSearch: document does not have ID field "${idField}"`);
+      throw new Error(
+        `MiniSearch: document does not have ID field "${idField}"`
+      );
     }
     if (this._idToShortId.has(id)) {
       throw new Error(`MiniSearch: duplicate ID ${id}`);
@@ -3569,12 +4154,16 @@ class MiniSearch {
     this.saveStoredFields(shortDocumentId, document2);
     for (const field of fields) {
       const fieldValue = extractField(document2, field);
-      if (fieldValue == null)
-        continue;
+      if (fieldValue == null) continue;
       const tokens = tokenize(stringifyField(fieldValue, field), field);
       const fieldId = this._fieldIds[field];
       const uniqueTerms = new Set(tokens).size;
-      this.addFieldLength(shortDocumentId, fieldId, this._documentCount - 1, uniqueTerms);
+      this.addFieldLength(
+        shortDocumentId,
+        fieldId,
+        this._documentCount - 1,
+        uniqueTerms
+      );
       for (const term of tokens) {
         const processedTerm = processTerm(term, field);
         if (Array.isArray(processedTerm)) {
@@ -3593,8 +4182,7 @@ class MiniSearch {
    * @param documents  An array of documents to be indexed
    */
   addAll(documents) {
-    for (const document2 of documents)
-      this.add(document2);
+    for (const document2 of documents) this.add(document2);
   }
   /**
    * Adds all the given documents to the index asynchronously.
@@ -3610,17 +4198,22 @@ class MiniSearch {
   addAllAsync(documents, options = {}) {
     const { chunkSize = 10 } = options;
     const acc = { chunk: [], promise: Promise.resolve() };
-    const { chunk, promise } = documents.reduce(({ chunk: chunk2, promise: promise2 }, document2, i) => {
-      chunk2.push(document2);
-      if ((i + 1) % chunkSize === 0) {
-        return {
-          chunk: [],
-          promise: promise2.then(() => new Promise((resolve) => setTimeout(resolve, 0))).then(() => this.addAll(chunk2))
-        };
-      } else {
-        return { chunk: chunk2, promise: promise2 };
-      }
-    }, acc);
+    const { chunk, promise } = documents.reduce(
+      ({ chunk: chunk2, promise: promise2 }, document2, i) => {
+        chunk2.push(document2);
+        if ((i + 1) % chunkSize === 0) {
+          return {
+            chunk: [],
+            promise: promise2
+              .then(() => new Promise((resolve) => setTimeout(resolve, 0)))
+              .then(() => this.addAll(chunk2)),
+          };
+        } else {
+          return { chunk: chunk2, promise: promise2 };
+        }
+      },
+      acc
+    );
     return promise.then(() => this.addAll(chunk));
   }
   /**
@@ -3638,23 +4231,38 @@ class MiniSearch {
    * @param document  The document to be removed
    */
   remove(document2) {
-    const { tokenize, processTerm, extractField, stringifyField, fields, idField } = this._options;
+    const {
+      tokenize,
+      processTerm,
+      extractField,
+      stringifyField,
+      fields,
+      idField,
+    } = this._options;
     const id = extractField(document2, idField);
     if (id == null) {
-      throw new Error(`MiniSearch: document does not have ID field "${idField}"`);
+      throw new Error(
+        `MiniSearch: document does not have ID field "${idField}"`
+      );
     }
     const shortId = this._idToShortId.get(id);
     if (shortId == null) {
-      throw new Error(`MiniSearch: cannot remove document with ID ${id}: it is not in the index`);
+      throw new Error(
+        `MiniSearch: cannot remove document with ID ${id}: it is not in the index`
+      );
     }
     for (const field of fields) {
       const fieldValue = extractField(document2, field);
-      if (fieldValue == null)
-        continue;
+      if (fieldValue == null) continue;
       const tokens = tokenize(stringifyField(fieldValue, field), field);
       const fieldId = this._fieldIds[field];
       const uniqueTerms = new Set(tokens).size;
-      this.removeFieldLength(shortId, fieldId, this._documentCount, uniqueTerms);
+      this.removeFieldLength(
+        shortId,
+        fieldId,
+        this._documentCount,
+        uniqueTerms
+      );
       for (const term of tokens) {
         const processedTerm = processTerm(term, field);
         if (Array.isArray(processedTerm)) {
@@ -3683,10 +4291,11 @@ class MiniSearch {
    */
   removeAll(documents) {
     if (documents) {
-      for (const document2 of documents)
-        this.remove(document2);
+      for (const document2 of documents) this.remove(document2);
     } else if (arguments.length > 0) {
-      throw new Error("Expected documents to be present. Omit the argument to remove all documents.");
+      throw new Error(
+        'Expected documents to be present. Omit the argument to remove all documents.'
+      );
     } else {
       this._index = new SearchableMap();
       this._documentCount = 0;
@@ -3745,13 +4354,20 @@ class MiniSearch {
   discard(id) {
     const shortId = this._idToShortId.get(id);
     if (shortId == null) {
-      throw new Error(`MiniSearch: cannot discard document with ID ${id}: it is not in the index`);
+      throw new Error(
+        `MiniSearch: cannot discard document with ID ${id}: it is not in the index`
+      );
     }
     this._idToShortId.delete(id);
     this._documentIds.delete(shortId);
     this._storedFields.delete(shortId);
     (this._fieldLength.get(shortId) || []).forEach((fieldLength, fieldId) => {
-      this.removeFieldLength(shortId, fieldId, this._documentCount, fieldLength);
+      this.removeFieldLength(
+        shortId,
+        fieldId,
+        this._documentCount,
+        fieldLength
+      );
     });
     this._fieldLength.delete(shortId);
     this._documentCount -= 1;
@@ -3762,8 +4378,12 @@ class MiniSearch {
     if (this._options.autoVacuum === false) {
       return;
     }
-    const { minDirtFactor, minDirtCount, batchSize, batchWait } = this._options.autoVacuum;
-    this.conditionalVacuum({ batchSize, batchWait }, { minDirtCount, minDirtFactor });
+    const { minDirtFactor, minDirtCount, batchSize, batchWait } =
+      this._options.autoVacuum;
+    this.conditionalVacuum(
+      { batchSize, batchWait },
+      { minDirtCount, minDirtFactor }
+    );
   }
   /**
    * Discards the documents with the given IDs, so they won't appear in search
@@ -3854,7 +4474,8 @@ class MiniSearch {
   }
   conditionalVacuum(options, conditions) {
     if (this._currentVacuum) {
-      this._enqueuedVacuumConditions = this._enqueuedVacuumConditions && conditions;
+      this._enqueuedVacuumConditions =
+        this._enqueuedVacuumConditions && conditions;
       if (this._enqueuedVacuum != null) {
         return this._enqueuedVacuum;
       }
@@ -4120,7 +4741,10 @@ class MiniSearch {
    */
   search(query, searchOptions = {}) {
     const { searchOptions: globalSearchOptions } = this._options;
-    const searchOptionsWithDefaults = { ...globalSearchOptions, ...searchOptions };
+    const searchOptionsWithDefaults = {
+      ...globalSearchOptions,
+      ...searchOptions,
+    };
     const rawResults = this.executeQuery(query, searchOptions);
     const results = [];
     for (const [docId, { score, terms, match }] of rawResults) {
@@ -4130,14 +4754,20 @@ class MiniSearch {
         score: score * quality,
         terms: Object.keys(match),
         queryTerms: terms,
-        match
+        match,
       };
       Object.assign(result, this._storedFields.get(docId));
-      if (searchOptionsWithDefaults.filter == null || searchOptionsWithDefaults.filter(result)) {
+      if (
+        searchOptionsWithDefaults.filter == null ||
+        searchOptionsWithDefaults.filter(result)
+      ) {
         results.push(result);
       }
     }
-    if (query === MiniSearch.wildcard && searchOptionsWithDefaults.boostDocument == null) {
+    if (
+      query === MiniSearch.wildcard &&
+      searchOptionsWithDefaults.boostDocument == null
+    ) {
       return results;
     }
     results.sort(byScore);
@@ -4208,7 +4838,7 @@ class MiniSearch {
     options = { ...this._options.autoSuggestOptions, ...options };
     const suggestions = /* @__PURE__ */ new Map();
     for (const { score, terms } of this.search(queryString, options)) {
-      const phrase = terms.join(" ");
+      const phrase = terms.join(' ');
       const suggestion = suggestions.get(phrase);
       if (suggestion != null) {
         suggestion.score += score;
@@ -4259,7 +4889,9 @@ class MiniSearch {
    */
   static loadJSON(json, options) {
     if (options == null) {
-      throw new Error("MiniSearch: loadJSON should be given the same options used when serializing the index");
+      throw new Error(
+        'MiniSearch: loadJSON should be given the same options used when serializing the index'
+      );
     }
     return this.loadJS(JSON.parse(json), options);
   }
@@ -4278,7 +4910,9 @@ class MiniSearch {
    */
   static async loadJSONAsync(json, options) {
     if (options == null) {
-      throw new Error("MiniSearch: loadJSON should be given the same options used when serializing the index");
+      throw new Error(
+        'MiniSearch: loadJSON should be given the same options used when serializing the index'
+      );
     }
     return this.loadJSAsync(JSON.parse(json), options);
   }
@@ -4314,7 +4948,13 @@ class MiniSearch {
    * @ignore
    */
   static loadJS(js, options) {
-    const { index, documentIds, fieldLength, storedFields, serializationVersion } = js;
+    const {
+      index,
+      documentIds,
+      fieldLength,
+      storedFields,
+      serializationVersion,
+    } = js;
     const miniSearch = this.instantiateMiniSearch(js, options);
     miniSearch._documentIds = objectToNumericMap(documentIds);
     miniSearch._fieldLength = objectToNumericMap(fieldLength);
@@ -4339,7 +4979,13 @@ class MiniSearch {
    * @ignore
    */
   static async loadJSAsync(js, options) {
-    const { index, documentIds, fieldLength, storedFields, serializationVersion } = js;
+    const {
+      index,
+      documentIds,
+      fieldLength,
+      storedFields,
+      serializationVersion,
+    } = js;
     const miniSearch = this.instantiateMiniSearch(js, options);
     miniSearch._documentIds = await objectToNumericMapAsync(documentIds);
     miniSearch._fieldLength = await objectToNumericMapAsync(fieldLength);
@@ -4355,10 +5001,12 @@ class MiniSearch {
         if (serializationVersion === 1) {
           indexEntry = indexEntry.ds;
         }
-        dataMap.set(parseInt(fieldId, 10), await objectToNumericMapAsync(indexEntry));
+        dataMap.set(
+          parseInt(fieldId, 10),
+          await objectToNumericMapAsync(indexEntry)
+        );
       }
-      if (++count % 1e3 === 0)
-        await wait(0);
+      if (++count % 1e3 === 0) await wait(0);
       miniSearch._index.set(term, dataMap);
     }
     return miniSearch;
@@ -4367,9 +5015,18 @@ class MiniSearch {
    * @ignore
    */
   static instantiateMiniSearch(js, options) {
-    const { documentCount, nextId, fieldIds, averageFieldLength, dirtCount, serializationVersion } = js;
+    const {
+      documentCount,
+      nextId,
+      fieldIds,
+      averageFieldLength,
+      dirtCount,
+      serializationVersion,
+    } = js;
     if (serializationVersion !== 1 && serializationVersion !== 2) {
-      throw new Error("MiniSearch: cannot deserialize an index created with an incompatible version");
+      throw new Error(
+        'MiniSearch: cannot deserialize an index created with an incompatible version'
+      );
     }
     const miniSearch = new MiniSearch(options);
     miniSearch._documentCount = documentCount;
@@ -4388,17 +5045,33 @@ class MiniSearch {
     if (query === MiniSearch.wildcard) {
       return this.executeWildcardQuery(searchOptions);
     }
-    if (typeof query !== "string") {
+    if (typeof query !== 'string') {
       const options2 = { ...searchOptions, ...query, queries: void 0 };
-      const results2 = query.queries.map((subquery) => this.executeQuery(subquery, options2));
+      const results2 = query.queries.map((subquery) =>
+        this.executeQuery(subquery, options2)
+      );
       return this.combineResults(results2, options2.combineWith);
     }
-    const { tokenize, processTerm, searchOptions: globalSearchOptions } = this._options;
-    const options = { tokenize, processTerm, ...globalSearchOptions, ...searchOptions };
-    const { tokenize: searchTokenize, processTerm: searchProcessTerm } = options;
-    const terms = searchTokenize(query).flatMap((term) => searchProcessTerm(term)).filter((term) => !!term);
+    const {
+      tokenize,
+      processTerm,
+      searchOptions: globalSearchOptions,
+    } = this._options;
+    const options = {
+      tokenize,
+      processTerm,
+      ...globalSearchOptions,
+      ...searchOptions,
+    };
+    const { tokenize: searchTokenize, processTerm: searchProcessTerm } =
+      options;
+    const terms = searchTokenize(query)
+      .flatMap((term) => searchProcessTerm(term))
+      .filter((term) => !!term);
     const queries = terms.map(termToQuerySpec(options));
-    const results = queries.map((query2) => this.executeQuerySpec(query2, options));
+    const results = queries.map((query2) =>
+      this.executeQuerySpec(query2, options)
+    );
     return this.combineResults(results, options.combineWith);
   }
   /**
@@ -4406,11 +5079,29 @@ class MiniSearch {
    */
   executeQuerySpec(query, searchOptions) {
     const options = { ...this._options.searchOptions, ...searchOptions };
-    const boosts = (options.fields || this._options.fields).reduce((boosts2, field) => ({ ...boosts2, [field]: getOwnProperty(options.boost, field) || 1 }), {});
+    const boosts = (options.fields || this._options.fields).reduce(
+      (boosts2, field) => ({
+        ...boosts2,
+        [field]: getOwnProperty(options.boost, field) || 1,
+      }),
+      {}
+    );
     const { boostDocument, weights, maxFuzzy, bm25: bm25params } = options;
-    const { fuzzy: fuzzyWeight, prefix: prefixWeight } = { ...defaultSearchOptions.weights, ...weights };
+    const { fuzzy: fuzzyWeight, prefix: prefixWeight } = {
+      ...defaultSearchOptions.weights,
+      ...weights,
+    };
     const data = this._index.get(query.term);
-    const results = this.termResults(query.term, query.term, 1, query.termBoost, data, boosts, boostDocument, bm25params);
+    const results = this.termResults(
+      query.term,
+      query.term,
+      1,
+      query.termBoost,
+      data,
+      boosts,
+      boostDocument,
+      bm25params
+    );
     let prefixMatches;
     let fuzzyMatches;
     if (query.prefix) {
@@ -4418,7 +5109,10 @@ class MiniSearch {
     }
     if (query.fuzzy) {
       const fuzzy = query.fuzzy === true ? 0.2 : query.fuzzy;
-      const maxDistance = fuzzy < 1 ? Math.min(maxFuzzy, Math.round(query.term.length * fuzzy)) : fuzzy;
+      const maxDistance =
+        fuzzy < 1
+          ? Math.min(maxFuzzy, Math.round(query.term.length * fuzzy))
+          : fuzzy;
       if (maxDistance)
         fuzzyMatches = this._index.fuzzyGet(query.term, maxDistance);
     }
@@ -4428,9 +5122,22 @@ class MiniSearch {
         if (!distance) {
           continue;
         }
-        fuzzyMatches === null || fuzzyMatches === void 0 ? void 0 : fuzzyMatches.delete(term);
-        const weight = prefixWeight * term.length / (term.length + 0.3 * distance);
-        this.termResults(query.term, term, weight, query.termBoost, data2, boosts, boostDocument, bm25params, results);
+        fuzzyMatches === null || fuzzyMatches === void 0
+          ? void 0
+          : fuzzyMatches.delete(term);
+        const weight =
+          (prefixWeight * term.length) / (term.length + 0.3 * distance);
+        this.termResults(
+          query.term,
+          term,
+          weight,
+          query.termBoost,
+          data2,
+          boosts,
+          boostDocument,
+          bm25params,
+          results
+        );
       }
     }
     if (fuzzyMatches) {
@@ -4439,8 +5146,18 @@ class MiniSearch {
         if (!distance) {
           continue;
         }
-        const weight = fuzzyWeight * term.length / (term.length + distance);
-        this.termResults(query.term, term, weight, query.termBoost, data2, boosts, boostDocument, bm25params, results);
+        const weight = (fuzzyWeight * term.length) / (term.length + distance);
+        this.termResults(
+          query.term,
+          term,
+          weight,
+          query.termBoost,
+          data2,
+          boosts,
+          boostDocument,
+          bm25params,
+          results
+        );
       }
     }
     return results;
@@ -4452,11 +5169,13 @@ class MiniSearch {
     const results = /* @__PURE__ */ new Map();
     const options = { ...this._options.searchOptions, ...searchOptions };
     for (const [shortId, id] of this._documentIds) {
-      const score = options.boostDocument ? options.boostDocument(id, "", this._storedFields.get(shortId)) : 1;
+      const score = options.boostDocument
+        ? options.boostDocument(id, '', this._storedFields.get(shortId))
+        : 1;
       results.set(shortId, {
         score,
         terms: [],
-        match: {}
+        match: {},
       });
     }
     return results;
@@ -4518,21 +5237,29 @@ class MiniSearch {
       storedFields: Object.fromEntries(this._storedFields),
       dirtCount: this._dirtCount,
       index,
-      serializationVersion: 2
+      serializationVersion: 2,
     };
   }
   /**
    * @ignore
    */
-  termResults(sourceTerm, derivedTerm, termWeight, termBoost, fieldTermData, fieldBoosts, boostDocumentFn, bm25params, results = /* @__PURE__ */ new Map()) {
-    if (fieldTermData == null)
-      return results;
+  termResults(
+    sourceTerm,
+    derivedTerm,
+    termWeight,
+    termBoost,
+    fieldTermData,
+    fieldBoosts,
+    boostDocumentFn,
+    bm25params,
+    results = /* @__PURE__ */ new Map()
+  ) {
+    if (fieldTermData == null) return results;
     for (const field of Object.keys(fieldBoosts)) {
       const fieldBoost = fieldBoosts[field];
       const fieldId = this._fieldIds[field];
       const fieldTermFreqs = fieldTermData.get(fieldId);
-      if (fieldTermFreqs == null)
-        continue;
+      if (fieldTermFreqs == null) continue;
       let matchingFields = fieldTermFreqs.size;
       const avgFieldLength = this._avgFieldLength[fieldId];
       for (const docId of fieldTermFreqs.keys()) {
@@ -4541,13 +5268,26 @@ class MiniSearch {
           matchingFields -= 1;
           continue;
         }
-        const docBoost = boostDocumentFn ? boostDocumentFn(this._documentIds.get(docId), derivedTerm, this._storedFields.get(docId)) : 1;
-        if (!docBoost)
-          continue;
+        const docBoost = boostDocumentFn
+          ? boostDocumentFn(
+              this._documentIds.get(docId),
+              derivedTerm,
+              this._storedFields.get(docId)
+            )
+          : 1;
+        if (!docBoost) continue;
         const termFreq = fieldTermFreqs.get(docId);
         const fieldLength = this._fieldLength.get(docId)[fieldId];
-        const rawScore = calcBM25Score(termFreq, matchingFields, this._documentCount, fieldLength, avgFieldLength, bm25params);
-        const weightedScore = termWeight * termBoost * fieldBoost * docBoost * rawScore;
+        const rawScore = calcBM25Score(
+          termFreq,
+          matchingFields,
+          this._documentCount,
+          fieldLength,
+          avgFieldLength,
+          bm25params
+        );
+        const weightedScore =
+          termWeight * termBoost * fieldBoost * docBoost * rawScore;
         const result = results.get(docId);
         if (result) {
           result.score += weightedScore;
@@ -4562,7 +5302,7 @@ class MiniSearch {
           results.set(docId, {
             score: weightedScore,
             terms: [sourceTerm],
-            match: { [derivedTerm]: [field] }
+            match: { [derivedTerm]: [field] },
           });
         }
       }
@@ -4615,7 +5355,11 @@ class MiniSearch {
   warnDocumentChanged(shortDocumentId, fieldId, term) {
     for (const fieldName of Object.keys(this._fieldIds)) {
       if (this._fieldIds[fieldName] === fieldId) {
-        this._options.logger("warn", `MiniSearch: document with ID ${this._documentIds.get(shortDocumentId)} has changed before removal: term "${term}" was not present in field "${fieldName}". Removing a document after it has changed can corrupt the index!`, "version_conflict");
+        this._options.logger(
+          'warn',
+          `MiniSearch: document with ID ${this._documentIds.get(shortDocumentId)} has changed before removal: term "${term}" was not present in field "${fieldName}". Removing a document after it has changed can corrupt the index!`,
+          'version_conflict'
+        );
         return;
       }
     }
@@ -4645,7 +5389,7 @@ class MiniSearch {
   addFieldLength(documentId, fieldId, count, length) {
     let fieldLengths = this._fieldLength.get(documentId);
     if (fieldLengths == null)
-      this._fieldLength.set(documentId, fieldLengths = []);
+      this._fieldLength.set(documentId, (fieldLengths = []));
     fieldLengths[fieldId] = length;
     const averageFieldLength = this._avgFieldLength[fieldId] || 0;
     const totalFieldLength = averageFieldLength * count + length;
@@ -4672,16 +5416,18 @@ class MiniSearch {
     }
     let documentFields = this._storedFields.get(documentId);
     if (documentFields == null)
-      this._storedFields.set(documentId, documentFields = {});
+      this._storedFields.set(documentId, (documentFields = {}));
     for (const fieldName of storeFields) {
       const fieldValue = extractField(doc, fieldName);
-      if (fieldValue !== void 0)
-        documentFields[fieldName] = fieldValue;
+      if (fieldValue !== void 0) documentFields[fieldName] = fieldValue;
     }
   }
 }
-MiniSearch.wildcard = Symbol("*");
-const getOwnProperty = (object, property) => Object.prototype.hasOwnProperty.call(object, property) ? object[property] : void 0;
+MiniSearch.wildcard = Symbol('*');
+const getOwnProperty = (object, property) =>
+  Object.prototype.hasOwnProperty.call(object, property)
+    ? object[property]
+    : void 0;
 const combinators = {
   [OR]: (a, b) => {
     for (const docId of b.keys()) {
@@ -4701,38 +5447,59 @@ const combinators = {
     const combined = /* @__PURE__ */ new Map();
     for (const docId of b.keys()) {
       const existing = a.get(docId);
-      if (existing == null)
-        continue;
+      if (existing == null) continue;
       const { score, terms, match } = b.get(docId);
       assignUniqueTerms(existing.terms, terms);
       combined.set(docId, {
         score: existing.score + score,
         terms: existing.terms,
-        match: Object.assign(existing.match, match)
+        match: Object.assign(existing.match, match),
       });
     }
     return combined;
   },
   [AND_NOT]: (a, b) => {
-    for (const docId of b.keys())
-      a.delete(docId);
+    for (const docId of b.keys()) a.delete(docId);
     return a;
-  }
+  },
 };
 const defaultBM25params = { k: 1.2, b: 0.7, d: 0.5 };
-const calcBM25Score = (termFreq, matchingCount, totalCount, fieldLength, avgFieldLength, bm25params) => {
+const calcBM25Score = (
+  termFreq,
+  matchingCount,
+  totalCount,
+  fieldLength,
+  avgFieldLength,
+  bm25params
+) => {
   const { k, b, d } = bm25params;
-  const invDocFreq = Math.log(1 + (totalCount - matchingCount + 0.5) / (matchingCount + 0.5));
-  return invDocFreq * (d + termFreq * (k + 1) / (termFreq + k * (1 - b + b * fieldLength / avgFieldLength)));
+  const invDocFreq = Math.log(
+    1 + (totalCount - matchingCount + 0.5) / (matchingCount + 0.5)
+  );
+  return (
+    invDocFreq *
+    (d +
+      (termFreq * (k + 1)) /
+        (termFreq + k * (1 - b + (b * fieldLength) / avgFieldLength)))
+  );
 };
 const termToQuerySpec = (options) => (term, i, terms) => {
-  const fuzzy = typeof options.fuzzy === "function" ? options.fuzzy(term, i, terms) : options.fuzzy || false;
-  const prefix = typeof options.prefix === "function" ? options.prefix(term, i, terms) : options.prefix === true;
-  const termBoost = typeof options.boostTerm === "function" ? options.boostTerm(term, i, terms) : 1;
+  const fuzzy =
+    typeof options.fuzzy === 'function'
+      ? options.fuzzy(term, i, terms)
+      : options.fuzzy || false;
+  const prefix =
+    typeof options.prefix === 'function'
+      ? options.prefix(term, i, terms)
+      : options.prefix === true;
+  const termBoost =
+    typeof options.boostTerm === 'function'
+      ? options.boostTerm(term, i, terms)
+      : 1;
   return { term, fuzzy, prefix, termBoost };
 };
 const defaultOptions = {
-  idField: "id",
+  idField: 'id',
   extractField: (document2, fieldName) => document2[fieldName],
   stringifyField: (fieldValue, fieldName) => fieldValue.toString(),
   tokenize: (text) => text.split(SPACE_OR_PUNCTUATION),
@@ -4741,10 +5508,14 @@ const defaultOptions = {
   searchOptions: void 0,
   storeFields: [],
   logger: (level, message) => {
-    if (typeof (console === null || console === void 0 ? void 0 : console[level]) === "function")
+    if (
+      typeof (console === null || console === void 0
+        ? void 0
+        : console[level]) === 'function'
+    )
       console[level](message);
   },
-  autoVacuum: true
+  autoVacuum: true,
 };
 const defaultSearchOptions = {
   combineWith: OR,
@@ -4753,23 +5524,24 @@ const defaultSearchOptions = {
   maxFuzzy: 6,
   boost: {},
   weights: { fuzzy: 0.45, prefix: 0.375 },
-  bm25: defaultBM25params
+  bm25: defaultBM25params,
 };
 const defaultAutoSuggestOptions = {
   combineWith: AND,
-  prefix: (term, i, terms) => i === terms.length - 1
+  prefix: (term, i, terms) => i === terms.length - 1,
 };
 const defaultVacuumOptions = { batchSize: 1e3, batchWait: 10 };
 const defaultVacuumConditions = { minDirtFactor: 0.1, minDirtCount: 20 };
-const defaultAutoVacuumOptions = { ...defaultVacuumOptions, ...defaultVacuumConditions };
+const defaultAutoVacuumOptions = {
+  ...defaultVacuumOptions,
+  ...defaultVacuumConditions,
+};
 const assignUniqueTerm = (target, term) => {
-  if (!target.includes(term))
-    target.push(term);
+  if (!target.includes(term)) target.push(term);
 };
 const assignUniqueTerms = (target, source) => {
   for (const term of source) {
-    if (!target.includes(term))
-      target.push(term);
+    if (!target.includes(term)) target.push(term);
   }
 };
 const byScore = ({ score: a }, { score: b }) => b - a;
@@ -4796,8 +5568,8 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const SPACE_OR_PUNCTUATION = /[\n\r\p{Z}\p{P}]+/u;
 class LRUCache {
   constructor(max = 10) {
-    __publicField(this, "max");
-    __publicField(this, "cache");
+    __publicField(this, 'max');
+    __publicField(this, 'cache');
     this.max = max;
     this.cache = /* @__PURE__ */ new Map();
   }
@@ -4810,10 +5582,8 @@ class LRUCache {
     return item;
   }
   set(key, val) {
-    if (this.cache.has(key))
-      this.cache.delete(key);
-    else if (this.cache.size === this.max)
-      this.cache.delete(this.first());
+    if (this.cache.has(key)) this.cache.delete(key);
+    else if (this.cache.size === this.max) this.cache.delete(this.first());
     this.cache.set(key, val);
   }
   first() {
@@ -4824,9 +5594,9 @@ class LRUCache {
   }
 }
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "VPLocalSearchBox",
+  __name: 'VPLocalSearchBox',
   __ssrInlineRender: true,
-  emits: ["close"],
+  emits: ['close'],
   setup(__props, { emit: __emit }) {
     var _a, _b;
     const emit = __emit;
@@ -4838,47 +5608,107 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       immediate: true,
       allowOutsideClick: true,
       clickOutsideDeactivates: true,
-      escapeDeactivates: true
+      escapeDeactivates: true,
     });
     const { localeIndex, theme } = vitePressData;
-    const searchIndex = computedAsync(
-      async () => {
-        var _a2, _b2, _c, _d, _e, _f, _g, _h, _i;
-        return markRaw(
-          MiniSearch.loadJSON(
-            (_c = await ((_b2 = (_a2 = searchIndexData.value)[localeIndex.value]) == null ? void 0 : _b2.call(_a2))) == null ? void 0 : _c.default,
-            {
-              fields: ["title", "titles", "text"],
-              storeFields: ["title", "titles"],
-              searchOptions: {
-                fuzzy: 0.2,
-                prefix: true,
-                boost: { title: 4, text: 2, titles: 1 },
-                ...((_d = theme.value.search) == null ? void 0 : _d.provider) === "local" && ((_f = (_e = theme.value.search.options) == null ? void 0 : _e.miniSearch) == null ? void 0 : _f.searchOptions)
-              },
-              ...((_g = theme.value.search) == null ? void 0 : _g.provider) === "local" && ((_i = (_h = theme.value.search.options) == null ? void 0 : _h.miniSearch) == null ? void 0 : _i.options)
-            }
-          )
-        );
-      }
-    );
+    const searchIndex = computedAsync(async () => {
+      var _a2, _b2, _c, _d, _e, _f, _g, _h, _i;
+      return markRaw(
+        MiniSearch.loadJSON(
+          (_c = await ((_b2 = (_a2 = searchIndexData.value)[
+            localeIndex.value
+          ]) == null
+            ? void 0
+            : _b2.call(_a2))) == null
+            ? void 0
+            : _c.default,
+          {
+            fields: ['title', 'titles', 'text'],
+            storeFields: ['title', 'titles'],
+            searchOptions: {
+              fuzzy: 0.2,
+              prefix: true,
+              boost: { title: 4, text: 2, titles: 1 },
+              ...(((_d = theme.value.search) == null ? void 0 : _d.provider) ===
+                'local' &&
+                ((_f =
+                  (_e = theme.value.search.options) == null
+                    ? void 0
+                    : _e.miniSearch) == null
+                  ? void 0
+                  : _f.searchOptions)),
+            },
+            ...(((_g = theme.value.search) == null ? void 0 : _g.provider) ===
+              'local' &&
+              ((_i =
+                (_h = theme.value.search.options) == null
+                  ? void 0
+                  : _h.miniSearch) == null
+                ? void 0
+                : _i.options)),
+          }
+        )
+      );
+    });
     const disableQueryPersistence = computed(() => {
       var _a2, _b2;
-      return ((_a2 = theme.value.search) == null ? void 0 : _a2.provider) === "local" && ((_b2 = theme.value.search.options) == null ? void 0 : _b2.disableQueryPersistence) === true;
+      return (
+        ((_a2 = theme.value.search) == null ? void 0 : _a2.provider) ===
+          'local' &&
+        ((_b2 = theme.value.search.options) == null
+          ? void 0
+          : _b2.disableQueryPersistence) === true
+      );
     });
-    const filterText = disableQueryPersistence.value ? ref("") : useSessionStorage("vitepress:local-search-filter", "");
+    const filterText = disableQueryPersistence.value
+      ? ref('')
+      : useSessionStorage('vitepress:local-search-filter', '');
     const showDetailedList = useLocalStorage(
-      "vitepress:local-search-detailed-list",
-      ((_a = theme.value.search) == null ? void 0 : _a.provider) === "local" && ((_b = theme.value.search.options) == null ? void 0 : _b.detailedView) === true
+      'vitepress:local-search-detailed-list',
+      ((_a = theme.value.search) == null ? void 0 : _a.provider) === 'local' &&
+        ((_b = theme.value.search.options) == null
+          ? void 0
+          : _b.detailedView) === true
     );
     const disableDetailedView = computed(() => {
       var _a2, _b2, _c;
-      return ((_a2 = theme.value.search) == null ? void 0 : _a2.provider) === "local" && (((_b2 = theme.value.search.options) == null ? void 0 : _b2.disableDetailedView) === true || ((_c = theme.value.search.options) == null ? void 0 : _c.detailedView) === false);
+      return (
+        ((_a2 = theme.value.search) == null ? void 0 : _a2.provider) ===
+          'local' &&
+        (((_b2 = theme.value.search.options) == null
+          ? void 0
+          : _b2.disableDetailedView) === true ||
+          ((_c = theme.value.search.options) == null
+            ? void 0
+            : _c.detailedView) === false)
+      );
     });
     const buttonText = computed(() => {
       var _a2, _b2, _c, _d, _e, _f, _g;
-      const options = ((_a2 = theme.value.search) == null ? void 0 : _a2.options) ?? theme.value.algolia;
-      return ((_e = (_d = (_c = (_b2 = options == null ? void 0 : options.locales) == null ? void 0 : _b2[localeIndex.value]) == null ? void 0 : _c.translations) == null ? void 0 : _d.button) == null ? void 0 : _e.buttonText) || ((_g = (_f = options == null ? void 0 : options.translations) == null ? void 0 : _f.button) == null ? void 0 : _g.buttonText) || "Search";
+      const options =
+        ((_a2 = theme.value.search) == null ? void 0 : _a2.options) ??
+        theme.value.algolia;
+      return (
+        ((_e =
+          (_d =
+            (_c =
+              (_b2 = options == null ? void 0 : options.locales) == null
+                ? void 0
+                : _b2[localeIndex.value]) == null
+              ? void 0
+              : _c.translations) == null
+            ? void 0
+            : _d.button) == null
+          ? void 0
+          : _e.buttonText) ||
+        ((_g =
+          (_f = options == null ? void 0 : options.translations) == null
+            ? void 0
+            : _f.button) == null
+          ? void 0
+          : _g.buttonText) ||
+        'Search'
+      );
     });
     watchEffect(() => {
       if (disableDetailedView.value) {
@@ -4897,7 +5727,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const cache = new LRUCache(16);
     watchDebounced(
       () => [searchIndex.value, filterText.value, showDetailedList.value],
-      async ([index, filterTextValue, showDetailedListValue], old, onCleanup) => {
+      async (
+        [index, filterTextValue, showDetailedListValue],
+        old,
+        onCleanup
+      ) => {
         var _a2, _b2, _c, _d;
         if ((old == null ? void 0 : old[0]) !== index) {
           cache.clear();
@@ -4909,42 +5743,53 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (!index) return;
         results.value = index.search(filterTextValue).slice(0, 16);
         enableNoResults.value = true;
-        const mods = showDetailedListValue ? await Promise.all(results.value.map((r) => fetchExcerpt(r.id))) : [];
+        const mods = showDetailedListValue
+          ? await Promise.all(results.value.map((r) => fetchExcerpt(r.id)))
+          : [];
         if (canceled) return;
         for (const { id, mod } of mods) {
-          const mapId = id.slice(0, id.indexOf("#"));
+          const mapId = id.slice(0, id.indexOf('#'));
           let map = cache.get(mapId);
           if (map) continue;
           map = /* @__PURE__ */ new Map();
           cache.set(mapId, map);
           const comp = mod.default ?? mod;
-          if ((comp == null ? void 0 : comp.render) || (comp == null ? void 0 : comp.setup)) {
+          if (
+            (comp == null ? void 0 : comp.render) ||
+            (comp == null ? void 0 : comp.setup)
+          ) {
             const app = createApp(comp);
-            app.config.warnHandler = () => {
-            };
+            app.config.warnHandler = () => {};
             app.provide(dataSymbol, vitePressData);
             Object.defineProperties(app.config.globalProperties, {
               $frontmatter: {
                 get() {
                   return vitePressData.frontmatter.value;
-                }
+                },
               },
               $params: {
                 get() {
                   return vitePressData.page.value.params;
-                }
-              }
+                },
+              },
             });
-            const div = document.createElement("div");
+            const div = document.createElement('div');
             app.mount(div);
-            const headings = div.querySelectorAll("h1, h2, h3, h4, h5, h6");
+            const headings = div.querySelectorAll('h1, h2, h3, h4, h5, h6');
             headings.forEach((el2) => {
               var _a3;
-              const href = (_a3 = el2.querySelector("a")) == null ? void 0 : _a3.getAttribute("href");
-              const anchor = (href == null ? void 0 : href.startsWith("#")) && href.slice(1);
+              const href =
+                (_a3 = el2.querySelector('a')) == null
+                  ? void 0
+                  : _a3.getAttribute('href');
+              const anchor =
+                (href == null ? void 0 : href.startsWith('#')) && href.slice(1);
               if (!anchor) return;
-              let html = "";
-              while ((el2 = el2.nextElementSibling) && !/^h[1-6]$/i.test(el2.tagName))
+              let html = '';
+              while (
+                (el2 = el2.nextElementSibling) &&
+                !/^h[1-6]$/i.test(el2.tagName)
+              )
                 html += el2.outerHTML;
               map.set(anchor, html);
             });
@@ -4954,9 +5799,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }
         const terms = /* @__PURE__ */ new Set();
         results.value = results.value.map((r) => {
-          const [id, anchor] = r.id.split("#");
+          const [id, anchor] = r.id.split('#');
           const map = cache.get(id);
-          const text = (map == null ? void 0 : map.get(anchor)) ?? "";
+          const text = (map == null ? void 0 : map.get(anchor)) ?? '';
           for (const term in r.match) {
             terms.add(term);
           }
@@ -4966,29 +5811,44 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (canceled) return;
         await new Promise((r) => {
           var _a3;
-          (_a3 = mark.value) == null ? void 0 : _a3.unmark({
-            done: () => {
-              var _a4;
-              (_a4 = mark.value) == null ? void 0 : _a4.markRegExp(formMarkRegex(terms), { done: r });
-            }
-          });
+          (_a3 = mark.value) == null
+            ? void 0
+            : _a3.unmark({
+                done: () => {
+                  var _a4;
+                  (_a4 = mark.value) == null
+                    ? void 0
+                    : _a4.markRegExp(formMarkRegex(terms), { done: r });
+                },
+              });
         });
-        const excerpts = ((_a2 = el.value) == null ? void 0 : _a2.querySelectorAll(".result .excerpt")) ?? [];
+        const excerpts =
+          ((_a2 = el.value) == null
+            ? void 0
+            : _a2.querySelectorAll('.result .excerpt')) ?? [];
         for (const excerpt of excerpts) {
-          (_b2 = excerpt.querySelector('mark[data-markjs="true"]')) == null ? void 0 : _b2.scrollIntoView({ block: "center" });
+          (_b2 = excerpt.querySelector('mark[data-markjs="true"]')) == null
+            ? void 0
+            : _b2.scrollIntoView({ block: 'center' });
         }
-        (_d = (_c = resultsEl.value) == null ? void 0 : _c.firstElementChild) == null ? void 0 : _d.scrollIntoView({ block: "start" });
+        (_d = (_c = resultsEl.value) == null ? void 0 : _c.firstElementChild) ==
+        null
+          ? void 0
+          : _d.scrollIntoView({ block: 'start' });
       },
       { debounce: 200, immediate: true }
     );
     async function fetchExcerpt(id) {
-      const file = pathToFile(id.slice(0, id.indexOf("#")));
+      const file = pathToFile(id.slice(0, id.indexOf('#')));
       try {
         if (!file) throw new Error(`Cannot find file for id: ${id}`);
-        return { id, mod: await import(
-          /*@vite-ignore*/
-          file
-        ) };
+        return {
+          id,
+          mod: await import(
+            /*@vite-ignore*/
+            file
+          ),
+        };
       } catch (e) {
         console.error(e);
         return { id, mod: {} };
@@ -5015,11 +5875,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     function scrollToSelectedResult() {
       nextTick(() => {
-        const selectedEl = document.querySelector(".result.selected");
-        selectedEl == null ? void 0 : selectedEl.scrollIntoView({ block: "nearest" });
+        const selectedEl = document.querySelector('.result.selected');
+        selectedEl == null
+          ? void 0
+          : selectedEl.scrollIntoView({ block: 'nearest' });
       });
     }
-    onKeyStroke("ArrowUp", (event) => {
+    onKeyStroke('ArrowUp', (event) => {
       event.preventDefault();
       selectedIndex.value--;
       if (selectedIndex.value < 0) {
@@ -5028,7 +5890,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       disableMouseOver.value = true;
       scrollToSelectedResult();
     });
-    onKeyStroke("ArrowDown", (event) => {
+    onKeyStroke('ArrowDown', (event) => {
       event.preventDefault();
       selectedIndex.value++;
       if (selectedIndex.value >= results.value.length) {
@@ -5038,9 +5900,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       scrollToSelectedResult();
     });
     const router = useRouter();
-    onKeyStroke("Enter", (e) => {
+    onKeyStroke('Enter', (e) => {
       if (e.isComposing) return;
-      if (e.target instanceof HTMLButtonElement && e.target.type !== "submit")
+      if (e.target instanceof HTMLButtonElement && e.target.type !== 'submit')
         return;
       const selectedPackage = results.value[selectedIndex.value];
       if (e.target instanceof HTMLInputElement && !selectedPackage) {
@@ -5049,36 +5911,36 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       if (selectedPackage) {
         router.go(selectedPackage.id);
-        emit("close");
+        emit('close');
       }
     });
-    onKeyStroke("Escape", () => {
-      emit("close");
+    onKeyStroke('Escape', () => {
+      emit('close');
     });
     const defaultTranslations = {
       modal: {
-        displayDetails: "Display detailed list",
-        resetButtonTitle: "Reset search",
-        backButtonTitle: "Close search",
-        noResultsText: "No results for",
+        displayDetails: 'Display detailed list',
+        resetButtonTitle: 'Reset search',
+        backButtonTitle: 'Close search',
+        noResultsText: 'No results for',
         footer: {
-          selectText: "to select",
-          selectKeyAriaLabel: "enter",
-          navigateText: "to navigate",
-          navigateUpKeyAriaLabel: "up arrow",
-          navigateDownKeyAriaLabel: "down arrow",
-          closeText: "to close",
-          closeKeyAriaLabel: "escape"
-        }
-      }
+          selectText: 'to select',
+          selectKeyAriaLabel: 'enter',
+          navigateText: 'to navigate',
+          navigateUpKeyAriaLabel: 'up arrow',
+          navigateDownKeyAriaLabel: 'down arrow',
+          closeText: 'to close',
+          closeKeyAriaLabel: 'escape',
+        },
+      },
     };
     const translate = createSearchTranslate(defaultTranslations);
     onMounted(() => {
-      window.history.pushState(null, "", null);
+      window.history.pushState(null, '', null);
     });
-    useEventListener("popstate", (event) => {
+    useEventListener('popstate', (event) => {
       event.preventDefault();
-      emit("close");
+      emit('close');
     });
     const isLocked = useScrollLock(inBrowser ? document.body : null);
     onMounted(() => {
@@ -5092,59 +5954,99 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     function formMarkRegex(terms) {
       return new RegExp(
-        [...terms].sort((a, b) => b.length - a.length).map((term) => `(${escapeRegExp(term)})`).join("|"),
-        "gi"
+        [...terms]
+          .sort((a, b) => b.length - a.length)
+          .map((term) => `(${escapeRegExp(term)})`)
+          .join('|'),
+        'gi'
       );
     }
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderTeleport(_push, (_push2) => {
-        var _a2, _b2, _c, _d, _e;
-        _push2(`<div role="button"${ssrRenderAttr("aria-owns", ((_a2 = results.value) == null ? void 0 : _a2.length) ? "localsearch-list" : void 0)} aria-expanded="true" aria-haspopup="listbox" aria-labelledby="localsearch-label" class="VPLocalSearchBox" data-v-d381e7d4><div class="backdrop" data-v-d381e7d4></div><div class="shell" data-v-d381e7d4><form class="search-bar" data-v-d381e7d4><label${ssrRenderAttr("title", buttonText.value)} id="localsearch-label" for="localsearch-input" data-v-d381e7d4><span aria-hidden="true" class="vpi-search search-icon local-search-icon" data-v-d381e7d4></span></label><div class="search-actions before" data-v-d381e7d4><button class="back-button"${ssrRenderAttr("title", unref(translate)("modal.backButtonTitle"))} data-v-d381e7d4><span class="vpi-arrow-left local-search-icon" data-v-d381e7d4></span></button></div><input${ssrRenderAttr("value", unref(filterText))}${ssrRenderAttr("aria-activedescendant", selectedIndex.value > -1 ? "localsearch-item-" + selectedIndex.value : void 0)} aria-autocomplete="both"${ssrRenderAttr("aria-controls", ((_b2 = results.value) == null ? void 0 : _b2.length) ? "localsearch-list" : void 0)} aria-labelledby="localsearch-label" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-input" id="localsearch-input" enterkeyhint="go" maxlength="64"${ssrRenderAttr("placeholder", buttonText.value)} spellcheck="false" type="search" data-v-d381e7d4><div class="search-actions" data-v-d381e7d4>`);
-        if (!disableDetailedView.value) {
-          _push2(`<button type="button" class="${ssrRenderClass([{ "detailed-list": unref(showDetailedList) }, "toggle-layout-button"])}"${ssrRenderAttr("title", unref(translate)("modal.displayDetails"))} data-v-d381e7d4><span class="vpi-layout-list local-search-icon" data-v-d381e7d4></span></button>`);
-        } else {
-          _push2(`<!---->`);
-        }
-        _push2(`<button class="clear-button" type="reset"${ssrIncludeBooleanAttr(disableReset.value) ? " disabled" : ""}${ssrRenderAttr("title", unref(translate)("modal.resetButtonTitle"))} data-v-d381e7d4><span class="vpi-delete local-search-icon" data-v-d381e7d4></span></button></div></form><ul${ssrRenderAttr("id", ((_c = results.value) == null ? void 0 : _c.length) ? "localsearch-list" : void 0)}${ssrRenderAttr("role", ((_d = results.value) == null ? void 0 : _d.length) ? "listbox" : void 0)}${ssrRenderAttr("aria-labelledby", ((_e = results.value) == null ? void 0 : _e.length) ? "localsearch-label" : void 0)} class="results" data-v-d381e7d4><!--[-->`);
-        ssrRenderList(results.value, (p, index) => {
-          _push2(`<li${ssrRenderAttr("id", "localsearch-item-" + index)}${ssrRenderAttr("aria-selected", selectedIndex.value === index ? "true" : "false")} role="option" data-v-d381e7d4><a${ssrRenderAttr("href", p.id)} class="${ssrRenderClass([{
-            selected: selectedIndex.value === index
-          }, "result"])}"${ssrRenderAttr("aria-label", [...p.titles, p.title].join(" > "))}${ssrRenderAttr("data-index", index)} data-v-d381e7d4><div data-v-d381e7d4><div class="titles" data-v-d381e7d4><span class="title-icon" data-v-d381e7d4>#</span><!--[-->`);
-          ssrRenderList(p.titles, (t, index2) => {
-            _push2(`<span class="title" data-v-d381e7d4><span class="text" data-v-d381e7d4>${t ?? ""}</span><span class="vpi-chevron-right local-search-icon" data-v-d381e7d4></span></span>`);
-          });
-          _push2(`<!--]--><span class="title main" data-v-d381e7d4><span class="text" data-v-d381e7d4>${p.title ?? ""}</span></span></div>`);
-          if (unref(showDetailedList)) {
-            _push2(`<div class="excerpt-wrapper" data-v-d381e7d4>`);
-            if (p.text) {
-              _push2(`<div class="excerpt" inert data-v-d381e7d4><div class="vp-doc" data-v-d381e7d4>${p.text ?? ""}</div></div>`);
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`<div class="excerpt-gradient-bottom" data-v-d381e7d4></div><div class="excerpt-gradient-top" data-v-d381e7d4></div></div>`);
+      ssrRenderTeleport(
+        _push,
+        (_push2) => {
+          var _a2, _b2, _c, _d, _e;
+          _push2(
+            `<div role="button"${ssrRenderAttr('aria-owns', ((_a2 = results.value) == null ? void 0 : _a2.length) ? 'localsearch-list' : void 0)} aria-expanded="true" aria-haspopup="listbox" aria-labelledby="localsearch-label" class="VPLocalSearchBox" data-v-d381e7d4><div class="backdrop" data-v-d381e7d4></div><div class="shell" data-v-d381e7d4><form class="search-bar" data-v-d381e7d4><label${ssrRenderAttr('title', buttonText.value)} id="localsearch-label" for="localsearch-input" data-v-d381e7d4><span aria-hidden="true" class="vpi-search search-icon local-search-icon" data-v-d381e7d4></span></label><div class="search-actions before" data-v-d381e7d4><button class="back-button"${ssrRenderAttr('title', unref(translate)('modal.backButtonTitle'))} data-v-d381e7d4><span class="vpi-arrow-left local-search-icon" data-v-d381e7d4></span></button></div><input${ssrRenderAttr('value', unref(filterText))}${ssrRenderAttr('aria-activedescendant', selectedIndex.value > -1 ? 'localsearch-item-' + selectedIndex.value : void 0)} aria-autocomplete="both"${ssrRenderAttr('aria-controls', ((_b2 = results.value) == null ? void 0 : _b2.length) ? 'localsearch-list' : void 0)} aria-labelledby="localsearch-label" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-input" id="localsearch-input" enterkeyhint="go" maxlength="64"${ssrRenderAttr('placeholder', buttonText.value)} spellcheck="false" type="search" data-v-d381e7d4><div class="search-actions" data-v-d381e7d4>`
+          );
+          if (!disableDetailedView.value) {
+            _push2(
+              `<button type="button" class="${ssrRenderClass([{ 'detailed-list': unref(showDetailedList) }, 'toggle-layout-button'])}"${ssrRenderAttr('title', unref(translate)('modal.displayDetails'))} data-v-d381e7d4><span class="vpi-layout-list local-search-icon" data-v-d381e7d4></span></button>`
+            );
           } else {
             _push2(`<!---->`);
           }
-          _push2(`</div></a></li>`);
-        });
-        _push2(`<!--]-->`);
-        if (unref(filterText) && !results.value.length && enableNoResults.value) {
-          _push2(`<li class="no-results" data-v-d381e7d4>${ssrInterpolate(unref(translate)("modal.noResultsText"))} &quot;<strong data-v-d381e7d4>${ssrInterpolate(unref(filterText))}</strong>&quot; </li>`);
-        } else {
-          _push2(`<!---->`);
-        }
-        _push2(`</ul><div class="search-keyboard-shortcuts" data-v-d381e7d4><span data-v-d381e7d4><kbd${ssrRenderAttr("aria-label", unref(translate)("modal.footer.navigateUpKeyAriaLabel"))} data-v-d381e7d4><span class="vpi-arrow-up navigate-icon" data-v-d381e7d4></span></kbd><kbd${ssrRenderAttr("aria-label", unref(translate)("modal.footer.navigateDownKeyAriaLabel"))} data-v-d381e7d4><span class="vpi-arrow-down navigate-icon" data-v-d381e7d4></span></kbd> ${ssrInterpolate(unref(translate)("modal.footer.navigateText"))}</span><span data-v-d381e7d4><kbd${ssrRenderAttr("aria-label", unref(translate)("modal.footer.selectKeyAriaLabel"))} data-v-d381e7d4><span class="vpi-corner-down-left navigate-icon" data-v-d381e7d4></span></kbd> ${ssrInterpolate(unref(translate)("modal.footer.selectText"))}</span><span data-v-d381e7d4><kbd${ssrRenderAttr("aria-label", unref(translate)("modal.footer.closeKeyAriaLabel"))} data-v-d381e7d4>esc</kbd> ${ssrInterpolate(unref(translate)("modal.footer.closeText"))}</span></div></div></div>`);
-      }, "body", false, _parent);
+          _push2(
+            `<button class="clear-button" type="reset"${ssrIncludeBooleanAttr(disableReset.value) ? ' disabled' : ''}${ssrRenderAttr('title', unref(translate)('modal.resetButtonTitle'))} data-v-d381e7d4><span class="vpi-delete local-search-icon" data-v-d381e7d4></span></button></div></form><ul${ssrRenderAttr('id', ((_c = results.value) == null ? void 0 : _c.length) ? 'localsearch-list' : void 0)}${ssrRenderAttr('role', ((_d = results.value) == null ? void 0 : _d.length) ? 'listbox' : void 0)}${ssrRenderAttr('aria-labelledby', ((_e = results.value) == null ? void 0 : _e.length) ? 'localsearch-label' : void 0)} class="results" data-v-d381e7d4><!--[-->`
+          );
+          ssrRenderList(results.value, (p, index) => {
+            _push2(
+              `<li${ssrRenderAttr('id', 'localsearch-item-' + index)}${ssrRenderAttr('aria-selected', selectedIndex.value === index ? 'true' : 'false')} role="option" data-v-d381e7d4><a${ssrRenderAttr('href', p.id)} class="${ssrRenderClass(
+                [
+                  {
+                    selected: selectedIndex.value === index,
+                  },
+                  'result',
+                ]
+              )}"${ssrRenderAttr('aria-label', [...p.titles, p.title].join(' > '))}${ssrRenderAttr('data-index', index)} data-v-d381e7d4><div data-v-d381e7d4><div class="titles" data-v-d381e7d4><span class="title-icon" data-v-d381e7d4>#</span><!--[-->`
+            );
+            ssrRenderList(p.titles, (t, index2) => {
+              _push2(
+                `<span class="title" data-v-d381e7d4><span class="text" data-v-d381e7d4>${t ?? ''}</span><span class="vpi-chevron-right local-search-icon" data-v-d381e7d4></span></span>`
+              );
+            });
+            _push2(
+              `<!--]--><span class="title main" data-v-d381e7d4><span class="text" data-v-d381e7d4>${p.title ?? ''}</span></span></div>`
+            );
+            if (unref(showDetailedList)) {
+              _push2(`<div class="excerpt-wrapper" data-v-d381e7d4>`);
+              if (p.text) {
+                _push2(
+                  `<div class="excerpt" inert data-v-d381e7d4><div class="vp-doc" data-v-d381e7d4>${p.text ?? ''}</div></div>`
+                );
+              } else {
+                _push2(`<!---->`);
+              }
+              _push2(
+                `<div class="excerpt-gradient-bottom" data-v-d381e7d4></div><div class="excerpt-gradient-top" data-v-d381e7d4></div></div>`
+              );
+            } else {
+              _push2(`<!---->`);
+            }
+            _push2(`</div></a></li>`);
+          });
+          _push2(`<!--]-->`);
+          if (
+            unref(filterText) &&
+            !results.value.length &&
+            enableNoResults.value
+          ) {
+            _push2(
+              `<li class="no-results" data-v-d381e7d4>${ssrInterpolate(unref(translate)('modal.noResultsText'))} &quot;<strong data-v-d381e7d4>${ssrInterpolate(unref(filterText))}</strong>&quot; </li>`
+            );
+          } else {
+            _push2(`<!---->`);
+          }
+          _push2(
+            `</ul><div class="search-keyboard-shortcuts" data-v-d381e7d4><span data-v-d381e7d4><kbd${ssrRenderAttr('aria-label', unref(translate)('modal.footer.navigateUpKeyAriaLabel'))} data-v-d381e7d4><span class="vpi-arrow-up navigate-icon" data-v-d381e7d4></span></kbd><kbd${ssrRenderAttr('aria-label', unref(translate)('modal.footer.navigateDownKeyAriaLabel'))} data-v-d381e7d4><span class="vpi-arrow-down navigate-icon" data-v-d381e7d4></span></kbd> ${ssrInterpolate(unref(translate)('modal.footer.navigateText'))}</span><span data-v-d381e7d4><kbd${ssrRenderAttr('aria-label', unref(translate)('modal.footer.selectKeyAriaLabel'))} data-v-d381e7d4><span class="vpi-corner-down-left navigate-icon" data-v-d381e7d4></span></kbd> ${ssrInterpolate(unref(translate)('modal.footer.selectText'))}</span><span data-v-d381e7d4><kbd${ssrRenderAttr('aria-label', unref(translate)('modal.footer.closeKeyAriaLabel'))} data-v-d381e7d4>esc</kbd> ${ssrInterpolate(unref(translate)('modal.footer.closeText'))}</span></div></div></div>`
+          );
+        },
+        'body',
+        false,
+        _parent
+      );
     };
-  }
+  },
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue'
+  );
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const VPLocalSearchBox = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d381e7d4"]]);
-export {
-  VPLocalSearchBox as default
-};
+const VPLocalSearchBox = /* @__PURE__ */ _export_sfc(_sfc_main, [
+  ['__scopeId', 'data-v-d381e7d4'],
+]);
+export { VPLocalSearchBox as default };

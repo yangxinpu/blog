@@ -7,10 +7,7 @@ interface LoadingProps {
   text?: string;
 }
 
-const Loading: React.FC<LoadingProps> = ({
-  logo,
-  text = 'NAILUO',
-}) => {
+const Loading: React.FC<LoadingProps> = ({ logo, text = 'NAILUO' }) => {
   return (
     <motion.div
       className={styles.loadingContainer}
@@ -96,11 +93,7 @@ const Loading: React.FC<LoadingProps> = ({
                 key={`${char}-${index}`}
                 className={styles.char}
                 animate={{
-                  color: [
-                    'var(--accent)',
-                    '#ffffff',
-                    'var(--accent)',
-                  ],
+                  color: ['var(--accent)', '#ffffff', 'var(--accent)'],
                 }}
                 transition={{
                   duration: 2,
@@ -127,11 +120,13 @@ const Loading: React.FC<LoadingProps> = ({
             <motion.div
               key={i}
               className={styles.particle}
-              style={{
-                '--delay': `${i * 0.2}s`,
-                '--distance': `${80 + i * 15}px`,
-                '--angle': `${i * 30}deg`,
-              } as React.CSSProperties}
+              style={
+                {
+                  '--delay': `${i * 0.2}s`,
+                  '--distance': `${80 + i * 15}px`,
+                  '--angle': `${i * 30}deg`,
+                } as React.CSSProperties
+              }
               animate={{
                 y: [0, -20, 0],
                 opacity: [0, 1, 0],

@@ -19,7 +19,7 @@ document.getElementById('id');
 Returns a pseudo-array of obtained elements; can access elements via array index
 
 ```js
-let ul = document.getElementsByTagName('ul') // Get ul pseudo-array
+let ul = document.getElementsByTagName('ul'); // Get ul pseudo-array
 ```
 
 **By Class Name**
@@ -39,8 +39,8 @@ querySelector: Returns the first found element;
 querySelectorAll: Returns a pseudo-array of all found elements (when handling thousands of DOM nodes: pseudo-array memory usage is 40% less than real array, Live Collection feature reduces 98% of repaint calculations);
 
 ```js
-document.querySelector('.class');       // By class selector
-document.querySelector("[type]");       // By attribute selector
+document.querySelector('.class'); // By class selector
+document.querySelector('[type]'); // By attribute selector
 
 document.querySelectorAll('#id');
 ```
@@ -48,8 +48,8 @@ document.querySelectorAll('#id');
 **html and body**
 
 ```js
-document.body;               // Get body element
-document.documentElement;    // Get html root element
+document.body; // Get body element
+document.documentElement; // Get html root element
 ```
 
 ### Node Operations
@@ -84,10 +84,10 @@ lastElementChild: Gets last child element node;
 removeChild: Deletes child node, parameter is child element to delete (can get via selector or node);
 
 ```js
-ul.children
-ul.childNodes
-ul.firstElementChild
-ul.lastElementChild
+ul.children;
+ul.childNodes;
+ul.firstElementChild;
+ul.lastElementChild;
 ul.removeChild(ul.children[0]);
 ```
 
@@ -98,11 +98,11 @@ Get next sibling node: nextSibling (all types), nextElementSibling (element type
 Get previous sibling node: previousSibling (all types), previousElementSibling (element type);
 
 ```js
-div.nextSibling
-div.nextElementSibling
+div.nextSibling;
+div.nextElementSibling;
 
-div.previousSibling
-div.previousElementSibling
+div.previousSibling;
+div.previousElementSibling;
 ```
 
 #### Creating and Adding Nodes
@@ -113,8 +113,8 @@ Create nodes via document.createElement method, parameter is node type to create
 let li = document.createElement('li');
 let uls = querySelector('ul');
 
-uls.appendChild(li);                      // Add child node at end
-uls.insertBefore(li, ul.children[0]);     // Insert element before first child node
+uls.appendChild(li); // Add child node at end
+uls.insertBefore(li, ul.children[0]); // Insert element before first child node
 ```
 
 #### Copying and Adding Nodes
@@ -188,12 +188,12 @@ div.className = 'class1 class2'
 
 ```css
 .style1 {
-    font-family: 'SimSun';
+  font-family: 'SimSun';
 }
 .style2 {
-    background-color: red;
-    color: black;
-    font-size: 14px;
+  background-color: red;
+  color: black;
+  font-size: 14px;
 }
 ```
 
@@ -207,14 +207,14 @@ div.classList.add('style1'); // Add new style
 **setProperty**: Dynamically sets inline CSS variables; after modification, reflects in real-time to styles using that variable; first parameter is variable name, second is variable value;
 
 ```js
-const app = document.getElementById('app')
-app.style.setProperty('background-color', 'blue')
+const app = document.getElementById('app');
+app.style.setProperty('background-color', 'blue');
 ```
 
 **removeProperty**: Removes set inline CSS (restores to default value at definition)
 
 ```js
-const app = document.getElementById('app')
+const app = document.getElementById('app');
 app.style.setProperty('border-radius', '50%');
 app.style.removeProperty('border-radius');
 ```
@@ -279,19 +279,19 @@ root.dataset.theme = 'light' ? 'dark' : 'light';
 Used to get element's width, height, and position info relative to viewport; this info depends on latest layout calculation results; if browser has unprocessed layout updates, to return accurate info, **browser forces a reflow**;
 
 ```js
-const app = document.getElementById('app')
-const info = app.getBoundingClientRect()
-console.log(info)
+const app = document.getElementById('app');
+const info = app.getBoundingClientRect();
+console.log(info);
 
 // Output
-bottom: 31.13636302947998
-height: 23.14049530029297
-left: 7.995867729187012
-right: 1389.0289487838745
-top: 7.995867729187012
-width: 1381.0330810546875
-x: 7.995867729187012
-y: 7.995867729187012
+bottom: 31.13636302947998;
+height: 23.14049530029297;
+left: 7.995867729187012;
+right: 1389.0289487838745;
+top: 7.995867729187012;
+width: 1381.0330810546875;
+x: 7.995867729187012;
+y: 7.995867729187012;
 ```
 
 ##### animate
@@ -319,16 +319,19 @@ First parameter is keyframe array (can specify frame position via offset, value 
 ```js
 const box = document.querySelector('#box');
 const btn = document.querySelector('button');
-let animateObj = box.animate([
-    {transform: 'translateX(0px)', offset: 0.2},
-    {transform: 'translateX(200px)', offset: 1}  
-], {
+let animateObj = box.animate(
+  [
+    { transform: 'translateX(0px)', offset: 0.2 },
+    { transform: 'translateX(200px)', offset: 1 },
+  ],
+  {
     duration: 1000,
-    iterations: 1
-});
+    iterations: 1,
+  }
+);
 btn.addEventListener('click', () => {
-    animateObj.play();
-})
+  animateObj.play();
+});
 ```
 
 #### Form Elements
@@ -372,7 +375,7 @@ src: Image's URL address;
 width / height: Image's display width and height (in pixels, can be modified directly)
 
 ```js
-img.width = 300;  // Set width to 300px
+img.width = 300; // Set width to 300px
 img.height = 200; // Set height to 200px
 ```
 

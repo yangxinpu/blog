@@ -1,9 +1,20 @@
-import { ssrRenderAttrs } from "vue/server-renderer";
-import { useSSRContext } from "vue";
-import { _ as _export_sfc } from "./plugin-vue_export-helper.1tPrXgE0.js";
-const __pageData = JSON.parse('{"title":"React Principles","description":"","frontmatter":{},"headers":[],"relativePath":"en/React/React原理.md","filePath":"en/React/React原理.md"}');
-const _sfc_main = { name: "en/React/React原理.md" };
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+import { ssrRenderAttrs } from 'vue/server-renderer';
+import { useSSRContext } from 'vue';
+import { _ as _export_sfc } from './plugin-vue_export-helper.1tPrXgE0.js';
+const __pageData = JSON.parse(
+  '{"title":"React Principles","description":"","frontmatter":{},"headers":[],"relativePath":"en/React/React原理.md","filePath":"en/React/React原理.md"}'
+);
+const _sfc_main = { name: 'en/React/React原理.md' };
+function _sfc_ssrRender(
+  _ctx,
+  _push,
+  _parent,
+  _attrs,
+  $props,
+  $setup,
+  $data,
+  $options
+) {
   _push(`<div${ssrRenderAttrs(_attrs)}><h1 id="react-principles" tabindex="-1">React Principles <a class="header-anchor" href="#react-principles" aria-label="Permalink to &quot;React Principles&quot;">​</a></h1><h3 id="fiber-architecture" tabindex="-1">Fiber Architecture <a class="header-anchor" href="#fiber-architecture" aria-label="Permalink to &quot;Fiber Architecture&quot;">​</a></h3><p>The original React architecture was synchronous rendering (stack reconciler, through tree structure + recursive comparison of old and new DOM), meaning all DOM updates and calculations were completed in the main thread until all tasks finished; this process couldn&#39;t be interrupted, so if complex calculations or long synchronous tasks occurred during rendering, the UI would freeze, resulting in poor user experience;</p><p>Fiber architecture splits tasks into multiple small units (Fiber nodes), so React can pause current tasks during rendering, and dynamically adjust task execution order based on different task priorities, ensuring critical tasks complete as soon as possible without affecting user experience due to long calculations;</p><ul><li><p>Fiber Node: Each Fiber node represents a task unit (a Fiber node usually corresponds to a component), containing component state, UI element information, and other associated tasks; each node stores important properties like <code>effectTag</code> (indicating DOM update type), <code>nextEffect</code> (next update node), <code>return</code> (parent node pointer), Hook chain;</p><div class="language-text vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>//Fiber node structure</span></span>
 <span class="line"><span>type Fiber = {</span></span>
 <span class="line"><span>  tag: WorkTag;              // Type (Function component / Class component / DOM)</span></span>
@@ -29,11 +40,12 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $op
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("en/React/React原理.md");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    'en/React/React原理.md'
+  );
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const React__ = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
-export {
-  __pageData,
-  React__ as default
-};
+const React__ = /* @__PURE__ */ _export_sfc(_sfc_main, [
+  ['ssrRender', _sfc_ssrRender],
+]);
+export { __pageData, React__ as default };

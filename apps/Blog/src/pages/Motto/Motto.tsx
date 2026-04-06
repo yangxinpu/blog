@@ -6,11 +6,14 @@ import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
 
 function Motto() {
   const { t } = useTranslation();
-  const { ref: sectionRef, isActive, hasEnteredView } =
-    useSectionActivity<HTMLElement>({
-      rootMargin: '30% 0px 30% 0px',
-      threshold: 0.2,
-    });
+  const {
+    ref: sectionRef,
+    isActive,
+    hasEnteredView,
+  } = useSectionActivity<HTMLElement>({
+    rootMargin: '30% 0px 30% 0px',
+    threshold: 0.2,
+  });
   const sparkleCount = 12;
 
   const quoteLinesRaw = t('mottoSection.quotes', {
@@ -71,7 +74,9 @@ function Motto() {
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
-            <p className={`${styles.quoteLine} ${index === 0 ? styles.primaryLine : ''}`}>
+            <p
+              className={`${styles.quoteLine} ${index === 0 ? styles.primaryLine : ''}`}
+            >
               {line}
             </p>
           </motion.div>

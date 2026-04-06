@@ -39,77 +39,95 @@ function FlowingLinesBackground({
   const linesRef = useRef<SilkLine[]>([]);
   const timeRef = useRef(0);
 
-  const initLines = useCallback((_width: number, height: number) => {
-    const lineCount = Math.floor(height / 60) + 5;
-    const colors = [primaryColor, secondaryColor, accentColor];
-    
-    linesRef.current = Array.from({ length: lineCount }, (_, i) => ({
-      y: (i / lineCount) * height,
-      baseY: (i / lineCount) * height,
-      speed: speed * (0.5 + Math.random() * 0.5),
-      amplitude: 20 + Math.random() * 40,
-      frequency: 0.003 + Math.random() * 0.002,
-      thickness: 0.5 + Math.random() * 1.5,
-      opacity: 0.08 + Math.random() * 0.15,
-      color: colors[i % colors.length],
-      phase: Math.random() * Math.PI * 2,
-      waveOffset: Math.random() * 1000,
-    }));
-  }, [speed, primaryColor, secondaryColor, accentColor]);
+  const initLines = useCallback(
+    (_width: number, height: number) => {
+      const lineCount = Math.floor(height / 60) + 5;
+      const colors = [primaryColor, secondaryColor, accentColor];
 
-  const drawLine = useCallback((
-    ctx: CanvasRenderingContext2D,
-    line: SilkLine,
-    time: number,
-    width: number,
-    _height: number
-  ) => {
-    ctx.beginPath();
-    
-    const segments = Math.ceil(width / 2);
-    const points: { x: number; y: number }[] = [];
-    
-    for (let i = 0; i <= segments; i++) {
-      const x = (i / segments) * width;
-      const wave1 = Math.sin(x * line.frequency + time * line.speed * 0.3 + line.phase) * line.amplitude;
-      const wave2 = Math.sin(x * line.frequency * 0.6 + time * line.speed * 0.5 + line.phase * 1.5) * (line.amplitude * 0.6);
-      const wave3 = Math.cos(x * line.frequency * 1.2 + time * line.speed * 0.2 + line.waveOffset) * (line.amplitude * 0.3);
-      const y = line.y + wave1 + wave2 + wave3;
-      points.push({ x, y });
-    }
+      linesRef.current = Array.from({ length: lineCount }, (_, i) => ({
+        y: (i / lineCount) * height,
+        baseY: (i / lineCount) * height,
+        speed: speed * (0.5 + Math.random() * 0.5),
+        amplitude: 20 + Math.random() * 40,
+        frequency: 0.003 + Math.random() * 0.002,
+        thickness: 0.5 + Math.random() * 1.5,
+        opacity: 0.08 + Math.random() * 0.15,
+        color: colors[i % colors.length],
+        phase: Math.random() * Math.PI * 2,
+        waveOffset: Math.random() * 1000,
+      }));
+    },
+    [speed, primaryColor, secondaryColor, accentColor]
+  );
 
-    if (points.length < 2) return;
+  const drawLine = useCallback(
+    (
+      ctx: CanvasRenderingContext2D,
+      line: SilkLine,
+      time: number,
+      width: number,
+      _height: number
+    ) => {
+      ctx.beginPath();
 
-    ctx.moveTo(points[0].x, points[0].y);
-    
-    for (let i = 1; i < points.length - 1; i++) {
-      const xc = (points[i].x + points[i + 1].x) / 2;
-      const yc = (points[i].y + points[i + 1].y) / 2;
-      ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
-    }
-    
-    ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+      const segments = Math.ceil(width / 2);
+      const points: { x: number; y: number }[] = [];
 
-    const gradient = ctx.createLinearGradient(0, 0, width, 0);
-    gradient.addColorStop(0, 'transparent');
-    gradient.addColorStop(0.15, line.color);
-    gradient.addColorStop(0.5, line.color);
-    gradient.addColorStop(0.85, line.color);
-    gradient.addColorStop(1, 'transparent');
+      for (let i = 0; i <= segments; i++) {
+        const x = (i / segments) * width;
+        const wave1 =
+          Math.sin(x * line.frequency + time * line.speed * 0.3 + line.phase) *
+          line.amplitude;
+        const wave2 =
+          Math.sin(
+            x * line.frequency * 0.6 +
+              time * line.speed * 0.5 +
+              line.phase * 1.5
+          ) *
+          (line.amplitude * 0.6);
+        const wave3 =
+          Math.cos(
+            x * line.frequency * 1.2 + time * line.speed * 0.2 + line.waveOffset
+          ) *
+          (line.amplitude * 0.3);
+        const y = line.y + wave1 + wave2 + wave3;
+        points.push({ x, y });
+      }
 
-    ctx.strokeStyle = gradient;
-    ctx.lineWidth = line.thickness;
-    ctx.globalAlpha = line.opacity;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    
-    ctx.shadowColor = line.color;
-    ctx.shadowBlur = 20 * glowIntensity;
-    
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-    ctx.shadowBlur = 0;
-  }, [glowIntensity]);
+      if (points.length < 2) return;
+
+      ctx.moveTo(points[0].x, points[0].y);
+
+      for (let i = 1; i < points.length - 1; i++) {
+        const xc = (points[i].x + points[i + 1].x) / 2;
+        const yc = (points[i].y + points[i + 1].y) / 2;
+        ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+      }
+
+      ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+
+      const gradient = ctx.createLinearGradient(0, 0, width, 0);
+      gradient.addColorStop(0, 'transparent');
+      gradient.addColorStop(0.15, line.color);
+      gradient.addColorStop(0.5, line.color);
+      gradient.addColorStop(0.85, line.color);
+      gradient.addColorStop(1, 'transparent');
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = line.thickness;
+      ctx.globalAlpha = line.opacity;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      ctx.shadowColor = line.color;
+      ctx.shadowBlur = 20 * glowIntensity;
+
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+    },
+    [glowIntensity]
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -142,17 +160,17 @@ function FlowingLinesBackground({
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      
+
       timeRef.current += 0.016;
-      
+
       linesRef.current.forEach((line) => {
         line.y += line.speed * 15;
-        
+
         if (line.y > height + 100) {
           line.y = -50;
           line.baseY = -50;
         }
-        
+
         drawLine(ctx, line, timeRef.current, width, height);
       });
 

@@ -38,7 +38,7 @@ let n = setTimeout(function(){
 clearTimeout(n);//停止延迟函数
 ```
 
-###  location对象：
+### location对象：
 
 它拆分并保存当前浏览器url地址的各个组成部分
 
@@ -71,7 +71,7 @@ location.reload(true);//强制刷新
 
 navigator.clipboard.readText()读取剪切板文本，返回一个Promise对象，如果被授权则Promise成功，传给then的参数即为剪切板字符串；
 
-​    navigator.clipboard.read()读取任何类型的数字（如图片）
+​ navigator.clipboard.read()读取任何类型的数字（如图片）
 
 ```
 navigator.clipboard.readText().then(text => {

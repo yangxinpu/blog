@@ -1,35 +1,122 @@
-import { ssrRenderAttrs, ssrRenderSlot, ssrInterpolate, ssrRenderAttr, ssrRenderList, ssrRenderComponent, ssrRenderVNode, ssrRenderClass, ssrRenderStyle, renderToString } from "vue/server-renderer";
-import { defineComponent, mergeProps, useSSRContext, getCurrentInstance, hasInjectionContext, inject, watch, getCurrentScope, onScopeDispose, onMounted, nextTick, isRef, toValue, toRef as toRef$1, readonly, customRef, ref, shallowRef, watchEffect, computed, unref, reactive, onUnmounted, markRaw, h, watchPostEffect, onUpdated, resolveComponent, createVNode, resolveDynamicComponent, withCtx, renderSlot, createTextVNode, toDisplayString, openBlock, createBlock, createCommentVNode, Fragment, renderList, defineAsyncComponent, provide, toHandlers, withKeys, onBeforeUnmount, useSlots, createSSRApp } from "vue";
-import { _ as _export_sfc } from "./plugin-vue_export-helper.1tPrXgE0.js";
+import {
+  ssrRenderAttrs,
+  ssrRenderSlot,
+  ssrInterpolate,
+  ssrRenderAttr,
+  ssrRenderList,
+  ssrRenderComponent,
+  ssrRenderVNode,
+  ssrRenderClass,
+  ssrRenderStyle,
+  renderToString,
+} from 'vue/server-renderer';
+import {
+  defineComponent,
+  mergeProps,
+  useSSRContext,
+  getCurrentInstance,
+  hasInjectionContext,
+  inject,
+  watch,
+  getCurrentScope,
+  onScopeDispose,
+  onMounted,
+  nextTick,
+  isRef,
+  toValue,
+  toRef as toRef$1,
+  readonly,
+  customRef,
+  ref,
+  shallowRef,
+  watchEffect,
+  computed,
+  unref,
+  reactive,
+  onUnmounted,
+  markRaw,
+  h,
+  watchPostEffect,
+  onUpdated,
+  resolveComponent,
+  createVNode,
+  resolveDynamicComponent,
+  withCtx,
+  renderSlot,
+  createTextVNode,
+  toDisplayString,
+  openBlock,
+  createBlock,
+  createCommentVNode,
+  Fragment,
+  renderList,
+  defineAsyncComponent,
+  provide,
+  toHandlers,
+  withKeys,
+  onBeforeUnmount,
+  useSlots,
+  createSSRApp,
+} from 'vue';
+import { _ as _export_sfc } from './plugin-vue_export-helper.1tPrXgE0.js';
 const _sfc_main$16 = /* @__PURE__ */ defineComponent({
-  __name: "VPBadge",
+  __name: 'VPBadge',
   __ssrInlineRender: true,
   props: {
     text: {},
-    type: { default: "tip" }
+    type: { default: 'tip' },
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<span${ssrRenderAttrs(mergeProps({
-        class: ["VPBadge", __props.type]
-      }, _attrs))}>`);
-      ssrRenderSlot(_ctx.$slots, "default", {}, () => {
-        _push(`${ssrInterpolate(__props.text)}`);
-      }, _push, _parent);
+      _push(
+        `<span${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPBadge', __props.type],
+            },
+            _attrs
+          )
+        )}>`
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'default',
+        {},
+        () => {
+          _push(`${ssrInterpolate(__props.text)}`);
+        },
+        _push,
+        _parent
+      );
       _push(`</span>`);
     };
-  }
+  },
 });
 const _sfc_setup$16 = _sfc_main$16.setup;
 _sfc_main$16.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue'
+  );
   return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
 function deserializeFunctions(r) {
-  return Array.isArray(r) ? r.map(deserializeFunctions) : typeof r == "object" && r !== null ? Object.keys(r).reduce((t, n) => (t[n] = deserializeFunctions(r[n]), t), {}) : typeof r == "string" && r.startsWith("_vp-fn_") ? new Function(`return ${r.slice(7)}`)() : r;
+  return Array.isArray(r)
+    ? r.map(deserializeFunctions)
+    : typeof r == 'object' && r !== null
+      ? Object.keys(r).reduce(
+          (t, n) => ((t[n] = deserializeFunctions(r[n])), t),
+          {}
+        )
+      : typeof r == 'string' && r.startsWith('_vp-fn_')
+        ? new Function(`return ${r.slice(7)}`)()
+        : r;
 }
-const siteData = deserializeFunctions(JSON.parse('{"lang":"en-US","dir":"ltr","title":"NaiLuo 知识库","description":"A VitePress site","base":"/","head":[],"router":{"prefetchLinks":true},"appearance":true,"themeConfig":{"logo":"/assets/logo.png","socialLinks":[{"icon":"github","link":"https://github.com/yangxinpu"}],"footer":{"copyright":"Copyright © 2026 NaiLuo"},"search":{"provider":"local"},"outline":{"level":[2,3]}},"locales":{"root":{"label":"简体中文","lang":"zh-CN","title":"NaiLuo 知识库","description":"前端技术知识库 - React, Vue","link":"/zh/","themeConfig":{"nav":[{"text":"首页","link":"/zh/"},{"text":"React","link":"/zh/React/React基础"},{"text":"Vue","link":"/zh/Vue/Vue基础"},{"text":"博客","link":"http://localhost:3000"}],"sidebar":{"/zh/React/":[{"text":"React","collapsed":false,"items":[{"text":"React 基础","link":"/zh/React/React基础"},{"text":"React 提高","link":"/zh/React/React提高"},{"text":"React 原理","link":"/zh/React/React原理"}]}],"/zh/Vue/":[{"text":"Vue","collapsed":false,"items":[{"text":"Vue 基础","link":"/zh/Vue/Vue基础"},{"text":"Vue3 基础","link":"/zh/Vue/Vue3基础"},{"text":"Vue3 提高","link":"/zh/Vue/Vue3提高"}]}]},"docFooter":{"prev":"上一页","next":"下一页"},"lastUpdated":{"text":"最后更新","formatOptions":{"dateStyle":"short","timeStyle":"short"}},"langMenuLabel":"语言","returnToTopLabel":"返回顶部","sidebarMenuLabel":"菜单","darkModeSwitchLabel":"主题","lightModeSwitchTitle":"切换到浅色模式","darkModeSwitchTitle":"切换到深色模式"}},"en":{"label":"English","lang":"en-US","title":"NaiLuo Knowledge Base","description":"Frontend Tech Knowledge Base - React, Vue","link":"/en/","themeConfig":{"nav":[{"text":"Home","link":"/en/"},{"text":"React","link":"/en/React/React基础"},{"text":"Vue","link":"/en/Vue/Vue基础"},{"text":"Blog","link":"http://localhost:3000"}],"sidebar":{"/en/React/":[{"text":"React","collapsed":false,"items":[{"text":"React Basics","link":"/en/React/React基础"},{"text":"React Advanced","link":"/en/React/React提高"},{"text":"React Principles","link":"/en/React/React原理"}]}],"/en/Vue/":[{"text":"Vue","collapsed":false,"items":[{"text":"Vue Basics","link":"/en/Vue/Vue基础"},{"text":"Vue3 Basics","link":"/en/Vue/Vue3基础"},{"text":"Vue3 Advanced","link":"/en/Vue/Vue3提高"}]}]},"docFooter":{"prev":"Previous","next":"Next"},"lastUpdated":{"text":"Last updated","formatOptions":{"dateStyle":"short","timeStyle":"short"}},"langMenuLabel":"Language","returnToTopLabel":"Return to top","sidebarMenuLabel":"Menu","darkModeSwitchLabel":"Theme","lightModeSwitchTitle":"Switch to light theme","darkModeSwitchTitle":"Switch to dark theme"}}},"scrollOffset":134,"cleanUrls":false}'));
+const siteData = deserializeFunctions(
+  JSON.parse(
+    '{"lang":"en-US","dir":"ltr","title":"NaiLuo 知识库","description":"A VitePress site","base":"/","head":[],"router":{"prefetchLinks":true},"appearance":true,"themeConfig":{"logo":"/assets/logo.png","socialLinks":[{"icon":"github","link":"https://github.com/yangxinpu"}],"footer":{"copyright":"Copyright © 2026 NaiLuo"},"search":{"provider":"local"},"outline":{"level":[2,3]}},"locales":{"root":{"label":"简体中文","lang":"zh-CN","title":"NaiLuo 知识库","description":"前端技术知识库 - React, Vue","link":"/zh/","themeConfig":{"nav":[{"text":"首页","link":"/zh/"},{"text":"React","link":"/zh/React/React基础"},{"text":"Vue","link":"/zh/Vue/Vue基础"},{"text":"博客","link":"http://localhost:3000"}],"sidebar":{"/zh/React/":[{"text":"React","collapsed":false,"items":[{"text":"React 基础","link":"/zh/React/React基础"},{"text":"React 提高","link":"/zh/React/React提高"},{"text":"React 原理","link":"/zh/React/React原理"}]}],"/zh/Vue/":[{"text":"Vue","collapsed":false,"items":[{"text":"Vue 基础","link":"/zh/Vue/Vue基础"},{"text":"Vue3 基础","link":"/zh/Vue/Vue3基础"},{"text":"Vue3 提高","link":"/zh/Vue/Vue3提高"}]}]},"docFooter":{"prev":"上一页","next":"下一页"},"lastUpdated":{"text":"最后更新","formatOptions":{"dateStyle":"short","timeStyle":"short"}},"langMenuLabel":"语言","returnToTopLabel":"返回顶部","sidebarMenuLabel":"菜单","darkModeSwitchLabel":"主题","lightModeSwitchTitle":"切换到浅色模式","darkModeSwitchTitle":"切换到深色模式"}},"en":{"label":"English","lang":"en-US","title":"NaiLuo Knowledge Base","description":"Frontend Tech Knowledge Base - React, Vue","link":"/en/","themeConfig":{"nav":[{"text":"Home","link":"/en/"},{"text":"React","link":"/en/React/React基础"},{"text":"Vue","link":"/en/Vue/Vue基础"},{"text":"Blog","link":"http://localhost:3000"}],"sidebar":{"/en/React/":[{"text":"React","collapsed":false,"items":[{"text":"React Basics","link":"/en/React/React基础"},{"text":"React Advanced","link":"/en/React/React提高"},{"text":"React Principles","link":"/en/React/React原理"}]}],"/en/Vue/":[{"text":"Vue","collapsed":false,"items":[{"text":"Vue Basics","link":"/en/Vue/Vue基础"},{"text":"Vue3 Basics","link":"/en/Vue/Vue3基础"},{"text":"Vue3 Advanced","link":"/en/Vue/Vue3提高"}]}]},"docFooter":{"prev":"Previous","next":"Next"},"lastUpdated":{"text":"Last updated","formatOptions":{"dateStyle":"short","timeStyle":"short"}},"langMenuLabel":"Language","returnToTopLabel":"Return to top","sidebarMenuLabel":"Menu","darkModeSwitchLabel":"Theme","lightModeSwitchTitle":"Switch to light theme","darkModeSwitchTitle":"Switch to dark theme"}}},"scrollOffset":134,"cleanUrls":false}'
+  )
+);
 function tryOnScopeDispose(fn) {
   if (getCurrentScope()) {
     onScopeDispose(fn);
@@ -43,27 +130,48 @@ const injectLocal = (...args) => {
   const key = args[0];
   const instance = (_a = getCurrentInstance()) == null ? void 0 : _a.proxy;
   if (instance == null && !hasInjectionContext())
-    throw new Error("injectLocal must be called in setup");
-  if (instance && localProvidedStateMap.has(instance) && key in localProvidedStateMap.get(instance))
+    throw new Error('injectLocal must be called in setup');
+  if (
+    instance &&
+    localProvidedStateMap.has(instance) &&
+    key in localProvidedStateMap.get(instance)
+  )
     return localProvidedStateMap.get(instance)[key];
   return inject(...args);
 };
-const isClient = typeof window !== "undefined" && typeof document !== "undefined";
-typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+const isClient =
+  typeof window !== 'undefined' && typeof document !== 'undefined';
+typeof WorkerGlobalScope !== 'undefined' &&
+  globalThis instanceof WorkerGlobalScope;
 const notNullish = (val) => val != null;
 const toString = Object.prototype.toString;
-const isObject = (val) => toString.call(val) === "[object Object]";
-const noop = () => {
-};
+const isObject = (val) => toString.call(val) === '[object Object]';
+const noop = () => {};
 const isIOS = /* @__PURE__ */ getIsIOS();
 function getIsIOS() {
   var _a, _b;
-  return isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && (/iP(?:ad|hone|od)/.test(window.navigator.userAgent) || ((_b = window == null ? void 0 : window.navigator) == null ? void 0 : _b.maxTouchPoints) > 2 && /iPad|Macintosh/.test(window == null ? void 0 : window.navigator.userAgent));
+  return (
+    isClient &&
+    ((_a = window == null ? void 0 : window.navigator) == null
+      ? void 0
+      : _a.userAgent) &&
+    (/iP(?:ad|hone|od)/.test(window.navigator.userAgent) ||
+      (((_b = window == null ? void 0 : window.navigator) == null
+        ? void 0
+        : _b.maxTouchPoints) > 2 &&
+        /iPad|Macintosh/.test(
+          window == null ? void 0 : window.navigator.userAgent
+        )))
+  );
 }
 function createFilterWrapper(filter, fn) {
   function wrapper(...args) {
     return new Promise((resolve, reject) => {
-      Promise.resolve(filter(() => fn.apply(this, args), { fn, thisArg: this, args })).then(resolve).catch(reject);
+      Promise.resolve(
+        filter(() => fn.apply(this, args), { fn, thisArg: this, args })
+      )
+        .then(resolve)
+        .catch(reject);
     });
   }
   return wrapper;
@@ -84,9 +192,8 @@ function debounceFilter(ms, options = {}) {
   const filter = (invoke) => {
     const duration = toValue(ms);
     const maxDuration = toValue(options.maxWait);
-    if (timer)
-      _clearTimeout(timer);
-    if (duration <= 0 || maxDuration !== void 0 && maxDuration <= 0) {
+    if (timer) _clearTimeout(timer);
+    if (duration <= 0 || (maxDuration !== void 0 && maxDuration <= 0)) {
       if (maxTimer) {
         _clearTimeout(maxTimer);
         maxTimer = null;
@@ -98,15 +205,13 @@ function debounceFilter(ms, options = {}) {
       lastInvoker = invoke;
       if (maxDuration && !maxTimer) {
         maxTimer = setTimeout(() => {
-          if (timer)
-            _clearTimeout(timer);
+          if (timer) _clearTimeout(timer);
           maxTimer = null;
           resolve(lastInvoker());
         }, maxDuration);
       }
       timer = setTimeout(() => {
-        if (maxTimer)
-          _clearTimeout(maxTimer);
+        if (maxTimer) _clearTimeout(maxTimer);
         maxTimer = null;
         resolve(invoke());
       }, duration);
@@ -124,10 +229,14 @@ function throttleFilter(...args) {
   let trailing;
   let leading;
   let rejectOnCancel;
-  if (!isRef(args[0]) && typeof args[0] === "object")
-    ({ delay: ms, trailing = true, leading = true, rejectOnCancel = false } = args[0]);
-  else
-    [ms, trailing = true, leading = true, rejectOnCancel = false] = args;
+  if (!isRef(args[0]) && typeof args[0] === 'object')
+    ({
+      delay: ms,
+      trailing = true,
+      leading = true,
+      rejectOnCancel = false,
+    } = args[0]);
+  else [ms, trailing = true, leading = true, rejectOnCancel = false] = args;
   const clear = () => {
     if (timer) {
       clearTimeout(timer);
@@ -140,7 +249,7 @@ function throttleFilter(...args) {
     const duration = toValue(ms);
     const elapsed = Date.now() - lastExec;
     const invoke = () => {
-      return lastValue = _invoke();
+      return (lastValue = _invoke());
     };
     clear();
     if (duration <= 0) {
@@ -153,26 +262,27 @@ function throttleFilter(...args) {
     } else if (trailing) {
       lastValue = new Promise((resolve, reject) => {
         lastRejector = rejectOnCancel ? reject : resolve;
-        timer = setTimeout(() => {
-          lastExec = Date.now();
-          isLeading = true;
-          resolve(invoke());
-          clear();
-        }, Math.max(0, duration - elapsed));
+        timer = setTimeout(
+          () => {
+            lastExec = Date.now();
+            isLeading = true;
+            resolve(invoke());
+            clear();
+          },
+          Math.max(0, duration - elapsed)
+        );
       });
     }
     if (!leading && !timer)
-      timer = setTimeout(() => isLeading = true, duration);
+      timer = setTimeout(() => (isLeading = true), duration);
     isLeading = false;
     return lastValue;
   };
   return filter;
 }
 function pausableFilter(extendFilter = bypassFilter, options = {}) {
-  const {
-    initialState = "active"
-  } = options;
-  const isActive2 = toRef(initialState === "active");
+  const { initialState = 'active' } = options;
+  const isActive2 = toRef(initialState === 'active');
   function pause() {
     isActive2.value = false;
   }
@@ -180,13 +290,14 @@ function pausableFilter(extendFilter = bypassFilter, options = {}) {
     isActive2.value = true;
   }
   const eventFilter = (...args) => {
-    if (isActive2.value)
-      extendFilter(...args);
+    if (isActive2.value) extendFilter(...args);
   };
   return { isActive: readonly(isActive2), pause, resume, eventFilter };
 }
 function pxValue(px) {
-  return px.endsWith("rem") ? Number.parseFloat(px) * 16 : Number.parseFloat(px);
+  return px.endsWith('rem')
+    ? Number.parseFloat(px) * 16
+    : Number.parseFloat(px);
 }
 function getLifeCycleTarget(target) {
   return getCurrentInstance();
@@ -195,93 +306,73 @@ function toArray(value) {
   return Array.isArray(value) ? value : [value];
 }
 function toRef(...args) {
-  if (args.length !== 1)
-    return toRef$1(...args);
+  if (args.length !== 1) return toRef$1(...args);
   const r = args[0];
-  return typeof r === "function" ? readonly(customRef(() => ({ get: r, set: noop }))) : ref(r);
+  return typeof r === 'function'
+    ? readonly(customRef(() => ({ get: r, set: noop })))
+    : ref(r);
 }
 function useDebounceFn(fn, ms = 200, options = {}) {
-  return createFilterWrapper(
-    debounceFilter(ms, options),
-    fn
-  );
+  return createFilterWrapper(debounceFilter(ms, options), fn);
 }
-function useThrottleFn(fn, ms = 200, trailing = false, leading = true, rejectOnCancel = false) {
+function useThrottleFn(
+  fn,
+  ms = 200,
+  trailing = false,
+  leading = true,
+  rejectOnCancel = false
+) {
   return createFilterWrapper(
     throttleFilter(ms, trailing, leading, rejectOnCancel),
     fn
   );
 }
 function watchWithFilter(source, cb, options = {}) {
-  const {
-    eventFilter = bypassFilter,
-    ...watchOptions
-  } = options;
-  return watch(
-    source,
-    createFilterWrapper(
-      eventFilter,
-      cb
-    ),
-    watchOptions
-  );
+  const { eventFilter = bypassFilter, ...watchOptions } = options;
+  return watch(source, createFilterWrapper(eventFilter, cb), watchOptions);
 }
 function watchPausable(source, cb, options = {}) {
   const {
     eventFilter: filter,
-    initialState = "active",
+    initialState = 'active',
     ...watchOptions
   } = options;
-  const { eventFilter, pause, resume, isActive: isActive2 } = pausableFilter(filter, { initialState });
-  const stop = watchWithFilter(
-    source,
-    cb,
-    {
-      ...watchOptions,
-      eventFilter
-    }
-  );
+  const {
+    eventFilter,
+    pause,
+    resume,
+    isActive: isActive2,
+  } = pausableFilter(filter, { initialState });
+  const stop = watchWithFilter(source, cb, {
+    ...watchOptions,
+    eventFilter,
+  });
   return { stop, pause, resume, isActive: isActive2 };
 }
 function tryOnMounted(fn, sync = true, target) {
   const instance = getLifeCycleTarget();
-  if (instance)
-    onMounted(fn, target);
-  else if (sync)
-    fn();
-  else
-    nextTick(fn);
+  if (instance) onMounted(fn, target);
+  else if (sync) fn();
+  else nextTick(fn);
 }
 function watchDebounced(source, cb, options = {}) {
-  const {
-    debounce = 0,
-    maxWait = void 0,
-    ...watchOptions
-  } = options;
-  return watchWithFilter(
-    source,
-    cb,
-    {
-      ...watchOptions,
-      eventFilter: debounceFilter(debounce, { maxWait })
-    }
-  );
+  const { debounce = 0, maxWait = void 0, ...watchOptions } = options;
+  return watchWithFilter(source, cb, {
+    ...watchOptions,
+    eventFilter: debounceFilter(debounce, { maxWait }),
+  });
 }
 function watchImmediate(source, cb, options) {
-  return watch(
-    source,
-    cb,
-    {
-      ...options,
-      immediate: true
-    }
-  );
+  return watch(source, cb, {
+    ...options,
+    immediate: true,
+  });
 }
 function computedAsync(evaluationCallback, initialState, optionsOrRef) {
   let options;
   if (isRef(optionsOrRef)) {
     options = {
-      evaluating: optionsOrRef
+      evaluating: optionsOrRef,
     };
   } else {
     options = {};
@@ -290,14 +381,13 @@ function computedAsync(evaluationCallback, initialState, optionsOrRef) {
     lazy = false,
     evaluating = void 0,
     shallow = true,
-    onError = noop
+    onError = noop,
   } = options;
   const started = shallowRef(!lazy);
   const current = shallow ? shallowRef(initialState) : ref(initialState);
   let counter = 0;
   watchEffect(async (onInvalidate) => {
-    if (!started.value)
-      return;
+    if (!started.value) return;
     counter++;
     const counterAtBeginning = counter;
     let hasFinished = false;
@@ -309,14 +399,11 @@ function computedAsync(evaluationCallback, initialState, optionsOrRef) {
     try {
       const result = await evaluationCallback((cancelCallback) => {
         onInvalidate(() => {
-          if (evaluating)
-            evaluating.value = false;
-          if (!hasFinished)
-            cancelCallback();
+          if (evaluating) evaluating.value = false;
+          if (!hasFinished) cancelCallback();
         });
       });
-      if (counterAtBeginning === counter)
-        current.value = result;
+      if (counterAtBeginning === counter) current.value = result;
     } catch (e) {
       onError(e);
     } finally {
@@ -352,33 +439,46 @@ function useEventListener(...args) {
   };
   const firstParamTargets = computed(() => {
     const test = toArray(toValue(args[0])).filter((e) => e != null);
-    return test.every((e) => typeof e !== "string") ? test : void 0;
+    return test.every((e) => typeof e !== 'string') ? test : void 0;
   });
   const stopWatch = watchImmediate(
     () => {
       var _a, _b;
       return [
-        (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
+        (_b =
+          (_a = firstParamTargets.value) == null
+            ? void 0
+            : _a.map((e) => unrefElement(e))) != null
+          ? _b
+          : [defaultWindow].filter((e) => e != null),
         toArray(toValue(firstParamTargets.value ? args[1] : args[0])),
         toArray(unref(firstParamTargets.value ? args[2] : args[1])),
         // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
-        toValue(firstParamTargets.value ? args[3] : args[2])
+        toValue(firstParamTargets.value ? args[3] : args[2]),
       ];
     },
     ([raw_targets, raw_events, raw_listeners, raw_options]) => {
       cleanup();
-      if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
+      if (
+        !(raw_targets == null ? void 0 : raw_targets.length) ||
+        !(raw_events == null ? void 0 : raw_events.length) ||
+        !(raw_listeners == null ? void 0 : raw_listeners.length)
+      )
         return;
-      const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+      const optionsClone = isObject(raw_options)
+        ? { ...raw_options }
+        : raw_options;
       cleanups.push(
-        ...raw_targets.flatMap(
-          (el) => raw_events.flatMap(
-            (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
+        ...raw_targets.flatMap((el) =>
+          raw_events.flatMap((event) =>
+            raw_listeners.map((listener) =>
+              register(el, event, listener, optionsClone)
+            )
           )
         )
       );
     },
-    { flush: "post" }
+    { flush: 'post' }
   );
   const stop = () => {
     stopWatch();
@@ -405,9 +505,8 @@ function useSupported(callback) {
   });
 }
 function createKeyPredicate(keyFilter) {
-  if (typeof keyFilter === "function")
-    return keyFilter;
-  else if (typeof keyFilter === "string")
+  if (typeof keyFilter === 'function') return keyFilter;
+  else if (typeof keyFilter === 'string')
     return (event) => event.key === keyFilter;
   else if (Array.isArray(keyFilter))
     return (event) => keyFilter.includes(event.key);
@@ -422,7 +521,7 @@ function onKeyStroke(...args) {
     handler = args[1];
     options = args[2];
   } else if (args.length === 2) {
-    if (typeof args[1] === "object") {
+    if (typeof args[1] === 'object') {
       key = true;
       handler = args[0];
       options = args[1];
@@ -436,28 +535,33 @@ function onKeyStroke(...args) {
   }
   const {
     target = defaultWindow,
-    eventName = "keydown",
+    eventName = 'keydown',
     passive = false,
-    dedupe = false
+    dedupe = false,
   } = options;
   const predicate = createKeyPredicate(key);
   const listener = (e) => {
-    if (e.repeat && toValue(dedupe))
-      return;
-    if (predicate(e))
-      handler(e);
+    if (e.repeat && toValue(dedupe)) return;
+    if (predicate(e)) handler(e);
   };
   return useEventListener(target, eventName, listener, passive);
 }
-const ssrWidthSymbol = Symbol("vueuse-ssr-width");
+const ssrWidthSymbol = Symbol('vueuse-ssr-width');
 function useSSRWidth() {
-  const ssrWidth = hasInjectionContext() ? injectLocal(ssrWidthSymbol, null) : null;
-  return typeof ssrWidth === "number" ? ssrWidth : void 0;
+  const ssrWidth = hasInjectionContext()
+    ? injectLocal(ssrWidthSymbol, null)
+    : null;
+  return typeof ssrWidth === 'number' ? ssrWidth : void 0;
 }
 function useMediaQuery(query, options = {}) {
   const { window: window2 = defaultWindow, ssrWidth = useSSRWidth() } = options;
-  const isSupported = useSupported(() => window2 && "matchMedia" in window2 && typeof window2.matchMedia === "function");
-  const ssrSupport = shallowRef(typeof ssrWidth === "number");
+  const isSupported = useSupported(
+    () =>
+      window2 &&
+      'matchMedia' in window2 &&
+      typeof window2.matchMedia === 'function'
+  );
+  const ssrSupport = shallowRef(typeof ssrWidth === 'number');
   const mediaQuery = shallowRef();
   const matches = shallowRef(false);
   const handler = (event) => {
@@ -466,11 +570,15 @@ function useMediaQuery(query, options = {}) {
   watchEffect(() => {
     if (ssrSupport.value) {
       ssrSupport.value = !isSupported.value;
-      const queryStrings = toValue(query).split(",");
+      const queryStrings = toValue(query).split(',');
       matches.value = queryStrings.some((queryString) => {
-        const not = queryString.includes("not all");
-        const minWidth = queryString.match(/\(\s*min-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/);
-        const maxWidth = queryString.match(/\(\s*max-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/);
+        const not = queryString.includes('not all');
+        const minWidth = queryString.match(
+          /\(\s*min-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/
+        );
+        const maxWidth = queryString.match(
+          /\(\s*max-width:\s*(-?\d+(?:\.\d*)?[a-z]+\s*)\)/
+        );
         let res = Boolean(minWidth || maxWidth);
         if (minWidth && res) {
           res = ssrWidth >= pxValue(minWidth[1]);
@@ -482,70 +590,93 @@ function useMediaQuery(query, options = {}) {
       });
       return;
     }
-    if (!isSupported.value)
-      return;
+    if (!isSupported.value) return;
     mediaQuery.value = window2.matchMedia(toValue(query));
     matches.value = mediaQuery.value.matches;
   });
-  useEventListener(mediaQuery, "change", handler, { passive: true });
+  useEventListener(mediaQuery, 'change', handler, { passive: true });
   return computed(() => matches.value);
 }
-const _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-const globalKey = "__vueuse_ssr_handlers__";
+const _global =
+  typeof globalThis !== 'undefined'
+    ? globalThis
+    : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+        ? global
+        : typeof self !== 'undefined'
+          ? self
+          : {};
+const globalKey = '__vueuse_ssr_handlers__';
 const handlers = /* @__PURE__ */ getHandlers();
 function getHandlers() {
-  if (!(globalKey in _global))
-    _global[globalKey] = _global[globalKey] || {};
+  if (!(globalKey in _global)) _global[globalKey] = _global[globalKey] || {};
   return _global[globalKey];
 }
 function getSSRHandler(key, fallback) {
   return handlers[key] || fallback;
 }
 function usePreferredDark(options) {
-  return useMediaQuery("(prefers-color-scheme: dark)", options);
+  return useMediaQuery('(prefers-color-scheme: dark)', options);
 }
 function guessSerializerType(rawInit) {
-  return rawInit == null ? "any" : rawInit instanceof Set ? "set" : rawInit instanceof Map ? "map" : rawInit instanceof Date ? "date" : typeof rawInit === "boolean" ? "boolean" : typeof rawInit === "string" ? "string" : typeof rawInit === "object" ? "object" : !Number.isNaN(rawInit) ? "number" : "any";
+  return rawInit == null
+    ? 'any'
+    : rawInit instanceof Set
+      ? 'set'
+      : rawInit instanceof Map
+        ? 'map'
+        : rawInit instanceof Date
+          ? 'date'
+          : typeof rawInit === 'boolean'
+            ? 'boolean'
+            : typeof rawInit === 'string'
+              ? 'string'
+              : typeof rawInit === 'object'
+                ? 'object'
+                : !Number.isNaN(rawInit)
+                  ? 'number'
+                  : 'any';
 }
 const StorageSerializers = {
   boolean: {
-    read: (v) => v === "true",
-    write: (v) => String(v)
+    read: (v) => v === 'true',
+    write: (v) => String(v),
   },
   object: {
     read: (v) => JSON.parse(v),
-    write: (v) => JSON.stringify(v)
+    write: (v) => JSON.stringify(v),
   },
   number: {
     read: (v) => Number.parseFloat(v),
-    write: (v) => String(v)
+    write: (v) => String(v),
   },
   any: {
     read: (v) => v,
-    write: (v) => String(v)
+    write: (v) => String(v),
   },
   string: {
     read: (v) => v,
-    write: (v) => String(v)
+    write: (v) => String(v),
   },
   map: {
     read: (v) => new Map(JSON.parse(v)),
-    write: (v) => JSON.stringify(Array.from(v.entries()))
+    write: (v) => JSON.stringify(Array.from(v.entries())),
   },
   set: {
     read: (v) => new Set(JSON.parse(v)),
-    write: (v) => JSON.stringify(Array.from(v))
+    write: (v) => JSON.stringify(Array.from(v)),
   },
   date: {
     read: (v) => new Date(v),
-    write: (v) => v.toISOString()
-  }
+    write: (v) => v.toISOString(),
+  },
 };
-const customStorageEventName = "vueuse-storage";
+const customStorageEventName = 'vueuse-storage';
 function useStorage(key, defaults, storage, options = {}) {
   var _a;
   const {
-    flush = "pre",
+    flush = 'pre',
     deep = true,
     listenToStorageChanges = true,
     writeDefaults = true,
@@ -556,13 +687,15 @@ function useStorage(key, defaults, storage, options = {}) {
     onError = (e) => {
       console.error(e);
     },
-    initOnMounted
+    initOnMounted,
   } = options;
-  const data = (shallow ? shallowRef : ref)(typeof defaults === "function" ? defaults() : defaults);
+  const data = (shallow ? shallowRef : ref)(
+    typeof defaults === 'function' ? defaults() : defaults
+  );
   const keyComputed = computed(() => toValue(key));
   if (!storage) {
     try {
-      storage = getSSRHandler("getDefaultStorage", () => {
+      storage = getSSRHandler('getDefaultStorage', () => {
         var _a2;
         return (_a2 = defaultWindow) == null ? void 0 : _a2.localStorage;
       })();
@@ -570,11 +703,11 @@ function useStorage(key, defaults, storage, options = {}) {
       onError(e);
     }
   }
-  if (!storage)
-    return data;
+  if (!storage) return data;
   const rawInit = toValue(defaults);
   const type = guessSerializerType(rawInit);
-  const serializer = (_a = options.serializer) != null ? _a : StorageSerializers[type];
+  const serializer =
+    (_a = options.serializer) != null ? _a : StorageSerializers[type];
   const { pause: pauseWatch, resume: resumeWatch } = watchPausable(
     data,
     () => write(data.value),
@@ -584,26 +717,32 @@ function useStorage(key, defaults, storage, options = {}) {
   if (window2 && listenToStorageChanges) {
     tryOnMounted(() => {
       if (storage instanceof Storage)
-        useEventListener(window2, "storage", update, { passive: true });
+        useEventListener(window2, 'storage', update, { passive: true });
       else
-        useEventListener(window2, customStorageEventName, updateFromCustomEvent);
-      if (initOnMounted)
-        update();
+        useEventListener(
+          window2,
+          customStorageEventName,
+          updateFromCustomEvent
+        );
+      if (initOnMounted) update();
     });
   }
-  if (!initOnMounted)
-    update();
+  if (!initOnMounted) update();
   function dispatchWriteEvent(oldValue, newValue) {
     if (window2) {
       const payload = {
         key: keyComputed.value,
         oldValue,
         newValue,
-        storageArea: storage
+        storageArea: storage,
       };
-      window2.dispatchEvent(storage instanceof Storage ? new StorageEvent("storage", payload) : new CustomEvent(customStorageEventName, {
-        detail: payload
-      }));
+      window2.dispatchEvent(
+        storage instanceof Storage
+          ? new StorageEvent('storage', payload)
+          : new CustomEvent(customStorageEventName, {
+              detail: payload,
+            })
+      );
     }
   }
   function write(v) {
@@ -624,44 +763,45 @@ function useStorage(key, defaults, storage, options = {}) {
     }
   }
   function read(event) {
-    const rawValue = event ? event.newValue : storage.getItem(keyComputed.value);
+    const rawValue = event
+      ? event.newValue
+      : storage.getItem(keyComputed.value);
     if (rawValue == null) {
       if (writeDefaults && rawInit != null)
         storage.setItem(keyComputed.value, serializer.write(rawInit));
       return rawInit;
     } else if (!event && mergeDefaults) {
       const value = serializer.read(rawValue);
-      if (typeof mergeDefaults === "function")
+      if (typeof mergeDefaults === 'function')
         return mergeDefaults(value, rawInit);
-      else if (type === "object" && !Array.isArray(value))
+      else if (type === 'object' && !Array.isArray(value))
         return { ...rawInit, ...value };
       return value;
-    } else if (typeof rawValue !== "string") {
+    } else if (typeof rawValue !== 'string') {
       return rawValue;
     } else {
       return serializer.read(rawValue);
     }
   }
   function update(event) {
-    if (event && event.storageArea !== storage)
-      return;
+    if (event && event.storageArea !== storage) return;
     if (event && event.key == null) {
       data.value = rawInit;
       return;
     }
-    if (event && event.key !== keyComputed.value)
-      return;
+    if (event && event.key !== keyComputed.value) return;
     pauseWatch();
     try {
-      if ((event == null ? void 0 : event.newValue) !== serializer.write(data.value))
+      if (
+        (event == null ? void 0 : event.newValue) !==
+        serializer.write(data.value)
+      )
         data.value = read(event);
     } catch (e) {
       onError(e);
     } finally {
-      if (event)
-        nextTick(resumeWatch);
-      else
-        resumeWatch();
+      if (event) nextTick(resumeWatch);
+      else resumeWatch();
     }
   }
   function updateFromCustomEvent(event) {
@@ -669,55 +809,74 @@ function useStorage(key, defaults, storage, options = {}) {
   }
   return data;
 }
-const CSS_DISABLE_TRANS = "*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}";
+const CSS_DISABLE_TRANS =
+  '*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}';
 function useColorMode(options = {}) {
   const {
-    selector = "html",
-    attribute = "class",
-    initialValue = "auto",
+    selector = 'html',
+    attribute = 'class',
+    initialValue = 'auto',
     window: window2 = defaultWindow,
     storage,
-    storageKey = "vueuse-color-scheme",
+    storageKey = 'vueuse-color-scheme',
     listenToStorageChanges = true,
     storageRef,
     emitAuto,
-    disableTransition = true
+    disableTransition = true,
   } = options;
   const modes = {
-    auto: "",
-    light: "light",
-    dark: "dark",
-    ...options.modes || {}
+    auto: '',
+    light: 'light',
+    dark: 'dark',
+    ...(options.modes || {}),
   };
   const preferredDark = usePreferredDark({ window: window2 });
-  const system = computed(() => preferredDark.value ? "dark" : "light");
-  const store = storageRef || (storageKey == null ? toRef(initialValue) : useStorage(storageKey, initialValue, storage, { window: window2, listenToStorageChanges }));
-  const state = computed(() => store.value === "auto" ? system.value : store.value);
+  const system = computed(() => (preferredDark.value ? 'dark' : 'light'));
+  const store =
+    storageRef ||
+    (storageKey == null
+      ? toRef(initialValue)
+      : useStorage(storageKey, initialValue, storage, {
+          window: window2,
+          listenToStorageChanges,
+        }));
+  const state = computed(() =>
+    store.value === 'auto' ? system.value : store.value
+  );
   const updateHTMLAttrs = getSSRHandler(
-    "updateHTMLAttrs",
+    'updateHTMLAttrs',
     (selector2, attribute2, value) => {
-      const el = typeof selector2 === "string" ? window2 == null ? void 0 : window2.document.querySelector(selector2) : unrefElement(selector2);
-      if (!el)
-        return;
+      const el =
+        typeof selector2 === 'string'
+          ? window2 == null
+            ? void 0
+            : window2.document.querySelector(selector2)
+          : unrefElement(selector2);
+      if (!el) return;
       const classesToAdd = /* @__PURE__ */ new Set();
       const classesToRemove = /* @__PURE__ */ new Set();
       let attributeToChange = null;
-      if (attribute2 === "class") {
+      if (attribute2 === 'class') {
         const current = value.split(/\s/g);
-        Object.values(modes).flatMap((i) => (i || "").split(/\s/g)).filter(Boolean).forEach((v) => {
-          if (current.includes(v))
-            classesToAdd.add(v);
-          else
-            classesToRemove.add(v);
-        });
+        Object.values(modes)
+          .flatMap((i) => (i || '').split(/\s/g))
+          .filter(Boolean)
+          .forEach((v) => {
+            if (current.includes(v)) classesToAdd.add(v);
+            else classesToRemove.add(v);
+          });
       } else {
         attributeToChange = { key: attribute2, value };
       }
-      if (classesToAdd.size === 0 && classesToRemove.size === 0 && attributeToChange === null)
+      if (
+        classesToAdd.size === 0 &&
+        classesToRemove.size === 0 &&
+        attributeToChange === null
+      )
         return;
       let style;
       if (disableTransition) {
-        style = window2.document.createElement("style");
+        style = window2.document.createElement('style');
         style.appendChild(document.createTextNode(CSS_DISABLE_TRANS));
         window2.document.head.appendChild(style);
       }
@@ -738,15 +897,17 @@ function useColorMode(options = {}) {
   );
   function defaultOnChanged(mode) {
     var _a;
-    updateHTMLAttrs(selector, attribute, (_a = modes[mode]) != null ? _a : mode);
+    updateHTMLAttrs(
+      selector,
+      attribute,
+      (_a = modes[mode]) != null ? _a : mode
+    );
   }
   function onChanged(mode) {
-    if (options.onChanged)
-      options.onChanged(mode, defaultOnChanged);
-    else
-      defaultOnChanged(mode);
+    if (options.onChanged) options.onChanged(mode, defaultOnChanged);
+    else defaultOnChanged(mode);
   }
-  watch(state, onChanged, { flush: "post", immediate: true });
+  watch(state, onChanged, { flush: 'post', immediate: true });
   tryOnMounted(() => onChanged(state.value));
   const auto = computed({
     get() {
@@ -754,48 +915,44 @@ function useColorMode(options = {}) {
     },
     set(v) {
       store.value = v;
-    }
+    },
   });
   return Object.assign(auto, { store, system, state });
 }
 function useDark(options = {}) {
-  const {
-    valueDark = "dark",
-    valueLight = ""
-  } = options;
+  const { valueDark = 'dark', valueLight = '' } = options;
   const mode = useColorMode({
     ...options,
     onChanged: (mode2, defaultHandler) => {
       var _a;
       if (options.onChanged)
-        (_a = options.onChanged) == null ? void 0 : _a.call(options, mode2 === "dark", defaultHandler, mode2);
-      else
-        defaultHandler(mode2);
+        (_a = options.onChanged) == null
+          ? void 0
+          : _a.call(options, mode2 === 'dark', defaultHandler, mode2);
+      else defaultHandler(mode2);
     },
     modes: {
       dark: valueDark,
-      light: valueLight
-    }
+      light: valueLight,
+    },
   });
   const system = computed(() => mode.system.value);
   const isDark = computed({
     get() {
-      return mode.value === "dark";
+      return mode.value === 'dark';
     },
     set(v) {
-      const modeVal = v ? "dark" : "light";
-      if (system.value === modeVal)
-        mode.value = "auto";
-      else
-        mode.value = modeVal;
-    }
+      const modeVal = v ? 'dark' : 'light';
+      if (system.value === modeVal) mode.value = 'auto';
+      else mode.value = modeVal;
+    },
   });
   return isDark;
 }
 function resolveElement(el) {
-  if (typeof Window !== "undefined" && el instanceof Window)
+  if (typeof Window !== 'undefined' && el instanceof Window)
     return el.document.documentElement;
-  if (typeof Document !== "undefined" && el instanceof Document)
+  if (typeof Document !== 'undefined' && el instanceof Document)
     return el.documentElement;
   return el;
 }
@@ -810,17 +967,17 @@ function useScroll(element, options = {}) {
       left: 0,
       right: 0,
       top: 0,
-      bottom: 0
+      bottom: 0,
     },
     eventListenerOptions = {
       capture: false,
-      passive: true
+      passive: true,
     },
-    behavior = "auto",
+    behavior = 'auto',
     window: window2 = defaultWindow,
     onError = (e) => {
       console.error(e);
-    }
+    },
   } = options;
   const internalX = shallowRef(0);
   const internalY = shallowRef(0);
@@ -830,7 +987,7 @@ function useScroll(element, options = {}) {
     },
     set(x2) {
       scrollTo2(x2, void 0);
-    }
+    },
   });
   const y = computed({
     get() {
@@ -838,42 +995,45 @@ function useScroll(element, options = {}) {
     },
     set(y2) {
       scrollTo2(void 0, y2);
-    }
+    },
   });
   function scrollTo2(_x, _y) {
     var _a, _b, _c, _d;
-    if (!window2)
-      return;
+    if (!window2) return;
     const _element = toValue(element);
-    if (!_element)
-      return;
-    (_c = _element instanceof Document ? window2.document.body : _element) == null ? void 0 : _c.scrollTo({
-      top: (_a = toValue(_y)) != null ? _a : y.value,
-      left: (_b = toValue(_x)) != null ? _b : x.value,
-      behavior: toValue(behavior)
-    });
-    const scrollContainer = ((_d = _element == null ? void 0 : _element.document) == null ? void 0 : _d.documentElement) || (_element == null ? void 0 : _element.documentElement) || _element;
-    if (x != null)
-      internalX.value = scrollContainer.scrollLeft;
-    if (y != null)
-      internalY.value = scrollContainer.scrollTop;
+    if (!_element) return;
+    (_c = _element instanceof Document ? window2.document.body : _element) ==
+    null
+      ? void 0
+      : _c.scrollTo({
+          top: (_a = toValue(_y)) != null ? _a : y.value,
+          left: (_b = toValue(_x)) != null ? _b : x.value,
+          behavior: toValue(behavior),
+        });
+    const scrollContainer =
+      ((_d = _element == null ? void 0 : _element.document) == null
+        ? void 0
+        : _d.documentElement) ||
+      (_element == null ? void 0 : _element.documentElement) ||
+      _element;
+    if (x != null) internalX.value = scrollContainer.scrollLeft;
+    if (y != null) internalY.value = scrollContainer.scrollTop;
   }
   const isScrolling = shallowRef(false);
   const arrivedState = reactive({
     left: true,
     right: false,
     top: true,
-    bottom: false
+    bottom: false,
   });
   const directions = reactive({
     left: false,
     right: false,
     top: false,
-    bottom: false
+    bottom: false,
   });
   const onScrollEnd = (e) => {
-    if (!isScrolling.value)
-      return;
+    if (!isScrolling.value) return;
     isScrolling.value = false;
     directions.left = false;
     directions.right = false;
@@ -884,17 +1044,24 @@ function useScroll(element, options = {}) {
   const onScrollEndDebounced = useDebounceFn(onScrollEnd, throttle + idle);
   const setArrivedState = (target) => {
     var _a;
-    if (!window2)
-      return;
-    const el = ((_a = target == null ? void 0 : target.document) == null ? void 0 : _a.documentElement) || (target == null ? void 0 : target.documentElement) || unrefElement(target);
+    if (!window2) return;
+    const el =
+      ((_a = target == null ? void 0 : target.document) == null
+        ? void 0
+        : _a.documentElement) ||
+      (target == null ? void 0 : target.documentElement) ||
+      unrefElement(target);
     const { display, flexDirection, direction } = getComputedStyle(el);
-    const directionMultipler = direction === "rtl" ? -1 : 1;
+    const directionMultipler = direction === 'rtl' ? -1 : 1;
     const scrollLeft = el.scrollLeft;
     directions.left = scrollLeft < internalX.value;
     directions.right = scrollLeft > internalX.value;
-    const left = Math.abs(scrollLeft * directionMultipler) <= (offset.left || 0);
-    const right = Math.abs(scrollLeft * directionMultipler) + el.clientWidth >= el.scrollWidth - (offset.right || 0) - ARRIVED_STATE_THRESHOLD_PIXELS;
-    if (display === "flex" && flexDirection === "row-reverse") {
+    const left =
+      Math.abs(scrollLeft * directionMultipler) <= (offset.left || 0);
+    const right =
+      Math.abs(scrollLeft * directionMultipler) + el.clientWidth >=
+      el.scrollWidth - (offset.right || 0) - ARRIVED_STATE_THRESHOLD_PIXELS;
+    if (display === 'flex' && flexDirection === 'row-reverse') {
       arrivedState.left = right;
       arrivedState.right = left;
     } else {
@@ -908,8 +1075,10 @@ function useScroll(element, options = {}) {
     directions.top = scrollTop < internalY.value;
     directions.bottom = scrollTop > internalY.value;
     const top = Math.abs(scrollTop) <= (offset.top || 0);
-    const bottom = Math.abs(scrollTop) + el.clientHeight >= el.scrollHeight - (offset.bottom || 0) - ARRIVED_STATE_THRESHOLD_PIXELS;
-    if (display === "flex" && flexDirection === "column-reverse") {
+    const bottom =
+      Math.abs(scrollTop) + el.clientHeight >=
+      el.scrollHeight - (offset.bottom || 0) - ARRIVED_STATE_THRESHOLD_PIXELS;
+    if (display === 'flex' && flexDirection === 'column-reverse') {
       arrivedState.top = bottom;
       arrivedState.bottom = top;
     } else {
@@ -920,8 +1089,7 @@ function useScroll(element, options = {}) {
   };
   const onScrollHandler = (e) => {
     var _a;
-    if (!window2)
-      return;
+    if (!window2) return;
     const eventTarget = (_a = e.target.documentElement) != null ? _a : e.target;
     setArrivedState(eventTarget);
     isScrolling.value = true;
@@ -930,26 +1098,22 @@ function useScroll(element, options = {}) {
   };
   useEventListener(
     element,
-    "scroll",
-    throttle ? useThrottleFn(onScrollHandler, throttle, true, false) : onScrollHandler,
+    'scroll',
+    throttle
+      ? useThrottleFn(onScrollHandler, throttle, true, false)
+      : onScrollHandler,
     eventListenerOptions
   );
   tryOnMounted(() => {
     try {
       const _element = toValue(element);
-      if (!_element)
-        return;
+      if (!_element) return;
       setArrivedState(_element);
     } catch (e) {
       onError(e);
     }
   });
-  useEventListener(
-    element,
-    "scrollend",
-    onScrollEnd,
-    eventListenerOptions
-  );
+  useEventListener(element, 'scrollend', onScrollEnd, eventListenerOptions);
   return {
     x,
     y,
@@ -958,81 +1122,85 @@ function useScroll(element, options = {}) {
     directions,
     measure() {
       const _element = toValue(element);
-      if (window2 && _element)
-        setArrivedState(_element);
-    }
+      if (window2 && _element) setArrivedState(_element);
+    },
   };
 }
 function useLocalStorage(key, initialValue, options = {}) {
   const { window: window2 = defaultWindow } = options;
-  return useStorage(key, initialValue, window2 == null ? void 0 : window2.localStorage, options);
+  return useStorage(
+    key,
+    initialValue,
+    window2 == null ? void 0 : window2.localStorage,
+    options
+  );
 }
 function checkOverflowScroll(ele) {
   const style = window.getComputedStyle(ele);
-  if (style.overflowX === "scroll" || style.overflowY === "scroll" || style.overflowX === "auto" && ele.clientWidth < ele.scrollWidth || style.overflowY === "auto" && ele.clientHeight < ele.scrollHeight) {
+  if (
+    style.overflowX === 'scroll' ||
+    style.overflowY === 'scroll' ||
+    (style.overflowX === 'auto' && ele.clientWidth < ele.scrollWidth) ||
+    (style.overflowY === 'auto' && ele.clientHeight < ele.scrollHeight)
+  ) {
     return true;
   } else {
     const parent = ele.parentNode;
-    if (!parent || parent.tagName === "BODY")
-      return false;
+    if (!parent || parent.tagName === 'BODY') return false;
     return checkOverflowScroll(parent);
   }
 }
 function preventDefault(rawEvent) {
   const e = rawEvent || window.event;
   const _target = e.target;
-  if (checkOverflowScroll(_target))
-    return false;
-  if (e.touches.length > 1)
-    return true;
-  if (e.preventDefault)
-    e.preventDefault();
+  if (checkOverflowScroll(_target)) return false;
+  if (e.touches.length > 1) return true;
+  if (e.preventDefault) e.preventDefault();
   return false;
 }
 const elInitialOverflow = /* @__PURE__ */ new WeakMap();
 function useScrollLock(element, initialState = false) {
   const isLocked = shallowRef(initialState);
   let stopTouchMoveListener = null;
-  let initialOverflow = "";
-  watch(toRef(element), (el) => {
-    const target = resolveElement(toValue(el));
-    if (target) {
-      const ele = target;
-      if (!elInitialOverflow.get(ele))
-        elInitialOverflow.set(ele, ele.style.overflow);
-      if (ele.style.overflow !== "hidden")
-        initialOverflow = ele.style.overflow;
-      if (ele.style.overflow === "hidden")
-        return isLocked.value = true;
-      if (isLocked.value)
-        return ele.style.overflow = "hidden";
+  let initialOverflow = '';
+  watch(
+    toRef(element),
+    (el) => {
+      const target = resolveElement(toValue(el));
+      if (target) {
+        const ele = target;
+        if (!elInitialOverflow.get(ele))
+          elInitialOverflow.set(ele, ele.style.overflow);
+        if (ele.style.overflow !== 'hidden')
+          initialOverflow = ele.style.overflow;
+        if (ele.style.overflow === 'hidden') return (isLocked.value = true);
+        if (isLocked.value) return (ele.style.overflow = 'hidden');
+      }
+    },
+    {
+      immediate: true,
     }
-  }, {
-    immediate: true
-  });
+  );
   const lock = () => {
     const el = resolveElement(toValue(element));
-    if (!el || isLocked.value)
-      return;
+    if (!el || isLocked.value) return;
     if (isIOS) {
       stopTouchMoveListener = useEventListener(
         el,
-        "touchmove",
+        'touchmove',
         (e) => {
           preventDefault(e);
         },
         { passive: false }
       );
     }
-    el.style.overflow = "hidden";
+    el.style.overflow = 'hidden';
     isLocked.value = true;
   };
   const unlock = () => {
     const el = resolveElement(toValue(element));
-    if (!el || !isLocked.value)
-      return;
-    if (isIOS)
-      stopTouchMoveListener == null ? void 0 : stopTouchMoveListener();
+    if (!el || !isLocked.value) return;
+    if (isIOS) stopTouchMoveListener == null ? void 0 : stopTouchMoveListener();
     el.style.overflow = initialOverflow;
     elInitialOverflow.delete(el);
     isLocked.value = false;
@@ -1043,15 +1211,19 @@ function useScrollLock(element, initialState = false) {
       return isLocked.value;
     },
     set(v) {
-      if (v)
-        lock();
+      if (v) lock();
       else unlock();
-    }
+    },
   });
 }
 function useSessionStorage(key, initialValue, options = {}) {
   const { window: window2 = defaultWindow } = options;
-  return useStorage(key, initialValue, window2 == null ? void 0 : window2.sessionStorage, options);
+  return useStorage(
+    key,
+    initialValue,
+    window2 == null ? void 0 : window2.sessionStorage,
+    options
+  );
 }
 function useWindowScroll(options = {}) {
   const { window: window2 = defaultWindow, ...rest } = options;
@@ -1064,17 +1236,21 @@ function useWindowSize(options = {}) {
     initialHeight = Number.POSITIVE_INFINITY,
     listenOrientation = true,
     includeScrollbar = true,
-    type = "inner"
+    type = 'inner',
   } = options;
   const width = shallowRef(initialWidth);
   const height = shallowRef(initialHeight);
   const update = () => {
     if (window2) {
-      if (type === "outer") {
+      if (type === 'outer') {
         width.value = window2.outerWidth;
         height.value = window2.outerHeight;
-      } else if (type === "visual" && window2.visualViewport) {
-        const { width: visualViewportWidth, height: visualViewportHeight, scale } = window2.visualViewport;
+      } else if (type === 'visual' && window2.visualViewport) {
+        const {
+          width: visualViewportWidth,
+          height: visualViewportHeight,
+          scale,
+        } = window2.visualViewport;
         width.value = Math.round(visualViewportWidth * scale);
         height.value = Math.round(visualViewportHeight * scale);
       } else if (includeScrollbar) {
@@ -1089,32 +1265,32 @@ function useWindowSize(options = {}) {
   update();
   tryOnMounted(update);
   const listenerOptions = { passive: true };
-  useEventListener("resize", update, listenerOptions);
-  if (window2 && type === "visual" && window2.visualViewport) {
-    useEventListener(window2.visualViewport, "resize", update, listenerOptions);
+  useEventListener('resize', update, listenerOptions);
+  if (window2 && type === 'visual' && window2.visualViewport) {
+    useEventListener(window2.visualViewport, 'resize', update, listenerOptions);
   }
   if (listenOrientation) {
-    const matches = useMediaQuery("(orientation: portrait)");
+    const matches = useMediaQuery('(orientation: portrait)');
     watch(matches, () => update());
   }
   return { width, height };
 }
 const __vite_import_meta_env__ = {};
 const EXTERNAL_URL_RE = /^(?:[a-z]+:|\/\/)/i;
-const APPEARANCE_KEY = "vitepress-theme-appearance";
+const APPEARANCE_KEY = 'vitepress-theme-appearance';
 const HASH_RE = /#.*$/;
 const HASH_OR_QUERY_RE = /[?#].*$/;
 const INDEX_OR_EXT_RE = /(?:(^|\/)index)?\.(?:md|html)$/;
-const inBrowser = typeof document !== "undefined";
+const inBrowser = typeof document !== 'undefined';
 const notFoundPageData = {
-  relativePath: "404.md",
-  filePath: "",
-  title: "404",
-  description: "Not Found",
+  relativePath: '404.md',
+  filePath: '',
+  title: '404',
+  description: 'Not Found',
   headers: [],
-  frontmatter: { sidebar: false, layout: "page" },
+  frontmatter: { sidebar: false, layout: 'page' },
   lastUpdated: 0,
-  isNotFound: true
+  isNotFound: true,
 };
 function isActive(currentPath, matchPath, asRegex = false) {
   if (matchPath === void 0) {
@@ -1129,40 +1305,66 @@ function isActive(currentPath, matchPath, asRegex = false) {
   }
   const hashMatch = matchPath.match(HASH_RE);
   if (hashMatch) {
-    return (inBrowser ? location.hash : "") === hashMatch[0];
+    return (inBrowser ? location.hash : '') === hashMatch[0];
   }
   return true;
 }
 function normalize(path) {
-  return decodeURI(path).replace(HASH_OR_QUERY_RE, "").replace(INDEX_OR_EXT_RE, "$1");
+  return decodeURI(path)
+    .replace(HASH_OR_QUERY_RE, '')
+    .replace(INDEX_OR_EXT_RE, '$1');
 }
 function isExternal(path) {
   return EXTERNAL_URL_RE.test(path);
 }
 function getLocaleForPath(siteData2, relativePath) {
-  return Object.keys((siteData2 == null ? void 0 : siteData2.locales) || {}).find((key) => key !== "root" && !isExternal(key) && isActive(relativePath, `/${key}/`, true)) || "root";
+  return (
+    Object.keys((siteData2 == null ? void 0 : siteData2.locales) || {}).find(
+      (key) =>
+        key !== 'root' &&
+        !isExternal(key) &&
+        isActive(relativePath, `/${key}/`, true)
+    ) || 'root'
+  );
 }
 function resolveSiteDataByRoute(siteData2, relativePath) {
   var _a, _b, _c, _d, _e, _f, _g;
   const localeIndex = getLocaleForPath(siteData2, relativePath);
   return Object.assign({}, siteData2, {
     localeIndex,
-    lang: ((_a = siteData2.locales[localeIndex]) == null ? void 0 : _a.lang) ?? siteData2.lang,
-    dir: ((_b = siteData2.locales[localeIndex]) == null ? void 0 : _b.dir) ?? siteData2.dir,
-    title: ((_c = siteData2.locales[localeIndex]) == null ? void 0 : _c.title) ?? siteData2.title,
-    titleTemplate: ((_d = siteData2.locales[localeIndex]) == null ? void 0 : _d.titleTemplate) ?? siteData2.titleTemplate,
-    description: ((_e = siteData2.locales[localeIndex]) == null ? void 0 : _e.description) ?? siteData2.description,
-    head: mergeHead(siteData2.head, ((_f = siteData2.locales[localeIndex]) == null ? void 0 : _f.head) ?? []),
+    lang:
+      ((_a = siteData2.locales[localeIndex]) == null ? void 0 : _a.lang) ??
+      siteData2.lang,
+    dir:
+      ((_b = siteData2.locales[localeIndex]) == null ? void 0 : _b.dir) ??
+      siteData2.dir,
+    title:
+      ((_c = siteData2.locales[localeIndex]) == null ? void 0 : _c.title) ??
+      siteData2.title,
+    titleTemplate:
+      ((_d = siteData2.locales[localeIndex]) == null
+        ? void 0
+        : _d.titleTemplate) ?? siteData2.titleTemplate,
+    description:
+      ((_e = siteData2.locales[localeIndex]) == null
+        ? void 0
+        : _e.description) ?? siteData2.description,
+    head: mergeHead(
+      siteData2.head,
+      ((_f = siteData2.locales[localeIndex]) == null ? void 0 : _f.head) ?? []
+    ),
     themeConfig: {
       ...siteData2.themeConfig,
-      ...(_g = siteData2.locales[localeIndex]) == null ? void 0 : _g.themeConfig
-    }
+      ...((_g = siteData2.locales[localeIndex]) == null
+        ? void 0
+        : _g.themeConfig),
+    },
   });
 }
 function createTitle(siteData2, pageData) {
   const title = pageData.title || siteData2.title;
   const template = pageData.titleTemplate ?? siteData2.titleTemplate;
-  if (typeof template === "string" && template.includes(":title")) {
+  if (typeof template === 'string' && template.includes(':title')) {
     return template.replace(/:title/g, title);
   }
   const templateString = createTitleTemplate(siteData2.title, template);
@@ -1173,24 +1375,24 @@ function createTitle(siteData2, pageData) {
 }
 function createTitleTemplate(siteTitle, template) {
   if (template === false) {
-    return "";
+    return '';
   }
   if (template === true || template === void 0) {
     return ` | ${siteTitle}`;
   }
   if (siteTitle === template) {
-    return "";
+    return '';
   }
   return ` | ${template}`;
 }
 function hasTag(head, tag) {
   const [tagType, tagAttrs] = tag;
-  if (tagType !== "meta")
-    return false;
+  if (tagType !== 'meta') return false;
   const keyAttr = Object.entries(tagAttrs)[0];
-  if (keyAttr == null)
-    return false;
-  return head.some(([type, attrs]) => type === tagType && attrs[keyAttr[0]] === keyAttr[1]);
+  if (keyAttr == null) return false;
+  return head.some(
+    ([type, attrs]) => type === tagType && attrs[keyAttr[0]] === keyAttr[1]
+  );
 }
 function mergeHead(prev, curr) {
   return [...prev.filter((tagAttrs) => !hasTag(curr, tagAttrs)), ...curr];
@@ -1199,41 +1401,70 @@ const INVALID_CHAR_REGEX = /[\u0000-\u001F"#$&*+,:;<=>?[\]^`{|}\u007F]/g;
 const DRIVE_LETTER_REGEX = /^[a-z]:/i;
 function sanitizeFileName(name) {
   const match = DRIVE_LETTER_REGEX.exec(name);
-  const driveLetter = match ? match[0] : "";
-  return driveLetter + name.slice(driveLetter.length).replace(INVALID_CHAR_REGEX, "_").replace(/(^|\/)_+(?=[^/]*$)/, "$1");
+  const driveLetter = match ? match[0] : '';
+  return (
+    driveLetter +
+    name
+      .slice(driveLetter.length)
+      .replace(INVALID_CHAR_REGEX, '_')
+      .replace(/(^|\/)_+(?=[^/]*$)/, '$1')
+  );
 }
 const KNOWN_EXTENSIONS = /* @__PURE__ */ new Set();
 function treatAsHtml(filename) {
   var _a;
   if (KNOWN_EXTENSIONS.size === 0) {
-    const extraExts = typeof process === "object" && ((_a = process.env) == null ? void 0 : _a.VITE_EXTRA_EXTENSIONS) || (__vite_import_meta_env__ == null ? void 0 : __vite_import_meta_env__.VITE_EXTRA_EXTENSIONS) || "";
-    ("3g2,3gp,aac,ai,apng,au,avif,bin,bmp,cer,class,conf,crl,css,csv,dll,doc,eps,epub,exe,gif,gz,ics,ief,jar,jpe,jpeg,jpg,js,json,jsonld,m4a,man,mid,midi,mjs,mov,mp2,mp3,mp4,mpe,mpeg,mpg,mpp,oga,ogg,ogv,ogx,opus,otf,p10,p7c,p7m,p7s,pdf,png,ps,qt,roff,rtf,rtx,ser,svg,t,tif,tiff,tr,ts,tsv,ttf,txt,vtt,wav,weba,webm,webp,woff,woff2,xhtml,xml,yaml,yml,zip" + (extraExts && typeof extraExts === "string" ? "," + extraExts : "")).split(",").forEach((ext2) => KNOWN_EXTENSIONS.add(ext2));
+    const extraExts =
+      (typeof process === 'object' &&
+        ((_a = process.env) == null ? void 0 : _a.VITE_EXTRA_EXTENSIONS)) ||
+      (__vite_import_meta_env__ == null
+        ? void 0
+        : __vite_import_meta_env__.VITE_EXTRA_EXTENSIONS) ||
+      '';
+    (
+      '3g2,3gp,aac,ai,apng,au,avif,bin,bmp,cer,class,conf,crl,css,csv,dll,doc,eps,epub,exe,gif,gz,ics,ief,jar,jpe,jpeg,jpg,js,json,jsonld,m4a,man,mid,midi,mjs,mov,mp2,mp3,mp4,mpe,mpeg,mpg,mpp,oga,ogg,ogv,ogx,opus,otf,p10,p7c,p7m,p7s,pdf,png,ps,qt,roff,rtf,rtx,ser,svg,t,tif,tiff,tr,ts,tsv,ttf,txt,vtt,wav,weba,webm,webp,woff,woff2,xhtml,xml,yaml,yml,zip' +
+      (extraExts && typeof extraExts === 'string' ? ',' + extraExts : '')
+    )
+      .split(',')
+      .forEach((ext2) => KNOWN_EXTENSIONS.add(ext2));
   }
-  const ext = filename.split(".").pop();
+  const ext = filename.split('.').pop();
   return ext == null || !KNOWN_EXTENSIONS.has(ext.toLowerCase());
 }
 function escapeRegExp(str) {
-  return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
+  return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
 }
 const dataSymbol = Symbol();
 const siteDataRef = shallowRef(siteData);
 function initData(route) {
-  const site = computed(() => resolveSiteDataByRoute(siteDataRef.value, route.data.relativePath));
+  const site = computed(() =>
+    resolveSiteDataByRoute(siteDataRef.value, route.data.relativePath)
+  );
   const appearance = site.value.appearance;
-  const isDark = appearance === "force-dark" ? ref(true) : appearance === "force-auto" ? usePreferredDark() : appearance ? useDark({
-    storageKey: APPEARANCE_KEY,
-    initialValue: () => appearance === "dark" ? "dark" : "auto",
-    ...typeof appearance === "object" ? appearance : {}
-  }) : ref(false);
-  const hashRef = ref(inBrowser ? location.hash : "");
+  const isDark =
+    appearance === 'force-dark'
+      ? ref(true)
+      : appearance === 'force-auto'
+        ? usePreferredDark()
+        : appearance
+          ? useDark({
+              storageKey: APPEARANCE_KEY,
+              initialValue: () => (appearance === 'dark' ? 'dark' : 'auto'),
+              ...(typeof appearance === 'object' ? appearance : {}),
+            })
+          : ref(false);
+  const hashRef = ref(inBrowser ? location.hash : '');
   if (inBrowser) {
-    window.addEventListener("hashchange", () => {
+    window.addEventListener('hashchange', () => {
       hashRef.value = location.hash;
     });
   }
-  watch(() => route.data, () => {
-    hashRef.value = inBrowser ? location.hash : "";
-  });
+  watch(
+    () => route.data,
+    () => {
+      hashRef.value = inBrowser ? location.hash : '';
+    }
+  );
   return {
     site,
     theme: computed(() => site.value.themeConfig),
@@ -1242,44 +1473,52 @@ function initData(route) {
     params: computed(() => route.data.params),
     lang: computed(() => site.value.lang),
     dir: computed(() => route.data.frontmatter.dir || site.value.dir),
-    localeIndex: computed(() => site.value.localeIndex || "root"),
+    localeIndex: computed(() => site.value.localeIndex || 'root'),
     title: computed(() => createTitle(site.value, route.data)),
-    description: computed(() => route.data.description || site.value.description),
+    description: computed(
+      () => route.data.description || site.value.description
+    ),
     isDark,
-    hash: computed(() => hashRef.value)
+    hash: computed(() => hashRef.value),
   };
 }
 function useData$1() {
   const data = inject(dataSymbol);
   if (!data) {
-    throw new Error("vitepress data not properly injected in app");
+    throw new Error('vitepress data not properly injected in app');
   }
   return data;
 }
 function joinPath(base, path) {
-  return `${base}${path}`.replace(/\/+/g, "/");
+  return `${base}${path}`.replace(/\/+/g, '/');
 }
 function withBase(path) {
-  return EXTERNAL_URL_RE.test(path) || !path.startsWith("/") ? path : joinPath(siteDataRef.value.base, path);
+  return EXTERNAL_URL_RE.test(path) || !path.startsWith('/')
+    ? path
+    : joinPath(siteDataRef.value.base, path);
 }
 function pathToFile(path) {
-  let pagePath = path.replace(/\.html$/, "");
+  let pagePath = path.replace(/\.html$/, '');
   pagePath = decodeURIComponent(pagePath);
-  pagePath = pagePath.replace(/\/$/, "/index");
+  pagePath = pagePath.replace(/\/$/, '/index');
   {
     if (inBrowser) {
-      const base = "/";
-      pagePath = sanitizeFileName(pagePath.slice(base.length).replace(/\//g, "_") || "index") + ".md";
+      const base = '/';
+      pagePath =
+        sanitizeFileName(
+          pagePath.slice(base.length).replace(/\//g, '_') || 'index'
+        ) + '.md';
       let pageHash = __VP_HASH_MAP__[pagePath.toLowerCase()];
       if (!pageHash) {
-        pagePath = pagePath.endsWith("_index.md") ? pagePath.slice(0, -9) + ".md" : pagePath.slice(0, -3) + "_index.md";
+        pagePath = pagePath.endsWith('_index.md')
+          ? pagePath.slice(0, -9) + '.md'
+          : pagePath.slice(0, -3) + '_index.md';
         pageHash = __VP_HASH_MAP__[pagePath.toLowerCase()];
       }
-      if (!pageHash)
-        return null;
-      pagePath = `${base}${"assets"}/${pagePath}.${pageHash}.js`;
+      if (!pageHash) return null;
+      pagePath = `${base}${'assets'}/${pagePath}.${pageHash}.js`;
     } else {
-      pagePath = `./${sanitizeFileName(pagePath.slice(1).replace(/\//g, "_"))}.md.js`;
+      pagePath = `./${sanitizeFileName(pagePath.slice(1).replace(/\//g, '_'))}.md.js`;
     }
   }
   return pagePath;
@@ -1295,13 +1534,13 @@ function getScrollOffset() {
   let scrollOffset = siteDataRef.value.scrollOffset;
   let offset = 0;
   let padding = 24;
-  if (typeof scrollOffset === "object" && "padding" in scrollOffset) {
+  if (typeof scrollOffset === 'object' && 'padding' in scrollOffset) {
     padding = scrollOffset.padding;
     scrollOffset = scrollOffset.selector;
   }
-  if (typeof scrollOffset === "number") {
+  if (typeof scrollOffset === 'number') {
     offset = scrollOffset;
-  } else if (typeof scrollOffset === "string") {
+  } else if (typeof scrollOffset === 'string') {
     offset = tryOffsetSelector(scrollOffset, padding);
   } else if (Array.isArray(scrollOffset)) {
     for (const selector of scrollOffset) {
@@ -1316,45 +1555,54 @@ function getScrollOffset() {
 }
 function tryOffsetSelector(selector, padding) {
   const el = document.querySelector(selector);
-  if (!el)
-    return 0;
+  if (!el) return 0;
   const bot = el.getBoundingClientRect().bottom;
-  if (bot < 0)
-    return 0;
+  if (bot < 0) return 0;
   return bot + padding;
 }
 const RouterSymbol = Symbol();
-const fakeHost = "http://a.com";
+const fakeHost = 'http://a.com';
 const getDefaultRoute = () => ({
-  path: "/",
+  path: '/',
   component: null,
-  data: notFoundPageData
+  data: notFoundPageData,
 });
 function createRouter(loadPageModule, fallbackComponent) {
   const route = reactive(getDefaultRoute());
   const router = {
     route,
-    go
+    go,
   };
-  async function go(href = inBrowser ? location.href : "/") {
+  async function go(href = inBrowser ? location.href : '/') {
     var _a, _b;
     href = normalizeHref(href);
-    if (await ((_a = router.onBeforeRouteChange) == null ? void 0 : _a.call(router, href)) === false)
+    if (
+      (await ((_a = router.onBeforeRouteChange) == null
+        ? void 0
+        : _a.call(router, href))) === false
+    )
       return;
     if (inBrowser && href !== normalizeHref(location.href)) {
-      history.replaceState({ scrollPosition: window.scrollY }, "");
-      history.pushState({}, "", href);
+      history.replaceState({ scrollPosition: window.scrollY }, '');
+      history.pushState({}, '', href);
     }
     await loadPage(href);
-    await ((_b = router.onAfterRouteChange ?? router.onAfterRouteChanged) == null ? void 0 : _b(href));
+    await ((_b = router.onAfterRouteChange ?? router.onAfterRouteChanged) ==
+    null
+      ? void 0
+      : _b(href));
   }
   let latestPendingPath = null;
   async function loadPage(href, scrollPosition = 0, isRetry = false) {
     var _a, _b;
-    if (await ((_a = router.onBeforePageLoad) == null ? void 0 : _a.call(router, href)) === false)
+    if (
+      (await ((_a = router.onBeforePageLoad) == null
+        ? void 0
+        : _a.call(router, href))) === false
+    )
       return;
     const targetLoc = new URL(href, fakeHost);
-    const pendingPath = latestPendingPath = targetLoc.pathname;
+    const pendingPath = (latestPendingPath = targetLoc.pathname);
     try {
       let page = await loadPageModule(pendingPath);
       if (!page) {
@@ -1366,25 +1614,31 @@ function createRouter(loadPageModule, fallbackComponent) {
         if (!comp) {
           throw new Error(`Invalid route component: ${comp}`);
         }
-        await ((_b = router.onAfterPageLoad) == null ? void 0 : _b.call(router, href));
+        await ((_b = router.onAfterPageLoad) == null
+          ? void 0
+          : _b.call(router, href));
         route.path = inBrowser ? pendingPath : withBase(pendingPath);
         route.component = markRaw(comp);
         route.data = true ? markRaw(__pageData) : readonly(__pageData);
         if (inBrowser) {
           nextTick(() => {
-            let actualPathname = siteDataRef.value.base + __pageData.relativePath.replace(/(?:(^|\/)index)?\.md$/, "$1");
-            if (!siteDataRef.value.cleanUrls && !actualPathname.endsWith("/")) {
-              actualPathname += ".html";
+            let actualPathname =
+              siteDataRef.value.base +
+              __pageData.relativePath.replace(/(?:(^|\/)index)?\.md$/, '$1');
+            if (!siteDataRef.value.cleanUrls && !actualPathname.endsWith('/')) {
+              actualPathname += '.html';
             }
             if (actualPathname !== targetLoc.pathname) {
               targetLoc.pathname = actualPathname;
               href = actualPathname + targetLoc.search + targetLoc.hash;
-              history.replaceState({}, "", href);
+              history.replaceState({}, '', href);
             }
             if (targetLoc.hash && !scrollPosition) {
               let target = null;
               try {
-                target = document.getElementById(decodeURIComponent(targetLoc.hash).slice(1));
+                target = document.getElementById(
+                  decodeURIComponent(targetLoc.hash).slice(1)
+                );
               } catch (e) {
                 console.warn(e);
               }
@@ -1398,72 +1652,109 @@ function createRouter(loadPageModule, fallbackComponent) {
         }
       }
     } catch (err) {
-      if (!/fetch|Page not found/.test(err.message) && !/^\/404(\.html|\/)?$/.test(href)) {
+      if (
+        !/fetch|Page not found/.test(err.message) &&
+        !/^\/404(\.html|\/)?$/.test(href)
+      ) {
         console.error(err);
       }
       if (!isRetry) {
         try {
-          const res = await fetch(siteDataRef.value.base + "hashmap.json");
+          const res = await fetch(siteDataRef.value.base + 'hashmap.json');
           window.__VP_HASH_MAP__ = await res.json();
           await loadPage(href, scrollPosition, true);
           return;
-        } catch (e) {
-        }
+        } catch (e) {}
       }
       if (latestPendingPath === pendingPath) {
         latestPendingPath = null;
         route.path = inBrowser ? pendingPath : withBase(pendingPath);
         route.component = fallbackComponent ? markRaw(fallbackComponent) : null;
-        const relativePath = inBrowser ? pendingPath.replace(/(^|\/)$/, "$1index").replace(/(\.html)?$/, ".md").replace(/^\//, "") : "404.md";
+        const relativePath = inBrowser
+          ? pendingPath
+              .replace(/(^|\/)$/, '$1index')
+              .replace(/(\.html)?$/, '.md')
+              .replace(/^\//, '')
+          : '404.md';
         route.data = { ...notFoundPageData, relativePath };
       }
     }
   }
   if (inBrowser) {
     if (history.state === null) {
-      history.replaceState({}, "");
+      history.replaceState({}, '');
     }
-    window.addEventListener("click", (e) => {
-      if (e.defaultPrevented || !(e.target instanceof Element) || e.target.closest("button") || // temporary fix for docsearch action buttons
-      e.button !== 0 || e.ctrlKey || e.shiftKey || e.altKey || e.metaKey)
-        return;
-      const link2 = e.target.closest("a");
-      if (!link2 || link2.closest(".vp-raw") || link2.hasAttribute("download") || link2.hasAttribute("target"))
-        return;
-      const linkHref = link2.getAttribute("href") ?? (link2 instanceof SVGAElement ? link2.getAttribute("xlink:href") : null);
-      if (linkHref == null)
-        return;
-      const { href, origin, pathname, hash, search } = new URL(linkHref, link2.baseURI);
-      const currentUrl = new URL(location.href);
-      if (origin === currentUrl.origin && treatAsHtml(pathname)) {
-        e.preventDefault();
-        if (pathname === currentUrl.pathname && search === currentUrl.search) {
-          if (hash !== currentUrl.hash) {
-            history.pushState({}, "", href);
-            window.dispatchEvent(new HashChangeEvent("hashchange", {
-              oldURL: currentUrl.href,
-              newURL: href
-            }));
-          }
-          if (hash) {
-            scrollTo(link2, hash, link2.classList.contains("header-anchor"));
+    window.addEventListener(
+      'click',
+      (e) => {
+        if (
+          e.defaultPrevented ||
+          !(e.target instanceof Element) ||
+          e.target.closest('button') || // temporary fix for docsearch action buttons
+          e.button !== 0 ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          e.altKey ||
+          e.metaKey
+        )
+          return;
+        const link2 = e.target.closest('a');
+        if (
+          !link2 ||
+          link2.closest('.vp-raw') ||
+          link2.hasAttribute('download') ||
+          link2.hasAttribute('target')
+        )
+          return;
+        const linkHref =
+          link2.getAttribute('href') ??
+          (link2 instanceof SVGAElement
+            ? link2.getAttribute('xlink:href')
+            : null);
+        if (linkHref == null) return;
+        const { href, origin, pathname, hash, search } = new URL(
+          linkHref,
+          link2.baseURI
+        );
+        const currentUrl = new URL(location.href);
+        if (origin === currentUrl.origin && treatAsHtml(pathname)) {
+          e.preventDefault();
+          if (
+            pathname === currentUrl.pathname &&
+            search === currentUrl.search
+          ) {
+            if (hash !== currentUrl.hash) {
+              history.pushState({}, '', href);
+              window.dispatchEvent(
+                new HashChangeEvent('hashchange', {
+                  oldURL: currentUrl.href,
+                  newURL: href,
+                })
+              );
+            }
+            if (hash) {
+              scrollTo(link2, hash, link2.classList.contains('header-anchor'));
+            } else {
+              window.scrollTo(0, 0);
+            }
           } else {
-            window.scrollTo(0, 0);
+            go(href);
           }
-        } else {
-          go(href);
         }
-      }
-    }, { capture: true });
-    window.addEventListener("popstate", async (e) => {
+      },
+      { capture: true }
+    );
+    window.addEventListener('popstate', async (e) => {
       var _a;
-      if (e.state === null)
-        return;
+      if (e.state === null) return;
       const href = normalizeHref(location.href);
-      await loadPage(href, e.state && e.state.scrollPosition || 0);
-      await ((_a = router.onAfterRouteChange ?? router.onAfterRouteChanged) == null ? void 0 : _a(href));
+      await loadPage(href, (e.state && e.state.scrollPosition) || 0);
+      await ((_a = router.onAfterRouteChange ?? router.onAfterRouteChanged) ==
+      null
+        ? void 0
+        : _a(href));
     });
-    window.addEventListener("hashchange", (e) => {
+    window.addEventListener('hashchange', (e) => {
       e.preventDefault();
     });
   }
@@ -1472,7 +1763,7 @@ function createRouter(loadPageModule, fallbackComponent) {
 function useRouter() {
   const router = inject(RouterSymbol);
   if (!router) {
-    throw new Error("useRouter() is called without provider.");
+    throw new Error('useRouter() is called without provider.');
   }
   return router;
 }
@@ -1482,96 +1773,126 @@ function useRoute() {
 function scrollTo(el, hash, smooth = false) {
   let target = null;
   try {
-    target = el.classList.contains("header-anchor") ? el : document.getElementById(decodeURIComponent(hash).slice(1));
+    target = el.classList.contains('header-anchor')
+      ? el
+      : document.getElementById(decodeURIComponent(hash).slice(1));
   } catch (e) {
     console.warn(e);
   }
   if (target) {
-    let scrollToTarget = function() {
+    let scrollToTarget = function () {
       if (!smooth || Math.abs(targetTop - window.scrollY) > window.innerHeight)
         window.scrollTo(0, targetTop);
-      else
-        window.scrollTo({ left: 0, top: targetTop, behavior: "smooth" });
+      else window.scrollTo({ left: 0, top: targetTop, behavior: 'smooth' });
     };
-    const targetPadding = parseInt(window.getComputedStyle(target).paddingTop, 10);
-    const targetTop = window.scrollY + target.getBoundingClientRect().top - getScrollOffset() + targetPadding;
+    const targetPadding = parseInt(
+      window.getComputedStyle(target).paddingTop,
+      10
+    );
+    const targetTop =
+      window.scrollY +
+      target.getBoundingClientRect().top -
+      getScrollOffset() +
+      targetPadding;
     requestAnimationFrame(scrollToTarget);
   }
 }
 function normalizeHref(href) {
   const url = new URL(href, fakeHost);
-  url.pathname = url.pathname.replace(/(^|\/)index(\.html)?$/, "$1");
+  url.pathname = url.pathname.replace(/(^|\/)index(\.html)?$/, '$1');
   if (siteDataRef.value.cleanUrls)
-    url.pathname = url.pathname.replace(/\.html$/, "");
-  else if (!url.pathname.endsWith("/") && !url.pathname.endsWith(".html"))
-    url.pathname += ".html";
+    url.pathname = url.pathname.replace(/\.html$/, '');
+  else if (!url.pathname.endsWith('/') && !url.pathname.endsWith('.html'))
+    url.pathname += '.html';
   return url.pathname + url.search + url.hash;
 }
 const runCbs = () => contentUpdatedCallbacks.forEach((fn) => fn());
 const Content = defineComponent({
-  name: "VitePressContent",
+  name: 'VitePressContent',
   props: {
-    as: { type: [Object, String], default: "div" }
+    as: { type: [Object, String], default: 'div' },
   },
   setup(props) {
     const route = useRoute();
     const { frontmatter, site } = useData$1();
-    watch(frontmatter, runCbs, { deep: true, flush: "post" });
-    return () => h(props.as, site.value.contentProps ?? { style: { position: "relative" } }, [
-      route.component ? h(route.component, {
-        onVnodeMounted: runCbs,
-        onVnodeUpdated: runCbs,
-        onVnodeUnmounted: runCbs
-      }) : "404 Page Not Found"
-    ]);
-  }
+    watch(frontmatter, runCbs, { deep: true, flush: 'post' });
+    return () =>
+      h(
+        props.as,
+        site.value.contentProps ?? { style: { position: 'relative' } },
+        [
+          route.component
+            ? h(route.component, {
+                onVnodeMounted: runCbs,
+                onVnodeUpdated: runCbs,
+                onVnodeUnmounted: runCbs,
+              })
+            : '404 Page Not Found',
+        ]
+      );
+  },
 });
 const _sfc_main$15 = /* @__PURE__ */ defineComponent({
-  __name: "VPBackdrop",
+  __name: 'VPBackdrop',
   __ssrInlineRender: true,
   props: {
-    show: { type: Boolean }
+    show: { type: Boolean },
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.show) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPBackdrop" }, _attrs))} data-v-a7dbfa11></div>`);
+        _push(
+          `<div${ssrRenderAttrs(mergeProps({ class: 'VPBackdrop' }, _attrs))} data-v-a7dbfa11></div>`
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$15 = _sfc_main$15.setup;
 _sfc_main$15.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPBackdrop.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPBackdrop.vue'
+  );
   return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
 };
-const VPBackdrop = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["__scopeId", "data-v-a7dbfa11"]]);
+const VPBackdrop = /* @__PURE__ */ _export_sfc(_sfc_main$15, [
+  ['__scopeId', 'data-v-a7dbfa11'],
+]);
 const useData = useData$1;
 function throttleAndDebounce(fn, delay) {
   let timeoutId;
   let called = false;
   return () => {
-    if (timeoutId)
-      clearTimeout(timeoutId);
+    if (timeoutId) clearTimeout(timeoutId);
     if (!called) {
       fn();
-      (called = true) && setTimeout(() => called = false, delay);
-    } else
-      timeoutId = setTimeout(fn, delay);
+      (called = true) && setTimeout(() => (called = false), delay);
+    } else timeoutId = setTimeout(fn, delay);
   };
 }
 function ensureStartingSlash(path) {
-  return path.startsWith("/") ? path : `/${path}`;
+  return path.startsWith('/') ? path : `/${path}`;
 }
 function normalizeLink$1(url) {
-  const { pathname, search, hash, protocol } = new URL(url, "http://a.com");
-  if (isExternal(url) || url.startsWith("#") || !protocol.startsWith("http") || !treatAsHtml(pathname))
+  const { pathname, search, hash, protocol } = new URL(url, 'http://a.com');
+  if (
+    isExternal(url) ||
+    url.startsWith('#') ||
+    !protocol.startsWith('http') ||
+    !treatAsHtml(pathname)
+  )
     return url;
   const { site } = useData();
-  const normalizedPath = pathname.endsWith("/") || pathname.endsWith(".html") ? url : url.replace(/(?:(^\.+)\/)?.*$/, `$1${pathname.replace(/(\.md)?$/, site.value.cleanUrls ? "" : ".html")}${search}${hash}`);
+  const normalizedPath =
+    pathname.endsWith('/') || pathname.endsWith('.html')
+      ? url
+      : url.replace(
+          /(?:(^\.+)\/)?.*$/,
+          `$1${pathname.replace(/(\.md)?$/, site.value.cleanUrls ? '' : '.html')}${search}${hash}`
+        );
   return withBase(normalizedPath);
 }
 function useLangs({ correspondingLink = false } = {}) {
@@ -1579,51 +1900,87 @@ function useLangs({ correspondingLink = false } = {}) {
   const currentLang = computed(() => {
     var _a, _b;
     return {
-      label: (_a = site.value.locales[localeIndex.value]) == null ? void 0 : _a.label,
-      link: ((_b = site.value.locales[localeIndex.value]) == null ? void 0 : _b.link) || (localeIndex.value === "root" ? "/" : `/${localeIndex.value}/`)
+      label:
+        (_a = site.value.locales[localeIndex.value]) == null
+          ? void 0
+          : _a.label,
+      link:
+        ((_b = site.value.locales[localeIndex.value]) == null
+          ? void 0
+          : _b.link) ||
+        (localeIndex.value === 'root' ? '/' : `/${localeIndex.value}/`),
     };
   });
-  const localeLinks = computed(() => Object.entries(site.value.locales).flatMap(([key, value]) => currentLang.value.label === value.label ? [] : {
-    text: value.label,
-    link: normalizeLink(value.link || (key === "root" ? "/" : `/${key}/`), theme2.value.i18nRouting !== false && correspondingLink, page.value.relativePath.slice(currentLang.value.link.length - 1), !site.value.cleanUrls) + hash.value
-  }));
+  const localeLinks = computed(() =>
+    Object.entries(site.value.locales).flatMap(([key, value]) =>
+      currentLang.value.label === value.label
+        ? []
+        : {
+            text: value.label,
+            link:
+              normalizeLink(
+                value.link || (key === 'root' ? '/' : `/${key}/`),
+                theme2.value.i18nRouting !== false && correspondingLink,
+                page.value.relativePath.slice(
+                  currentLang.value.link.length - 1
+                ),
+                !site.value.cleanUrls
+              ) + hash.value,
+          }
+    )
+  );
   return { localeLinks, currentLang };
 }
 function normalizeLink(link2, addPath, path, addExt) {
-  return addPath ? link2.replace(/\/$/, "") + ensureStartingSlash(path.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, addExt ? ".html" : "")) : link2;
+  return addPath
+    ? link2.replace(/\/$/, '') +
+        ensureStartingSlash(
+          path
+            .replace(/(^|\/)index\.md$/, '$1')
+            .replace(/\.md$/, addExt ? '.html' : '')
+        )
+    : link2;
 }
 const _sfc_main$14 = /* @__PURE__ */ defineComponent({
-  __name: "NotFound",
+  __name: 'NotFound',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     const { currentLang } = useLangs();
     return (_ctx, _push, _parent, _attrs) => {
       var _a, _b, _c, _d, _e;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "NotFound" }, _attrs))} data-v-5051cd88><p class="code" data-v-5051cd88>${ssrInterpolate(((_a = unref(theme2).notFound) == null ? void 0 : _a.code) ?? "404")}</p><h1 class="title" data-v-5051cd88>${ssrInterpolate(((_b = unref(theme2).notFound) == null ? void 0 : _b.title) ?? "PAGE NOT FOUND")}</h1><div class="divider" data-v-5051cd88></div><blockquote class="quote" data-v-5051cd88>${ssrInterpolate(((_c = unref(theme2).notFound) == null ? void 0 : _c.quote) ?? "But if you don't change your direction, and if you keep looking, you may end up where you are heading.")}</blockquote><div class="action" data-v-5051cd88><a class="link"${ssrRenderAttr("href", unref(withBase)(unref(currentLang).link))}${ssrRenderAttr("aria-label", ((_d = unref(theme2).notFound) == null ? void 0 : _d.linkLabel) ?? "go to home")} data-v-5051cd88>${ssrInterpolate(((_e = unref(theme2).notFound) == null ? void 0 : _e.linkText) ?? "Take me home")}</a></div></div>`);
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'NotFound' }, _attrs))} data-v-5051cd88><p class="code" data-v-5051cd88>${ssrInterpolate(((_a = unref(theme2).notFound) == null ? void 0 : _a.code) ?? '404')}</p><h1 class="title" data-v-5051cd88>${ssrInterpolate(((_b = unref(theme2).notFound) == null ? void 0 : _b.title) ?? 'PAGE NOT FOUND')}</h1><div class="divider" data-v-5051cd88></div><blockquote class="quote" data-v-5051cd88>${ssrInterpolate(((_c = unref(theme2).notFound) == null ? void 0 : _c.quote) ?? "But if you don't change your direction, and if you keep looking, you may end up where you are heading.")}</blockquote><div class="action" data-v-5051cd88><a class="link"${ssrRenderAttr('href', unref(withBase)(unref(currentLang).link))}${ssrRenderAttr('aria-label', ((_d = unref(theme2).notFound) == null ? void 0 : _d.linkLabel) ?? 'go to home')} data-v-5051cd88>${ssrInterpolate(((_e = unref(theme2).notFound) == null ? void 0 : _e.linkText) ?? 'Take me home')}</a></div></div>`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$14 = _sfc_main$14.setup;
 _sfc_main$14.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/NotFound.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/NotFound.vue'
+  );
   return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
 };
-const NotFound = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["__scopeId", "data-v-5051cd88"]]);
+const NotFound = /* @__PURE__ */ _export_sfc(_sfc_main$14, [
+  ['__scopeId', 'data-v-5051cd88'],
+]);
 function getSidebar(_sidebar, path) {
-  if (Array.isArray(_sidebar))
-    return addBase(_sidebar);
-  if (_sidebar == null)
-    return [];
+  if (Array.isArray(_sidebar)) return addBase(_sidebar);
+  if (_sidebar == null) return [];
   path = ensureStartingSlash(path);
-  const dir = Object.keys(_sidebar).sort((a, b) => {
-    return b.split("/").length - a.split("/").length;
-  }).find((dir2) => {
-    return path.startsWith(ensureStartingSlash(dir2));
-  });
+  const dir = Object.keys(_sidebar)
+    .sort((a, b) => {
+      return b.split('/').length - a.split('/').length;
+    })
+    .find((dir2) => {
+      return path.startsWith(ensureStartingSlash(dir2));
+    });
   const sidebar = dir ? _sidebar[dir] : [];
-  return Array.isArray(sidebar) ? addBase(sidebar) : addBase(sidebar.items, sidebar.base);
+  return Array.isArray(sidebar)
+    ? addBase(sidebar)
+    : addBase(sidebar.items, sidebar.base);
 }
 function getSidebarGroups(sidebar) {
   const groups = [];
@@ -1649,7 +2006,7 @@ function getFlatSideBarLinks(sidebar) {
         links.push({
           text: item.text,
           link: item.link,
-          docFooterText: item.docFooterText
+          docFooterText: item.docFooterText,
         });
       }
       if (item.items) {
@@ -1664,22 +2021,24 @@ function hasActiveLink(path, items) {
   if (Array.isArray(items)) {
     return items.some((item) => hasActiveLink(path, item));
   }
-  return isActive(path, items.link) ? true : items.items ? hasActiveLink(path, items.items) : false;
+  return isActive(path, items.link)
+    ? true
+    : items.items
+      ? hasActiveLink(path, items.items)
+      : false;
 }
 function addBase(items, _base) {
   return [...items].map((_item) => {
     const item = { ..._item };
     const base = item.base || _base;
-    if (base && item.link)
-      item.link = base + item.link;
-    if (item.items)
-      item.items = addBase(item.items, base);
+    if (base && item.link) item.link = base + item.link;
+    if (item.items) item.items = addBase(item.items, base);
     return item;
   });
 }
 function useSidebar() {
   const { frontmatter, page, theme: theme2 } = useData();
-  const is960 = useMediaQuery("(min-width: 960px)");
+  const is960 = useMediaQuery('(min-width: 960px)');
   const isOpen = ref(false);
   const _sidebar = computed(() => {
     const sidebarConfig = theme2.value.sidebar;
@@ -1692,18 +2051,22 @@ function useSidebar() {
       sidebar.value = _sidebar.value;
   });
   const hasSidebar = computed(() => {
-    return frontmatter.value.sidebar !== false && sidebar.value.length > 0 && frontmatter.value.layout !== "home";
+    return (
+      frontmatter.value.sidebar !== false &&
+      sidebar.value.length > 0 &&
+      frontmatter.value.layout !== 'home'
+    );
   });
   const leftAside = computed(() => {
     if (hasAside)
-      return frontmatter.value.aside == null ? theme2.value.aside === "left" : frontmatter.value.aside === "left";
+      return frontmatter.value.aside == null
+        ? theme2.value.aside === 'left'
+        : frontmatter.value.aside === 'left';
     return false;
   });
   const hasAside = computed(() => {
-    if (frontmatter.value.layout === "home")
-      return false;
-    if (frontmatter.value.aside != null)
-      return !!frontmatter.value.aside;
+    if (frontmatter.value.layout === 'home') return false;
+    if (frontmatter.value.aside != null) return !!frontmatter.value.aside;
     return theme2.value.aside !== false;
   });
   const isSidebarEnabled = computed(() => hasSidebar.value && is960.value);
@@ -1729,7 +2092,7 @@ function useSidebar() {
     isSidebarEnabled,
     open,
     close,
-    toggle
+    toggle,
   };
 }
 function useCloseSidebarOnEscape(isOpen, close) {
@@ -1738,13 +2101,13 @@ function useCloseSidebarOnEscape(isOpen, close) {
     triggerElement = isOpen.value ? document.activeElement : void 0;
   });
   onMounted(() => {
-    window.addEventListener("keyup", onEscape);
+    window.addEventListener('keyup', onEscape);
   });
   onUnmounted(() => {
-    window.removeEventListener("keyup", onEscape);
+    window.removeEventListener('keyup', onEscape);
   });
   function onEscape(e) {
-    if (e.key === "Escape" && isOpen.value) {
+    if (e.key === 'Escape' && isOpen.value) {
       close();
       triggerElement == null ? void 0 : triggerElement.focus();
     }
@@ -1769,7 +2132,9 @@ function useSidebarControl(item) {
     if (isActiveLink.value) {
       return true;
     }
-    return item.value.items ? hasActiveLink(page.value.relativePath, item.value.items) : false;
+    return item.value.items
+      ? hasActiveLink(page.value.relativePath, item.value.items)
+      : false;
   });
   const hasChildren = computed(() => {
     return !!(item.value.items && item.value.items.length);
@@ -1792,13 +2157,13 @@ function useSidebarControl(item) {
     isActiveLink,
     hasActiveLink: hasActiveLink$1,
     hasChildren,
-    toggle
+    toggle,
   };
 }
 function useAside() {
   const { hasSidebar } = useSidebar();
-  const is960 = useMediaQuery("(min-width: 960px)");
-  const is1280 = useMediaQuery("(min-width: 1280px)");
+  const is960 = useMediaQuery('(min-width: 960px)');
+  const is1280 = useMediaQuery('(min-width: 1280px)');
   const isAsideEnabled = computed(() => {
     if (!is1280.value && !is960.value) {
       return false;
@@ -1806,34 +2171,41 @@ function useAside() {
     return hasSidebar.value ? is1280.value : is960.value;
   });
   return {
-    isAsideEnabled
+    isAsideEnabled,
   };
 }
 const ignoreRE = /\b(?:VPBadge|header-anchor|footnote-ref|ignore-header)\b/;
 const resolvedHeaders = [];
 function resolveTitle(theme2) {
-  return typeof theme2.outline === "object" && !Array.isArray(theme2.outline) && theme2.outline.label || theme2.outlineTitle || "On this page";
+  return (
+    (typeof theme2.outline === 'object' &&
+      !Array.isArray(theme2.outline) &&
+      theme2.outline.label) ||
+    theme2.outlineTitle ||
+    'On this page'
+  );
 }
 function getHeaders(range) {
   const headers = [
-    ...document.querySelectorAll(".VPDoc :where(h1,h2,h3,h4,h5,h6)")
-  ].filter((el) => el.id && el.hasChildNodes()).map((el) => {
-    const level = Number(el.tagName[1]);
-    return {
-      element: el,
-      title: serializeHeader(el),
-      link: "#" + el.id,
-      level
-    };
-  });
+    ...document.querySelectorAll('.VPDoc :where(h1,h2,h3,h4,h5,h6)'),
+  ]
+    .filter((el) => el.id && el.hasChildNodes())
+    .map((el) => {
+      const level = Number(el.tagName[1]);
+      return {
+        element: el,
+        title: serializeHeader(el),
+        link: '#' + el.id,
+        level,
+      };
+    });
   return resolveHeaders(headers, range);
 }
 function serializeHeader(h2) {
-  let ret = "";
+  let ret = '';
   for (const node of h2.childNodes) {
     if (node.nodeType === 1) {
-      if (ignoreRE.test(node.className))
-        continue;
+      if (ignoreRE.test(node.className)) continue;
       ret += node.textContent;
     } else if (node.nodeType === 3) {
       ret += node.textContent;
@@ -1845,8 +2217,16 @@ function resolveHeaders(headers, range) {
   if (range === false) {
     return [];
   }
-  const levelsRange = (typeof range === "object" && !Array.isArray(range) ? range.level : range) || 2;
-  const [high, low] = typeof levelsRange === "number" ? [levelsRange, levelsRange] : levelsRange === "deep" ? [2, 6] : levelsRange;
+  const levelsRange =
+    (typeof range === 'object' && !Array.isArray(range)
+      ? range.level
+      : range) || 2;
+  const [high, low] =
+    typeof levelsRange === 'number'
+      ? [levelsRange, levelsRange]
+      : levelsRange === 'deep'
+        ? [2, 6]
+        : levelsRange;
   return buildTree(headers, high, low);
 }
 function useActiveAnchor(container, marker) {
@@ -1855,13 +2235,13 @@ function useActiveAnchor(container, marker) {
   let prevActiveLink = null;
   onMounted(() => {
     requestAnimationFrame(setActiveLink);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
   });
   onUpdated(() => {
     activateLink(location.hash);
   });
   onUnmounted(() => {
-    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener('scroll', onScroll);
   });
   function setActiveLink() {
     if (!isAsideEnabled.value) {
@@ -1871,10 +2251,13 @@ function useActiveAnchor(container, marker) {
     const innerHeight = window.innerHeight;
     const offsetHeight = document.body.offsetHeight;
     const isBottom = Math.abs(scrollY + innerHeight - offsetHeight) < 1;
-    const headers = resolvedHeaders.map(({ element, link: link2 }) => ({
-      link: link2,
-      top: getAbsoluteTop(element)
-    })).filter(({ top }) => !Number.isNaN(top)).sort((a, b) => a.top - b.top);
+    const headers = resolvedHeaders
+      .map(({ element, link: link2 }) => ({
+        link: link2,
+        top: getAbsoluteTop(element),
+      }))
+      .filter(({ top }) => !Number.isNaN(top))
+      .sort((a, b) => a.top - b.top);
     if (!headers.length) {
       activateLink(null);
       return;
@@ -1898,21 +2281,23 @@ function useActiveAnchor(container, marker) {
   }
   function activateLink(hash) {
     if (prevActiveLink) {
-      prevActiveLink.classList.remove("active");
+      prevActiveLink.classList.remove('active');
     }
     if (hash == null) {
       prevActiveLink = null;
     } else {
-      prevActiveLink = container.value.querySelector(`a[href="${decodeURIComponent(hash)}"]`);
+      prevActiveLink = container.value.querySelector(
+        `a[href="${decodeURIComponent(hash)}"]`
+      );
     }
     const activeLink = prevActiveLink;
     if (activeLink) {
-      activeLink.classList.add("active");
-      marker.value.style.top = activeLink.offsetTop + 39 + "px";
-      marker.value.style.opacity = "1";
+      activeLink.classList.add('active');
+      marker.value.style.top = activeLink.offsetTop + 39 + 'px';
+      marker.value.style.opacity = '1';
     } else {
-      marker.value.style.top = "33px";
-      marker.value.style.opacity = "0";
+      marker.value.style.top = '33px';
+      marker.value.style.opacity = '0';
     }
   }
 }
@@ -1938,38 +2323,57 @@ function buildTree(data, min, max) {
       stack.pop();
       parent = stack[stack.length - 1];
     }
-    if (node.element.classList.contains("ignore-header") || parent && "shouldIgnore" in parent) {
+    if (
+      node.element.classList.contains('ignore-header') ||
+      (parent && 'shouldIgnore' in parent)
+    ) {
       stack.push({ level: node.level, shouldIgnore: true });
       return;
     }
-    if (node.level > max || node.level < min)
-      return;
+    if (node.level > max || node.level < min) return;
     resolvedHeaders.push({ element: node.element, link: node.link });
-    if (parent)
-      parent.children.push(node);
-    else
-      result.push(node);
+    if (parent) parent.children.push(node);
+    else result.push(node);
     stack.push(node);
   });
   return result;
 }
 const _sfc_main$13 = /* @__PURE__ */ defineComponent({
-  __name: "VPDocOutlineItem",
+  __name: 'VPDocOutlineItem',
   __ssrInlineRender: true,
   props: {
     headers: {},
-    root: { type: Boolean }
+    root: { type: Boolean },
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_VPDocOutlineItem = resolveComponent("VPDocOutlineItem", true);
-      _push(`<ul${ssrRenderAttrs(mergeProps({
-        class: ["VPDocOutlineItem", __props.root ? "root" : "nested"]
-      }, _attrs))} data-v-ff1a599b><!--[-->`);
+      const _component_VPDocOutlineItem = resolveComponent(
+        'VPDocOutlineItem',
+        true
+      );
+      _push(
+        `<ul${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPDocOutlineItem', __props.root ? 'root' : 'nested'],
+            },
+            _attrs
+          )
+        )} data-v-ff1a599b><!--[-->`
+      );
       ssrRenderList(__props.headers, ({ children, link: link2, title }) => {
-        _push(`<li data-v-ff1a599b><a class="outline-link"${ssrRenderAttr("href", link2)}${ssrRenderAttr("title", title)} data-v-ff1a599b>${ssrInterpolate(title)}</a>`);
+        _push(
+          `<li data-v-ff1a599b><a class="outline-link"${ssrRenderAttr('href', link2)}${ssrRenderAttr('title', title)} data-v-ff1a599b>${ssrInterpolate(title)}</a>`
+        );
         if (children == null ? void 0 : children.length) {
-          _push(ssrRenderComponent(_component_VPDocOutlineItem, { headers: children }, null, _parent));
+          _push(
+            ssrRenderComponent(
+              _component_VPDocOutlineItem,
+              { headers: children },
+              null,
+              _parent
+            )
+          );
         } else {
           _push(`<!---->`);
         }
@@ -1977,109 +2381,175 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
       });
       _push(`<!--]--></ul>`);
     };
-  }
+  },
 });
 const _sfc_setup$13 = _sfc_main$13.setup;
 _sfc_main$13.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocOutlineItem.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocOutlineItem.vue'
+  );
   return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
 };
-const VPDocOutlineItem = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["__scopeId", "data-v-ff1a599b"]]);
+const VPDocOutlineItem = /* @__PURE__ */ _export_sfc(_sfc_main$13, [
+  ['__scopeId', 'data-v-ff1a599b'],
+]);
 const _sfc_main$12 = /* @__PURE__ */ defineComponent({
-  __name: "VPDocAsideOutline",
+  __name: 'VPDocAsideOutline',
   __ssrInlineRender: true,
   setup(__props) {
     const { frontmatter, theme: theme2 } = useData();
     const headers = shallowRef([]);
     onContentUpdated(() => {
-      headers.value = getHeaders(frontmatter.value.outline ?? theme2.value.outline);
+      headers.value = getHeaders(
+        frontmatter.value.outline ?? theme2.value.outline
+      );
     });
     const container = ref();
     const marker = ref();
     useActiveAnchor(container, marker);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<nav${ssrRenderAttrs(mergeProps({
-        "aria-labelledby": "doc-outline-aria-label",
-        class: ["VPDocAsideOutline", { "has-outline": headers.value.length > 0 }],
-        ref_key: "container",
-        ref: container
-      }, _attrs))} data-v-39ade64c><div class="content" data-v-39ade64c><div class="outline-marker" data-v-39ade64c></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-39ade64c>${ssrInterpolate(unref(resolveTitle)(unref(theme2)))}</div>`);
-      _push(ssrRenderComponent(VPDocOutlineItem, {
-        headers: headers.value,
-        root: true
-      }, null, _parent));
+      _push(
+        `<nav${ssrRenderAttrs(
+          mergeProps(
+            {
+              'aria-labelledby': 'doc-outline-aria-label',
+              class: [
+                'VPDocAsideOutline',
+                { 'has-outline': headers.value.length > 0 },
+              ],
+              ref_key: 'container',
+              ref: container,
+            },
+            _attrs
+          )
+        )} data-v-39ade64c><div class="content" data-v-39ade64c><div class="outline-marker" data-v-39ade64c></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-39ade64c>${ssrInterpolate(unref(resolveTitle)(unref(theme2)))}</div>`
+      );
+      _push(
+        ssrRenderComponent(
+          VPDocOutlineItem,
+          {
+            headers: headers.value,
+            root: true,
+          },
+          null,
+          _parent
+        )
+      );
       _push(`</div></nav>`);
     };
-  }
+  },
 });
 const _sfc_setup$12 = _sfc_main$12.setup;
 _sfc_main$12.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
+  );
   return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
 };
-const VPDocAsideOutline = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["__scopeId", "data-v-39ade64c"]]);
+const VPDocAsideOutline = /* @__PURE__ */ _export_sfc(_sfc_main$12, [
+  ['__scopeId', 'data-v-39ade64c'],
+]);
 const _sfc_main$11 = /* @__PURE__ */ defineComponent({
-  __name: "VPDocAsideCarbonAds",
+  __name: 'VPDocAsideCarbonAds',
   __ssrInlineRender: true,
   props: {
-    carbonAds: {}
+    carbonAds: {},
   },
   setup(__props) {
     const VPCarbonAds = () => null;
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPDocAsideCarbonAds" }, _attrs))}>`);
-      _push(ssrRenderComponent(unref(VPCarbonAds), { "carbon-ads": __props.carbonAds }, null, _parent));
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPDocAsideCarbonAds' }, _attrs))}>`
+      );
+      _push(
+        ssrRenderComponent(
+          unref(VPCarbonAds),
+          { 'carbon-ads': __props.carbonAds },
+          null,
+          _parent
+        )
+      );
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$11 = _sfc_main$11.setup;
 _sfc_main$11.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideCarbonAds.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideCarbonAds.vue'
+  );
   return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
 };
 const _sfc_main$10 = /* @__PURE__ */ defineComponent({
-  __name: "VPDocAside",
+  __name: 'VPDocAside',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPDocAside" }, _attrs))} data-v-6fe3dc0c>`);
-      ssrRenderSlot(_ctx.$slots, "aside-top", {}, null, _push, _parent);
-      ssrRenderSlot(_ctx.$slots, "aside-outline-before", {}, null, _push, _parent);
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPDocAside' }, _attrs))} data-v-6fe3dc0c>`
+      );
+      ssrRenderSlot(_ctx.$slots, 'aside-top', {}, null, _push, _parent);
+      ssrRenderSlot(
+        _ctx.$slots,
+        'aside-outline-before',
+        {},
+        null,
+        _push,
+        _parent
+      );
       _push(ssrRenderComponent(VPDocAsideOutline, null, null, _parent));
-      ssrRenderSlot(_ctx.$slots, "aside-outline-after", {}, null, _push, _parent);
+      ssrRenderSlot(
+        _ctx.$slots,
+        'aside-outline-after',
+        {},
+        null,
+        _push,
+        _parent
+      );
       _push(`<div class="spacer" data-v-6fe3dc0c></div>`);
-      ssrRenderSlot(_ctx.$slots, "aside-ads-before", {}, null, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, 'aside-ads-before', {}, null, _push, _parent);
       if (unref(theme2).carbonAds) {
-        _push(ssrRenderComponent(_sfc_main$11, {
-          "carbon-ads": unref(theme2).carbonAds
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            _sfc_main$11,
+            {
+              'carbon-ads': unref(theme2).carbonAds,
+            },
+            null,
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
-      ssrRenderSlot(_ctx.$slots, "aside-ads-after", {}, null, _push, _parent);
-      ssrRenderSlot(_ctx.$slots, "aside-bottom", {}, null, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, 'aside-ads-after', {}, null, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, 'aside-bottom', {}, null, _push, _parent);
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$10 = _sfc_main$10.setup;
 _sfc_main$10.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAside.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAside.vue'
+  );
   return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
 };
-const VPDocAside = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["__scopeId", "data-v-6fe3dc0c"]]);
+const VPDocAside = /* @__PURE__ */ _export_sfc(_sfc_main$10, [
+  ['__scopeId', 'data-v-6fe3dc0c'],
+]);
 function useEditLink() {
   const { theme: theme2, page } = useData();
   return computed(() => {
-    const { text = "Edit this page", pattern = "" } = theme2.value.editLink || {};
+    const { text = 'Edit this page', pattern = '' } =
+      theme2.value.editLink || {};
     let url;
-    if (typeof pattern === "function") {
+    if (typeof pattern === 'function') {
       url = pattern(page.value);
     } else {
       url = pattern.replace(/:path/g, page.value.filePath);
@@ -2093,21 +2563,59 @@ function usePrevNext() {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     const sidebar = getSidebar(theme2.value.sidebar, page.value.relativePath);
     const links = getFlatSideBarLinks(sidebar);
-    const candidates = uniqBy(links, (link2) => link2.link.replace(/[?#].*$/, ""));
+    const candidates = uniqBy(links, (link2) =>
+      link2.link.replace(/[?#].*$/, '')
+    );
     const index = candidates.findIndex((link2) => {
       return isActive(page.value.relativePath, link2.link);
     });
-    const hidePrev = ((_a = theme2.value.docFooter) == null ? void 0 : _a.prev) === false && !frontmatter.value.prev || frontmatter.value.prev === false;
-    const hideNext = ((_b = theme2.value.docFooter) == null ? void 0 : _b.next) === false && !frontmatter.value.next || frontmatter.value.next === false;
+    const hidePrev =
+      (((_a = theme2.value.docFooter) == null ? void 0 : _a.prev) === false &&
+        !frontmatter.value.prev) ||
+      frontmatter.value.prev === false;
+    const hideNext =
+      (((_b = theme2.value.docFooter) == null ? void 0 : _b.next) === false &&
+        !frontmatter.value.next) ||
+      frontmatter.value.next === false;
     return {
-      prev: hidePrev ? void 0 : {
-        text: (typeof frontmatter.value.prev === "string" ? frontmatter.value.prev : typeof frontmatter.value.prev === "object" ? frontmatter.value.prev.text : void 0) ?? ((_c = candidates[index - 1]) == null ? void 0 : _c.docFooterText) ?? ((_d = candidates[index - 1]) == null ? void 0 : _d.text),
-        link: (typeof frontmatter.value.prev === "object" ? frontmatter.value.prev.link : void 0) ?? ((_e = candidates[index - 1]) == null ? void 0 : _e.link)
-      },
-      next: hideNext ? void 0 : {
-        text: (typeof frontmatter.value.next === "string" ? frontmatter.value.next : typeof frontmatter.value.next === "object" ? frontmatter.value.next.text : void 0) ?? ((_f = candidates[index + 1]) == null ? void 0 : _f.docFooterText) ?? ((_g = candidates[index + 1]) == null ? void 0 : _g.text),
-        link: (typeof frontmatter.value.next === "object" ? frontmatter.value.next.link : void 0) ?? ((_h = candidates[index + 1]) == null ? void 0 : _h.link)
-      }
+      prev: hidePrev
+        ? void 0
+        : {
+            text:
+              (typeof frontmatter.value.prev === 'string'
+                ? frontmatter.value.prev
+                : typeof frontmatter.value.prev === 'object'
+                  ? frontmatter.value.prev.text
+                  : void 0) ??
+              ((_c = candidates[index - 1]) == null
+                ? void 0
+                : _c.docFooterText) ??
+              ((_d = candidates[index - 1]) == null ? void 0 : _d.text),
+            link:
+              (typeof frontmatter.value.prev === 'object'
+                ? frontmatter.value.prev.link
+                : void 0) ??
+              ((_e = candidates[index - 1]) == null ? void 0 : _e.link),
+          },
+      next: hideNext
+        ? void 0
+        : {
+            text:
+              (typeof frontmatter.value.next === 'string'
+                ? frontmatter.value.next
+                : typeof frontmatter.value.next === 'object'
+                  ? frontmatter.value.next.text
+                  : void 0) ??
+              ((_f = candidates[index + 1]) == null
+                ? void 0
+                : _f.docFooterText) ??
+              ((_g = candidates[index + 1]) == null ? void 0 : _g.text),
+            link:
+              (typeof frontmatter.value.next === 'object'
+                ? frontmatter.value.next.link
+                : void 0) ??
+              ((_h = candidates[index + 1]) == null ? void 0 : _h.link),
+          },
     };
   });
 }
@@ -2119,89 +2627,130 @@ function uniqBy(array, keyFn) {
   });
 }
 const _sfc_main$$ = /* @__PURE__ */ defineComponent({
-  __name: "VPLink",
+  __name: 'VPLink',
   __ssrInlineRender: true,
   props: {
     tag: {},
     href: {},
     noIcon: { type: Boolean },
     target: {},
-    rel: {}
+    rel: {},
   },
   setup(__props) {
     const props = __props;
-    const tag = computed(() => props.tag ?? (props.href ? "a" : "span"));
+    const tag = computed(() => props.tag ?? (props.href ? 'a' : 'span'));
     const isExternal2 = computed(
-      () => props.href && EXTERNAL_URL_RE.test(props.href) || props.target === "_blank"
+      () =>
+        (props.href && EXTERNAL_URL_RE.test(props.href)) ||
+        props.target === '_blank'
     );
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderVNode(_push, createVNode(resolveDynamicComponent(tag.value), mergeProps({
-        class: ["VPLink", {
-          link: __props.href,
-          "vp-external-link-icon": isExternal2.value,
-          "no-icon": __props.noIcon
-        }],
-        href: __props.href ? unref(normalizeLink$1)(__props.href) : void 0,
-        target: __props.target ?? (isExternal2.value ? "_blank" : void 0),
-        rel: __props.rel ?? (isExternal2.value ? "noreferrer" : void 0)
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "default")
-            ];
+      ssrRenderVNode(
+        _push,
+        createVNode(
+          resolveDynamicComponent(tag.value),
+          mergeProps(
+            {
+              class: [
+                'VPLink',
+                {
+                  link: __props.href,
+                  'vp-external-link-icon': isExternal2.value,
+                  'no-icon': __props.noIcon,
+                },
+              ],
+              href: __props.href
+                ? unref(normalizeLink$1)(__props.href)
+                : void 0,
+              target: __props.target ?? (isExternal2.value ? '_blank' : void 0),
+              rel: __props.rel ?? (isExternal2.value ? 'noreferrer' : void 0),
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'default',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [renderSlot(_ctx.$slots, 'default')];
+              }
+            }),
+            _: 3,
           }
-        }),
-        _: 3
-      }), _parent);
+        ),
+        _parent
+      );
     };
-  }
+  },
 });
 const _sfc_setup$$ = _sfc_main$$.setup;
 _sfc_main$$.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLink.vue'
+  );
   return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
 };
 const _sfc_main$_ = /* @__PURE__ */ defineComponent({
-  __name: "VPDocFooterLastUpdated",
+  __name: 'VPDocFooterLastUpdated',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2, page, lang } = useData();
-    const date = computed(
-      () => new Date(page.value.lastUpdated)
-    );
+    const date = computed(() => new Date(page.value.lastUpdated));
     const isoDatetime = computed(() => date.value.toISOString());
-    const datetime = ref("");
+    const datetime = ref('');
     onMounted(() => {
       watchEffect(() => {
         var _a, _b, _c;
         datetime.value = new Intl.DateTimeFormat(
-          ((_b = (_a = theme2.value.lastUpdated) == null ? void 0 : _a.formatOptions) == null ? void 0 : _b.forceLocale) ? lang.value : void 0,
-          ((_c = theme2.value.lastUpdated) == null ? void 0 : _c.formatOptions) ?? {
-            dateStyle: "short",
-            timeStyle: "short"
+          (
+            (_b =
+              (_a = theme2.value.lastUpdated) == null
+                ? void 0
+                : _a.formatOptions) == null
+              ? void 0
+              : _b.forceLocale
+          )
+            ? lang.value
+            : void 0,
+          ((_c = theme2.value.lastUpdated) == null
+            ? void 0
+            : _c.formatOptions) ?? {
+            dateStyle: 'short',
+            timeStyle: 'short',
           }
         ).format(date.value);
       });
     });
     return (_ctx, _push, _parent, _attrs) => {
       var _a;
-      _push(`<p${ssrRenderAttrs(mergeProps({ class: "VPLastUpdated" }, _attrs))} data-v-4f1db626>${ssrInterpolate(((_a = unref(theme2).lastUpdated) == null ? void 0 : _a.text) || unref(theme2).lastUpdatedText || "Last updated")}: <time${ssrRenderAttr("datetime", isoDatetime.value)} data-v-4f1db626>${ssrInterpolate(datetime.value)}</time></p>`);
+      _push(
+        `<p${ssrRenderAttrs(mergeProps({ class: 'VPLastUpdated' }, _attrs))} data-v-4f1db626>${ssrInterpolate(((_a = unref(theme2).lastUpdated) == null ? void 0 : _a.text) || unref(theme2).lastUpdatedText || 'Last updated')}: <time${ssrRenderAttr('datetime', isoDatetime.value)} data-v-4f1db626>${ssrInterpolate(datetime.value)}</time></p>`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$_ = _sfc_main$_.setup;
 _sfc_main$_.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocFooterLastUpdated.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocFooterLastUpdated.vue'
+  );
   return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
 };
-const VPDocFooterLastUpdated = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["__scopeId", "data-v-4f1db626"]]);
+const VPDocFooterLastUpdated = /* @__PURE__ */ _export_sfc(_sfc_main$_, [
+  ['__scopeId', 'data-v-4f1db626'],
+]);
 const _sfc_main$Z = /* @__PURE__ */ defineComponent({
-  __name: "VPDocFooter",
+  __name: 'VPDocFooter',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2, page, frontmatter } = useData();
@@ -2212,41 +2761,70 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
     );
     const hasLastUpdated = computed(() => page.value.lastUpdated);
     const showFooter = computed(
-      () => hasEditLink.value || hasLastUpdated.value || control.value.prev || control.value.next
+      () =>
+        hasEditLink.value ||
+        hasLastUpdated.value ||
+        control.value.prev ||
+        control.value.next
     );
     return (_ctx, _push, _parent, _attrs) => {
       var _a, _b, _c, _d;
       if (showFooter.value) {
-        _push(`<footer${ssrRenderAttrs(mergeProps({ class: "VPDocFooter" }, _attrs))} data-v-85fe10f1>`);
-        ssrRenderSlot(_ctx.$slots, "doc-footer-before", {}, null, _push, _parent);
+        _push(
+          `<footer${ssrRenderAttrs(mergeProps({ class: 'VPDocFooter' }, _attrs))} data-v-85fe10f1>`
+        );
+        ssrRenderSlot(
+          _ctx.$slots,
+          'doc-footer-before',
+          {},
+          null,
+          _push,
+          _parent
+        );
         if (hasEditLink.value || hasLastUpdated.value) {
           _push(`<div class="edit-info" data-v-85fe10f1>`);
           if (hasEditLink.value) {
             _push(`<div class="edit-link" data-v-85fe10f1>`);
-            _push(ssrRenderComponent(_sfc_main$$, {
-              class: "edit-link-button",
-              href: unref(editLink).url,
-              "no-icon": true
-            }, {
-              default: withCtx((_, _push2, _parent2, _scopeId) => {
-                if (_push2) {
-                  _push2(`<span class="vpi-square-pen edit-link-icon" data-v-85fe10f1${_scopeId}></span> ${ssrInterpolate(unref(editLink).text)}`);
-                } else {
-                  return [
-                    createVNode("span", { class: "vpi-square-pen edit-link-icon" }),
-                    createTextVNode(" " + toDisplayString(unref(editLink).text), 1)
-                  ];
-                }
-              }),
-              _: 1
-            }, _parent));
+            _push(
+              ssrRenderComponent(
+                _sfc_main$$,
+                {
+                  class: 'edit-link-button',
+                  href: unref(editLink).url,
+                  'no-icon': true,
+                },
+                {
+                  default: withCtx((_, _push2, _parent2, _scopeId) => {
+                    if (_push2) {
+                      _push2(
+                        `<span class="vpi-square-pen edit-link-icon" data-v-85fe10f1${_scopeId}></span> ${ssrInterpolate(unref(editLink).text)}`
+                      );
+                    } else {
+                      return [
+                        createVNode('span', {
+                          class: 'vpi-square-pen edit-link-icon',
+                        }),
+                        createTextVNode(
+                          ' ' + toDisplayString(unref(editLink).text),
+                          1
+                        ),
+                      ];
+                    }
+                  }),
+                  _: 1,
+                },
+                _parent
+              )
+            );
             _push(`</div>`);
           } else {
             _push(`<!---->`);
           }
           if (hasLastUpdated.value) {
             _push(`<div class="last-updated" data-v-85fe10f1>`);
-            _push(ssrRenderComponent(VPDocFooterLastUpdated, null, null, _parent));
+            _push(
+              ssrRenderComponent(VPDocFooterLastUpdated, null, null, _parent)
+            );
             _push(`</div>`);
           } else {
             _push(`<!---->`);
@@ -2255,60 +2833,113 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
         } else {
           _push(`<!---->`);
         }
-        if (((_a = unref(control).prev) == null ? void 0 : _a.link) || ((_b = unref(control).next) == null ? void 0 : _b.link)) {
-          _push(`<nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-85fe10f1><span class="visually-hidden" id="doc-footer-aria-label" data-v-85fe10f1>Pager</span><div class="pager" data-v-85fe10f1>`);
+        if (
+          ((_a = unref(control).prev) == null ? void 0 : _a.link) ||
+          ((_b = unref(control).next) == null ? void 0 : _b.link)
+        ) {
+          _push(
+            `<nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-85fe10f1><span class="visually-hidden" id="doc-footer-aria-label" data-v-85fe10f1>Pager</span><div class="pager" data-v-85fe10f1>`
+          );
           if ((_c = unref(control).prev) == null ? void 0 : _c.link) {
-            _push(ssrRenderComponent(_sfc_main$$, {
-              class: "pager-link prev",
-              href: unref(control).prev.link
-            }, {
-              default: withCtx((_, _push2, _parent2, _scopeId) => {
-                var _a2, _b2;
-                if (_push2) {
-                  _push2(`<span class="desc" data-v-85fe10f1${_scopeId}>${(((_a2 = unref(theme2).docFooter) == null ? void 0 : _a2.prev) || "Previous page") ?? ""}</span><span class="title" data-v-85fe10f1${_scopeId}>${unref(control).prev.text ?? ""}</span>`);
-                } else {
-                  return [
-                    createVNode("span", {
-                      class: "desc",
-                      innerHTML: ((_b2 = unref(theme2).docFooter) == null ? void 0 : _b2.prev) || "Previous page"
-                    }, null, 8, ["innerHTML"]),
-                    createVNode("span", {
-                      class: "title",
-                      innerHTML: unref(control).prev.text
-                    }, null, 8, ["innerHTML"])
-                  ];
-                }
-              }),
-              _: 1
-            }, _parent));
+            _push(
+              ssrRenderComponent(
+                _sfc_main$$,
+                {
+                  class: 'pager-link prev',
+                  href: unref(control).prev.link,
+                },
+                {
+                  default: withCtx((_, _push2, _parent2, _scopeId) => {
+                    var _a2, _b2;
+                    if (_push2) {
+                      _push2(
+                        `<span class="desc" data-v-85fe10f1${_scopeId}>${(((_a2 = unref(theme2).docFooter) == null ? void 0 : _a2.prev) || 'Previous page') ?? ''}</span><span class="title" data-v-85fe10f1${_scopeId}>${unref(control).prev.text ?? ''}</span>`
+                      );
+                    } else {
+                      return [
+                        createVNode(
+                          'span',
+                          {
+                            class: 'desc',
+                            innerHTML:
+                              ((_b2 = unref(theme2).docFooter) == null
+                                ? void 0
+                                : _b2.prev) || 'Previous page',
+                          },
+                          null,
+                          8,
+                          ['innerHTML']
+                        ),
+                        createVNode(
+                          'span',
+                          {
+                            class: 'title',
+                            innerHTML: unref(control).prev.text,
+                          },
+                          null,
+                          8,
+                          ['innerHTML']
+                        ),
+                      ];
+                    }
+                  }),
+                  _: 1,
+                },
+                _parent
+              )
+            );
           } else {
             _push(`<!---->`);
           }
           _push(`</div><div class="pager" data-v-85fe10f1>`);
           if ((_d = unref(control).next) == null ? void 0 : _d.link) {
-            _push(ssrRenderComponent(_sfc_main$$, {
-              class: "pager-link next",
-              href: unref(control).next.link
-            }, {
-              default: withCtx((_, _push2, _parent2, _scopeId) => {
-                var _a2, _b2;
-                if (_push2) {
-                  _push2(`<span class="desc" data-v-85fe10f1${_scopeId}>${(((_a2 = unref(theme2).docFooter) == null ? void 0 : _a2.next) || "Next page") ?? ""}</span><span class="title" data-v-85fe10f1${_scopeId}>${unref(control).next.text ?? ""}</span>`);
-                } else {
-                  return [
-                    createVNode("span", {
-                      class: "desc",
-                      innerHTML: ((_b2 = unref(theme2).docFooter) == null ? void 0 : _b2.next) || "Next page"
-                    }, null, 8, ["innerHTML"]),
-                    createVNode("span", {
-                      class: "title",
-                      innerHTML: unref(control).next.text
-                    }, null, 8, ["innerHTML"])
-                  ];
-                }
-              }),
-              _: 1
-            }, _parent));
+            _push(
+              ssrRenderComponent(
+                _sfc_main$$,
+                {
+                  class: 'pager-link next',
+                  href: unref(control).next.link,
+                },
+                {
+                  default: withCtx((_, _push2, _parent2, _scopeId) => {
+                    var _a2, _b2;
+                    if (_push2) {
+                      _push2(
+                        `<span class="desc" data-v-85fe10f1${_scopeId}>${(((_a2 = unref(theme2).docFooter) == null ? void 0 : _a2.next) || 'Next page') ?? ''}</span><span class="title" data-v-85fe10f1${_scopeId}>${unref(control).next.text ?? ''}</span>`
+                      );
+                    } else {
+                      return [
+                        createVNode(
+                          'span',
+                          {
+                            class: 'desc',
+                            innerHTML:
+                              ((_b2 = unref(theme2).docFooter) == null
+                                ? void 0
+                                : _b2.next) || 'Next page',
+                          },
+                          null,
+                          8,
+                          ['innerHTML']
+                        ),
+                        createVNode(
+                          'span',
+                          {
+                            class: 'title',
+                            innerHTML: unref(control).next.text,
+                          },
+                          null,
+                          8,
+                          ['innerHTML']
+                        ),
+                      ];
+                    }
+                  }),
+                  _: 1,
+                },
+                _parent
+              )
+            );
           } else {
             _push(`<!---->`);
           }
@@ -2321,142 +2952,281 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$Z = _sfc_main$Z.setup;
 _sfc_main$Z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocFooter.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocFooter.vue'
+  );
   return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
 };
-const VPDocFooter = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["__scopeId", "data-v-85fe10f1"]]);
+const VPDocFooter = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [
+  ['__scopeId', 'data-v-85fe10f1'],
+]);
 const _sfc_main$Y = /* @__PURE__ */ defineComponent({
-  __name: "VPDoc",
+  __name: 'VPDoc',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     const route = useRoute();
     const { hasSidebar, hasAside, leftAside } = useSidebar();
-    const pageName = computed(
-      () => route.path.replace(/[./]+/g, "_").replace(/_html$/, "")
+    const pageName = computed(() =>
+      route.path.replace(/[./]+/g, '_').replace(/_html$/, '')
     );
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Content = resolveComponent("Content");
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPDoc", { "has-sidebar": unref(hasSidebar), "has-aside": unref(hasAside) }]
-      }, _attrs))} data-v-e708a764>`);
-      ssrRenderSlot(_ctx.$slots, "doc-top", {}, null, _push, _parent);
+      const _component_Content = resolveComponent('Content');
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: [
+                'VPDoc',
+                {
+                  'has-sidebar': unref(hasSidebar),
+                  'has-aside': unref(hasAside),
+                },
+              ],
+            },
+            _attrs
+          )
+        )} data-v-e708a764>`
+      );
+      ssrRenderSlot(_ctx.$slots, 'doc-top', {}, null, _push, _parent);
       _push(`<div class="container" data-v-e708a764>`);
       if (unref(hasAside)) {
-        _push(`<div class="${ssrRenderClass([{ "left-aside": unref(leftAside) }, "aside"])}" data-v-e708a764><div class="aside-curtain" data-v-e708a764></div><div class="aside-container" data-v-e708a764><div class="aside-content" data-v-e708a764>`);
-        _push(ssrRenderComponent(VPDocAside, null, {
-          "aside-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-outline-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-outline-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-outline-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-outline-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-outline-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-outline-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-ads-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-ads-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-ads-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-ads-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-ads-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-ads-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
+        _push(
+          `<div class="${ssrRenderClass([{ 'left-aside': unref(leftAside) }, 'aside'])}" data-v-e708a764><div class="aside-curtain" data-v-e708a764></div><div class="aside-container" data-v-e708a764><div class="aside-content" data-v-e708a764>`
+        );
+        _push(
+          ssrRenderComponent(
+            VPDocAside,
+            null,
+            {
+              'aside-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'aside-top', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'aside-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-outline-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'aside-outline-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'aside-outline-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'aside-outline-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'aside-outline-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'aside-outline-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'aside-ads-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-ads-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'aside-ads-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'aside-ads-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-ads-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'aside-ads-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              _: 3,
+            },
+            _parent
+          )
+        );
         _push(`</div></div></div>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="content" data-v-e708a764><div class="content-container" data-v-e708a764>`);
-      ssrRenderSlot(_ctx.$slots, "doc-before", {}, null, _push, _parent);
+      _push(
+        `<div class="content" data-v-e708a764><div class="content-container" data-v-e708a764>`
+      );
+      ssrRenderSlot(_ctx.$slots, 'doc-before', {}, null, _push, _parent);
       _push(`<main class="main" data-v-e708a764>`);
-      _push(ssrRenderComponent(_component_Content, {
-        class: ["vp-doc", [
-          pageName.value,
-          unref(theme2).externalLinkIcon && "external-link-icon-enabled"
-        ]]
-      }, null, _parent));
+      _push(
+        ssrRenderComponent(
+          _component_Content,
+          {
+            class: [
+              'vp-doc',
+              [
+                pageName.value,
+                unref(theme2).externalLinkIcon && 'external-link-icon-enabled',
+              ],
+            ],
+          },
+          null,
+          _parent
+        )
+      );
       _push(`</main>`);
-      _push(ssrRenderComponent(VPDocFooter, null, {
-        "doc-footer-before": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "doc-footer-before", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "doc-footer-before", {}, void 0, true)
-            ];
-          }
-        }),
-        _: 3
-      }, _parent));
-      ssrRenderSlot(_ctx.$slots, "doc-after", {}, null, _push, _parent);
+      _push(
+        ssrRenderComponent(
+          VPDocFooter,
+          null,
+          {
+            'doc-footer-before': withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'doc-footer-before',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [
+                  renderSlot(
+                    _ctx.$slots,
+                    'doc-footer-before',
+                    {},
+                    void 0,
+                    true
+                  ),
+                ];
+              }
+            }),
+            _: 3,
+          },
+          _parent
+        )
+      );
+      ssrRenderSlot(_ctx.$slots, 'doc-after', {}, null, _push, _parent);
       _push(`</div></div></div>`);
-      ssrRenderSlot(_ctx.$slots, "doc-bottom", {}, null, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, 'doc-bottom', {}, null, _push, _parent);
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$Y = _sfc_main$Y.setup;
 _sfc_main$Y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDoc.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDoc.vue'
+  );
   return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
 };
-const VPDoc = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["__scopeId", "data-v-e708a764"]]);
+const VPDoc = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [
+  ['__scopeId', 'data-v-e708a764'],
+]);
 const _sfc_main$X = /* @__PURE__ */ defineComponent({
-  __name: "VPButton",
+  __name: 'VPButton',
   __ssrInlineRender: true,
   props: {
     tag: {},
-    size: { default: "medium" },
-    theme: { default: "brand" },
+    size: { default: 'medium' },
+    theme: { default: 'brand' },
     text: {},
     href: {},
     target: {},
-    rel: {}
+    rel: {},
   },
   setup(__props) {
     const props = __props;
@@ -2464,66 +3234,119 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
       () => props.href && EXTERNAL_URL_RE.test(props.href)
     );
     const component = computed(() => {
-      return props.tag || (props.href ? "a" : "button");
+      return props.tag || (props.href ? 'a' : 'button');
     });
     return (_ctx, _push, _parent, _attrs) => {
-      ssrRenderVNode(_push, createVNode(resolveDynamicComponent(component.value), mergeProps({
-        class: ["VPButton", [__props.size, __props.theme]],
-        href: __props.href ? unref(normalizeLink$1)(__props.href) : void 0,
-        target: props.target ?? (isExternal2.value ? "_blank" : void 0),
-        rel: props.rel ?? (isExternal2.value ? "noreferrer" : void 0)
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`${ssrInterpolate(__props.text)}`);
-          } else {
-            return [
-              createTextVNode(toDisplayString(__props.text), 1)
-            ];
+      ssrRenderVNode(
+        _push,
+        createVNode(
+          resolveDynamicComponent(component.value),
+          mergeProps(
+            {
+              class: ['VPButton', [__props.size, __props.theme]],
+              href: __props.href
+                ? unref(normalizeLink$1)(__props.href)
+                : void 0,
+              target: props.target ?? (isExternal2.value ? '_blank' : void 0),
+              rel: props.rel ?? (isExternal2.value ? 'noreferrer' : void 0),
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`${ssrInterpolate(__props.text)}`);
+              } else {
+                return [createTextVNode(toDisplayString(__props.text), 1)];
+              }
+            }),
+            _: 1,
           }
-        }),
-        _: 1
-      }), _parent);
+        ),
+        _parent
+      );
     };
-  }
+  },
 });
 const _sfc_setup$X = _sfc_main$X.setup;
 _sfc_main$X.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPButton.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPButton.vue'
+  );
   return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
 };
-const VPButton = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["__scopeId", "data-v-707fae06"]]);
+const VPButton = /* @__PURE__ */ _export_sfc(_sfc_main$X, [
+  ['__scopeId', 'data-v-707fae06'],
+]);
 const _sfc_main$W = /* @__PURE__ */ defineComponent({
   ...{ inheritAttrs: false },
-  __name: "VPImage",
+  __name: 'VPImage',
   __ssrInlineRender: true,
   props: {
     image: {},
-    alt: {}
+    alt: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_VPImage = resolveComponent("VPImage", true);
+      const _component_VPImage = resolveComponent('VPImage', true);
       if (__props.image) {
         _push(`<!--[-->`);
-        if (typeof __props.image === "string" || "src" in __props.image) {
-          _push(`<img${ssrRenderAttrs(mergeProps({ class: "VPImage" }, typeof __props.image === "string" ? _ctx.$attrs : { ...__props.image, ..._ctx.$attrs }, {
-            src: unref(withBase)(typeof __props.image === "string" ? __props.image : __props.image.src),
-            alt: __props.alt ?? (typeof __props.image === "string" ? "" : __props.image.alt || "")
-          }))} data-v-b2f5900c>`);
+        if (typeof __props.image === 'string' || 'src' in __props.image) {
+          _push(
+            `<img${ssrRenderAttrs(
+              mergeProps(
+                { class: 'VPImage' },
+                typeof __props.image === 'string'
+                  ? _ctx.$attrs
+                  : { ...__props.image, ..._ctx.$attrs },
+                {
+                  src: unref(withBase)(
+                    typeof __props.image === 'string'
+                      ? __props.image
+                      : __props.image.src
+                  ),
+                  alt:
+                    __props.alt ??
+                    (typeof __props.image === 'string'
+                      ? ''
+                      : __props.image.alt || ''),
+                }
+              )
+            )} data-v-b2f5900c>`
+          );
         } else {
           _push(`<!--[-->`);
-          _push(ssrRenderComponent(_component_VPImage, mergeProps({
-            class: "dark",
-            image: __props.image.dark,
-            alt: __props.image.alt
-          }, _ctx.$attrs), null, _parent));
-          _push(ssrRenderComponent(_component_VPImage, mergeProps({
-            class: "light",
-            image: __props.image.light,
-            alt: __props.image.alt
-          }, _ctx.$attrs), null, _parent));
+          _push(
+            ssrRenderComponent(
+              _component_VPImage,
+              mergeProps(
+                {
+                  class: 'dark',
+                  image: __props.image.dark,
+                  alt: __props.image.alt,
+                },
+                _ctx.$attrs
+              ),
+              null,
+              _parent
+            )
+          );
+          _push(
+            ssrRenderComponent(
+              _component_VPImage,
+              mergeProps(
+                {
+                  class: 'light',
+                  image: __props.image.light,
+                  alt: __props.image.alt,
+                },
+                _ctx.$attrs
+              ),
+              null,
+              _parent
+            )
+          );
           _push(`<!--]-->`);
         }
         _push(`<!--]-->`);
@@ -2531,176 +3354,299 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$W = _sfc_main$W.setup;
 _sfc_main$W.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPImage.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPImage.vue'
+  );
   return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
 };
-const VPImage = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["__scopeId", "data-v-b2f5900c"]]);
+const VPImage = /* @__PURE__ */ _export_sfc(_sfc_main$W, [
+  ['__scopeId', 'data-v-b2f5900c'],
+]);
 const _sfc_main$V = /* @__PURE__ */ defineComponent({
-  __name: "VPHero",
+  __name: 'VPHero',
   __ssrInlineRender: true,
   props: {
     name: {},
     text: {},
     tagline: {},
     image: {},
-    actions: {}
+    actions: {},
   },
   setup(__props) {
-    const heroImageSlotExists = inject("hero-image-slot-exists");
+    const heroImageSlotExists = inject('hero-image-slot-exists');
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPHero", { "has-image": __props.image || unref(heroImageSlotExists) }]
-      }, _attrs))} data-v-d1089a32><div class="container" data-v-d1089a32><div class="main" data-v-d1089a32>`);
-      ssrRenderSlot(_ctx.$slots, "home-hero-info-before", {}, null, _push, _parent);
-      ssrRenderSlot(_ctx.$slots, "home-hero-info", {}, () => {
-        _push(`<h1 class="heading" data-v-d1089a32>`);
-        if (__props.name) {
-          _push(`<span class="name clip" data-v-d1089a32>${__props.name ?? ""}</span>`);
-        } else {
-          _push(`<!---->`);
-        }
-        if (__props.text) {
-          _push(`<span class="text" data-v-d1089a32>${__props.text ?? ""}</span>`);
-        } else {
-          _push(`<!---->`);
-        }
-        _push(`</h1>`);
-        if (__props.tagline) {
-          _push(`<p class="tagline" data-v-d1089a32>${__props.tagline ?? ""}</p>`);
-        } else {
-          _push(`<!---->`);
-        }
-      }, _push, _parent);
-      ssrRenderSlot(_ctx.$slots, "home-hero-info-after", {}, null, _push, _parent);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: [
+                'VPHero',
+                { 'has-image': __props.image || unref(heroImageSlotExists) },
+              ],
+            },
+            _attrs
+          )
+        )} data-v-d1089a32><div class="container" data-v-d1089a32><div class="main" data-v-d1089a32>`
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'home-hero-info-before',
+        {},
+        null,
+        _push,
+        _parent
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'home-hero-info',
+        {},
+        () => {
+          _push(`<h1 class="heading" data-v-d1089a32>`);
+          if (__props.name) {
+            _push(
+              `<span class="name clip" data-v-d1089a32>${__props.name ?? ''}</span>`
+            );
+          } else {
+            _push(`<!---->`);
+          }
+          if (__props.text) {
+            _push(
+              `<span class="text" data-v-d1089a32>${__props.text ?? ''}</span>`
+            );
+          } else {
+            _push(`<!---->`);
+          }
+          _push(`</h1>`);
+          if (__props.tagline) {
+            _push(
+              `<p class="tagline" data-v-d1089a32>${__props.tagline ?? ''}</p>`
+            );
+          } else {
+            _push(`<!---->`);
+          }
+        },
+        _push,
+        _parent
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'home-hero-info-after',
+        {},
+        null,
+        _push,
+        _parent
+      );
       if (__props.actions) {
         _push(`<div class="actions" data-v-d1089a32><!--[-->`);
         ssrRenderList(__props.actions, (action) => {
           _push(`<div class="action" data-v-d1089a32>`);
-          _push(ssrRenderComponent(VPButton, {
-            tag: "a",
-            size: "medium",
-            theme: action.theme,
-            text: action.text,
-            href: action.link,
-            target: action.target,
-            rel: action.rel
-          }, null, _parent));
+          _push(
+            ssrRenderComponent(
+              VPButton,
+              {
+                tag: 'a',
+                size: 'medium',
+                theme: action.theme,
+                text: action.text,
+                href: action.link,
+                target: action.target,
+                rel: action.rel,
+              },
+              null,
+              _parent
+            )
+          );
           _push(`</div>`);
         });
         _push(`<!--]--></div>`);
       } else {
         _push(`<!---->`);
       }
-      ssrRenderSlot(_ctx.$slots, "home-hero-actions-after", {}, null, _push, _parent);
+      ssrRenderSlot(
+        _ctx.$slots,
+        'home-hero-actions-after',
+        {},
+        null,
+        _push,
+        _parent
+      );
       _push(`</div>`);
       if (__props.image || unref(heroImageSlotExists)) {
-        _push(`<div class="image" data-v-d1089a32><div class="image-container" data-v-d1089a32><div class="image-bg" data-v-d1089a32></div>`);
-        ssrRenderSlot(_ctx.$slots, "home-hero-image", {}, () => {
-          if (__props.image) {
-            _push(ssrRenderComponent(VPImage, {
-              class: "image-src",
-              image: __props.image
-            }, null, _parent));
-          } else {
-            _push(`<!---->`);
-          }
-        }, _push, _parent);
+        _push(
+          `<div class="image" data-v-d1089a32><div class="image-container" data-v-d1089a32><div class="image-bg" data-v-d1089a32></div>`
+        );
+        ssrRenderSlot(
+          _ctx.$slots,
+          'home-hero-image',
+          {},
+          () => {
+            if (__props.image) {
+              _push(
+                ssrRenderComponent(
+                  VPImage,
+                  {
+                    class: 'image-src',
+                    image: __props.image,
+                  },
+                  null,
+                  _parent
+                )
+              );
+            } else {
+              _push(`<!---->`);
+            }
+          },
+          _push,
+          _parent
+        );
         _push(`</div></div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$V = _sfc_main$V.setup;
 _sfc_main$V.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHero.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHero.vue'
+  );
   return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
 };
-const VPHero = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["__scopeId", "data-v-d1089a32"]]);
+const VPHero = /* @__PURE__ */ _export_sfc(_sfc_main$V, [
+  ['__scopeId', 'data-v-d1089a32'],
+]);
 const _sfc_main$U = /* @__PURE__ */ defineComponent({
-  __name: "VPHomeHero",
+  __name: 'VPHomeHero',
   __ssrInlineRender: true,
   setup(__props) {
     const { frontmatter: fm } = useData();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(fm).hero) {
-        _push(ssrRenderComponent(VPHero, mergeProps({
-          class: "VPHomeHero",
-          name: unref(fm).hero.name,
-          text: unref(fm).hero.text,
-          tagline: unref(fm).hero.tagline,
-          image: unref(fm).hero.image,
-          actions: unref(fm).hero.actions
-        }, _attrs), {
-          "home-hero-info-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info-before")
-              ];
-            }
-          }),
-          "home-hero-info": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info")
-              ];
-            }
-          }),
-          "home-hero-info-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info-after")
-              ];
-            }
-          }),
-          "home-hero-actions-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-actions-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-actions-after")
-              ];
-            }
-          }),
-          "home-hero-image": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-image", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-image")
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            VPHero,
+            mergeProps(
+              {
+                class: 'VPHomeHero',
+                name: unref(fm).hero.name,
+                text: unref(fm).hero.text,
+                tagline: unref(fm).hero.tagline,
+                image: unref(fm).hero.image,
+                actions: unref(fm).hero.actions,
+              },
+              _attrs
+            ),
+            {
+              'home-hero-info-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [renderSlot(_ctx.$slots, 'home-hero-info-before')];
+                  }
+                }
+              ),
+              'home-hero-info': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-info',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [renderSlot(_ctx.$slots, 'home-hero-info')];
+                }
+              }),
+              'home-hero-info-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [renderSlot(_ctx.$slots, 'home-hero-info-after')];
+                  }
+                }
+              ),
+              'home-hero-actions-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-actions-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [renderSlot(_ctx.$slots, 'home-hero-actions-after')];
+                  }
+                }
+              ),
+              'home-hero-image': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-image',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [renderSlot(_ctx.$slots, 'home-hero-image')];
+                }
+              }),
+              _: 3,
+            },
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$U = _sfc_main$U.setup;
 _sfc_main$U.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeHero.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeHero.vue'
+  );
   return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
 };
 const _sfc_main$T = /* @__PURE__ */ defineComponent({
-  __name: "VPFeature",
+  __name: 'VPFeature',
   __ssrInlineRender: true,
   props: {
     icon: {},
@@ -2709,117 +3655,213 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     link: {},
     linkText: {},
     rel: {},
-    target: {}
+    target: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$$, mergeProps({
-        class: "VPFeature",
-        href: __props.link,
-        rel: __props.rel,
-        target: __props.target,
-        "no-icon": true,
-        tag: __props.link ? "a" : "div"
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<article class="box" data-v-c45db59a${_scopeId}>`);
-            if (typeof __props.icon === "object" && __props.icon.wrap) {
-              _push2(`<div class="icon" data-v-c45db59a${_scopeId}>`);
-              _push2(ssrRenderComponent(VPImage, {
-                image: __props.icon,
-                alt: __props.icon.alt,
-                height: __props.icon.height || 48,
-                width: __props.icon.width || 48
-              }, null, _parent2, _scopeId));
-              _push2(`</div>`);
-            } else if (typeof __props.icon === "object") {
-              _push2(ssrRenderComponent(VPImage, {
-                image: __props.icon,
-                alt: __props.icon.alt,
-                height: __props.icon.height || 48,
-                width: __props.icon.width || 48
-              }, null, _parent2, _scopeId));
-            } else if (__props.icon) {
-              _push2(`<div class="icon" data-v-c45db59a${_scopeId}>${__props.icon ?? ""}</div>`);
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`<h2 class="title" data-v-c45db59a${_scopeId}>${__props.title ?? ""}</h2>`);
-            if (__props.details) {
-              _push2(`<p class="details" data-v-c45db59a${_scopeId}>${__props.details ?? ""}</p>`);
-            } else {
-              _push2(`<!---->`);
-            }
-            if (__props.linkText) {
-              _push2(`<div class="link-text" data-v-c45db59a${_scopeId}><p class="link-text-value" data-v-c45db59a${_scopeId}>${ssrInterpolate(__props.linkText)} <span class="vpi-arrow-right link-text-icon" data-v-c45db59a${_scopeId}></span></p></div>`);
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</article>`);
-          } else {
-            return [
-              createVNode("article", { class: "box" }, [
-                typeof __props.icon === "object" && __props.icon.wrap ? (openBlock(), createBlock("div", {
-                  key: 0,
-                  class: "icon"
-                }, [
-                  createVNode(VPImage, {
-                    image: __props.icon,
-                    alt: __props.icon.alt,
-                    height: __props.icon.height || 48,
-                    width: __props.icon.width || 48
-                  }, null, 8, ["image", "alt", "height", "width"])
-                ])) : typeof __props.icon === "object" ? (openBlock(), createBlock(VPImage, {
-                  key: 1,
-                  image: __props.icon,
-                  alt: __props.icon.alt,
-                  height: __props.icon.height || 48,
-                  width: __props.icon.width || 48
-                }, null, 8, ["image", "alt", "height", "width"])) : __props.icon ? (openBlock(), createBlock("div", {
-                  key: 2,
-                  class: "icon",
-                  innerHTML: __props.icon
-                }, null, 8, ["innerHTML"])) : createCommentVNode("", true),
-                createVNode("h2", {
-                  class: "title",
-                  innerHTML: __props.title
-                }, null, 8, ["innerHTML"]),
-                __props.details ? (openBlock(), createBlock("p", {
-                  key: 3,
-                  class: "details",
-                  innerHTML: __props.details
-                }, null, 8, ["innerHTML"])) : createCommentVNode("", true),
-                __props.linkText ? (openBlock(), createBlock("div", {
-                  key: 4,
-                  class: "link-text"
-                }, [
-                  createVNode("p", { class: "link-text-value" }, [
-                    createTextVNode(toDisplayString(__props.linkText) + " ", 1),
-                    createVNode("span", { class: "vpi-arrow-right link-text-icon" })
-                  ])
-                ])) : createCommentVNode("", true)
-              ])
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      _push(
+        ssrRenderComponent(
+          _sfc_main$$,
+          mergeProps(
+            {
+              class: 'VPFeature',
+              href: __props.link,
+              rel: __props.rel,
+              target: __props.target,
+              'no-icon': true,
+              tag: __props.link ? 'a' : 'div',
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<article class="box" data-v-c45db59a${_scopeId}>`);
+                if (typeof __props.icon === 'object' && __props.icon.wrap) {
+                  _push2(`<div class="icon" data-v-c45db59a${_scopeId}>`);
+                  _push2(
+                    ssrRenderComponent(
+                      VPImage,
+                      {
+                        image: __props.icon,
+                        alt: __props.icon.alt,
+                        height: __props.icon.height || 48,
+                        width: __props.icon.width || 48,
+                      },
+                      null,
+                      _parent2,
+                      _scopeId
+                    )
+                  );
+                  _push2(`</div>`);
+                } else if (typeof __props.icon === 'object') {
+                  _push2(
+                    ssrRenderComponent(
+                      VPImage,
+                      {
+                        image: __props.icon,
+                        alt: __props.icon.alt,
+                        height: __props.icon.height || 48,
+                        width: __props.icon.width || 48,
+                      },
+                      null,
+                      _parent2,
+                      _scopeId
+                    )
+                  );
+                } else if (__props.icon) {
+                  _push2(
+                    `<div class="icon" data-v-c45db59a${_scopeId}>${__props.icon ?? ''}</div>`
+                  );
+                } else {
+                  _push2(`<!---->`);
+                }
+                _push2(
+                  `<h2 class="title" data-v-c45db59a${_scopeId}>${__props.title ?? ''}</h2>`
+                );
+                if (__props.details) {
+                  _push2(
+                    `<p class="details" data-v-c45db59a${_scopeId}>${__props.details ?? ''}</p>`
+                  );
+                } else {
+                  _push2(`<!---->`);
+                }
+                if (__props.linkText) {
+                  _push2(
+                    `<div class="link-text" data-v-c45db59a${_scopeId}><p class="link-text-value" data-v-c45db59a${_scopeId}>${ssrInterpolate(__props.linkText)} <span class="vpi-arrow-right link-text-icon" data-v-c45db59a${_scopeId}></span></p></div>`
+                  );
+                } else {
+                  _push2(`<!---->`);
+                }
+                _push2(`</article>`);
+              } else {
+                return [
+                  createVNode('article', { class: 'box' }, [
+                    typeof __props.icon === 'object' && __props.icon.wrap
+                      ? (openBlock(),
+                        createBlock(
+                          'div',
+                          {
+                            key: 0,
+                            class: 'icon',
+                          },
+                          [
+                            createVNode(
+                              VPImage,
+                              {
+                                image: __props.icon,
+                                alt: __props.icon.alt,
+                                height: __props.icon.height || 48,
+                                width: __props.icon.width || 48,
+                              },
+                              null,
+                              8,
+                              ['image', 'alt', 'height', 'width']
+                            ),
+                          ]
+                        ))
+                      : typeof __props.icon === 'object'
+                        ? (openBlock(),
+                          createBlock(
+                            VPImage,
+                            {
+                              key: 1,
+                              image: __props.icon,
+                              alt: __props.icon.alt,
+                              height: __props.icon.height || 48,
+                              width: __props.icon.width || 48,
+                            },
+                            null,
+                            8,
+                            ['image', 'alt', 'height', 'width']
+                          ))
+                        : __props.icon
+                          ? (openBlock(),
+                            createBlock(
+                              'div',
+                              {
+                                key: 2,
+                                class: 'icon',
+                                innerHTML: __props.icon,
+                              },
+                              null,
+                              8,
+                              ['innerHTML']
+                            ))
+                          : createCommentVNode('', true),
+                    createVNode(
+                      'h2',
+                      {
+                        class: 'title',
+                        innerHTML: __props.title,
+                      },
+                      null,
+                      8,
+                      ['innerHTML']
+                    ),
+                    __props.details
+                      ? (openBlock(),
+                        createBlock(
+                          'p',
+                          {
+                            key: 3,
+                            class: 'details',
+                            innerHTML: __props.details,
+                          },
+                          null,
+                          8,
+                          ['innerHTML']
+                        ))
+                      : createCommentVNode('', true),
+                    __props.linkText
+                      ? (openBlock(),
+                        createBlock(
+                          'div',
+                          {
+                            key: 4,
+                            class: 'link-text',
+                          },
+                          [
+                            createVNode('p', { class: 'link-text-value' }, [
+                              createTextVNode(
+                                toDisplayString(__props.linkText) + ' ',
+                                1
+                              ),
+                              createVNode('span', {
+                                class: 'vpi-arrow-right link-text-icon',
+                              }),
+                            ]),
+                          ]
+                        ))
+                      : createCommentVNode('', true),
+                  ]),
+                ];
+              }
+            }),
+            _: 1,
+          },
+          _parent
+        )
+      );
     };
-  }
+  },
 });
 const _sfc_setup$T = _sfc_main$T.setup;
 _sfc_main$T.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFeature.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFeature.vue'
+  );
   return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
 };
-const VPFeature = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-c45db59a"]]);
+const VPFeature = /* @__PURE__ */ _export_sfc(_sfc_main$T, [
+  ['__scopeId', 'data-v-c45db59a'],
+]);
 const _sfc_main$S = /* @__PURE__ */ defineComponent({
-  __name: "VPFeatures",
+  __name: 'VPFeatures',
   __ssrInlineRender: true,
   props: {
-    features: {}
+    features: {},
   },
   setup(__props) {
     const props = __props;
@@ -2828,29 +3870,40 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
       if (!length) {
         return;
       } else if (length === 2) {
-        return "grid-2";
+        return 'grid-2';
       } else if (length === 3) {
-        return "grid-3";
+        return 'grid-3';
       } else if (length % 3 === 0) {
-        return "grid-6";
+        return 'grid-6';
       } else if (length > 3) {
-        return "grid-4";
+        return 'grid-4';
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.features) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPFeatures" }, _attrs))} data-v-f55e36ed><div class="container" data-v-f55e36ed><div class="items" data-v-f55e36ed><!--[-->`);
+        _push(
+          `<div${ssrRenderAttrs(mergeProps({ class: 'VPFeatures' }, _attrs))} data-v-f55e36ed><div class="container" data-v-f55e36ed><div class="items" data-v-f55e36ed><!--[-->`
+        );
         ssrRenderList(__props.features, (feature) => {
-          _push(`<div class="${ssrRenderClass([[grid.value], "item"])}" data-v-f55e36ed>`);
-          _push(ssrRenderComponent(VPFeature, {
-            icon: feature.icon,
-            title: feature.title,
-            details: feature.details,
-            link: feature.link,
-            "link-text": feature.linkText,
-            rel: feature.rel,
-            target: feature.target
-          }, null, _parent));
+          _push(
+            `<div class="${ssrRenderClass([[grid.value], 'item'])}" data-v-f55e36ed>`
+          );
+          _push(
+            ssrRenderComponent(
+              VPFeature,
+              {
+                icon: feature.icon,
+                title: feature.title,
+                details: feature.details,
+                link: feature.link,
+                'link-text': feature.linkText,
+                rel: feature.rel,
+                target: feature.target,
+              },
+              null,
+              _parent
+            )
+          );
           _push(`</div>`);
         });
         _push(`<!--]--></div></div></div>`);
@@ -2858,431 +3911,904 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$S = _sfc_main$S.setup;
 _sfc_main$S.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFeatures.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFeatures.vue'
+  );
   return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
 };
-const VPFeatures = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-f55e36ed"]]);
+const VPFeatures = /* @__PURE__ */ _export_sfc(_sfc_main$S, [
+  ['__scopeId', 'data-v-f55e36ed'],
+]);
 const _sfc_main$R = /* @__PURE__ */ defineComponent({
-  __name: "VPHomeFeatures",
+  __name: 'VPHomeFeatures',
   __ssrInlineRender: true,
   setup(__props) {
     const { frontmatter: fm } = useData();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(fm).features) {
-        _push(ssrRenderComponent(VPFeatures, mergeProps({
-          class: "VPHomeFeatures",
-          features: unref(fm).features
-        }, _attrs), null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPFeatures,
+            mergeProps(
+              {
+                class: 'VPHomeFeatures',
+                features: unref(fm).features,
+              },
+              _attrs
+            ),
+            null,
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$R = _sfc_main$R.setup;
 _sfc_main$R.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeFeatures.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeFeatures.vue'
+  );
   return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
 };
 const _sfc_main$Q = /* @__PURE__ */ defineComponent({
-  __name: "VPHomeContent",
+  __name: 'VPHomeContent',
   __ssrInlineRender: true,
   setup(__props) {
     const { width: vw } = useWindowSize({
       initialWidth: 0,
-      includeScrollbar: false
+      includeScrollbar: false,
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: "vp-doc container",
-        style: unref(vw) ? { "--vp-offset": `calc(50% - ${unref(vw) / 2}px)` } : {}
-      }, _attrs))} data-v-15ce1214>`);
-      ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: 'vp-doc container',
+              style: unref(vw)
+                ? { '--vp-offset': `calc(50% - ${unref(vw) / 2}px)` }
+                : {},
+            },
+            _attrs
+          )
+        )} data-v-15ce1214>`
+      );
+      ssrRenderSlot(_ctx.$slots, 'default', {}, null, _push, _parent);
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$Q = _sfc_main$Q.setup;
 _sfc_main$Q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeContent.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeContent.vue'
+  );
   return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
 };
-const VPHomeContent = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["__scopeId", "data-v-15ce1214"]]);
+const VPHomeContent = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [
+  ['__scopeId', 'data-v-15ce1214'],
+]);
 const _sfc_main$P = /* @__PURE__ */ defineComponent({
-  __name: "VPHome",
+  __name: 'VPHome',
   __ssrInlineRender: true,
   setup(__props) {
     const { frontmatter, theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Content = resolveComponent("Content");
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPHome", {
-          "external-link-icon-enabled": unref(theme2).externalLinkIcon
-        }]
-      }, _attrs))} data-v-3f08be4d>`);
-      ssrRenderSlot(_ctx.$slots, "home-hero-before", {}, null, _push, _parent);
-      _push(ssrRenderComponent(_sfc_main$U, null, {
-        "home-hero-info-before": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "home-hero-info-before", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "home-hero-info-before", {}, void 0, true)
-            ];
-          }
-        }),
-        "home-hero-info": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "home-hero-info", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "home-hero-info", {}, void 0, true)
-            ];
-          }
-        }),
-        "home-hero-info-after": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "home-hero-info-after", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "home-hero-info-after", {}, void 0, true)
-            ];
-          }
-        }),
-        "home-hero-actions-after": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "home-hero-actions-after", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "home-hero-actions-after", {}, void 0, true)
-            ];
-          }
-        }),
-        "home-hero-image": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "home-hero-image", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "home-hero-image", {}, void 0, true)
-            ];
-          }
-        }),
-        _: 3
-      }, _parent));
-      ssrRenderSlot(_ctx.$slots, "home-hero-after", {}, null, _push, _parent);
-      ssrRenderSlot(_ctx.$slots, "home-features-before", {}, null, _push, _parent);
+      const _component_Content = resolveComponent('Content');
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: [
+                'VPHome',
+                {
+                  'external-link-icon-enabled': unref(theme2).externalLinkIcon,
+                },
+              ],
+            },
+            _attrs
+          )
+        )} data-v-3f08be4d>`
+      );
+      ssrRenderSlot(_ctx.$slots, 'home-hero-before', {}, null, _push, _parent);
+      _push(
+        ssrRenderComponent(
+          _sfc_main$U,
+          null,
+          {
+            'home-hero-info-before': withCtx(
+              (_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-info-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }
+            ),
+            'home-hero-info': withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'home-hero-info',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [
+                  renderSlot(_ctx.$slots, 'home-hero-info', {}, void 0, true),
+                ];
+              }
+            }),
+            'home-hero-info-after': withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'home-hero-info-after',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [
+                  renderSlot(
+                    _ctx.$slots,
+                    'home-hero-info-after',
+                    {},
+                    void 0,
+                    true
+                  ),
+                ];
+              }
+            }),
+            'home-hero-actions-after': withCtx(
+              (_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-actions-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-actions-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }
+            ),
+            'home-hero-image': withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'home-hero-image',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [
+                  renderSlot(_ctx.$slots, 'home-hero-image', {}, void 0, true),
+                ];
+              }
+            }),
+            _: 3,
+          },
+          _parent
+        )
+      );
+      ssrRenderSlot(_ctx.$slots, 'home-hero-after', {}, null, _push, _parent);
+      ssrRenderSlot(
+        _ctx.$slots,
+        'home-features-before',
+        {},
+        null,
+        _push,
+        _parent
+      );
       _push(ssrRenderComponent(_sfc_main$R, null, null, _parent));
-      ssrRenderSlot(_ctx.$slots, "home-features-after", {}, null, _push, _parent);
+      ssrRenderSlot(
+        _ctx.$slots,
+        'home-features-after',
+        {},
+        null,
+        _push,
+        _parent
+      );
       if (unref(frontmatter).markdownStyles !== false) {
-        _push(ssrRenderComponent(VPHomeContent, null, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(ssrRenderComponent(_component_Content, null, null, _parent2, _scopeId));
-            } else {
-              return [
-                createVNode(_component_Content)
-              ];
-            }
-          }),
-          _: 1
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            VPHomeContent,
+            null,
+            {
+              default: withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(
+                    ssrRenderComponent(
+                      _component_Content,
+                      null,
+                      null,
+                      _parent2,
+                      _scopeId
+                    )
+                  );
+                } else {
+                  return [createVNode(_component_Content)];
+                }
+              }),
+              _: 1,
+            },
+            _parent
+          )
+        );
       } else {
         _push(ssrRenderComponent(_component_Content, null, null, _parent));
       }
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$P = _sfc_main$P.setup;
 _sfc_main$P.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHome.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHome.vue'
+  );
   return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
 };
-const VPHome = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-3f08be4d"]]);
+const VPHome = /* @__PURE__ */ _export_sfc(_sfc_main$P, [
+  ['__scopeId', 'data-v-3f08be4d'],
+]);
 const _sfc_main$O = {};
 function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
-  const _component_Content = resolveComponent("Content");
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPPage" }, _attrs))}>`);
-  ssrRenderSlot(_ctx.$slots, "page-top", {}, null, _push, _parent);
+  const _component_Content = resolveComponent('Content');
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: 'VPPage' }, _attrs))}>`);
+  ssrRenderSlot(_ctx.$slots, 'page-top', {}, null, _push, _parent);
   _push(ssrRenderComponent(_component_Content, null, null, _parent));
-  ssrRenderSlot(_ctx.$slots, "page-bottom", {}, null, _push, _parent);
+  ssrRenderSlot(_ctx.$slots, 'page-bottom', {}, null, _push, _parent);
   _push(`</div>`);
 }
 const _sfc_setup$O = _sfc_main$O.setup;
 _sfc_main$O.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPPage.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPPage.vue'
+  );
   return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
 };
-const VPPage = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["ssrRender", _sfc_ssrRender$1]]);
+const VPPage = /* @__PURE__ */ _export_sfc(_sfc_main$O, [
+  ['ssrRender', _sfc_ssrRender$1],
+]);
 const _sfc_main$N = /* @__PURE__ */ defineComponent({
-  __name: "VPContent",
+  __name: 'VPContent',
   __ssrInlineRender: true,
   setup(__props) {
     const { page, frontmatter } = useData();
     const { hasSidebar } = useSidebar();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPContent", {
-          "has-sidebar": unref(hasSidebar),
-          "is-home": unref(frontmatter).layout === "home"
-        }],
-        id: "VPContent"
-      }, _attrs))} data-v-b7b04193>`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: [
+                'VPContent',
+                {
+                  'has-sidebar': unref(hasSidebar),
+                  'is-home': unref(frontmatter).layout === 'home',
+                },
+              ],
+              id: 'VPContent',
+            },
+            _attrs
+          )
+        )} data-v-b7b04193>`
+      );
       if (unref(page).isNotFound) {
-        ssrRenderSlot(_ctx.$slots, "not-found", {}, () => {
-          _push(ssrRenderComponent(NotFound, null, null, _parent));
-        }, _push, _parent);
-      } else if (unref(frontmatter).layout === "page") {
-        _push(ssrRenderComponent(VPPage, null, {
-          "page-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "page-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "page-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "page-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "page-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "page-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
-      } else if (unref(frontmatter).layout === "home") {
-        _push(ssrRenderComponent(VPHome, null, {
-          "home-hero-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-info-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-info": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-info-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-actions-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-actions-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-actions-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-image": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-image", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-image", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-features-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-features-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-features-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-features-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-features-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-features-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
-      } else if (unref(frontmatter).layout && unref(frontmatter).layout !== "doc") {
-        ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(frontmatter).layout), null, null), _parent);
+        ssrRenderSlot(
+          _ctx.$slots,
+          'not-found',
+          {},
+          () => {
+            _push(ssrRenderComponent(NotFound, null, null, _parent));
+          },
+          _push,
+          _parent
+        );
+      } else if (unref(frontmatter).layout === 'page') {
+        _push(
+          ssrRenderComponent(
+            VPPage,
+            null,
+            {
+              'page-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'page-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'page-top', {}, void 0, true),
+                  ];
+                }
+              }),
+              'page-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'page-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'page-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              _: 3,
+            },
+            _parent
+          )
+        );
+      } else if (unref(frontmatter).layout === 'home') {
+        _push(
+          ssrRenderComponent(
+            VPHome,
+            null,
+            {
+              'home-hero-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'home-hero-info-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-hero-info-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-hero-info': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-info',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'home-hero-info', {}, void 0, true),
+                  ];
+                }
+              }),
+              'home-hero-info-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-hero-info-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-hero-actions-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-actions-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-hero-actions-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-hero-image': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-image',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-image',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'home-hero-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'home-features-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-features-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-features-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-features-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-features-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-features-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              _: 3,
+            },
+            _parent
+          )
+        );
+      } else if (
+        unref(frontmatter).layout &&
+        unref(frontmatter).layout !== 'doc'
+      ) {
+        ssrRenderVNode(
+          _push,
+          createVNode(
+            resolveDynamicComponent(unref(frontmatter).layout),
+            null,
+            null
+          ),
+          _parent
+        );
       } else {
-        _push(ssrRenderComponent(VPDoc, null, {
-          "doc-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-footer-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-footer-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-footer-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-outline-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-outline-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-outline-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-outline-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-outline-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-outline-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-ads-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-ads-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-ads-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-ads-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-ads-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-ads-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            VPDoc,
+            null,
+            {
+              'doc-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [renderSlot(_ctx.$slots, 'doc-top', {}, void 0, true)];
+                }
+              }),
+              'doc-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'doc-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              'doc-footer-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-footer-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'doc-footer-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'doc-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'doc-before', {}, void 0, true),
+                  ];
+                }
+              }),
+              'doc-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'doc-after', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'aside-top', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-outline-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'aside-outline-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'aside-outline-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'aside-outline-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'aside-outline-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'aside-outline-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'aside-ads-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-ads-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'aside-ads-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'aside-ads-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-ads-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'aside-ads-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'aside-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'aside-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              _: 3,
+            },
+            _parent
+          )
+        );
       }
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$N = _sfc_main$N.setup;
 _sfc_main$N.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPContent.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPContent.vue'
+  );
   return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
 };
-const VPContent = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["__scopeId", "data-v-b7b04193"]]);
+const VPContent = /* @__PURE__ */ _export_sfc(_sfc_main$N, [
+  ['__scopeId', 'data-v-b7b04193'],
+]);
 const _sfc_main$M = /* @__PURE__ */ defineComponent({
-  __name: "VPFooter",
+  __name: 'VPFooter',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2, frontmatter } = useData();
     const { hasSidebar } = useSidebar();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(theme2).footer && unref(frontmatter).footer !== false) {
-        _push(`<footer${ssrRenderAttrs(mergeProps({
-          class: ["VPFooter", { "has-sidebar": unref(hasSidebar) }]
-        }, _attrs))} data-v-b3c26e97><div class="container" data-v-b3c26e97>`);
+        _push(
+          `<footer${ssrRenderAttrs(
+            mergeProps(
+              {
+                class: ['VPFooter', { 'has-sidebar': unref(hasSidebar) }],
+              },
+              _attrs
+            )
+          )} data-v-b3c26e97><div class="container" data-v-b3c26e97>`
+        );
         if (unref(theme2).footer.message) {
-          _push(`<p class="message" data-v-b3c26e97>${unref(theme2).footer.message ?? ""}</p>`);
+          _push(
+            `<p class="message" data-v-b3c26e97>${unref(theme2).footer.message ?? ''}</p>`
+          );
         } else {
           _push(`<!---->`);
         }
         if (unref(theme2).footer.copyright) {
-          _push(`<p class="copyright" data-v-b3c26e97>${unref(theme2).footer.copyright ?? ""}</p>`);
+          _push(
+            `<p class="copyright" data-v-b3c26e97>${unref(theme2).footer.copyright ?? ''}</p>`
+          );
         } else {
           _push(`<!---->`);
         }
@@ -3291,15 +4817,19 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$M = _sfc_main$M.setup;
 _sfc_main$M.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFooter.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFooter.vue'
+  );
   return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
 };
-const VPFooter = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-b3c26e97"]]);
+const VPFooter = /* @__PURE__ */ _export_sfc(_sfc_main$M, [
+  ['__scopeId', 'data-v-b3c26e97'],
+]);
 function useLocalNav() {
   const { theme: theme2, frontmatter } = useData();
   const headers = shallowRef([]);
@@ -3307,19 +4837,21 @@ function useLocalNav() {
     return headers.value.length > 0;
   });
   onContentUpdated(() => {
-    headers.value = getHeaders(frontmatter.value.outline ?? theme2.value.outline);
+    headers.value = getHeaders(
+      frontmatter.value.outline ?? theme2.value.outline
+    );
   });
   return {
     headers,
-    hasLocalNav
+    hasLocalNav,
   };
 }
 const _sfc_main$L = /* @__PURE__ */ defineComponent({
-  __name: "VPLocalNavOutlineDropdown",
+  __name: 'VPLocalNavOutlineDropdown',
   __ssrInlineRender: true,
   props: {
     headers: {},
-    navHeight: {}
+    navHeight: {},
   },
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -3335,54 +4867,78 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     }
     watch(open, (value) => {
       if (value) {
-        document.addEventListener("click", closeOnClickOutside);
+        document.addEventListener('click', closeOnClickOutside);
         return;
       }
-      document.removeEventListener("click", closeOnClickOutside);
+      document.removeEventListener('click', closeOnClickOutside);
     });
-    onKeyStroke("Escape", () => {
+    onKeyStroke('Escape', () => {
       open.value = false;
     });
     onContentUpdated(() => {
       open.value = false;
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: "VPLocalNavOutlineDropdown",
-        style: { "--vp-vh": vh.value + "px" },
-        ref_key: "main",
-        ref: main
-      }, _attrs))} data-v-ee939bb1>`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: 'VPLocalNavOutlineDropdown',
+              style: { '--vp-vh': vh.value + 'px' },
+              ref_key: 'main',
+              ref: main,
+            },
+            _attrs
+          )
+        )} data-v-ee939bb1>`
+      );
       if (__props.headers.length > 0) {
-        _push(`<button class="${ssrRenderClass({ open: open.value })}" data-v-ee939bb1><span class="menu-text" data-v-ee939bb1>${ssrInterpolate(unref(resolveTitle)(unref(theme2)))}</span><span class="vpi-chevron-right icon" data-v-ee939bb1></span></button>`);
+        _push(
+          `<button class="${ssrRenderClass({ open: open.value })}" data-v-ee939bb1><span class="menu-text" data-v-ee939bb1>${ssrInterpolate(unref(resolveTitle)(unref(theme2)))}</span><span class="vpi-chevron-right icon" data-v-ee939bb1></span></button>`
+        );
       } else {
-        _push(`<button data-v-ee939bb1>${ssrInterpolate(unref(theme2).returnToTopLabel || "Return to top")}</button>`);
+        _push(
+          `<button data-v-ee939bb1>${ssrInterpolate(unref(theme2).returnToTopLabel || 'Return to top')}</button>`
+        );
       }
       if (open.value) {
-        _push(`<div class="items" data-v-ee939bb1><div class="header" data-v-ee939bb1><a class="top-link" href="#" data-v-ee939bb1>${ssrInterpolate(unref(theme2).returnToTopLabel || "Return to top")}</a></div><div class="outline" data-v-ee939bb1>`);
-        _push(ssrRenderComponent(VPDocOutlineItem, { headers: __props.headers }, null, _parent));
+        _push(
+          `<div class="items" data-v-ee939bb1><div class="header" data-v-ee939bb1><a class="top-link" href="#" data-v-ee939bb1>${ssrInterpolate(unref(theme2).returnToTopLabel || 'Return to top')}</a></div><div class="outline" data-v-ee939bb1>`
+        );
+        _push(
+          ssrRenderComponent(
+            VPDocOutlineItem,
+            { headers: __props.headers },
+            null,
+            _parent
+          )
+        );
         _push(`</div></div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$L = _sfc_main$L.setup;
 _sfc_main$L.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLocalNavOutlineDropdown.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLocalNavOutlineDropdown.vue'
+  );
   return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
 };
-const VPLocalNavOutlineDropdown = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["__scopeId", "data-v-ee939bb1"]]);
+const VPLocalNavOutlineDropdown = /* @__PURE__ */ _export_sfc(_sfc_main$L, [
+  ['__scopeId', 'data-v-ee939bb1'],
+]);
 const _sfc_main$K = /* @__PURE__ */ defineComponent({
-  __name: "VPLocalNav",
+  __name: 'VPLocalNav',
   __ssrInlineRender: true,
   props: {
-    open: { type: Boolean }
+    open: { type: Boolean },
   },
-  emits: ["open-menu"],
+  emits: ['open-menu'],
   setup(__props) {
     const { theme: theme2, frontmatter } = useData();
     const { hasSidebar } = useSidebar();
@@ -3392,12 +4948,14 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     onMounted(() => {
       navHeight.value = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue(
-          "--vp-nav-height"
+          '--vp-nav-height'
         )
       );
     });
     onContentUpdated(() => {
-      headers.value = getHeaders(frontmatter.value.outline ?? theme2.value.outline);
+      headers.value = getHeaders(
+        frontmatter.value.outline ?? theme2.value.outline
+      );
     });
     const empty = computed(() => {
       return headers.value.length === 0;
@@ -3408,46 +4966,64 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     const classes = computed(() => {
       return {
         VPLocalNav: true,
-        "has-sidebar": hasSidebar.value,
+        'has-sidebar': hasSidebar.value,
         empty: empty.value,
-        fixed: emptyAndNoSidebar.value
+        fixed: emptyAndNoSidebar.value,
       };
     });
     return (_ctx, _push, _parent, _attrs) => {
-      if (unref(frontmatter).layout !== "home" && (!emptyAndNoSidebar.value || unref(y) >= navHeight.value)) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: classes.value }, _attrs))} data-v-3d22a78c><div class="container" data-v-3d22a78c>`);
+      if (
+        unref(frontmatter).layout !== 'home' &&
+        (!emptyAndNoSidebar.value || unref(y) >= navHeight.value)
+      ) {
+        _push(
+          `<div${ssrRenderAttrs(mergeProps({ class: classes.value }, _attrs))} data-v-3d22a78c><div class="container" data-v-3d22a78c>`
+        );
         if (unref(hasSidebar)) {
-          _push(`<button class="menu"${ssrRenderAttr("aria-expanded", __props.open)} aria-controls="VPSidebarNav" data-v-3d22a78c><span class="vpi-align-left menu-icon" data-v-3d22a78c></span><span class="menu-text" data-v-3d22a78c>${ssrInterpolate(unref(theme2).sidebarMenuLabel || "Menu")}</span></button>`);
+          _push(
+            `<button class="menu"${ssrRenderAttr('aria-expanded', __props.open)} aria-controls="VPSidebarNav" data-v-3d22a78c><span class="vpi-align-left menu-icon" data-v-3d22a78c></span><span class="menu-text" data-v-3d22a78c>${ssrInterpolate(unref(theme2).sidebarMenuLabel || 'Menu')}</span></button>`
+          );
         } else {
           _push(`<!---->`);
         }
-        _push(ssrRenderComponent(VPLocalNavOutlineDropdown, {
-          headers: unref(headers),
-          navHeight: navHeight.value
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPLocalNavOutlineDropdown,
+            {
+              headers: unref(headers),
+              navHeight: navHeight.value,
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</div></div>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$K = _sfc_main$K.setup;
 _sfc_main$K.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLocalNav.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPLocalNav.vue'
+  );
   return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
 };
-const VPLocalNav = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-3d22a78c"]]);
+const VPLocalNav = /* @__PURE__ */ _export_sfc(_sfc_main$K, [
+  ['__scopeId', 'data-v-3d22a78c'],
+]);
 function useNav() {
   const isScreenOpen = ref(false);
   function openScreen() {
     isScreenOpen.value = true;
-    window.addEventListener("resize", closeScreenOnTabletWindow);
+    window.addEventListener('resize', closeScreenOnTabletWindow);
   }
   function closeScreen() {
     isScreenOpen.value = false;
-    window.removeEventListener("resize", closeScreenOnTabletWindow);
+    window.removeEventListener('resize', closeScreenOnTabletWindow);
   }
   function toggleScreen() {
     isScreenOpen.value ? closeScreen() : openScreen();
@@ -3461,19 +5037,26 @@ function useNav() {
     isScreenOpen,
     openScreen,
     closeScreen,
-    toggleScreen
+    toggleScreen,
   };
 }
 const _sfc_main$J = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  _push(`<button${ssrRenderAttrs(mergeProps({
-    class: "VPSwitch",
-    type: "button",
-    role: "switch"
-  }, _attrs))} data-v-607d071a><span class="check" data-v-607d071a>`);
+  _push(
+    `<button${ssrRenderAttrs(
+      mergeProps(
+        {
+          class: 'VPSwitch',
+          type: 'button',
+          role: 'switch',
+        },
+        _attrs
+      )
+    )} data-v-607d071a><span class="check" data-v-607d071a>`
+  );
   if (_ctx.$slots.default) {
     _push(`<span class="icon" data-v-607d071a>`);
-    ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+    ssrRenderSlot(_ctx.$slots, 'default', {}, null, _push, _parent);
     _push(`</span>`);
   } else {
     _push(`<!---->`);
@@ -3483,74 +5066,107 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
 const _sfc_setup$J = _sfc_main$J.setup;
 _sfc_main$J.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSwitch.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSwitch.vue'
+  );
   return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
 };
-const VPSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-607d071a"]]);
+const VPSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$J, [
+  ['ssrRender', _sfc_ssrRender],
+  ['__scopeId', 'data-v-607d071a'],
+]);
 const _sfc_main$I = /* @__PURE__ */ defineComponent({
-  __name: "VPSwitchAppearance",
+  __name: 'VPSwitchAppearance',
   __ssrInlineRender: true,
   setup(__props) {
     const { isDark, theme: theme2 } = useData();
-    const toggleAppearance = inject("toggle-appearance", () => {
+    const toggleAppearance = inject('toggle-appearance', () => {
       isDark.value = !isDark.value;
     });
-    const switchTitle = ref("");
+    const switchTitle = ref('');
     watchPostEffect(() => {
-      switchTitle.value = isDark.value ? theme2.value.lightModeSwitchTitle || "Switch to light theme" : theme2.value.darkModeSwitchTitle || "Switch to dark theme";
+      switchTitle.value = isDark.value
+        ? theme2.value.lightModeSwitchTitle || 'Switch to light theme'
+        : theme2.value.darkModeSwitchTitle || 'Switch to dark theme';
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(VPSwitch, mergeProps({
-        title: switchTitle.value,
-        class: "VPSwitchAppearance",
-        "aria-checked": unref(isDark),
-        onClick: unref(toggleAppearance)
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<span class="vpi-sun sun" data-v-33083be2${_scopeId}></span><span class="vpi-moon moon" data-v-33083be2${_scopeId}></span>`);
-          } else {
-            return [
-              createVNode("span", { class: "vpi-sun sun" }),
-              createVNode("span", { class: "vpi-moon moon" })
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      _push(
+        ssrRenderComponent(
+          VPSwitch,
+          mergeProps(
+            {
+              title: switchTitle.value,
+              class: 'VPSwitchAppearance',
+              'aria-checked': unref(isDark),
+              onClick: unref(toggleAppearance),
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(
+                  `<span class="vpi-sun sun" data-v-33083be2${_scopeId}></span><span class="vpi-moon moon" data-v-33083be2${_scopeId}></span>`
+                );
+              } else {
+                return [
+                  createVNode('span', { class: 'vpi-sun sun' }),
+                  createVNode('span', { class: 'vpi-moon moon' }),
+                ];
+              }
+            }),
+            _: 1,
+          },
+          _parent
+        )
+      );
     };
-  }
+  },
 });
 const _sfc_setup$I = _sfc_main$I.setup;
 _sfc_main$I.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSwitchAppearance.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSwitchAppearance.vue'
+  );
   return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
 };
-const VPSwitchAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-33083be2"]]);
+const VPSwitchAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$I, [
+  ['__scopeId', 'data-v-33083be2'],
+]);
 const _sfc_main$H = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarAppearance",
+  __name: 'VPNavBarAppearance',
   __ssrInlineRender: true,
   setup(__props) {
     const { site } = useData();
     return (_ctx, _push, _parent, _attrs) => {
-      if (unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto") {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPNavBarAppearance" }, _attrs))} data-v-66f9632b>`);
+      if (
+        unref(site).appearance &&
+        unref(site).appearance !== 'force-dark' &&
+        unref(site).appearance !== 'force-auto'
+      ) {
+        _push(
+          `<div${ssrRenderAttrs(mergeProps({ class: 'VPNavBarAppearance' }, _attrs))} data-v-66f9632b>`
+        );
         _push(ssrRenderComponent(VPSwitchAppearance, null, null, _parent));
         _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$H = _sfc_main$H.setup;
 _sfc_main$H.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarAppearance.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarAppearance.vue'
+  );
   return _sfc_setup$H ? _sfc_setup$H(props, ctx) : void 0;
 };
-const VPNavBarAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["__scopeId", "data-v-66f9632b"]]);
+const VPNavBarAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$H, [
+  ['__scopeId', 'data-v-66f9632b'],
+]);
 const focusedElement = ref();
 let active = false;
 let listeners = 0;
@@ -3561,7 +5177,10 @@ function useFlyout(options) {
     listeners++;
     const unwatch = watch(focusedElement, (el) => {
       var _a, _b, _c;
-      if (el === options.el.value || ((_a = options.el.value) == null ? void 0 : _a.contains(el))) {
+      if (
+        el === options.el.value ||
+        ((_a = options.el.value) == null ? void 0 : _a.contains(el))
+      ) {
         focus.value = true;
         (_b = options.onFocus) == null ? void 0 : _b.call(options);
       } else {
@@ -3580,82 +5199,107 @@ function useFlyout(options) {
   return readonly(focus);
 }
 function activateFocusTracking() {
-  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener('focusin', handleFocusIn);
   active = true;
   focusedElement.value = document.activeElement;
 }
 function deactivateFocusTracking() {
-  document.removeEventListener("focusin", handleFocusIn);
+  document.removeEventListener('focusin', handleFocusIn);
 }
 function handleFocusIn() {
   focusedElement.value = document.activeElement;
 }
 const _sfc_main$G = /* @__PURE__ */ defineComponent({
-  __name: "VPMenuLink",
+  __name: 'VPMenuLink',
   __ssrInlineRender: true,
   props: {
-    item: {}
+    item: {},
   },
   setup(__props) {
     const { page } = useData();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPMenuLink" }, _attrs))} data-v-80ca5e41>`);
-      _push(ssrRenderComponent(_sfc_main$$, {
-        class: {
-          active: unref(isActive)(
-            unref(page).relativePath,
-            __props.item.activeMatch || __props.item.link,
-            !!__props.item.activeMatch
-          )
-        },
-        href: __props.item.link,
-        target: __props.item.target,
-        rel: __props.item.rel,
-        "no-icon": __props.item.noIcon
-      }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<span data-v-80ca5e41${_scopeId}>${__props.item.text ?? ""}</span>`);
-          } else {
-            return [
-              createVNode("span", {
-                innerHTML: __props.item.text
-              }, null, 8, ["innerHTML"])
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPMenuLink' }, _attrs))} data-v-80ca5e41>`
+      );
+      _push(
+        ssrRenderComponent(
+          _sfc_main$$,
+          {
+            class: {
+              active: unref(isActive)(
+                unref(page).relativePath,
+                __props.item.activeMatch || __props.item.link,
+                !!__props.item.activeMatch
+              ),
+            },
+            href: __props.item.link,
+            target: __props.item.target,
+            rel: __props.item.rel,
+            'no-icon': __props.item.noIcon,
+          },
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(
+                  `<span data-v-80ca5e41${_scopeId}>${__props.item.text ?? ''}</span>`
+                );
+              } else {
+                return [
+                  createVNode(
+                    'span',
+                    {
+                      innerHTML: __props.item.text,
+                    },
+                    null,
+                    8,
+                    ['innerHTML']
+                  ),
+                ];
+              }
+            }),
+            _: 1,
+          },
+          _parent
+        )
+      );
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$G = _sfc_main$G.setup;
 _sfc_main$G.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPMenuLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPMenuLink.vue'
+  );
   return _sfc_setup$G ? _sfc_setup$G(props, ctx) : void 0;
 };
-const VPMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["__scopeId", "data-v-80ca5e41"]]);
+const VPMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$G, [
+  ['__scopeId', 'data-v-80ca5e41'],
+]);
 const _sfc_main$F = /* @__PURE__ */ defineComponent({
-  __name: "VPMenuGroup",
+  __name: 'VPMenuGroup',
   __ssrInlineRender: true,
   props: {
     text: {},
-    items: {}
+    items: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPMenuGroup" }, _attrs))} data-v-9cc1f87b>`);
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPMenuGroup' }, _attrs))} data-v-9cc1f87b>`
+      );
       if (__props.text) {
-        _push(`<p class="title" data-v-9cc1f87b>${ssrInterpolate(__props.text)}</p>`);
+        _push(
+          `<p class="title" data-v-9cc1f87b>${ssrInterpolate(__props.text)}</p>`
+        );
       } else {
         _push(`<!---->`);
       }
       _push(`<!--[-->`);
       ssrRenderList(__props.items, (item) => {
         _push(`<!--[-->`);
-        if ("link" in item) {
+        if ('link' in item) {
           _push(ssrRenderComponent(VPMenuLink, { item }, null, _parent));
         } else {
           _push(`<!---->`);
@@ -3664,37 +5308,58 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
       });
       _push(`<!--]--></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$F = _sfc_main$F.setup;
 _sfc_main$F.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPMenuGroup.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPMenuGroup.vue'
+  );
   return _sfc_setup$F ? _sfc_setup$F(props, ctx) : void 0;
 };
-const VPMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-9cc1f87b"]]);
+const VPMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$F, [
+  ['__scopeId', 'data-v-9cc1f87b'],
+]);
 const _sfc_main$E = /* @__PURE__ */ defineComponent({
-  __name: "VPMenu",
+  __name: 'VPMenu',
   __ssrInlineRender: true,
   props: {
-    items: {}
+    items: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPMenu" }, _attrs))} data-v-99931a8d>`);
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPMenu' }, _attrs))} data-v-99931a8d>`
+      );
       if (__props.items) {
         _push(`<div class="items" data-v-99931a8d><!--[-->`);
         ssrRenderList(__props.items, (item) => {
           _push(`<!--[-->`);
-          if ("link" in item) {
+          if ('link' in item) {
             _push(ssrRenderComponent(VPMenuLink, { item }, null, _parent));
-          } else if ("component" in item) {
-            ssrRenderVNode(_push, createVNode(resolveDynamicComponent(item.component), mergeProps({ ref_for: true }, item.props), null), _parent);
+          } else if ('component' in item) {
+            ssrRenderVNode(
+              _push,
+              createVNode(
+                resolveDynamicComponent(item.component),
+                mergeProps({ ref_for: true }, item.props),
+                null
+              ),
+              _parent
+            );
           } else {
-            _push(ssrRenderComponent(VPMenuGroup, {
-              text: item.text,
-              items: item.items
-            }, null, _parent));
+            _push(
+              ssrRenderComponent(
+                VPMenuGroup,
+                {
+                  text: item.text,
+                  items: item.items,
+                },
+                null,
+                _parent
+              )
+            );
           }
           _push(`<!--]-->`);
         });
@@ -3702,26 +5367,30 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, 'default', {}, null, _push, _parent);
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$E = _sfc_main$E.setup;
 _sfc_main$E.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPMenu.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPMenu.vue'
+  );
   return _sfc_setup$E ? _sfc_setup$E(props, ctx) : void 0;
 };
-const VPMenu = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["__scopeId", "data-v-99931a8d"]]);
+const VPMenu = /* @__PURE__ */ _export_sfc(_sfc_main$E, [
+  ['__scopeId', 'data-v-99931a8d'],
+]);
 const _sfc_main$D = /* @__PURE__ */ defineComponent({
-  __name: "VPFlyout",
+  __name: 'VPFlyout',
   __ssrInlineRender: true,
   props: {
     icon: {},
     button: {},
     label: {},
-    items: {}
+    items: {},
   },
   setup(__props) {
     const open = ref(false);
@@ -3731,58 +5400,86 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
       open.value = false;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: "VPFlyout",
-        ref_key: "el",
-        ref: el
-      }, _attrs))} data-v-c163b590><button type="button" class="button" aria-haspopup="true"${ssrRenderAttr("aria-expanded", open.value)}${ssrRenderAttr("aria-label", __props.label)} data-v-c163b590>`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: 'VPFlyout',
+              ref_key: 'el',
+              ref: el,
+            },
+            _attrs
+          )
+        )} data-v-c163b590><button type="button" class="button" aria-haspopup="true"${ssrRenderAttr('aria-expanded', open.value)}${ssrRenderAttr('aria-label', __props.label)} data-v-c163b590>`
+      );
       if (__props.button || __props.icon) {
         _push(`<span class="text" data-v-c163b590>`);
         if (__props.icon) {
-          _push(`<span class="${ssrRenderClass([__props.icon, "option-icon"])}" data-v-c163b590></span>`);
+          _push(
+            `<span class="${ssrRenderClass([__props.icon, 'option-icon'])}" data-v-c163b590></span>`
+          );
         } else {
           _push(`<!---->`);
         }
         if (__props.button) {
-          _push(`<span data-v-c163b590>${__props.button ?? ""}</span>`);
+          _push(`<span data-v-c163b590>${__props.button ?? ''}</span>`);
         } else {
           _push(`<!---->`);
         }
-        _push(`<span class="vpi-chevron-down text-icon" data-v-c163b590></span></span>`);
+        _push(
+          `<span class="vpi-chevron-down text-icon" data-v-c163b590></span></span>`
+        );
       } else {
         _push(`<span class="vpi-more-horizontal icon" data-v-c163b590></span>`);
       }
       _push(`</button><div class="menu" data-v-c163b590>`);
-      _push(ssrRenderComponent(VPMenu, { items: __props.items }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "default", {}, void 0, true)
-            ];
-          }
-        }),
-        _: 3
-      }, _parent));
+      _push(
+        ssrRenderComponent(
+          VPMenu,
+          { items: __props.items },
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'default',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [renderSlot(_ctx.$slots, 'default', {}, void 0, true)];
+              }
+            }),
+            _: 3,
+          },
+          _parent
+        )
+      );
       _push(`</div></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$D = _sfc_main$D.setup;
 _sfc_main$D.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFlyout.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPFlyout.vue'
+  );
   return _sfc_setup$D ? _sfc_setup$D(props, ctx) : void 0;
 };
-const VPFlyout = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__scopeId", "data-v-c163b590"]]);
+const VPFlyout = /* @__PURE__ */ _export_sfc(_sfc_main$D, [
+  ['__scopeId', 'data-v-c163b590'],
+]);
 const _sfc_main$C = /* @__PURE__ */ defineComponent({
-  __name: "VPSocialLink",
+  __name: 'VPSocialLink',
   __ssrInlineRender: true,
   props: {
     icon: {},
     link: {},
-    ariaLabel: {}
+    ariaLabel: {},
   },
   setup(__props) {
     var _a;
@@ -3792,250 +5489,427 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
       var _a2;
       await nextTick();
       const span = (_a2 = el.value) == null ? void 0 : _a2.children[0];
-      if (span instanceof HTMLElement && span.className.startsWith("vpi-social-") && (getComputedStyle(span).maskImage || getComputedStyle(span).webkitMaskImage) === "none") {
+      if (
+        span instanceof HTMLElement &&
+        span.className.startsWith('vpi-social-') &&
+        (getComputedStyle(span).maskImage ||
+          getComputedStyle(span).webkitMaskImage) === 'none'
+      ) {
         span.style.setProperty(
-          "--icon",
+          '--icon',
           `url('https://api.iconify.design/simple-icons/${props.icon}.svg')`
         );
       }
     });
     const svg = computed(() => {
-      if (typeof props.icon === "object") return props.icon.svg;
+      if (typeof props.icon === 'object') return props.icon.svg;
       return `<span class="vpi-social-${props.icon}"></span>`;
     });
     {
-      typeof props.icon === "string" && ((_a = useSSRContext()) == null ? void 0 : _a.vpSocialIcons.add(props.icon));
+      typeof props.icon === 'string' &&
+        ((_a = useSSRContext()) == null
+          ? void 0
+          : _a.vpSocialIcons.add(props.icon));
     }
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<a${ssrRenderAttrs(mergeProps({
-        ref_key: "el",
-        ref: el,
-        class: "VPSocialLink no-icon",
-        href: __props.link,
-        "aria-label": __props.ariaLabel ?? (typeof __props.icon === "string" ? __props.icon : ""),
-        target: "_blank",
-        rel: "noopener"
-      }, _attrs))} data-v-a2656781>${svg.value ?? ""}</a>`);
+      _push(
+        `<a${ssrRenderAttrs(
+          mergeProps(
+            {
+              ref_key: 'el',
+              ref: el,
+              class: 'VPSocialLink no-icon',
+              href: __props.link,
+              'aria-label':
+                __props.ariaLabel ??
+                (typeof __props.icon === 'string' ? __props.icon : ''),
+              target: '_blank',
+              rel: 'noopener',
+            },
+            _attrs
+          )
+        )} data-v-a2656781>${svg.value ?? ''}</a>`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$C = _sfc_main$C.setup;
 _sfc_main$C.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSocialLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSocialLink.vue'
+  );
   return _sfc_setup$C ? _sfc_setup$C(props, ctx) : void 0;
 };
-const VPSocialLink = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__scopeId", "data-v-a2656781"]]);
+const VPSocialLink = /* @__PURE__ */ _export_sfc(_sfc_main$C, [
+  ['__scopeId', 'data-v-a2656781'],
+]);
 const _sfc_main$B = /* @__PURE__ */ defineComponent({
-  __name: "VPSocialLinks",
+  __name: 'VPSocialLinks',
   __ssrInlineRender: true,
   props: {
-    links: {}
+    links: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPSocialLinks" }, _attrs))} data-v-05a2e655><!--[-->`);
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPSocialLinks' }, _attrs))} data-v-05a2e655><!--[-->`
+      );
       ssrRenderList(__props.links, ({ link: link2, icon, ariaLabel }) => {
-        _push(ssrRenderComponent(VPSocialLink, {
-          key: link2,
-          icon,
-          link: link2,
-          ariaLabel
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPSocialLink,
+            {
+              key: link2,
+              icon,
+              link: link2,
+              ariaLabel,
+            },
+            null,
+            _parent
+          )
+        );
       });
       _push(`<!--]--></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$B = _sfc_main$B.setup;
 _sfc_main$B.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSocialLinks.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSocialLinks.vue'
+  );
   return _sfc_setup$B ? _sfc_setup$B(props, ctx) : void 0;
 };
-const VPSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-05a2e655"]]);
+const VPSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$B, [
+  ['__scopeId', 'data-v-05a2e655'],
+]);
 const _sfc_main$A = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarExtra",
+  __name: 'VPNavBarExtra',
   __ssrInlineRender: true,
   setup(__props) {
     const { site, theme: theme2 } = useData();
     const { localeLinks, currentLang } = useLangs({ correspondingLink: true });
     const hasExtraContent = computed(
-      () => localeLinks.value.length && currentLang.value.label || site.value.appearance || theme2.value.socialLinks
+      () =>
+        (localeLinks.value.length && currentLang.value.label) ||
+        site.value.appearance ||
+        theme2.value.socialLinks
     );
     return (_ctx, _push, _parent, _attrs) => {
       if (hasExtraContent.value) {
-        _push(ssrRenderComponent(VPFlyout, mergeProps({
-          class: "VPNavBarExtra",
-          label: "extra navigation"
-        }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              if (unref(localeLinks).length && unref(currentLang).label) {
-                _push2(`<div class="group translations" data-v-565bfc4d${_scopeId}><p class="trans-title" data-v-565bfc4d${_scopeId}>${ssrInterpolate(unref(currentLang).label)}</p><!--[-->`);
-                ssrRenderList(unref(localeLinks), (locale) => {
-                  _push2(ssrRenderComponent(VPMenuLink, { item: locale }, null, _parent2, _scopeId));
-                });
-                _push2(`<!--]--></div>`);
-              } else {
-                _push2(`<!---->`);
-              }
-              if (unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto") {
-                _push2(`<div class="group" data-v-565bfc4d${_scopeId}><div class="item appearance" data-v-565bfc4d${_scopeId}><p class="label" data-v-565bfc4d${_scopeId}>${ssrInterpolate(unref(theme2).darkModeSwitchLabel || "Appearance")}</p><div class="appearance-action" data-v-565bfc4d${_scopeId}>`);
-                _push2(ssrRenderComponent(VPSwitchAppearance, null, null, _parent2, _scopeId));
-                _push2(`</div></div></div>`);
-              } else {
-                _push2(`<!---->`);
-              }
-              if (unref(theme2).socialLinks) {
-                _push2(`<div class="group" data-v-565bfc4d${_scopeId}><div class="item social-links" data-v-565bfc4d${_scopeId}>`);
-                _push2(ssrRenderComponent(VPSocialLinks, {
-                  class: "social-links-list",
-                  links: unref(theme2).socialLinks
-                }, null, _parent2, _scopeId));
-                _push2(`</div></div>`);
-              } else {
-                _push2(`<!---->`);
-              }
-            } else {
-              return [
-                unref(localeLinks).length && unref(currentLang).label ? (openBlock(), createBlock("div", {
-                  key: 0,
-                  class: "group translations"
-                }, [
-                  createVNode("p", { class: "trans-title" }, toDisplayString(unref(currentLang).label), 1),
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(localeLinks), (locale) => {
-                    return openBlock(), createBlock(VPMenuLink, {
-                      key: locale.link,
-                      item: locale
-                    }, null, 8, ["item"]);
-                  }), 128))
-                ])) : createCommentVNode("", true),
-                unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto" ? (openBlock(), createBlock("div", {
-                  key: 1,
-                  class: "group"
-                }, [
-                  createVNode("div", { class: "item appearance" }, [
-                    createVNode("p", { class: "label" }, toDisplayString(unref(theme2).darkModeSwitchLabel || "Appearance"), 1),
-                    createVNode("div", { class: "appearance-action" }, [
-                      createVNode(VPSwitchAppearance)
-                    ])
-                  ])
-                ])) : createCommentVNode("", true),
-                unref(theme2).socialLinks ? (openBlock(), createBlock("div", {
-                  key: 2,
-                  class: "group"
-                }, [
-                  createVNode("div", { class: "item social-links" }, [
-                    createVNode(VPSocialLinks, {
-                      class: "social-links-list",
-                      links: unref(theme2).socialLinks
-                    }, null, 8, ["links"])
-                  ])
-                ])) : createCommentVNode("", true)
-              ];
-            }
-          }),
-          _: 1
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            VPFlyout,
+            mergeProps(
+              {
+                class: 'VPNavBarExtra',
+                label: 'extra navigation',
+              },
+              _attrs
+            ),
+            {
+              default: withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  if (unref(localeLinks).length && unref(currentLang).label) {
+                    _push2(
+                      `<div class="group translations" data-v-565bfc4d${_scopeId}><p class="trans-title" data-v-565bfc4d${_scopeId}>${ssrInterpolate(unref(currentLang).label)}</p><!--[-->`
+                    );
+                    ssrRenderList(unref(localeLinks), (locale) => {
+                      _push2(
+                        ssrRenderComponent(
+                          VPMenuLink,
+                          { item: locale },
+                          null,
+                          _parent2,
+                          _scopeId
+                        )
+                      );
+                    });
+                    _push2(`<!--]--></div>`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  if (
+                    unref(site).appearance &&
+                    unref(site).appearance !== 'force-dark' &&
+                    unref(site).appearance !== 'force-auto'
+                  ) {
+                    _push2(
+                      `<div class="group" data-v-565bfc4d${_scopeId}><div class="item appearance" data-v-565bfc4d${_scopeId}><p class="label" data-v-565bfc4d${_scopeId}>${ssrInterpolate(unref(theme2).darkModeSwitchLabel || 'Appearance')}</p><div class="appearance-action" data-v-565bfc4d${_scopeId}>`
+                    );
+                    _push2(
+                      ssrRenderComponent(
+                        VPSwitchAppearance,
+                        null,
+                        null,
+                        _parent2,
+                        _scopeId
+                      )
+                    );
+                    _push2(`</div></div></div>`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  if (unref(theme2).socialLinks) {
+                    _push2(
+                      `<div class="group" data-v-565bfc4d${_scopeId}><div class="item social-links" data-v-565bfc4d${_scopeId}>`
+                    );
+                    _push2(
+                      ssrRenderComponent(
+                        VPSocialLinks,
+                        {
+                          class: 'social-links-list',
+                          links: unref(theme2).socialLinks,
+                        },
+                        null,
+                        _parent2,
+                        _scopeId
+                      )
+                    );
+                    _push2(`</div></div>`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                } else {
+                  return [
+                    unref(localeLinks).length && unref(currentLang).label
+                      ? (openBlock(),
+                        createBlock(
+                          'div',
+                          {
+                            key: 0,
+                            class: 'group translations',
+                          },
+                          [
+                            createVNode(
+                              'p',
+                              { class: 'trans-title' },
+                              toDisplayString(unref(currentLang).label),
+                              1
+                            ),
+                            (openBlock(true),
+                            createBlock(
+                              Fragment,
+                              null,
+                              renderList(unref(localeLinks), (locale) => {
+                                return (
+                                  openBlock(),
+                                  createBlock(
+                                    VPMenuLink,
+                                    {
+                                      key: locale.link,
+                                      item: locale,
+                                    },
+                                    null,
+                                    8,
+                                    ['item']
+                                  )
+                                );
+                              }),
+                              128
+                            )),
+                          ]
+                        ))
+                      : createCommentVNode('', true),
+                    unref(site).appearance &&
+                    unref(site).appearance !== 'force-dark' &&
+                    unref(site).appearance !== 'force-auto'
+                      ? (openBlock(),
+                        createBlock(
+                          'div',
+                          {
+                            key: 1,
+                            class: 'group',
+                          },
+                          [
+                            createVNode('div', { class: 'item appearance' }, [
+                              createVNode(
+                                'p',
+                                { class: 'label' },
+                                toDisplayString(
+                                  unref(theme2).darkModeSwitchLabel ||
+                                    'Appearance'
+                                ),
+                                1
+                              ),
+                              createVNode(
+                                'div',
+                                { class: 'appearance-action' },
+                                [createVNode(VPSwitchAppearance)]
+                              ),
+                            ]),
+                          ]
+                        ))
+                      : createCommentVNode('', true),
+                    unref(theme2).socialLinks
+                      ? (openBlock(),
+                        createBlock(
+                          'div',
+                          {
+                            key: 2,
+                            class: 'group',
+                          },
+                          [
+                            createVNode('div', { class: 'item social-links' }, [
+                              createVNode(
+                                VPSocialLinks,
+                                {
+                                  class: 'social-links-list',
+                                  links: unref(theme2).socialLinks,
+                                },
+                                null,
+                                8,
+                                ['links']
+                              ),
+                            ]),
+                          ]
+                        ))
+                      : createCommentVNode('', true),
+                  ];
+                }
+              }),
+              _: 1,
+            },
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$A = _sfc_main$A.setup;
 _sfc_main$A.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarExtra.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarExtra.vue'
+  );
   return _sfc_setup$A ? _sfc_setup$A(props, ctx) : void 0;
 };
-const VPNavBarExtra = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-565bfc4d"]]);
+const VPNavBarExtra = /* @__PURE__ */ _export_sfc(_sfc_main$A, [
+  ['__scopeId', 'data-v-565bfc4d'],
+]);
 const _sfc_main$z = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarHamburger",
+  __name: 'VPNavBarHamburger',
   __ssrInlineRender: true,
   props: {
-    active: { type: Boolean }
+    active: { type: Boolean },
   },
-  emits: ["click"],
+  emits: ['click'],
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<button${ssrRenderAttrs(mergeProps({
-        type: "button",
-        class: ["VPNavBarHamburger", { active: __props.active }],
-        "aria-label": "mobile navigation",
-        "aria-expanded": __props.active,
-        "aria-controls": "VPNavScreen"
-      }, _attrs))} data-v-6d231992><span class="container" data-v-6d231992><span class="top" data-v-6d231992></span><span class="middle" data-v-6d231992></span><span class="bottom" data-v-6d231992></span></span></button>`);
+      _push(
+        `<button${ssrRenderAttrs(
+          mergeProps(
+            {
+              type: 'button',
+              class: ['VPNavBarHamburger', { active: __props.active }],
+              'aria-label': 'mobile navigation',
+              'aria-expanded': __props.active,
+              'aria-controls': 'VPNavScreen',
+            },
+            _attrs
+          )
+        )} data-v-6d231992><span class="container" data-v-6d231992><span class="top" data-v-6d231992></span><span class="middle" data-v-6d231992></span><span class="bottom" data-v-6d231992></span></span></button>`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$z = _sfc_main$z.setup;
 _sfc_main$z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarHamburger.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarHamburger.vue'
+  );
   return _sfc_setup$z ? _sfc_setup$z(props, ctx) : void 0;
 };
-const VPNavBarHamburger = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-6d231992"]]);
+const VPNavBarHamburger = /* @__PURE__ */ _export_sfc(_sfc_main$z, [
+  ['__scopeId', 'data-v-6d231992'],
+]);
 const _sfc_main$y = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarMenuLink",
+  __name: 'VPNavBarMenuLink',
   __ssrInlineRender: true,
   props: {
-    item: {}
+    item: {},
   },
   setup(__props) {
     const { page } = useData();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$$, mergeProps({
-        class: {
-          VPNavBarMenuLink: true,
-          active: unref(isActive)(
-            unref(page).relativePath,
-            __props.item.activeMatch || __props.item.link,
-            !!__props.item.activeMatch
-          )
-        },
-        href: __props.item.link,
-        target: __props.item.target,
-        rel: __props.item.rel,
-        "no-icon": __props.item.noIcon,
-        tabindex: "0"
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<span data-v-60a34d14${_scopeId}>${__props.item.text ?? ""}</span>`);
-          } else {
-            return [
-              createVNode("span", {
-                innerHTML: __props.item.text
-              }, null, 8, ["innerHTML"])
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      _push(
+        ssrRenderComponent(
+          _sfc_main$$,
+          mergeProps(
+            {
+              class: {
+                VPNavBarMenuLink: true,
+                active: unref(isActive)(
+                  unref(page).relativePath,
+                  __props.item.activeMatch || __props.item.link,
+                  !!__props.item.activeMatch
+                ),
+              },
+              href: __props.item.link,
+              target: __props.item.target,
+              rel: __props.item.rel,
+              'no-icon': __props.item.noIcon,
+              tabindex: '0',
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(
+                  `<span data-v-60a34d14${_scopeId}>${__props.item.text ?? ''}</span>`
+                );
+              } else {
+                return [
+                  createVNode(
+                    'span',
+                    {
+                      innerHTML: __props.item.text,
+                    },
+                    null,
+                    8,
+                    ['innerHTML']
+                  ),
+                ];
+              }
+            }),
+            _: 1,
+          },
+          _parent
+        )
+      );
     };
-  }
+  },
 });
 const _sfc_setup$y = _sfc_main$y.setup;
 _sfc_main$y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarMenuLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarMenuLink.vue'
+  );
   return _sfc_setup$y ? _sfc_setup$y(props, ctx) : void 0;
 };
-const VPNavBarMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__scopeId", "data-v-60a34d14"]]);
+const VPNavBarMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$y, [
+  ['__scopeId', 'data-v-60a34d14'],
+]);
 const _sfc_main$x = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarMenuGroup",
+  __name: 'VPNavBarMenuGroup',
   __ssrInlineRender: true,
   props: {
-    item: {}
+    item: {},
   },
   setup(__props) {
     const props = __props;
     const { page } = useData();
     const isChildActive = (navItem) => {
-      if ("component" in navItem) return false;
-      if ("link" in navItem) {
+      if ('component' in navItem) return false;
+      if ('link' in navItem) {
         return isActive(
           page.value.relativePath,
           navItem.link,
@@ -4046,40 +5920,74 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
     const childrenActive = computed(() => isChildActive(props.item));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(VPFlyout, mergeProps({
-        class: {
-          VPNavBarMenuGroup: true,
-          active: unref(isActive)(unref(page).relativePath, __props.item.activeMatch, !!__props.item.activeMatch) || childrenActive.value
-        },
-        button: __props.item.text,
-        items: __props.item.items
-      }, _attrs), null, _parent));
+      _push(
+        ssrRenderComponent(
+          VPFlyout,
+          mergeProps(
+            {
+              class: {
+                VPNavBarMenuGroup: true,
+                active:
+                  unref(isActive)(
+                    unref(page).relativePath,
+                    __props.item.activeMatch,
+                    !!__props.item.activeMatch
+                  ) || childrenActive.value,
+              },
+              button: __props.item.text,
+              items: __props.item.items,
+            },
+            _attrs
+          ),
+          null,
+          _parent
+        )
+      );
     };
-  }
+  },
 });
 const _sfc_setup$x = _sfc_main$x.setup;
 _sfc_main$x.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarMenuGroup.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarMenuGroup.vue'
+  );
   return _sfc_setup$x ? _sfc_setup$x(props, ctx) : void 0;
 };
 const _sfc_main$w = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarMenu",
+  __name: 'VPNavBarMenu',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(theme2).nav) {
-        _push(`<nav${ssrRenderAttrs(mergeProps({
-          "aria-labelledby": "main-nav-aria-label",
-          class: "VPNavBarMenu"
-        }, _attrs))} data-v-f06cfeb4><span id="main-nav-aria-label" class="visually-hidden" data-v-f06cfeb4> Main Navigation </span><!--[-->`);
+        _push(
+          `<nav${ssrRenderAttrs(
+            mergeProps(
+              {
+                'aria-labelledby': 'main-nav-aria-label',
+                class: 'VPNavBarMenu',
+              },
+              _attrs
+            )
+          )} data-v-f06cfeb4><span id="main-nav-aria-label" class="visually-hidden" data-v-f06cfeb4> Main Navigation </span><!--[-->`
+        );
         ssrRenderList(unref(theme2).nav, (item) => {
           _push(`<!--[-->`);
-          if ("link" in item) {
-            _push(ssrRenderComponent(VPNavBarMenuLink, { item }, null, _parent));
-          } else if ("component" in item) {
-            ssrRenderVNode(_push, createVNode(resolveDynamicComponent(item.component), mergeProps({ ref_for: true }, item.props), null), _parent);
+          if ('link' in item) {
+            _push(
+              ssrRenderComponent(VPNavBarMenuLink, { item }, null, _parent)
+            );
+          } else if ('component' in item) {
+            ssrRenderVNode(
+              _push,
+              createVNode(
+                resolveDynamicComponent(item.component),
+                mergeProps({ ref_for: true }, item.props),
+                null
+              ),
+              _parent
+            );
           } else {
             _push(ssrRenderComponent(_sfc_main$x, { item }, null, _parent));
           }
@@ -4090,24 +5998,37 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$w = _sfc_main$w.setup;
 _sfc_main$w.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarMenu.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarMenu.vue'
+  );
   return _sfc_setup$w ? _sfc_setup$w(props, ctx) : void 0;
 };
-const VPNavBarMenu = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__scopeId", "data-v-f06cfeb4"]]);
+const VPNavBarMenu = /* @__PURE__ */ _export_sfc(_sfc_main$w, [
+  ['__scopeId', 'data-v-f06cfeb4'],
+]);
 function createSearchTranslate(defaultTranslations) {
   const { localeIndex, theme: theme2 } = useData();
   function translate(key) {
     var _a, _b, _c;
-    const keyPath = key.split(".");
-    const themeObject = (_a = theme2.value.search) == null ? void 0 : _a.options;
-    const isObject2 = themeObject && typeof themeObject === "object";
-    const locales = isObject2 && ((_c = (_b = themeObject.locales) == null ? void 0 : _b[localeIndex.value]) == null ? void 0 : _c.translations) || null;
-    const translations = isObject2 && themeObject.translations || null;
+    const keyPath = key.split('.');
+    const themeObject =
+      (_a = theme2.value.search) == null ? void 0 : _a.options;
+    const isObject2 = themeObject && typeof themeObject === 'object';
+    const locales =
+      (isObject2 &&
+        ((_c =
+          (_b = themeObject.locales) == null
+            ? void 0
+            : _b[localeIndex.value]) == null
+          ? void 0
+          : _c.translations)) ||
+      null;
+    const translations = (isObject2 && themeObject.translations) || null;
     let localeResult = locales;
     let translationResult = translations;
     let defaultResult = defaultTranslations;
@@ -4118,7 +6039,8 @@ function createSearchTranslate(defaultTranslations) {
       if (foundInFallback) {
         fallbackResult = defaultResult = foundInFallback;
       }
-      const foundInTranslation = translationResult == null ? void 0 : translationResult[k];
+      const foundInTranslation =
+        translationResult == null ? void 0 : translationResult[k];
       if (foundInTranslation) {
         fallbackResult = translationResult = foundInTranslation;
       }
@@ -4136,41 +6058,57 @@ function createSearchTranslate(defaultTranslations) {
         localeResult = fallbackResult;
       }
     }
-    return (localeResult == null ? void 0 : localeResult[lastKey]) ?? (translationResult == null ? void 0 : translationResult[lastKey]) ?? (defaultResult == null ? void 0 : defaultResult[lastKey]) ?? "";
+    return (
+      (localeResult == null ? void 0 : localeResult[lastKey]) ??
+      (translationResult == null ? void 0 : translationResult[lastKey]) ??
+      (defaultResult == null ? void 0 : defaultResult[lastKey]) ??
+      ''
+    );
   }
   return translate;
 }
 const _sfc_main$v = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarSearchButton",
+  __name: 'VPNavBarSearchButton',
   __ssrInlineRender: true,
   setup(__props) {
     const defaultTranslations = {
       button: {
-        buttonText: "Search",
-        buttonAriaLabel: "Search"
-      }
+        buttonText: 'Search',
+        buttonAriaLabel: 'Search',
+      },
     };
     const translate = createSearchTranslate(defaultTranslations);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<button${ssrRenderAttrs(mergeProps({
-        type: "button",
-        class: "DocSearch DocSearch-Button",
-        "aria-label": unref(translate)("button.buttonAriaLabel")
-      }, _attrs))}><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">${ssrInterpolate(unref(translate)("button.buttonText"))}</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button>`);
+      _push(
+        `<button${ssrRenderAttrs(
+          mergeProps(
+            {
+              type: 'button',
+              class: 'DocSearch DocSearch-Button',
+              'aria-label': unref(translate)('button.buttonAriaLabel'),
+            },
+            _attrs
+          )
+        )}><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">${ssrInterpolate(unref(translate)('button.buttonText'))}</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button>`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$v = _sfc_main$v.setup;
 _sfc_main$v.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSearchButton.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSearchButton.vue'
+  );
   return _sfc_setup$v ? _sfc_setup$v(props, ctx) : void 0;
 };
 const _sfc_main$u = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarSearch",
+  __name: 'VPNavBarSearch',
   __ssrInlineRender: true,
   setup(__props) {
-    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.BBMV_SYc.js"));
+    const VPLocalSearchBox = defineAsyncComponent(
+      () => import('./VPLocalSearchBox.BBMV_SYc.js')
+    );
     const VPAlgoliaSearchBox = () => null;
     const { theme: theme2 } = useData();
     const loaded = ref(false);
@@ -4187,12 +6125,12 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       }
     }
     function poll() {
-      const e = new Event("keydown");
-      e.key = "k";
+      const e = new Event('keydown');
+      e.key = 'k';
       e.metaKey = true;
       window.dispatchEvent(e);
       setTimeout(() => {
-        if (!document.querySelector(".DocSearch-Modal")) {
+        if (!document.querySelector('.DocSearch-Modal')) {
           poll();
         }
       }, 16);
@@ -4200,54 +6138,86 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
     function isEditingContent(event) {
       const element = event.target;
       const tagName = element.tagName;
-      return element.isContentEditable || tagName === "INPUT" || tagName === "SELECT" || tagName === "TEXTAREA";
+      return (
+        element.isContentEditable ||
+        tagName === 'INPUT' ||
+        tagName === 'SELECT' ||
+        tagName === 'TEXTAREA'
+      );
     }
     const showSearch = ref(false);
     {
-      onKeyStroke("k", (event) => {
+      onKeyStroke('k', (event) => {
         if (event.ctrlKey || event.metaKey) {
           event.preventDefault();
           showSearch.value = true;
         }
       });
-      onKeyStroke("/", (event) => {
+      onKeyStroke('/', (event) => {
         if (!isEditingContent(event)) {
           event.preventDefault();
           showSearch.value = true;
         }
       });
     }
-    const provider = "local";
+    const provider = 'local';
     return (_ctx, _push, _parent, _attrs) => {
       var _a;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPNavBarSearch" }, _attrs))}>`);
-      if (unref(provider) === "local") {
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPNavBarSearch' }, _attrs))}>`
+      );
+      if (unref(provider) === 'local') {
         _push(`<!--[-->`);
         if (showSearch.value) {
-          _push(ssrRenderComponent(unref(VPLocalSearchBox), {
-            onClose: ($event) => showSearch.value = false
-          }, null, _parent));
+          _push(
+            ssrRenderComponent(
+              unref(VPLocalSearchBox),
+              {
+                onClose: ($event) => (showSearch.value = false),
+              },
+              null,
+              _parent
+            )
+          );
         } else {
           _push(`<!---->`);
         }
         _push(`<div id="local-search">`);
-        _push(ssrRenderComponent(_sfc_main$v, {
-          onClick: ($event) => showSearch.value = true
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            _sfc_main$v,
+            {
+              onClick: ($event) => (showSearch.value = true),
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</div><!--]-->`);
-      } else if (unref(provider) === "algolia") {
+      } else if (unref(provider) === 'algolia') {
         _push(`<!--[-->`);
         if (loaded.value) {
-          _push(ssrRenderComponent(unref(VPAlgoliaSearchBox), {
-            algolia: ((_a = unref(theme2).search) == null ? void 0 : _a.options) ?? unref(theme2).algolia,
-            onVnodeBeforeMount: ($event) => actuallyLoaded.value = true
-          }, null, _parent));
+          _push(
+            ssrRenderComponent(
+              unref(VPAlgoliaSearchBox),
+              {
+                algolia:
+                  ((_a = unref(theme2).search) == null ? void 0 : _a.options) ??
+                  unref(theme2).algolia,
+                onVnodeBeforeMount: ($event) => (actuallyLoaded.value = true),
+              },
+              null,
+              _parent
+            )
+          );
         } else {
           _push(`<!---->`);
         }
         if (!actuallyLoaded.value) {
           _push(`<div id="docsearch">`);
-          _push(ssrRenderComponent(_sfc_main$v, { onClick: load }, null, _parent));
+          _push(
+            ssrRenderComponent(_sfc_main$v, { onClick: load }, null, _parent)
+          );
           _push(`</div>`);
         } else {
           _push(`<!---->`);
@@ -4258,151 +6228,251 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       }
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$u = _sfc_main$u.setup;
 _sfc_main$u.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSearch.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSearch.vue'
+  );
   return _sfc_setup$u ? _sfc_setup$u(props, ctx) : void 0;
 };
 const _sfc_main$t = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarSocialLinks",
+  __name: 'VPNavBarSocialLinks',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(theme2).socialLinks) {
-        _push(ssrRenderComponent(VPSocialLinks, mergeProps({
-          class: "VPNavBarSocialLinks",
-          links: unref(theme2).socialLinks
-        }, _attrs), null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPSocialLinks,
+            mergeProps(
+              {
+                class: 'VPNavBarSocialLinks',
+                links: unref(theme2).socialLinks,
+              },
+              _attrs
+            ),
+            null,
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$t = _sfc_main$t.setup;
 _sfc_main$t.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSocialLinks.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSocialLinks.vue'
+  );
   return _sfc_setup$t ? _sfc_setup$t(props, ctx) : void 0;
 };
-const VPNavBarSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__scopeId", "data-v-8c4de41d"]]);
+const VPNavBarSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$t, [
+  ['__scopeId', 'data-v-8c4de41d'],
+]);
 const _sfc_main$s = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarTitle",
+  __name: 'VPNavBarTitle',
   __ssrInlineRender: true,
   setup(__props) {
     const { site, theme: theme2 } = useData();
     const { hasSidebar } = useSidebar();
     const { currentLang } = useLangs();
-    const link2 = computed(
-      () => {
-        var _a;
-        return typeof theme2.value.logoLink === "string" ? theme2.value.logoLink : (_a = theme2.value.logoLink) == null ? void 0 : _a.link;
-      }
-    );
-    const rel = computed(
-      () => {
-        var _a;
-        return typeof theme2.value.logoLink === "string" ? void 0 : (_a = theme2.value.logoLink) == null ? void 0 : _a.rel;
-      }
-    );
-    const target = computed(
-      () => {
-        var _a;
-        return typeof theme2.value.logoLink === "string" ? void 0 : (_a = theme2.value.logoLink) == null ? void 0 : _a.target;
-      }
-    );
+    const link2 = computed(() => {
+      var _a;
+      return typeof theme2.value.logoLink === 'string'
+        ? theme2.value.logoLink
+        : (_a = theme2.value.logoLink) == null
+          ? void 0
+          : _a.link;
+    });
+    const rel = computed(() => {
+      var _a;
+      return typeof theme2.value.logoLink === 'string'
+        ? void 0
+        : (_a = theme2.value.logoLink) == null
+          ? void 0
+          : _a.rel;
+    });
+    const target = computed(() => {
+      var _a;
+      return typeof theme2.value.logoLink === 'string'
+        ? void 0
+        : (_a = theme2.value.logoLink) == null
+          ? void 0
+          : _a.target;
+    });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPNavBarTitle", { "has-sidebar": unref(hasSidebar) }]
-      }, _attrs))} data-v-7bec3787><a class="title"${ssrRenderAttr("href", link2.value ?? unref(normalizeLink$1)(unref(currentLang).link))}${ssrRenderAttr("rel", rel.value)}${ssrRenderAttr("target", target.value)} data-v-7bec3787>`);
-      ssrRenderSlot(_ctx.$slots, "nav-bar-title-before", {}, null, _push, _parent);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPNavBarTitle', { 'has-sidebar': unref(hasSidebar) }],
+            },
+            _attrs
+          )
+        )} data-v-7bec3787><a class="title"${ssrRenderAttr('href', link2.value ?? unref(normalizeLink$1)(unref(currentLang).link))}${ssrRenderAttr('rel', rel.value)}${ssrRenderAttr('target', target.value)} data-v-7bec3787>`
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'nav-bar-title-before',
+        {},
+        null,
+        _push,
+        _parent
+      );
       if (unref(theme2).logo) {
-        _push(ssrRenderComponent(VPImage, {
-          class: "logo",
-          image: unref(theme2).logo
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPImage,
+            {
+              class: 'logo',
+              image: unref(theme2).logo,
+            },
+            null,
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
       if (unref(theme2).siteTitle) {
-        _push(`<span data-v-7bec3787>${unref(theme2).siteTitle ?? ""}</span>`);
+        _push(`<span data-v-7bec3787>${unref(theme2).siteTitle ?? ''}</span>`);
       } else if (unref(theme2).siteTitle === void 0) {
-        _push(`<span data-v-7bec3787>${ssrInterpolate(unref(site).title)}</span>`);
+        _push(
+          `<span data-v-7bec3787>${ssrInterpolate(unref(site).title)}</span>`
+        );
       } else {
         _push(`<!---->`);
       }
-      ssrRenderSlot(_ctx.$slots, "nav-bar-title-after", {}, null, _push, _parent);
+      ssrRenderSlot(
+        _ctx.$slots,
+        'nav-bar-title-after',
+        {},
+        null,
+        _push,
+        _parent
+      );
       _push(`</a></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$s = _sfc_main$s.setup;
 _sfc_main$s.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarTitle.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarTitle.vue'
+  );
   return _sfc_setup$s ? _sfc_setup$s(props, ctx) : void 0;
 };
-const VPNavBarTitle = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__scopeId", "data-v-7bec3787"]]);
+const VPNavBarTitle = /* @__PURE__ */ _export_sfc(_sfc_main$s, [
+  ['__scopeId', 'data-v-7bec3787'],
+]);
 const _sfc_main$r = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBarTranslations",
+  __name: 'VPNavBarTranslations',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     const { localeLinks, currentLang } = useLangs({ correspondingLink: true });
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(localeLinks).length && unref(currentLang).label) {
-        _push(ssrRenderComponent(VPFlyout, mergeProps({
-          class: "VPNavBarTranslations",
-          icon: "vpi-languages",
-          label: unref(theme2).langMenuLabel || "Change language"
-        }, _attrs), {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(`<div class="items" data-v-afdf8a00${_scopeId}><p class="title" data-v-afdf8a00${_scopeId}>${ssrInterpolate(unref(currentLang).label)}</p><!--[-->`);
-              ssrRenderList(unref(localeLinks), (locale) => {
-                _push2(ssrRenderComponent(VPMenuLink, { item: locale }, null, _parent2, _scopeId));
-              });
-              _push2(`<!--]--></div>`);
-            } else {
-              return [
-                createVNode("div", { class: "items" }, [
-                  createVNode("p", { class: "title" }, toDisplayString(unref(currentLang).label), 1),
-                  (openBlock(true), createBlock(Fragment, null, renderList(unref(localeLinks), (locale) => {
-                    return openBlock(), createBlock(VPMenuLink, {
-                      key: locale.link,
-                      item: locale
-                    }, null, 8, ["item"]);
-                  }), 128))
-                ])
-              ];
-            }
-          }),
-          _: 1
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            VPFlyout,
+            mergeProps(
+              {
+                class: 'VPNavBarTranslations',
+                icon: 'vpi-languages',
+                label: unref(theme2).langMenuLabel || 'Change language',
+              },
+              _attrs
+            ),
+            {
+              default: withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(
+                    `<div class="items" data-v-afdf8a00${_scopeId}><p class="title" data-v-afdf8a00${_scopeId}>${ssrInterpolate(unref(currentLang).label)}</p><!--[-->`
+                  );
+                  ssrRenderList(unref(localeLinks), (locale) => {
+                    _push2(
+                      ssrRenderComponent(
+                        VPMenuLink,
+                        { item: locale },
+                        null,
+                        _parent2,
+                        _scopeId
+                      )
+                    );
+                  });
+                  _push2(`<!--]--></div>`);
+                } else {
+                  return [
+                    createVNode('div', { class: 'items' }, [
+                      createVNode(
+                        'p',
+                        { class: 'title' },
+                        toDisplayString(unref(currentLang).label),
+                        1
+                      ),
+                      (openBlock(true),
+                      createBlock(
+                        Fragment,
+                        null,
+                        renderList(unref(localeLinks), (locale) => {
+                          return (
+                            openBlock(),
+                            createBlock(
+                              VPMenuLink,
+                              {
+                                key: locale.link,
+                                item: locale,
+                              },
+                              null,
+                              8,
+                              ['item']
+                            )
+                          );
+                        }),
+                        128
+                      )),
+                    ]),
+                  ];
+                }
+              }),
+              _: 1,
+            },
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$r = _sfc_main$r.setup;
 _sfc_main$r.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarTranslations.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBarTranslations.vue'
+  );
   return _sfc_setup$r ? _sfc_setup$r(props, ctx) : void 0;
 };
-const VPNavBarTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-afdf8a00"]]);
+const VPNavBarTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$r, [
+  ['__scopeId', 'data-v-afdf8a00'],
+]);
 const _sfc_main$q = /* @__PURE__ */ defineComponent({
-  __name: "VPNavBar",
+  __name: 'VPNavBar',
   __ssrInlineRender: true,
   props: {
-    isScreenOpen: { type: Boolean }
+    isScreenOpen: { type: Boolean },
   },
-  emits: ["toggle-screen"],
+  emits: ['toggle-screen'],
   setup(__props) {
     const props = __props;
     const { y } = useWindowScroll();
@@ -4411,265 +6481,484 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const classes = ref({});
     watchPostEffect(() => {
       classes.value = {
-        "has-sidebar": hasSidebar.value,
-        "home": frontmatter.value.layout === "home",
-        "top": y.value === 0,
-        "screen-open": props.isScreenOpen
+        'has-sidebar': hasSidebar.value,
+        home: frontmatter.value.layout === 'home',
+        top: y.value === 0,
+        'screen-open': props.isScreenOpen,
       };
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPNavBar", classes.value]
-      }, _attrs))} data-v-abeb00ea><div class="wrapper" data-v-abeb00ea><div class="container" data-v-abeb00ea><div class="title" data-v-abeb00ea>`);
-      _push(ssrRenderComponent(VPNavBarTitle, null, {
-        "nav-bar-title-before": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "nav-bar-title-before", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "nav-bar-title-before", {}, void 0, true)
-            ];
-          }
-        }),
-        "nav-bar-title-after": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            ssrRenderSlot(_ctx.$slots, "nav-bar-title-after", {}, null, _push2, _parent2, _scopeId);
-          } else {
-            return [
-              renderSlot(_ctx.$slots, "nav-bar-title-after", {}, void 0, true)
-            ];
-          }
-        }),
-        _: 3
-      }, _parent));
-      _push(`</div><div class="content" data-v-abeb00ea><div class="content-body" data-v-abeb00ea>`);
-      ssrRenderSlot(_ctx.$slots, "nav-bar-content-before", {}, null, _push, _parent);
-      _push(ssrRenderComponent(_sfc_main$u, { class: "search" }, null, _parent));
-      _push(ssrRenderComponent(VPNavBarMenu, { class: "menu" }, null, _parent));
-      _push(ssrRenderComponent(VPNavBarTranslations, { class: "translations" }, null, _parent));
-      _push(ssrRenderComponent(VPNavBarAppearance, { class: "appearance" }, null, _parent));
-      _push(ssrRenderComponent(VPNavBarSocialLinks, { class: "social-links" }, null, _parent));
-      _push(ssrRenderComponent(VPNavBarExtra, { class: "extra" }, null, _parent));
-      ssrRenderSlot(_ctx.$slots, "nav-bar-content-after", {}, null, _push, _parent);
-      _push(ssrRenderComponent(VPNavBarHamburger, {
-        class: "hamburger",
-        active: __props.isScreenOpen,
-        onClick: ($event) => _ctx.$emit("toggle-screen")
-      }, null, _parent));
-      _push(`</div></div></div></div><div class="divider" data-v-abeb00ea><div class="divider-line" data-v-abeb00ea></div></div></div>`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPNavBar', classes.value],
+            },
+            _attrs
+          )
+        )} data-v-abeb00ea><div class="wrapper" data-v-abeb00ea><div class="container" data-v-abeb00ea><div class="title" data-v-abeb00ea>`
+      );
+      _push(
+        ssrRenderComponent(
+          VPNavBarTitle,
+          null,
+          {
+            'nav-bar-title-before': withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'nav-bar-title-before',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [
+                  renderSlot(
+                    _ctx.$slots,
+                    'nav-bar-title-before',
+                    {},
+                    void 0,
+                    true
+                  ),
+                ];
+              }
+            }),
+            'nav-bar-title-after': withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                ssrRenderSlot(
+                  _ctx.$slots,
+                  'nav-bar-title-after',
+                  {},
+                  null,
+                  _push2,
+                  _parent2,
+                  _scopeId
+                );
+              } else {
+                return [
+                  renderSlot(
+                    _ctx.$slots,
+                    'nav-bar-title-after',
+                    {},
+                    void 0,
+                    true
+                  ),
+                ];
+              }
+            }),
+            _: 3,
+          },
+          _parent
+        )
+      );
+      _push(
+        `</div><div class="content" data-v-abeb00ea><div class="content-body" data-v-abeb00ea>`
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'nav-bar-content-before',
+        {},
+        null,
+        _push,
+        _parent
+      );
+      _push(
+        ssrRenderComponent(_sfc_main$u, { class: 'search' }, null, _parent)
+      );
+      _push(ssrRenderComponent(VPNavBarMenu, { class: 'menu' }, null, _parent));
+      _push(
+        ssrRenderComponent(
+          VPNavBarTranslations,
+          { class: 'translations' },
+          null,
+          _parent
+        )
+      );
+      _push(
+        ssrRenderComponent(
+          VPNavBarAppearance,
+          { class: 'appearance' },
+          null,
+          _parent
+        )
+      );
+      _push(
+        ssrRenderComponent(
+          VPNavBarSocialLinks,
+          { class: 'social-links' },
+          null,
+          _parent
+        )
+      );
+      _push(
+        ssrRenderComponent(VPNavBarExtra, { class: 'extra' }, null, _parent)
+      );
+      ssrRenderSlot(
+        _ctx.$slots,
+        'nav-bar-content-after',
+        {},
+        null,
+        _push,
+        _parent
+      );
+      _push(
+        ssrRenderComponent(
+          VPNavBarHamburger,
+          {
+            class: 'hamburger',
+            active: __props.isScreenOpen,
+            onClick: ($event) => _ctx.$emit('toggle-screen'),
+          },
+          null,
+          _parent
+        )
+      );
+      _push(
+        `</div></div></div></div><div class="divider" data-v-abeb00ea><div class="divider-line" data-v-abeb00ea></div></div></div>`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$q = _sfc_main$q.setup;
 _sfc_main$q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBar.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavBar.vue'
+  );
   return _sfc_setup$q ? _sfc_setup$q(props, ctx) : void 0;
 };
-const VPNavBar = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-abeb00ea"]]);
+const VPNavBar = /* @__PURE__ */ _export_sfc(_sfc_main$q, [
+  ['__scopeId', 'data-v-abeb00ea'],
+]);
 const _sfc_main$p = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenAppearance",
+  __name: 'VPNavScreenAppearance',
   __ssrInlineRender: true,
   setup(__props) {
     const { site, theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
-      if (unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto") {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPNavScreenAppearance" }, _attrs))} data-v-0630061a><p class="text" data-v-0630061a>${ssrInterpolate(unref(theme2).darkModeSwitchLabel || "Appearance")}</p>`);
+      if (
+        unref(site).appearance &&
+        unref(site).appearance !== 'force-dark' &&
+        unref(site).appearance !== 'force-auto'
+      ) {
+        _push(
+          `<div${ssrRenderAttrs(mergeProps({ class: 'VPNavScreenAppearance' }, _attrs))} data-v-0630061a><p class="text" data-v-0630061a>${ssrInterpolate(unref(theme2).darkModeSwitchLabel || 'Appearance')}</p>`
+        );
         _push(ssrRenderComponent(VPSwitchAppearance, null, null, _parent));
         _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$p = _sfc_main$p.setup;
 _sfc_main$p.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenAppearance.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenAppearance.vue'
+  );
   return _sfc_setup$p ? _sfc_setup$p(props, ctx) : void 0;
 };
-const VPNavScreenAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-0630061a"]]);
+const VPNavScreenAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$p, [
+  ['__scopeId', 'data-v-0630061a'],
+]);
 const _sfc_main$o = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenMenuLink",
+  __name: 'VPNavScreenMenuLink',
   __ssrInlineRender: true,
   props: {
-    item: {}
+    item: {},
   },
   setup(__props) {
-    const closeScreen = inject("close-screen");
+    const closeScreen = inject('close-screen');
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$$, mergeProps({
-        class: "VPNavScreenMenuLink",
-        href: __props.item.link,
-        target: __props.item.target,
-        rel: __props.item.rel,
-        "no-icon": __props.item.noIcon,
-        onClick: unref(closeScreen)
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<span data-v-4207dc8e${_scopeId}>${__props.item.text ?? ""}</span>`);
-          } else {
-            return [
-              createVNode("span", {
-                innerHTML: __props.item.text
-              }, null, 8, ["innerHTML"])
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      _push(
+        ssrRenderComponent(
+          _sfc_main$$,
+          mergeProps(
+            {
+              class: 'VPNavScreenMenuLink',
+              href: __props.item.link,
+              target: __props.item.target,
+              rel: __props.item.rel,
+              'no-icon': __props.item.noIcon,
+              onClick: unref(closeScreen),
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(
+                  `<span data-v-4207dc8e${_scopeId}>${__props.item.text ?? ''}</span>`
+                );
+              } else {
+                return [
+                  createVNode(
+                    'span',
+                    {
+                      innerHTML: __props.item.text,
+                    },
+                    null,
+                    8,
+                    ['innerHTML']
+                  ),
+                ];
+              }
+            }),
+            _: 1,
+          },
+          _parent
+        )
+      );
     };
-  }
+  },
 });
 const _sfc_setup$o = _sfc_main$o.setup;
 _sfc_main$o.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuLink.vue'
+  );
   return _sfc_setup$o ? _sfc_setup$o(props, ctx) : void 0;
 };
-const VPNavScreenMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-4207dc8e"]]);
+const VPNavScreenMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$o, [
+  ['__scopeId', 'data-v-4207dc8e'],
+]);
 const _sfc_main$n = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenMenuGroupLink",
+  __name: 'VPNavScreenMenuGroupLink',
   __ssrInlineRender: true,
   props: {
-    item: {}
+    item: {},
   },
   setup(__props) {
-    const closeScreen = inject("close-screen");
+    const closeScreen = inject('close-screen');
     return (_ctx, _push, _parent, _attrs) => {
-      _push(ssrRenderComponent(_sfc_main$$, mergeProps({
-        class: "VPNavScreenMenuGroupLink",
-        href: __props.item.link,
-        target: __props.item.target,
-        rel: __props.item.rel,
-        "no-icon": __props.item.noIcon,
-        onClick: unref(closeScreen)
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<span data-v-51e704e0${_scopeId}>${__props.item.text ?? ""}</span>`);
-          } else {
-            return [
-              createVNode("span", {
-                innerHTML: __props.item.text
-              }, null, 8, ["innerHTML"])
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      _push(
+        ssrRenderComponent(
+          _sfc_main$$,
+          mergeProps(
+            {
+              class: 'VPNavScreenMenuGroupLink',
+              href: __props.item.link,
+              target: __props.item.target,
+              rel: __props.item.rel,
+              'no-icon': __props.item.noIcon,
+              onClick: unref(closeScreen),
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(
+                  `<span data-v-51e704e0${_scopeId}>${__props.item.text ?? ''}</span>`
+                );
+              } else {
+                return [
+                  createVNode(
+                    'span',
+                    {
+                      innerHTML: __props.item.text,
+                    },
+                    null,
+                    8,
+                    ['innerHTML']
+                  ),
+                ];
+              }
+            }),
+            _: 1,
+          },
+          _parent
+        )
+      );
     };
-  }
+  },
 });
 const _sfc_setup$n = _sfc_main$n.setup;
 _sfc_main$n.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuGroupLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuGroupLink.vue'
+  );
   return _sfc_setup$n ? _sfc_setup$n(props, ctx) : void 0;
 };
-const VPNavScreenMenuGroupLink = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-51e704e0"]]);
+const VPNavScreenMenuGroupLink = /* @__PURE__ */ _export_sfc(_sfc_main$n, [
+  ['__scopeId', 'data-v-51e704e0'],
+]);
 const _sfc_main$m = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenMenuGroupSection",
+  __name: 'VPNavScreenMenuGroupSection',
   __ssrInlineRender: true,
   props: {
     text: {},
-    items: {}
+    items: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPNavScreenMenuGroupSection" }, _attrs))} data-v-bbb349f1>`);
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPNavScreenMenuGroupSection' }, _attrs))} data-v-bbb349f1>`
+      );
       if (__props.text) {
-        _push(`<p class="title" data-v-bbb349f1>${ssrInterpolate(__props.text)}</p>`);
+        _push(
+          `<p class="title" data-v-bbb349f1>${ssrInterpolate(__props.text)}</p>`
+        );
       } else {
         _push(`<!---->`);
       }
       _push(`<!--[-->`);
       ssrRenderList(__props.items, (item) => {
-        _push(ssrRenderComponent(VPNavScreenMenuGroupLink, {
-          key: item.text,
-          item
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPNavScreenMenuGroupLink,
+            {
+              key: item.text,
+              item,
+            },
+            null,
+            _parent
+          )
+        );
       });
       _push(`<!--]--></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$m = _sfc_main$m.setup;
 _sfc_main$m.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuGroupSection.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuGroupSection.vue'
+  );
   return _sfc_setup$m ? _sfc_setup$m(props, ctx) : void 0;
 };
-const VPNavScreenMenuGroupSection = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-bbb349f1"]]);
+const VPNavScreenMenuGroupSection = /* @__PURE__ */ _export_sfc(_sfc_main$m, [
+  ['__scopeId', 'data-v-bbb349f1'],
+]);
 const _sfc_main$l = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenMenuGroup",
+  __name: 'VPNavScreenMenuGroup',
   __ssrInlineRender: true,
   props: {
     text: {},
-    items: {}
+    items: {},
   },
   setup(__props) {
     const props = __props;
     const isOpen = ref(false);
     const groupId = computed(
-      () => `NavScreenGroup-${props.text.replace(" ", "-").toLowerCase()}`
+      () => `NavScreenGroup-${props.text.replace(' ', '-').toLowerCase()}`
     );
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPNavScreenMenuGroup", { open: isOpen.value }]
-      }, _attrs))} data-v-a20fe3c8><button class="button"${ssrRenderAttr("aria-controls", groupId.value)}${ssrRenderAttr("aria-expanded", isOpen.value)} data-v-a20fe3c8><span class="button-text" data-v-a20fe3c8>${__props.text ?? ""}</span><span class="vpi-plus button-icon" data-v-a20fe3c8></span></button><div${ssrRenderAttr("id", groupId.value)} class="items" data-v-a20fe3c8><!--[-->`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPNavScreenMenuGroup', { open: isOpen.value }],
+            },
+            _attrs
+          )
+        )} data-v-a20fe3c8><button class="button"${ssrRenderAttr('aria-controls', groupId.value)}${ssrRenderAttr('aria-expanded', isOpen.value)} data-v-a20fe3c8><span class="button-text" data-v-a20fe3c8>${__props.text ?? ''}</span><span class="vpi-plus button-icon" data-v-a20fe3c8></span></button><div${ssrRenderAttr('id', groupId.value)} class="items" data-v-a20fe3c8><!--[-->`
+      );
       ssrRenderList(__props.items, (item) => {
         _push(`<!--[-->`);
-        if ("link" in item) {
+        if ('link' in item) {
           _push(`<div class="item" data-v-a20fe3c8>`);
-          _push(ssrRenderComponent(VPNavScreenMenuGroupLink, { item }, null, _parent));
+          _push(
+            ssrRenderComponent(
+              VPNavScreenMenuGroupLink,
+              { item },
+              null,
+              _parent
+            )
+          );
           _push(`</div>`);
-        } else if ("component" in item) {
+        } else if ('component' in item) {
           _push(`<div class="item" data-v-a20fe3c8>`);
-          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(item.component), mergeProps({ ref_for: true }, item.props, { "screen-menu": "" }), null), _parent);
+          ssrRenderVNode(
+            _push,
+            createVNode(
+              resolveDynamicComponent(item.component),
+              mergeProps({ ref_for: true }, item.props, { 'screen-menu': '' }),
+              null
+            ),
+            _parent
+          );
           _push(`</div>`);
         } else {
           _push(`<div class="group" data-v-a20fe3c8>`);
-          _push(ssrRenderComponent(VPNavScreenMenuGroupSection, {
-            text: item.text,
-            items: item.items
-          }, null, _parent));
+          _push(
+            ssrRenderComponent(
+              VPNavScreenMenuGroupSection,
+              {
+                text: item.text,
+                items: item.items,
+              },
+              null,
+              _parent
+            )
+          );
           _push(`</div>`);
         }
         _push(`<!--]-->`);
       });
       _push(`<!--]--></div></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$l = _sfc_main$l.setup;
 _sfc_main$l.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuGroup.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenuGroup.vue'
+  );
   return _sfc_setup$l ? _sfc_setup$l(props, ctx) : void 0;
 };
-const VPNavScreenMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-a20fe3c8"]]);
+const VPNavScreenMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$l, [
+  ['__scopeId', 'data-v-a20fe3c8'],
+]);
 const _sfc_main$k = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenMenu",
+  __name: 'VPNavScreenMenu',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(theme2).nav) {
-        _push(`<nav${ssrRenderAttrs(mergeProps({ class: "VPNavScreenMenu" }, _attrs))}><!--[-->`);
+        _push(
+          `<nav${ssrRenderAttrs(mergeProps({ class: 'VPNavScreenMenu' }, _attrs))}><!--[-->`
+        );
         ssrRenderList(unref(theme2).nav, (item) => {
           _push(`<!--[-->`);
-          if ("link" in item) {
-            _push(ssrRenderComponent(VPNavScreenMenuLink, { item }, null, _parent));
-          } else if ("component" in item) {
-            ssrRenderVNode(_push, createVNode(resolveDynamicComponent(item.component), mergeProps({ ref_for: true }, item.props, { "screen-menu": "" }), null), _parent);
+          if ('link' in item) {
+            _push(
+              ssrRenderComponent(VPNavScreenMenuLink, { item }, null, _parent)
+            );
+          } else if ('component' in item) {
+            ssrRenderVNode(
+              _push,
+              createVNode(
+                resolveDynamicComponent(item.component),
+                mergeProps({ ref_for: true }, item.props, {
+                  'screen-menu': '',
+                }),
+                null
+              ),
+              _parent
+            );
           } else {
-            _push(ssrRenderComponent(VPNavScreenMenuGroup, {
-              text: item.text || "",
-              items: item.items
-            }, null, _parent));
+            _push(
+              ssrRenderComponent(
+                VPNavScreenMenuGroup,
+                {
+                  text: item.text || '',
+                  items: item.items,
+                },
+                null,
+                _parent
+              )
+            );
           }
           _push(`<!--]-->`);
         });
@@ -4678,65 +6967,91 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$k = _sfc_main$k.setup;
 _sfc_main$k.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenu.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenMenu.vue'
+  );
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
 const _sfc_main$j = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenSocialLinks",
+  __name: 'VPNavScreenSocialLinks',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(theme2).socialLinks) {
-        _push(ssrRenderComponent(VPSocialLinks, mergeProps({
-          class: "VPNavScreenSocialLinks",
-          links: unref(theme2).socialLinks
-        }, _attrs), null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPSocialLinks,
+            mergeProps(
+              {
+                class: 'VPNavScreenSocialLinks',
+                links: unref(theme2).socialLinks,
+              },
+              _attrs
+            ),
+            null,
+            _parent
+          )
+        );
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$j = _sfc_main$j.setup;
 _sfc_main$j.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenSocialLinks.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenSocialLinks.vue'
+  );
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreenTranslations",
+  __name: 'VPNavScreenTranslations',
   __ssrInlineRender: true,
   setup(__props) {
     const { localeLinks, currentLang } = useLangs({ correspondingLink: true });
     const isOpen = ref(false);
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(localeLinks).length && unref(currentLang).label) {
-        _push(`<div${ssrRenderAttrs(mergeProps({
-          class: ["VPNavScreenTranslations", { open: isOpen.value }]
-        }, _attrs))} data-v-6df8c44a><button class="title" data-v-6df8c44a><span class="vpi-languages icon lang" data-v-6df8c44a></span> ${ssrInterpolate(unref(currentLang).label)} <span class="vpi-chevron-down icon chevron" data-v-6df8c44a></span></button><ul class="list" data-v-6df8c44a><!--[-->`);
+        _push(
+          `<div${ssrRenderAttrs(
+            mergeProps(
+              {
+                class: ['VPNavScreenTranslations', { open: isOpen.value }],
+              },
+              _attrs
+            )
+          )} data-v-6df8c44a><button class="title" data-v-6df8c44a><span class="vpi-languages icon lang" data-v-6df8c44a></span> ${ssrInterpolate(unref(currentLang).label)} <span class="vpi-chevron-down icon chevron" data-v-6df8c44a></span></button><ul class="list" data-v-6df8c44a><!--[-->`
+        );
         ssrRenderList(unref(localeLinks), (locale) => {
           _push(`<li class="item" data-v-6df8c44a>`);
-          _push(ssrRenderComponent(_sfc_main$$, {
-            class: "link",
-            href: locale.link
-          }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
-              if (_push2) {
-                _push2(`${ssrInterpolate(locale.text)}`);
-              } else {
-                return [
-                  createTextVNode(toDisplayString(locale.text), 1)
-                ];
-              }
-            }),
-            _: 2
-          }, _parent));
+          _push(
+            ssrRenderComponent(
+              _sfc_main$$,
+              {
+                class: 'link',
+                href: locale.link,
+              },
+              {
+                default: withCtx((_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    _push2(`${ssrInterpolate(locale.text)}`);
+                  } else {
+                    return [createTextVNode(toDisplayString(locale.text), 1)];
+                  }
+                }),
+                _: 2,
+              },
+              _parent
+            )
+          );
           _push(`</li>`);
         });
         _push(`<!--]--></ul></div>`);
@@ -4744,54 +7059,106 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$i = _sfc_main$i.setup;
 _sfc_main$i.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenTranslations.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreenTranslations.vue'
+  );
   return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
-const VPNavScreenTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-6df8c44a"]]);
+const VPNavScreenTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$i, [
+  ['__scopeId', 'data-v-6df8c44a'],
+]);
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
-  __name: "VPNavScreen",
+  __name: 'VPNavScreen',
   __ssrInlineRender: true,
   props: {
-    open: { type: Boolean }
+    open: { type: Boolean },
   },
   setup(__props) {
     const screen = ref(null);
     useScrollLock(inBrowser ? document.body : null);
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.open) {
-        _push(`<div${ssrRenderAttrs(mergeProps({
-          class: "VPNavScreen",
-          ref_key: "screen",
-          ref: screen,
-          id: "VPNavScreen"
-        }, _attrs))} data-v-c96e519b><div class="container" data-v-c96e519b>`);
-        ssrRenderSlot(_ctx.$slots, "nav-screen-content-before", {}, null, _push, _parent);
-        _push(ssrRenderComponent(_sfc_main$k, { class: "menu" }, null, _parent));
-        _push(ssrRenderComponent(VPNavScreenTranslations, { class: "translations" }, null, _parent));
-        _push(ssrRenderComponent(VPNavScreenAppearance, { class: "appearance" }, null, _parent));
-        _push(ssrRenderComponent(_sfc_main$j, { class: "social-links" }, null, _parent));
-        ssrRenderSlot(_ctx.$slots, "nav-screen-content-after", {}, null, _push, _parent);
+        _push(
+          `<div${ssrRenderAttrs(
+            mergeProps(
+              {
+                class: 'VPNavScreen',
+                ref_key: 'screen',
+                ref: screen,
+                id: 'VPNavScreen',
+              },
+              _attrs
+            )
+          )} data-v-c96e519b><div class="container" data-v-c96e519b>`
+        );
+        ssrRenderSlot(
+          _ctx.$slots,
+          'nav-screen-content-before',
+          {},
+          null,
+          _push,
+          _parent
+        );
+        _push(
+          ssrRenderComponent(_sfc_main$k, { class: 'menu' }, null, _parent)
+        );
+        _push(
+          ssrRenderComponent(
+            VPNavScreenTranslations,
+            { class: 'translations' },
+            null,
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            VPNavScreenAppearance,
+            { class: 'appearance' },
+            null,
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            _sfc_main$j,
+            { class: 'social-links' },
+            null,
+            _parent
+          )
+        );
+        ssrRenderSlot(
+          _ctx.$slots,
+          'nav-screen-content-after',
+          {},
+          null,
+          _push,
+          _parent
+        );
         _push(`</div></div>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$h = _sfc_main$h.setup;
 _sfc_main$h.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreen.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNavScreen.vue'
+  );
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
-const VPNavScreen = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-c96e519b"]]);
+const VPNavScreen = /* @__PURE__ */ _export_sfc(_sfc_main$h, [
+  ['__scopeId', 'data-v-c96e519b'],
+]);
 const _sfc_main$g = /* @__PURE__ */ defineComponent({
-  __name: "VPNav",
+  __name: 'VPNav',
   __ssrInlineRender: true,
   setup(__props) {
     const { isScreenOpen, closeScreen, toggleScreen } = useNav();
@@ -4799,98 +7166,214 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     const hasNavbar = computed(() => {
       return frontmatter.value.navbar !== false;
     });
-    provide("close-screen", closeScreen);
+    provide('close-screen', closeScreen);
     watchEffect(() => {
       if (inBrowser) {
-        document.documentElement.classList.toggle("hide-nav", !hasNavbar.value);
+        document.documentElement.classList.toggle('hide-nav', !hasNavbar.value);
       }
     });
     return (_ctx, _push, _parent, _attrs) => {
       if (hasNavbar.value) {
-        _push(`<header${ssrRenderAttrs(mergeProps({ class: "VPNav" }, _attrs))} data-v-3729b08e>`);
-        _push(ssrRenderComponent(VPNavBar, {
-          "is-screen-open": unref(isScreenOpen),
-          onToggleScreen: unref(toggleScreen)
-        }, {
-          "nav-bar-title-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-title-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-title-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-bar-title-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-title-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-title-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-bar-content-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-content-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-content-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-bar-content-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-content-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-content-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
-        _push(ssrRenderComponent(VPNavScreen, { open: unref(isScreenOpen) }, {
-          "nav-screen-content-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-screen-content-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-screen-content-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-screen-content-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-screen-content-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-screen-content-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
+        _push(
+          `<header${ssrRenderAttrs(mergeProps({ class: 'VPNav' }, _attrs))} data-v-3729b08e>`
+        );
+        _push(
+          ssrRenderComponent(
+            VPNavBar,
+            {
+              'is-screen-open': unref(isScreenOpen),
+              onToggleScreen: unref(toggleScreen),
+            },
+            {
+              'nav-bar-title-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-title-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-title-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-bar-title-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-title-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-title-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-bar-content-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-content-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-content-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-bar-content-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-content-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-content-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              _: 3,
+            },
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            VPNavScreen,
+            { open: unref(isScreenOpen) },
+            {
+              'nav-screen-content-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-screen-content-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-screen-content-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-screen-content-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-screen-content-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-screen-content-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              _: 3,
+            },
+            _parent
+          )
+        );
         _push(`</header>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$g = _sfc_main$g.setup;
 _sfc_main$g.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNav.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPNav.vue'
+  );
   return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
 };
-const VPNav = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-3729b08e"]]);
+const VPNav = /* @__PURE__ */ _export_sfc(_sfc_main$g, [
+  ['__scopeId', 'data-v-3729b08e'],
+]);
 const _sfc_main$f = /* @__PURE__ */ defineComponent({
-  __name: "VPSidebarItem",
+  __name: 'VPSidebarItem',
   __ssrInlineRender: true,
   props: {
     item: {},
-    depth: {}
+    depth: {},
   },
   setup(__props) {
     const props = __props;
@@ -4901,24 +7384,28 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       isActiveLink,
       hasActiveLink: hasActiveLink2,
       hasChildren,
-      toggle
+      toggle,
     } = useSidebarControl(computed(() => props.item));
-    const sectionTag = computed(() => hasChildren.value ? "section" : `div`);
-    const linkTag = computed(() => isLink.value ? "a" : "div");
+    const sectionTag = computed(() => (hasChildren.value ? 'section' : `div`));
+    const linkTag = computed(() => (isLink.value ? 'a' : 'div'));
     const textTag = computed(() => {
-      return !hasChildren.value ? "p" : props.depth + 2 === 7 ? "p" : `h${props.depth + 2}`;
+      return !hasChildren.value
+        ? 'p'
+        : props.depth + 2 === 7
+          ? 'p'
+          : `h${props.depth + 2}`;
     });
-    const itemRole = computed(() => isLink.value ? void 0 : "button");
+    const itemRole = computed(() => (isLink.value ? void 0 : 'button'));
     const classes = computed(() => [
       [`level-${props.depth}`],
       { collapsible: collapsible.value },
       { collapsed: collapsed.value },
-      { "is-link": isLink.value },
-      { "is-active": isActiveLink.value },
-      { "has-active": hasActiveLink2.value }
+      { 'is-link': isLink.value },
+      { 'is-active': isActiveLink.value },
+      { 'has-active': hasActiveLink2.value },
     ]);
     function onItemInteraction(e) {
-      if ("key" in e && e.key !== "Enter") {
+      if ('key' in e && e.key !== 'Enter') {
         return;
       }
       !props.item.link && toggle();
@@ -4927,144 +7414,287 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       props.item.link && toggle();
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_VPSidebarItem = resolveComponent("VPSidebarItem", true);
-      ssrRenderVNode(_push, createVNode(resolveDynamicComponent(sectionTag.value), mergeProps({
-        class: ["VPSidebarItem", classes.value]
-      }, _attrs), {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            if (__props.item.text) {
-              _push2(`<div class="item"${ssrRenderAttr("role", itemRole.value)}${ssrRenderAttr("tabindex", __props.item.items && 0)} data-v-eef37193${_scopeId}><div class="indicator" data-v-eef37193${_scopeId}></div>`);
-              if (__props.item.link) {
-                _push2(ssrRenderComponent(_sfc_main$$, {
-                  tag: linkTag.value,
-                  class: "link",
-                  href: __props.item.link,
-                  rel: __props.item.rel,
-                  target: __props.item.target
-                }, {
-                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
-                    if (_push3) {
-                      ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(textTag.value), { class: "text" }, null), _parent3, _scopeId2);
-                    } else {
-                      return [
-                        (openBlock(), createBlock(resolveDynamicComponent(textTag.value), {
-                          class: "text",
-                          innerHTML: __props.item.text
-                        }, null, 8, ["innerHTML"]))
-                      ];
-                    }
-                  }),
-                  _: 1
-                }, _parent2, _scopeId));
+      const _component_VPSidebarItem = resolveComponent('VPSidebarItem', true);
+      ssrRenderVNode(
+        _push,
+        createVNode(
+          resolveDynamicComponent(sectionTag.value),
+          mergeProps(
+            {
+              class: ['VPSidebarItem', classes.value],
+            },
+            _attrs
+          ),
+          {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                if (__props.item.text) {
+                  _push2(
+                    `<div class="item"${ssrRenderAttr('role', itemRole.value)}${ssrRenderAttr('tabindex', __props.item.items && 0)} data-v-eef37193${_scopeId}><div class="indicator" data-v-eef37193${_scopeId}></div>`
+                  );
+                  if (__props.item.link) {
+                    _push2(
+                      ssrRenderComponent(
+                        _sfc_main$$,
+                        {
+                          tag: linkTag.value,
+                          class: 'link',
+                          href: __props.item.link,
+                          rel: __props.item.rel,
+                          target: __props.item.target,
+                        },
+                        {
+                          default: withCtx(
+                            (_2, _push3, _parent3, _scopeId2) => {
+                              if (_push3) {
+                                ssrRenderVNode(
+                                  _push3,
+                                  createVNode(
+                                    resolveDynamicComponent(textTag.value),
+                                    { class: 'text' },
+                                    null
+                                  ),
+                                  _parent3,
+                                  _scopeId2
+                                );
+                              } else {
+                                return [
+                                  (openBlock(),
+                                  createBlock(
+                                    resolveDynamicComponent(textTag.value),
+                                    {
+                                      class: 'text',
+                                      innerHTML: __props.item.text,
+                                    },
+                                    null,
+                                    8,
+                                    ['innerHTML']
+                                  )),
+                                ];
+                              }
+                            }
+                          ),
+                          _: 1,
+                        },
+                        _parent2,
+                        _scopeId
+                      )
+                    );
+                  } else {
+                    ssrRenderVNode(
+                      _push2,
+                      createVNode(
+                        resolveDynamicComponent(textTag.value),
+                        { class: 'text' },
+                        null
+                      ),
+                      _parent2,
+                      _scopeId
+                    );
+                  }
+                  if (
+                    __props.item.collapsed != null &&
+                    __props.item.items &&
+                    __props.item.items.length
+                  ) {
+                    _push2(
+                      `<div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-eef37193${_scopeId}><span class="vpi-chevron-right caret-icon" data-v-eef37193${_scopeId}></span></div>`
+                    );
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  _push2(`</div>`);
+                } else {
+                  _push2(`<!---->`);
+                }
+                if (__props.item.items && __props.item.items.length) {
+                  _push2(`<div class="items" data-v-eef37193${_scopeId}>`);
+                  if (__props.depth < 5) {
+                    _push2(`<!--[-->`);
+                    ssrRenderList(__props.item.items, (i) => {
+                      _push2(
+                        ssrRenderComponent(
+                          _component_VPSidebarItem,
+                          {
+                            key: i.text,
+                            item: i,
+                            depth: __props.depth + 1,
+                          },
+                          null,
+                          _parent2,
+                          _scopeId
+                        )
+                      );
+                    });
+                    _push2(`<!--]-->`);
+                  } else {
+                    _push2(`<!---->`);
+                  }
+                  _push2(`</div>`);
+                } else {
+                  _push2(`<!---->`);
+                }
               } else {
-                ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(textTag.value), { class: "text" }, null), _parent2, _scopeId);
+                return [
+                  __props.item.text
+                    ? (openBlock(),
+                      createBlock(
+                        'div',
+                        mergeProps(
+                          {
+                            key: 0,
+                            class: 'item',
+                            role: itemRole.value,
+                          },
+                          toHandlers(
+                            __props.item.items
+                              ? {
+                                  click: onItemInteraction,
+                                  keydown: onItemInteraction,
+                                }
+                              : {},
+                            true
+                          ),
+                          {
+                            tabindex: __props.item.items && 0,
+                          }
+                        ),
+                        [
+                          createVNode('div', { class: 'indicator' }),
+                          __props.item.link
+                            ? (openBlock(),
+                              createBlock(
+                                _sfc_main$$,
+                                {
+                                  key: 0,
+                                  tag: linkTag.value,
+                                  class: 'link',
+                                  href: __props.item.link,
+                                  rel: __props.item.rel,
+                                  target: __props.item.target,
+                                },
+                                {
+                                  default: withCtx(() => [
+                                    (openBlock(),
+                                    createBlock(
+                                      resolveDynamicComponent(textTag.value),
+                                      {
+                                        class: 'text',
+                                        innerHTML: __props.item.text,
+                                      },
+                                      null,
+                                      8,
+                                      ['innerHTML']
+                                    )),
+                                  ]),
+                                  _: 1,
+                                },
+                                8,
+                                ['tag', 'href', 'rel', 'target']
+                              ))
+                            : (openBlock(),
+                              createBlock(
+                                resolveDynamicComponent(textTag.value),
+                                {
+                                  key: 1,
+                                  class: 'text',
+                                  innerHTML: __props.item.text,
+                                },
+                                null,
+                                8,
+                                ['innerHTML']
+                              )),
+                          __props.item.collapsed != null &&
+                          __props.item.items &&
+                          __props.item.items.length
+                            ? (openBlock(),
+                              createBlock(
+                                'div',
+                                {
+                                  key: 2,
+                                  class: 'caret',
+                                  role: 'button',
+                                  'aria-label': 'toggle section',
+                                  onClick: onCaretClick,
+                                  onKeydown: withKeys(onCaretClick, ['enter']),
+                                  tabindex: '0',
+                                },
+                                [
+                                  createVNode('span', {
+                                    class: 'vpi-chevron-right caret-icon',
+                                  }),
+                                ],
+                                32
+                              ))
+                            : createCommentVNode('', true),
+                        ],
+                        16,
+                        ['role', 'tabindex']
+                      ))
+                    : createCommentVNode('', true),
+                  __props.item.items && __props.item.items.length
+                    ? (openBlock(),
+                      createBlock(
+                        'div',
+                        {
+                          key: 1,
+                          class: 'items',
+                        },
+                        [
+                          __props.depth < 5
+                            ? (openBlock(true),
+                              createBlock(
+                                Fragment,
+                                { key: 0 },
+                                renderList(__props.item.items, (i) => {
+                                  return (
+                                    openBlock(),
+                                    createBlock(
+                                      _component_VPSidebarItem,
+                                      {
+                                        key: i.text,
+                                        item: i,
+                                        depth: __props.depth + 1,
+                                      },
+                                      null,
+                                      8,
+                                      ['item', 'depth']
+                                    )
+                                  );
+                                }),
+                                128
+                              ))
+                            : createCommentVNode('', true),
+                        ]
+                      ))
+                    : createCommentVNode('', true),
+                ];
               }
-              if (__props.item.collapsed != null && __props.item.items && __props.item.items.length) {
-                _push2(`<div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-eef37193${_scopeId}><span class="vpi-chevron-right caret-icon" data-v-eef37193${_scopeId}></span></div>`);
-              } else {
-                _push2(`<!---->`);
-              }
-              _push2(`</div>`);
-            } else {
-              _push2(`<!---->`);
-            }
-            if (__props.item.items && __props.item.items.length) {
-              _push2(`<div class="items" data-v-eef37193${_scopeId}>`);
-              if (__props.depth < 5) {
-                _push2(`<!--[-->`);
-                ssrRenderList(__props.item.items, (i) => {
-                  _push2(ssrRenderComponent(_component_VPSidebarItem, {
-                    key: i.text,
-                    item: i,
-                    depth: __props.depth + 1
-                  }, null, _parent2, _scopeId));
-                });
-                _push2(`<!--]-->`);
-              } else {
-                _push2(`<!---->`);
-              }
-              _push2(`</div>`);
-            } else {
-              _push2(`<!---->`);
-            }
-          } else {
-            return [
-              __props.item.text ? (openBlock(), createBlock("div", mergeProps({
-                key: 0,
-                class: "item",
-                role: itemRole.value
-              }, toHandlers(
-                __props.item.items ? { click: onItemInteraction, keydown: onItemInteraction } : {},
-                true
-              ), {
-                tabindex: __props.item.items && 0
-              }), [
-                createVNode("div", { class: "indicator" }),
-                __props.item.link ? (openBlock(), createBlock(_sfc_main$$, {
-                  key: 0,
-                  tag: linkTag.value,
-                  class: "link",
-                  href: __props.item.link,
-                  rel: __props.item.rel,
-                  target: __props.item.target
-                }, {
-                  default: withCtx(() => [
-                    (openBlock(), createBlock(resolveDynamicComponent(textTag.value), {
-                      class: "text",
-                      innerHTML: __props.item.text
-                    }, null, 8, ["innerHTML"]))
-                  ]),
-                  _: 1
-                }, 8, ["tag", "href", "rel", "target"])) : (openBlock(), createBlock(resolveDynamicComponent(textTag.value), {
-                  key: 1,
-                  class: "text",
-                  innerHTML: __props.item.text
-                }, null, 8, ["innerHTML"])),
-                __props.item.collapsed != null && __props.item.items && __props.item.items.length ? (openBlock(), createBlock("div", {
-                  key: 2,
-                  class: "caret",
-                  role: "button",
-                  "aria-label": "toggle section",
-                  onClick: onCaretClick,
-                  onKeydown: withKeys(onCaretClick, ["enter"]),
-                  tabindex: "0"
-                }, [
-                  createVNode("span", { class: "vpi-chevron-right caret-icon" })
-                ], 32)) : createCommentVNode("", true)
-              ], 16, ["role", "tabindex"])) : createCommentVNode("", true),
-              __props.item.items && __props.item.items.length ? (openBlock(), createBlock("div", {
-                key: 1,
-                class: "items"
-              }, [
-                __props.depth < 5 ? (openBlock(true), createBlock(Fragment, { key: 0 }, renderList(__props.item.items, (i) => {
-                  return openBlock(), createBlock(_component_VPSidebarItem, {
-                    key: i.text,
-                    item: i,
-                    depth: __props.depth + 1
-                  }, null, 8, ["item", "depth"]);
-                }), 128)) : createCommentVNode("", true)
-              ])) : createCommentVNode("", true)
-            ];
+            }),
+            _: 1,
           }
-        }),
-        _: 1
-      }), _parent);
+        ),
+        _parent
+      );
     };
-  }
+  },
 });
 const _sfc_setup$f = _sfc_main$f.setup;
 _sfc_main$f.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSidebarItem.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSidebarItem.vue'
+  );
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
-const VPSidebarItem = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-eef37193"]]);
+const VPSidebarItem = /* @__PURE__ */ _export_sfc(_sfc_main$f, [
+  ['__scopeId', 'data-v-eef37193'],
+]);
 const _sfc_main$e = /* @__PURE__ */ defineComponent({
-  __name: "VPSidebarGroup",
+  __name: 'VPSidebarGroup',
   __ssrInlineRender: true,
   props: {
-    items: {}
+    items: {},
   },
   setup(__props) {
     const disableTransition = ref(true);
@@ -5084,29 +7714,42 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       ssrRenderList(__props.items, (item) => {
-        _push(`<div class="${ssrRenderClass([{ "no-transition": disableTransition.value }, "group"])}" data-v-4cc4e27e>`);
-        _push(ssrRenderComponent(VPSidebarItem, {
-          item,
-          depth: 0
-        }, null, _parent));
+        _push(
+          `<div class="${ssrRenderClass([{ 'no-transition': disableTransition.value }, 'group'])}" data-v-4cc4e27e>`
+        );
+        _push(
+          ssrRenderComponent(
+            VPSidebarItem,
+            {
+              item,
+              depth: 0,
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</div>`);
       });
       _push(`<!--]-->`);
     };
-  }
+  },
 });
 const _sfc_setup$e = _sfc_main$e.setup;
 _sfc_main$e.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSidebarGroup.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSidebarGroup.vue'
+  );
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
-const VPSidebarGroup = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-4cc4e27e"]]);
+const VPSidebarGroup = /* @__PURE__ */ _export_sfc(_sfc_main$e, [
+  ['__scopeId', 'data-v-4cc4e27e'],
+]);
 const _sfc_main$d = /* @__PURE__ */ defineComponent({
-  __name: "VPSidebar",
+  __name: 'VPSidebar',
   __ssrInlineRender: true,
   props: {
-    open: { type: Boolean }
+    open: { type: Boolean },
   },
   setup(__props) {
     const { sidebarGroups, hasSidebar } = useSidebar();
@@ -5122,7 +7765,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
           (_a = navEl.value) == null ? void 0 : _a.focus();
         } else isLocked.value = false;
       },
-      { immediate: true, flush: "post" }
+      { immediate: true, flush: 'post' }
     );
     const key = ref(0);
     watch(
@@ -5134,388 +7777,873 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     );
     return (_ctx, _push, _parent, _attrs) => {
       if (unref(hasSidebar)) {
-        _push(`<aside${ssrRenderAttrs(mergeProps({
-          class: ["VPSidebar", { open: __props.open }],
-          ref_key: "navEl",
-          ref: navEl
-        }, _attrs))} data-v-39fcdd20><div class="curtain" data-v-39fcdd20></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-39fcdd20><span class="visually-hidden" id="sidebar-aria-label" data-v-39fcdd20> Sidebar Navigation </span>`);
-        ssrRenderSlot(_ctx.$slots, "sidebar-nav-before", {}, null, _push, _parent);
-        _push(ssrRenderComponent(VPSidebarGroup, {
-          items: unref(sidebarGroups),
-          key: key.value
-        }, null, _parent));
-        ssrRenderSlot(_ctx.$slots, "sidebar-nav-after", {}, null, _push, _parent);
+        _push(
+          `<aside${ssrRenderAttrs(
+            mergeProps(
+              {
+                class: ['VPSidebar', { open: __props.open }],
+                ref_key: 'navEl',
+                ref: navEl,
+              },
+              _attrs
+            )
+          )} data-v-39fcdd20><div class="curtain" data-v-39fcdd20></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-39fcdd20><span class="visually-hidden" id="sidebar-aria-label" data-v-39fcdd20> Sidebar Navigation </span>`
+        );
+        ssrRenderSlot(
+          _ctx.$slots,
+          'sidebar-nav-before',
+          {},
+          null,
+          _push,
+          _parent
+        );
+        _push(
+          ssrRenderComponent(
+            VPSidebarGroup,
+            {
+              items: unref(sidebarGroups),
+              key: key.value,
+            },
+            null,
+            _parent
+          )
+        );
+        ssrRenderSlot(
+          _ctx.$slots,
+          'sidebar-nav-after',
+          {},
+          null,
+          _push,
+          _parent
+        );
         _push(`</nav></aside>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup$d = _sfc_main$d.setup;
 _sfc_main$d.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSidebar.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSidebar.vue'
+  );
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
-const VPSidebar = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-39fcdd20"]]);
+const VPSidebar = /* @__PURE__ */ _export_sfc(_sfc_main$d, [
+  ['__scopeId', 'data-v-39fcdd20'],
+]);
 const _sfc_main$c = /* @__PURE__ */ defineComponent({
-  __name: "VPSkipLink",
+  __name: 'VPSkipLink',
   __ssrInlineRender: true,
   setup(__props) {
     const { theme: theme2 } = useData();
     const route = useRoute();
     const backToTop = ref();
-    watch(() => route.path, () => backToTop.value.focus());
+    watch(
+      () => route.path,
+      () => backToTop.value.focus()
+    );
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<!--[--><span tabindex="-1" data-v-0fc92682></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-0fc92682>${ssrInterpolate(unref(theme2).skipToContentLabel || "Skip to content")}</a><!--]-->`);
+      _push(
+        `<!--[--><span tabindex="-1" data-v-0fc92682></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-0fc92682>${ssrInterpolate(unref(theme2).skipToContentLabel || 'Skip to content')}</a><!--]-->`
+      );
     };
-  }
+  },
 });
 const _sfc_setup$c = _sfc_main$c.setup;
 _sfc_main$c.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSkipLink.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSkipLink.vue'
+  );
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
-const VPSkipLink = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-0fc92682"]]);
+const VPSkipLink = /* @__PURE__ */ _export_sfc(_sfc_main$c, [
+  ['__scopeId', 'data-v-0fc92682'],
+]);
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
-  __name: "Layout",
+  __name: 'Layout',
   __ssrInlineRender: true,
   setup(__props) {
     const {
       isOpen: isSidebarOpen,
       open: openSidebar,
-      close: closeSidebar
+      close: closeSidebar,
     } = useSidebar();
     const route = useRoute();
     watch(() => route.path, closeSidebar);
     useCloseSidebarOnEscape(isSidebarOpen, closeSidebar);
     const { frontmatter } = useData();
     const slots = useSlots();
-    const heroImageSlotExists = computed(() => !!slots["home-hero-image"]);
-    provide("hero-image-slot-exists", heroImageSlotExists);
+    const heroImageSlotExists = computed(() => !!slots['home-hero-image']);
+    provide('hero-image-slot-exists', heroImageSlotExists);
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Content = resolveComponent("Content");
+      const _component_Content = resolveComponent('Content');
       if (unref(frontmatter).layout !== false) {
-        _push(`<div${ssrRenderAttrs(mergeProps({
-          class: ["Layout", unref(frontmatter).pageClass]
-        }, _attrs))} data-v-9cedb95c>`);
-        ssrRenderSlot(_ctx.$slots, "layout-top", {}, null, _push, _parent);
+        _push(
+          `<div${ssrRenderAttrs(
+            mergeProps(
+              {
+                class: ['Layout', unref(frontmatter).pageClass],
+              },
+              _attrs
+            )
+          )} data-v-9cedb95c>`
+        );
+        ssrRenderSlot(_ctx.$slots, 'layout-top', {}, null, _push, _parent);
         _push(ssrRenderComponent(VPSkipLink, null, null, _parent));
-        _push(ssrRenderComponent(VPBackdrop, {
-          class: "backdrop",
-          show: unref(isSidebarOpen),
-          onClick: unref(closeSidebar)
-        }, null, _parent));
-        _push(ssrRenderComponent(VPNav, null, {
-          "nav-bar-title-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-title-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-title-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-bar-title-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-title-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-title-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-bar-content-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-content-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-content-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-bar-content-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-bar-content-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-bar-content-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-screen-content-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-screen-content-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-screen-content-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "nav-screen-content-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "nav-screen-content-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "nav-screen-content-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
-        _push(ssrRenderComponent(VPLocalNav, {
-          open: unref(isSidebarOpen),
-          onOpenMenu: unref(openSidebar)
-        }, null, _parent));
-        _push(ssrRenderComponent(VPSidebar, { open: unref(isSidebarOpen) }, {
-          "sidebar-nav-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "sidebar-nav-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "sidebar-nav-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "sidebar-nav-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "sidebar-nav-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "sidebar-nav-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
-        _push(ssrRenderComponent(VPContent, null, {
-          "page-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "page-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "page-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "page-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "page-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "page-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          "not-found": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "not-found", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "not-found", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-info-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-info": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-info-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-info-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-info-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-actions-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-actions-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-actions-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-image": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-image", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-image", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-hero-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-hero-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-hero-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-features-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-features-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-features-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "home-features-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "home-features-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "home-features-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-footer-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-footer-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-footer-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "doc-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "doc-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "doc-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-top": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-top", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-top", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-bottom": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-bottom", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-bottom", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-outline-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-outline-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-outline-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-outline-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-outline-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-outline-after", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-ads-before": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-ads-before", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-ads-before", {}, void 0, true)
-              ];
-            }
-          }),
-          "aside-ads-after": withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              ssrRenderSlot(_ctx.$slots, "aside-ads-after", {}, null, _push2, _parent2, _scopeId);
-            } else {
-              return [
-                renderSlot(_ctx.$slots, "aside-ads-after", {}, void 0, true)
-              ];
-            }
-          }),
-          _: 3
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            VPBackdrop,
+            {
+              class: 'backdrop',
+              show: unref(isSidebarOpen),
+              onClick: unref(closeSidebar),
+            },
+            null,
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            VPNav,
+            null,
+            {
+              'nav-bar-title-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-title-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-title-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-bar-title-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-title-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-title-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-bar-content-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-content-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-content-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-bar-content-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-bar-content-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-bar-content-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-screen-content-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-screen-content-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-screen-content-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'nav-screen-content-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'nav-screen-content-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'nav-screen-content-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              _: 3,
+            },
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            VPLocalNav,
+            {
+              open: unref(isSidebarOpen),
+              onOpenMenu: unref(openSidebar),
+            },
+            null,
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            VPSidebar,
+            { open: unref(isSidebarOpen) },
+            {
+              'sidebar-nav-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'sidebar-nav-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'sidebar-nav-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'sidebar-nav-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'sidebar-nav-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'sidebar-nav-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              _: 3,
+            },
+            _parent
+          )
+        );
+        _push(
+          ssrRenderComponent(
+            VPContent,
+            null,
+            {
+              'page-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'page-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'page-top', {}, void 0, true),
+                  ];
+                }
+              }),
+              'page-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'page-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'page-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              'not-found': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'not-found',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'not-found', {}, void 0, true),
+                  ];
+                }
+              }),
+              'home-hero-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'home-hero-info-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-hero-info-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-hero-info': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-info',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'home-hero-info', {}, void 0, true),
+                  ];
+                }
+              }),
+              'home-hero-info-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-info-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-hero-info-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-hero-actions-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-hero-actions-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-hero-actions-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-hero-image': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-image',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-image',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'home-hero-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'home-hero-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'home-hero-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'home-features-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-features-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-features-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'home-features-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'home-features-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'home-features-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'doc-footer-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-footer-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'doc-footer-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'doc-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'doc-before', {}, void 0, true),
+                  ];
+                }
+              }),
+              'doc-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'doc-after', {}, void 0, true),
+                  ];
+                }
+              }),
+              'doc-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [renderSlot(_ctx.$slots, 'doc-top', {}, void 0, true)];
+                }
+              }),
+              'doc-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'doc-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'doc-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-top': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-top',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'aside-top', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-bottom': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-bottom',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(_ctx.$slots, 'aside-bottom', {}, void 0, true),
+                  ];
+                }
+              }),
+              'aside-outline-before': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'aside-outline-before',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'aside-outline-before',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'aside-outline-after': withCtx(
+                (_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    ssrRenderSlot(
+                      _ctx.$slots,
+                      'aside-outline-after',
+                      {},
+                      null,
+                      _push2,
+                      _parent2,
+                      _scopeId
+                    );
+                  } else {
+                    return [
+                      renderSlot(
+                        _ctx.$slots,
+                        'aside-outline-after',
+                        {},
+                        void 0,
+                        true
+                      ),
+                    ];
+                  }
+                }
+              ),
+              'aside-ads-before': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-ads-before',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'aside-ads-before',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              'aside-ads-after': withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  ssrRenderSlot(
+                    _ctx.$slots,
+                    'aside-ads-after',
+                    {},
+                    null,
+                    _push2,
+                    _parent2,
+                    _scopeId
+                  );
+                } else {
+                  return [
+                    renderSlot(
+                      _ctx.$slots,
+                      'aside-ads-after',
+                      {},
+                      void 0,
+                      true
+                    ),
+                  ];
+                }
+              }),
+              _: 3,
+            },
+            _parent
+          )
+        );
         _push(ssrRenderComponent(VPFooter, null, null, _parent));
-        ssrRenderSlot(_ctx.$slots, "layout-bottom", {}, null, _push, _parent);
+        ssrRenderSlot(_ctx.$slots, 'layout-bottom', {}, null, _push, _parent);
         _push(`</div>`);
       } else {
         _push(ssrRenderComponent(_component_Content, _attrs, null, _parent));
       }
     };
-  }
+  },
 });
 const _sfc_setup$b = _sfc_main$b.setup;
 _sfc_main$b.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/Layout.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/Layout.vue'
+  );
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
-const Layout = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-9cedb95c"]]);
+const Layout = /* @__PURE__ */ _export_sfc(_sfc_main$b, [
+  ['__scopeId', 'data-v-9cedb95c'],
+]);
 const GridSettings = {
   xmini: [[0, 2]],
   mini: [],
@@ -5524,27 +8652,27 @@ const GridSettings = {
     [768, 5],
     [640, 4],
     [480, 3],
-    [0, 2]
+    [0, 2],
   ],
   medium: [
     [960, 5],
     [832, 4],
     [640, 3],
-    [480, 2]
+    [480, 2],
   ],
   big: [
     [832, 3],
-    [640, 2]
-  ]
+    [640, 2],
+  ],
 };
-function useSponsorsGrid({ el, size = "medium" }) {
+function useSponsorsGrid({ el, size = 'medium' }) {
   const onResize = throttleAndDebounce(manage, 100);
   onMounted(() => {
     manage();
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
   });
   onUnmounted(() => {
-    window.removeEventListener("resize", onResize);
+    window.removeEventListener('resize', onResize);
   });
   function manage() {
     adjustSlots(el.value, size);
@@ -5552,7 +8680,7 @@ function useSponsorsGrid({ el, size = "medium" }) {
 }
 function adjustSlots(el, size) {
   const tsize = el.children.length;
-  const asize = el.querySelectorAll(".vp-sponsor-grid-item:not(.empty)").length;
+  const asize = el.querySelectorAll('.vp-sponsor-grid-item:not(.empty)').length;
   const grid = setGrid(el, size, asize);
   manageSlots(el, grid, tsize, asize);
 }
@@ -5586,8 +8714,8 @@ function neutralizeSlots(el, count) {
 }
 function addSlots(el, count) {
   for (let i = 0; i < count; i++) {
-    const slot = document.createElement("div");
-    slot.classList.add("vp-sponsor-grid-item", "empty");
+    const slot = document.createElement('div');
+    slot.classList.add('vp-sponsor-grid-item', 'empty');
     el.append(slot);
   }
 }
@@ -5597,168 +8725,230 @@ function removeSlots(el, count) {
   }
 }
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
-  __name: "VPSponsorsGrid",
+  __name: 'VPSponsorsGrid',
   __ssrInlineRender: true,
   props: {
-    size: { default: "medium" },
-    data: {}
+    size: { default: 'medium' },
+    data: {},
   },
   setup(__props) {
     const props = __props;
     const el = ref(null);
     useSponsorsGrid({ el, size: props.size });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPSponsorsGrid vp-sponsor-grid", [__props.size]],
-        ref_key: "el",
-        ref: el
-      }, _attrs))}><!--[-->`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPSponsorsGrid vp-sponsor-grid', [__props.size]],
+              ref_key: 'el',
+              ref: el,
+            },
+            _attrs
+          )
+        )}><!--[-->`
+      );
       ssrRenderList(__props.data, (sponsor) => {
-        _push(`<div class="vp-sponsor-grid-item"><a class="vp-sponsor-grid-link"${ssrRenderAttr("href", sponsor.url)} target="_blank" rel="sponsored noopener"><article class="vp-sponsor-grid-box"><h4 class="visually-hidden">${ssrInterpolate(sponsor.name)}</h4><img class="vp-sponsor-grid-image"${ssrRenderAttr("src", sponsor.img)}${ssrRenderAttr("alt", sponsor.name)}></article></a></div>`);
+        _push(
+          `<div class="vp-sponsor-grid-item"><a class="vp-sponsor-grid-link"${ssrRenderAttr('href', sponsor.url)} target="_blank" rel="sponsored noopener"><article class="vp-sponsor-grid-box"><h4 class="visually-hidden">${ssrInterpolate(sponsor.name)}</h4><img class="vp-sponsor-grid-image"${ssrRenderAttr('src', sponsor.img)}${ssrRenderAttr('alt', sponsor.name)}></article></a></div>`
+        );
       });
       _push(`<!--]--></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$a = _sfc_main$a.setup;
 _sfc_main$a.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSponsorsGrid.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSponsorsGrid.vue'
+  );
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
-  __name: "VPSponsors",
+  __name: 'VPSponsors',
   __ssrInlineRender: true,
   props: {
-    mode: { default: "normal" },
+    mode: { default: 'normal' },
     tier: {},
     size: {},
-    data: {}
+    data: {},
   },
   setup(__props) {
     const props = __props;
     const sponsors = computed(() => {
       const isSponsors = props.data.some((s) => {
-        return "items" in s;
+        return 'items' in s;
       });
       if (isSponsors) {
         return props.data;
       }
-      return [
-        { tier: props.tier, size: props.size, items: props.data }
-      ];
+      return [{ tier: props.tier, size: props.size, items: props.data }];
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPSponsors vp-sponsor", [__props.mode]]
-      }, _attrs))}><!--[-->`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPSponsors vp-sponsor', [__props.mode]],
+            },
+            _attrs
+          )
+        )}><!--[-->`
+      );
       ssrRenderList(sponsors.value, (sponsor, index) => {
         _push(`<section class="vp-sponsor-section">`);
         if (sponsor.tier) {
-          _push(`<h3 class="vp-sponsor-tier">${ssrInterpolate(sponsor.tier)}</h3>`);
+          _push(
+            `<h3 class="vp-sponsor-tier">${ssrInterpolate(sponsor.tier)}</h3>`
+          );
         } else {
           _push(`<!---->`);
         }
-        _push(ssrRenderComponent(_sfc_main$a, {
-          size: sponsor.size,
-          data: sponsor.items
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            _sfc_main$a,
+            {
+              size: sponsor.size,
+              data: sponsor.items,
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</section>`);
       });
       _push(`<!--]--></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$9 = _sfc_main$9.setup;
 _sfc_main$9.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSponsors.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPSponsors.vue'
+  );
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  __name: "VPDocAsideSponsors",
+  __name: 'VPDocAsideSponsors',
   __ssrInlineRender: true,
   props: {
     tier: {},
     size: {},
-    data: {}
+    data: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "VPDocAsideSponsors" }, _attrs))}>`);
-      _push(ssrRenderComponent(_sfc_main$9, {
-        mode: "aside",
-        tier: __props.tier,
-        size: __props.size,
-        data: __props.data
-      }, null, _parent));
+      _push(
+        `<div${ssrRenderAttrs(mergeProps({ class: 'VPDocAsideSponsors' }, _attrs))}>`
+      );
+      _push(
+        ssrRenderComponent(
+          _sfc_main$9,
+          {
+            mode: 'aside',
+            tier: __props.tier,
+            size: __props.size,
+            data: __props.data,
+          },
+          null,
+          _parent
+        )
+      );
       _push(`</div>`);
     };
-  }
+  },
 });
 const _sfc_setup$8 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideSponsors.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideSponsors.vue'
+  );
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  __name: "VPHomeSponsors",
+  __name: 'VPHomeSponsors',
   __ssrInlineRender: true,
   props: {
     message: {},
-    actionText: { default: "Become a sponsor" },
+    actionText: { default: 'Become a sponsor' },
     actionLink: {},
-    data: {}
+    data: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<section${ssrRenderAttrs(mergeProps({ class: "VPHomeSponsors" }, _attrs))} data-v-28ae6d31><div class="container" data-v-28ae6d31><div class="header" data-v-28ae6d31><div class="love" data-v-28ae6d31><span class="vpi-heart icon" data-v-28ae6d31></span></div>`);
+      _push(
+        `<section${ssrRenderAttrs(mergeProps({ class: 'VPHomeSponsors' }, _attrs))} data-v-28ae6d31><div class="container" data-v-28ae6d31><div class="header" data-v-28ae6d31><div class="love" data-v-28ae6d31><span class="vpi-heart icon" data-v-28ae6d31></span></div>`
+      );
       if (__props.message) {
-        _push(`<h2 class="message" data-v-28ae6d31>${ssrInterpolate(__props.message)}</h2>`);
+        _push(
+          `<h2 class="message" data-v-28ae6d31>${ssrInterpolate(__props.message)}</h2>`
+        );
       } else {
         _push(`<!---->`);
       }
       _push(`</div><div class="sponsors" data-v-28ae6d31>`);
-      _push(ssrRenderComponent(_sfc_main$9, { data: __props.data }, null, _parent));
+      _push(
+        ssrRenderComponent(_sfc_main$9, { data: __props.data }, null, _parent)
+      );
       _push(`</div>`);
       if (__props.actionLink) {
         _push(`<div class="action" data-v-28ae6d31>`);
-        _push(ssrRenderComponent(VPButton, {
-          theme: "sponsor",
-          text: __props.actionText,
-          href: __props.actionLink
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPButton,
+            {
+              theme: 'sponsor',
+              text: __props.actionText,
+              href: __props.actionLink,
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div></section>`);
     };
-  }
+  },
 });
 const _sfc_setup$7 = _sfc_main$7.setup;
 _sfc_main$7.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeSponsors.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPHomeSponsors.vue'
+  );
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
-  __name: "VPTeamMembersItem",
+  __name: 'VPTeamMembersItem',
   __ssrInlineRender: true,
   props: {
-    size: { default: "medium" },
-    member: {}
+    size: { default: 'medium' },
+    member: {},
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<article${ssrRenderAttrs(mergeProps({
-        class: ["VPTeamMembersItem", [__props.size]]
-      }, _attrs))} data-v-65e78feb><div class="profile" data-v-65e78feb><figure class="avatar" data-v-65e78feb><img class="avatar-img"${ssrRenderAttr("src", __props.member.avatar)}${ssrRenderAttr("alt", __props.member.name)} data-v-65e78feb></figure><div class="data" data-v-65e78feb><h1 class="name" data-v-65e78feb>${ssrInterpolate(__props.member.name)}</h1>`);
+      _push(
+        `<article${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPTeamMembersItem', [__props.size]],
+            },
+            _attrs
+          )
+        )} data-v-65e78feb><div class="profile" data-v-65e78feb><figure class="avatar" data-v-65e78feb><img class="avatar-img"${ssrRenderAttr('src', __props.member.avatar)}${ssrRenderAttr('alt', __props.member.name)} data-v-65e78feb></figure><div class="data" data-v-65e78feb><h1 class="name" data-v-65e78feb>${ssrInterpolate(__props.member.name)}</h1>`
+      );
       if (__props.member.title || __props.member.org) {
         _push(`<p class="affiliation" data-v-65e78feb>`);
         if (__props.member.title) {
-          _push(`<span class="title" data-v-65e78feb>${ssrInterpolate(__props.member.title)}</span>`);
+          _push(
+            `<span class="title" data-v-65e78feb>${ssrInterpolate(__props.member.title)}</span>`
+          );
         } else {
           _push(`<!---->`);
         }
@@ -5768,22 +8958,29 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           _push(`<!---->`);
         }
         if (__props.member.org) {
-          _push(ssrRenderComponent(_sfc_main$$, {
-            class: ["org", { link: __props.member.orgLink }],
-            href: __props.member.orgLink,
-            "no-icon": ""
-          }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
-              if (_push2) {
-                _push2(`${ssrInterpolate(__props.member.org)}`);
-              } else {
-                return [
-                  createTextVNode(toDisplayString(__props.member.org), 1)
-                ];
-              }
-            }),
-            _: 1
-          }, _parent));
+          _push(
+            ssrRenderComponent(
+              _sfc_main$$,
+              {
+                class: ['org', { link: __props.member.orgLink }],
+                href: __props.member.orgLink,
+                'no-icon': '',
+              },
+              {
+                default: withCtx((_, _push2, _parent2, _scopeId) => {
+                  if (_push2) {
+                    _push2(`${ssrInterpolate(__props.member.org)}`);
+                  } else {
+                    return [
+                      createTextVNode(toDisplayString(__props.member.org), 1),
+                    ];
+                  }
+                }),
+                _: 1,
+              },
+              _parent
+            )
+          );
         } else {
           _push(`<!---->`);
         }
@@ -5792,15 +8989,24 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         _push(`<!---->`);
       }
       if (__props.member.desc) {
-        _push(`<p class="desc" data-v-65e78feb>${__props.member.desc ?? ""}</p>`);
+        _push(
+          `<p class="desc" data-v-65e78feb>${__props.member.desc ?? ''}</p>`
+        );
       } else {
         _push(`<!---->`);
       }
       if (__props.member.links) {
         _push(`<div class="links" data-v-65e78feb>`);
-        _push(ssrRenderComponent(VPSocialLinks, {
-          links: __props.member.links
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPSocialLinks,
+            {
+              links: __props.member.links,
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</div>`);
       } else {
         _push(`<!---->`);
@@ -5808,100 +9014,142 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       _push(`</div></div>`);
       if (__props.member.sponsor) {
         _push(`<div class="sp" data-v-65e78feb>`);
-        _push(ssrRenderComponent(_sfc_main$$, {
-          class: "sp-link",
-          href: __props.member.sponsor,
-          "no-icon": ""
-        }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(`<span class="vpi-heart sp-icon" data-v-65e78feb${_scopeId}></span> ${ssrInterpolate(__props.member.actionText || "Sponsor")}`);
-            } else {
-              return [
-                createVNode("span", { class: "vpi-heart sp-icon" }),
-                createTextVNode(" " + toDisplayString(__props.member.actionText || "Sponsor"), 1)
-              ];
-            }
-          }),
-          _: 1
-        }, _parent));
+        _push(
+          ssrRenderComponent(
+            _sfc_main$$,
+            {
+              class: 'sp-link',
+              href: __props.member.sponsor,
+              'no-icon': '',
+            },
+            {
+              default: withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(
+                    `<span class="vpi-heart sp-icon" data-v-65e78feb${_scopeId}></span> ${ssrInterpolate(__props.member.actionText || 'Sponsor')}`
+                  );
+                } else {
+                  return [
+                    createVNode('span', { class: 'vpi-heart sp-icon' }),
+                    createTextVNode(
+                      ' ' +
+                        toDisplayString(__props.member.actionText || 'Sponsor'),
+                      1
+                    ),
+                  ];
+                }
+              }),
+              _: 1,
+            },
+            _parent
+          )
+        );
         _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</article>`);
     };
-  }
+  },
 });
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembersItem.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembersItem.vue'
+  );
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const VPTeamMembersItem = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-65e78feb"]]);
+const VPTeamMembersItem = /* @__PURE__ */ _export_sfc(_sfc_main$6, [
+  ['__scopeId', 'data-v-65e78feb'],
+]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  __name: "VPTeamMembers",
+  __name: 'VPTeamMembers',
   __ssrInlineRender: true,
   props: {
-    size: { default: "medium" },
-    members: {}
+    size: { default: 'medium' },
+    members: {},
   },
   setup(__props) {
     const props = __props;
-    const classes = computed(() => [props.size, `count-${props.members.length}`]);
+    const classes = computed(() => [
+      props.size,
+      `count-${props.members.length}`,
+    ]);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["VPTeamMembers", classes.value]
-      }, _attrs))} data-v-8a51f01e><div class="container" data-v-8a51f01e><!--[-->`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              class: ['VPTeamMembers', classes.value],
+            },
+            _attrs
+          )
+        )} data-v-8a51f01e><div class="container" data-v-8a51f01e><!--[-->`
+      );
       ssrRenderList(__props.members, (member) => {
         _push(`<div class="item" data-v-8a51f01e>`);
-        _push(ssrRenderComponent(VPTeamMembersItem, {
-          size: __props.size,
-          member
-        }, null, _parent));
+        _push(
+          ssrRenderComponent(
+            VPTeamMembersItem,
+            {
+              size: __props.size,
+              member,
+            },
+            null,
+            _parent
+          )
+        );
         _push(`</div>`);
       });
       _push(`<!--]--></div></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$5 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembers.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembers.vue'
+  );
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
 const _sfc_main$4 = {};
 const _sfc_setup$4 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamPage.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamPage.vue'
+  );
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
 const _sfc_main$3 = {};
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageSection.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageSection.vue'
+  );
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const _sfc_main$2 = {};
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageTitle.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '../../node_modules/.pnpm/vitepress@1.6.4_@algolia+cl_4ef88c7572305d8e84db00bb804c2f64/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageTitle.vue'
+  );
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const theme = {
   Layout,
   enhanceApp: ({ app }) => {
-    app.component("Badge", _sfc_main$16);
-  }
+    app.component('Badge', _sfc_main$16);
+  },
 };
-const _imports_0 = "/assets/logo.png";
+const _imports_0 = '/assets/logo.png';
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  __name: "LogoAnimation",
+  __name: 'LogoAnimation',
   __ssrInlineRender: true,
   setup(__props) {
     const isHovering = ref(false);
@@ -5911,17 +9159,17 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const particles = ref([]);
     const containerRef = ref(null);
     const colors = [
-      "#00d5c4",
-      "#19fac6",
-      "#00b8a9",
-      "#00ffcc",
-      "#4FC08D",
-      "#61DAFB"
+      '#00d5c4',
+      '#19fac6',
+      '#00b8a9',
+      '#00ffcc',
+      '#4FC08D',
+      '#61DAFB',
     ];
     const generateParticles = () => {
       const newParticles = [];
       for (let i = 0; i < 12; i++) {
-        const angle = i / 12 * Math.PI * 2;
+        const angle = (i / 12) * Math.PI * 2;
         const radius = 60 + Math.random() * 40;
         newParticles.push({
           id: i,
@@ -5929,7 +9177,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
           y: Math.sin(angle) * radius,
           size: 4 + Math.random() * 8,
           color: colors[Math.floor(Math.random() * colors.length)],
-          delay: i * 0.05
+          delay: i * 0.05,
         });
       }
       particles.value = newParticles;
@@ -5955,23 +9203,32 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       cancelAnimationFrame(animationFrame);
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({
-        ref_key: "containerRef",
-        ref: containerRef,
-        class: "logo-container"
-      }, _attrs))} data-v-310d2b84><div class="logo-wrapper" style="${ssrRenderStyle({
-        transform: `perspective(1000px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`
-      })}" data-v-310d2b84><div class="logo-glow" data-v-310d2b84></div><img${ssrRenderAttr("src", _imports_0)} alt="Logo" class="${ssrRenderClass([{ "logo-hover": isHovering.value }, "logo-image"])}" data-v-310d2b84><div class="logo-ring ring-1" data-v-310d2b84></div><div class="logo-ring ring-2" data-v-310d2b84></div><div class="logo-ring ring-3" data-v-310d2b84></div></div>`);
+      _push(
+        `<div${ssrRenderAttrs(
+          mergeProps(
+            {
+              ref_key: 'containerRef',
+              ref: containerRef,
+              class: 'logo-container',
+            },
+            _attrs
+          )
+        )} data-v-310d2b84><div class="logo-wrapper" style="${ssrRenderStyle({
+          transform: `perspective(1000px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`,
+        })}" data-v-310d2b84><div class="logo-glow" data-v-310d2b84></div><img${ssrRenderAttr('src', _imports_0)} alt="Logo" class="${ssrRenderClass([{ 'logo-hover': isHovering.value }, 'logo-image'])}" data-v-310d2b84><div class="logo-ring ring-1" data-v-310d2b84></div><div class="logo-ring ring-2" data-v-310d2b84></div><div class="logo-ring ring-3" data-v-310d2b84></div></div>`
+      );
       if (isAnimating.value) {
         _push(`<div class="particles-container" data-v-310d2b84><!--[-->`);
         ssrRenderList(particles.value, (particle) => {
-          _push(`<div class="particle" style="${ssrRenderStyle({
-            "--x": `${particle.x}px`,
-            "--y": `${particle.y}px`,
-            "--size": `${particle.size}px`,
-            "--color": particle.color,
-            "--delay": `${particle.delay}s`
-          })}" data-v-310d2b84></div>`);
+          _push(
+            `<div class="particle" style="${ssrRenderStyle({
+              '--x': `${particle.x}px`,
+              '--y': `${particle.y}px`,
+              '--size': `${particle.size}px`,
+              '--color': particle.color,
+              '--delay': `${particle.delay}s`,
+            })}" data-v-310d2b84></div>`
+          );
         });
         _push(`<!--]--></div>`);
       } else {
@@ -5979,29 +9236,35 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       }
       _push(`<div class="floating-dots" data-v-310d2b84><!--[-->`);
       ssrRenderList(6, (i) => {
-        _push(`<span class="dot" style="${ssrRenderStyle({ "--i": i })}" data-v-310d2b84></span>`);
+        _push(
+          `<span class="dot" style="${ssrRenderStyle({ '--i': i })}" data-v-310d2b84></span>`
+        );
       });
       _push(`<!--]--></div></div>`);
     };
-  }
+  },
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(".vitepress/theme/components/LogoAnimation.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '.vitepress/theme/components/LogoAnimation.vue'
+  );
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const LogoAnimation = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-310d2b84"]]);
-const brandText = "NAILUO";
+const LogoAnimation = /* @__PURE__ */ _export_sfc(_sfc_main$1, [
+  ['__scopeId', 'data-v-310d2b84'],
+]);
+const brandText = 'NAILUO';
 const INITIAL_DURATION = 1100;
 const ROUTE_DURATION = 650;
 const FADE_DURATION = 420;
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "LoadingOverlay",
+  __name: 'LoadingOverlay',
   __ssrInlineRender: true,
   setup(__props) {
     const route = useRoute();
-    const brandChars = brandText.split("");
+    const brandChars = brandText.split('');
     const isVisible = ref(false);
     const isActive2 = ref(false);
     let closeTimer = null;
@@ -6017,7 +9280,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     }
     function playOverlay(duration) {
-      if (typeof window === "undefined") {
+      if (typeof window === 'undefined') {
         return;
       }
       clearTimers();
@@ -6049,50 +9312,67 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       if (isVisible.value) {
-        _push(`<div${ssrRenderAttrs(mergeProps({
-          class: ["kb-loading", { "kb-loading-active": isActive2.value }],
-          "aria-live": "polite",
-          "aria-label": "Loading page"
-        }, _attrs))} data-v-b08174ce><div class="kb-loading__background" data-v-b08174ce><div class="kb-loading__orb kb-loading__orb--one" data-v-b08174ce></div><div class="kb-loading__orb kb-loading__orb--two" data-v-b08174ce></div><div class="kb-loading__orb kb-loading__orb--three" data-v-b08174ce></div></div><div class="kb-loading__content" data-v-b08174ce><div class="kb-loading__logo-wrapper" data-v-b08174ce><div class="kb-loading__ring-container" data-v-b08174ce><div class="kb-loading__ring kb-loading__ring--primary" data-v-b08174ce></div><div class="kb-loading__ring kb-loading__ring--reverse" data-v-b08174ce></div><div class="kb-loading__ring kb-loading__ring--dotted" data-v-b08174ce></div></div><div class="kb-loading__logo-glow" data-v-b08174ce></div><img${ssrRenderAttr("src", _imports_0)} alt="NaiLuo logo" class="kb-loading__logo" data-v-b08174ce><div class="kb-loading__pulse-ring" data-v-b08174ce></div></div><div class="kb-loading__text" data-v-b08174ce><h2 class="kb-loading__brand" data-v-b08174ce><!--[-->`);
+        _push(
+          `<div${ssrRenderAttrs(
+            mergeProps(
+              {
+                class: ['kb-loading', { 'kb-loading-active': isActive2.value }],
+                'aria-live': 'polite',
+                'aria-label': 'Loading page',
+              },
+              _attrs
+            )
+          )} data-v-b08174ce><div class="kb-loading__background" data-v-b08174ce><div class="kb-loading__orb kb-loading__orb--one" data-v-b08174ce></div><div class="kb-loading__orb kb-loading__orb--two" data-v-b08174ce></div><div class="kb-loading__orb kb-loading__orb--three" data-v-b08174ce></div></div><div class="kb-loading__content" data-v-b08174ce><div class="kb-loading__logo-wrapper" data-v-b08174ce><div class="kb-loading__ring-container" data-v-b08174ce><div class="kb-loading__ring kb-loading__ring--primary" data-v-b08174ce></div><div class="kb-loading__ring kb-loading__ring--reverse" data-v-b08174ce></div><div class="kb-loading__ring kb-loading__ring--dotted" data-v-b08174ce></div></div><div class="kb-loading__logo-glow" data-v-b08174ce></div><img${ssrRenderAttr('src', _imports_0)} alt="NaiLuo logo" class="kb-loading__logo" data-v-b08174ce><div class="kb-loading__pulse-ring" data-v-b08174ce></div></div><div class="kb-loading__text" data-v-b08174ce><h2 class="kb-loading__brand" data-v-b08174ce><!--[-->`
+        );
         ssrRenderList(unref(brandChars), (char, index) => {
-          _push(`<span class="kb-loading__char" style="${ssrRenderStyle({ animationDelay: `${index * 0.1}s` })}" data-v-b08174ce>${ssrInterpolate(char)}</span>`);
+          _push(
+            `<span class="kb-loading__char" style="${ssrRenderStyle({ animationDelay: `${index * 0.1}s` })}" data-v-b08174ce>${ssrInterpolate(char)}</span>`
+          );
         });
-        _push(`<!--]--></h2><p class="kb-loading__caption" data-v-b08174ce>Loading...</p></div><div class="kb-loading__particles" data-v-b08174ce><!--[-->`);
+        _push(
+          `<!--]--></h2><p class="kb-loading__caption" data-v-b08174ce>Loading...</p></div><div class="kb-loading__particles" data-v-b08174ce><!--[-->`
+        );
         ssrRenderList(12, (i) => {
-          _push(`<span class="kb-loading__particle" style="${ssrRenderStyle({
-            "--particle-angle": `${(i - 1) * 30}deg`,
-            "--particle-distance": `${80 + (i - 1) * 14}px`,
-            "--particle-delay": `${(i - 1) * 0.12}s`
-          })}" data-v-b08174ce></span>`);
+          _push(
+            `<span class="kb-loading__particle" style="${ssrRenderStyle({
+              '--particle-angle': `${(i - 1) * 30}deg`,
+              '--particle-distance': `${80 + (i - 1) * 14}px`,
+              '--particle-delay': `${(i - 1) * 0.12}s`,
+            })}" data-v-b08174ce></span>`
+          );
         });
         _push(`<!--]--></div></div></div>`);
       } else {
         _push(`<!---->`);
       }
     };
-  }
+  },
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(".vitepress/theme/components/LoadingOverlay.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(
+    '.vitepress/theme/components/LoadingOverlay.vue'
+  );
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const LoadingOverlay = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-b08174ce"]]);
+const LoadingOverlay = /* @__PURE__ */ _export_sfc(_sfc_main, [
+  ['__scopeId', 'data-v-b08174ce'],
+]);
 const RawTheme = {
   extends: theme,
   enhanceApp({ app }) {
-    app.component("LogoAnimation", LogoAnimation);
-    app.component("LoadingOverlay", LoadingOverlay);
+    app.component('LogoAnimation', LogoAnimation);
+    app.component('LoadingOverlay', LoadingOverlay);
   },
   Layout: () => {
     return h(Fragment, null, [
       h(LoadingOverlay),
       h(theme.Layout, null, {
-        "home-hero-image": () => h(LogoAnimation)
-      })
+        'home-hero-image': () => h(LogoAnimation),
+      }),
     ]);
-  }
+  },
 };
 const ClientOnly = defineComponent({
   setup(_, { slots }) {
@@ -6100,34 +9380,33 @@ const ClientOnly = defineComponent({
     onMounted(() => {
       show.value = true;
     });
-    return () => show.value && slots.default ? slots.default() : null;
-  }
+    return () => (show.value && slots.default ? slots.default() : null);
+  },
 });
 function useCodeGroups() {
   if (inBrowser) {
-    window.addEventListener("click", (e) => {
+    window.addEventListener('click', (e) => {
       var _a;
       const el = e.target;
-      if (el.matches(".vp-code-group input")) {
-        const group = (_a = el.parentElement) == null ? void 0 : _a.parentElement;
-        if (!group)
-          return;
-        const i = Array.from(group.querySelectorAll("input")).indexOf(el);
-        if (i < 0)
-          return;
-        const blocks = group.querySelector(".blocks");
-        if (!blocks)
-          return;
-        const current = Array.from(blocks.children).find((child) => child.classList.contains("active"));
-        if (!current)
-          return;
+      if (el.matches('.vp-code-group input')) {
+        const group =
+          (_a = el.parentElement) == null ? void 0 : _a.parentElement;
+        if (!group) return;
+        const i = Array.from(group.querySelectorAll('input')).indexOf(el);
+        if (i < 0) return;
+        const blocks = group.querySelector('.blocks');
+        if (!blocks) return;
+        const current = Array.from(blocks.children).find((child) =>
+          child.classList.contains('active')
+        );
+        if (!current) return;
         const next = blocks.children[i];
-        if (!next || current === next)
-          return;
-        current.classList.remove("active");
-        next.classList.add("active");
-        const label = group == null ? void 0 : group.querySelector(`label[for="${el.id}"]`);
-        label == null ? void 0 : label.scrollIntoView({ block: "nearest" });
+        if (!next || current === next) return;
+        current.classList.remove('active');
+        next.classList.add('active');
+        const label =
+          group == null ? void 0 : group.querySelector(`label[for="${el.id}"]`);
+        label == null ? void 0 : label.scrollIntoView({ block: 'nearest' });
       }
     });
   }
@@ -6135,28 +9414,33 @@ function useCodeGroups() {
 function useCopyCode() {
   if (inBrowser) {
     const timeoutIdMap = /* @__PURE__ */ new WeakMap();
-    window.addEventListener("click", (e) => {
+    window.addEventListener('click', (e) => {
       var _a;
       const el = e.target;
       if (el.matches('div[class*="language-"] > button.copy')) {
         const parent = el.parentElement;
-        const sibling = (_a = el.nextElementSibling) == null ? void 0 : _a.nextElementSibling;
+        const sibling =
+          (_a = el.nextElementSibling) == null ? void 0 : _a.nextElementSibling;
         if (!parent || !sibling) {
           return;
         }
-        const isShell = /language-(shellscript|shell|bash|sh|zsh)/.test(parent.className);
-        const ignoredNodes = [".vp-copy-ignore", ".diff.remove"];
+        const isShell = /language-(shellscript|shell|bash|sh|zsh)/.test(
+          parent.className
+        );
+        const ignoredNodes = ['.vp-copy-ignore', '.diff.remove'];
         const clone = sibling.cloneNode(true);
-        clone.querySelectorAll(ignoredNodes.join(",")).forEach((node) => node.remove());
-        let text = clone.textContent || "";
+        clone
+          .querySelectorAll(ignoredNodes.join(','))
+          .forEach((node) => node.remove());
+        let text = clone.textContent || '';
         if (isShell) {
-          text = text.replace(/^ *(\$|>) /gm, "").trim();
+          text = text.replace(/^ *(\$|>) /gm, '').trim();
         }
         copyToClipboard(text).then(() => {
-          el.classList.add("copied");
+          el.classList.add('copied');
           clearTimeout(timeoutIdMap.get(el));
           const timeoutId = setTimeout(() => {
-            el.classList.remove("copied");
+            el.classList.remove('copied');
             el.blur();
             timeoutIdMap.delete(el);
           }, 2e3);
@@ -6170,21 +9454,23 @@ async function copyToClipboard(text) {
   try {
     return navigator.clipboard.writeText(text);
   } catch {
-    const element = document.createElement("textarea");
+    const element = document.createElement('textarea');
     const previouslyFocusedElement = document.activeElement;
     element.value = text;
-    element.setAttribute("readonly", "");
-    element.style.contain = "strict";
-    element.style.position = "absolute";
-    element.style.left = "-9999px";
-    element.style.fontSize = "12pt";
+    element.setAttribute('readonly', '');
+    element.style.contain = 'strict';
+    element.style.position = 'absolute';
+    element.style.left = '-9999px';
+    element.style.fontSize = '12pt';
     const selection = document.getSelection();
-    const originalRange = selection ? selection.rangeCount > 0 && selection.getRangeAt(0) : null;
+    const originalRange = selection
+      ? selection.rangeCount > 0 && selection.getRangeAt(0)
+      : null;
     document.body.appendChild(element);
     element.select();
     element.selectionStart = 0;
     element.selectionEnd = text.length;
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(element);
     if (originalRange) {
       selection.removeAllRanges();
@@ -6214,7 +9500,9 @@ function useUpdateHead(route, siteDataByRouteRef) {
     }
     const newElements = newTags.map(createHeadElement);
     managedHeadElements.forEach((oldEl, oldIndex) => {
-      const matchedIndex = newElements.findIndex((newEl) => newEl == null ? void 0 : newEl.isEqualNode(oldEl ?? null));
+      const matchedIndex = newElements.findIndex((newEl) =>
+        newEl == null ? void 0 : newEl.isEqualNode(oldEl ?? null)
+      );
       if (matchedIndex !== -1) {
         delete newElements[matchedIndex];
       } else {
@@ -6223,27 +9511,36 @@ function useUpdateHead(route, siteDataByRouteRef) {
       }
     });
     newElements.forEach((el) => el && document.head.appendChild(el));
-    managedHeadElements = [...managedHeadElements, ...newElements].filter(Boolean);
+    managedHeadElements = [...managedHeadElements, ...newElements].filter(
+      Boolean
+    );
   };
   watchEffect(() => {
     const pageData = route.data;
     const siteData2 = siteDataByRouteRef.value;
     const pageDescription = pageData && pageData.description;
-    const frontmatterHead = pageData && pageData.frontmatter.head || [];
+    const frontmatterHead = (pageData && pageData.frontmatter.head) || [];
     const title = createTitle(siteData2, pageData);
     if (title !== document.title) {
       document.title = title;
     }
     const description = pageDescription || siteData2.description;
-    let metaDescriptionElement = document.querySelector(`meta[name=description]`);
+    let metaDescriptionElement = document.querySelector(
+      `meta[name=description]`
+    );
     if (metaDescriptionElement) {
-      if (metaDescriptionElement.getAttribute("content") !== description) {
-        metaDescriptionElement.setAttribute("content", description);
+      if (metaDescriptionElement.getAttribute('content') !== description) {
+        metaDescriptionElement.setAttribute('content', description);
       }
     } else {
-      createHeadElement(["meta", { name: "description", content: description }]);
+      createHeadElement([
+        'meta',
+        { name: 'description', content: description },
+      ]);
     }
-    updateHeadTags(mergeHead(siteData2.head, filterOutHeadDescription(frontmatterHead)));
+    updateHeadTags(
+      mergeHead(siteData2.head, filterOutHeadDescription(frontmatterHead))
+    );
   });
 }
 function createHeadElement([tag, attrs, innerHTML]) {
@@ -6254,19 +9551,23 @@ function createHeadElement([tag, attrs, innerHTML]) {
   if (innerHTML) {
     el.innerHTML = innerHTML;
   }
-  if (tag === "script" && attrs.async == null) {
+  if (tag === 'script' && attrs.async == null) {
     el.async = false;
   }
   return el;
 }
 function isMetaDescription(headConfig) {
-  return headConfig[0] === "meta" && headConfig[1] && headConfig[1].name === "description";
+  return (
+    headConfig[0] === 'meta' &&
+    headConfig[1] &&
+    headConfig[1].name === 'description'
+  );
 }
 function filterOutHeadDescription(head) {
   return head.filter((h2) => !isMetaDescription(h2));
 }
 const hasFetched = /* @__PURE__ */ new Set();
-const createLink = () => document.createElement("link");
+const createLink = () => document.createElement('link');
 const viaDOM = (url) => {
   const link2 = createLink();
   link2.rel = `prefetch`;
@@ -6275,11 +9576,18 @@ const viaDOM = (url) => {
 };
 const viaXHR = (url) => {
   const req = new XMLHttpRequest();
-  req.open("GET", url, req.withCredentials = true);
+  req.open('GET', url, (req.withCredentials = true));
   req.send();
 };
 let link;
-const doFetch = inBrowser && (link = createLink()) && link.relList && link.relList.supports && link.relList.supports("prefetch") ? viaDOM : viaXHR;
+const doFetch =
+  inBrowser &&
+  (link = createLink()) &&
+  link.relList &&
+  link.relList.supports &&
+  link.relList.supports('prefetch')
+    ? viaDOM
+    : viaXHR;
 function usePrefetch() {
   if (!inBrowser) {
     return;
@@ -6288,7 +9596,10 @@ function usePrefetch() {
     return;
   }
   let conn;
-  if ((conn = navigator.connection) && (conn.saveData || /2g/.test(conn.effectiveType))) {
+  if (
+    (conn = navigator.connection) &&
+    (conn.saveData || /2g/.test(conn.effectiveType))
+  ) {
     return;
   }
   const rIC = window.requestIdleCallback || setTimeout;
@@ -6306,23 +9617,27 @@ function usePrefetch() {
           if (!hasFetched.has(pathname)) {
             hasFetched.add(pathname);
             const pageChunkPath = pathToFile(pathname);
-            if (pageChunkPath)
-              doFetch(pageChunkPath);
+            if (pageChunkPath) doFetch(pageChunkPath);
           }
         }
       });
     });
     rIC(() => {
-      document.querySelectorAll("#app a").forEach((link2) => {
-        const { hostname, pathname } = new URL(link2.href instanceof SVGAnimatedString ? link2.href.animVal : link2.href, link2.baseURI);
+      document.querySelectorAll('#app a').forEach((link2) => {
+        const { hostname, pathname } = new URL(
+          link2.href instanceof SVGAnimatedString
+            ? link2.href.animVal
+            : link2.href,
+          link2.baseURI
+        );
         const extMatch = pathname.match(/\.\w+$/);
-        if (extMatch && extMatch[0] !== ".html") {
+        if (extMatch && extMatch[0] !== '.html') {
           return;
         }
         if (
           // only prefetch same tab navigation, since a new tab will load
           // the lean js chunk instead.
-          link2.target !== "_blank" && // only prefetch inbound links
+          link2.target !== '_blank' && // only prefetch inbound links
           hostname === location.hostname
         ) {
           if (pathname !== location.pathname) {
@@ -6348,18 +9663,16 @@ function resolveThemeExtends(theme2) {
       ...base,
       ...theme2,
       async enhanceApp(ctx) {
-        if (base.enhanceApp)
-          await base.enhanceApp(ctx);
-        if (theme2.enhanceApp)
-          await theme2.enhanceApp(ctx);
-      }
+        if (base.enhanceApp) await base.enhanceApp(ctx);
+        if (theme2.enhanceApp) await theme2.enhanceApp(ctx);
+      },
     };
   }
   return theme2;
 }
 const Theme = resolveThemeExtends(RawTheme);
 const VitePressApp = defineComponent({
-  name: "VitePressApp",
+  name: 'VitePressApp',
   setup() {
     const { site, lang, dir } = useData$1();
     onMounted(() => {
@@ -6373,10 +9686,9 @@ const VitePressApp = defineComponent({
     }
     useCopyCode();
     useCodeGroups();
-    if (Theme.setup)
-      Theme.setup();
+    if (Theme.setup) Theme.setup();
     return () => h(Theme.Layout);
-  }
+  },
 });
 async function createApp() {
   globalThis.__VITEPRESS__ = true;
@@ -6385,25 +9697,25 @@ async function createApp() {
   app.provide(RouterSymbol, router);
   const data = initData(router.route);
   app.provide(dataSymbol, data);
-  app.component("Content", Content);
-  app.component("ClientOnly", ClientOnly);
+  app.component('Content', Content);
+  app.component('ClientOnly', ClientOnly);
   Object.defineProperties(app.config.globalProperties, {
     $frontmatter: {
       get() {
         return data.frontmatter.value;
-      }
+      },
     },
     $params: {
       get() {
         return data.page.value.params;
-      }
-    }
+      },
+    },
   });
   if (Theme.enhanceApp) {
     await Theme.enhanceApp({
       app,
       router,
-      siteData: siteDataRef
+      siteData: siteDataRef,
     });
   }
   return { app, router, data };
@@ -6418,9 +9730,9 @@ function newRouter() {
     let pageModule = null;
     if (pageFilePath) {
       if (isInitialPageLoad) {
-        pageFilePath = pageFilePath.replace(/\.js$/, ".lean.js");
+        pageFilePath = pageFilePath.replace(/\.js$/, '.lean.js');
       }
-      if (false) ;
+      if (false);
       else {
         pageModule = import(
           /*@vite-ignore*/
@@ -6438,14 +9750,14 @@ if (inBrowser) {
   createApp().then(({ app, router, data }) => {
     router.go().then(() => {
       useUpdateHead(router.route, data.site);
-      app.mount("#app");
+      app.mount('#app');
     });
   });
 }
 async function render(path) {
   const { app, router } = await createApp();
   await router.go(path);
-  const ctx = { content: "", vpSocialIcons: /* @__PURE__ */ new Set() };
+  const ctx = { content: '', vpSocialIcons: /* @__PURE__ */ new Set() };
   ctx.content = await renderToString(app, ctx);
   return ctx;
 }
@@ -6468,5 +9780,5 @@ export {
   render,
   toArray as t,
   unrefElement as u,
-  watchDebounced as w
+  watchDebounced as w,
 };

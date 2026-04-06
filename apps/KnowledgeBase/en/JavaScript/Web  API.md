@@ -7,9 +7,9 @@
 Parameter is character's index in string, returns encoding value of character at specified position
 
 ```js
-let str = "A";
+let str = 'A';
 
-console.log(str.charCodeAt(0)); 
+console.log(str.charCodeAt(0));
 ```
 
 ### String.fromCharCode()
@@ -17,7 +17,7 @@ console.log(str.charCodeAt(0));
 Used to convert numeric ASCII code to character
 
 ```js
-String.fromCharCode(65) // 'A'
+String.fromCharCode(65); // 'A'
 console.log(String.fromCharCode(72, 101, 108, 108, 111)); // Hello
 ```
 
@@ -27,7 +27,7 @@ console.log(String.fromCharCode(72, 101, 108, 108, 111)); // Hello
 
 ```js
 let arr = [1, 2, 3];
-Math.max(...arr) // Result is 3, array must use spread operator
+Math.max(...arr); // Result is 3, array must use spread operator
 Math.max(1, 2, 3, 4, 5, 6); // Result is 6
 ```
 
@@ -72,7 +72,7 @@ Math.floor();
 ### Ceil: `ceil()`
 
 ```js
-Math.ceil()
+Math.ceil();
 ```
 
 ---
@@ -87,10 +87,10 @@ let date = new Date();
 
 ```js
 let date = new Date();
-date.getFullYear();   // Year
-date.getMonth();      // Only returns 0~11, i.e., month - 1
-date.getDate();       // Day
-date.getDay();        // Week, returns 0~6 numbers, can use array to convert to uppercase
+date.getFullYear(); // Year
+date.getMonth(); // Only returns 0~11, i.e., month - 1
+date.getDate(); // Day
+date.getDay(); // Week, returns 0~6 numbers, can use array to convert to uppercase
 date.getHours();
 date.getMinutes();
 date.getSeconds();
@@ -122,8 +122,8 @@ Timestamp to current day's hour, minute, second algorithm:
 
 ```js
 let time = Date.now() / 1000; // Convert milliseconds to seconds
-let hour = time / 60 / 60 % 24; // First 60 converts to minutes, second 60 converts to hours, then modulo 24 to get hours
-let minute = time / 60 % 60;
+let hour = (time / 60 / 60) % 24; // First 60 converts to minutes, second 60 converts to hours, then modulo 24 to get hours
+let minute = (time / 60) % 60;
 let second = time % 60;
 ```
 
@@ -181,19 +181,19 @@ disconnect(): Stop all observations;
 const lazyImg = document.querySelector('.lazyImg');
 // Callback function
 function callback(entries, observer) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            console.log(entry, 'entered');
-        } else {
-            // What happens when element leaves
-        }
-    })
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      console.log(entry, 'entered');
+    } else {
+      // What happens when element leaves
+    }
+  });
 }
 // Config
 const option = {
-    root: null,        // Set root element, null means viewport
-    rootMargin: '10px', // Whether to trigger early, here means trigger 10px early
-}
+  root: null, // Set root element, null means viewport
+  rootMargin: '10px', // Whether to trigger early, here means trigger 10px early
+};
 const observer = new IntersectionObserver(callback, option);
 
 observer.observe(lazyImg); // Set object to observe
@@ -209,12 +209,12 @@ EyeDropper, call open method, returns a Promise, Promise object after success ca
 const btn = document.querySelector('button');
 const color = document.querySelector('#color');
 const dropper = new EyeDropper();
-console.log(dropper)
+console.log(dropper);
 
 btn.addEventListener('click', async () => {
-    const {sRGBHex} = await dropper.open()
-    color.style.backgroundColor = sRGBHex
-})
+  const { sRGBHex } = await dropper.open();
+  color.style.backgroundColor = sRGBHex;
+});
 ```
 
 ---
@@ -231,20 +231,24 @@ Only supports video for picture-in-picture;
 - document.exitPictureInPicture(): Exit picture-in-picture mode;
 
 ```html
-<video id="video" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls></video>
+<video
+  id="video"
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  controls
+></video>
 <button id="btn">Picture-in-Picture</button>
 
 <script>
-const video = document.getElementById('video');
-const btn = document.getElementById('btn');
+  const video = document.getElementById('video');
+  const btn = document.getElementById('btn');
 
-btn.onclick = async () => {
-  if (document.pictureInPictureElement) {
-    await document.exitPictureInPicture();
-  } else {
-    await video.requestPictureInPicture();
-  }
-};
+  btn.onclick = async () => {
+    if (document.pictureInPictureElement) {
+      await document.exitPictureInPicture();
+    } else {
+      await video.requestPictureInPicture();
+    }
+  };
 </script>
 ```
 
@@ -269,32 +273,35 @@ Allows you to put an entire HTML page into a PiP window;
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Document PiP Demo</title>
-  <style>
-    body { font-family: sans-serif; }
-    button { margin: 8px; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document PiP Demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      button {
+        margin: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Main Page</h2>
+    <button id="open">Open PiP</button>
+    <button id="send">Send Message to PiP</button>
 
-<h2>Main Page</h2>
-<button id="open">Open PiP</button>
-<button id="send">Send Message to PiP</button>
+    <script>
+      let pipWindow = null;
+      const channel = new BroadcastChannel('pip-channel');
 
-<script>
-let pipWindow = null;
-const channel = new BroadcastChannel('pip-channel');
+      document.getElementById('open').onclick = async () => {
+        pipWindow = await documentPictureInPicture.requestWindow({
+          width: 400,
+          height: 300,
+        });
 
-document.getElementById('open').onclick = async () => {
-  pipWindow = await documentPictureInPicture.requestWindow({
-    width: 400,
-    height: 300,
-  });
-
-  // 1. Write basic HTML
-  pipWindow.document.body.innerHTML = `
+        // 1. Write basic HTML
+        pipWindow.document.body.innerHTML = `
     <div id="app">
       <h3>PiP Window</h3>
       <p id="msg">Waiting for message...</p>
@@ -302,48 +309,47 @@ document.getElementById('open').onclick = async () => {
     </div>
   `;
 
-  // 2. Style sync (key)
-  copyStyles(document, pipWindow.document);
+        // 2. Style sync (key)
+        copyStyles(document, pipWindow.document);
 
-  // 3. Bind events
-  pipWindow.document.getElementById('close').onclick = () => {
-    pipWindow.close();
-  };
+        // 3. Bind events
+        pipWindow.document.getElementById('close').onclick = () => {
+          pipWindow.close();
+        };
 
-  // 4. Receive main page messages
-  const pipChannel = new BroadcastChannel('pip-channel');
-  pipChannel.onmessage = (e) => {
-    pipWindow.document.getElementById('msg').textContent = e.data;
-  };
+        // 4. Receive main page messages
+        const pipChannel = new BroadcastChannel('pip-channel');
+        pipChannel.onmessage = (e) => {
+          pipWindow.document.getElementById('msg').textContent = e.data;
+        };
 
-  // 5. Lifecycle
-  pipWindow.addEventListener('pagehide', () => {
-    console.log('PiP closed');
-    pipWindow = null;
-  });
-};
+        // 5. Lifecycle
+        pipWindow.addEventListener('pagehide', () => {
+          console.log('PiP closed');
+          pipWindow = null;
+        });
+      };
 
-// Main page sends message
-document.getElementById('send').onclick = () => {
-  channel.postMessage('Message from main page: ' + Date.now());
-};
+      // Main page sends message
+      document.getElementById('send').onclick = () => {
+        channel.postMessage('Message from main page: ' + Date.now());
+      };
 
-// Style copy function
-function copyStyles(srcDoc, targetDoc) {
-  [...srcDoc.styleSheets].forEach(sheet => {
-    try {
-      const rules = [...sheet.cssRules].map(r => r.cssText).join('');
-      const style = document.createElement('style');
-      style.textContent = rules;
-      targetDoc.head.appendChild(style);
-    } catch (e) {
-      console.warn('Cannot access cross-origin styles');
-    }
-  });
-}
-</script>
-
-</body>
+      // Style copy function
+      function copyStyles(srcDoc, targetDoc) {
+        [...srcDoc.styleSheets].forEach((sheet) => {
+          try {
+            const rules = [...sheet.cssRules].map((r) => r.cssText).join('');
+            const style = document.createElement('style');
+            style.textContent = rules;
+            targetDoc.head.appendChild(style);
+          } catch (e) {
+            console.warn('Cannot access cross-origin styles');
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
 ```
 
@@ -391,13 +397,13 @@ delete(name): Delete key-value pair
 
 Doesn't support object types, must serialize first;
 
-| Type | Behavior |
-| ---- | -------- |
-| `string` | Sent as-is |
-| `number` | **Auto-converts to string** |
-| `boolean` | `"true"` / `"false"` |
-| `File` | Binary file |
-| `Blob` | Binary data |
+| Type      | Behavior                    |
+| --------- | --------------------------- |
+| `string`  | Sent as-is                  |
+| `number`  | **Auto-converts to string** |
+| `boolean` | `"true"` / `"false"`        |
+| `File`    | Binary file                 |
+| `Blob`    | Binary data                 |
 
 **Form Submission:**
 
@@ -405,12 +411,12 @@ Automatically reads name attribute and form control's current value, disabled fi
 
 ```html
 <form id="myForm">
-    <input name="username" value="Tom" />
-    <input type="file" name="avatar" />
+  <input name="username" value="Tom" />
+  <input type="file" name="avatar" />
 </form>
 <script>
-    const form = document.getElementById('myForm');
-    const formData = new FormData(form);
+  const form = document.getElementById('myForm');
+  const formData = new FormData(form);
 </script>
 ```
 
@@ -423,7 +429,7 @@ formData.append('file', file, 'custom-name.png'); // Specify filename
 
 fetch('/upload', {
   method: 'POST',
-  body: formData
+  body: formData,
 });
 ```
 
@@ -438,7 +444,7 @@ Binary Large Object, is an object for storing immutable binary data, can be used
 Blob(): First parameter is data array to store, second parameter is optional config object (can configure MIME type);
 
 ```js
-const blob = new Blob(["Hello World"], { type: "text/plain"});
+const blob = new Blob(['Hello World'], { type: 'text/plain' });
 ```
 
 ### blob Instance:
@@ -446,14 +452,14 @@ const blob = new Blob(["Hello World"], { type: "text/plain"});
 **type**: Returns MIME type, if type cannot be determined, returns empty string;
 
 ```js
-const blob = new Blob(["Hello World"], { type: "text/plain"})
+const blob = new Blob(['Hello World'], { type: 'text/plain' });
 console.log(blob.type);
 ```
 
 **size**: Returns data's byte count;
 
 ```js
-const blob = new Blob(["Hello World"], { type: "text/plain"})
+const blob = new Blob(['Hello World'], { type: 'text/plain' });
 console.log(blob.size);
 ```
 
@@ -462,8 +468,8 @@ console.log(blob.size);
 Cuts old Blob, returns new Blob; first and second parameters are start and end positions, third parameter is MIME type;
 
 ```js
-const blob1 = new Blob(["Hello World"], { type: "text/plain;charset=utf-8" });
-const blob2 = blob1.slice(0, 5, "text/plain;charset=utf-8");
+const blob1 = new Blob(['Hello World'], { type: 'text/plain;charset=utf-8' });
+const blob2 = blob1.slice(0, 5, 'text/plain;charset=utf-8');
 ```
 
 **Read as Text: `text()`**
@@ -471,11 +477,11 @@ const blob2 = blob1.slice(0, 5, "text/plain;charset=utf-8");
 Returns a Promise object, can get text content via then's parameter;
 
 ```js
-const blob = new Blob(["<div>aaaa</div>"], { type: "text/html;charset=utf-8" });
+const blob = new Blob(['<div>aaaa</div>'], { type: 'text/html;charset=utf-8' });
 
 blob.text().then((data) => {
-    console.log(data);
-})
+  console.log(data);
+});
 ```
 
 **Read as Binary Object: `arrayBuffer()`**
@@ -483,8 +489,8 @@ blob.text().then((data) => {
 Returns a Promise object; arrayBuffer is a fixed-length raw binary array;
 
 ```js
-const blob = new Blob(["Hello World"]);
-blob.arrayBuffer().then(buffer => {
+const blob = new Blob(['Hello World']);
+blob.arrayBuffer().then((buffer) => {
   console.log(buffer.byteLength); // 11
 });
 ```
@@ -496,12 +502,12 @@ blob.arrayBuffer().then(buffer => {
 File inherits from Blob, has all Blob capabilities, additionally has filename, lastModified, etc. metadata;
 
 ```js
-const file = new File(["Hello"], "hello.txt", {
-  type: "text/plain",
-  lastModified: Date.now()
+const file = new File(['Hello'], 'hello.txt', {
+  type: 'text/plain',
+  lastModified: Date.now(),
 });
 
-console.log(file.name);         // "hello.txt"
+console.log(file.name); // "hello.txt"
 console.log(file.lastModified); // Timestamp
 ```
 
@@ -576,7 +582,7 @@ Creates a URL representing the given File or Blob object, pointing to file data 
 Commonly used for image preview, video preview, file download;
 
 ```js
-const blob = new Blob(["Hello World"], { type: "text/plain" });
+const blob = new Blob(['Hello World'], { type: 'text/plain' });
 const url = URL.createObjectURL(blob);
 
 console.log(url); // "blob:http://localhost:3000/abc123..."
@@ -592,7 +598,7 @@ document.body.appendChild(img);
 Releases URL object created by `createObjectURL`, frees memory; after calling, URL is no longer valid;
 
 ```js
-const blob = new Blob(["Hello World"], { type: "text/plain" });
+const blob = new Blob(['Hello World'], { type: 'text/plain' });
 const url = URL.createObjectURL(blob);
 
 // After use, release memory
@@ -606,12 +612,12 @@ URL.revokeObjectURL(url);
 ### Method 1: a tag download attribute
 
 ```js
-const blob = new Blob(["Hello World"], { type: "text/plain" });
+const blob = new Blob(['Hello World'], { type: 'text/plain' });
 const url = URL.createObjectURL(blob);
 
 const a = document.createElement('a');
 a.href = url;
-a.download = "hello.txt";
+a.download = 'hello.txt';
 a.click();
 
 URL.revokeObjectURL(url);
@@ -623,18 +629,22 @@ URL.revokeObjectURL(url);
 function downloadFile(content, filename, mimeType = 'text/plain') {
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
-  
+
   const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   a.click();
-  
+
   URL.revokeObjectURL(url);
 }
 
 // Usage
-downloadFile("Hello World", "hello.txt");
-downloadFile(JSON.stringify({ name: "Alice" }), "data.json", "application/json");
+downloadFile('Hello World', 'hello.txt');
+downloadFile(
+  JSON.stringify({ name: 'Alice' }),
+  'data.json',
+  'application/json'
+);
 ```
 
 ### Method 3: fetch download
@@ -643,13 +653,13 @@ downloadFile(JSON.stringify({ name: "Alice" }), "data.json", "application/json")
 async function downloadFromUrl(url, filename) {
   const response = await fetch(url);
   const blob = await response.blob();
-  
+
   const downloadUrl = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = downloadUrl;
   a.download = filename;
   a.click();
-  
+
   URL.revokeObjectURL(downloadUrl);
 }
 

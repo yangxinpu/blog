@@ -1,4 +1,4 @@
-#  DOM
+# DOM
 
 DOM（文档对象模型，Document Object Model）是一个将HTML文档呈现为一个由节点和对象组成的**树形结构**的一个接口，以便使用JS对其进行操作；
 
@@ -222,8 +222,6 @@ app.style.setProperty('border-radius', '50%');
 app.style.removeProperty('border-radius');
 ```
 
-
-
 ##### 尺寸与位置：
 
 offsetTop/ offsetLeft：元素相对于定位祖先元素的顶部 / 左侧偏移量（像素）；
@@ -326,7 +324,7 @@ const box = document.querySelector('#box');
 const btn = document.querySelector('button');
 let animateObj = box.animate([
     {transform: 'translateX(0px)',offset: 0.2},
-    {transform: 'translateX(200px)',offset: 1}  
+    {transform: 'translateX(200px)',offset: 1}
 ], {
     duration: 1000,
     iterations: 1
@@ -400,4 +398,3 @@ disabled：链接是否被禁用；
 ##### 方法
 
 click()：模拟点击链接；
-

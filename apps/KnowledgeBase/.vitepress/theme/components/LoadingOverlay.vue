@@ -164,8 +164,16 @@ onBeforeUnmount(() => {
   justify-content: center;
   overflow: hidden;
   background:
-    radial-gradient(circle at top left, rgba(0, 213, 196, 0.18), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(25, 250, 198, 0.14), transparent 38%),
+    radial-gradient(
+      circle at top left,
+      rgba(0, 213, 196, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(25, 250, 198, 0.14),
+      transparent 38%
+    ),
     var(--vp-c-bg);
   opacity: 0;
   transition: opacity 0.42s ease;
@@ -284,7 +292,9 @@ onBeforeUnmount(() => {
   width: 70px;
   height: 70px;
   object-fit: contain;
-  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--vp-c-brand-1) 65%, transparent));
+  filter: drop-shadow(
+    0 0 18px color-mix(in srgb, var(--vp-c-brand-1) 65%, transparent)
+  );
   animation: kb-float-logo 2s ease-in-out infinite;
 }
 
@@ -344,9 +354,7 @@ onBeforeUnmount(() => {
   border-radius: 50%;
   background: var(--vp-c-brand-1);
   box-shadow: 0 0 12px color-mix(in srgb, var(--vp-c-brand-1) 80%, transparent);
-  transform:
-    translate(-50%, -50%)
-    rotate(var(--particle-angle))
+  transform: translate(-50%, -50%) rotate(var(--particle-angle))
     translateY(calc(var(--particle-distance) * -1));
   opacity: 0;
   animation: kb-particle-float 2s ease-in-out infinite;
@@ -474,29 +482,20 @@ onBeforeUnmount(() => {
 @keyframes kb-particle-float {
   0% {
     opacity: 0;
-    transform:
-      translate(-50%, -50%)
-      rotate(var(--particle-angle))
-      translateY(calc((var(--particle-distance) - 12px) * -1))
-      scale(0.5);
+    transform: translate(-50%, -50%) rotate(var(--particle-angle))
+      translateY(calc((var(--particle-distance) - 12px) * -1)) scale(0.5);
   }
 
   50% {
     opacity: 1;
-    transform:
-      translate(-50%, -50%)
-      rotate(var(--particle-angle))
-      translateY(calc(var(--particle-distance) * -1))
-      scale(1);
+    transform: translate(-50%, -50%) rotate(var(--particle-angle))
+      translateY(calc(var(--particle-distance) * -1)) scale(1);
   }
 
   100% {
     opacity: 0;
-    transform:
-      translate(-50%, -50%)
-      rotate(var(--particle-angle))
-      translateY(calc((var(--particle-distance) + 14px) * -1))
-      scale(0.5);
+    transform: translate(-50%, -50%) rotate(var(--particle-angle))
+      translateY(calc((var(--particle-distance) + 14px) * -1)) scale(0.5);
   }
 }
 

@@ -13,7 +13,9 @@ export function useSectionActivity<T extends HTMLElement>({
   const isObserverSupported = typeof IntersectionObserver !== 'undefined';
 
   const [isActive, setIsActive] = useState(() => !isObserverSupported);
-  const [hasEnteredView, setHasEnteredView] = useState(() => !isObserverSupported);
+  const [hasEnteredView, setHasEnteredView] = useState(
+    () => !isObserverSupported
+  );
 
   useEffect(() => {
     if (!isObserverSupported) return;

@@ -19,8 +19,8 @@ Timer callback functions are async tasks, won't block file execution; timer retu
 Interval function must be cleared;
 
 ```js
-let n = setInterval(function() {
-   console.log('Hello World');
+let n = setInterval(function () {
+  console.log('Hello World');
 }, 1000); // Prints once per second
 
 // setInterval returns a numeric sequence number to distinguish different interval functions
@@ -31,8 +31,8 @@ clearInterval(n); // Stop interval function
 **Delay Function: setTimeout**
 
 ```js
-let n = setTimeout(function() {
-   console.log('Hello World');
+let n = setTimeout(function () {
+  console.log('Hello World');
 }, 1000); // Outputs after one second, executes only once
 
 clearTimeout(n); // Stop delay function
@@ -74,13 +74,13 @@ Clipboard operations are async, need to wait for user authorization to read clip
 `navigator.clipboard.read()` reads any type of data (like images)
 
 ```js
-navigator.clipboard.readText().then(text => {
-    console.log(text);
+navigator.clipboard.readText().then((text) => {
+  console.log(text);
 });
 
 navigator.clipboard.read().then((clip) => {
-    console.log(clip);
-})
+  console.log(clip);
+});
 ```
 
 **Write clipboard content:**
@@ -90,7 +90,7 @@ navigator.clipboard.read().then((clip) => {
 `navigator.clipboard.write()` same;
 
 ```js
-navigator.clipboard.writeText('hello world')
+navigator.clipboard.writeText('hello world');
 ```
 
 **ClipboardItem**
@@ -99,7 +99,7 @@ Clipboard data object, allows content for `navigator.clipboard.read()` and `navi
 
 ```js
 const textItem = new ClipboardItem({
-    'text/plain': new Blob(['Hello, world!'], { type: 'text/plain' })
+  'text/plain': new Blob(['Hello, world!'], { type: 'text/plain' }),
 });
 navigator.clipboard.write([textItem]);
 ```
@@ -139,11 +139,7 @@ const loc = navigator.geolocation.getCurrentPosition(
 **watchPosition**: Continuously tracks and gets current location information; can use `navigator.geolocation.clearWatch` to stop getting location
 
 ```js
-const id = navigator.geolocation.watchPosition(
-  success,
-  error,
-  options
-);
+const id = navigator.geolocation.watchPosition(success, error, options);
 
 // Stop
 navigator.geolocation.clearWatch(id);
@@ -154,9 +150,9 @@ navigator.geolocation.clearWatch(id);
 Mainly manages history, corresponds to browser address bar operations like forward, backward, history, etc.
 
 ```js
-history.back();      // Go back one step
-history.forward();   // Go forward one step
-history.go(param);   // Parameter 1 goes forward one step, -1 goes back one step
+history.back(); // Go back one step
+history.forward(); // Go forward one step
+history.go(param); // Parameter 1 goes forward one step, -1 goes back one step
 ```
 
 ### Browser Data Storage
@@ -174,9 +170,9 @@ Local storage can only store strings; stored values are automatically converted 
 Can find stored values in browser's Application tab
 
 ```js
-localStorage.setItem('key', value);     // Store a value for key, can also modify key's value
-localStorage.getItem('key');            // Find corresponding value by key
-localStorage.removeItem('key');         // Delete
+localStorage.setItem('key', value); // Store a value for key, can also modify key's value
+localStorage.getItem('key'); // Find corresponding value by key
+localStorage.removeItem('key'); // Delete
 ```
 
 **sessionStorage:** Data is deleted when current browser page is closed;
@@ -190,9 +186,9 @@ Need to convert complex data types to JSON strings, then convert back to objects
 JSON (JavaScript Object Notation) is a lightweight data exchange format
 
 ```js
-localStorage.setItem('key', JSON.stringify(obj));  // Convert obj to string for storage
-localStorage.getItem('key');                       // Print obj object's string
-JSON.parse(localStorage.getItem('key'));           // JSON.parse converts string to object
+localStorage.setItem('key', JSON.stringify(obj)); // Convert obj to string for storage
+localStorage.getItem('key'); // Print obj object's string
+JSON.parse(localStorage.getItem('key')); // JSON.parse converts string to object
 ```
 
 #### Cookie
@@ -212,6 +208,6 @@ Internally stores information as key-value pairs (can view in browser's Applicat
 On first website visit, browser sends request, after server responds, adds a Set-Cookie in response header, and puts Cookie in response request; Web server provides an encrypted Cookie to browser
 
 ```js
-document.cookie = 'username=json;expires=Thu';  // Set cookie
-console.log(document.cookie);                    // Read cookie
+document.cookie = 'username=json;expires=Thu'; // Set cookie
+console.log(document.cookie); // Read cookie
 ```

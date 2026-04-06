@@ -41,12 +41,26 @@ function MainContent({ theme, toggleTheme }: MainContentProps) {
     navigator.clipboard
       .writeText(PERSON_EMAIL)
       .then(() => {
-        setMessage({ visible: true, type: 'success', text: t('footer.emailCopied') });
-        setTimeout(() => setMessage((prev) => ({ ...prev, visible: false })), 3000);
+        setMessage({
+          visible: true,
+          type: 'success',
+          text: t('footer.emailCopied'),
+        });
+        setTimeout(
+          () => setMessage((prev) => ({ ...prev, visible: false })),
+          3000
+        );
       })
       .catch(() => {
-        setMessage({ visible: true, type: 'error', text: t('footer.emailCopyFailed') });
-        setTimeout(() => setMessage((prev) => ({ ...prev, visible: false })), 3000);
+        setMessage({
+          visible: true,
+          type: 'error',
+          text: t('footer.emailCopyFailed'),
+        });
+        setTimeout(
+          () => setMessage((prev) => ({ ...prev, visible: false })),
+          3000
+        );
       });
   }, [t]);
 

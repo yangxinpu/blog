@@ -269,10 +269,16 @@ function FloatingLines({
 
   const gradientColors = useMemo(() => {
     if (!linesGradient || linesGradient.length === 0) {
-      return Array.from({ length: MAX_GRADIENT_STOPS }, () => new Vector3(1, 1, 1));
+      return Array.from(
+        { length: MAX_GRADIENT_STOPS },
+        () => new Vector3(1, 1, 1)
+      );
     }
     const stops = linesGradient.slice(0, MAX_GRADIENT_STOPS);
-    const colors = Array.from({ length: MAX_GRADIENT_STOPS }, () => new Vector3(1, 1, 1));
+    const colors = Array.from(
+      { length: MAX_GRADIENT_STOPS },
+      () => new Vector3(1, 1, 1)
+    );
     stops.forEach((hex, i) => {
       const color = hexToVec3(hex);
       colors[i].set(color.x, color.y, color.z);
@@ -305,7 +311,7 @@ function FloatingLines({
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ 
+    const renderer = new WebGLRenderer({
       antialias: false,
       alpha: true,
       powerPreference: 'high-performance',
@@ -339,7 +345,12 @@ function FloatingLines({
       middleWavePosition: { value: new Vector3(0, 0, 0) },
       bottomWavePosition: { value: new Vector3(0, 0, 0) },
 
-      lineGradient: { value: Array.from({ length: MAX_GRADIENT_STOPS }, () => new Vector3(1, 1, 1)) },
+      lineGradient: {
+        value: Array.from(
+          { length: MAX_GRADIENT_STOPS },
+          () => new Vector3(1, 1, 1)
+        ),
+      },
       lineGradientCount: { value: 0 },
       isDarkTheme: { value: true },
     };
@@ -364,7 +375,7 @@ function FloatingLines({
       if (!container || !renderer) return;
       const width = container.clientWidth || 1;
       const height = container.clientHeight || 1;
-      
+
       if (width === lastWidth && height === lastHeight) return;
       lastWidth = width;
       lastHeight = height;
@@ -394,7 +405,13 @@ function FloatingLines({
         return;
       }
 
-      if (!materialRef.current || !rendererRef.current || !sceneRef.current || !clockRef.current) return;
+      if (
+        !materialRef.current ||
+        !rendererRef.current ||
+        !sceneRef.current ||
+        !clockRef.current
+      )
+        return;
 
       const currentTime = performance.now();
       const deltaTime = currentTime - lastTimeRef.current;
@@ -402,7 +419,8 @@ function FloatingLines({
       if (deltaTime >= FRAME_DURATION) {
         lastTimeRef.current = currentTime - (deltaTime % FRAME_DURATION);
 
-        materialRef.current.uniforms.iTime.value = clockRef.current.getElapsedTime();
+        materialRef.current.uniforms.iTime.value =
+          clockRef.current.getElapsedTime();
 
         rendererRef.current.render(sceneRef.current, camera);
       }
@@ -450,11 +468,11 @@ function FloatingLines({
       geometry.dispose();
       material.dispose();
       renderer.dispose();
-      
+
       if (renderer.domElement.parentElement) {
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
-      
+
       rendererRef.current = null;
       sceneRef.current = null;
       materialRef.current = null;
@@ -466,22 +484,22 @@ function FloatingLines({
   useEffect(() => {
     if (!materialRef.current) return;
     const uniforms = materialRef.current.uniforms;
-    
+
     uniforms.animationSpeed.value = animationSpeed;
     uniforms.brightness.value = brightness;
-    
+
     uniforms.enableTop.value = enabledWaves.includes('top');
     uniforms.enableMiddle.value = enabledWaves.includes('middle');
     uniforms.enableBottom.value = enabledWaves.includes('bottom');
-    
+
     uniforms.topLineCount.value = topLineCount;
     uniforms.middleLineCount.value = middleLineCount;
     uniforms.bottomLineCount.value = bottomLineCount;
-    
+
     uniforms.topLineDistance.value = topLineDistance;
     uniforms.middleLineDistance.value = middleLineDistance;
     uniforms.bottomLineDistance.value = bottomLineDistance;
-    
+
     uniforms.topWavePosition.value.set(
       topWavePosition?.x ?? 10.0,
       topWavePosition?.y ?? 0.5,
@@ -497,7 +515,7 @@ function FloatingLines({
       bottomWavePosition?.y ?? -0.7,
       bottomWavePosition?.rotate ?? 0.4
     );
-    
+
     uniforms.lineGradient.value = gradientColors;
     uniforms.lineGradientCount.value = gradientCount;
     uniforms.isDarkTheme.value = isDark;

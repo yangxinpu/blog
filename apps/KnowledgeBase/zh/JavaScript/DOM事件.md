@@ -20,11 +20,11 @@
 
 `mouseout`:鼠标离开时触发；
 
- `mousemove`:鼠标移动时触发，一般和document.addEventListen()用；
+`mousemove`:鼠标移动时触发，一般和document.addEventListen()用；
 
 `contextmenu`:鼠标右击事件，默认触发显示菜单栏；
 
- `selectstart`：鼠标左键选取文本触发，默认触发选取文本；
+`selectstart`：鼠标左键选取文本触发，默认触发选取文本；
 
 `copy`：当用户执行赋值操作时触发（包括clr+c），默认将内容复制到系统剪切板；与其同类型的有cut剪切事件，paste粘贴事件；
 
@@ -147,8 +147,6 @@ window.addEventListener('load', function() {
 });
 ```
 
-
-
 ### event对象
 
 事件一系列相关数据的集合，比如鼠标点击坐标，或者键盘的哪个键
@@ -256,4 +254,3 @@ uls.addEventListener('click',function(event){
    event.target.style...
 })
 ```
-

@@ -5,6 +5,4 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-export {
-  _export_sfc as _
-};
+export { _export_sfc as _ };
