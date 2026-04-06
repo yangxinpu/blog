@@ -71,12 +71,12 @@ function Header({
                 {
                   value: 'react',
                   label: t('react'),
-                  path: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础.html`,
+                  path: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础`,
                 },
                 {
                   value: 'vue',
                   label: t('vue'),
-                  path: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础.html`,
+                  path: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础`,
                 },
                 {
                   value: 'javascript',

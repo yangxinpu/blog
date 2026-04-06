@@ -48,12 +48,12 @@ const techAssets: Record<
   react: {
     logo: 'https://cdn.simpleicons.org/react/61DAFB',
     link: 'https://react.dev/',
-    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础.html`,
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/React/React基础`,
   },
   vue: {
     logo: 'https://cdn.simpleicons.org/vuedotjs/4FC08D',
     link: 'https://vuejs.org/',
-    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础.html`,
+    kbLink: `${import.meta.env.VITE_KB_BASE_URL}/zh/Vue/Vue基础`,
   },
   javascript: {
     logo: 'https://cdn.simpleicons.org/javascript/F7DF1E',
