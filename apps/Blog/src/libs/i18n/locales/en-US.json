@@ -222,5 +222,8 @@
       "FOCUS",
       "CREATE"
     ]
+  },
+  "neonSprintPage": {
+    "copy": "Refine every output, break complexity into executable steps, keep moving, and your growth will compound."
   }
 }

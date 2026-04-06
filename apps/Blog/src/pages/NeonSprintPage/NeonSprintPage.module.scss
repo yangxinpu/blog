@@ -29,7 +29,11 @@
 
 .textPane {
   position: relative;
+  left: 10%;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .copy {
@@ -68,57 +72,14 @@
   position: relative;
   min-height: 560px;
   border-radius: 22px;
-  background: var(--bg);
+  background: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--bg) 92%, var(--accent) 8%) 0%,
+    var(--bg) 70%
+  );
   overflow: hidden;
-  cursor: crosshair;
 
   @media (max-width: 980px) {
     min-height: 420px;
   }
-}
-
-.metaBalls {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.filterSvg {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.gooWrap {
-  position: absolute;
-  inset: 0;
-  filter: url('#neon-meta-goo');
-}
-
-.ballWrap {
-  position: absolute;
-  transform: translate(-50%, -50%);
-}
-
-.ball {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.95;
-}
-
-.mouseBallWrap {
-  position: absolute;
-  transform: translate(-50%, -50%);
-}
-
-.mouseBall {
-  display: block;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--accent);
 }

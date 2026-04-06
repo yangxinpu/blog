@@ -1,123 +1,194 @@
-import { useMemo, useState } from 'react';
-import type { PointerEvent } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import styles from './NeonSprintPage.module.scss';
 
-const blobs = [
-  {
-    left: '50%',
-    top: '52%',
-    size: 138,
-    duration: 8.2,
-    delay: 0,
-    x: [0, -28, 22, 0],
-    y: [0, 12, -14, 0],
-  },
-  {
-    left: '36%',
-    top: '46%',
-    size: 84,
-    duration: 7,
-    delay: -0.8,
-    x: [0, 22, -16, 0],
-    y: [0, -10, 14, 0],
-  },
-  {
-    left: '64%',
-    top: '42%',
-    size: 74,
-    duration: 7.4,
-    delay: -1.3,
-    x: [0, -14, 18, 0],
-    y: [0, 16, -10, 0],
-  },
-  {
-    left: '56%',
-    top: '32%',
-    size: 68,
-    duration: 6.5,
-    delay: -0.6,
-    x: [0, 14, -12, 0],
-    y: [0, -14, 12, 0],
-  },
-  {
-    left: '69%',
-    top: '58%',
-    size: 64,
-    duration: 6.2,
-    delay: -1.1,
-    x: [0, -12, 10, 0],
-    y: [0, 10, -10, 0],
-  },
-  {
-    left: '30%',
-    top: '34%',
-    size: 56,
-    duration: 5.8,
-    delay: -0.7,
-    x: [0, 10, -8, 0],
-    y: [0, -10, 8, 0],
-  },
-  {
-    left: '74%',
-    top: '36%',
-    size: 58,
-    duration: 6.1,
-    delay: -1.6,
-    x: [0, -8, 10, 0],
-    y: [0, 10, -8, 0],
-  },
-  {
-    left: '59%',
-    top: '68%',
-    size: 66,
-    duration: 7.1,
-    delay: -0.9,
-    x: [0, 12, -10, 0],
-    y: [0, 10, -12, 0],
-  },
-  {
-    left: '43%',
-    top: '69%',
-    size: 60,
-    duration: 6.7,
-    delay: -1.2,
-    x: [0, -10, 12, 0],
-    y: [0, -8, 10, 0],
-  },
-];
+function GeometricAnimation() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>(0);
+  const timeRef = useRef(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const handleResize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    const rings = [
+      { radius: 0.18, speed: 0.3, opacity: 0.15, dashArray: [8, 12], width: 1.5 },
+      { radius: 0.26, speed: -0.25, opacity: 0.12, dashArray: [12, 8], width: 1.2 },
+      { radius: 0.34, speed: 0.2, opacity: 0.1, dashArray: [6, 10], width: 1 },
+      { radius: 0.42, speed: -0.15, opacity: 0.08, dashArray: [10, 6], width: 0.8 },
+    ];
+
+    const animate = () => {
+      const rect = canvas.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const maxRadius = Math.min(width, height) * 0.45;
+
+      ctx.clearRect(0, 0, width, height);
+
+      timeRef.current += 0.016;
+
+      rings.forEach((ring, index) => {
+        const radius = maxRadius * ring.radius;
+        const rotation = timeRef.current * ring.speed;
+        const breathe = 1 + Math.sin(timeRef.current * 0.5 + index) * 0.02;
+
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(rotation);
+        ctx.scale(breathe, breathe);
+
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(25, 250, 198, ${ring.opacity})`;
+        ctx.lineWidth = ring.width;
+        ctx.setLineDash(ring.dashArray);
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+        ctx.restore();
+      });
+
+      const hexagonLayers = [
+        { radius: 0.22, speed: 0.18, opacity: 0.2, sides: 6 },
+        { radius: 0.38, speed: -0.12, opacity: 0.12, sides: 6 },
+      ];
+
+      hexagonLayers.forEach((layer) => {
+        const radius = maxRadius * layer.radius;
+        const rotation = timeRef.current * layer.speed;
+
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(rotation);
+
+        ctx.beginPath();
+        for (let i = 0; i <= layer.sides; i++) {
+          const angle = (i / layer.sides) * Math.PI * 2 - Math.PI / 2;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.strokeStyle = `rgba(25, 250, 198, ${layer.opacity})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.restore();
+      });
+
+      const dotCount = 24;
+      const dotRadius = maxRadius * 0.48;
+      for (let i = 0; i < dotCount; i++) {
+        const angle = (i / dotCount) * Math.PI * 2 + timeRef.current * 0.1;
+        const x = centerX + Math.cos(angle) * dotRadius;
+        const y = centerY + Math.sin(angle) * dotRadius;
+        const pulse = 0.5 + Math.sin(timeRef.current * 2 + i * 0.5) * 0.5;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 2 + pulse * 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(25, 250, 198, ${0.3 + pulse * 0.3})`;
+        ctx.fill();
+      }
+
+      const lineCount = 8;
+      for (let i = 0; i < lineCount; i++) {
+        const angle = (i / lineCount) * Math.PI * 2;
+        const innerRadius = maxRadius * 0.12;
+        const outerRadius = maxRadius * 0.52;
+        const pulse = Math.sin(timeRef.current * 1.5 + i * 0.8) * 0.5 + 0.5;
+
+        ctx.beginPath();
+        ctx.moveTo(
+          centerX + Math.cos(angle) * innerRadius,
+          centerY + Math.sin(angle) * innerRadius
+        );
+        ctx.lineTo(
+          centerX + Math.cos(angle) * outerRadius,
+          centerY + Math.sin(angle) * outerRadius
+        );
+        ctx.strokeStyle = `rgba(25, 250, 198, ${0.05 + pulse * 0.08})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+
+      const coreRadius = maxRadius * 0.08;
+      const corePulse = 1 + Math.sin(timeRef.current * 2) * 0.15;
+
+      const gradient = ctx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, coreRadius * corePulse * 2
+      );
+      gradient.addColorStop(0, 'rgba(25, 250, 198, 0.4)');
+      gradient.addColorStop(0.5, 'rgba(25, 250, 198, 0.15)');
+      gradient.addColorStop(1, 'rgba(25, 250, 198, 0)');
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, coreRadius * corePulse * 2, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, coreRadius * corePulse, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(25, 250, 198, 0.6)';
+      ctx.fill();
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+      }}
+    />
+  );
+}
 
 function NeonSprintPage() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isZh = i18n.language === 'zh-CN';
-  const [pointer, setPointer] = useState({ x: 0.5, y: 0.5 });
-  const [isPointerInside, setIsPointerInside] = useState(false);
 
-  const copy = isZh
-    ? '专注打磨每一次输出，把复杂拆成可执行的小步，持续前进，你会看见自己的跃迁。'
-    : 'Refine every output, break complexity into executable steps, keep moving, and your growth will compound.';
+  const copy = t('neonSprintPage.copy');
 
   const segments = useMemo(
     () => (isZh ? Array.from(copy) : copy.split(' ')),
     [copy, isZh]
   );
-
-  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    setPointer({
-      x: Math.max(0, Math.min(1, x)),
-      y: Math.max(0, Math.min(1, y)),
-    });
-  };
-
-  const resetPointer = () => {
-    setPointer({ x: 0.5, y: 0.5 });
-    setIsPointerInside(false);
-  };
 
   return (
     <section className={styles.section}>
@@ -154,75 +225,8 @@ function NeonSprintPage() {
           </p>
         </div>
 
-        <div
-          className={styles.visualPane}
-          onPointerMove={handlePointerMove}
-          onPointerEnter={() => setIsPointerInside(true)}
-          onPointerLeave={resetPointer}
-        >
-          <div className={styles.metaBalls} aria-hidden="true">
-            <svg className={styles.filterSvg}>
-              <filter id="neon-meta-goo">
-                <feGaussianBlur
-                  in="SourceGraphic"
-                  stdDeviation="11"
-                  result="blur"
-                />
-                <feColorMatrix
-                  in="blur"
-                  mode="matrix"
-                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 28 -11"
-                  result="goo"
-                />
-                <feBlend in="SourceGraphic" in2="goo" />
-              </filter>
-            </svg>
-
-            <div className={styles.gooWrap}>
-              {blobs.map((blob, index) => (
-                <motion.span
-                  key={`blob-${index}`}
-                  className={styles.ballWrap}
-                  style={{
-                    left: blob.left,
-                    top: blob.top,
-                    width: `${blob.size}px`,
-                    height: `${blob.size}px`,
-                  }}
-                >
-                  <motion.span
-                    className={styles.ball}
-                    animate={{
-                      x: blob.x,
-                      y: blob.y,
-                      scale: [1, 1.08, 0.92, 1],
-                    }}
-                    transition={{
-                      duration: blob.duration,
-                      delay: blob.delay,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-                </motion.span>
-              ))}
-
-              <motion.span
-                className={styles.mouseBallWrap}
-                style={{
-                  left: `${pointer.x * 100}%`,
-                  top: `${pointer.y * 100}%`,
-                }}
-                animate={{
-                  opacity: isPointerInside ? 0.96 : 0,
-                  scale: isPointerInside ? 1 : 0.4,
-                }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-              >
-                <span className={styles.mouseBall} />
-              </motion.span>
-            </div>
-          </div>
+        <div className={styles.visualPane}>
+          <GeometricAnimation />
         </div>
       </div>
     </section>
