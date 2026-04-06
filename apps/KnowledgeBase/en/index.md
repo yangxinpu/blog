@@ -4,7 +4,7 @@ layout: home
 hero:
   name: NaiLuo Knowledge Base
   text: Frontend Tech Learning Notes
-  tagline: React · Vue
+  tagline: JavaScript · React · Vue
   actions:
     - theme: brand
       text: React Notes
@@ -14,6 +14,11 @@ hero:
       link: /en/Vue/Vue基础
 
 features:
+  - icon:
+      src: https://cdn.simpleicons.org/javascript/F7DF1E
+    title: JavaScript
+    details: JS Basics, JS Advanced, BOM, DOM, Built-in Objects
+    link: /en/JavaScript/JS基础：
   - icon:
       src: https://cdn.simpleicons.org/react/61DAFB
     title: React
