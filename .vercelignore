@@ -1,0 +1,9 @@
+node_modules
+.pnpm-store
+.vercel
+.vitepress/dist
+.vitepress/cache
+dist
+*.log
+.env.local
+.env.*.local

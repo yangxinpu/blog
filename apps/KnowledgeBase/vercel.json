@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm install && pnpm --filter knowledge-base run build",
+  "outputDirectory": ".vitepress/dist",
+  "installCommand": "pnpm install",
+  "framework": "vitepress",
+  "cleanUrls": true,
+  "trailingSlash": false
+}
