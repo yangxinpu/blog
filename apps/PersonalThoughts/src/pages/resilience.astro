@@ -1,107 +1,186 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ResilienceBackground from '../components/backgrounds/ResilienceBackground.astro';
+export interface Props {
+  intensity?: 'low' | 'medium' | 'high';
+}
 
-const thoughts = [
-  {
-    date: '2024年4月5日',
-    title: '岩石的沉默',
-    content: '岩石不言，却承受着风雨的洗礼。真正的坚韧，不是大声呐喊，而是默默承受，在沉默中积蓄力量。时间会证明一切。'
-  },
-  {
-    date: '2024年3月10日',
-    title: '裂缝中的光',
-    content: '生活总会给我们留下伤痕，但正是这些裂缝，让光得以照进。坚韧不是没有伤痛，而是带着伤痛依然前行。'
-  },
-  {
-    date: '2024年2月5日',
-    title: '不屈的灵魂',
-    content: '高山之巅的松树，在风雪中傲然挺立。它告诉我们，坚韧是一种选择，是对生命最深沉的热爱与尊重。'
-  }
-];
+const { intensity = 'medium' } = Astro.props;
+
+const crackCount = {
+  low: 5,
+  medium: 10,
+  high: 18,
+};
 ---
 
-<BaseLayout title="坚韧 - 思想集" theme="resilience">
-  <ResilienceBackground slot="background" />
-  
-  <div class="theme-header">
-    <h1 class="theme-title">坚韧</h1>
-    <p class="theme-subtitle">岩石的纹理，不屈的力量，见证生命最坚韧的姿态</p>
-  </div>
-  
-  <div class="thoughts-container">
-    {thoughts.map((thought) => (
-      <article class="thought-card">
-        <time class="thought-date">{thought.date}</time>
-        <h2 class="thought-title">{thought.title}</h2>
-        <p class="thought-content">{thought.content}</p>
-      </article>
+<div class="resilience-background">
+  <div class="stone-texture"></div>
+  <div class="mountain-silhouette"></div>
+  <div class="cracks-container">
+    {Array.from({ length: crackCount[intensity] }).map((_, i) => (
+      <svg
+        class="crack"
+        style={{
+          '--delay': `${Math.random() * 5}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--y': `${Math.random() * 100}%`,
+          '--rotation': `${Math.random() * 360}deg`,
+        }}
+        viewBox="0 0 100 100"
+      >
+        <path
+          d={`M50 50 L${30 + Math.random() * 20} ${20 + Math.random() * 20} L${40 + Math.random() * 20} ${10 + Math.random() * 20} L${50 + Math.random() * 20} ${30 + Math.random() * 20}`}
+          stroke="rgba(149, 165, 166, 0.6)"
+          stroke-width="2"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <path
+          d={`M50 50 L${60 + Math.random() * 20} ${70 + Math.random() * 20} L${70 + Math.random() * 20} ${80 + Math.random() * 20}`}
+          stroke="rgba(149, 165, 166, 0.4)"
+          stroke-width="1.5"
+          fill="none"
+          stroke-linecap="round"
+        />
+      </svg>
     ))}
   </div>
-</BaseLayout>
+  <div class="light-rays">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <div
+        class="ray"
+        style={{
+          '--delay': `${i * 0.5}s`,
+          '--rotation': `${i * 45}deg`,
+        }}
+      />
+    ))}
+  </div>
+  <div class="dust-particles">
+    {Array.from({ length: 30 }).map((_, i) => (
+      <div
+        class="dust"
+        style={{
+          '--delay': `${Math.random() * 10}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--y': `${Math.random() * 100}%`,
+          '--duration': `${8 + Math.random() * 8}s`,
+        }}
+      />
+    ))}
+  </div>
+</div>
 
 <style>
-  .theme-header {
-    text-align: center;
-    margin-bottom: 3rem;
+  .resilience-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(180deg, #2C3E50 0%, #34495E 50%, #1A252F 100%);
   }
 
-  .theme-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #ECF0F1, #95A5A6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .stone-texture {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(52, 73, 94, 0.8) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(44, 62, 80, 0.8) 0%, transparent 50%);
+    opacity: 0.5;
   }
 
-  .theme-subtitle {
-    font-size: 1.1rem;
-    opacity: 0.8;
-    max-width: 500px;
-    margin: 0 auto;
+  .mountain-silhouette {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, transparent 0%, rgba(26, 37, 47, 0.8) 100%);
+    clip-path: polygon(
+      0% 100%,
+      10% 70%,
+      20% 85%,
+      30% 60%,
+      40% 75%,
+      50% 50%,
+      60% 70%,
+      70% 55%,
+      80% 80%,
+      90% 65%,
+      100% 100%
+    );
   }
 
-  .thoughts-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 800px;
+  .cracks-container {
+    position: absolute;
+    inset: 0;
+  }
+
+  .crack {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 80px;
+    height: 80px;
+    transform: rotate(var(--rotation));
+    opacity: 0;
+    animation: crackAppear 8s ease-out var(--delay) infinite;
+  }
+
+  @keyframes crackAppear {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+  }
+
+  .light-rays {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    height: 100%;
+    opacity: 0.1;
   }
 
-  .thought-card {
-    background: rgba(44, 62, 80, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(149, 165, 166, 0.3);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .ray {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(236, 240, 241, 0.8), transparent);
+    transform-origin: top center;
+    transform: rotate(var(--rotation));
+    animation: rayPulse 4s ease-in-out var(--delay) infinite;
   }
 
-  .thought-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(149, 165, 166, 0.2);
+  @keyframes rayPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
   }
 
-  .thought-date {
-    font-size: 0.875rem;
-    opacity: 0.6;
-    margin-bottom: 0.5rem;
-    display: block;
+  .dust-particles {
+    position: absolute;
+    inset: 0;
   }
 
-  .thought-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #ECF0F1;
+  .dust {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 3px;
+    height: 3px;
+    background: rgba(236, 240, 241, 0.4);
+    border-radius: 50%;
+    animation: dustFloat var(--duration) ease-in-out var(--delay) infinite;
   }
 
-  .thought-content {
-    font-size: 1rem;
-    line-height: 1.8;
-    opacity: 0.9;
+  @keyframes dustFloat {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0.2;
+    }
+    50% {
+      transform: translate(20px, -40px);
+      opacity: 0.6;
+    }
   }
 </style>

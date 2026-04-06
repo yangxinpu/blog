@@ -1,14 +1,13 @@
 ---
 interface Props {
   title: string;
-  theme?: 'nature' | 'life' | 'resilience' | 'tech' | 'science';
+  theme?: 'nature' | 'resilience' | 'tech' | 'science';
 }
 
 const { title, theme = 'nature' } = Astro.props;
 
 const themeColors = {
   nature: { primary: '#19fac6', secondary: '#13d6aa', bg: '#0a1a15' },
-  life: { primary: '#13d6aa', secondary: '#0ea387', bg: '#0a1512' },
   resilience: { primary: '#0ea387', secondary: '#0a6f5d', bg: '#0a0f0e' },
   tech: { primary: '#0a6f5d', secondary: '#19fac6', bg: '#0a192f' },
   science: { primary: '#19fac6', secondary: '#97fce4', bg: '#0d0d1a' },
@@ -33,11 +32,6 @@ const themeColors = {
       <div class="nav-center">
         <a href="/nature" class="nav-link">
           <span class="nav-link-text">自然</span>
-          <span class="nav-link-bg"></span>
-          <span class="nav-link-glow"></span>
-        </a>
-        <a href="/life" class="nav-link">
-          <span class="nav-link-text">生命</span>
           <span class="nav-link-bg"></span>
           <span class="nav-link-glow"></span>
         </a>
@@ -110,7 +104,6 @@ const themeColors = {
   }
 
   body[data-theme='nature'] { color: #e0e0e0; }
-  body[data-theme='life'] { color: #e0e0e0; }
   body[data-theme='resilience'] { color: #ecf0f1; }
   body[data-theme='tech'] { color: #e6f1ff; }
   body[data-theme='science'] { color: #e0e0e0; }
