@@ -7,28 +7,24 @@ const themes = [
     id: 'nature', 
     name: '自然', 
     desc: '翠绿森林，流水潺潺', 
-    color: '#19fac6',
     icon: 'leaf'
   },
   { 
     id: 'resilience', 
     name: '坚韧', 
     desc: '岩石纹理，不屈力量', 
-    color: '#0ea387',
     icon: 'mountain'
   },
   { 
     id: 'tech', 
     name: '技术', 
     desc: '代码矩阵，数据流动', 
-    color: '#0a6f5d',
     icon: 'code'
   },
   { 
     id: 'science', 
     name: '科学', 
     desc: '浩瀚星空，原子轨迹', 
-    color: '#19fac6',
     icon: 'atom'
   },
 ];
@@ -56,7 +52,7 @@ const themes = [
         <a 
           href={`/${theme.id}`} 
           class="theme-card"
-          style={`--theme-color: ${theme.color}; --delay: ${index * 0.1}s`}
+          style={`--delay: ${index * 0.1}s`}
         >
           <div class="card-glow"></div>
           <div class="card-content">
