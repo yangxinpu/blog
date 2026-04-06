@@ -378,6 +378,7 @@ function Home() {
                 <p className={styles.roleText}>{t('homePage.profile.role')}</p>
               </div>
             </div>
+
             <p className={styles.featuredText}>
               {t('homePage.profile.description')}
             </p>
@@ -389,8 +390,8 @@ function Home() {
                   className={styles.tag}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.01 }}
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  transition={{ duration: 0.3, delay: 0.5 + index * 0.06 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                 >
                   {tag}
                 </motion.span>
@@ -429,29 +430,36 @@ function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
             >
-              <div className={styles.techHead}>
-                <span className={styles.logoBox}>
-                  {'logos' in card ? (
-                    card.logos.map((logo, i) => (
+              <div className={styles.cardBackdrop} aria-hidden="true">
+                <span className={styles.cardBackdropGlow} />
+                <span className={styles.cardBackdropGrid} />
+              </div>
+
+              <div className={styles.techHero}>
+                <div className={styles.techHead}>
+                  <span className={styles.logoBox}>
+                    {'logos' in card ? (
+                      card.logos.map((logo, i) => (
+                        <img
+                          key={`${logo}-${i}`}
+                          src={logo}
+                          alt={t('common.logoWithName', { name: card.name })}
+                          loading="lazy"
+                        />
+                      ))
+                    ) : (
                       <img
-                        key={`${logo}-${i}`}
-                        src={logo}
+                        src={card.logo}
                         alt={t('common.logoWithName', { name: card.name })}
                         loading="lazy"
                       />
-                    ))
-                  ) : (
-                    <img
-                      src={card.logo}
-                      alt={t('common.logoWithName', { name: card.name })}
-                      loading="lazy"
-                    />
-                  )}
-                </span>
+                    )}
+                  </span>
 
-                <div className={styles.techNameWrap}>
-                  <h4>{card.name}</h4>
-                  <span>{card.focus}</span>
+                  <div className={styles.techNameWrap}>
+                    <h4>{card.name}</h4>
+                    <span>{card.focus}</span>
+                  </div>
                 </div>
               </div>
 
@@ -472,6 +480,7 @@ function Home() {
                     className={styles.cardAction}
                   >
                     {t('homePage.openKb')}
+                    <span className={styles.cardActionArrow}>→</span>
                   </a>
                 )}
               </div>

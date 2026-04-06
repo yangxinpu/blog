@@ -281,34 +281,189 @@
   grid-column: span 4;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 20px;
+  gap: 16px;
+  padding: 22px;
   text-decoration: none;
   color: inherit;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 280px;
+  --card-accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+  --card-accent-strong: color-mix(in srgb, var(--accent) 40%, transparent);
+  --card-surface: color-mix(in srgb, var(--bg) 92%, black 8%);
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      var(--card-accent-soft) 0%,
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--card-surface) 94%, white 6%) 0%,
+      var(--card-surface) 100%
+    );
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 26%, var(--border));
+    box-shadow:
+      0 16px 28px rgba(0, 0, 0, 0.12),
+      0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 20px 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--accent) 30%, transparent) 20%,
+      color-mix(in srgb, var(--accent) 12%, transparent) 80%,
+      transparent 100%
+    );
+    opacity: 0.9;
+  }
 }
 
 .techHead {
   display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: min(100%, 420px);
+  position: relative;
+  z-index: 1;
+}
+
+.cardBackdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cardBackdropGlow,
+.cardBackdropGrid {
+  position: absolute;
+  inset: auto;
+}
+
+.cardBackdropGlow {
+  width: 240px;
+  height: 240px;
+  right: -92px;
+  top: -92px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    var(--card-accent-strong) 0%,
+    transparent 72%
+  );
+  opacity: 0.75;
+  filter: blur(6px);
+}
+
+.cardBackdropGrid {
+  right: -18px;
+  bottom: -18px;
+  width: 168px;
+  height: 124px;
+  border-radius: 28px;
+  opacity: 0.45;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent) 12%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent) 12%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 18px 18px;
+  transform: rotate(-16deg);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 90%);
+}
+
+.techMetaRow {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.cardIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  background: color-mix(in srgb, var(--bg-secondary) 84%, var(--bg));
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+}
+
+.cardFocusPill {
+  max-width: 72%;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 86%, var(--text));
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.techHero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .logoBox {
-  min-width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--bg-secondary) 70%, var(--bg));
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--bg-secondary) 70%, var(--bg)) 0%,
+      color-mix(in srgb, var(--accent) 8%, var(--bg)) 100%
+    );
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 0 8px;
+  gap: 8px;
+  padding: 12px;
   flex-shrink: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 18px rgba(0, 0, 0, 0.08);
 
   img {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     transition: transform 0.25s ease;
   }
 }
@@ -320,64 +475,198 @@
 .techNameWrap {
   h4 {
     margin: 0;
-    font-size: 1.04rem;
+    font-size: clamp(1.08rem, 1.8vw, 1.42rem);
     color: var(--text);
+    letter-spacing: -0.03em;
   }
 
   span {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
+    display: inline-block;
+    margin-top: 0.28rem;
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--text-secondary) 86%, var(--accent));
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
+}
+
+.shapeCluster {
+  position: relative;
+  width: 108px;
+  height: 96px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.shapeRing,
+.shapeCore,
+.shapeDiamond {
+  position: absolute;
+  inset: auto;
+}
+
+.shapeRing {
+  top: 2px;
+  right: 8px;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  box-shadow: inset 0 0 0 10px color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.shapeCore {
+  right: 34px;
+  top: 28px;
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--accent) 42%, white 10%),
+    color-mix(in srgb, var(--accent) 16%, transparent)
+  );
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.shapeDiamond {
+  right: 2px;
+  bottom: 6px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  transform: rotate(45deg);
+  border-radius: 6px;
 }
 
 .techDescription {
   margin: 0;
+  position: relative;
+  z-index: 1;
+  max-width: 52ch;
   color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 .highlightList {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
+  position: relative;
+  z-index: 1;
 
   li {
-    position: relative;
-    padding-left: 16px;
+    padding: 9px 12px;
     margin: 0;
-    font-size: 0.92rem;
-    color: var(--text);
-    line-height: 1.4;
-  }
-
-  li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.58em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+    background: color-mix(in srgb, var(--bg-secondary) 70%, var(--bg));
+    font-size: 0.86rem;
+    color: color-mix(in srgb, var(--text) 92%, var(--accent));
+    line-height: 1.3;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 }
 
 .cardActions {
   margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.cardAction,
+.cardActionSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .cardAction {
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.11em;
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
+  color: #062c24;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 88%, white 12%),
+    color-mix(in srgb, var(--primary-200) 78%, white 22%)
+  );
+  box-shadow: 0 10px 20px color-mix(in srgb, var(--accent) 22%, transparent);
+  gap: 6px;
+}
 
-  &:hover {
-    opacity: 0.8;
+.cardActionArrow {
+  font-size: 1em;
+  transition: transform 0.2s ease;
+}
+
+.cardAction:hover {
+  color: #062c24;
+  .cardActionArrow {
+    transform: translateX(3px);
   }
+}
+
+.cardActionSecondary {
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  background: color-mix(in srgb, var(--bg-secondary) 76%, var(--bg));
+}
+
+.techCard1 {
+  grid-column: span 7;
+  --card-accent-soft: rgba(97, 218, 251, 0.14);
+  --card-accent-strong: rgba(97, 218, 251, 0.2);
+}
+
+.techCard2 {
+  grid-column: span 5;
+  --card-accent-soft: rgba(79, 192, 141, 0.14);
+  --card-accent-strong: rgba(79, 192, 141, 0.22);
+}
+
+.techCard3 {
+  --card-accent-soft: rgba(247, 223, 30, 0.12);
+  --card-accent-strong: rgba(247, 223, 30, 0.2);
+}
+
+.techCard4 {
+  --card-accent-soft: rgba(100, 108, 255, 0.14);
+  --card-accent-strong: rgba(141, 214, 249, 0.16);
+}
+
+.techCard5 {
+  --card-accent-soft: rgba(95, 160, 78, 0.14);
+  --card-accent-strong: rgba(95, 160, 78, 0.22);
+}
+
+.techCard1,
+.techCard2 {
+  min-height: 318px;
+}
+
+.techCard1 .highlightList {
+  max-width: 92%;
+}
+
+.techCard1 .shapeCluster {
+  width: 132px;
+  height: 108px;
 }
 
 @media (max-width: 1080px) {
@@ -391,6 +680,12 @@
 
   .techCard {
     grid-column: span 6;
+  }
+
+  .techCard1,
+  .techCard2 {
+    grid-column: span 12;
+    min-height: 296px;
   }
 }
 
@@ -419,5 +714,31 @@
 
   .techCard {
     grid-column: span 12;
+    padding: 18px;
+    min-height: auto;
+  }
+
+  .techHero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shapeCluster {
+    width: 88px;
+    height: 72px;
+    align-self: flex-end;
+  }
+
+  .cardFocusPill {
+    max-width: 60%;
+  }
+
+  .cardActions {
+    flex-direction: column;
+  }
+
+  .cardAction,
+  .cardActionSecondary {
+    width: 100%;
   }
 }
