@@ -5,55 +5,45 @@ export interface Props {
 
 const { intensity = 'medium' } = Astro.props;
 
-const leafCount = {
-  low: 10,
-  medium: 25,
-  high: 40,
+const particleCount = {
+  low: 15,
+  medium: 30,
+  high: 50,
 };
 ---
 
 <div class="nature-background">
-  <div class="sky-gradient"></div>
-  <div class="forest-layer"></div>
-  <div class="leaves-container">
-    {Array.from({ length: leafCount[intensity] }).map((_, i) => (
-      <div
-        class="leaf"
-        style={{
-          '--delay': `${Math.random() * 15}s`,
-          '--duration': `${10 + Math.random() * 10}s`,
-          '--x': `${Math.random() * 100}%`,
-          '--size': `${15 + Math.random() * 20}px`,
-          '--rotation': `${Math.random() * 360}deg`,
-          '--sway': `${30 + Math.random() * 50}px`,
-        }}
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" />
-        </svg>
-      </div>
-    ))}
+  <div class="gradient-base"></div>
+  <div class="aurora-container">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
   </div>
-  <div class="grass-container">
-    {Array.from({ length: 50 }).map((_, i) => (
+  <div class="particles">
+    {Array.from({ length: particleCount[intensity] }).map((_, i) => (
       <div
-        class="grass"
+        class="particle"
         style={{
-          '--x': `${i * 2}%`,
-          '--height': `${20 + Math.random() * 30}px`,
-          '--delay': `${Math.random() * 2}s`,
+          '--delay': `${Math.random() * 10}s`,
+          '--duration': `${15 + Math.random() * 15}s`,
+          '--x': `${Math.random() * 100}%`,
+          '--size': `${2 + Math.random() * 4}px`,
         }}
       />
     ))}
   </div>
-  <div class="fireflies">
-    {Array.from({ length: 15 }).map((_, i) => (
+  <div class="wave-container">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+  </div>
+  <div class="flow-lines">
+    {Array.from({ length: 5 }).map((_, i) => (
       <div
-        class="firefly"
+        class="flow-line"
         style={{
-          '--delay': `${Math.random() * 10}s`,
-          '--x': `${Math.random() * 100}%`,
-          '--y': `${Math.random() * 100}%`,
+          '--delay': `${i * 3}s`,
+          '--y': `${20 + i * 15}%`,
         }}
       />
     ))}
@@ -65,112 +55,153 @@ const leafCount = {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: linear-gradient(180deg, #87CEEB 0%, #98FB98 30%, #228B22 100%);
+    background: linear-gradient(180deg, #0a1a15 0%, #0d2818 50%, #0a1a15 100%);
   }
 
-  .sky-gradient {
+  .gradient-base {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 80% 10%, rgba(255, 255, 200, 0.5) 0%, transparent 50%);
-    animation: skyShift 30s ease-in-out infinite;
+    background: radial-gradient(ellipse at 50% 0%, rgba(25, 250, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 0% 50%, rgba(19, 214, 170, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 100% 50%, rgba(14, 163, 135, 0.08) 0%, transparent 40%);
   }
 
-  @keyframes skyShift {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+  .aurora-container {
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
   }
 
-  .forest-layer {
+  .aurora {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(100px);
+    animation: auroraMove 20s ease-in-out infinite;
+  }
+
+  .aurora-1 {
+    background: radial-gradient(ellipse at 30% 20%, rgba(25, 250, 198, 0.3), transparent 50%);
+    animation-delay: 0s;
+  }
+
+  .aurora-2 {
+    background: radial-gradient(ellipse at 70% 30%, rgba(19, 214, 170, 0.25), transparent 50%);
+    animation-delay: -7s;
+  }
+
+  .aurora-3 {
+    background: radial-gradient(ellipse at 50% 50%, rgba(14, 163, 135, 0.2), transparent 50%);
+    animation-delay: -14s;
+  }
+
+  @keyframes auroraMove {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    25% { transform: translate(5%, -5%) scale(1.1); opacity: 0.8; }
+    50% { transform: translate(-3%, 3%) scale(0.95); opacity: 0.5; }
+    75% { transform: translate(4%, -2%) scale(1.05); opacity: 0.7; }
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+  }
+
+  .particle {
+    position: absolute;
+    left: var(--x);
+    bottom: -10px;
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle, rgba(25, 250, 198, 0.8), transparent);
+    border-radius: 50%;
+    animation: rise var(--duration) linear var(--delay) infinite;
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% {
+      transform: translateY(-100vh) translateX(30px);
+      opacity: 0;
+    }
+  }
+
+  .wave-container {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(180deg, transparent 0%, rgba(34, 139, 34, 0.3) 50%, rgba(0, 100, 0, 0.5) 100%);
+    overflow: hidden;
   }
 
-  .leaves-container {
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 60%, rgba(25, 250, 198, 0.05) 100%);
+    border-radius: 50% 50% 0 0;
+    animation: waveMove 12s ease-in-out infinite;
+  }
+
+  .wave-1 {
+    animation-delay: 0s;
+    opacity: 0.5;
+  }
+
+  .wave-2 {
+    animation-delay: -4s;
+    opacity: 0.3;
+    bottom: 10%;
+  }
+
+  .wave-3 {
+    animation-delay: -8s;
+    opacity: 0.2;
+    bottom: 20%;
+  }
+
+  @keyframes waveMove {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(2%) translateY(-5px); }
+  }
+
+  .flow-lines {
     position: absolute;
     inset: 0;
-    pointer-events: none;
   }
 
-  .leaf {
+  .flow-line {
     position: absolute;
-    left: var(--x);
-    top: -30px;
-    width: var(--size);
-    height: var(--size);
-    color: rgba(46, 204, 113, 0.7);
-    animation: falling var(--duration) linear var(--delay) infinite;
-  }
-
-  .leaf svg {
+    left: 0;
+    top: var(--y);
     width: 100%;
-    height: 100%;
-    animation: rotateLeaf 4s ease-in-out infinite;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(25, 250, 198, 0.3), 
+      rgba(19, 214, 170, 0.5), 
+      rgba(25, 250, 198, 0.3), 
+      transparent
+    );
+    animation: flowMove 8s ease-in-out var(--delay) infinite;
   }
 
-  @keyframes falling {
-    0% {
-      transform: translateY(-30px) translateX(0) rotate(var(--rotation));
+  @keyframes flowMove {
+    0%, 100% { 
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% { 
+      transform: translateX(100%);
       opacity: 1;
     }
-    100% {
-      transform: translateY(100vh) translateX(var(--sway)) rotate(calc(var(--rotation) + 720deg));
-      opacity: 0.3;
-    }
-  }
-
-  @keyframes rotateLeaf {
-    0%, 100% { transform: rotate(-15deg); }
-    50% { transform: rotate(15deg); }
-  }
-
-  .grass-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-  }
-
-  .grass {
-    position: absolute;
-    left: var(--x);
-    bottom: 0;
-    width: 3px;
-    height: var(--height);
-    background: linear-gradient(to top, #228B22, #90EE90);
-    border-radius: 50% 50% 0 0;
-    transform-origin: bottom center;
-    animation: sway 2s ease-in-out var(--delay) infinite;
-  }
-
-  @keyframes sway {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
-  }
-
-  .fireflies {
-    position: absolute;
-    inset: 0;
-  }
-
-  .firefly {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    width: 6px;
-    height: 6px;
-    background: radial-gradient(circle, #FFFF00 0%, transparent 70%);
-    border-radius: 50%;
-    animation: glow 3s ease-in-out var(--delay) infinite;
-  }
-
-  @keyframes glow {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.5); }
   }
 </style>

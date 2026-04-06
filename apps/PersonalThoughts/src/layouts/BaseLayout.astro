@@ -1,19 +1,17 @@
 ---
 interface Props {
   title: string;
-  theme?: 'warm' | 'intense' | 'nature' | 'life' | 'resilience' | 'tech' | 'science';
+  theme?: 'nature' | 'life' | 'resilience' | 'tech' | 'science';
 }
 
-const { title, theme = 'warm' } = Astro.props;
+const { title, theme = 'nature' } = Astro.props;
 
 const themeColors = {
-  warm: { primary: '#FF6B6B', secondary: '#FFE66D', bg: '#FFF5F5' },
-  intense: { primary: '#FF2E63', secondary: '#08D9D6', bg: '#1A1A2E' },
-  nature: { primary: '#2ECC71', secondary: '#27AE60', bg: '#F0FFF0' },
-  life: { primary: '#9B59B6', secondary: '#E74C3C', bg: '#FDF2E9' },
-  resilience: { primary: '#34495E', secondary: '#95A5A6', bg: '#2C3E50' },
-  tech: { primary: '#00D9FF', secondary: '#0D47A1', bg: '#0A192F' },
-  science: { primary: '#7C4DFF', secondary: '#64FFDA', bg: '#0D0D1A' },
+  nature: { primary: '#19fac6', secondary: '#13d6aa', bg: '#0a1a15' },
+  life: { primary: '#13d6aa', secondary: '#0ea387', bg: '#0a1512' },
+  resilience: { primary: '#0ea387', secondary: '#0a6f5d', bg: '#0a0f0e' },
+  tech: { primary: '#0a6f5d', secondary: '#19fac6', bg: '#0a192f' },
+  science: { primary: '#19fac6', secondary: '#97fce4', bg: '#0d0d1a' },
 };
 ---
 
@@ -33,8 +31,6 @@ const themeColors = {
     <nav class="nav">
       <a href="/" class="logo">思想集</a>
       <div class="nav-links">
-        <a href="/warm">温馨</a>
-        <a href="/intense">激烈</a>
         <a href="/nature">自然</a>
         <a href="/life">生命</a>
         <a href="/resilience">坚韧</a>
@@ -67,16 +63,15 @@ const themeColors = {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    color: #333;
+    color: #e0e0e0;
+    background: #0a0a0a;
   }
 
-  body[data-theme='warm'] { color: #4A4A4A; }
-  body[data-theme='intense'] { color: #E0E0E0; }
-  body[data-theme='nature'] { color: #2C3E50; }
-  body[data-theme='life'] { color: #5D4E37; }
-  body[data-theme='resilience'] { color: #ECF0F1; }
-  body[data-theme='tech'] { color: #E6F1FF; }
-  body[data-theme='science'] { color: #E0E0E0; }
+  body[data-theme='nature'] { color: #e0e0e0; }
+  body[data-theme='life'] { color: #e0e0e0; }
+  body[data-theme='resilience'] { color: #ecf0f1; }
+  body[data-theme='tech'] { color: #e6f1ff; }
+  body[data-theme='science'] { color: #e0e0e0; }
 </style>
 
 <style>
@@ -97,16 +92,16 @@ const themeColors = {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 10, 0.8);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(25, 250, 198, 0.1);
   }
 
   .logo {
     font-size: 1.5rem;
     font-weight: 700;
     text-decoration: none;
-    color: inherit;
+    color: #19fac6;
   }
 
   .nav-links {
@@ -116,14 +111,13 @@ const themeColors = {
 
   .nav-links a {
     text-decoration: none;
-    color: inherit;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    color: #888;
+    transition: color 0.3s ease;
     font-size: 0.95rem;
   }
 
   .nav-links a:hover {
-    opacity: 1;
+    color: #19fac6;
   }
 
   .main {
@@ -140,7 +134,7 @@ const themeColors = {
     z-index: 10;
     text-align: center;
     padding: 2rem;
-    opacity: 0.7;
+    color: #666;
     font-size: 0.875rem;
   }
 

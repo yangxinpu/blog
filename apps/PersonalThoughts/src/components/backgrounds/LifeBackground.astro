@@ -10,49 +10,73 @@ const cellCount = {
   medium: 15,
   high: 25,
 };
+
+const dnaCount = {
+  low: 2,
+  medium: 4,
+  high: 6,
+};
 ---
 
 <div class="life-background">
   <div class="gradient-base"></div>
   <div class="dna-helix">
-    {Array.from({ length: 20 }).map((_, i) => (
+    {Array.from({ length: dnaCount[intensity] }).map((_, i) => (
       <div
-        class="dna-pair"
+        class="dna-strand"
         style={{
-          '--delay': `${i * 0.3}s`,
-          '--y': `${i * 5}%`,
+          '--x': `${15 + i * 20}%`,
+          '--delay': `${i * 2}s`,
+          '--direction': i % 2 === 0 ? 'normal' : 'reverse',
         }}
       >
-        <div class="dna-strand strand-a"></div>
-        <div class="dna-bridge"></div>
-        <div class="dna-strand strand-b"></div>
+        <div class="strand-line strand-line-1"></div>
+        <div class="strand-line strand-line-2"></div>
+        {Array.from({ length: 8 }).map((_, j) => (
+          <div
+            class="dna-node"
+            style={{
+              '--node-delay': `${j * 0.3}s`,
+              '--node-y': `${j * 12.5}%`,
+            }}
+          />
+        ))}
       </div>
     ))}
   </div>
-  <div class="cells-container">
+  <div class="cells">
     {Array.from({ length: cellCount[intensity] }).map((_, i) => (
       <div
         class="cell"
         style={{
           '--delay': `${Math.random() * 10}s`,
-          '--duration': `${15 + Math.random() * 10}s`,
+          '--duration': `${20 + Math.random() * 20}s`,
           '--x': `${Math.random() * 100}%`,
-          '--size': `${30 + Math.random() * 40}px`,
+          '--y': `${Math.random() * 100}%`,
+          '--size': `${30 + Math.random() * 50}px`,
         }}
       >
         <div class="cell-nucleus"></div>
-        <div class="cell-membrane"></div>
       </div>
     ))}
   </div>
-  <div class="particles-flow">
-    {Array.from({ length: 40 }).map((_, i) => (
+  <div class="pulse-rings">
+    {Array.from({ length: 3 }).map((_, i) => (
       <div
-        class="flow-particle"
+        class="pulse-ring"
         style={{
-          '--delay': `${Math.random() * 8}s`,
-          '--x': `${Math.random() * 100}%`,
-          '--y': `${Math.random() * 100}%`,
+          '--delay': `${i * 4}s`,
+        }}
+      />
+    ))}
+  </div>
+  <div class="energy-lines">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <div
+        class="energy-line"
+        style={{
+          '--angle': `${i * 45}deg`,
+          '--delay': `${i * 0.5}s`,
         }}
       />
     ))}
@@ -64,72 +88,80 @@ const cellCount = {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: linear-gradient(135deg, #FDF2E9 0%, #F5EEF8 30%, #D5F5E3 60%, #FADBD8 100%);
+    background: linear-gradient(180deg, #0a1512 0%, #0d1f1a 50%, #0a1512 100%);
   }
 
   .gradient-base {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 70%, rgba(155, 89, 182, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 70% 30%, rgba(231, 76, 60, 0.2) 0%, transparent 50%);
-    animation: breathe 8s ease-in-out infinite;
-  }
-
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
+    background: radial-gradient(ellipse at 50% 50%, rgba(19, 214, 170, 0.1) 0%, transparent 60%);
   }
 
   .dna-helix {
     position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 100%;
-    opacity: 0.3;
-  }
-
-  .dna-pair {
-    position: absolute;
-    top: var(--y);
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    animation: rotateHelix 4s linear var(--delay) infinite;
-  }
-
-  @keyframes rotateHelix {
-    0% { transform: translateX(-50%) rotateY(0deg); }
-    100% { transform: translateX(-50%) rotateY(360deg); }
+    inset: 0;
+    opacity: 0.4;
   }
 
   .dna-strand {
-    width: 15px;
-    height: 15px;
+    position: absolute;
+    left: var(--x);
+    top: 0;
+    width: 2px;
+    height: 100%;
+    animation: dnaRotate 10s linear var(--delay) infinite;
+    animation-direction: var(--direction);
+  }
+
+  .strand-line {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+      transparent 0%, 
+      rgba(19, 214, 170, 0.5) 25%, 
+      transparent 50%,
+      rgba(14, 163, 135, 0.5) 75%,
+      transparent 100%
+    );
+  }
+
+  .strand-line-1 {
+    animation: strandMove1 4s ease-in-out infinite;
+  }
+
+  .strand-line-2 {
+    animation: strandMove2 4s ease-in-out infinite;
+  }
+
+  @keyframes strandMove1 {
+    0%, 100% { transform: translateX(-15px); }
+    50% { transform: translateX(15px); }
+  }
+
+  @keyframes strandMove2 {
+    0%, 100% { transform: translateX(15px); }
+    50% { transform: translateX(-15px); }
+  }
+
+  .dna-node {
+    position: absolute;
+    top: var(--node-y);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(19, 214, 170, 0.8), transparent);
     border-radius: 50%;
+    animation: nodePulse 2s ease-in-out var(--node-delay) infinite;
   }
 
-  .strand-a {
-    background: linear-gradient(135deg, #9B59B6, #8E44AD);
-    box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+  @keyframes nodePulse {
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    50% { transform: translateX(-50%) scale(1.5); opacity: 0.4; }
   }
 
-  .strand-b {
-    background: linear-gradient(135deg, #E74C3C, #C0392B);
-    box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
-  }
-
-  .dna-bridge {
-    width: 30px;
-    height: 3px;
-    background: linear-gradient(90deg, #9B59B6, #E74C3C);
-    border-radius: 2px;
-  }
-
-  .cells-container {
+  .cells {
     position: absolute;
     inset: 0;
   }
@@ -137,31 +169,12 @@ const cellCount = {
   .cell {
     position: absolute;
     left: var(--x);
-    top: -60px;
+    top: var(--y);
     width: var(--size);
     height: var(--size);
-    animation: cellFloat var(--duration) linear var(--delay) infinite;
-  }
-
-  @keyframes cellFloat {
-    0% {
-      transform: translateY(-60px) rotate(0deg);
-      opacity: 0;
-    }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.6; }
-    100% {
-      transform: translateY(100vh) rotate(360deg);
-      opacity: 0;
-    }
-  }
-
-  .cell-membrane {
-    position: absolute;
-    inset: 0;
-    border: 3px solid rgba(155, 89, 182, 0.4);
+    border: 1px solid rgba(19, 214, 170, 0.3);
     border-radius: 50%;
-    animation: pulse 3s ease-in-out infinite;
+    animation: cellFloat var(--duration) ease-in-out var(--delay) infinite;
   }
 
   .cell-nucleus {
@@ -171,39 +184,100 @@ const cellCount = {
     transform: translate(-50%, -50%);
     width: 40%;
     height: 40%;
-    background: radial-gradient(circle, rgba(231, 76, 60, 0.6), transparent);
+    background: radial-gradient(circle, rgba(19, 214, 170, 0.4), transparent);
     border-radius: 50%;
+    animation: nucleusPulse 3s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  .particles-flow {
-    position: absolute;
-    inset: 0;
-  }
-
-  .flow-particle {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    width: 4px;
-    height: 4px;
-    background: rgba(155, 89, 182, 0.5);
-    border-radius: 50%;
-    animation: flowMove 6s ease-in-out var(--delay) infinite;
-  }
-
-  @keyframes flowMove {
-    0%, 100% {
-      transform: translate(0, 0);
+  @keyframes cellFloat {
+    0%, 100% { 
+      transform: translate(0, 0) rotate(0deg);
       opacity: 0.3;
     }
-    50% {
-      transform: translate(30px, -30px);
-      opacity: 0.8;
+    25% { 
+      transform: translate(20px, -20px) rotate(90deg);
+      opacity: 0.5;
+    }
+    50% { 
+      transform: translate(0, -40px) rotate(180deg);
+      opacity: 0.3;
+    }
+    75% { 
+      transform: translate(-20px, -20px) rotate(270deg);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes nucleusPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+  }
+
+  .pulse-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(19, 214, 170, 0.3);
+    border-radius: 50%;
+    animation: pulseExpand 8s ease-out var(--delay) infinite;
+  }
+
+  @keyframes pulseExpand {
+    0% {
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+    }
+    100% {
+      width: 800px;
+      height: 800px;
+      opacity: 0;
+    }
+  }
+
+  .energy-lines {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .energy-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(19, 214, 170, 0.5), 
+      rgba(14, 163, 135, 0.8), 
+      rgba(19, 214, 170, 0.5), 
+      transparent
+    );
+    transform-origin: left center;
+    transform: rotate(var(--angle));
+    animation: energyFlow 4s ease-in-out var(--delay) infinite;
+  }
+
+  @keyframes energyFlow {
+    0%, 100% { 
+      opacity: 0;
+      transform: rotate(var(--angle)) scaleX(0.3);
+    }
+    50% { 
+      opacity: 0.6;
+      transform: rotate(var(--angle)) scaleX(1);
     }
   }
 </style>

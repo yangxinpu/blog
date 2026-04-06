@@ -50,7 +50,7 @@ const thoughts = [
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #9B59B6, #E74C3C);
+    background: linear-gradient(135deg, #13d6aa, #0ea387);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -58,9 +58,10 @@ const thoughts = [
 
   .theme-subtitle {
     font-size: 1.1rem;
-    opacity: 0.8;
+    opacity: 0.7;
     max-width: 500px;
     margin: 0 auto;
+    color: #888;
   }
 
   .thoughts-container {
@@ -72,36 +73,42 @@ const thoughts = [
   }
 
   .thought-card {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(13, 214, 170, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(155, 89, 182, 0.3);
+    border: 1px solid rgba(19, 214, 170, 0.2);
     border-radius: 16px;
     padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
   .thought-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(155, 89, 182, 0.2);
+    box-shadow: 0 10px 30px rgba(19, 214, 170, 0.15);
+    border-color: rgba(19, 214, 170, 0.4);
   }
 
   .thought-date {
     font-size: 0.875rem;
-    opacity: 0.7;
+    opacity: 0.5;
     margin-bottom: 0.5rem;
     display: block;
+    color: #888;
   }
 
   .thought-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #9B59B6;
+    background: linear-gradient(90deg, #13d6aa, #0ea387);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .thought-content {
     font-size: 1rem;
     line-height: 1.8;
-    opacity: 0.9;
+    opacity: 0.85;
+    color: #b0b0b0;
   }
 </style>

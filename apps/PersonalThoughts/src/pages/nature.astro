@@ -11,12 +11,12 @@ const thoughts = [
   {
     date: '2024年2月20日',
     title: '溪流的智慧',
-    content: '溪水潺潺，从不急躁。它知道，只要方向正确，终会抵达大海。人生亦是如此，不必焦虑，只需坚持向前。'
+    content: '溪流不争，却能穿透岩石；水滴不大，却能汇成江海。自然的智慧，在于以柔克刚，以退为进。学会像水一样，才能行得更远。'
   },
   {
-    date: '2024年1月10日',
+    date: '2024年1月15日',
     title: '四季的轮回',
-    content: '春生夏长，秋收冬藏。自然教会我们，每个阶段都有其意义。不必强求，顺应自然的节奏，生命自有其韵律。'
+    content: '春生夏长，秋收冬藏。自然遵循着自己的节奏，不急不躁。人生亦是如此，每个阶段都有其意义，不必强求，顺其自然。'
   }
 ];
 ---
@@ -26,7 +26,7 @@ const thoughts = [
   
   <div class="theme-header">
     <h1 class="theme-title">自然</h1>
-    <p class="theme-subtitle">翠绿的森林，飘落的树叶，感受大自然的宁静与智慧</p>
+    <p class="theme-subtitle">翠绿的森林，流动的溪水，感受自然的宁静与智慧</p>
   </div>
   
   <div class="thoughts-container">
@@ -50,7 +50,7 @@ const thoughts = [
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #2ECC71, #27AE60);
+    background: linear-gradient(135deg, #19fac6, #13d6aa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -58,9 +58,10 @@ const thoughts = [
 
   .theme-subtitle {
     font-size: 1.1rem;
-    opacity: 0.8;
+    opacity: 0.7;
     max-width: 500px;
     margin: 0 auto;
+    color: #888;
   }
 
   .thoughts-container {
@@ -72,36 +73,42 @@ const thoughts = [
   }
 
   .thought-card {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(25, 250, 198, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(46, 204, 113, 0.3);
+    border: 1px solid rgba(25, 250, 198, 0.2);
     border-radius: 16px;
     padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
   .thought-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
+    box-shadow: 0 10px 30px rgba(25, 250, 198, 0.15);
+    border-color: rgba(25, 250, 198, 0.4);
   }
 
   .thought-date {
     font-size: 0.875rem;
-    opacity: 0.7;
+    opacity: 0.5;
     margin-bottom: 0.5rem;
     display: block;
+    color: #888;
   }
 
   .thought-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #27AE60;
+    background: linear-gradient(90deg, #19fac6, #13d6aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .thought-content {
     font-size: 1rem;
     line-height: 1.8;
-    opacity: 0.9;
+    opacity: 0.85;
+    color: #b0b0b0;
   }
 </style>

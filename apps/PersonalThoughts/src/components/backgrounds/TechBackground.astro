@@ -5,30 +5,36 @@ export interface Props {
 
 const { intensity = 'medium' } = Astro.props;
 
-const matrixCount = {
-  low: 20,
-  medium: 40,
-  high: 70,
+const matrixLines = {
+  low: 10,
+  medium: 20,
+  high: 35,
+};
+
+const nodeCount = {
+  low: 5,
+  medium: 10,
+  high: 20,
 };
 ---
 
 <div class="tech-background">
-  <div class="grid-overlay"></div>
+  <div class="gradient-base"></div>
   <div class="matrix-rain">
-    {Array.from({ length: matrixCount[intensity] }).map((_, i) => (
+    {Array.from({ length: matrixLines[intensity] }).map((_, i) => (
       <div
         class="matrix-column"
         style={{
+          '--x': `${(i / matrixLines[intensity]) * 100}%`,
           '--delay': `${Math.random() * 5}s`,
-          '--duration': `${5 + Math.random() * 10}s`,
-          '--x': `${(i / matrixCount[intensity]) * 100}%`,
+          '--duration': `${8 + Math.random() * 8}s`,
         }}
       >
-        {Array.from({ length: 20 }).map(() => (
+        {Array.from({ length: 15 }).map((_, j) => (
           <span
             class="matrix-char"
             style={{
-              '--char-delay': `${Math.random() * 2}s`,
+              '--char-delay': `${j * 0.1}s`,
             }}
           >
             {String.fromCharCode(0x30A0 + Math.random() * 96)}
@@ -38,36 +44,27 @@ const matrixCount = {
     ))}
   </div>
   <div class="circuit-lines">
-    <svg class="circuit-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path
-        d="M0 50 L20 50 L25 30 L40 30 L45 50 L60 50 L65 70 L80 70 L85 50 L100 50"
-        stroke="rgba(0, 217, 255, 0.3)"
-        stroke-width="0.5"
-        fill="none"
-        class="circuit-path"
+    {Array.from({ length: 8 }).map((_, i) => (
+      <div
+        class="circuit-line"
+        style={{
+          '--y': `${10 + i * 12}%`,
+          '--delay': `${i * 0.5}s`,
+        }}
       />
-      <path
-        d="M0 30 L15 30 L20 50 L35 50 L40 30 L55 30 L60 50 L75 50 L80 70 L100 70"
-        stroke="rgba(0, 217, 255, 0.2)"
-        stroke-width="0.5"
-        fill="none"
-        class="circuit-path"
-        style="--delay: 2s;"
-      />
-    </svg>
+    ))}
   </div>
   <div class="data-nodes">
-    {Array.from({ length: 15 }).map((_, i) => (
+    {Array.from({ length: nodeCount[intensity] }).map((_, i) => (
       <div
         class="node"
         style={{
-          '--delay': `${Math.random() * 4}s`,
           '--x': `${Math.random() * 100}%`,
           '--y': `${Math.random() * 100}%`,
+          '--delay': `${Math.random() * 5}s`,
         }}
       >
-        <div class="node-core"></div>
-        <div class="node-ring"></div>
+        <div class="node-pulse"></div>
       </div>
     ))}
   </div>
@@ -79,28 +76,19 @@ const matrixCount = {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: linear-gradient(135deg, #0A192F 0%, #0D47A1 50%, #0A192F 100%);
+    background: linear-gradient(180deg, #0a192f 0%, #0d1f2d 50%, #0a192f 100%);
   }
 
-  .grid-overlay {
+  .gradient-base {
     position: absolute;
     inset: 0;
-    background-image: 
-      linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: gridPulse 10s ease-in-out infinite;
-  }
-
-  @keyframes gridPulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    background: radial-gradient(ellipse at 50% 50%, rgba(10, 111, 93, 0.1) 0%, transparent 60%);
   }
 
   .matrix-rain {
     position: absolute;
     inset: 0;
-    display: flex;
+    opacity: 0.3;
   }
 
   .matrix-column {
@@ -109,50 +97,52 @@ const matrixCount = {
     top: -100%;
     display: flex;
     flex-direction: column;
-    animation: rainFall var(--duration) linear var(--delay) infinite;
-  }
-
-  @keyframes rainFall {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(200vh); }
+    animation: matrixFall var(--duration) linear var(--delay) infinite;
   }
 
   .matrix-char {
-    font-family: 'Courier New', monospace;
+    font-family: monospace;
     font-size: 14px;
-    color: #00D9FF;
+    color: rgba(10, 111, 93, 0.8);
     opacity: 0;
-    text-shadow: 0 0 10px #00D9FF;
-    animation: charFade 2s linear var(--char-delay) infinite;
+    animation: charFade 0.5s ease-out var(--char-delay) forwards;
+  }
+
+  @keyframes matrixFall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(200vh); }
   }
 
   @keyframes charFade {
     0% { opacity: 0; }
     20% { opacity: 1; }
-    80% { opacity: 1; }
     100% { opacity: 0; }
   }
 
   .circuit-lines {
     position: absolute;
     inset: 0;
-    opacity: 0.5;
   }
 
-  .circuit-svg {
+  .circuit-line {
+    position: absolute;
+    left: 0;
+    top: var(--y);
     width: 100%;
-    height: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(10, 111, 93, 0.3), 
+      rgba(25, 250, 198, 0.5), 
+      rgba(10, 111, 93, 0.3), 
+      transparent
+    );
+    animation: circuitPulse 4s ease-in-out var(--delay) infinite;
   }
 
-  .circuit-path {
-    stroke-dasharray: 200;
-    stroke-dashoffset: 200;
-    animation: circuitFlow 6s linear var(--delay, 0s) infinite;
-  }
-
-  @keyframes circuitFlow {
-    0% { stroke-dashoffset: 200; }
-    100% { stroke-dashoffset: -200; }
+  @keyframes circuitPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.6; }
   }
 
   .data-nodes {
@@ -164,52 +154,51 @@ const matrixCount = {
     position: absolute;
     left: var(--x);
     top: var(--y);
-    width: 20px;
-    height: 20px;
-    animation: nodePulse 3s ease-in-out var(--delay) infinite;
+    width: 6px;
+    height: 6px;
+    background: rgba(10, 111, 93, 0.8);
+    border-radius: 50%;
+    animation: nodeGlow 3s ease-in-out var(--delay) infinite;
+  }
+
+  .node-pulse {
+    position: absolute;
+    inset: -10px;
+    border: 1px solid rgba(10, 111, 93, 0.3);
+    border-radius: 50%;
+    animation: nodePulse 3s ease-out var(--delay) infinite;
+  }
+
+  @keyframes nodeGlow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
   }
 
   @keyframes nodePulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.2); opacity: 1; }
-  }
-
-  .node-core {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 6px;
-    height: 6px;
-    background: #00D9FF;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00D9FF;
-  }
-
-  .node-ring {
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(0, 217, 255, 0.5);
-    border-radius: 50%;
-    animation: ringExpand 2s ease-out infinite;
-  }
-
-  @keyframes ringExpand {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(2); opacity: 0; }
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(3); opacity: 0; }
   }
 
   .scan-line {
     position: absolute;
     left: 0;
-    right: 0;
+    top: 0;
+    width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.5), transparent);
-    animation: scan 4s linear infinite;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(25, 250, 198, 0.5), 
+      rgba(10, 111, 93, 0.8), 
+      rgba(25, 250, 198, 0.5), 
+      transparent
+    );
+    animation: scanMove 8s linear infinite;
   }
 
-  @keyframes scan {
-    0% { top: 0; }
-    100% { top: 100%; }
+  @keyframes scanMove {
+    0% { top: 0; opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
   }
 </style>

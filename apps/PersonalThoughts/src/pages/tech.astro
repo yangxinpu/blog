@@ -10,13 +10,13 @@ const thoughts = [
   },
   {
     date: '2024年3月15日',
-    title: '架构之美',
-    content: '优秀的架构如同精密的建筑，每一部分都恰到好处。简洁而不简单，复杂而不混乱。好的设计，是对混乱世界的秩序回应。'
+    title: '算法的艺术',
+    content: '算法不只是解决问题的工具，更是一种思维方式。它教会我们如何分解复杂，如何寻找最优，如何在有限中创造无限。'
   },
   {
     date: '2024年2月10日',
     title: '开源的精神',
-    content: '代码共享，知识传递。开源不仅是技术选择，更是一种精神。我们站在巨人的肩膀上，也为后来者搭建阶梯。'
+    content: '代码共享，智慧传承。开源不仅是技术，更是一种精神。在分享中成长，在协作中进步，这是技术社区最美的风景。'
   }
 ];
 ---
@@ -50,18 +50,18 @@ const thoughts = [
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #00D9FF, #0D47A1);
+    background: linear-gradient(135deg, #0a6f5d, #19fac6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
   }
 
   .theme-subtitle {
     font-size: 1.1rem;
-    opacity: 0.8;
+    opacity: 0.7;
     max-width: 500px;
     margin: 0 auto;
+    color: #888;
   }
 
   .thoughts-container {
@@ -73,37 +73,42 @@ const thoughts = [
   }
 
   .thought-card {
-    background: rgba(10, 25, 47, 0.7);
+    background: rgba(10, 111, 93, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 217, 255, 0.3);
+    border: 1px solid rgba(10, 111, 93, 0.2);
     border-radius: 16px;
     padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
   .thought-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-    border-color: rgba(0, 217, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(10, 111, 93, 0.15);
+    border-color: rgba(10, 111, 93, 0.4);
   }
 
   .thought-date {
     font-size: 0.875rem;
-    opacity: 0.6;
+    opacity: 0.5;
     margin-bottom: 0.5rem;
     display: block;
+    color: #888;
   }
 
   .thought-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #00D9FF;
+    background: linear-gradient(90deg, #0a6f5d, #19fac6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .thought-content {
     font-size: 1rem;
     line-height: 1.8;
-    opacity: 0.9;
+    opacity: 0.85;
+    color: #b0b0b0;
   }
 </style>
