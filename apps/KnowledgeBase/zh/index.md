@@ -18,7 +18,7 @@ features:
       src: https://cdn.simpleicons.org/javascript/F7DF1E
     title: JavaScript
     details: JS 基础、JS 提高、BOM、DOM、内置对象
-    link: /zh/JavaScript/JS基础：
+    link: /zh/JavaScript/JS基础
   - icon:
       src: https://cdn.simpleicons.org/react/61DAFB
     title: React

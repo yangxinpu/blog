@@ -18,7 +18,7 @@ features:
       src: https://cdn.simpleicons.org/javascript/F7DF1E
     title: JavaScript
     details: JS Basics, JS Advanced, BOM, DOM, Built-in Objects
-    link: /en/JavaScript/JS基础：
+    link: /en/JavaScript/JS基础
   - icon:
       src: https://cdn.simpleicons.org/react/61DAFB
     title: React

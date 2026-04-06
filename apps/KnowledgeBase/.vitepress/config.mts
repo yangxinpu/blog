@@ -38,7 +38,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '首页', link: '/zh/' },
-          { text: 'JavaScript', link: '/zh/JavaScript/JS基础：' },
+          { text: 'JavaScript', link: '/zh/JavaScript/JS基础' },
           { text: 'React', link: '/zh/React/React基础' },
           { text: 'Vue', link: '/zh/Vue/Vue基础' },
           { text: '博客', link: blogUrl },
@@ -49,7 +49,7 @@ export default defineConfig({
               text: 'JavaScript',
               collapsed: false,
               items: [
-                { text: 'JS 基础', link: '/zh/JavaScript/JS基础：' },
+                { text: 'JS 基础', link: '/zh/JavaScript/JS基础' },
                 { text: 'JS 提高', link: '/zh/JavaScript/JS提高' },
                 { text: 'BOM', link: '/zh/JavaScript/BOM' },
                 { text: 'DOM', link: '/zh/JavaScript/DOM' },
@@ -57,7 +57,7 @@ export default defineConfig({
                 { text: '内置对象', link: '/zh/JavaScript/内置对象' },
                 {
                   text: '函数&面向对象',
-                  link: '/zh/JavaScript/函数&面向对象：',
+                  link: '/zh/JavaScript/函数&面向对象',
                 },
                 { text: '前后端通信', link: '/zh/JavaScript/前后端通信' },
                 { text: 'Web API', link: '/zh/JavaScript/Web  API' },
@@ -115,7 +115,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/en/' },
-          { text: 'JavaScript', link: '/en/JavaScript/JS基础：' },
+          { text: 'JavaScript', link: '/en/JavaScript/JS基础' },
           { text: 'React', link: '/en/React/React基础' },
           { text: 'Vue', link: '/en/Vue/Vue基础' },
           { text: 'Blog', link: blogUrl },
@@ -126,7 +126,7 @@ export default defineConfig({
               text: 'JavaScript',
               collapsed: false,
               items: [
-                { text: 'JS Basics', link: '/en/JavaScript/JS基础：' },
+                { text: 'JS Basics', link: '/en/JavaScript/JS基础' },
                 { text: 'JS Advanced', link: '/en/JavaScript/JS提高' },
                 { text: 'BOM', link: '/en/JavaScript/BOM' },
                 { text: 'DOM', link: '/en/JavaScript/DOM' },
@@ -134,7 +134,7 @@ export default defineConfig({
                 { text: 'Built-in Objects', link: '/en/JavaScript/内置对象' },
                 {
                   text: 'Functions & OOP',
-                  link: '/en/JavaScript/函数&面向对象：',
+                  link: '/en/JavaScript/函数&面向对象',
                 },
                 {
                   text: 'Client-Server Communication',
