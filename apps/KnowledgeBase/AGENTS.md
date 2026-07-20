@@ -136,3 +136,27 @@ pnpm clean
 
 - `VITEPRESS_BASE`: 部署路径前缀，默认为 `/`
 - `VITEPRESS_BLOG_URL`: 博客链接地址，默认为 `http://localhost:3000`
+
+## Agent 工作规则
+
+### Skill 规范
+
+- **语言要求**: 创建或修改 skill 时，必须使用中文编写
+- **存放位置**: skill 文件存放在以下目录：
+  - [.codex/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.codex/skills)
+  - [.opencode/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.opencode/skills)
+  - [.trae/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.trae/skills)
+- **命名规范**: skill 目录使用小写英文命名，主文件为 `SKILL.md`
+- **同步更新**: 新增或修改 skill 时，需同步更新三个目录下的对应 skill
+
+### 规则文件
+
+项目详细的开发规则和工作流程请参考：
+
+- [.agent/RULES.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.agent/RULES.md) - Agent 工作规则（核心原则、文档编写、多语言工作流、主题样式、配置修改、代码风格、验证测试等）
+
+### 当前可用 Skills
+
+| Skill 名称 | 说明 | 位置 |
+|-----------|------|------|
+| vitepress | VitePress 文档站点开发技能，包含站点配置、主题自定义、内容创作、搜索、部署等完整指南 | [.codex/skills/vitepress/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.codex/skills/vitepress) |
