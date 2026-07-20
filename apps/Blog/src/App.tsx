@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import Loading from '@blog/ui';
+import { Loading } from './components';
 import logoImage from './assets/Images/logo.png';
 
 const MainContent = lazy(() => import('./Layout/MainContent/MainContent'));

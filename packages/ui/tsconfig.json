@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "noEmit": true
-  },
-  "include": ["./Loading", "index.ts", "types.d.ts"]
-}
