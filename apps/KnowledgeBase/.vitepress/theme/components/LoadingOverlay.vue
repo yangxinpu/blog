@@ -117,7 +117,7 @@ onBeforeUnmount(() => {
 
         <div class="kb-loading__logo-glow"></div>
         <img
-          src="/assets/logo.png"
+          src="/logo.png"
           alt="NaiLuo logo"
           class="kb-loading__logo"
         />

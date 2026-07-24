@@ -86,8 +86,11 @@
 │       ├── guide/
 │       ├── api/
 │       └── index.md          # 英文首页
-├── public/                   # 静态资源
-│   └── assets/
+├── assets/                  # 静态资源（图片、favicon、robots.txt 等）
+│   ├── favicon_32px.ico
+│   ├── favicon_48px.ico
+│   ├── favicon_64px.ico
+│   └── logo.png
 ├── package.json
 └── tsconfig.json
 ```
@@ -432,7 +435,7 @@ export default defineConfig({
 
 - 启用 `cleanUrls` 获得更简洁的 URL
 - 为子路径部署设置正确的 `base` 路径
-- 优化图片（使用 `public/` 目录）
+- 优化图片（使用 `assets/` 目录）
 - 大型站点可考虑启用 `ignoreDeadLinks`（如需要）
 
 ### 10.2 进阶优化
@@ -456,7 +459,7 @@ export default defineConfig({
 ### 11.2 进阶优化
 
 - 通过 `buildEnd` 钩子生成站点地图
-- 在 `public/` 中配置 robots.txt
+- 在 `assets/` 中配置 robots.txt
 - 使用规范 URL
 - 通过 `head` 添加结构化数据（JSON-LD）
 

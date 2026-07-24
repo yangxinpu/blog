@@ -114,7 +114,7 @@ onUnmounted(() => {
     >
       <div class="logo-glow"></div>
       <img
-        src="/assets/logo.png"
+        src="/logo.png"
         alt="Logo"
         class="logo-image"
         :class="{ 'logo-hover': isHovering }"

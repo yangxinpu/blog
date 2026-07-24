@@ -11,7 +11,7 @@
 | 框架 | VitePress ^1.6.3 |
 | UI 框架 | Vue ^3.5.31 |
 | 包管理器 | pnpm |
-| 语言 | TypeScript |
+| 语言 | TypeScript |查看当前的图片asset图片，替换对应发icon和logo
 | 部署平台 | Vercel |
 | 开发服务器端口 | 8080 |
 

@@ -6,11 +6,29 @@ const blogUrl = process.env.VITEPRESS_BLOG_URL || 'http://localhost:3000';
 export default defineConfig({
   title: 'NaiLuo 知识库',
   base,
+  srcDir: 'docs',
+  publicDir: 'assets',
+  cleanUrls: true,
 
   vite: {
     server: {
       port: 8080,
     },
+    plugins: [
+      {
+        name: 'redirect-root-to-zh',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            if (req.url === '/' || req.url === '') {
+              res.writeHead(302, { Location: '/zh/' });
+              res.end();
+              return;
+            }
+            next();
+          });
+        },
+      },
+    ],
   },
 
   markdown: {
@@ -25,16 +43,18 @@ export default defineConfig({
   },
 
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/assets/logo.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon_32px.ico' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon_48px.ico' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/favicon_64px.ico' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '64x64', href: '/favicon_64px.ico' }],
   ],
 
   locales: {
-    root: {
+    'zh': {
       label: '简体中文',
       lang: 'zh-CN',
       title: 'NaiLuo 知识库',
       description: '前端技术知识库 - React, Vue',
-      link: '/zh/',
       themeConfig: {
         nav: [
           { text: '首页', link: '/zh/' },
@@ -106,12 +126,11 @@ export default defineConfig({
         darkModeSwitchTitle: '切换到深色模式',
       },
     },
-    en: {
+    'en': {
       label: 'English',
       lang: 'en-US',
       title: 'NaiLuo Knowledge Base',
       description: 'Frontend Tech Knowledge Base - React, Vue',
-      link: '/en/',
       themeConfig: {
         nav: [
           { text: 'Home', link: '/en/' },
@@ -189,7 +208,7 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/assets/logo.png',
+    logo: '/logo.png',
     socialLinks: [{ icon: 'github', link: 'https://github.com/yangxinpu' }],
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} NaiLuo`,
