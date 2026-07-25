@@ -6,7 +6,7 @@
 
 React's traditional scaffold is create-react-app (CRA), which wraps Webpack configuration through react-scripts, handling JSX transpilation, ES6+ syntax downgrade (via Babel), CSS parsing, static asset handling, code splitting, and compression optimization through Webpack;
 
-**Global CLI Installation**: `npm install -g create-react-app` (Global installation may lead to version lag issues)
+**Global CLI Installation**: `pnpm add -g create-react-app` (Global installation may lead to version lag issues)
 
 **Create React Project with CLI**: Does not support pnpm;
 

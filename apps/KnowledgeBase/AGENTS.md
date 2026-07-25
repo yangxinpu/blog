@@ -1,8 +1,20 @@
 # NaiLuo 知识库 - Agent 指南
 
+> **文档版本**: v1.1.0
+> **最后更新**: 2026-07-26
+
+## 版本管理规则
+
+- 本文档使用语义化版本号（`主版本.次版本.修订号`）
+- **每次迭代/修改本项目时，必须同步递增本文档的版本号**：
+  - 新增功能或结构调整 → 递增 `次版本`（如 v1.1.0 → v1.2.0）
+  - Bug 修复或文档校对 → 递增 `修订号`（如 v1.1.0 → v1.1.1）
+  - 重大架构变更 → 递增 `主版本`（如 v1.1.0 → v2.0.0）
+- 更新版本号时，同步更新上方的「最后更新」日期
+
 ## 项目概述
 
-本项目是基于 **VitePress** 构建的多语言前端技术知识库，包含 JavaScript、React、Vue 三大技术栈的学习笔记，支持简体中文和英文双语切换。
+本项目是基于 **VitePress** 构建的多语言技术知识库，涵盖前端、后端、运维、AI、产品、Python 等多个技术领域，支持简体中文和英文双语切换。站点强制暗色模式，部署于 Vercel。
 
 ### 技术栈
 
@@ -10,10 +22,12 @@
 |------|-----------|
 | 框架 | VitePress ^1.6.3 |
 | UI 框架 | Vue ^3.5.31 |
+| 动画库 | GSAP ^3.15.0 |
 | 包管理器 | pnpm |
 | 语言 | TypeScript |
 | 部署平台 | Vercel |
 | 开发服务器端口 | 8080 |
+| 主题模式 | 强制暗色（`appearance: 'force-dark'`） |
 
 ### 项目结构
 
@@ -22,51 +36,31 @@ KnowledgeBase/
 ├── .vitepress/              # VitePress 配置目录
 │   ├── theme/               # 自定义主题
 │   │   ├── components/      # 自定义组件
-│   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件
-│   │   │   └── LogoAnimation.vue    # Logo 动画组件
-│   │   ├── index.ts         # 主题入口文件
-│   │   └── style.css        # 全局自定义样式
+│   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件（三盒加载动画）
+│   │   │   └── LogoAnimation.vue    # 首页粒子 Logo 动画组件（Canvas + GSAP）
+│   │   ├── index.ts         # 主题入口文件（注册组件 + Layout 插槽）
+│   │   └── style.css        # 全局自定义样式（仅暗色模式）
 │   └── config.mts           # VitePress 主配置文件
-├── docs/                    # 文档内容目录
+├── docs/                    # 文档内容目录（srcDir）
 │   ├── zh/                  # 中文文档
-│   │   ├── 前端/            # 前端相关笔记
-│   │   │   ├── JavaScript/  # JavaScript 笔记
-│   │   │   ├── React/       # React 笔记
-│   │   │   └── Vue/         # Vue 笔记
-│   │   ├── 后端/            # 后端相关笔记
-│   │   ├── 运维/            # 运维相关笔记
-│   │   ├── AI/              # AI 相关笔记
-│   │   ├── 产品/            # 产品相关笔记
-│   │   ├── Python/          # Python 笔记
-│   │   ├── 其他/            # 其他模块（聚合）
-│   │   │   ├── 计算机网络/  # 计算机网络笔记
-│   │   │   ├── Git/         # Git 笔记
-│   │   │   ├── 书籍/        # 技术书籍笔记
-│   │   │   └── 算法/        # 算法笔记
+│   │   ├── 前端/            # 前端（JavaScript / React / Vue）
+│   │   ├── 后端/            # 后端（待补充）
+│   │   ├── 运维/            # 运维（待补充）
+│   │   ├── AI/              # AI（待补充）
+│   │   ├── 产品/            # 产品（待补充）
+│   │   ├── Python/          # Python（待补充）
+│   │   ├── 其他/            # 其他（计算机网络 / Git / 书籍 / 算法）
 │   │   └── index.md         # 中文首页
-│   └── en/                  # 英文文档
-│       ├── 前端/
-│       │   ├── JavaScript/
-│       │   ├── React/
-│       │   └── Vue/
-│       ├── 后端/
-│       ├── 运维/
-│       ├── AI/
-│       ├── 产品/
-│       ├── Python/
-│       ├── 其他/
-│       │   ├── 计算机网络/
-│       │   ├── Git/
-│       │   ├── 书籍/
-│       │   └── 算法/
+│   └── en/                  # 英文文档（结构与中文一致）
 │       └── index.md         # 英文首页
 ├── assets/                  # 静态资源（Vite publicDir）
 │   ├── logo.png             # 站点 Logo
-│   ├── favicon.ico          # 网站图标
-│   ├── favicon_32px.ico     # 32x32 尺寸图标
-│   ├── favicon_48px.ico     # 48x48 尺寸图标
-│   └── favicon_64px.ico     # 64x64 尺寸图标
+│   ├── favicon_32px.ico     # 32x32 图标
+│   ├── favicon_48px.ico     # 48x48 图标
+│   └── favicon_64px.ico     # 64x64 图标
+├── .opencode/skills/        # 知识库项目 Skill
 ├── .env.production          # 生产环境变量
+├── .gitignore               # Git 忽略配置
 ├── package.json             # 项目依赖配置
 ├── tsconfig.json            # TypeScript 配置
 ├── vercel.json              # Vercel 部署配置
@@ -112,11 +106,12 @@ KnowledgeBase/
 
 - **默认语言**: 简体中文 (`zh-CN`)，路径前缀 `/zh/`
 - **英文**: `en-US`，路径前缀 `/en/`
+- **根路径重定向**: 访问 `/` 时自动 302 重定向到 `/zh/`（通过 Vite 插件实现）
 
 ## 常用命令
 
 ```bash
-# 启动开发服务器
+# 启动开发服务器（端口 8080）
 pnpm dev
 # 或
 pnpm docs:dev
@@ -147,13 +142,15 @@ pnpm clean
 
 ### 侧边栏配置
 
-侧边栏配置位于 [config.mts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/config.mts) 的 `themeConfig.sidebar` 中。新增文档页面后，需要在对应语言的侧边栏配置中添加菜单项。
+侧边栏配置位于 [config.mts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/config.mts) 的 `locales.*.themeConfig.sidebar` 中。新增文档页面后，需要在对应语言的侧边栏配置中添加菜单项。
 
 ### 主题自定义
 
-- **品牌色**: 青色系 (`#00d5c4`, `#19fac6`, `#00b8a9`)，在 [style.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/style.css) 中定义
+- **品牌色**: 青色系（仅暗色模式），在 [style.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/style.css) 中定义
+- **主题模式**: 强制暗色（`appearance: 'force-dark'`），不支持亮色切换
 - **自定义组件**: 放在 `.vitepress/theme/components/` 目录下
 - **组件注册**: 在 [index.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/index.ts) 的 `enhanceApp` 中全局注册
+- **首页动画**: 通过 `home-hero-image` 插槽注入 [LogoAnimation.vue](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/components/LogoAnimation.vue)，首页 `index.md` 的 hero 配置需包含 `image` 字段才能触发插槽渲染
 
 ## 部署配置
 
@@ -175,6 +172,7 @@ pnpm clean
 2. **结构一致**: 中英文文档的目录结构、文件命名、标题层级必须完全一致
 3. **质量优先**: 技术内容需准确、规范，代码示例需可运行
 4. **遵循 VitePress 规范**: 所有 Markdown 扩展语法必须符合 VitePress 的支持范围
+5. **版本同步**: 每次迭代修改本项目后，必须递增本文档顶部的版本号并更新日期
 
 ## 文档编写规则
 
@@ -207,7 +205,7 @@ pnpm clean
 
 1. 在 `docs/zh/对应模块/` 下创建中文文档
 2. 在 `docs/en/对应模块/` 下创建英文文档（文件名与中文完全一致）
-3. 在 [config.mts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/config.mts) 的 `locales.root.themeConfig.sidebar` 和 `locales.en.themeConfig.sidebar` 中分别添加侧边栏配置
+3. 在 [config.mts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/config.mts) 的 `locales.zh.themeConfig.sidebar` 和 `locales.en.themeConfig.sidebar` 中分别添加侧边栏配置
 4. 如有导航栏新增，同步更新 `nav` 配置
 
 ### 修改文档
@@ -227,14 +225,14 @@ pnpm clean
 
 ### 品牌色
 
-项目使用青色系品牌色，定义在 [style.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/style.css)：
+项目使用青色系品牌色，仅暗色模式，定义在 [style.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/style.css)：
 
-| 变量名 | 亮色模式 | 暗色模式 | 用途 |
-|--------|----------|----------|------|
-| `--vp-c-brand-1` | `#00d5c4` | `#19fac6` | 主品牌色 |
-| `--vp-c-brand-2` | `#00b8a9` | `#00d5c4` | 次品牌色 |
-| `--vp-c-brand-3` | `#009b8f` | `#00b8a9` | 第三品牌色 |
-| `--vp-c-brand-soft` | `rgba(0, 213, 196, 0.14)` | `rgba(25, 250, 198, 0.14)` | 柔和背景色 |
+| 变量名 | 值 | 用途 |
+|--------|-----|------|
+| `--vp-c-brand-1` | `#19fac6` | 主品牌色 |
+| `--vp-c-brand-2` | `#00d5c4` | 次品牌色 |
+| `--vp-c-brand-3` | `#00b8a9` | 第三品牌色 |
+| `--vp-c-brand-soft` | `rgba(25, 250, 198, 0.14)` | 柔和背景色 |
 
 ### 自定义组件
 
@@ -245,9 +243,9 @@ pnpm clean
 
 ### 样式规范
 
-- 优先使用 CSS 变量（`--vp-c-*`），确保主题切换正常
+- 优先使用 CSS 变量（`--vp-c-*`）
 - 动画过渡使用 `ease` 缓动函数，时长 0.2-0.5s
-- 支持暗色模式，需考虑两种模式下的样式表现
+- 仅需考虑暗色模式下的样式表现（站点强制暗色）
 - 响应式设计，适配移动端
 
 ## 配置修改规则
@@ -301,11 +299,12 @@ pnpm preview
 
 - [ ] 中英文文档同步更新
 - [ ] 侧边栏配置已更新
-- [ ] 页面在亮色/暗色模式下均正常显示
+- [ ] 页面在暗色模式下正常显示
 - [ ] 页面在移动端正常显示
 - [ ] 内部链接跳转正确
 - [ ] 代码块语法高亮正确
 - [ ] 构建无错误
+- [ ] 文档版本号已递增
 
 ## 提交规范
 
@@ -320,7 +319,7 @@ pnpm preview
 2. **不要提交** `node_modules/`、`.vitepress/dist/`、`.vitepress/cache/` 目录
 3. **不要直接修改** 构建产物文件
 4. **大段内容翻译** 建议分多次提交，便于审查
-5. **图片资源** 放在 `assets/` 目录下，引用路径以 `/` 开头，如 `/logo.png`、`/favicon.ico`（Vite 配置 `publicDir: '../assets'`）
+5. **图片资源** 放在 `assets/` 目录下，引用路径以 `/` 开头，如 `/logo.png`、`/favicon_48px.ico`（Vite 配置 `publicDir: '../assets'`）
 
 ## Skill 规范
 
@@ -346,3 +345,5 @@ pnpm preview
 | Skill 名称 | 说明 | 位置 |
 |-----------|------|------|
 | gsap-skills | GSAP 动画库技能集合，包含 core、timeline、scrolltrigger、react、plugins、frameworks、performance、utils 等子技能 | [.opencode/skills/gsap-skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/gsap-skills) |
+| impeccable | 高质量前端界面设计技能，规范颜色、排版、布局、动效等设计标准 | [.opencode/skills/impeccable/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/impeccable) |
+| taste-skill | 反模板化前端设计技能，避免 AI 生成的常见设计陷阱 | [.opencode/skills/taste-skill/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/taste-skill) |

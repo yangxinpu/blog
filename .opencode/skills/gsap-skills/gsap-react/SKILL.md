@@ -16,9 +16,9 @@ Apply when writing or reviewing GSAP code in React (or React-based frameworks li
 
 ```bash
 # Install the GSAP library
-npm install gsap
+pnpm add gsap
 # Install the GSAP React package
-npm install @gsap/react
+pnpm add @gsap/react
 ```
 
 ## Prefer the useGSAP() Hook

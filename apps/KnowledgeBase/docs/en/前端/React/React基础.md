@@ -65,7 +65,7 @@ Use { }, inside { } you can write any JS expression (function calls, ternary ope
 
 SCSS is responsible for enhancing CSS writing capabilities, CSS Modules is responsible for scope isolation (class name hash, generating corresponding hash JS class name mapping objects), and finally build tools compile them into browser-executable regular CSS + mapping objects
 
-Install: `npm install sass --save-dev`
+Install: `pnpm add -D sass`
 
 Import via import: Global effect;
 
@@ -111,7 +111,7 @@ A CSS-in-JS solution in the React ecosystem that allows you to write CSS directl
 
 - styled-components is essentially calling a function (tag function), passing CSS code in template strings as parameters, and generating a unique hash class name for each style component (like `sc-bdVaJa`); styled-components creates a `<style>` tag at runtime (or reuses existing ones) and inserts it into `<head>`, writing the generated class name and corresponding CSS rules into the `<style>` tag;
 
-Install: `npm install styled-components`;
+Install: `pnpm add styled-components`;
 
 ##### Basic Syntax
 

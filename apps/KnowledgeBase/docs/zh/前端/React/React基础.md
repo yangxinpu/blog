@@ -65,7 +65,7 @@ createRoot(document.getElementById('root')).render(
 
 SCSS 负责增强 CSS 编写能力，CSS Modules 负责作用域隔离（类名hash，生成对应hash的JS类名映射对象），最终由构建工具把它们编译成浏览器可执行的普通 CSS + 映射对象
 
-安装：`npm install sass --save-dev`
+安装：`pnpm add -D sass`
 
 通过import方式引入：全局生效；
 
@@ -111,7 +111,7 @@ function Button() {
 
 - styled-components本质上是调用一个函数（标签函数），将模板字符串中的 CSS 代码作为参数传入，并为每个 style 组件生成唯一的哈希类名（如 `sc-bdVaJa`）；styled-components会在运行时，创建一个 `<style>` 标签（或复用已有的）插入到 `<head>` 中，将生成的类名与对应的 CSS 规则写入 `<style>` 标签；
 
-安装：`npm install styled-components`；
+安装：`pnpm add styled-components`；
 
 ##### 基本语法
 

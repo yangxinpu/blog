@@ -1,8 +1,20 @@
+---
+name: gsap-skills
+description: 当用户需要进行 JavaScript 动画开发时使用。涵盖 GSAP 核心 API（gsap.to/from/fromTo、缓动、stagger、变换）、时间轴（timeline、序列编排）、ScrollTrigger（滚动联动、钉固、scrub）、插件（SplitText、MorphSVG、Flip、Draggable 等全部免费）、工具函数（gsap.utils）、React/Vue/Svelte 框架集成（useGSAP、生命周期、清理）、性能优化（60fps、will-change、批处理）。适用于网页动画、落地页动效、仪表盘交互、产品 UI 动画、微交互、视差滚动、SVG 动画等场景。GSAP 自 Webflow 收购后全部免费（含原 Club 插件），统一从公共 gsap npm 包安装，无需认证令牌。
+version: 1.0.0
+user-invocable: true
+argument-hint: "[core|timeline|scrolltrigger|plugins|utils|react|frameworks|performance] [target]"
+license: Apache 2.0
+allowed-tools:
+  - Bash(npx gsap *)
+  - Bash(node .opencode/skills/gsap-skills/scripts/*)
+---
+
 # GSAP Skills — Index for AI Agents
 
 Use this file to discover which skill to load. Each skill lives in a directory of the same name under skills/ and contains SKILL.md.
 
-Note: GSAP is fully free (including every plugin) since Webflow's acquisition. Club GSAP is no longer a paid tier — formerly Club-only plugins (SplitText, MorphSVG, etc.) are free for commercial use. Install everything from the public `gsap` npm package (`npm install gsap`); no `.npmrc` / auth token or private registry required. See gsap-plugins for details.
+Note: GSAP is fully free (including every plugin) since Webflow's acquisition. Club GSAP is no longer a paid tier — formerly Club-only plugins (SplitText, MorphSVG, etc.) are free for commercial use. Install everything from the public `gsap` npm package (`pnpm add gsap`); no `.npmrc` / auth token or private registry required. See gsap-plugins for details.
 
 ## Skills
 
