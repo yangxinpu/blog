@@ -8,6 +8,7 @@ export default defineConfig({
   base,
   srcDir: 'docs',
   cleanUrls: true,
+  appearance: 'force-dark',
 
   vite: {
     server: {
@@ -122,9 +123,6 @@ export default defineConfig({
         langMenuLabel: '语言',
         returnToTopLabel: '返回顶部',
         sidebarMenuLabel: '菜单',
-        darkModeSwitchLabel: '主题',
-        lightModeSwitchTitle: '切换到浅色模式',
-        darkModeSwitchTitle: '切换到深色模式',
       },
     },
     'en': {
@@ -201,9 +199,6 @@ export default defineConfig({
         langMenuLabel: 'Language',
         returnToTopLabel: 'Return to top',
         sidebarMenuLabel: 'Menu',
-        darkModeSwitchLabel: 'Theme',
-        lightModeSwitchTitle: 'Switch to light theme',
-        darkModeSwitchTitle: 'Switch to dark theme',
       },
     },
   },
