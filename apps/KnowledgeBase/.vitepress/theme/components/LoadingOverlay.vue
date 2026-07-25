@@ -8,8 +8,9 @@ const brandChars = brandText.split('');
 const isVisible = ref(false);
 const isActive = ref(false);
 
-const INITIAL_DURATION = 1100;
-const ROUTE_DURATION = 650;
+// 动画周期为 4s（含 1s 延迟），初始展示一个完整周期
+const INITIAL_DURATION = 5000;
+const ROUTE_DURATION = 4200;
 const FADE_DURATION = 420;
 
 const LOADED_KEY = 'kb-loaded';
@@ -108,20 +109,10 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="kb-loading__content">
-      <div class="kb-loading__logo-wrapper">
-        <div class="kb-loading__ring-container">
-          <div class="kb-loading__ring kb-loading__ring--primary"></div>
-          <div class="kb-loading__ring kb-loading__ring--reverse"></div>
-          <div class="kb-loading__ring kb-loading__ring--dotted"></div>
-        </div>
-
-        <div class="kb-loading__logo-glow"></div>
-        <img
-          src="/logo.png"
-          alt="NaiLuo logo"
-          class="kb-loading__logo"
-        />
-        <div class="kb-loading__pulse-ring"></div>
+      <div class="loader">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
       </div>
 
       <div class="kb-loading__text">
@@ -136,19 +127,6 @@ onBeforeUnmount(() => {
           </span>
         </h2>
         <p class="kb-loading__caption">Loading...</p>
-      </div>
-
-      <div class="kb-loading__particles">
-        <span
-          v-for="i in 12"
-          :key="i"
-          class="kb-loading__particle"
-          :style="{
-            '--particle-angle': `${(i - 1) * 30}deg`,
-            '--particle-distance': `${80 + (i - 1) * 14}px`,
-            '--particle-delay': `${(i - 1) * 0.12}s`,
-          }"
-        ></span>
       </div>
     </div>
   </div>
@@ -229,84 +207,245 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
-.kb-loading__logo-wrapper {
+/* ===== 盒子加载动画 ===== */
+.loader {
+  width: 112px;
+  height: 112px;
   position: relative;
-  width: 140px;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.kb-loading__ring-container {
+.box1,
+.box2,
+.box3 {
+  border: 16px solid var(--vp-c-brand-1);
+  box-sizing: border-box;
   position: absolute;
-  inset: 0;
+  display: block;
 }
 
-.kb-loading__ring {
-  position: absolute;
-  border-radius: 50%;
+.box1 {
+  width: 112px;
+  height: 48px;
+  margin-top: 64px;
+  margin-left: 0px;
+  animation: abox1 4s 1s forwards ease-in-out infinite;
 }
 
-.kb-loading__ring--primary {
-  inset: 0;
-  border: 2px solid transparent;
-  border-top-color: var(--vp-c-brand-1);
-  border-right-color: var(--vp-c-brand-1);
-  opacity: 0.85;
-  animation: kb-spin 3s linear infinite;
+.box2 {
+  width: 48px;
+  height: 48px;
+  margin-top: 0px;
+  margin-left: 0px;
+  animation: abox2 4s 1s forwards ease-in-out infinite;
 }
 
-.kb-loading__ring--reverse {
-  inset: 10px;
-  border: 2px solid transparent;
-  border-bottom-color: var(--vp-c-brand-2);
-  border-left-color: var(--vp-c-brand-2);
-  opacity: 0.58;
-  animation: kb-spin-reverse 4s linear infinite;
+.box3 {
+  width: 48px;
+  height: 48px;
+  margin-top: 0px;
+  margin-left: 64px;
+  animation: abox3 4s 1s forwards ease-in-out infinite;
 }
 
-.kb-loading__ring--dotted {
-  inset: -10px;
-  border: 2px dashed color-mix(in srgb, var(--vp-c-brand-1) 60%, transparent);
-  opacity: 0.4;
-  animation: kb-spin 8s linear infinite;
+@keyframes abox1 {
+  0% {
+    width: 112px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
+
+  12.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
+
+  25% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
+
+  37.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
+
+  50% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
+
+  62.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
+
+  75% {
+    width: 48px;
+    height: 112px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  87.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  100% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
 }
 
-.kb-loading__logo-glow {
-  position: absolute;
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--vp-c-brand-1) 0%, transparent 70%);
-  filter: blur(20px);
-  animation: kb-breathe 2s ease-in-out infinite;
+@keyframes abox2 {
+  0% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  12.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  25% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  37.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  50% {
+    width: 112px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  62.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
+
+  75% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
+
+  87.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
+
+  100% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
 }
 
-.kb-loading__logo {
-  position: relative;
-  z-index: 2;
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-  filter: drop-shadow(
-    0 0 18px color-mix(in srgb, var(--vp-c-brand-1) 65%, transparent)
-  );
-  animation: kb-float-logo 2s ease-in-out infinite;
+@keyframes abox3 {
+  0% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
+
+  12.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
+
+  25% {
+    width: 48px;
+    height: 112px;
+    margin-top: 0px;
+    margin-left: 64px;
+  }
+
+  37.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 64px;
+  }
+
+  50% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 64px;
+  }
+
+  62.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 64px;
+  }
+
+  75% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 64px;
+  }
+
+  87.5% {
+    width: 48px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 64px;
+  }
+
+  100% {
+    width: 112px;
+    height: 48px;
+    margin-top: 64px;
+    margin-left: 0px;
+  }
 }
 
-.kb-loading__pulse-ring {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 2px solid color-mix(in srgb, var(--vp-c-brand-1) 80%, transparent);
-  border-radius: 50%;
-  animation: kb-pulse-ring 2s ease-out infinite;
-}
-
+/* ===== 文字 ===== */
 .kb-loading__text {
   display: flex;
   flex-direction: column;
@@ -337,48 +476,6 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   color: var(--vp-c-text-2);
   animation: kb-caption-fade 1.6s ease-in-out infinite;
-}
-
-.kb-loading__particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.kb-loading__particle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--vp-c-brand-1);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--vp-c-brand-1) 80%, transparent);
-  transform: translate(-50%, -50%) rotate(var(--particle-angle))
-    translateY(calc(var(--particle-distance) * -1));
-  opacity: 0;
-  animation: kb-particle-float 2s ease-in-out infinite;
-  animation-delay: var(--particle-delay);
-}
-
-@keyframes kb-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes kb-spin-reverse {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-360deg);
-  }
 }
 
 @keyframes kb-float-one {
@@ -416,47 +513,6 @@ onBeforeUnmount(() => {
   }
 }
 
-@keyframes kb-breathe {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.45;
-  }
-
-  50% {
-    transform: scale(1.14);
-    opacity: 0.8;
-  }
-}
-
-@keyframes kb-float-logo {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes kb-pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-
-  70% {
-    transform: scale(1.45);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1.45);
-    opacity: 0;
-  }
-}
-
 @keyframes kb-char-glow {
   0%,
   100% {
@@ -476,50 +532,6 @@ onBeforeUnmount(() => {
 
   50% {
     opacity: 1;
-  }
-}
-
-@keyframes kb-particle-float {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(var(--particle-angle))
-      translateY(calc((var(--particle-distance) - 12px) * -1)) scale(0.5);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(var(--particle-angle))
-      translateY(calc(var(--particle-distance) * -1)) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(var(--particle-angle))
-      translateY(calc((var(--particle-distance) + 14px) * -1)) scale(0.5);
-  }
-}
-
-@media (max-width: 640px) {
-  .kb-loading__logo-wrapper {
-    width: 120px;
-    height: 120px;
-  }
-
-  .kb-loading__ring--reverse {
-    inset: 8px;
-  }
-
-  .kb-loading__ring--dotted {
-    inset: -8px;
-  }
-
-  .kb-loading__logo {
-    width: 60px;
-    height: 60px;
-  }
-
-  .kb-loading__brand {
-    letter-spacing: 0.18em;
   }
 }
 
