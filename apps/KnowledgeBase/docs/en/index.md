@@ -5,6 +5,9 @@ hero:
   name: NaiLuo Knowledge Base
   text: Frontend Tech Learning Notes
   tagline: JavaScript · React · Vue
+  image:
+    src: /logo.png
+    alt: NaiLuo
   actions:
     - theme: brand
       text: React Notes
