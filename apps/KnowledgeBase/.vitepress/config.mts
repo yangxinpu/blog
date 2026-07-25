@@ -7,13 +7,13 @@ export default defineConfig({
   title: 'NaiLuo 知识库',
   base,
   srcDir: 'docs',
-  publicDir: 'assets',
   cleanUrls: true,
 
   vite: {
     server: {
       port: 8080,
     },
+    publicDir: '../assets',
     plugins: [
       {
         name: 'redirect-root-to-zh',
@@ -43,10 +43,11 @@ export default defineConfig({
   },
 
   head: [
-    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon_32px.ico' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon_48px.ico' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/favicon_64px.ico' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '64x64', href: '/favicon_64px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon_48px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '32x32', href: '/favicon_32px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '48x48', href: '/favicon_48px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '64x64', href: '/favicon_64px.ico' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '64x64', href: '/logo.png' }],
   ],
 
   locales: {

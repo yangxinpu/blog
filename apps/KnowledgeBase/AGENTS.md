@@ -11,7 +11,7 @@
 | 框架 | VitePress ^1.6.3 |
 | UI 框架 | Vue ^3.5.31 |
 | 包管理器 | pnpm |
-| 语言 | TypeScript |查看当前的图片asset图片，替换对应发icon和logo
+| 语言 | TypeScript |
 | 部署平台 | Vercel |
 | 开发服务器端口 | 8080 |
 
@@ -38,8 +38,12 @@ KnowledgeBase/
 │       ├── React/
 │       ├── Vue/
 │       └── index.md         # 英文首页
-├── public/                  # 静态资源
-│   └── assets/              # 图片等资源
+├── assets/                  # 静态资源（Vite publicDir）
+│   ├── logo.png             # 站点 Logo
+│   ├── favicon.ico          # 网站图标
+│   ├── favicon_32px.ico     # 32x32 尺寸图标
+│   ├── favicon_48px.ico     # 48x48 尺寸图标
+│   └── favicon_64px.ico     # 64x64 尺寸图标
 ├── .env.production          # 生产环境变量
 ├── package.json             # 项目依赖配置
 ├── tsconfig.json            # TypeScript 配置
@@ -142,12 +146,8 @@ pnpm clean
 ### Skill 规范
 
 - **语言要求**: 创建或修改 skill 时，必须使用中文编写
-- **存放位置**: skill 文件存放在以下目录：
-  - [.codex/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.codex/skills)
-  - [.opencode/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.opencode/skills)
-  - [.trae/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.trae/skills)
+- **存放位置**: skill 文件存放在 [.opencode/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.opencode/skills) 目录
 - **命名规范**: skill 目录使用小写英文命名，主文件为 `SKILL.md`
-- **同步更新**: 新增或修改 skill 时，需同步更新三个目录下的对应 skill
 
 ### 规则文件
 
@@ -159,4 +159,4 @@ pnpm clean
 
 | Skill 名称 | 说明 | 位置 |
 |-----------|------|------|
-| vitepress | VitePress 文档站点开发技能，包含站点配置、主题自定义、内容创作、搜索、部署等完整指南 | [.codex/skills/vitepress/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.codex/skills/vitepress) |
+| vitepress | VitePress 文档站点开发技能，包含站点配置、主题自定义、内容创作、搜索、部署等完整指南 | [.opencode/skills/vitepress/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.opencode/skills/vitepress) |

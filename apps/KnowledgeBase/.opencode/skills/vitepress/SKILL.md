@@ -394,9 +394,8 @@ themeConfig: {
 
 ```ts
 export default defineConfig({
-  srcDir: '.',
+  srcDir: 'docs',
   outDir: './.vitepress/dist',
-  assetsDir: 'assets',
   cacheDir: './.vitepress/cache',
   cleanUrls: true,
   ignoreDeadLinks: false

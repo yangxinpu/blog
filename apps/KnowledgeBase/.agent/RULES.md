@@ -151,4 +151,4 @@ pnpm preview
 2. **不要提交** `node_modules/`、`.vitepress/dist/`、`.vitepress/cache/` 目录
 3. **不要直接修改** 构建产物文件
 4. **大段内容翻译** 建议分多次提交，便于审查
-5. **图片资源** 放在 `assets/` 目录下，引用路径以 `/` 开头（VitePress 配置 `publicDir: 'assets'`）
+5. **图片资源** 放在 `assets/` 目录下，引用路径以 `/` 开头，如 `/logo.png`、`/favicon.ico`（Vite 配置 `publicDir: '../assets'`）
