@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NaiLuo 知识库</title>
+    <link>https://nailuo.com/zh/</link>
+    <description>前端技术知识库 - JavaScript、React、Vue、Node.js、性能优化等技术学习笔记</description>
+    <language>zh-CN</language>
+    <pubDate>Sun, 26 Jul 2026 14:01:31 GMT</pubDate>
+    <lastBuildDate>Sun, 26 Jul 2026 14:01:31 GMT</lastBuildDate>
+    <atom:link href="https://nailuo.com/zh/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>React基础</title>
+      <link>https://nailuo.com/zh/前端/React/React基础</link>
+      <description><![CDATA[react包： React 核心库，定义了 UI 的抽象模型]]></description>
+      <pubDate>Sun, 26 Jul 2026 03:08:28 GMT</pubDate>
+      <category>前端 > React</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/React/React基础</guid>
+    </item>
+  
+
+    <item>
+      <title>Ajax</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/前后端通信</link>
+      <description><![CDATA[**AJAX** （Asynchronous JavaScript and XML，异步 JavaScript 和 XML），一种用于在不刷新整个页面的情况下，向服务器交换数据，并更新部分网页内容的技术；]]></description>
+      <pubDate>Sun, 26 Jul 2026 03:08:27 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/前后端通信</guid>
+    </item>
+  
+
+    <item>
+      <title>Vue基础</title>
+      <link>https://nailuo.com/zh/前端/Vue/Vue基础</link>
+      <description><![CDATA[MVVM（Model-View-ViewModel）是一种软件架构模式（前端，移动端，桌面端），核心目标是彻底分离视图展示（View）和业务数据（Model），通过 ViewModel 作为中间层实现数据与视图的双向自动同步；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > Vue</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/Vue/Vue基础</guid>
+    </item>
+  
+
+    <item>
+      <title>React提高</title>
+      <link>https://nailuo.com/zh/前端/React/React提高</link>
+      <description><![CDATA[React传统的脚手架为create-react-app（CRA），底层通过 react-scripts封装了 Webpack 配置，通过Webpack 负责处理 JSX 转译、ES6+ 语法降级（通过 Babel）、CSS 解析、图片等静态资源处理、代码分割、压缩优化等；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > React</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/React/React提高</guid>
+    </item>
+  
+
+    <item>
+      <title>Vue3基础</title>
+      <link>https://nailuo.com/zh/前端/Vue/Vue3基础</link>
+      <description><![CDATA[vite是一个现代化前端构建工具，也是官方推荐的Vue3项目的构建工具；在生产环境使用Rollup打包，开发环境使用Esbuild打包；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > Vue</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/Vue/Vue3基础</guid>
+    </item>
+  
+
+    <item>
+      <title>Vue3提高</title>
+      <link>https://nailuo.com/zh/前端/Vue/Vue3提高</link>
+      <description><![CDATA[在终端中安装：`npm i vue-router`]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > Vue</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/Vue/Vue3提高</guid>
+    </item>
+  
+
+    <item>
+      <title>DOM</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/DOM</link>
+      <description><![CDATA[DOM（文档对象模型，Document Object Model）是一个将HTML文档呈现为一个由节点和对象组成的**树形结构**的一个接口，以便使用JS对其进行操作；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/DOM</guid>
+    </item>
+  
+
+    <item>
+      <title>DOM事件</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/DOM事件</link>
+      <description><![CDATA[触发js响应的操作，网页中的每个元素都可以产生某些触发js的事件]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/DOM事件</guid>
+    </item>
+  
+
+    <item>
+      <title>JS基础：</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/JS基础</link>
+      <description><![CDATA[script标签的属性]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/JS基础</guid>
+    </item>
+  
+
+    <item>
+      <title>JS提高</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/JS提高</link>
+      <description><![CDATA[JavaScript 是单线程的，而浏览器是多线程的，网络请求、定时器、DOM 事件等能力由浏览器的其他线程负责执行；JavaScript 通过调用这些 Web API 发起任务后，不会阻塞主线程执行，当异步任务完成后，其回调会被放入任务队列中，事件循环机制负责在调用栈为空时，将这些回调取出并执行，从而实现 JavaScript 与浏览器多线程能力的协作；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/JS提高</guid>
+    </item>
+  
+
+    <item>
+      <title>工具API</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/Web  API</link>
+      <description><![CDATA[参数为字符在字符串中的索引，返回 指定位置字符的编码值]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/Web  API</guid>
+    </item>
+  
+
+    <item>
+      <title>内置对象</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/内置对象</link>
+      <description><![CDATA[是所有对象的基类，Object的键只能是字符串或者symbol类型，如果写成其他类型会自动转化为字符串；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/内置对象</guid>
+    </item>
+  
+
+    <item>
+      <title>函数&面向对象</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/函数&面向对象</link>
+      <description><![CDATA[函数本质是对象，可以被赋值，作为参数传递，作为返回值，挂载属性；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/函数&面向对象</guid>
+    </item>
+  
+
+    <item>
+      <title>React原理</title>
+      <link>https://nailuo.com/zh/前端/React/React原理</link>
+      <description><![CDATA[原来的React架构是同步渲染的（堆栈协调器，通过树形结构 + 递归对比新旧DOM），即所有的DOM更新和计算都在主线程中完成，直到所有任务完成；这个过程无法打断，因此如果渲染过程中发生复杂计算或者长时间的同步任务，UI就会卡顿，用户体验较差；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > React</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/React/React原理</guid>
+    </item>
+  
+
+    <item>
+      <title>BOM（Browser Object Model）</title>
+      <link>https://nailuo.com/zh/前端/JavaScript/BOM</link>
+      <description><![CDATA[浏览器对象模型；涵盖了与浏览器窗口相关操作的所有对象和功能，包括navigato、location、document、history、screen、alert（）、console等API，BOM的所有操作都是通过window对象来访问和调用，调用时可以省略window；]]></description>
+      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
+      <category>前端 > JavaScript</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/JavaScript/BOM</guid>
+    </item>
+  
+  </channel>
+</rss>

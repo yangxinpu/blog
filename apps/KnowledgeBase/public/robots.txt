@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /assets/
+
+Sitemap: https://nailuo.com/sitemap.xml
+Sitemap: https://nailuo.com/zh/sitemap.xml
+Sitemap: https://nailuo.com/en/sitemap.xml

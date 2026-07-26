@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    <url>
+      <loc>https://nailuo.com/en/</loc>
+      <lastmod>2026-07-26</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1.0</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/AI/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/Python/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/Python/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/产品/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/产品/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/Git/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/Git/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/书籍/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/书籍/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/算法/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/算法/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/计算机网络/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/计算机网络/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/BOM</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/BOM"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/DOM</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/DOM"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/DOM事件</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/DOM事件"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/JS基础</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/JS基础"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/JS提高</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/JS提高"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/Web  API</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/Web  API"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/内置对象</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/内置对象"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/函数&面向对象</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/函数&面向对象"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/JavaScript/前后端通信</loc>
+      <lastmod>2026-07-26</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/JavaScript/前后端通信"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/React/React原理</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/React/React原理"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/React/React基础</loc>
+      <lastmod>2026-07-26</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/React/React基础"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/React/React提高</loc>
+      <lastmod>2026-07-26</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/React/React提高"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/Vue/Vue3基础</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/Vue/Vue3基础"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/Vue/Vue3提高</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/Vue/Vue3提高"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/Vue/Vue基础</loc>
+      <lastmod>2026-07-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/Vue/Vue基础"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/后端/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/后端/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/运维/</loc>
+      <lastmod>2026-07-25</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/运维/"/>
+    </url>
+  
+</urlset>

@@ -1,5 +1,3 @@
-/* 自定义样式（仅暗色模式） */
-
 :root {
   --vp-c-brand-1: #19fac6;
   --vp-c-brand-2: #00d5c4;
@@ -7,7 +5,14 @@
   --vp-c-brand-soft: rgba(25, 250, 198, 0.14);
 }
 
-/* 首页 Hero 样式 */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-display: swap;
+}
+
 .VPHero .name {
   background: linear-gradient(120deg, #00d5c4, #19fac6);
   -webkit-background-clip: text;
@@ -15,7 +20,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* 首页 Logo 动画容器 */
 .home-logo-container {
   display: flex;
   justify-content: center;
@@ -24,22 +28,18 @@
   padding: 2rem 0;
 }
 
-/* 首页特征卡片动画 */
 .VPFeature {
   transition: all 0.3s ease;
 }
 
-/* 代码块样式 */
 .vp-code-group .tabs label {
   font-weight: 500;
 }
 
-/* 自定义容器动画 */
 .custom-block {
   transition: all 0.3s ease;
 }
 
-/* 滚动条样式 */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -58,13 +58,11 @@
   background: var(--vp-c-brand-2);
 }
 
-/* 选择文本样式 */
 ::selection {
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
 }
 
-/* 链接悬停效果 */
 .vp-doc a {
   transition: all 0.2s ease;
 }
@@ -75,13 +73,11 @@
   text-underline-offset: 3px;
 }
 
-/* 侧边栏项目悬停效果 */
 .VPSidebarItem .item:hover {
   background: var(--vp-c-brand-soft);
   border-radius: 8px;
 }
 
-/* 侧边栏图标样式 */
 .VPSidebarItem.level-0 H2.text .sidebar-icon {
   display: inline-flex !important;
   align-items: center !important;
@@ -108,7 +104,6 @@
   transform: none !important;
 }
 
-/* 侧边栏标题字体大小和左侧间距 */
 .VPSidebarItem.level-0 .text {
   font-size: 16px;
   font-weight: 600;
@@ -116,12 +111,10 @@
   padding-left: 8px;
 }
 
-/* 导航栏悬停效果 */
 .VPNavBarMenuLink:hover {
   color: var(--vp-c-brand-1);
 }
 
-/* 按钮动画 */
 .VPButton {
   transition: all 0.3s ease;
 }
@@ -130,10 +123,11 @@
   box-shadow: 0 10px 30px rgba(0, 213, 196, 0.3);
 }
 
-/* 图片悬停效果 */
 .vp-doc img {
   transition: all 0.3s ease;
   border-radius: 8px;
+  max-width: 100%;
+  height: auto;
 }
 
 .vp-doc img:hover {
@@ -141,7 +135,15 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* 表格样式 */
+.vp-doc img.lazy {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.vp-doc img.lazy.loaded {
+  opacity: 1;
+}
+
 .vp-doc table {
   border-radius: 8px;
   overflow: hidden;
@@ -151,12 +153,10 @@
   background: var(--vp-c-brand-soft);
 }
 
-/* 页脚样式 */
 .VPFooter {
   border-top: 1px solid var(--vp-c-divider);
 }
 
-/* 左侧 Logo 放大 */
 .VPNavBarTitle .logo {
   height: 32px;
   width: auto;
@@ -165,4 +165,100 @@
 .VPNavBarTitle:hover .logo {
   transform: scale(1.05);
   transition: transform 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .VPSidebarItem.level-0 .text {
+    font-size: 14px;
+  }
+  
+  .VPSidebarItem.level-0 H2.text .sidebar-icon {
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 8px !important;
+  }
+}
+
+.vp-doc h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.vp-doc h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.vp-doc h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.vp-doc h5,
+.vp-doc h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.vp-doc p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.vp-doc ul,
+.vp-doc ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.vp-doc li {
+  margin-bottom: 0.5rem;
+}
+
+.vp-doc code {
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+.vp-doc pre {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.vp-doc blockquote {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  border-radius: 0 8px 8px 0;
+}
+
+.vp-doc blockquote p {
+  margin-bottom: 0;
 }

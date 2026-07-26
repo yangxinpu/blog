@@ -9,11 +9,15 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "clean": "rm -rf node_modules .vitepress/dist .vitepress/cache"
+    "clean": "rm -rf node_modules .vitepress/dist .vitepress/cache",
+    "generate:rss": "tsx scripts/generate-rss.ts",
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts",
+    "prebuild": "npm run generate:rss && npm run generate:sitemap"
   },
   "devDependencies": {
     "vitepress": "^1.6.3",
-    "vue": "^3.5.31"
+    "vue": "^3.5.31",
+    "tsx": "^4.7.2"
   },
   "dependencies": {
     "gsap": "^3.15.0"

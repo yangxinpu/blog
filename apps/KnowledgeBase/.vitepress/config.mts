@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 
 const base = process.env.VITEPRESS_BASE || '/';
 const blogUrl = process.env.VITEPRESS_BLOG_URL || 'http://localhost:3000';
+const siteUrl = process.env.VITEPRESS_SITE_URL || 'https://nailuo.com';
 
 export default defineConfig({
   title: 'NaiLuo 知识库',
@@ -9,6 +10,22 @@ export default defineConfig({
   srcDir: 'docs',
   cleanUrls: true,
   appearance: 'force-dark',
+  lastUpdated: true,
+
+  head: [
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon_48px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '32x32', href: '/favicon_32px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '48x48', href: '/favicon_48px.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '64x64', href: '/favicon_64px.ico' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '64x64', href: '/logo.png' }],
+    ['link', { rel: 'preconnect', href: 'https://cdn.jsdelivr.net' }],
+    ['link', { rel: 'preconnect', href: 'https://cdn.simpleicons.org' }],
+    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
+    ['meta', { name: 'theme-color', content: '#0a0a0a' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml', title: 'NaiLuo 知识库 RSS' }],
+  ],
 
   vite: {
     server: {
@@ -43,20 +60,12 @@ export default defineConfig({
     },
   },
 
-  head: [
-    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon_48px.ico' }],
-    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '32x32', href: '/favicon_32px.ico' }],
-    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '48x48', href: '/favicon_48px.ico' }],
-    ['link', { rel: 'icon', type: 'image/x-icon', sizes: '64x64', href: '/favicon_64px.ico' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '64x64', href: '/logo.png' }],
-  ],
-
   locales: {
     'zh': {
       label: '简体中文',
       lang: 'zh-CN',
       title: 'NaiLuo 知识库',
-      description: '前端技术知识库 - React, Vue',
+      description: '前端技术知识库 - JavaScript、React、Vue、Node.js、性能优化等技术学习笔记',
       themeConfig: {
         nav: [
           { text: '首页', link: '/zh/' },
@@ -299,13 +308,16 @@ export default defineConfig({
         langMenuLabel: '语言',
         returnToTopLabel: '返回顶部',
         sidebarMenuLabel: '菜单',
+        outline: {
+          label: '页面导航',
+        },
       },
     },
     'en': {
       label: 'English',
       lang: 'en-US',
       title: 'NaiLuo Knowledge Base',
-      description: 'Frontend Tech Knowledge Base - React, Vue',
+      description: 'Frontend Tech Knowledge Base - JavaScript, React, Vue, Node.js, Performance Optimization',
       themeConfig: {
         nav: [
           { text: 'Home', link: '/en/' },
@@ -551,6 +563,9 @@ export default defineConfig({
         langMenuLabel: 'Language',
         returnToTopLabel: 'Return to top',
         sidebarMenuLabel: 'Menu',
+        outline: {
+          label: 'On this page',
+        },
       },
     },
   },
@@ -563,6 +578,56 @@ export default defineConfig({
     },
     search: {
       provider: 'local',
+      options: {
+        locales: {
+          'zh': {
+            translations: {
+              button: {
+                buttonText: '搜索',
+                buttonAriaLabel: '搜索',
+              },
+              modal: {
+                displayDetails: '显示详细列表',
+                resetButtonTitle: '重置搜索',
+                backButtonTitle: '关闭搜索',
+                noResultsText: '没有找到结果',
+                footer: {
+                  selectText: '选择',
+                  selectKeyAriaLabel: '回车',
+                  navigateText: '导航',
+                  navigateUpKeyAriaLabel: '上箭头',
+                  navigateDownKeyAriaLabel: '下箭头',
+                  closeText: '关闭',
+                  closeKeyAriaLabel: 'esc',
+                },
+              },
+            },
+          },
+          'en': {
+            translations: {
+              button: {
+                buttonText: 'Search',
+                buttonAriaLabel: 'Search',
+              },
+              modal: {
+                displayDetails: 'Display detailed list',
+                resetButtonTitle: 'Reset search',
+                backButtonTitle: 'Close search',
+                noResultsText: 'No results for',
+                footer: {
+                  selectText: 'to select',
+                  selectKeyAriaLabel: 'enter',
+                  navigateText: 'to navigate',
+                  navigateUpKeyAriaLabel: 'up arrow',
+                  navigateDownKeyAriaLabel: 'down arrow',
+                  closeText: 'to close',
+                  closeKeyAriaLabel: 'escape',
+                },
+              },
+            },
+          },
+        },
+      },
     },
     outline: {
       level: [2, 3],
