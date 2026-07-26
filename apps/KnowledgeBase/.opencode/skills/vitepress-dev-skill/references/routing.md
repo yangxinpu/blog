@@ -193,3 +193,15 @@ export default {
 ```md
 <!-- @content -->
 ```
+
+## 重要规则
+
+1. **内部链接省略扩展名**：`[link](./page)` 而非 `./page.md`，让 VitePress 处理最终 URL
+2. **base 自动添加**：Markdown 链接中，`base` 会自动添加到 URL 前面
+3. **重写后相对链接**：启用 `rewrites` 后，相对链接应基于**重写后的路径**
+4. **cleanUrls 需要服务器支持**：
+   - Netlify / GitHub Pages：默认支持
+   - Vercel：需在 vercel.json 中启用 `cleanUrls`
+5. **动态路由必须伴随 paths 加载器**：`[param].md` 必须有对应的 `[param].paths.js` 或 `.ts`
+6. **content 属性传递大量数据**：避免在 params 中传递大量数据（如 Markdown/HTML 内容），使用 `content` 属性代替
+7. **路径加载器仅在构建时运行**：路径加载器在 Node.js 中执行，仅构建时运行，可使用 Node API

@@ -133,3 +133,25 @@ const router = useRouter()
   </div>
 </template>
 ```
+
+## 其他全局 API
+
+### `inBrowser`
+
+布尔值，表示当前是否在浏览器环境中运行。
+
+```ts
+import { inBrowser } from 'vitepress'
+
+if (inBrowser) {
+  // 仅在浏览器中执行的代码
+}
+```
+
+## 重要规则
+
+1. **use* 函数只能在 setup 中使用**：`useData`、`useRoute`、`useRouter` 等组合式 API 只能在 `setup()` 或 `<script setup>` 中调用
+2. **SSR 兼容**：所有运行时 API 的使用必须兼容 SSR，浏览器/DOM API 只能在 `beforeMount`/`mounted` 中访问
+3. **ClientOnly 包裹不兼容组件**：使用 `ClientOnly` 组件包裹不兼容 SSR 的组件
+4. **withBase 处理 base URL**：手动拼接路径时使用 `withBase()` 确保正确处理 `base` 配置
+5. **Ref 值**：`useData`、`useRoute` 返回的都是 Vue Ref，需要通过 `.value` 访问
