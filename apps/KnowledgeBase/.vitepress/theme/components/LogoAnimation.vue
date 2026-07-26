@@ -246,15 +246,25 @@ function initParticles(rawParticles: Particle[]) {
   const offsetX = cx - ((minX + maxX) / 2) * scale;
   const offsetY = cy - ((minY + maxY) / 2) * scale;
 
-  particles = rawParticles.map((p) => ({
-    ...p,
-    x: cx + (Math.random() - 0.5) * rect.width * 2.5,
-    y: cy + (Math.random() - 0.5) * rect.height * 2.5,
-    tx: offsetX + p.tx * scale,
-    ty: offsetY + p.ty * scale,
-    wanderRadius: p.wanderRadius * scale,
-    a: 0,
-  }));
+  const spreadRadius = Math.max(rect.width, rect.height) * 1.2;
+
+  particles = rawParticles.map((p) => {
+    const tx = offsetX + p.tx * scale;
+    const ty = offsetY + p.ty * scale;
+    
+    const angle = Math.random() * Math.PI * 2;
+    const dist = spreadRadius * (0.5 + Math.random() * 0.5);
+    
+    return {
+      ...p,
+      x: cx + Math.cos(angle) * dist,
+      y: cy + Math.sin(angle) * dist,
+      tx,
+      ty,
+      wanderRadius: p.wanderRadius * scale,
+      a: 0,
+    };
+  });
 }
 
 function animate() {
@@ -310,26 +320,21 @@ function startEntranceAnimation() {
 
   const avgX = particles.reduce((s, p) => s + p.tx, 0) / particles.length;
   const avgY = particles.reduce((s, p) => s + p.ty, 0) / particles.length;
-  const width = canvas.value.width;
-  const height = canvas.value.height;
 
   particleCtx = gsap.context(() => {
     particles.forEach((p) => {
       const dist = Math.sqrt(
-        Math.pow(p.tx - avgX, 2) +
-        Math.pow(p.ty - avgY, 2)
+        Math.pow(p.x - p.tx, 2) +
+        Math.pow(p.y - p.ty, 2)
       );
-      const maxDist = Math.sqrt(
-        Math.pow(width / 2, 2) +
-        Math.pow(height / 2, 2)
-      );
-      const delay = (dist / maxDist) * 0.9;
+      const delay = (Math.random() * 0.6);
+      const duration = 0.8 + (dist / 400) * 0.8 + Math.random() * 0.4;
 
       gsap.to(p, {
         x: p.tx,
         y: p.ty,
         a: p.ta,
-        duration: 1.3 + Math.random() * 0.5,
+        duration,
         delay,
         ease: 'power2.out',
       });
@@ -409,16 +414,15 @@ onMounted(async () => {
   } else {
     setTimeout(() => {
       startEntranceAnimation();
-    }, 800);
+    }, 600);
   }
 
   watch(
     () => route.path,
     () => {
-      const delay = loadingStateRef.isLoading ? 500 : 200;
       setTimeout(() => {
         reinitAndAnimate();
-      }, delay);
+      }, 300);
     }
   );
 
