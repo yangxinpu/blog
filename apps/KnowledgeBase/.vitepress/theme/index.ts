@@ -15,7 +15,6 @@ function CustomLayout() {
 
   if (page.value?.isNotFound) {
     return h(Fragment, null, [
-      h(LoadingOverlay),
       h(NotFound),
     ]);
   }

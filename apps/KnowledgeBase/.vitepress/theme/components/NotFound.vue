@@ -10,9 +10,7 @@ const i18n = computed(() => {
   const locale = lang.value;
   if (locale === 'zh' || locale === 'zh-CN') {
     return {
-      title: '页面未找到',
-      subtitle: '错误',
-      message: '请检查URL地址或使用下方链接',
+      message: '文档暂时未开发，请检查URL拼写是否正确，或使用搜索功能查找内容，也可以返回首页浏览其他文档',
       home: '首页',
       frontEnd: '前端',
       backEnd: '后端',
@@ -20,9 +18,7 @@ const i18n = computed(() => {
     };
   }
   return {
-    title: 'Page not found',
-    subtitle: 'Error',
-    message: 'Please, check url address or use the links below',
+    message: 'Document not yet developed. Please check if the URL is spelled correctly, use search to find content, or return to homepage to browse other documents.',
     home: 'Home',
     frontEnd: 'Frontend',
     backEnd: 'Backend',
@@ -52,13 +48,10 @@ onMounted(() => {
     </div>
 
     <div class="not-found__content" :class="{ 'not-found__content--visible': isVisible }">
-      <div class="not-found__title">{{ i18n.title }}</div>
-
       <div class="not-found__number">
         <span class="not-found__digit">4</span>
         <span class="not-found__digit">0</span>
         <span class="not-found__digit">4</span>
-        <span class="not-found__subtitle">{{ i18n.subtitle }}</span>
       </div>
 
       <div class="not-found__message">{{ i18n.message }}</div>
@@ -174,18 +167,7 @@ onMounted(() => {
   transform: translateY(0);
 }
 
-.not-found__title {
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--vp-c-brand-1);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  animation: fade-in-up 0.8s ease 0.2s both;
-}
-
 .not-found__number {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,19 +180,6 @@ onMounted(() => {
   font-weight: 700;
   color: var(--vp-c-text-1);
   line-height: 1;
-}
-
-.not-found__subtitle {
-  position: absolute;
-  bottom: -2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  animation: fade-in-up 0.8s ease 0.8s both;
 }
 
 .not-found__message {
