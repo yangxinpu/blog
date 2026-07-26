@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vitepress';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { useRouter } from 'vitepress';
 import { useLoadingState } from '../composables/useLoadingState';
 
-const route = useRoute();
+const router = useRouter();
 const { setLoading, markPageReady, isLoading } = useLoadingState();
 
 const brandText = 'NAILUO';
@@ -18,7 +18,10 @@ const FADE_DURATION = 420;
 let showTimer: number | null = null;
 let hideTimer: number | null = null;
 let minDisplayTimer: number | null = null;
+let safetyTimer: number | null = null;
 let loadingStartTime = 0;
+let navId = 0;
+let currentNavId = 0;
 
 function clearTimers() {
   if (showTimer !== null) {
@@ -32,6 +35,10 @@ function clearTimers() {
   if (minDisplayTimer !== null) {
     window.clearTimeout(minDisplayTimer);
     minDisplayTimer = null;
+  }
+  if (safetyTimer !== null) {
+    window.clearTimeout(safetyTimer);
+    safetyTimer = null;
   }
 }
 
@@ -54,11 +61,14 @@ function hideOverlay() {
 
 function onRouteChangeStart() {
   clearTimers();
+  navId++;
+  currentNavId = navId;
   loadingStartTime = Date.now();
   setLoading(true);
 
   showTimer = window.setTimeout(() => {
     showTimer = null;
+    if (navId !== currentNavId) return;
     showOverlay();
 
     minDisplayTimer = window.setTimeout(() => {
@@ -68,6 +78,8 @@ function onRouteChangeStart() {
 }
 
 function onRouteChangeEnd() {
+  if (navId !== currentNavId) return;
+
   const elapsed = Date.now() - loadingStartTime;
 
   if (showTimer !== null) {
@@ -97,31 +109,26 @@ function onRouteChangeEnd() {
 onMounted(() => {
   onRouteChangeStart();
 
-  setTimeout(() => {
-    if (!isLoading()) {
-      return;
-    }
+  safetyTimer = window.setTimeout(() => {
+    safetyTimer = null;
+    if (!isLoading()) return;
     onRouteChangeEnd();
   }, 3000);
 
-  watch(
-    () => route.path,
-    (nextPath, previousPath) => {
-      if (!previousPath || nextPath === previousPath) {
-        return;
-      }
+  router.onBeforeRouteChange = async (to) => {
+    onRouteChangeStart();
+    return true;
+  };
 
-      onRouteChangeStart();
-
-      setTimeout(() => {
-        onRouteChangeEnd();
-      }, 100);
-    }
-  );
+  router.onAfterPageLoad = async (to) => {
+    onRouteChangeEnd();
+  };
 });
 
 onBeforeUnmount(() => {
   clearTimers();
+  router.onBeforeRouteChange = undefined;
+  router.onAfterPageLoad = undefined;
 });
 </script>
 
