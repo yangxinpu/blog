@@ -1,93 +1,124 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vitepress';
+import { useLoadingState } from '../composables/useLoadingState';
 
 const route = useRoute();
+const { setLoading, markPageReady, isLoading } = useLoadingState();
+
 const brandText = 'NAILUO';
 const brandChars = brandText.split('');
 const isVisible = ref(false);
 const isActive = ref(false);
 
-// 动画周期为 4s（含 1s 延迟），初始展示一个完整周期
-const INITIAL_DURATION = 5000;
-const ROUTE_DURATION = 4200;
+const SHOW_DELAY = 0;
+const MIN_DISPLAY_TIME = 400;
 const FADE_DURATION = 420;
 
-const LOADED_KEY = 'kb-loaded';
-
-let closeTimer: number | null = null;
+let showTimer: number | null = null;
 let hideTimer: number | null = null;
+let minDisplayTimer: number | null = null;
+let loadingStartTime = 0;
 
 function clearTimers() {
-  if (closeTimer !== null) {
-    window.clearTimeout(closeTimer);
-    closeTimer = null;
+  if (showTimer !== null) {
+    window.clearTimeout(showTimer);
+    showTimer = null;
   }
-
   if (hideTimer !== null) {
     window.clearTimeout(hideTimer);
     hideTimer = null;
   }
+  if (minDisplayTimer !== null) {
+    window.clearTimeout(minDisplayTimer);
+    minDisplayTimer = null;
+  }
 }
 
-function hasLoadedBefore(): boolean {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-  return sessionStorage.getItem(LOADED_KEY) === 'true';
-}
-
-function markAsLoaded() {
-  if (typeof window === 'undefined') {
-    return;
-  }
-  sessionStorage.setItem(LOADED_KEY, 'true');
-}
-
-function playOverlay(duration: number) {
-  if (typeof window === 'undefined') {
-    return;
-  }
-
-  if (hasLoadedBefore()) {
-    return;
-  }
-
-  clearTimers();
+function showOverlay() {
   isVisible.value = true;
-
+  document.body.style.overflow = 'hidden';
   window.requestAnimationFrame(() => {
     isActive.value = true;
   });
+}
 
-  closeTimer = window.setTimeout(() => {
-    isActive.value = false;
+function hideOverlay() {
+  isActive.value = false;
+  document.body.style.overflow = '';
+  hideTimer = window.setTimeout(() => {
+    isVisible.value = false;
+    markPageReady();
+  }, FADE_DURATION);
+}
 
-    hideTimer = window.setTimeout(() => {
-      isVisible.value = false;
-      markAsLoaded();
-    }, FADE_DURATION);
-  }, duration);
+function onRouteChangeStart() {
+  clearTimers();
+  loadingStartTime = Date.now();
+  setLoading(true);
+
+  showTimer = window.setTimeout(() => {
+    showTimer = null;
+    showOverlay();
+
+    minDisplayTimer = window.setTimeout(() => {
+      minDisplayTimer = null;
+    }, MIN_DISPLAY_TIME);
+  }, SHOW_DELAY);
+}
+
+function onRouteChangeEnd() {
+  const elapsed = Date.now() - loadingStartTime;
+
+  if (showTimer !== null) {
+    window.clearTimeout(showTimer);
+    showTimer = null;
+    setLoading(false);
+    markPageReady();
+    return;
+  }
+
+  if (minDisplayTimer !== null) {
+    const remaining = MIN_DISPLAY_TIME - elapsed;
+    if (remaining > 0) {
+      minDisplayTimer = window.setTimeout(() => {
+        minDisplayTimer = null;
+        hideOverlay();
+      }, remaining);
+    } else {
+      minDisplayTimer = null;
+      hideOverlay();
+    }
+  } else {
+    hideOverlay();
+  }
 }
 
 onMounted(() => {
-  playOverlay(INITIAL_DURATION);
+  onRouteChangeStart();
+
+  setTimeout(() => {
+    if (!isLoading()) {
+      return;
+    }
+    onRouteChangeEnd();
+  }, 3000);
+
+  watch(
+    () => route.path,
+    (nextPath, previousPath) => {
+      if (!previousPath || nextPath === previousPath) {
+        return;
+      }
+
+      onRouteChangeStart();
+
+      setTimeout(() => {
+        onRouteChangeEnd();
+      }, 100);
+    }
+  );
 });
-
-watch(
-  () => route.path,
-  (nextPath, previousPath) => {
-    if (!previousPath || nextPath === previousPath) {
-      return;
-    }
-
-    if (hasLoadedBefore()) {
-      return;
-    }
-
-    playOverlay(ROUTE_DURATION);
-  }
-);
 
 onBeforeUnmount(() => {
   clearTimers();
@@ -109,10 +140,11 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="kb-loading__content">
+
       <div class="loader">
-        <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="box3"></div>
+        <div class="particle-ring">
+          <div class="particle" v-for="i in 12" :key="i" :style="{ '--i': i }"></div>
+        </div>
       </div>
 
       <div class="kb-loading__text">
@@ -126,7 +158,6 @@ onBeforeUnmount(() => {
             {{ char }}
           </span>
         </h2>
-        <p class="kb-loading__caption">Loading...</p>
       </div>
     </div>
   </div>
@@ -210,239 +241,31 @@ onBeforeUnmount(() => {
   gap: 2.5rem;
 }
 
-/* ===== 盒子加载动画 ===== */
 .loader {
-  width: 112px;
-  height: 112px;
   position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.box1,
-.box2,
-.box3 {
-  border: 16px solid var(--vp-c-brand-1);
-  box-sizing: border-box;
+.particle-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  animation: ring-rotate 2s linear infinite;
+}
+
+.particle {
   position: absolute;
-  display: block;
-}
-
-.box1 {
-  width: 112px;
-  height: 48px;
-  margin-top: 64px;
-  margin-left: 0px;
-  animation: abox1 4s 1s forwards ease-in-out infinite;
-}
-
-.box2 {
-  width: 48px;
-  height: 48px;
-  margin-top: 0px;
-  margin-left: 0px;
-  animation: abox2 4s 1s forwards ease-in-out infinite;
-}
-
-.box3 {
-  width: 48px;
-  height: 48px;
-  margin-top: 0px;
-  margin-left: 64px;
-  animation: abox3 4s 1s forwards ease-in-out infinite;
-}
-
-@keyframes abox1 {
-  0% {
-    width: 112px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
-
-  12.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
-
-  25% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
-
-  37.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
-
-  50% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
-
-  62.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
-
-  75% {
-    width: 48px;
-    height: 112px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  87.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  100% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-}
-
-@keyframes abox2 {
-  0% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  12.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  25% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  37.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  50% {
-    width: 112px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 0px;
-  }
-
-  62.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-
-  75% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-
-  87.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-
-  100% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-}
-
-@keyframes abox3 {
-  0% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-
-  12.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-
-  25% {
-    width: 48px;
-    height: 112px;
-    margin-top: 0px;
-    margin-left: 64px;
-  }
-
-  37.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 64px;
-  }
-
-  50% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 64px;
-  }
-
-  62.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 64px;
-  }
-
-  75% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 64px;
-  }
-
-  87.5% {
-    width: 48px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 64px;
-  }
-
-  100% {
-    width: 112px;
-    height: 48px;
-    margin-top: 64px;
-    margin-left: 0px;
-  }
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(calc((var(--i) - 1) * 30deg)) translateY(-40px);
 }
 
 /* ===== 文字 ===== */
@@ -467,15 +290,6 @@ onBeforeUnmount(() => {
   display: inline-block;
   text-shadow: 0 0 20px color-mix(in srgb, var(--vp-c-brand-1) 75%, transparent);
   animation: kb-char-glow 2s ease-in-out infinite;
-}
-
-.kb-loading__caption {
-  margin: 0;
-  font-size: 0.875rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-2);
-  animation: kb-caption-fade 1.6s ease-in-out infinite;
 }
 
 @keyframes kb-float-one {
@@ -532,6 +346,15 @@ onBeforeUnmount(() => {
 
   50% {
     opacity: 1;
+  }
+}
+
+@keyframes ring-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

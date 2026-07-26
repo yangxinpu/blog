@@ -1,6 +1,6 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.1.0
+> **文档版本**: v1.1.2
 > **最后更新**: 2026-07-26
 
 ## 版本管理规则
@@ -36,7 +36,7 @@ KnowledgeBase/
 ├── .vitepress/              # VitePress 配置目录
 │   ├── theme/               # 自定义主题
 │   │   ├── components/      # 自定义组件
-│   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件（三盒加载动画）
+  │   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件（粒子圆圈加载动画）
 │   │   │   └── LogoAnimation.vue    # 首页粒子 Logo 动画组件（Canvas + GSAP）
 │   │   ├── index.ts         # 主题入口文件（注册组件 + Layout 插槽）
 │   │   └── style.css        # 全局自定义样式（仅暗色模式）
@@ -336,7 +336,7 @@ pnpm preview
 
 | Skill 名称 | 说明 | 位置 |
 |-----------|------|------|
-| vitepress | VitePress 文档站点开发技能，包含站点配置、主题自定义、内容创作、搜索、部署等完整指南 | [.opencode/skills/vitepress/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.opencode/skills/vitepress) |
+| vitepress-dev-skill | VitePress 文档站点开发技能，包含站点配置、主题自定义、内容创作、搜索、部署等完整指南，使用 pnpm 作为包管理器 | [.opencode/skills/vitepress-dev-skill/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.opencode/skills/vitepress-dev-skill) |
 
 #### 2. 全局通用 Skill
 

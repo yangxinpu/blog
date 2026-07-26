@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { gsap } from 'gsap';
+import { loadingStateRef } from '../composables/useLoadingState';
 
 interface Particle {
   x: number;
@@ -249,7 +250,7 @@ function initParticles(rawParticles: Particle[]) {
     tx: offsetX + p.tx * scale,
     ty: offsetY + p.ty * scale,
     wanderRadius: p.wanderRadius * scale,
-    a: isReducedMotion.value ? p.ta : 0,
+    a: 0,
   }));
 }
 
@@ -367,7 +368,29 @@ onMounted(async () => {
   if (particles.length === 0) return;
 
   animate();
-  startEntranceAnimation();
+
+  if (isReducedMotion.value) {
+    particles.forEach((p) => {
+      p.x = p.tx;
+      p.y = p.ty;
+      p.a = p.ta;
+    });
+  }
+
+  watch(
+    () => loadingStateRef.isPageReady,
+    (isReady) => {
+      if (isReady && !isReducedMotion.value) {
+        startEntranceAnimation();
+      }
+    }
+  );
+
+  setTimeout(() => {
+    if (!loadingStateRef.isPageReady && !isReducedMotion.value) {
+      startEntranceAnimation();
+    }
+  }, 3500);
 
   window.addEventListener('resize', handleResize);
 });
