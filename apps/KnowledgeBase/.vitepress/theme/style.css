@@ -81,6 +81,41 @@
   border-radius: 8px;
 }
 
+/* 侧边栏图标样式 */
+.VPSidebarItem.level-0 H2.text .sidebar-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 10px !important;
+  flex-shrink: 0 !important;
+  vertical-align: middle !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+.VPSidebarItem.level-0 H2.text .sidebar-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.VPSidebarItem.level-0 H2.text .sidebar-icon:hover {
+  filter: none !important;
+  -webkit-filter: none !important;
+  transform: none !important;
+}
+
+/* 侧边栏标题字体大小和左侧间距 */
+.VPSidebarItem.level-0 .text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+  padding-left: 8px;
+}
+
 /* 导航栏悬停效果 */
 .VPNavBarMenuLink:hover {
   color: var(--vp-c-brand-1);

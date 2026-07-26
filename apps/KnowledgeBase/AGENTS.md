@@ -1,6 +1,6 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.1.2
+> **文档版本**: v1.2.0
 > **最后更新**: 2026-07-26
 
 ## 版本管理规则
@@ -40,17 +40,16 @@ KnowledgeBase/
 │   │   │   └── LogoAnimation.vue    # 首页粒子 Logo 动画组件（Canvas + GSAP）
 │   │   ├── index.ts         # 主题入口文件（注册组件 + Layout 插槽）
 │   │   └── style.css        # 全局自定义样式（仅暗色模式）
-│   └── config.mts           # VitePress 主配置文件
-├── docs/                    # 文档内容目录（srcDir）
-│   ├── zh/                  # 中文文档
-│   │   ├── 前端/            # 前端（JavaScript / React / Vue）
-│   │   ├── 后端/            # 后端（待补充）
-│   │   ├── 运维/            # 运维（待补充）
-│   │   ├── AI/              # AI（待补充）
-│   │   ├── 产品/            # 产品（待补充）
-│   │   ├── Python/          # Python（待补充）
-│   │   ├── 其他/            # 其他（计算机网络 / Git / 书籍 / 算法）
-│   │   └── index.md         # 中文首页
+│   ├── docs/                    # 文档内容目录（srcDir）
+  │   ├── zh/                  # 中文文档
+  │   │   ├── 前端/            # 前端（JavaScript / React / Vue / Vite / Webpack / 性能优化）
+  │   │   ├── 后端/            # 后端（Node.js / 数据库 / Bun）
+  │   │   ├── 运维/            # 运维（Docker / Linux / Nginx / 服务器工具）
+  │   │   ├── AI/              # AI（Harness工程 / 上下文工程 / MCP / RAG / 大模型 / Ollama / Opencode）
+  │   │   ├── 产品/            # 产品
+  │   │   ├── Python/          # Python
+  │   │   ├── 其他/            # 其他（计算机网络 / Git / 算法 / 书籍）
+  │   │   └── index.md         # 中文首页
 │   └── en/                  # 英文文档（结构与中文一致）
 │       └── index.md         # 英文首页
 ├── assets/                  # 静态资源（Vite publicDir）
@@ -77,28 +76,42 @@ KnowledgeBase/
 - **JavaScript**: JS 基础、JS 提高、BOM、DOM、DOM 事件、内置对象、函数 & 面向对象、前后端通信、Web API
 - **React**: React 基础、React 提高、React 原理
 - **Vue**: Vue 基础、Vue3 基础、Vue3 提高
+- **Vite**: Vite 基础、Vite 进阶
+- **Webpack**: Webpack 基础、Webpack 进阶
+- **性能优化**: 前端性能、打包优化
 
 #### 2. 后端
-- 后端开发技术学习笔记（待补充）
+- **Node.js**: Node 基础、Express、Koa
+- **数据库**: MySQL、MongoDB、Redis
+- **Bun**: Bun 基础
 
 #### 3. 运维
-- 运维相关学习笔记（待补充）
+- **Docker**: Docker 基础、Docker Compose
+- **Linux**: Linux 基础、Shell 脚本
+- **Nginx**: Nginx 基础、Nginx 配置
+- **服务器工具**: Git Hooks、CI/CD
 
 #### 4. AI
-- 人工智能相关学习笔记（待补充）
+- **Harness工程**: Harness 基础
+- **上下文工程**: Prompt 工程
+- **MCP**: MCP 基础
+- **RAG**: RAG 基础
+- **大模型**: LLM 基础
+- **Ollama**: Ollama 基础
+- **Opencode**: Opencode 基础
 
 #### 5. 产品
-- 产品相关学习笔记（待补充）
+- **产品**: 产品设计、产品方法论
 
 #### 6. Python
-- Python 编程语言学习笔记（待补充）
+- **Python**: Python 基础、Python 进阶、Python 框架
 
 #### 7. 其他
-聚合计算机网络、Git、书籍、算法等模块：
+聚合计算机网络、Git、算法、书籍等模块：
 - **计算机网络** - 计算机网络基础知识（待补充）
 - **Git** - Git 版本控制学习笔记（待补充）
-- **书籍** - 技术书籍阅读笔记（待补充）
 - **算法** - 算法学习笔记（待补充）
+- **书籍** - 技术书籍阅读笔记（待补充）
 
 ### 多语言支持
 
