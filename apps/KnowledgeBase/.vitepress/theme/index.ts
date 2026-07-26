@@ -9,6 +9,7 @@ import SidebarIcons from './components/SidebarIcons.vue';
 import SchemaOrg from './components/SchemaOrg.vue';
 import HeadSeo from './components/HeadSeo.vue';
 import NotFound from './components/NotFound.vue';
+import PageStateCache from './components/PageStateCache.vue';
 
 function CustomLayout() {
   const { page } = useData();
@@ -22,6 +23,7 @@ function CustomLayout() {
   return h(Fragment, null, [
     h(LoadingOverlay),
     h(SidebarIcons),
+    h(PageStateCache),
     h(SchemaOrg),
     h(DefaultTheme.Layout, null, {
       'home-hero-image': () => h(LogoAnimation),

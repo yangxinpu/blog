@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { useRouter } from 'vitepress';
+import { useRouter, useRoute } from 'vitepress';
 import { useLoadingState } from '../composables/useLoadingState';
 
 const router = useRouter();
+const route = useRoute();
 const { setLoading, markPageReady, isLoading, resetForNavigation } = useLoadingState();
 
 const brandText = 'NAILUO';
@@ -11,8 +12,8 @@ const brandChars = brandText.split('');
 const isVisible = ref(false);
 const isActive = ref(false);
 
-const SHOW_DELAY = 200;
-const MIN_DISPLAY_TIME = 300;
+const SHOW_DELAY = 300;
+const MIN_DISPLAY_TIME = 400;
 const FADE_DURATION = 420;
 
 let showTimer: number | null = null;
@@ -59,13 +60,46 @@ function hideOverlay() {
   }, FADE_DURATION);
 }
 
-function onRouteChangeStart() {
+function getLoadedPages(): Set<string> {
+  try {
+    const stored = sessionStorage.getItem('kb_loaded_pages');
+    return stored ? new Set(JSON.parse(stored)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function markPageAsLoaded(path: string) {
+  try {
+    const loadedPages = getLoadedPages();
+    loadedPages.add(path);
+    sessionStorage.setItem('kb_loaded_pages', JSON.stringify([...loadedPages]));
+  } catch (e) {
+    console.warn('[LoadingOverlay] Failed to mark page as loaded:', e);
+  }
+}
+
+function hasPageLoaded(path: string): boolean {
+  return getLoadedPages().has(path);
+}
+
+function onRouteChangeStart(targetPath?: string) {
   clearTimers();
   navId++;
   currentNavId = navId;
   loadingStartTime = Date.now();
   resetForNavigation();
   setLoading(true);
+
+  const path = targetPath || window.location.pathname;
+  const categoryPath = getCategoryPath(path);
+
+  console.log('[LoadingOverlay] Route change to:', path, 'category:', categoryPath);
+
+  if (hasPageLoaded(categoryPath)) {
+    console.log('[LoadingOverlay] Page already loaded, skipping animation:', categoryPath);
+    return;
+  }
 
   showTimer = window.setTimeout(() => {
     showTimer = null;
@@ -78,10 +112,31 @@ function onRouteChangeStart() {
   }, SHOW_DELAY);
 }
 
+function getCategoryPath(path: string): string {
+  if (!path || path === '/') {
+    return path;
+  }
+  
+  const normalizedPath = path.startsWith('/') ? path : '/' + path;
+  const parts = normalizedPath.split('/').filter(p => p && p !== '_clear');
+  
+  if (parts.length >= 2) {
+    return `/${parts[0]}/${parts[1]}/`;
+  }
+  
+  if (parts.length === 1) {
+    return `/${parts[0]}/`;
+  }
+  
+  return path;
+}
+
 function onRouteChangeEnd() {
   if (navId !== currentNavId) return;
 
   const elapsed = Date.now() - loadingStartTime;
+  const categoryPath = getCategoryPath(window.location.pathname);
+  markPageAsLoaded(categoryPath);
 
   if (showTimer !== null) {
     window.clearTimeout(showTimer);
@@ -108,20 +163,52 @@ function onRouteChangeEnd() {
 }
 
 onMounted(() => {
-  onRouteChangeStart();
+  clearTimers();
+  navId++;
+  currentNavId = navId;
+  loadingStartTime = Date.now();
+  resetForNavigation();
+  setLoading(true);
+
+  console.log('[LoadingOverlay] First load, showing animation');
+
+  showTimer = window.setTimeout(() => {
+    showTimer = null;
+    if (navId !== currentNavId) return;
+    console.log('[LoadingOverlay] Showing overlay');
+    showOverlay();
+
+    minDisplayTimer = window.setTimeout(() => {
+      minDisplayTimer = null;
+    }, MIN_DISPLAY_TIME);
+  }, SHOW_DELAY);
 
   safetyTimer = window.setTimeout(() => {
     safetyTimer = null;
     if (!isLoading()) return;
+    console.log('[LoadingOverlay] Safety timer triggered');
     onRouteChangeEnd();
   }, 3000);
 
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'complete') {
+      console.log('[LoadingOverlay] Document already complete');
+      setTimeout(() => onRouteChangeEnd(), 500);
+    } else {
+      window.addEventListener('load', () => {
+        console.log('[LoadingOverlay] Window load event');
+        onRouteChangeEnd();
+      }, { once: true });
+    }
+  }
+
   router.onBeforeRouteChange = async (to) => {
-    onRouteChangeStart();
+    onRouteChangeStart(to);
     return true;
   };
 
   router.onAfterPageLoad = async (to) => {
+    console.log('[LoadingOverlay] onAfterPageLoad:', to);
     onRouteChangeEnd();
   };
 });

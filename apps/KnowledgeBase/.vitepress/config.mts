@@ -83,7 +83,7 @@ export default defineConfig({
             {
               text: 'JavaScript',
               icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg',
-              collapsed: false,
+              collapsed: true,
               items: [
                 { text: 'JS 基础', link: '/zh/前端/JavaScript/JS基础' },
                 { text: 'JS 提高', link: '/zh/前端/JavaScript/JS提高' },
@@ -335,7 +335,7 @@ export default defineConfig({
             {
               text: 'JavaScript',
               icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg',
-              collapsed: false,
+              collapsed: true,
               items: [
                 { text: 'JS Basics', link: '/en/前端/JavaScript/JS基础' },
                 { text: 'JS Advanced', link: '/en/前端/JavaScript/JS提高' },
