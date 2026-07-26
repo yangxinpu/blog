@@ -406,29 +406,21 @@ onMounted(async () => {
       p.y = p.ty;
       p.a = p.ta;
     });
+  } else {
+    setTimeout(() => {
+      startEntranceAnimation();
+    }, 800);
   }
-
-  watch(
-    () => loadingStateRef.isPageReady,
-    (isReady) => {
-      if (isReady && !isReducedMotion.value) {
-        startEntranceAnimation();
-      }
-    }
-  );
 
   watch(
     () => route.path,
     () => {
-      reinitAndAnimate();
+      const delay = loadingStateRef.isLoading ? 500 : 200;
+      setTimeout(() => {
+        reinitAndAnimate();
+      }, delay);
     }
   );
-
-  setTimeout(() => {
-    if (!loadingStateRef.isPageReady && !isReducedMotion.value) {
-      startEntranceAnimation();
-    }
-  }, 3500);
 
   window.addEventListener('resize', handleResize);
 });

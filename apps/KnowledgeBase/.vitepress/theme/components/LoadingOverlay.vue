@@ -11,8 +11,8 @@ const brandChars = brandText.split('');
 const isVisible = ref(false);
 const isActive = ref(false);
 
-const SHOW_DELAY = 0;
-const MIN_DISPLAY_TIME = 400;
+const SHOW_DELAY = 200;
+const MIN_DISPLAY_TIME = 300;
 const FADE_DURATION = 420;
 
 let showTimer: number | null = null;
