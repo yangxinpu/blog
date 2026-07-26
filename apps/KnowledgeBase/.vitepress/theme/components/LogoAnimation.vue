@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { gsap } from 'gsap';
+import { useRoute } from 'vitepress';
 import { loadingStateRef } from '../composables/useLoadingState';
 
 interface Particle {
@@ -24,9 +25,11 @@ interface Particle {
   wanderRadius: number;
 }
 
+const route = useRoute();
 const container = ref<HTMLElement | null>(null);
 const canvas = ref<HTMLCanvasElement | null>(null);
 const isReducedMotion = ref(false);
+const rawParticlesCache = ref<Particle[]>([]);
 
 let ctx: CanvasRenderingContext2D | null = null;
 let particles: Particle[] = [];
@@ -303,10 +306,12 @@ function animate() {
 }
 
 function startEntranceAnimation() {
-  if (isReducedMotion.value || particles.length === 0) return;
+  if (isReducedMotion.value || particles.length === 0 || !canvas.value) return;
 
   const avgX = particles.reduce((s, p) => s + p.tx, 0) / particles.length;
   const avgY = particles.reduce((s, p) => s + p.ty, 0) / particles.length;
+  const width = canvas.value.width;
+  const height = canvas.value.height;
 
   particleCtx = gsap.context(() => {
     particles.forEach((p) => {
@@ -315,8 +320,8 @@ function startEntranceAnimation() {
         Math.pow(p.ty - avgY, 2)
       );
       const maxDist = Math.sqrt(
-        Math.pow(canvas.value!.width / 2, 2) +
-        Math.pow(canvas.value!.height / 2, 2)
+        Math.pow(width / 2, 2) +
+        Math.pow(height / 2, 2)
       );
       const delay = (dist / maxDist) * 0.9;
 
@@ -351,6 +356,31 @@ function handleResize() {
   canvas.value.height = rect.height;
 }
 
+function reinitAndAnimate() {
+  if (!canvas.value || !container.value || rawParticlesCache.value.length === 0) return;
+  
+  particleCtx?.revert();
+  
+  handleResize();
+  initParticles(rawParticlesCache.value);
+  
+  if (particles.length === 0) return;
+  
+  if (!animationId) {
+    animate();
+  }
+  
+  if (!isReducedMotion.value) {
+    startEntranceAnimation();
+  } else {
+    particles.forEach((p) => {
+      p.x = p.tx;
+      p.y = p.ty;
+      p.a = p.ta;
+    });
+  }
+}
+
 onMounted(async () => {
   if (!canvas.value || !container.value) return;
 
@@ -363,6 +393,7 @@ onMounted(async () => {
   handleResize();
 
   const rawParticles = await extractLogoShape();
+  rawParticlesCache.value = rawParticles;
   initParticles(rawParticles);
 
   if (particles.length === 0) return;
@@ -383,6 +414,13 @@ onMounted(async () => {
       if (isReady && !isReducedMotion.value) {
         startEntranceAnimation();
       }
+    }
+  );
+
+  watch(
+    () => route.path,
+    () => {
+      reinitAndAnimate();
     }
   );
 

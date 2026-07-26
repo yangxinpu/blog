@@ -4,7 +4,7 @@ import { useRouter } from 'vitepress';
 import { useLoadingState } from '../composables/useLoadingState';
 
 const router = useRouter();
-const { setLoading, markPageReady, isLoading } = useLoadingState();
+const { setLoading, markPageReady, isLoading, resetForNavigation } = useLoadingState();
 
 const brandText = 'NAILUO';
 const brandChars = brandText.split('');
@@ -64,6 +64,7 @@ function onRouteChangeStart() {
   navId++;
   currentNavId = navId;
   loadingStartTime = Date.now();
+  resetForNavigation();
   setLoading(true);
 
   showTimer = window.setTimeout(() => {
