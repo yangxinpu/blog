@@ -5,10 +5,50 @@
     <link>https://nailuo.com/en/</link>
     <description>Frontend Tech Knowledge Base - JavaScript, React, Vue, Node.js, Performance Optimization</description>
     <language>en-US</language>
-    <pubDate>Mon, 27 Jul 2026 10:20:18 GMT</pubDate>
-    <lastBuildDate>Mon, 27 Jul 2026 10:20:18 GMT</lastBuildDate>
+    <pubDate>Mon, 27 Jul 2026 15:28:51 GMT</pubDate>
+    <lastBuildDate>Mon, 27 Jul 2026 15:28:51 GMT</lastBuildDate>
     <atom:link href="https://nailuo.com/en/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>Performance Testing</title>
+      <link>https://nailuo.com/en/测试/性能测试</link>
+      <description><![CDATA[Performance testing validates system behavior under various load conditions.]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:26:07 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/en/测试/性能测试</guid>
+    </item>
+  
+
+    <item>
+      <title>End-to-End Testing</title>
+      <link>https://nailuo.com/en/测试/端到端测试</link>
+      <description><![CDATA[End-to-End (E2E) testing verifies complete user workflows from start to finish.]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:26:05 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/en/测试/端到端测试</guid>
+    </item>
+  
+
+    <item>
+      <title>Integration Testing</title>
+      <link>https://nailuo.com/en/测试/集成测试</link>
+      <description><![CDATA[Integration testing verifies that different modules work correctly when combined together.]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:26:03 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/en/测试/集成测试</guid>
+    </item>
+  
+
+    <item>
+      <title>Unit Testing</title>
+      <link>https://nailuo.com/en/测试/单元测试</link>
+      <description><![CDATA[Unit testing is a software testing method where individual units of source code are tested to ensure they work correctly.]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:26:01 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/en/测试/单元测试</guid>
+    </item>
+  
+
     <item>
       <title>View only Anthropic provider's model list</title>
       <link>https://nailuo.com/en/AI/Opencode/Opencode基础</link>

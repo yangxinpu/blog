@@ -21,11 +21,29 @@
   
 
     <url>
+      <loc>https://nailuo.com/zh/AI/Ollama/</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/AI/Ollama/"/>
+    </url>
+  
+
+    <url>
       <loc>https://nailuo.com/zh/AI/Ollama/Ollama基础</loc>
       <lastmod>2026-07-27</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/AI/Ollama/Ollama基础"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/AI/Opencode/</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/AI/Opencode/"/>
     </url>
   
 
@@ -251,6 +269,51 @@
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/后端/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/测试/</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/测试/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/测试/单元测试</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/测试/单元测试"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/测试/性能测试</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/测试/性能测试"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/测试/端到端测试</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/测试/端到端测试"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/测试/集成测试</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/测试/集成测试"/>
     </url>
   
 

@@ -5,10 +5,50 @@
     <link>https://nailuo.com/zh/</link>
     <description>前端技术知识库 - JavaScript、React、Vue、Node.js、性能优化等技术学习笔记</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 27 Jul 2026 10:20:18 GMT</pubDate>
-    <lastBuildDate>Mon, 27 Jul 2026 10:20:18 GMT</lastBuildDate>
+    <pubDate>Mon, 27 Jul 2026 15:28:51 GMT</pubDate>
+    <lastBuildDate>Mon, 27 Jul 2026 15:28:51 GMT</lastBuildDate>
     <atom:link href="https://nailuo.com/zh/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>性能测试</title>
+      <link>https://nailuo.com/zh/测试/性能测试</link>
+      <description><![CDATA[性能测试是验证系统在特定负载下响应时间、吞吐量、资源利用率等指标的测试方法。]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:25:50 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/测试/性能测试</guid>
+    </item>
+  
+
+    <item>
+      <title>端到端测试</title>
+      <link>https://nailuo.com/zh/测试/端到端测试</link>
+      <description><![CDATA[端到端（E2E）测试是从用户角度验证完整业务流程的测试方法。]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:25:47 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/测试/端到端测试</guid>
+    </item>
+  
+
+    <item>
+      <title>集成测试</title>
+      <link>https://nailuo.com/zh/测试/集成测试</link>
+      <description><![CDATA[集成测试是验证多个模块协作是否正确的测试方法。]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:25:45 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/测试/集成测试</guid>
+    </item>
+  
+
+    <item>
+      <title>单元测试</title>
+      <link>https://nailuo.com/zh/测试/单元测试</link>
+      <description><![CDATA[单元测试是对程序中最小可测试单元（函数、方法等）进行验证的测试方法。]]></description>
+      <pubDate>Mon, 27 Jul 2026 15:25:44 GMT</pubDate>
+      <category>测试</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/测试/单元测试</guid>
+    </item>
+  
+
     <item>
       <title>示例输出</title>
       <link>https://nailuo.com/zh/AI/Ollama/Ollama基础</link>

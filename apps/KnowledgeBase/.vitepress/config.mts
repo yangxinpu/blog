@@ -71,6 +71,7 @@ export default defineConfig({
           { text: '首页', link: '/zh/' },
           { text: '前端', link: '/zh/前端/', activeMatch: '^/zh/前端' },
           { text: '后端', link: '/zh/后端/', activeMatch: '^/zh/后端' },
+          { text: '测试', link: '/zh/测试/', activeMatch: '^/zh/测试' },
           { text: '运维', link: '/zh/运维/', activeMatch: '^/zh/运维' },
           { text: 'AI', link: '/zh/AI/', activeMatch: '^/zh/AI' },
           { text: '产品', link: '/zh/产品/', activeMatch: '^/zh/产品' },
@@ -174,6 +175,19 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: 'Bun 基础', link: '/zh/后端/Bun/Bun基础' },
+              ],
+            },
+          ],
+          '/zh/测试/': [
+            {
+              text: '测试',
+              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vitest.svg',
+              collapsed: true,
+              items: [
+                { text: '单元测试', link: '/zh/测试/单元测试' },
+                { text: '集成测试', link: '/zh/测试/集成测试' },
+                { text: '端到端测试', link: '/zh/测试/端到端测试' },
+                { text: '性能测试', link: '/zh/测试/性能测试' },
               ],
             },
           ],
@@ -348,6 +362,7 @@ export default defineConfig({
           { text: 'Home', link: '/en/' },
           { text: 'Frontend', link: '/en/前端/', activeMatch: '^/en/前端' },
           { text: 'Backend', link: '/en/后端/', activeMatch: '^/en/后端' },
+          { text: 'Testing', link: '/en/测试/', activeMatch: '^/en/测试' },
           { text: 'DevOps', link: '/en/运维/', activeMatch: '^/en/运维' },
           { text: 'AI', link: '/en/AI/', activeMatch: '^/en/AI' },
           { text: 'Product', link: '/en/产品/', activeMatch: '^/en/产品' },
@@ -454,6 +469,19 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: 'Bun Basics', link: '/en/后端/Bun/Bun基础' },
+              ],
+            },
+          ],
+          '/en/测试/': [
+            {
+              text: 'Testing',
+              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vitest.svg',
+              collapsed: true,
+              items: [
+                { text: 'Unit Testing', link: '/en/测试/单元测试' },
+                { text: 'Integration Testing', link: '/en/测试/集成测试' },
+                { text: 'E2E Testing', link: '/en/测试/端到端测试' },
+                { text: 'Performance Testing', link: '/en/测试/性能测试' },
               ],
             },
           ],

@@ -10,6 +10,7 @@ import SchemaOrg from './components/SchemaOrg.vue';
 import HeadSeo from './components/HeadSeo.vue';
 import NotFound from './components/NotFound.vue';
 import PageStateCache from './components/PageStateCache.vue';
+import HeroStats from './components/HeroStats.vue';
 
 function CustomLayout() {
   const { page } = useData();
@@ -27,6 +28,7 @@ function CustomLayout() {
     h(SchemaOrg),
     h(DefaultTheme.Layout, null, {
       'home-hero-image': () => h(LogoAnimation),
+      'home-hero-info-after': () => h(HeroStats),
     }),
   ]);
 }

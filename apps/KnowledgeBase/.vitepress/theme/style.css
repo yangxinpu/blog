@@ -29,7 +29,68 @@ body {
 }
 
 .VPFeature {
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 60px rgba(25, 250, 198, 0.1);
+}
+
+.VPFeature .VPFeature-title {
+  background: linear-gradient(120deg, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.VPFeature .VPFeature-icon {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.VPFeature:hover .VPFeature-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.VPFeature .VPFeature-details {
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+.VPHero .tagline {
+  background: linear-gradient(90deg, rgba(25, 250, 198, 0.8), rgba(0, 213, 196, 0.6));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.VPHero .actions .VPButton {
+  position: relative;
+  overflow: hidden;
+}
+
+.VPHero .actions .VPButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.VPHero .actions .VPButton:hover::before {
+  left: 100%;
+}
+
+.VPFeatures {
+  gap: 1.5rem;
 }
 
 .vp-code-group .tabs label {

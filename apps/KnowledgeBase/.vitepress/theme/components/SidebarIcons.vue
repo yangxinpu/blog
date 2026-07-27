@@ -41,6 +41,16 @@ const iconSlugs: Record<string, string> = {
   'Nginx': 'nginx',
   '服务器工具': 'tmux',
   'Server Tools': 'tmux',
+  '测试': 'vitest',
+  'Testing': 'vitest',
+  '单元测试': 'vitest',
+  'Unit Testing': 'vitest',
+  '集成测试': 'vitest',
+  'Integration Testing': 'vitest',
+  '端到端测试': 'cypress',
+  'E2E Testing': 'cypress',
+  '性能测试': 'k6',
+  'Performance Testing': 'k6',
 }
 
 const iconPaths: Record<string, string> = {
@@ -93,6 +103,16 @@ const iconColors: Record<string, string> = {
   'Nginx': '#009639',
   '服务器工具': '#1BB954',
   'Server Tools': '#1BB954',
+  '测试': '#10B981',
+  'Testing': '#10B981',
+  '单元测试': '#10B981',
+  'Unit Testing': '#10B981',
+  '集成测试': '#10B981',
+  'Integration Testing': '#10B981',
+  '端到端测试': '#69D3A7',
+  'E2E Testing': '#69D3A7',
+  '性能测试': '#FF4447',
+  'Performance Testing': '#FF4447',
 }
 
 const cachedSvgs: Record<string, string> = {}
