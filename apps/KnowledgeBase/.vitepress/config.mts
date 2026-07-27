@@ -288,10 +288,34 @@ export default defineConfig({
             },
           ],
           '/zh/其他/': [
-            { text: '计算机网络', link: '/zh/其他/计算机网络/' },
-            { text: 'Git', link: '/zh/其他/Git/' },
-            { text: '算法', link: '/zh/其他/算法/' },
-            { text: '书籍', link: '/zh/其他/书籍/' },
+            {
+              text: '计算机网络',
+              collapsed: true,
+              items: [
+                { text: '计算机网络', link: '/zh/其他/计算机网络/' },
+              ],
+            },
+            {
+              text: 'Git',
+              collapsed: true,
+              items: [
+                { text: 'Git', link: '/zh/其他/Git/' },
+              ],
+            },
+            {
+              text: '算法',
+              collapsed: true,
+              items: [
+                { text: '算法', link: '/zh/其他/算法/' },
+              ],
+            },
+            {
+              text: '书籍',
+              collapsed: true,
+              items: [
+                { text: '书籍', link: '/zh/其他/书籍/' },
+              ],
+            },
           ],
         },
         docFooter: {
@@ -543,10 +567,34 @@ export default defineConfig({
             },
           ],
           '/en/其他/': [
-            { text: 'Network', link: '/en/其他/计算机网络/' },
-            { text: 'Git', link: '/en/其他/Git/' },
-            { text: 'Algorithm', link: '/en/其他/算法/' },
-            { text: 'Books', link: '/en/其他/书籍/' },
+            {
+              text: 'Network',
+              collapsed: true,
+              items: [
+                { text: 'Network', link: '/en/其他/计算机网络/' },
+              ],
+            },
+            {
+              text: 'Git',
+              collapsed: true,
+              items: [
+                { text: 'Git', link: '/en/其他/Git/' },
+              ],
+            },
+            {
+              text: 'Algorithm',
+              collapsed: true,
+              items: [
+                { text: 'Algorithm', link: '/en/其他/算法/' },
+              ],
+            },
+            {
+              text: 'Books',
+              collapsed: true,
+              items: [
+                { text: 'Books', link: '/en/其他/书籍/' },
+              ],
+            },
           ],
         },
         docFooter: {

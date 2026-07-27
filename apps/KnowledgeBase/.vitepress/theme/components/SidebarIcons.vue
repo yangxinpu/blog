@@ -5,6 +5,26 @@ import { useRouter } from 'vitepress'
 const router = useRouter()
 
 const iconSlugs: Record<string, string> = {
+  'AI': 'anthropic',
+  '人工智能': 'anthropic',
+  '上下文工程': 'arxiv',
+  'Context Engineering': 'arxiv',
+  'MCP': 'modelcontextprotocol',
+  'Ollama': 'ollama',
+  'Opencode': 'opencode',
+  'OpenCode': 'opencode',
+  '产品': 'producthunt',
+  'Product': 'producthunt',
+  'Python': 'python',
+  '其他': 'mozilla',
+  'Other': 'mozilla',
+  '计算机网络': 'cloudflare',
+  'Computer Network': 'cloudflare',
+  'Git': 'git',
+  '算法': 'cplusplus',
+  'Algorithm': 'cplusplus',
+  '书籍': 'bookstack',
+  'Books': 'bookstack',
   'JavaScript': 'javascript',
   'React': 'react',
   'Vue': 'vuedotjs',
@@ -23,7 +43,40 @@ const iconSlugs: Record<string, string> = {
   'Server Tools': 'tmux',
 }
 
+const iconPaths: Record<string, string> = {
+  'Harness工程': '/icons/harness.svg',
+  'Harness': '/icons/harness.svg',
+  'RAG': '/icons/rag.svg',
+  '大模型': '/icons/gpt.svg',
+  'LLM': '/icons/gpt.svg',
+}
+
 const iconColors: Record<string, string> = {
+  'AI': '#41295A',
+  '人工智能': '#41295A',
+  'Harness工程': '#35A6E6',
+  'Harness': '#35A6E6',
+  '上下文工程': '#B31B1B',
+  'Context Engineering': '#B31B1B',
+  'MCP': '#FFFFFF',
+  'RAG': '#7C3AED',
+  '大模型': '#FFFFFF',
+  'LLM': '#FFFFFF',
+  'Ollama': '#FFFFFF',
+  'Opencode': '#FFFFFF',
+  'OpenCode': '#FFFFFF',
+  '产品': '#DA552F',
+  'Product': '#DA552F',
+  'Python': '#3776AB',
+  '其他': '#202020',
+  'Other': '#202020',
+  '计算机网络': '#F38020',
+  'Computer Network': '#F38020',
+  'Git': '#F05032',
+  '算法': '#00599C',
+  'Algorithm': '#00599C',
+  '书籍': '#3A6DB5',
+  'Books': '#3A6DB5',
   'JavaScript': '#F7DF1E',
   'React': '#61DAFB',
   'Vue': '#42B883',
@@ -44,19 +97,25 @@ const iconColors: Record<string, string> = {
 
 const cachedSvgs: Record<string, string> = {}
 
-async function fetchIcon(slug: string): Promise<string> {
-  if (cachedSvgs[slug]) {
-    return cachedSvgs[slug]
+async function fetchIcon(slugOrPath: string): Promise<string> {
+  if (cachedSvgs[slugOrPath]) {
+    return cachedSvgs[slugOrPath]
   }
   try {
-    const response = await fetch(`https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${slug}.svg`)
+    let url: string
+    if (slugOrPath.startsWith('/')) {
+      url = slugOrPath
+    } else {
+      url = `https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${slugOrPath}.svg`
+    }
+    const response = await fetch(url)
     if (response.ok) {
       const svgText = await response.text()
-      cachedSvgs[slug] = svgText
+      cachedSvgs[slugOrPath] = svgText
       return svgText
     }
   } catch (error) {
-    console.error(`Failed to fetch icon ${slug}:`, error)
+    console.error(`Failed to fetch icon ${slugOrPath}:`, error)
   }
   return ''
 }
@@ -65,12 +124,14 @@ async function addIcons() {
   const sidebarTitles = document.querySelectorAll('.VPSidebarItem.level-0 H2.text')
   for (const title of sidebarTitles) {
     const text = title.textContent?.trim() || ''
-    const slug = iconSlugs[text]
+    const iconPath = iconPaths[text]
+    const iconSlug = iconSlugs[text]
     const color = iconColors[text]
-    if (slug && color) {
+    const identifier = iconPath || iconSlug
+    if (identifier && color) {
       const existingIcon = title.querySelector('.sidebar-icon')
       if (!existingIcon) {
-        const svgHtml = await fetchIcon(slug)
+        const svgHtml = await fetchIcon(identifier)
         if (svgHtml) {
           const wrapper = document.createElement('span')
           wrapper.className = 'sidebar-icon'
