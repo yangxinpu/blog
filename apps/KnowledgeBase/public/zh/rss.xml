@@ -5,10 +5,30 @@
     <link>https://nailuo.com/zh/</link>
     <description>前端技术知识库 - JavaScript、React、Vue、Node.js、性能优化等技术学习笔记</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 26 Jul 2026 14:01:31 GMT</pubDate>
-    <lastBuildDate>Sun, 26 Jul 2026 14:01:31 GMT</lastBuildDate>
+    <pubDate>Mon, 27 Jul 2026 10:20:18 GMT</pubDate>
+    <lastBuildDate>Mon, 27 Jul 2026 10:20:18 GMT</lastBuildDate>
     <atom:link href="https://nailuo.com/zh/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>示例输出</title>
+      <link>https://nailuo.com/zh/AI/Ollama/Ollama基础</link>
+      <description><![CDATA[Ollama 是一个用于本地部署大语言模型（LLM）的工具，它将模型下载、管理、推理、API 服务全部封装好，让开发者可以像使用 Docker 一样简单地本地运行 AI 模型；]]></description>
+      <pubDate>Mon, 27 Jul 2026 10:07:33 GMT</pubDate>
+      <category>AI > Ollama</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/AI/Ollama/Ollama基础</guid>
+    </item>
+  
+
+    <item>
+      <title>仅查看 Anthropic 提供商的模型列表</title>
+      <link>https://nailuo.com/zh/AI/Opencode/Opencode基础</link>
+      <description><![CDATA[Opencode是一个开源 AI Coding Agent（AI 编程代理），定位类似于 Claude Code 的开源替代品。它可以调用各种大语言模型，让 AI 帮你完成整个开发流程；]]></description>
+      <pubDate>Mon, 27 Jul 2026 10:07:33 GMT</pubDate>
+      <category>AI > Opencode</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/AI/Opencode/Opencode基础</guid>
+    </item>
+  
+
     <item>
       <title>React基础</title>
       <link>https://nailuo.com/zh/前端/React/React基础</link>

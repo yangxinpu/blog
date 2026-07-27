@@ -4,7 +4,7 @@
   
     <url>
       <loc>https://nailuo.com/zh/</loc>
-      <lastmod>2026-07-26</lastmod>
+      <lastmod>2026-07-27</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/"/>
@@ -13,10 +13,28 @@
 
     <url>
       <loc>https://nailuo.com/zh/AI/</loc>
-      <lastmod>2026-07-25</lastmod>
+      <lastmod>2026-07-27</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/AI/"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/AI/Ollama/Ollama基础</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/AI/Ollama/Ollama基础"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/AI/Opencode/Opencode基础</loc>
+      <lastmod>2026-07-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/AI/Opencode/Opencode基础"/>
     </url>
   
 
