@@ -69,13 +69,13 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '首页', link: '/zh/' },
-          { text: '前端', link: '/zh/前端/' },
-          { text: '后端', link: '/zh/后端/' },
-          { text: '运维', link: '/zh/运维/' },
-          { text: 'AI', link: '/zh/AI/' },
-          { text: '产品', link: '/zh/产品/' },
-          { text: 'Python', link: '/zh/Python/' },
-          { text: '其他', link: '/zh/其他/' },
+          { text: '前端', link: '/zh/前端/', activeMatch: '^/zh/前端' },
+          { text: '后端', link: '/zh/后端/', activeMatch: '^/zh/后端' },
+          { text: '运维', link: '/zh/运维/', activeMatch: '^/zh/运维' },
+          { text: 'AI', link: '/zh/AI/', activeMatch: '^/zh/AI' },
+          { text: '产品', link: '/zh/产品/', activeMatch: '^/zh/产品' },
+          { text: 'Python', link: '/zh/Python/', activeMatch: '^/zh/Python' },
+          { text: '其他', link: '/zh/其他/', activeMatch: '^/zh/其他' },
           { text: '博客', link: blogUrl },
         ],
         sidebar: {
@@ -333,6 +333,7 @@ export default defineConfig({
         returnToTopLabel: '返回顶部',
         sidebarMenuLabel: '菜单',
         outline: {
+          level: [2, 3],
           label: '页面导航',
         },
       },
@@ -345,13 +346,13 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/en/' },
-          { text: 'Frontend', link: '/en/前端/' },
-          { text: 'Backend', link: '/en/后端/' },
-          { text: 'DevOps', link: '/en/运维/' },
-          { text: 'AI', link: '/en/AI/' },
-          { text: 'Product', link: '/en/产品/' },
-          { text: 'Python', link: '/en/Python/' },
-          { text: 'Other', link: '/en/其他/' },
+          { text: 'Frontend', link: '/en/前端/', activeMatch: '^/en/前端' },
+          { text: 'Backend', link: '/en/后端/', activeMatch: '^/en/后端' },
+          { text: 'DevOps', link: '/en/运维/', activeMatch: '^/en/运维' },
+          { text: 'AI', link: '/en/AI/', activeMatch: '^/en/AI' },
+          { text: 'Product', link: '/en/产品/', activeMatch: '^/en/产品' },
+          { text: 'Python', link: '/en/Python/', activeMatch: '^/en/Python' },
+          { text: 'Other', link: '/en/其他/', activeMatch: '^/en/其他' },
           { text: 'Blog', link: blogUrl },
         ],
         sidebar: {
@@ -612,6 +613,7 @@ export default defineConfig({
         returnToTopLabel: 'Return to top',
         sidebarMenuLabel: 'Menu',
         outline: {
+          level: [2, 3],
           label: 'On this page',
         },
       },

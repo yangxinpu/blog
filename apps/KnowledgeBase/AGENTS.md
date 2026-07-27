@@ -1,7 +1,7 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.2.0
-> **最后更新**: 2026-07-26
+> **文档版本**: v1.3.0
+> **最后更新**: 2026-07-27
 
 ## 版本管理规则
 
@@ -358,5 +358,6 @@ pnpm preview
 | Skill 名称 | 说明 | 位置 |
 |-----------|------|------|
 | gsap-skills | GSAP 动画库技能集合，包含 core、timeline、scrolltrigger、react、plugins、frameworks、performance、utils 等子技能 | [.opencode/skills/gsap-skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/gsap-skills) |
+| performance-optimization | 应用性能优化技能，涵盖 Core Web Vitals 指标、测量方法、瓶颈识别、优化流程（测量→识别→修复→验证→守护）及常见反模式修复 | [.opencode/skills/performance-optimization/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/performance-optimization) |
 | impeccable | 高质量前端界面设计技能，规范颜色、排版、布局、动效等设计标准 | [.opencode/skills/impeccable/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/impeccable) |
 | taste-skill | 反模板化前端设计技能，避免 AI 生成的常见设计陷阱 | [.opencode/skills/taste-skill/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills/taste-skill) |
