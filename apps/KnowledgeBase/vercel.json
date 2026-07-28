@@ -5,5 +5,12 @@
   "installCommand": "pnpm install",
   "framework": "vitepress",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/zh/",
+      "permanent": true
+    }
+  ]
 }

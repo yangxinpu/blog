@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 const base = process.env.VITEPRESS_BASE || '/';
 const blogUrl = process.env.VITEPRESS_BLOG_URL || 'http://localhost:3000';
-const siteUrl = process.env.VITEPRESS_SITE_URL || 'https://nailuo.com';
+const kbUrl = process.env.VITEPRESS_KB_URL || 'https://nailuo-knowledge-base.vercel.app';
 
 export default defineConfig({
   title: 'NaiLuo 知识库',
@@ -296,13 +296,20 @@ export default defineConfig({
     `],
     ['script', {}, `
       (function() {
+        var path = window.location.pathname;
+        var query = window.location.search;
+        var hash = window.location.hash;
+        if (path === '/' || path === '') {
+          window.location.replace('/zh/' + query + hash);
+          return;
+        }
+
         if ('scrollRestoration' in history) {
           history.scrollRestoration = 'manual';
         }
         document.documentElement.classList.add('is-loading');
 
-        var path = window.location.pathname;
-        var isHome = path === '/' || path === '/zh/' || path === '/en/' || path === '/zh' || path === '/en';
+        var isHome = path === '/zh/' || path === '/en/' || path === '/zh' || path === '/en';
 
         var homeEl = document.querySelector('#inline-skeleton.sk-home-page');
         var docEl = document.querySelector('#inline-skeleton.sk-doc-page');
@@ -367,7 +374,12 @@ export default defineConfig({
 
   vite: {
     server: {
+      host: '0.0.0.0',
       port: 8080,
+    },
+    preview: {
+      host: '0.0.0.0',
+      port: 8081,
     },
     publicDir: '../assets',
     plugins: [

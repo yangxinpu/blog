@@ -6,7 +6,7 @@ const { page, site } = useData();
 const route = useRoute();
 const schemaRef = ref<HTMLElement | null>(null);
 
-const siteUrl = 'https://nailuo.com';
+const siteUrl = import.meta.env.VITEPRESS_KB_URL || 'https://nailuo-knowledge-base.vercel.app';
 
 const schema = computed(() => {
   const { title, description, lastUpdated, frontmatter, relativePath } = page.value;
