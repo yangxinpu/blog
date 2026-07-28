@@ -6,7 +6,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: instant;
+  scroll-restoration: manual;
+}
+
+html.is-loading body {
+  overflow: hidden !important;
 }
 
 body {

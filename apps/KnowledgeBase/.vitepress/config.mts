@@ -12,6 +12,10 @@ export default defineConfig({
   appearance: 'force-dark',
   lastUpdated: true,
 
+  scrollBehavior: {
+    behavior: 'instant',
+  },
+
   head: [
     ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon_48px.ico' }],
     ['link', { rel: 'icon', type: 'image/x-icon', sizes: '32x32', href: '/favicon_32px.ico' }],
@@ -25,6 +29,47 @@ export default defineConfig({
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml', title: 'NaiLuo 知识库 RSS' }],
+    ['script', {}, `
+      (function() {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        document.documentElement.classList.add('is-loading');
+        
+        var isProgScroll = false;
+        var isLocked = true;
+        
+        function scrollToTop() {
+          isProgScroll = true;
+          window.scrollTo(0, 0);
+          requestAnimationFrame(function() {
+            isProgScroll = false;
+          });
+        }
+        
+        scrollToTop();
+        
+        var scrollHandler = function() {
+          if (!isProgScroll && isLocked) {
+            scrollToTop();
+          }
+        };
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        
+        var releaseLock = function() {
+          isLocked = false;
+          window.removeEventListener('scroll', scrollHandler);
+          document.documentElement.classList.remove('is-loading');
+          scrollToTop();
+        };
+        
+        window.addEventListener('load', function() {
+          setTimeout(releaseLock, 500);
+        }, { once: true });
+        
+        setTimeout(releaseLock, 2000);
+      })();
+    `],
   ],
 
   vite: {

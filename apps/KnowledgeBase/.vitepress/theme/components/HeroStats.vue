@@ -1,12 +1,71 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, onUnmounted, watch, computed, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
 const isZh = ref(true)
 
+const SCROLL_LOCK_DURATION = 0
+
+let isProgrammaticScroll = false
+let lockTimer: ReturnType<typeof setTimeout> | null = null
+let scrollListener: (() => void) | null = null
+let isScrollLocked = false
+
+function programmaticScrollToTop() {
+  isProgrammaticScroll = true
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  requestAnimationFrame(() => {
+    isProgrammaticScroll = false
+  })
+}
+
+function releaseScrollLock() {
+  isScrollLocked = false
+  document.documentElement.classList.remove('is-loading')
+  
+  if (lockTimer !== null) {
+    clearTimeout(lockTimer)
+    lockTimer = null
+  }
+  if (scrollListener !== null) {
+    window.removeEventListener('scroll', scrollListener)
+    scrollListener = null
+  }
+  
+  programmaticScrollToTop()
+}
+
 onMounted(() => {
   isZh.value = route.path.startsWith('/zh/')
+  
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+  }
+  
+  isScrollLocked = true
+  document.documentElement.classList.add('is-loading')
+  
+  scrollListener = () => {
+    if (!isProgrammaticScroll && isScrollLocked) {
+      programmaticScrollToTop()
+    }
+  }
+  window.addEventListener('scroll', scrollListener, { passive: true })
+  
+  programmaticScrollToTop()
+  
+  nextTick(() => {
+    programmaticScrollToTop()
+  })
+  
+  lockTimer = setTimeout(() => {
+    releaseScrollLock()
+  }, SCROLL_LOCK_DURATION)
+})
+
+onUnmounted(() => {
+  releaseScrollLock()
 })
 
 watch(() => route.path, () => {
