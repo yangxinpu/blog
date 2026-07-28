@@ -1,6 +1,6 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.4.0
+> **文档版本**: v1.5.0
 > **最后更新**: 2026-07-28
 
 ## 版本管理规则
@@ -35,9 +35,9 @@
 KnowledgeBase/
 ├── .vitepress/              # VitePress 配置目录
 │   ├── theme/               # 自定义主题
-│   │   ├── components/      # 自定义组件
-│   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件（粒子圆圈加载动画）
-│   │   │   └── LogoAnimation.vue    # 首页粒子 Logo 动画组件（Canvas + GSAP）
+│   │   │   ├── components/      # 自定义组件
+│   │   │   │   ├── SkeletonOverlay.vue # 页面骨架屏组件（替代加载动画）
+│   │   │   │   └── LogoAnimation.vue   # 首页粒子 Logo 动画组件（Canvas + GSAP）
 │   │   ├── index.ts         # 主题入口文件（注册组件 + Layout 插槽）
 │   │   └── style.css        # 全局自定义样式（仅暗色模式）
 │   ├── docs/                    # 文档内容目录（srcDir）

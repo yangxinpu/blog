@@ -4,7 +4,7 @@ import type { Theme } from 'vitepress';
 import { useData } from 'vitepress';
 import './style.css';
 import LogoAnimation from './components/LogoAnimation.vue';
-import LoadingOverlay from './components/LoadingOverlay.vue';
+import SkeletonOverlay from './components/SkeletonOverlay.vue';
 import SidebarIcons from './components/SidebarIcons.vue';
 import SchemaOrg from './components/SchemaOrg.vue';
 import HeadSeo from './components/HeadSeo.vue';
@@ -22,7 +22,7 @@ function CustomLayout() {
   }
 
   return h(Fragment, null, [
-    h(LoadingOverlay),
+    h(SkeletonOverlay),
     h(SidebarIcons),
     h(PageStateCache),
     h(SchemaOrg),
@@ -37,7 +37,7 @@ export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component('LogoAnimation', LogoAnimation);
-    app.component('LoadingOverlay', LoadingOverlay);
+    app.component('SkeletonOverlay', SkeletonOverlay);
     app.component('SidebarIcons', SidebarIcons);
     app.component('SchemaOrg', SchemaOrg);
     app.component('HeadSeo', HeadSeo);
