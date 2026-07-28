@@ -5,7 +5,7 @@ import { useData, useRoute } from 'vitepress';
 const { page, site } = useData();
 const route = useRoute();
 
-const siteUrl = 'https://nailuo.com';
+const siteUrl = 'https://nailuo-knowledge-base.vercel.app';
 
 const seoMeta = computed(() => {
   const { title, description, frontmatter } = page.value;

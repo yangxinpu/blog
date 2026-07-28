@@ -1,7 +1,7 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.3.0
-> **最后更新**: 2026-07-27
+> **文档版本**: v1.4.0
+> **最后更新**: 2026-07-28
 
 ## 版本管理规则
 
@@ -36,22 +36,23 @@ KnowledgeBase/
 ├── .vitepress/              # VitePress 配置目录
 │   ├── theme/               # 自定义主题
 │   │   ├── components/      # 自定义组件
-  │   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件（粒子圆圈加载动画）
+│   │   │   ├── LoadingOverlay.vue   # 页面加载遮罩组件（粒子圆圈加载动画）
 │   │   │   └── LogoAnimation.vue    # 首页粒子 Logo 动画组件（Canvas + GSAP）
 │   │   ├── index.ts         # 主题入口文件（注册组件 + Layout 插槽）
 │   │   └── style.css        # 全局自定义样式（仅暗色模式）
 │   ├── docs/                    # 文档内容目录（srcDir）
-  │   ├── zh/                  # 中文文档
-  │   │   ├── 前端/            # 前端（JavaScript / React / Vue / Vite / Webpack / 性能优化）
-  │   │   ├── 后端/            # 后端（Node.js / 数据库 / Bun）
-  │   │   ├── 运维/            # 运维（Docker / Linux / Nginx / 服务器工具）
-  │   │   ├── AI/              # AI（Harness工程 / 上下文工程 / MCP / RAG / 大模型 / Ollama / Opencode）
-  │   │   ├── 产品/            # 产品
-  │   │   ├── Python/          # Python
-  │   │   ├── 其他/            # 其他（计算机网络 / Git / 算法 / 书籍）
-  │   │   └── index.md         # 中文首页
-│   └── en/                  # 英文文档（结构与中文一致）
-│       └── index.md         # 英文首页
+│   │   ├── zh/                  # 中文文档
+│   │   │   ├── 前端/            # 前端（JavaScript / React / Vue / Vite / Webpack / 性能优化）
+│   │   │   ├── 后端/            # 后端（Node.js / 数据库 / Bun）
+│   │   │   ├── 测试/            # 测试（单元测试 / 集成测试 / E2E / 性能测试）
+│   │   │   ├── 运维/            # 运维（Docker / Linux / Nginx / 服务器工具）
+│   │   │   ├── AI/              # AI（Harness工程 / 上下文工程 / MCP / RAG / 大模型 / Ollama / Opencode）
+│   │   │   ├── 产品/            # 产品
+│   │   │   ├── Python/          # Python
+│   │   │   ├── 其他/            # 其他（计算机网络 / Git / 算法 / 书籍）
+│   │   │   └── index.md         # 中文首页
+│   │   └── en/                  # 英文文档（结构与中文一致）
+│   │       └── index.md         # 英文首页
 ├── assets/                  # 静态资源（Vite publicDir）
 │   ├── logo.png             # 站点 Logo
 │   ├── favicon_32px.ico     # 32x32 图标
@@ -70,7 +71,7 @@ KnowledgeBase/
 
 ### 知识模块
 
-知识库顶部导航栏按以下顺序排列七大主模块 + 其他 + 博客：前端、后端、运维、AI、产品、Python、其他、博客。
+知识库顶部导航栏按以下顺序排列七大主模块 + 其他 + 博客：前端、后端、测试、运维、AI、产品、Python、其他、博客。
 
 #### 1. 前端
 - **JavaScript**: JS 基础、JS 提高、BOM、DOM、DOM 事件、内置对象、函数 & 面向对象、前后端通信、Web API
@@ -85,13 +86,19 @@ KnowledgeBase/
 - **数据库**: MySQL、MongoDB、Redis
 - **Bun**: Bun 基础
 
-#### 3. 运维
+#### 3. 测试
+- **单元测试**: Vitest、Jest
+- **集成测试**: API 测试、数据库测试
+- **端到端测试**: Playwright、Cypress
+- **性能测试**: Lighthouse、Web Vitals
+
+#### 4. 运维
 - **Docker**: Docker 基础、Docker Compose
 - **Linux**: Linux 基础、Shell 脚本
 - **Nginx**: Nginx 基础、Nginx 配置
 - **服务器工具**: Git Hooks、CI/CD
 
-#### 4. AI
+#### 5. AI
 - **Harness工程**: Harness 基础
 - **上下文工程**: Prompt 工程
 - **MCP**: MCP 基础
@@ -100,13 +107,13 @@ KnowledgeBase/
 - **Ollama**: Ollama 基础
 - **Opencode**: Opencode 基础
 
-#### 5. 产品
+#### 6. 产品
 - **产品**: 产品设计、产品方法论
 
-#### 6. Python
+#### 7. Python
 - **Python**: Python 基础、Python 进阶、Python 框架
 
-#### 7. 其他
+#### 8. 其他
 聚合计算机网络、Git、算法、书籍等模块：
 - **计算机网络** - 计算机网络基础知识（待补充）
 - **Git** - Git 版本控制学习笔记（待补充）
@@ -333,6 +340,59 @@ pnpm preview
 3. **不要直接修改** 构建产物文件
 4. **大段内容翻译** 建议分多次提交，便于审查
 5. **图片资源** 放在 `assets/` 目录下，引用路径以 `/` 开头，如 `/logo.png`、`/favicon_48px.ico`（Vite 配置 `publicDir: '../assets'`）
+
+## SEO 规范
+
+### SEO 组件
+
+项目使用自定义 SEO 组件 [HeadSeo.vue](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/components/HeadSeo.vue) 注入元数据标签，在 [index.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/.vitepress/theme/index.ts) 中通过 `Layout` 插槽全局注入。
+
+### 配置规则
+
+- **站点 URL**: `https://nailuo-knowledge-base.vercel.app`
+- **默认语言**: `zh-CN`
+- **页面类型**: 首页使用 `website`，其他页面使用 `article`
+
+### 必须包含的 Meta 标签
+
+1. **description**: 页面描述，优先使用 frontmatter 中的 `description` 字段
+2. **keywords**: 关键词，优先使用 frontmatter 中的 `keywords` 字段
+3. **og:title**: 格式为 `{页面标题} | NaiLuo 知识库`
+4. **og:description**: 与 description 一致
+5. **og:url**: 完整 URL，格式为 `{siteUrl}{route.path}`
+6. **og:type**: 首页 `website`，其他 `article`
+7. **og:image**: 使用 `/logo.png`，尺寸 600x600
+8. **og:locale**: `zh-CN` 或 `en-US`
+9. **twitter:card**: `summary_large_image`
+10. **twitter:title**: 与 og:title 一致
+11. **twitter:description**: 与 og:description 一致
+12. **twitter:image**: 与 og:image 一致
+13. **twitter:site**: `@NaiLuo`
+14. **canonical**: 与 og:url 一致
+15. **amphtml**: 非首页时添加，指向 `{url}?amp`
+
+### 多语言 SEO
+
+- 中文页面默认 SEO 数据（description、keywords）以中文为主
+- 英文页面（路径以 `/en/` 开头）使用英文默认数据
+- 所有 frontmatter 支持独立设置 `title`、`description`、`keywords`
+
+### 页面 SEO Frontmatter 示例
+
+```yaml
+---
+title: 页面标题
+description: 页面描述内容（建议 150-160 字符）
+keywords: 关键词1, 关键词2, 关键词3
+---
+```
+
+### 注意事项
+
+- 新增页面必须确保 frontmatter 包含 `title` 和 `description`
+- 中英文页面的 `title` 和 `description` 需分别设置，保持语言一致性
+- 首页的 `description` 和 `keywords` 应在 `config.mts` 的 `description` 配置中维护
+- SEO 组件已全局注册，无需在每个页面单独引入
 
 ## Skill 规范
 
