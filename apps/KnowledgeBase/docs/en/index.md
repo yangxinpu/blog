@@ -41,7 +41,7 @@ features:
     details: Python Basics, Advanced, Frameworks
     link: /en/Python/
   - icon:
-      src: https://cdn.simpleicons.org/producthunt/DA552F
+      src: https://cdn.simpleicons.org/linear/5E6AD2
     title: Product
     details: Product Design, Product Methodology
     link: /en/产品/

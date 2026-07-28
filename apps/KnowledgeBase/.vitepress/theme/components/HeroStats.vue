@@ -20,23 +20,23 @@ const stats = [
 ]
 
 const techStacks = computed(() => [
-  { name: 'JavaScript', icon: 'javascript', color: '#F7DF1E' },
-  { name: 'TypeScript', icon: 'typescript', color: '#3178C6' },
-  { name: 'React', icon: 'react', color: '#61DAFB' },
-  { name: 'Vue', icon: 'vuedotjs', color: '#42B883' },
-  { name: 'Node.js', icon: 'nodedotjs', color: '#339933' },
-  { name: 'Express', icon: 'express', color: '#FFFFFF' },
-  { name: 'MySQL', icon: 'mysql', color: '#4479A1' },
-  { name: 'Docker', icon: 'docker', color: '#2496ED' },
-  { name: 'Nginx', icon: 'nginx', color: '#009639' },
-  { name: 'Linux', icon: 'linux', color: '#FCC624' },
-  { name: 'Git', icon: 'git', color: '#F05032' },
-  { name: 'Python', icon: 'python', color: '#3776AB' },
-  { name: 'Vitest', icon: 'vitest', color: '#10B981' },
-  { name: 'AI/LLM', icon: 'anthropic', color: '#FFFFFF' },
-  { name: 'MCP', icon: 'modelcontextprotocol', color: '#FFFFFF' },
-  { name: 'Kubernetes', icon: 'kubernetes', color: '#326CE5' },
-  { name: 'GitHub', icon: 'github', color: '#FFFFFF' },
+  { name: 'JavaScript', icon: 'javascript', color: '#F7DF1E', bg: 'rgba(247, 223, 30, 0.15)' },
+  { name: 'TypeScript', icon: 'typescript', color: '#3178C6', bg: 'rgba(49, 120, 198, 0.15)' },
+  { name: 'React', icon: 'react', color: '#61DAFB', bg: 'rgba(97, 218, 251, 0.15)' },
+  { name: 'Vue', icon: 'vuedotjs', color: '#42B883', bg: 'rgba(66, 184, 131, 0.15)' },
+  { name: 'Node.js', icon: 'nodedotjs', color: '#339933', bg: 'rgba(51, 153, 51, 0.15)' },
+  { name: 'Vite', icon: 'vite', color: '#646CFF', bg: 'rgba(100, 108, 255, 0.15)' },
+  { name: 'MySQL', icon: 'mysql', color: '#4479A1', bg: 'rgba(68, 121, 161, 0.15)' },
+  { name: 'MongoDB', icon: 'mongodb', color: '#47A248', bg: 'rgba(71, 162, 72, 0.15)' },
+  { name: 'Redis', icon: 'redis', color: '#DC382D', bg: 'rgba(220, 56, 45, 0.15)' },
+  { name: 'Docker', icon: 'docker', color: '#2496ED', bg: 'rgba(36, 150, 237, 0.15)' },
+  { name: 'Nginx', icon: 'nginx', color: '#009639', bg: 'rgba(0, 150, 57, 0.15)' },
+  { name: 'Linux', icon: 'linux', color: '#FCC624', bg: 'rgba(252, 198, 36, 0.15)' },
+  { name: 'Git', icon: 'git', color: '#F05032', bg: 'rgba(240, 80, 50, 0.15)' },
+  { name: 'Python', icon: 'python', color: '#3776AB', bg: 'rgba(55, 118, 171, 0.15)' },
+  { name: 'Vitest', icon: 'vitest', color: '#10B981', bg: 'rgba(16, 185, 129, 0.15)' },
+  { name: 'AI/LLM', icon: 'anthropic', color: '#FFFFFF', bg: 'rgba(255, 255, 255, 0.1)' },
+  { name: 'MCP', icon: 'modelcontextprotocol', color: '#FFFFFF', bg: 'rgba(255, 255, 255, 0.1)' },
 ])
 
 const getIconUrl = (slug: string, color: string) => {
@@ -58,14 +58,16 @@ const getIconUrl = (slug: string, color: string) => {
         v-for="tech in techStacks" 
         :key="tech.name" 
         class="tech-tag"
-        :style="{ '--tech-color': tech.color }"
+        :style="{ '--tech-bg': tech.bg }"
       >
-        <img 
-          class="tech-icon" 
-          :src="getIconUrl(tech.icon, tech.color)"
-          :alt="tech.name"
-          loading="lazy"
-        />
+        <span class="tech-icon-wrap">
+          <img 
+            class="tech-icon" 
+            :src="getIconUrl(tech.icon, tech.color)"
+            :alt="tech.name"
+            loading="lazy"
+          />
+        </span>
         <span class="tech-name">{{ tech.name }}</span>
       </span>
     </div>
@@ -110,27 +112,40 @@ const getIconUrl = (slug: string, color: string) => {
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.375rem;
+  gap: 0.3rem;
 }
 
 .tech-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.18rem 0.45rem;
-  font-size: 0.72rem;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--tech-color);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 5px;
+  color: #e0e0e0;
+  background: var(--tech-bg);
+  border-radius: 8px;
   cursor: default;
   line-height: 1;
+  transition: filter 0.2s ease;
+}
+
+.tech-tag:hover {
+  filter: brightness(1.2);
+}
+
+.tech-tag .tech-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
 }
 
 .tech-icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 
@@ -157,13 +172,13 @@ const getIconUrl = (slug: string, color: string) => {
   }
   
   .tech-tag {
-    padding: 0.14rem 0.35rem;
+    padding: 0.2rem 0.4rem;
     font-size: 0.68rem;
   }
   
   .tech-icon {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
 }
 </style>

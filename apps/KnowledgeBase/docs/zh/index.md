@@ -41,7 +41,7 @@ features:
     details: Python 基础、进阶、框架
     link: /zh/Python/
   - icon:
-      src: https://cdn.simpleicons.org/producthunt/DA552F
+      src: https://cdn.simpleicons.org/linear/5E6AD2
     title: 产品设计
     details: 产品设计、产品方法论
     link: /zh/产品/
