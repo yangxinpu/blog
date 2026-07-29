@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
 import avatarImage from '../../assets/Images/cat.webp';
 import { FloatingLines } from '../../components/index';
 import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
+
+gsap.registerPlugin(useGSAP);
 
 type TechKey =
   | 'react'
@@ -292,6 +295,168 @@ function Home() {
     };
   });
 
+  // 首页入场动画（hero + 各卡片错峰）
+  useGSAP(
+    () => {
+      const root = sectionRef.current;
+      if (!root) return;
+
+      const hero = root.querySelector<HTMLElement>(`.${styles.hero}`);
+      if (hero) {
+        gsap.fromTo(
+          hero,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.8, ease: 'power2.out' }
+        );
+      }
+
+      const titleChars = root.querySelectorAll<HTMLElement>(
+        `.${styles.title} span`
+      );
+      if (titleChars.length > 0) {
+        gsap.fromTo(
+          titleChars,
+          { opacity: 0, y: 44, scale: 0.7 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.45,
+            stagger: 0.06,
+            ease: 'back.out(2)',
+          }
+        );
+      }
+
+      const subtitle = root.querySelector<HTMLElement>(`.${styles.subtitle}`);
+      if (subtitle) {
+        gsap.fromTo(
+          subtitle,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 0.12,
+            ease: 'power2.out',
+          }
+        );
+      }
+
+      const desc = root.querySelector<HTMLElement>(`.${styles.desc}`);
+      if (desc) {
+        gsap.fromTo(
+          desc,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 0.24,
+            ease: 'power2.out',
+          }
+        );
+      }
+
+      const featuredCard = root.querySelector<HTMLElement>(
+        `.${styles.featuredCard}`
+      );
+      if (featuredCard) {
+        gsap.fromTo(
+          featuredCard,
+          { opacity: 0, y: -28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: 0.12,
+            ease: 'power2.out',
+          }
+        );
+      }
+
+      const avatar = root.querySelector<HTMLElement>(`.${styles.avatar}`);
+      if (avatar) {
+        gsap.fromTo(
+          avatar,
+          { scale: 0.8, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            delay: 0.2,
+            ease: 'power2.out',
+          }
+        );
+      }
+
+      const tags = root.querySelectorAll<HTMLElement>(`.${styles.tag}`);
+      tags.forEach((tag: HTMLElement, index: number) => {
+        gsap.fromTo(
+          tag,
+          { opacity: 0, scale: 0.8 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.3,
+            delay: 0.5 + index * 0.06,
+            ease: 'power2.out',
+          }
+        );
+      });
+
+      const interestCard = root.querySelector<HTMLElement>(
+        `.${styles.interestCard}`
+      );
+      if (interestCard) {
+        gsap.fromTo(
+          interestCard,
+          { opacity: 0, y: -28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: 0.2,
+            ease: 'power2.out',
+          }
+        );
+      }
+
+      const techCardsEls = root.querySelectorAll<HTMLElement>(
+        `.${styles.techCard}`
+      );
+      techCardsEls.forEach((card: HTMLElement, index: number) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 0.28 + index * 0.05,
+            ease: 'power2.out',
+          }
+        );
+      });
+    },
+    { scope: sectionRef, dependencies: [techCards, profileTags, interests] }
+  );
+
+  // 标签 hover：scale1.05 + y-2
+  const handleTagEnter = (el: HTMLElement | null) => {
+    if (!el) return;
+    gsap.to(el, {
+      scale: 1.05,
+      y: -2,
+      duration: 0.3,
+      ease: 'back.out(1.7)',
+    });
+  };
+  const handleTagLeave = (el: HTMLElement | null) => {
+    if (!el) return;
+    gsap.to(el, { scale: 1, y: 0, duration: 0.3, ease: 'power2.out' });
+  };
+
   return (
     <div id="home" ref={sectionRef} className={styles.home}>
       <div className={styles.floatingLinesBackground}>
@@ -307,72 +472,31 @@ function Home() {
         />
       </div>
 
-      <motion.div
-        className={styles.hero}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
+      <div className={styles.hero}>
         <h1 className={styles.title}>
           {t('homePage.hero.title')
             .split('')
             .map((char, index) => (
-              <motion.span
-                key={`${char}-${index}`}
-                initial={{
-                  opacity: 0,
-                  y: 44,
-                  scale: 0.7,
-                }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.06,
-                  type: 'spring',
-                  stiffness: 120,
-                }}
-              >
-                {char}
-              </motion.span>
+              <span key={`${char}-${index}`}>{char}</span>
             ))}
         </h1>
 
-        <motion.p
-          className={styles.subtitle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.12 }}
-        >
-          {t('homePage.hero.subtitle')}
-        </motion.p>
+        <p className={styles.subtitle}>{t('homePage.hero.subtitle')}</p>
 
-        <motion.p
-          className={styles.desc}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.24 }}
-        >
-          {t('homePage.hero.desc')}
-        </motion.p>
-      </motion.div>
+        <p className={styles.desc}>{t('homePage.hero.desc')}</p>
+      </div>
 
       <section className={styles.content}>
         <div className={styles.gridLayout} ref={gridRef}>
-          <motion.article
+          <article
             data-card-id="profile"
             className={styles.featuredCard}
-            initial={{ opacity: 0, y: -28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
           >
             <div className={styles.profileHeader}>
-              <motion.img
+              <img
                 src={avatarImage}
                 alt="Avatar"
                 className={styles.avatar}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
               />
               <div className={styles.profileInfo}>
                 <p className={styles.nickname}>
@@ -393,26 +517,21 @@ function Home() {
 
             <div className={styles.tagsGrid}>
               {profileTags.map((tag, index) => (
-                <motion.span
+                <span
                   key={`${tag}-${index}`}
                   className={styles.tag}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.5 + index * 0.06 }}
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  onMouseEnter={(e) => handleTagEnter(e.currentTarget)}
+                  onMouseLeave={(e) => handleTagLeave(e.currentTarget)}
                 >
                   {tag}
-                </motion.span>
+                </span>
               ))}
             </div>
-          </motion.article>
+          </article>
 
-          <motion.article
+          <article
             data-card-id="interests"
             className={styles.interestCard}
-            initial={{ opacity: 0, y: -28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3>{t('homePage.interests.title')}</h3>
             <p className={styles.featuredText}>
@@ -427,16 +546,13 @@ function Home() {
                 </li>
               ))}
             </ul>
-          </motion.article>
+          </article>
 
           {techCards.map((card, index) => (
-            <motion.article
+            <article
               key={card.key}
               data-card-id={card.key}
               className={`${styles.techCard} ${styles[`techCard${index + 1}`]}`}
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.28 + index * 0.05 }}
             >
               <div className={styles.cardBackdrop} aria-hidden="true">
                 <span className={styles.cardBackdropGlow} />
@@ -492,7 +608,7 @@ function Home() {
                   </a>
                 )}
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>

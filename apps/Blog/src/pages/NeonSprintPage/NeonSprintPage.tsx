@@ -1,8 +1,12 @@
 import { useMemo, useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import styles from './NeonSprintPage.module.scss';
 import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 function GeometricAnimation({ isActive }: { isActive: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -224,6 +228,37 @@ function NeonSprintPage() {
     [copy, isZh]
   );
 
+  const copyRef = useRef<HTMLParagraphElement | null>(null);
+
+  // 文本段落按段滚动进入动画
+  useGSAP(
+    () => {
+      const tokens = copyRef.current?.querySelectorAll<HTMLElement>(
+        `.${styles.copyToken}`
+      );
+      if (!tokens || tokens.length === 0) return;
+
+      gsap.fromTo(
+        tokens,
+        { opacity: 0, y: 28, rotateX: 70 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.58,
+          ease: 'power2.out',
+          stagger: 0.024,
+          scrollTrigger: {
+            trigger: copyRef.current,
+            start: 'top 40%',
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: copyRef, dependencies: [segments] }
+  );
+
   return (
     <section
       ref={sectionRef}
@@ -231,31 +266,15 @@ function NeonSprintPage() {
     >
       <div className={styles.inner}>
         <div className={styles.textPane}>
-          <p className={styles.copy}>
+          <p className={styles.copy} ref={copyRef}>
             {segments.map((segment, index) => (
-              <motion.span
+              <span
                 key={`${segment}-${index}`}
                 className={styles.copyToken}
-                initial={{
-                  opacity: 0,
-                  y: 28,
-                  rotateX: 70,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  rotateX: 0,
-                }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{
-                  duration: 0.58,
-                  delay: index * 0.024,
-                  ease: 'easeOut',
-                }}
               >
                 {!isZh && index > 0 ? '\u00A0' : ''}
                 {segment}
-              </motion.span>
+              </span>
             ))}
           </p>
         </div>

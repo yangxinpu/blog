@@ -1,6 +1,9 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import styles from './Loading.module.scss';
+
+gsap.registerPlugin(useGSAP);
 
 interface LoadingProps {
   logo?: string;
@@ -8,13 +11,164 @@ interface LoadingProps {
 }
 
 const Loading: React.FC<LoadingProps> = ({ logo, text = 'NAILUO' }) => {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  // 加载屏所有动画
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      if (!root) return;
+
+      // logoWrapper 入场
+      const logoWrapper = root.querySelector<HTMLElement>(
+        `.${styles.logoWrapper}`
+      );
+      if (logoWrapper) {
+        gsap.fromTo(
+          logoWrapper,
+          { scale: 0.8, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: 'power2.out' }
+        );
+      }
+
+      // 三圈旋转
+      const ring = root.querySelector<HTMLElement>(`.${styles.ring}`);
+      if (ring) {
+        gsap.to(ring, {
+          rotation: 360,
+          duration: 3,
+          repeat: -1,
+          ease: 'none',
+        });
+      }
+
+      const ringReverse = root.querySelector<HTMLElement>(
+        `.${styles.ringReverse}`
+      );
+      if (ringReverse) {
+        gsap.to(ringReverse, {
+          rotation: -360,
+          duration: 4,
+          repeat: -1,
+          ease: 'none',
+        });
+      }
+
+      const ringDotted = root.querySelector<HTMLElement>(
+        `.${styles.ringDotted}`
+      );
+      if (ringDotted) {
+        gsap.to(ringDotted, {
+          rotation: 360,
+          duration: 8,
+          repeat: -1,
+          ease: 'none',
+        });
+      }
+
+      // logo 光晕脉动
+      const logoGlow = root.querySelector<HTMLElement>(`.${styles.logoGlow}`);
+      if (logoGlow) {
+        gsap.to(logoGlow, {
+          keyframes: {
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.8, 0.5],
+          },
+          duration: 2,
+          repeat: -1,
+          ease: 'power1.inOut',
+        });
+      }
+
+      // logo 图像上下浮动
+      const logoImg = root.querySelector<HTMLElement>(`.${styles.logo}`);
+      if (logoImg) {
+        gsap.to(logoImg, {
+          keyframes: { y: [0, -8, 0] },
+          duration: 2,
+          repeat: -1,
+          ease: 'power1.inOut',
+        });
+      }
+
+      // 脉冲圆环
+      const pulseRing = root.querySelector<HTMLElement>(
+        `.${styles.pulseRing}`
+      );
+      if (pulseRing) {
+        gsap.to(pulseRing, {
+          keyframes: {
+            scale: [1, 1.5, 1],
+            opacity: [0.6, 0, 0.6],
+          },
+          duration: 2,
+          repeat: -1,
+          ease: 'power2.out',
+        });
+      }
+
+      // 文本容器入场
+      const textContainer = root.querySelector<HTMLElement>(
+        `.${styles.textContainer}`
+      );
+      if (textContainer) {
+        gsap.fromTo(
+          textContainer,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, delay: 0.3, duration: 0.5, ease: 'power2.out' }
+        );
+      }
+
+      // 品牌字符颜色循环
+      const chars = root.querySelectorAll<HTMLElement>(`.${styles.char}`);
+      chars.forEach((char, index) => {
+        gsap.to(char, {
+          keyframes: {
+            color: ['var(--accent)', '#ffffff', 'var(--accent)'],
+          },
+          duration: 2,
+          repeat: -1,
+          delay: index * 0.1,
+          ease: 'none',
+        });
+      });
+
+      // "Loading..." 透明度脉动
+      const loadingText = root.querySelector<HTMLElement>(
+        `.${styles.loadingText}`
+      );
+      if (loadingText) {
+        gsap.to(loadingText, {
+          keyframes: { opacity: [0.5, 1, 0.5] },
+          duration: 1.5,
+          repeat: -1,
+          ease: 'none',
+        });
+      }
+
+      // 12 个粒子上升
+      const particles = root.querySelectorAll<HTMLElement>(
+        `.${styles.particle}`
+      );
+      particles.forEach((particle, index) => {
+        gsap.to(particle, {
+          keyframes: {
+            y: [0, -20, 0],
+            opacity: [0, 1, 0],
+            scale: [0.5, 1, 0.5],
+          },
+          duration: 2,
+          repeat: -1,
+          delay: index * 0.15,
+          ease: 'power1.inOut',
+        });
+      });
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <motion.div
-      className={styles.loadingContainer}
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className={styles.loadingContainer} ref={rootRef}>
       <div className={styles.background}>
         <div className={styles.gradientOrb1} />
         <div className={styles.gradientOrb2} />
@@ -22,102 +176,40 @@ const Loading: React.FC<LoadingProps> = ({ logo, text = 'NAILUO' }) => {
       </div>
 
       <div className={styles.content}>
-        <motion.div
-          className={styles.logoWrapper}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
+        <div className={styles.logoWrapper}>
           <div className={styles.ringContainer}>
-            <motion.div
-              className={styles.ring}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            />
-            <motion.div
-              className={styles.ringReverse}
-              animate={{ rotate: -360 }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-            />
-            <motion.div
-              className={styles.ringDotted}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            />
+            <div className={styles.ring} />
+            <div className={styles.ringReverse} />
+            <div className={styles.ringDotted} />
           </div>
 
-          <motion.div
-            className={styles.logoGlow}
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
+          <div className={styles.logoGlow} />
 
           {logo && (
-            <motion.img
-              src={logo}
-              alt="Logo"
-              className={styles.logo}
-              animate={{
-                y: [0, -8, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
+            <img src={logo} alt="Logo" className={styles.logo} />
           )}
 
-          <motion.div
-            className={styles.pulseRing}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.6, 0, 0.6],
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
-          />
-        </motion.div>
+          <div className={styles.pulseRing} />
+        </div>
 
-        <motion.div
-          className={styles.textContainer}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <motion.h2 className={styles.brandText}>
+        <div className={styles.textContainer}>
+          <h2 className={styles.brandText}>
             {text.split('').map((char, index) => (
-              <motion.span
+              <span
                 key={`${char}-${index}`}
                 className={styles.char}
-                animate={{
-                  color: ['var(--accent)', '#ffffff', 'var(--accent)'],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: index * 0.1,
-                }}
               >
                 {char}
-              </motion.span>
+              </span>
             ))}
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className={styles.loadingText}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            Loading...
-          </motion.p>
-        </motion.div>
+          <p className={styles.loadingText}>Loading...</p>
+        </div>
 
         <div className={styles.particles}>
           {Array.from({ length: 12 }).map((_, i) => (
-            <motion.div
+            <div
               key={i}
               className={styles.particle}
               style={
@@ -127,22 +219,11 @@ const Loading: React.FC<LoadingProps> = ({ logo, text = 'NAILUO' }) => {
                   '--angle': `${i * 30}deg`,
                 } as React.CSSProperties
               }
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0, 1, 0],
-                scale: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: i * 0.15,
-                ease: 'easeInOut',
-              }}
             />
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

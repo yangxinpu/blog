@@ -27,8 +27,8 @@ export default defineConfig({
             ) {
               return 'react-vendor';
             }
-            if (id.includes('motion')) {
-              return 'motion';
+            if (id.includes('gsap') || id.includes('@gsap')) {
+              return 'gsap';
             }
             if (id.includes('i18next') || id.includes('react-i18next')) {
               return 'i18n';

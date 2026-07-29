@@ -1,7 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ChevronRight } from 'lucide-react';
 import styles from './Dropdown.module.scss';
+
+gsap.registerPlugin(useGSAP);
 
 interface DropdownOption {
   value: string;
@@ -17,8 +20,11 @@ interface DropdownProps {
 
 const Dropdown: React.FC<DropdownProps> = ({ options, label, mainPath }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [shouldRenderMenu, setShouldRenderMenu] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
+  const arrowRef = useRef<HTMLSpanElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -65,6 +71,90 @@ const Dropdown: React.FC<DropdownProps> = ({ options, label, mainPath }) => {
     }
   };
 
+  // 箭头旋转 + 菜单进出动画
+  useGSAP(
+    () => {
+      if (arrowRef.current) {
+        gsap.to(arrowRef.current, {
+          rotation: isOpen ? 90 : 0,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+      }
+
+      if (isOpen) {
+        setShouldRenderMenu(true);
+      } else if (menuRef.current) {
+        gsap.to(menuRef.current, {
+          opacity: 0,
+          y: -10,
+          visibility: 'hidden',
+          duration: 0.2,
+          ease: 'power2.out',
+          onComplete: () => setShouldRenderMenu(false),
+        });
+      } else {
+        setShouldRenderMenu(false);
+      }
+    },
+    { dependencies: [isOpen] }
+  );
+
+  // 菜单入场动画（在 shouldRenderMenu 变为 true 后执行）
+  useGSAP(
+    () => {
+      if (shouldRenderMenu && menuRef.current) {
+        gsap.fromTo(
+          menuRef.current,
+          { opacity: 0, y: -10, visibility: 'hidden' },
+          {
+            opacity: 1,
+            y: 0,
+            visibility: 'visible',
+            duration: 0.2,
+            ease: 'power2.out',
+          }
+        );
+      }
+    },
+    { dependencies: [shouldRenderMenu] }
+  );
+
+  const handleItemEnter = useCallback(
+    (el: HTMLLIElement | null) => {
+      if (!el) return;
+      gsap.to(el, {
+        backgroundColor: 'var(--accent)',
+        color: '#ffffff',
+        borderRadius: 8,
+        duration: 0.2,
+        ease: 'power2.out',
+      });
+    },
+    []
+  );
+
+  const handleItemLeave = useCallback((el: HTMLLIElement | null) => {
+    if (!el) return;
+    gsap.to(el, {
+      backgroundColor: 'transparent',
+      color: 'inherit',
+      borderRadius: 0,
+      duration: 0.2,
+      ease: 'power2.out',
+    });
+  }, []);
+
+  const handleItemDown = useCallback((el: HTMLLIElement | null) => {
+    if (!el) return;
+    gsap.to(el, { scale: 0.3, duration: 0.15, ease: 'power2.out' });
+  }, []);
+
+  const handleItemUp = useCallback((el: HTMLLIElement | null) => {
+    if (!el) return;
+    gsap.to(el, { scale: 1, duration: 0.2, ease: 'power2.out' });
+  }, []);
+
   return (
     <div
       className={styles.dropdown}
@@ -80,49 +170,27 @@ const Dropdown: React.FC<DropdownProps> = ({ options, label, mainPath }) => {
       >
         {label}
         <span className={styles.dropdownArrow}>
-          {isOpen ? (
-            <motion.div
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 90 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ChevronRight size={16} />
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ rotate: 90 }}
-              animate={{ rotate: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ChevronRight size={16} />
-            </motion.div>
-          )}
+          <span ref={arrowRef} style={{ display: 'inline-block' }}>
+            <ChevronRight size={16} />
+          </span>
         </span>
       </button>
-      {isOpen && (
-        <motion.ul
-          className={styles.dropdownMenu}
-          initial={{ opacity: 0, y: -10, visibility: 'hidden' }}
-          animate={{ opacity: 1, y: 0, visibility: 'visible' }}
-          exit={{ opacity: 0, y: -10, visibility: 'hidden' }}
-          transition={{ duration: 0.2 }}
-        >
+      {shouldRenderMenu && (
+        <ul className={styles.dropdownMenu} ref={menuRef}>
           {options.map((option) => (
-            <motion.li
+            <li
               key={option.value}
               className={styles.dropdownItem}
               onClick={() => handleSelect(option.path)}
-              whileHover={{
-                backgroundColor: 'var(--accent)',
-                color: 'white',
-                borderRadius: 8,
-              }}
-              whileTap={{ scale: 0.3 }}
+              onMouseEnter={(e) => handleItemEnter(e.currentTarget)}
+              onMouseLeave={(e) => handleItemLeave(e.currentTarget)}
+              onMouseDown={(e) => handleItemDown(e.currentTarget)}
+              onMouseUp={(e) => handleItemUp(e.currentTarget)}
             >
               {option.label}
-            </motion.li>
+            </li>
           ))}
-        </motion.ul>
+        </ul>
       )}
     </div>
   );

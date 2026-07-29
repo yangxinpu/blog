@@ -1,7 +1,7 @@
 # Blog 应用 - Agent 指南
 
-> **文档版本**: v1.0.0
-> **最后更新**: 2026-07-29
+> **文档版本**: v1.1.0
+> **最后更新**: 2026-07-30
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
 
@@ -26,7 +26,7 @@
 
 | 依赖 | 正确导入 | 注意 |
 |------|----------|------|
-| `motion`（v12） | `from 'motion/react'` | 这是 Motion for React 的新包名，**不是** `framer-motion`。现有代码全部从 `motion/react` 导入 |
+| `gsap`（v3）+ `@gsap/react`（v2） | `import gsap from 'gsap'`、`import { useGSAP } from '@gsap/react'`、`import { ScrollTrigger } from 'gsap/ScrollTrigger'` | 所有动画基于 GSAP。`useGSAP` 自带 `gsap.context` 清理，必须用 `scope` 限定作用域。需要滚动联动时手动 `gsap.registerPlugin(useGSAP, ScrollTrigger)` |
 | `three` | `from 'three'` | 仅 [Motto/CanvasWaves.tsx](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/pages/Motto/CanvasWaves.tsx) 使用 |
 | `lucide-react` | 图标按需导入 | |
 | `i18next` + `react-i18next` | 见下 | |
@@ -104,7 +104,7 @@ pnpm --filter blog run build             # tsc -b && vite build
 - **ESLint 未用变量**：以 `_` 前缀命名（`argsIgnorePattern: '^_'`）
 - **Prettier**：单引号、2 空格、分号、`trailingComma: 'es5'`、`endOfLine: 'lf'`（见 [.prettierrc.json](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/.prettierrc.json)）
 - **ESLint 继承链**：[eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/eslint.config.js) → 根 [eslint.config.base.js](file:///Users/NaiLuo/Documents/GithubProject/blog/eslint.config.base.js) + react-hooks + react-refresh
-- **vendor 分包**：[vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/vite.config.ts) 的 `manualChunks` 已分 react-vendor / motion / i18n / lucide / vendor，新增大依赖时考虑是否单独分包
+- **vendor 分包**：[vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/vite.config.ts) 的 `manualChunks` 已分 react-vendor / gsap / i18n / lucide / vendor，新增大依赖时考虑是否单独分包
 
 ## 开发服务器
 

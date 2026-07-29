@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './AuroraRisePage.module.scss';
 import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface SilkLine {
   y: number;
@@ -211,6 +215,7 @@ function AuroraRisePage() {
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') === 'dark'
   );
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -226,6 +231,28 @@ function AuroraRisePage() {
 
     return () => observer.disconnect();
   }, []);
+
+  // 标题滚动进入动画
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 28 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.62,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: 'top 62%',
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: titleRef }
+  );
 
   return (
     <section
@@ -243,17 +270,11 @@ function AuroraRisePage() {
       />
 
       <div className={styles.inner}>
-        <motion.h2
-          className={styles.title}
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.38 }}
-          transition={{ duration: 0.62, ease: 'easeOut' }}
-        >
+        <h2 className={styles.title} ref={titleRef}>
           {isZh
             ? '每天进步一点，未来就会发光'
             : 'Small progress every day builds a glowing future.'}
-        </motion.h2>
+        </h2>
       </div>
     </section>
   );

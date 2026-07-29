@@ -1,7 +1,12 @@
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import styles from './Thoughts.module.scss';
 import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type ThoughtArticle = {
   date: string;
@@ -23,6 +28,56 @@ function Thoughts() {
     returnObjects: true,
   }) as unknown as ThoughtArticle[];
 
+  const innerRef = useRef<HTMLDivElement | null>(null);
+
+  // 头部 + 卡片滚动进入动画
+  useGSAP(
+    () => {
+      const inner = innerRef.current;
+      if (!inner) return;
+
+      const header = inner.querySelector<HTMLElement>(`.${styles.header}`);
+      if (header) {
+        gsap.fromTo(
+          header,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: header,
+              start: 'top 75%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      const cards = inner.querySelectorAll<HTMLElement>(`.${styles.card}`);
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            delay: index * 0.06,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      });
+    },
+    { scope: innerRef, dependencies: [articles] }
+  );
+
   return (
     <section
       id="thoughts"
@@ -35,31 +90,17 @@ function Thoughts() {
         ))}
       </div>
 
-      <div className={styles.inner}>
-        <motion.header
-          className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
+      <div className={styles.inner} ref={innerRef}>
+        <header className={styles.header}>
           <h2>{t('thoughtsPage.title')}</h2>
           <p>{t('thoughtsPage.subtitle')}</p>
-        </motion.header>
+        </header>
 
         <div className={styles.grid}>
           {articles.map((item, index) => (
-            <motion.article
+            <article
               key={`${item.title}-${index}`}
               className={`${styles.card} ${item.featured ? styles.featured : ''}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.45,
-                delay: index * 0.06,
-                ease: 'easeOut',
-              }}
             >
               <div className={styles.meta}>
                 <time>{item.date}</time>
@@ -73,7 +114,7 @@ function Thoughts() {
               <span className={styles.cardAction}>
                 {t('thoughtsPage.action')}
               </span>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

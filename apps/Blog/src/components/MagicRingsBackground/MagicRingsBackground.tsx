@@ -1,6 +1,10 @@
-import { motion } from 'motion/react';
+import { useRef } from 'react';
 import type { CSSProperties } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import styles from './MagicRingsBackground.module.scss';
+
+gsap.registerPlugin(useGSAP);
 
 type RingConfig = {
   size: string;
@@ -58,8 +62,34 @@ const ringConfigs: RingConfig[] = [
 ];
 
 function MagicRingsBackground() {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  // 五圈无限旋转
+  useGSAP(
+    () => {
+      const rings = rootRef.current?.querySelectorAll<HTMLElement>(
+        `.${styles.ring}`
+      );
+      if (!rings) return;
+
+      rings.forEach((ring, index) => {
+        const config = ringConfigs[index];
+        if (!config) return;
+
+        gsap.to(ring, {
+          rotation: config.reverse ? -360 : 360,
+          duration: config.duration,
+          delay: config.delay,
+          repeat: -1,
+          ease: 'none',
+        });
+      });
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <div className={styles.root} aria-hidden="true">
+    <div className={styles.root} aria-hidden="true" ref={rootRef}>
       <div className={styles.glowOne} />
       <div className={styles.glowTwo} />
 
@@ -73,17 +103,10 @@ function MagicRingsBackground() {
         } as CSSProperties;
 
         return (
-          <motion.span
+          <span
             key={`ring-${index}`}
             className={styles.ring}
             style={ringStyle}
-            animate={{ rotate: ring.reverse ? -360 : 360 }}
-            transition={{
-              duration: ring.duration,
-              delay: ring.delay,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
           />
         );
       })}

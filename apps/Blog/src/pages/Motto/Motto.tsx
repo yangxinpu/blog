@@ -1,8 +1,12 @@
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { useTranslation } from 'react-i18next';
 import styles from './Motto.module.scss';
 import CanvasWaves from './CanvasWaves';
 import { useSectionActivity } from '../../libs/hooks/useSectionActivity';
+
+gsap.registerPlugin(useGSAP);
 
 function Motto() {
   const { t } = useTranslation();
@@ -24,6 +28,55 @@ function Motto() {
     Array.isArray(quoteLinesRaw) && quoteLinesRaw.length > 0
       ? (quoteLinesRaw as string[])
       : [t('mottoSection.quote')];
+
+  const stackRef = useRef<HTMLDivElement | null>(null);
+
+  // 进入视口后逐行展开引语
+  useGSAP(
+    () => {
+      const stack = stackRef.current;
+      if (!stack) return;
+
+      const lineWraps = stack.querySelectorAll<HTMLElement>(
+        `.${styles.quoteLineWrapper}`
+      );
+
+      if (hasEnteredView) {
+        gsap.to(stack, {
+          opacity: 1,
+          duration: 0.3,
+          ease: 'none',
+        });
+        gsap.fromTo(
+          lineWraps,
+          { opacity: 0, y: 30, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            stagger: 0.15,
+            delay: 0.1,
+          }
+        );
+      } else {
+        gsap.to(stack, {
+          opacity: 0,
+          duration: 0.3,
+          ease: 'none',
+        });
+        gsap.to(lineWraps, {
+          opacity: 0,
+          y: 30,
+          scale: 0.95,
+          duration: 0.3,
+          ease: 'none',
+        });
+      }
+    },
+    { scope: stackRef, dependencies: [hasEnteredView] }
+  );
 
   return (
     <section
@@ -52,36 +105,20 @@ function Motto() {
         />
       </div>
 
-      <motion.div
-        className={styles.quoteStack}
-        initial={{ opacity: 0 }}
-        animate={hasEnteredView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className={styles.quoteStack} ref={stackRef}>
         {quoteLines.map((line, index) => (
-          <motion.div
+          <div
             key={`${line}-${index}`}
             className={styles.quoteLineWrapper}
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={
-              hasEnteredView
-                ? { opacity: 1, y: 0, scale: 1 }
-                : { opacity: 0, y: 30, scale: 0.95 }
-            }
-            transition={{
-              duration: 0.8,
-              delay: 0.1 + index * 0.15,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
           >
             <p
               className={`${styles.quoteLine} ${index === 0 ? styles.primaryLine : ''}`}
             >
               {line}
             </p>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 }
