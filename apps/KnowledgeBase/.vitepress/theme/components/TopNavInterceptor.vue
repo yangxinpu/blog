@@ -1,38 +1,44 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue';
-import { useRouter, useRoute } from 'vitepress';
-import { useSidebarStateStore } from '../composables/useSidebarStateStore';
+import { useRoute } from 'vitepress';
+import { useSidebarStateStore, getCategoryPath } from '../composables/useSidebarStateStore';
 
-const router = useRouter();
 const route = useRoute();
 const store = useSidebarStateStore();
 
-let navMouseOverHandler: ((e: MouseEvent) => void) | null = null;
-let navMouseOutHandler: ((e: MouseEvent) => void) | null = null;
+let navMouseOverHandler: ((e: Event) => void) | null = null;
+let navMouseOutHandler: ((e: Event) => void) | null = null;
 let originalHrefs: Map<string, string> = new Map();
-
-function getCategoryPath(href: string): string {
-  const parts = href.split('/').filter(p => p);
-  if (parts.length >= 2) {
-    return `/${parts[0]}/${parts[1]}/`;
-  }
-  return href;
-}
 
 function getStoredActiveMenuItem(categoryPath: string): string | null {
   try {
     const pageStates = store.state.pageStates;
     const decodedCategoryPath = decodeURIComponent(categoryPath);
     
+    let bestMatch: string | null = null;
+    let bestMatchSegments = 0;
+    let bestMatchTime = 0;
+    
     for (const [path, state] of Object.entries(pageStates)) {
+      if (!state.activeMenuItem) continue;
+      
       const decodedPath = decodeURIComponent(path);
       const normalizedPath = decodedPath.endsWith('/') ? decodedPath : `${decodedPath}/`;
-      if (normalizedPath.startsWith(decodedCategoryPath) && state.activeMenuItem) {
-        return state.activeMenuItem;
+      
+      if (normalizedPath.startsWith(decodedCategoryPath)) {
+        const segments = decodedPath.split('/').filter(p => p).length;
+        const accessTime = state.lastAccessTime || 0;
+        
+        if (segments > bestMatchSegments || 
+            (segments === bestMatchSegments && accessTime >= bestMatchTime)) {
+          bestMatchSegments = segments;
+          bestMatchTime = accessTime;
+          bestMatch = state.activeMenuItem;
+        }
       }
     }
     
-    return null;
+    return bestMatch;
   } catch {
     return null;
   }
@@ -59,8 +65,9 @@ function isHomePageHref(href: string): boolean {
   return false;
 }
 
-function handleMouseOver(e: MouseEvent): void {
-  const target = e.target as Element;
+function handleMouseOver(e: Event): void {
+  const mouseEvent = e as MouseEvent;
+  const target = mouseEvent.target as Element;
   const navLink = target.closest('.VPNavBarMenuLink');
   
   if (!navLink) return;
@@ -74,20 +81,21 @@ function handleMouseOver(e: MouseEvent): void {
   console.log('[TopNavInterceptor] handleMouseOver:', { href, categoryPath, storedArticle, currentPath: route.path, pageStatesCount: Object.keys(store.state.pageStates).length });
   
   if (storedArticle && storedArticle !== route.path) {
-    const currentHref = navLink.getAttribute('href') || '';
-    if (!originalHrefs.has(currentHref)) {
-      originalHrefs.set(currentHref, currentHref);
+    const originalHref = navLink.getAttribute('href') || '';
+    if (!originalHrefs.has(storedArticle)) {
+      originalHrefs.set(storedArticle, originalHref);
     }
     
     if (navLink.getAttribute('href') !== storedArticle) {
-      console.log('[TopNavInterceptor] Swapping href:', { original: currentHref, new: storedArticle });
+      console.log('[TopNavInterceptor] Swapping href:', { original: originalHref, new: storedArticle });
       navLink.setAttribute('href', storedArticle);
     }
   }
 }
 
-function handleMouseOut(e: MouseEvent): void {
-  const target = e.target as Element;
+function handleMouseOut(e: Event): void {
+  const mouseEvent = e as MouseEvent;
+  const target = mouseEvent.target as Element;
   const navLink = target.closest('.VPNavBarMenuLink');
   
   if (!navLink) return;
@@ -110,17 +118,22 @@ function initInterceptor(): void {
   }
   
   if (navMouseOverHandler) {
-    navBar.removeEventListener('mouseover', navMouseOverHandler, true);
+    const handler = navMouseOverHandler;
+    navBar.removeEventListener('mouseover', handler as EventListener, true);
   }
   
   if (navMouseOutHandler) {
-    navBar.removeEventListener('mouseout', navMouseOutHandler, true);
+    const handler = navMouseOutHandler;
+    navBar.removeEventListener('mouseout', handler as EventListener, true);
   }
   
   navMouseOverHandler = handleMouseOver;
   navMouseOutHandler = handleMouseOut;
-  navBar.addEventListener('mouseover', navMouseOverHandler, true);
-  navBar.addEventListener('mouseout', navMouseOutHandler, true);
+  
+  const overHandler = navMouseOverHandler;
+  const outHandler = navMouseOutHandler;
+  navBar.addEventListener('mouseover', overHandler as EventListener, true);
+  navBar.addEventListener('mouseout', outHandler as EventListener, true);
   
   console.log('[TopNavInterceptor] Initialized with mouseover/mouseout');
 }
@@ -131,14 +144,16 @@ function cleanup(): void {
   if (navMouseOverHandler) {
     const navBar = document.querySelector('.VPNavBar');
     if (navBar) {
-      navBar.removeEventListener('mouseover', navMouseOverHandler, true);
+      const handler = navMouseOverHandler;
+      navBar.removeEventListener('mouseover', handler as EventListener, true);
     }
     navMouseOverHandler = null;
   }
   if (navMouseOutHandler) {
     const navBar = document.querySelector('.VPNavBar');
     if (navBar) {
-      navBar.removeEventListener('mouseout', navMouseOutHandler, true);
+      const handler = navMouseOutHandler;
+      navBar.removeEventListener('mouseout', handler as EventListener, true);
     }
     navMouseOutHandler = null;
   }

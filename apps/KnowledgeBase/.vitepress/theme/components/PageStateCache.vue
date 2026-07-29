@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, watch, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vitepress';
-import { useSidebarStateStore } from '../composables/useSidebarStateStore';
+import { useSidebarStateStore, getCategoryPath } from '../composables/useSidebarStateStore';
 
 const router = useRouter();
 const route = useRoute();
@@ -133,7 +133,7 @@ function getActiveMenuItem(sidebar: Element): string {
     
     if (href === currentPath) {
       const parts = currentPath.split('/').filter(p => p);
-      if (parts.length >= 3) {
+      if (parts.length >= 2) {
         return href;
       }
     }
@@ -141,7 +141,7 @@ function getActiveMenuItem(sidebar: Element): string {
   
   if (currentPath && currentPath !== '/') {
     const parts = currentPath.split('/').filter(p => p);
-    if (parts.length >= 3) {
+    if (parts.length >= 2) {
       return currentPath;
     }
   }
@@ -220,14 +220,6 @@ async function restoreCurrentState(): Promise<void> {
       console.log('[PageStateCache] restore complete');
     }, 500);
   }, 200);
-}
-
-function getCategoryPath(path: string): string {
-  const parts = path.split('/').filter(p => p);
-  if (parts.length >= 2) {
-    return `/${parts[0]}/${parts[1]}/`;
-  }
-  return `/${parts.join('/')}/`;
 }
 
 function scrollToActiveMenuItem(sidebar: Element, activeHref: string): void {
@@ -324,10 +316,14 @@ function initMobileSidebarObserver(): void {
   }
 }
 
+let prevBeforeRouteChange: ((to: string) => boolean | void | Promise<boolean | void>) | undefined = undefined;
+
 function initBeforeRouteChangeHandler(): void {
   if (beforeRouteChangeHandler) {
-    router.onBeforeRouteChange = undefined;
+    router.onBeforeRouteChange = prevBeforeRouteChange;
   }
+  
+  prevBeforeRouteChange = router.onBeforeRouteChange;
   
   beforeRouteChangeHandler = (to: string) => {
     if (isRestoring) return true;
@@ -339,7 +335,13 @@ function initBeforeRouteChangeHandler(): void {
     return true;
   };
   
-  router.onBeforeRouteChange = beforeRouteChangeHandler;
+  router.onBeforeRouteChange = async (to) => {
+    if (prevBeforeRouteChange) {
+      const result = await prevBeforeRouteChange(to);
+      if (result === false) return false;
+    }
+    return beforeRouteChangeHandler(to);
+  };
 }
 
 function cleanupAll(): void {
@@ -378,7 +380,7 @@ function cleanupAll(): void {
   }
   
   if (beforeRouteChangeHandler) {
-    router.onBeforeRouteChange = undefined;
+    router.onBeforeRouteChange = prevBeforeRouteChange;
     beforeRouteChangeHandler = null;
   }
 }
@@ -387,6 +389,9 @@ async function handleRouteChange(): Promise<void> {
   console.log('[PageStateCache] handleRouteChange', { from: currentPath, to: route.path });
   
   currentPath = route.path;
+  
+  store.getPageState(currentPath).lastAccessTime = Date.now();
+  store.saveDebounced();
   
   const sidebar = await waitForSidebar();
   if (!sidebar) {
@@ -407,6 +412,9 @@ watch(() => route.path, () => {
 
 onMounted(async () => {
   console.log('[PageStateCache] onMounted', { path: route.path });
+  
+  store.getPageState(route.path).lastAccessTime = Date.now();
+  store.saveDebounced();
   
   const sidebar = await waitForSidebar();
   if (!sidebar) {

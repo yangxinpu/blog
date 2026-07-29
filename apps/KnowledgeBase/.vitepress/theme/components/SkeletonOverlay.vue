@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vitepress';
 import { useLoadingState } from '../composables/useLoadingState';
+import { getCategoryPath as getBaseCategoryPath } from '../composables/useSidebarStateStore';
 
 const router = useRouter();
 const route = useRoute();
@@ -121,17 +122,9 @@ function getCategoryPath(path: string): string {
   }
   
   const normalizedPath = path.startsWith('/') ? path : '/' + path;
-  const parts = normalizedPath.split('/').filter(p => p && p !== '_clear');
+  const filteredPath = normalizedPath.split('/').filter(p => p && p !== '_clear').join('/');
   
-  if (parts.length >= 2) {
-    return `/${parts[0]}/${parts[1]}/`;
-  }
-  
-  if (parts.length === 1) {
-    return `/${parts[0]}/`;
-  }
-  
-  return path;
+  return getBaseCategoryPath(filteredPath);
 }
 
 function onRouteChangeEnd() {
@@ -164,6 +157,9 @@ function onRouteChangeEnd() {
     hideOverlay();
   }
 }
+
+let prevBeforeRouteChange: ((to: string) => boolean | void | Promise<boolean | void>) | undefined = undefined;
+let prevAfterPageLoad: ((to: string) => void | Promise<void>) | undefined = undefined;
 
 onMounted(() => {
   if (typeof window !== 'undefined' && (window as any).removeInlineSkeleton) {
@@ -203,12 +199,21 @@ onMounted(() => {
     }
   }
 
+  prevBeforeRouteChange = router.onBeforeRouteChange;
   router.onBeforeRouteChange = async (to) => {
+    if (prevBeforeRouteChange) {
+      const result = await prevBeforeRouteChange(to);
+      if (result === false) return false;
+    }
     onRouteChangeStart(to);
     return true;
   };
 
+  prevAfterPageLoad = router.onAfterPageLoad;
   router.onAfterPageLoad = async (to) => {
+    if (prevAfterPageLoad) {
+      await prevAfterPageLoad(to);
+    }
     console.log('[SkeletonOverlay] onAfterPageLoad:', to);
     onRouteChangeEnd();
   };
@@ -216,8 +221,12 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   clearTimers();
-  router.onBeforeRouteChange = undefined;
-  router.onAfterPageLoad = undefined;
+  if (router.onBeforeRouteChange) {
+    router.onBeforeRouteChange = prevBeforeRouteChange;
+  }
+  if (router.onAfterPageLoad) {
+    router.onAfterPageLoad = prevAfterPageLoad;
+  }
 });
 </script>
 

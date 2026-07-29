@@ -76,8 +76,10 @@ function addOverviewLink(): void {
   const firstGroup = nav.querySelector('.group');
   if (firstGroup) {
     nav.insertBefore(group, firstGroup);
-  } else {
+  } else if (nav.firstChild) {
     nav.insertBefore(group, nav.firstChild.nextSibling);
+  } else {
+    nav.appendChild(group);
   }
   
   console.log('[SidebarOverview] Added overview link for:', categoryInfo.value.name);

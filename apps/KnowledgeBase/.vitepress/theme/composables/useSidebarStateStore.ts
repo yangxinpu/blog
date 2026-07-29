@@ -8,6 +8,7 @@ export interface SidebarGlobalState {
 export interface PageState {
   scrollY: number;
   activeMenuItem: string;
+  lastAccessTime: number;
 }
 
 export interface CategorySidebarStates {
@@ -38,12 +39,12 @@ let saveTimer: ReturnType<typeof setTimeout> | null = null;
 const DEBOUNCE_DELAY = 200;
 let isLoaded = false;
 
-function getFullPath(path: string): string {
+export function getFullPath(path: string): string {
   const cleanPath = path.split('#')[0].split('?')[0];
   return cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
 }
 
-function getCategoryPath(path: string): string {
+export function getCategoryPath(path: string): string {
   const parts = path.split('/').filter(p => p);
   if (parts.length >= 2) {
     return `/${parts[0]}/${parts[1]}/`;
@@ -113,6 +114,7 @@ export function useSidebarStateStore() {
       state.pageStates[key] = {
         scrollY: 0,
         activeMenuItem: '',
+        lastAccessTime: Date.now(),
       };
     }
     return state.pageStates[key];
@@ -135,9 +137,10 @@ export function useSidebarStateStore() {
       state.pageStates[key] = {
         scrollY: 0,
         activeMenuItem: '',
+        lastAccessTime: Date.now(),
       };
     }
-    Object.assign(state.pageStates[key], updates);
+    Object.assign(state.pageStates[key], updates, { lastAccessTime: Date.now() });
     debouncedSave();
   }
 
