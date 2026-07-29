@@ -1,44 +1,54 @@
 import { reactive } from 'vue';
 
-export interface SidebarState {
+export interface SidebarGlobalState {
   expandedGroups: Record<string, boolean>;
-  activeMenuItem: string;
   sidebarScrollY: number;
-  mobileSidebarOpen: boolean;
 }
 
 export interface PageState {
   scrollY: number;
-  sidebar: SidebarState;
+  activeMenuItem: string;
 }
 
-const STATE_STORAGE_KEY = 'kb_page_state_v2';
-const SIDEBAR_GLOBAL_KEY = 'kb_sidebar_global_state';
+export interface CategorySidebarStates {
+  [categoryPath: string]: SidebarGlobalState;
+}
 
-const isBrowser = typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+const PAGE_STATE_KEY = 'kb_page_states_v3';
+const SIDEBAR_CATEGORY_KEY = 'kb_sidebar_category_states_v3';
+const SIDEBAR_GLOBAL_KEY = 'kb_sidebar_global_state_v3';
+
+const isBrowser = typeof window !== 'undefined' && typeof sessionStorage !== 'undefined';
 
 const state = reactive<{
   pageStates: Record<string, PageState>;
-  globalSidebar: Partial<SidebarState>;
+  categorySidebars: Record<string, SidebarGlobalState>;
+  globalSidebar: {
+    mobileSidebarOpen: boolean;
+  };
 }>({
   pageStates: {},
-  globalSidebar: {},
+  categorySidebars: {},
+  globalSidebar: {
+    mobileSidebarOpen: false,
+  },
 });
 
 let saveTimer: ReturnType<typeof setTimeout> | null = null;
 const DEBOUNCE_DELAY = 200;
 let isLoaded = false;
 
+function getFullPath(path: string): string {
+  const cleanPath = path.split('#')[0].split('?')[0];
+  return cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+}
+
 function getCategoryPath(path: string): string {
   const parts = path.split('/').filter(p => p);
   if (parts.length >= 2) {
     return `/${parts[0]}/${parts[1]}/`;
   }
-  return path;
-}
-
-function getPageStateKey(path: string): string {
-  return getCategoryPath(path);
+  return `/${parts.join('/')}/`;
 }
 
 function safeParseJSON<T>(raw: string | null): T | null {
@@ -54,18 +64,23 @@ function loadFromStorage(): void {
   if (!isBrowser || isLoaded) return;
   
   try {
-    const stored = safeParseJSON<Record<string, PageState>>(localStorage.getItem(STATE_STORAGE_KEY));
-    if (stored) {
-      state.pageStates = stored;
+    const pageStates = safeParseJSON<Record<string, PageState>>(sessionStorage.getItem(PAGE_STATE_KEY));
+    if (pageStates) {
+      state.pageStates = pageStates;
     }
 
-    const globalStored = safeParseJSON<Partial<SidebarState>>(localStorage.getItem(SIDEBAR_GLOBAL_KEY));
-    if (globalStored) {
-      state.globalSidebar = globalStored;
+    const categorySidebars = safeParseJSON<Record<string, SidebarGlobalState>>(sessionStorage.getItem(SIDEBAR_CATEGORY_KEY));
+    if (categorySidebars) {
+      state.categorySidebars = categorySidebars;
+    }
+
+    const globalSidebar = safeParseJSON<{ mobileSidebarOpen: boolean }>(sessionStorage.getItem(SIDEBAR_GLOBAL_KEY));
+    if (globalSidebar) {
+      state.globalSidebar = globalSidebar;
     }
     isLoaded = true;
   } catch (e) {
-    console.warn('[SidebarStateStore] Failed to load from localStorage:', e);
+    console.warn('[SidebarStateStore] Failed to load from sessionStorage:', e);
   }
 }
 
@@ -73,10 +88,11 @@ function saveToStorage(): void {
   if (!isBrowser) return;
   
   try {
-    localStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(state.pageStates));
-    localStorage.setItem(SIDEBAR_GLOBAL_KEY, JSON.stringify(state.globalSidebar));
+    sessionStorage.setItem(PAGE_STATE_KEY, JSON.stringify(state.pageStates));
+    sessionStorage.setItem(SIDEBAR_CATEGORY_KEY, JSON.stringify(state.categorySidebars));
+    sessionStorage.setItem(SIDEBAR_GLOBAL_KEY, JSON.stringify(state.globalSidebar));
   } catch (e) {
-    console.warn('[SidebarStateStore] Failed to save to localStorage:', e);
+    console.warn('[SidebarStateStore] Failed to save to sessionStorage:', e);
   }
 }
 
@@ -92,68 +108,66 @@ function debouncedSave(): void {
 
 export function useSidebarStateStore() {
   function getPageState(path: string): PageState {
-    const key = getPageStateKey(path);
+    const key = getFullPath(path);
     if (!state.pageStates[key]) {
       state.pageStates[key] = {
         scrollY: 0,
-        sidebar: {
-          expandedGroups: {},
-          activeMenuItem: '',
-          sidebarScrollY: 0,
-          mobileSidebarOpen: false,
-        },
+        activeMenuItem: '',
       };
     }
     return state.pageStates[key];
   }
 
+  function getCategorySidebar(path: string): SidebarGlobalState {
+    const key = getCategoryPath(path);
+    if (!state.categorySidebars[key]) {
+      state.categorySidebars[key] = {
+        expandedGroups: {},
+        sidebarScrollY: 0,
+      };
+    }
+    return state.categorySidebars[key];
+  }
+
   function setPageState(path: string, updates: Partial<PageState>): void {
-    const key = getPageStateKey(path);
+    const key = getFullPath(path);
     if (!state.pageStates[key]) {
       state.pageStates[key] = {
         scrollY: 0,
-        sidebar: {
-          expandedGroups: {},
-          activeMenuItem: '',
-          sidebarScrollY: 0,
-          mobileSidebarOpen: false,
-        },
+        activeMenuItem: '',
       };
     }
     Object.assign(state.pageStates[key], updates);
     debouncedSave();
   }
 
-  function setSidebarState(path: string, updates: Partial<SidebarState>): void {
-    const pageState = getPageState(path);
-    Object.assign(pageState.sidebar, updates);
+  function setCategorySidebar(path: string, updates: Partial<SidebarGlobalState>): void {
+    const sidebar = getCategorySidebar(path);
+    Object.assign(sidebar, updates);
     debouncedSave();
-  }
-
-  function setGlobalSidebar(updates: Partial<SidebarState>): void {
-    Object.assign(state.globalSidebar, updates);
-    debouncedSave();
-  }
-
-  function getGlobalSidebar(): Partial<SidebarState> {
-    return state.globalSidebar;
   }
 
   function updateExpandedGroup(path: string, groupKey: string, expanded: boolean): void {
-    const pageState = getPageState(path);
-    pageState.sidebar.expandedGroups[groupKey] = expanded;
+    const sidebar = getCategorySidebar(path);
+    sidebar.expandedGroups[groupKey] = expanded;
     debouncedSave();
   }
 
   function setActiveMenuItem(path: string, menuItem: string): void {
     const pageState = getPageState(path);
-    pageState.sidebar.activeMenuItem = menuItem;
+    pageState.activeMenuItem = menuItem;
     debouncedSave();
   }
 
   function setSidebarScroll(path: string, scrollY: number): void {
+    const sidebar = getCategorySidebar(path);
+    sidebar.sidebarScrollY = scrollY;
+    debouncedSave();
+  }
+
+  function setPageScroll(path: string, scrollY: number): void {
     const pageState = getPageState(path);
-    pageState.sidebar.sidebarScrollY = scrollY;
+    pageState.scrollY = scrollY;
     debouncedSave();
   }
 
@@ -176,14 +190,16 @@ export function useSidebarStateStore() {
 
   function clearAll(): void {
     state.pageStates = {};
-    state.globalSidebar = {};
+    state.categorySidebars = {};
+    state.globalSidebar = { mobileSidebarOpen: false };
     if (saveTimer) {
       clearTimeout(saveTimer);
       saveTimer = null;
     }
     try {
-      localStorage.removeItem(STATE_STORAGE_KEY);
-      localStorage.removeItem(SIDEBAR_GLOBAL_KEY);
+      sessionStorage.removeItem(PAGE_STATE_KEY);
+      sessionStorage.removeItem(SIDEBAR_CATEGORY_KEY);
+      sessionStorage.removeItem(SIDEBAR_GLOBAL_KEY);
     } catch {
       // ignore
     }
@@ -193,13 +209,13 @@ export function useSidebarStateStore() {
 
   return {
     getPageState,
+    getCategorySidebar,
     setPageState,
-    setSidebarState,
-    setGlobalSidebar,
-    getGlobalSidebar,
+    setCategorySidebar,
     updateExpandedGroup,
     setActiveMenuItem,
     setSidebarScroll,
+    setPageScroll,
     setMobileSidebarOpen,
     getMobileSidebarOpen,
     saveNow,

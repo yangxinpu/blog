@@ -10,25 +10,26 @@ const store = useSidebarStateStore();
 let mutationObserver: MutationObserver | null = null;
 let mobileOverlayObserver: MutationObserver | null = null;
 let mobileBodyObserver: MutationObserver | null = null;
+let sidebarScrollObserver: MutationObserver | null = null;
+
 let currentPath = route.path;
 let isRestoring = false;
 let isNavigating = false;
-let stateSavedBeforeUnload = false;
 
 let scrollHandler: (() => void) | null = null;
 let beforeUnloadHandler: (() => void) | null = null;
-let sidebarScrollHandler: (() => void) | null = null;
-let globalClickHandler: ((e: MouseEvent) => void) | null = null;
 let beforeRouteChangeHandler: ((to: string) => boolean | void) | null = null;
 
 function generateGroupKey(item: Element): string {
-  const h2Text = item.querySelector(':scope > .item > H2.text')?.textContent?.trim() || '';
-  if (h2Text) {
-    return h2Text;
+  const textElement = item.querySelector(':scope > .item > .text') || 
+                       item.querySelector(':scope > .item > H2') ||
+                       item.querySelector(':scope > .item');
+  const text = textElement?.textContent?.trim() || '';
+  if (text) {
+    return text;
   }
   const link = item.querySelector(':scope > .item > a')?.getAttribute('href') || '';
-  const pText = item.querySelector(':scope > .item > a > P.text')?.textContent?.trim() || '';
-  return `${pText}${link}`;
+  return link;
 }
 
 function collectExpandedGroups(container: Element): Record<string, boolean> {
@@ -78,41 +79,74 @@ function restoreExpandedGroups(container: Element, expandedGroups: Record<string
   console.log('[PageStateCache] restoreExpandedGroups:', clicksPerformed, 'clicks performed');
 }
 
-function saveCurrentState(immediate = false, force = false): void {
-  if (!force && (isRestoring || isNavigating)) {
-    console.log('[PageStateCache] saveCurrentState skipped:', { isRestoring, isNavigating });
+function saveCurrentState(immediate = false): void {
+  if (isRestoring) {
+    console.log('[PageStateCache] saveCurrentState skipped: isRestoring');
     return;
   }
   
   const sidebar = document.querySelector('.VPSidebar');
   if (!sidebar) return;
   
-  const pageState = store.getPageState(currentPath);
+  try {
+    const pageState = store.getPageState(currentPath);
+    const categorySidebar = store.getCategorySidebar(currentPath);
+    
+    if (!pageState || !categorySidebar) {
+      console.warn('[PageStateCache] saveCurrentState: state is undefined');
+      return;
+    }
+    
+    pageState.scrollY = window.scrollY;
+    pageState.activeMenuItem = getActiveMenuItem(sidebar);
+    
+    categorySidebar.expandedGroups = collectExpandedGroups(sidebar);
+    
+    const sidebarContainer = sidebar.querySelector('.VPSidebar__scroll') || sidebar;
+    categorySidebar.sidebarScrollY = sidebarContainer.scrollTop;
+    
+    console.log('[PageStateCache] saveCurrentState', {
+      path: currentPath,
+      immediate,
+      scrollY: pageState.scrollY,
+      activeMenuItem: pageState.activeMenuItem,
+      expandedGroups: Object.entries(categorySidebar.expandedGroups).filter(([, v]) => v),
+      sidebarScrollY: categorySidebar.sidebarScrollY,
+    });
+    
+    if (immediate) {
+      store.saveNow();
+    } else {
+      store.saveDebounced();
+    }
+  } catch (e) {
+    console.warn('[PageStateCache] saveCurrentState error:', e);
+  }
+}
+
+function getActiveMenuItem(sidebar: Element): string {
+  const activeLinks = sidebar.querySelectorAll('a.active');
   
-  pageState.scrollY = window.scrollY;
-  pageState.sidebar.expandedGroups = collectExpandedGroups(sidebar);
-  
-  const activeLink = sidebar.querySelector('.active');
-  if (activeLink) {
-    pageState.sidebar.activeMenuItem = activeLink.getAttribute('href') || activeLink.textContent?.trim() || '';
+  for (const link of activeLinks) {
+    const href = link.getAttribute('href');
+    if (!href) continue;
+    
+    if (href === currentPath) {
+      const parts = currentPath.split('/').filter(p => p);
+      if (parts.length >= 3) {
+        return href;
+      }
+    }
   }
   
-  const sidebarContainer = sidebar.querySelector('.VPSidebar__scroll') || sidebar;
-  pageState.sidebar.sidebarScrollY = sidebarContainer.scrollTop;
-  
-  console.log('[PageStateCache] saveCurrentState', {
-    path: currentPath,
-    immediate,
-    force,
-    expandedGroups: Object.entries(pageState.sidebar.expandedGroups).filter(([, v]) => v),
-    scrollY: pageState.scrollY,
-  });
-  
-  if (immediate) {
-    store.saveNow();
-  } else {
-    store.saveDebounced();
+  if (currentPath && currentPath !== '/') {
+    const parts = currentPath.split('/').filter(p => p);
+    if (parts.length >= 3) {
+      return currentPath;
+    }
   }
+  
+  return '';
 }
 
 function waitForSidebar(maxAttempts = 30): Promise<Element | null> {
@@ -121,16 +155,14 @@ function waitForSidebar(maxAttempts = 30): Promise<Element | null> {
     const tryFind = () => {
       const sidebar = document.querySelector('.VPSidebar');
       if (sidebar) {
-        const hasCollapsible = sidebar.querySelector('.VPSidebarItem.collapsible');
-        const hasItem = sidebar.querySelector('.VPSidebarItem');
-        if (hasCollapsible || hasItem) {
+        const hasItems = sidebar.querySelector('.VPSidebarItem');
+        if (hasItems) {
           resolve(sidebar);
           return;
         }
       }
       attempts++;
       if (attempts >= maxAttempts) {
-        const sidebar = document.querySelector('.VPSidebar');
         resolve(sidebar);
         return;
       }
@@ -142,55 +174,69 @@ function waitForSidebar(maxAttempts = 30): Promise<Element | null> {
 
 async function restoreCurrentState(): Promise<void> {
   isRestoring = true;
-  isNavigating = true;
   
   const sidebar = await waitForSidebar();
   if (!sidebar) {
     console.warn('[PageStateCache] restoreCurrentState: sidebar not found');
     isRestoring = false;
-    isNavigating = false;
     return;
   }
   
   const pageState = store.getPageState(route.path);
-  
-  const collapsibleItems = sidebar.querySelectorAll('.VPSidebarItem.collapsible');
-  const currentKeys: string[] = [];
-  collapsibleItems.forEach((item) => {
-    const key = generateGroupKey(item);
-    if (key) currentKeys.push(key);
-  });
+  const categorySidebar = store.getCategorySidebar(route.path);
   
   console.log('[PageStateCache] restoreCurrentState', {
     path: route.path,
-    savedGroups: Object.entries(pageState.sidebar.expandedGroups).filter(([, v]) => v).map(([k]) => k),
-    currentCollapsibles: currentKeys,
-    scrollY: pageState.scrollY,
+    categoryPath: getCategoryPath(route.path),
+    savedScrollY: pageState.scrollY,
+    savedActiveMenuItem: pageState.activeMenuItem,
+    savedExpandedGroups: Object.entries(categorySidebar.expandedGroups).filter(([, v]) => v).map(([k]) => k),
+    savedSidebarScrollY: categorySidebar.sidebarScrollY,
   });
   
   await nextTick();
   
   setTimeout(() => {
+    if (categorySidebar.expandedGroups && Object.keys(categorySidebar.expandedGroups).length > 0) {
+      restoreExpandedGroups(sidebar, categorySidebar.expandedGroups);
+    }
+    
+    if (pageState.activeMenuItem) {
+      scrollToActiveMenuItem(sidebar, pageState.activeMenuItem);
+    }
+    
     if (pageState.scrollY > 0) {
       window.scrollTo(0, pageState.scrollY);
     }
     
-    if (Object.keys(pageState.sidebar.expandedGroups).length > 0) {
-      restoreExpandedGroups(sidebar, pageState.sidebar.expandedGroups);
-    }
-    
-    if (pageState.sidebar.sidebarScrollY > 0) {
+    if (categorySidebar.sidebarScrollY > 0) {
       const sidebarContainer = sidebar.querySelector('.VPSidebar__scroll') || sidebar;
-      sidebarContainer.scrollTop = pageState.sidebar.sidebarScrollY;
+      sidebarContainer.scrollTop = categorySidebar.sidebarScrollY;
     }
     
     setTimeout(() => {
-      saveCurrentState(true, true);
+      saveCurrentState(true);
       isRestoring = false;
-      isNavigating = false;
       console.log('[PageStateCache] restore complete');
     }, 500);
   }, 200);
+}
+
+function getCategoryPath(path: string): string {
+  const parts = path.split('/').filter(p => p);
+  if (parts.length >= 2) {
+    return `/${parts[0]}/${parts[1]}/`;
+  }
+  return `/${parts.join('/')}/`;
+}
+
+function scrollToActiveMenuItem(sidebar: Element, activeHref: string): void {
+  if (!activeHref) return;
+  
+  const activeLink = sidebar.querySelector(`a[href="${activeHref}"]`);
+  if (activeLink) {
+    activeLink.scrollIntoView({ block: 'nearest' });
+  }
 }
 
 function initMutationObserver(): void {
@@ -230,66 +276,23 @@ function initMutationObserver(): void {
   });
 }
 
-function initGlobalClickHandler(): void {
-  if (globalClickHandler) {
-    document.removeEventListener('click', globalClickHandler);
-  }
-  
-  if (beforeRouteChangeHandler) {
-    router.onBeforeRouteChange = undefined;
-  }
-  
-  globalClickHandler = (e: MouseEvent) => {
-    if (isRestoring) return;
-    
-    const target = e.target as Element;
-    const anchor = target.closest('a');
-    if (!anchor) return;
-    
-    const href = anchor.getAttribute('href') || anchor.href;
-    if (!href || href.startsWith('javascript:') || href.startsWith('#')) return;
-    
-    const isExternal = anchor.target === '_blank' || 
-                       (href.startsWith('http') && !href.includes(window.location.host));
-    if (isExternal) return;
-    
-    console.log('[PageStateCache] globalClickHandler: saving state before navigation');
-    stateSavedBeforeUnload = true;
-    saveCurrentState(true);
-    isNavigating = true;
-  };
-  
-  beforeRouteChangeHandler = (to: string) => {
-    if (isRestoring) return true;
-    
-    console.log('[PageStateCache] beforeRouteChangeHandler: saving state before navigation to', to);
-    stateSavedBeforeUnload = true;
-    saveCurrentState(true);
-    isNavigating = true;
-    return true;
-  };
-  
-  document.addEventListener('click', globalClickHandler);
-  router.onBeforeRouteChange = beforeRouteChangeHandler;
-}
-
-function initScrollObserver(): void {
+function initSidebarScrollObserver(): void {
   const sidebar = document.querySelector('.VPSidebar');
   if (!sidebar) return;
   
   const scrollContainer = sidebar.querySelector('.VPSidebar__scroll') || sidebar;
   
-  if (sidebarScrollHandler) {
-    scrollContainer.removeEventListener('scroll', sidebarScrollHandler);
+  if (sidebarScrollObserver) {
+    scrollContainer.removeEventListener('scroll', sidebarScrollObserver);
   }
   
-  sidebarScrollHandler = () => {
+  sidebarScrollObserver = () => {
     if (isRestoring) return;
-    const pageState = store.getPageState(currentPath);
-    pageState.sidebar.sidebarScrollY = scrollContainer.scrollTop;
+    const categorySidebar = store.getCategorySidebar(currentPath);
+    categorySidebar.sidebarScrollY = scrollContainer.scrollTop;
   };
   
-  scrollContainer.addEventListener('scroll', sidebarScrollHandler, { passive: true });
+  scrollContainer.addEventListener('scroll', sidebarScrollObserver, { passive: true });
 }
 
 function initMobileSidebarObserver(): void {
@@ -321,6 +324,24 @@ function initMobileSidebarObserver(): void {
   }
 }
 
+function initBeforeRouteChangeHandler(): void {
+  if (beforeRouteChangeHandler) {
+    router.onBeforeRouteChange = undefined;
+  }
+  
+  beforeRouteChangeHandler = (to: string) => {
+    if (isRestoring) return true;
+    
+    console.log('[PageStateCache] beforeRouteChangeHandler: saving state before navigation to', to);
+    isNavigating = true;
+    saveCurrentState(true);
+    isNavigating = false;
+    return true;
+  };
+  
+  router.onBeforeRouteChange = beforeRouteChangeHandler;
+}
+
 function cleanupAll(): void {
   if (mutationObserver) {
     mutationObserver.disconnect();
@@ -337,6 +358,15 @@ function cleanupAll(): void {
     mobileBodyObserver = null;
   }
   
+  if (sidebarScrollObserver) {
+    const sidebar = document.querySelector('.VPSidebar');
+    if (sidebar) {
+      const scrollContainer = sidebar.querySelector('.VPSidebar__scroll') || sidebar;
+      scrollContainer.removeEventListener('scroll', sidebarScrollObserver);
+    }
+    sidebarScrollObserver = null;
+  }
+  
   if (scrollHandler) {
     window.removeEventListener('scroll', scrollHandler);
     scrollHandler = null;
@@ -345,18 +375,6 @@ function cleanupAll(): void {
   if (beforeUnloadHandler) {
     window.removeEventListener('beforeunload', beforeUnloadHandler);
     beforeUnloadHandler = null;
-  }
-  
-  const sidebar = document.querySelector('.VPSidebar');
-  if (sidebar && sidebarScrollHandler) {
-    const scrollContainer = sidebar.querySelector('.VPSidebar__scroll') || sidebar;
-    scrollContainer.removeEventListener('scroll', sidebarScrollHandler);
-    sidebarScrollHandler = null;
-  }
-  
-  if (globalClickHandler) {
-    document.removeEventListener('click', globalClickHandler);
-    globalClickHandler = null;
   }
   
   if (beforeRouteChangeHandler) {
@@ -368,20 +386,18 @@ function cleanupAll(): void {
 async function handleRouteChange(): Promise<void> {
   console.log('[PageStateCache] handleRouteChange', { from: currentPath, to: route.path });
   
-  isNavigating = true;
   currentPath = route.path;
   
   const sidebar = await waitForSidebar();
   if (!sidebar) {
     console.warn('[PageStateCache] handleRouteChange: sidebar not found after route change');
-    isNavigating = false;
     return;
   }
   
   initMutationObserver();
-  initScrollObserver();
+  initSidebarScrollObserver();
   initMobileSidebarObserver();
-  initGlobalClickHandler();
+  initBeforeRouteChangeHandler();
   restoreCurrentState();
 }
 
@@ -392,8 +408,6 @@ watch(() => route.path, () => {
 onMounted(async () => {
   console.log('[PageStateCache] onMounted', { path: route.path });
   
-  stateSavedBeforeUnload = false;
-  
   const sidebar = await waitForSidebar();
   if (!sidebar) {
     console.warn('[PageStateCache] onMounted: sidebar not found');
@@ -403,9 +417,9 @@ onMounted(async () => {
   console.log('[PageStateCache] sidebar found, initializing observers and restoring state');
   
   initMutationObserver();
-  initScrollObserver();
+  initSidebarScrollObserver();
   initMobileSidebarObserver();
-  initGlobalClickHandler();
+  initBeforeRouteChangeHandler();
   restoreCurrentState();
   
   scrollHandler = () => {
@@ -416,11 +430,11 @@ onMounted(async () => {
   window.addEventListener('scroll', scrollHandler, { passive: true });
   
   beforeUnloadHandler = () => {
-    if (stateSavedBeforeUnload) {
-      console.log('[PageStateCache] beforeUnloadHandler: state already saved, skipping');
+    if (isNavigating) {
+      console.log('[PageStateCache] beforeUnloadHandler: navigating, skipping');
       return;
     }
-    if (isRestoring || isNavigating) return;
+    if (isRestoring) return;
     console.log('[PageStateCache] beforeUnloadHandler: saving state');
     saveCurrentState(true);
   };
@@ -429,7 +443,6 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   isRestoring = false;
-  isNavigating = false;
   saveCurrentState(true);
   cleanupAll();
 });

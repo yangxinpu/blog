@@ -11,6 +11,8 @@ import HeadSeo from './components/HeadSeo.vue';
 import NotFound from './components/NotFound.vue';
 import PageStateCache from './components/PageStateCache.vue';
 import HeroStats from './components/HeroStats.vue';
+import TopNavInterceptor from './components/TopNavInterceptor.vue';
+import SidebarOverview from './components/SidebarOverview.vue';
 
 function CustomLayout() {
   const { page } = useData();
@@ -25,6 +27,8 @@ function CustomLayout() {
     h(SkeletonOverlay),
     h(SidebarIcons),
     h(PageStateCache),
+    h(TopNavInterceptor),
+    h(SidebarOverview),
     h(SchemaOrg),
     h(DefaultTheme.Layout, null, {
       'home-hero-image': () => h(LogoAnimation),
