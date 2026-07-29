@@ -47,7 +47,7 @@ document.querySelectorAll('#id');
 
 **html和body**
 
-```id
+```javascript
 document.body;//获得body元素
 document.documentElement;//获得html根元素
 ```
