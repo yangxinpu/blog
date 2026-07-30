@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useTranslation } from 'react-i18next';
@@ -84,9 +84,9 @@ function isMultiLogoItem(
   return Array.isArray(asset.logo);
 }
 
-function resolveLogo(source: LogoSource, isDark: boolean): string {
+function resolveLogo(source: LogoSource): string {
   if (typeof source === 'string') return source;
-  return isDark ? source.dark : source.light;
+  return source.dark;
 }
 
 const BORDER_LIGHT_RADIUS = 300;
@@ -99,9 +99,6 @@ function Home() {
       rootMargin: '35% 0px 25% 0px',
       threshold: 0.05,
     });
-  const [isDark, setIsDark] = useState(
-    () => document.documentElement.getAttribute('data-theme') === 'dark'
-  );
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
   const cardsDataRef = useRef<Array<{ rect: DOMRect; element: HTMLElement }>>(
@@ -247,20 +244,6 @@ function Home() {
     };
   }, [isHomeActive]);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const updateTheme = () =>
-      setIsDark(root.getAttribute('data-theme') === 'dark');
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(root, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   const profileTags = t('homePage.profile.tags', {
     returnObjects: true,
   }) as unknown as string[];
@@ -280,7 +263,7 @@ function Home() {
       return {
         key,
         ...item,
-        logos: asset.logo.map((src) => resolveLogo(src, isDark)),
+        logos: asset.logo.map((src) => resolveLogo(src)),
         link: asset.link,
         kbLink: asset.kbLink,
       };
@@ -289,7 +272,7 @@ function Home() {
     return {
       key,
       ...item,
-      logo: resolveLogo(asset.logo, isDark),
+      logo: resolveLogo(asset.logo),
       link: asset.link,
       kbLink: asset.kbLink,
     };
@@ -467,7 +450,6 @@ function Home() {
           lineDistance={[4, 3, 5]}
           animationSpeed={0.6}
           mixBlendMode="screen"
-          isDark={isDark}
           isActive={isHomeActive}
         />
       </div>

@@ -175,7 +175,6 @@ interface FloatingLinesProps {
   bottomWavePosition?: WavePosition;
   animationSpeed?: number;
   mixBlendMode?: React.CSSProperties['mixBlendMode'];
-  isDark?: boolean;
   isActive?: boolean;
 }
 
@@ -213,7 +212,6 @@ function FloatingLines({
   bottomWavePosition = { x: 2.0, y: -0.7, rotate: -1 },
   animationSpeed = 1,
   mixBlendMode = 'screen',
-  isDark = false,
   isActive = true,
 }: FloatingLinesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -227,9 +225,8 @@ function FloatingLines({
   const startLoopRef = useRef<() => void>(() => {});
   const stopLoopRef = useRef<() => void>(() => {});
 
-  const brightness = useMemo(() => {
-    return isDark ? 0.3 : 0.6;
-  }, [isDark]);
+  // Theme is fixed to dark; brightness is constant
+  const brightness = 0.3;
 
   const topLineCount = useMemo(() => {
     if (typeof lineCount === 'number') return lineCount;
@@ -518,7 +515,6 @@ function FloatingLines({
 
     uniforms.lineGradient.value = gradientColors;
     uniforms.lineGradientCount.value = gradientCount;
-    uniforms.isDarkTheme.value = isDark;
   }, [
     animationSpeed,
     brightness,
@@ -534,7 +530,6 @@ function FloatingLines({
     bottomWavePosition,
     gradientColors,
     gradientCount,
-    isDark,
   ]);
 
   return (
@@ -542,7 +537,7 @@ function FloatingLines({
       ref={containerRef}
       className={styles.floatingLinesContainer}
       style={{
-        mixBlendMode: isDark ? mixBlendMode : 'normal',
+        mixBlendMode,
       }}
     />
   );

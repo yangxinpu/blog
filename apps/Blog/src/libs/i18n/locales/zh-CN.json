@@ -20,10 +20,6 @@
       "zhShort": "CN"
     }
   },
-  "theme": {
-    "dark": "深色模式",
-    "light": "浅色模式"
-  },
   "mottoSection": {
     "quotes": [
       "代码里的旋律，键盘上的狂欢",

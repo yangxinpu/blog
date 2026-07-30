@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Moon, Sun } from 'lucide-react';
 import { Dropdown } from '../../components/index';
 import styles from './Header.module.scss';
 import logoImage from '../../assets/Images/logo.png';
 
 interface HeaderProps {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
   changeLanguage: (lang: string) => void;
   scrollToSection: (id: string) => void;
 }
@@ -15,12 +12,7 @@ const personMeta = {
   capitalNickname: 'NAILUO',
 };
 
-function Header({
-  theme,
-  toggleTheme,
-  changeLanguage,
-  scrollToSection,
-}: HeaderProps) {
+function Header({ changeLanguage, scrollToSection }: HeaderProps) {
   const { t, i18n } = useTranslation();
 
   const langToggleText =
@@ -108,10 +100,6 @@ function Header({
             }
           >
             {langToggleText}
-          </button>
-
-          <button className={styles.themeSwitch} onClick={toggleTheme}>
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
       </div>

@@ -21,51 +21,27 @@
 
   // 不同类型的消息样式
   &-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #28a745;
-
-    [data-theme='dark'] & {
-      background-color: #1e3a2a;
-      color: #d4edda;
-      border-color: #34ce57;
-    }
+    background-color: #1e3a2a;
+    color: #d4edda;
+    border: 1px solid #34ce57;
   }
 
   &-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #dc3545;
-
-    [data-theme='dark'] & {
-      background-color: #3a1e1e;
-      color: #f8d7da;
-      border-color: #e53e4d;
-    }
+    background-color: #3a1e1e;
+    color: #f8d7da;
+    border: 1px solid #e53e4d;
   }
 
   &-warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffc107;
-
-    [data-theme='dark'] & {
-      background-color: #3a311e;
-      color: #fff3cd;
-      border-color: #ffca28;
-    }
+    background-color: #3a311e;
+    color: #fff3cd;
+    border: 1px solid #ffca28;
   }
 
   &-info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-    border: 1px solid #17a2b8;
-
-    [data-theme='dark'] & {
-      background-color: #1e2f3a;
-      color: #d1ecf1;
-      border-color: #1ab6cf;
-    }
+    background-color: #1e2f3a;
+    color: #d1ecf1;
+    border: 1px solid #1ab6cf;
   }
 }
 

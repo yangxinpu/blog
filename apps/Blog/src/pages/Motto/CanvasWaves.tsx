@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface WaveOptions {
   speed?: number;
@@ -31,43 +31,27 @@ export default function CanvasWaves({
   const wavesRef = useRef<WaveConfig[]>([]);
   const progressRef = useRef(0);
   const animationRef = useRef<number>(0);
-  const [themeColor, setThemeColor] = useState({
-    line: 'rgba(255, 255, 255, 0.8)',
-    glow: 'rgba(255, 255, 255, 0.2)',
+  // Theme is fixed to dark; accent color is read once from CSS variables.
+  // Default to #13d6aa (the dark-theme accent fallback) so the first frame
+  // is already correct before the effect below runs.
+  const themeColorRef = useRef({
+    line: '#13d6aa',
+    glow: '#13d6aa',
   });
 
   const { speed = 1.2, density = 5, lineWidthMultiplier = 1.5 } = options;
 
-  // Update theme color based on CSS variables
+  // Read accent color from CSS variables (theme is fixed to dark)
   useEffect(() => {
-    const updateColors = () => {
-      const root = document.documentElement;
-      const computedStyle = getComputedStyle(root);
-      // Fallback to a teal/blue if not found
-      const accent =
-        computedStyle.getPropertyValue('--accent').trim() || '#13d6aa';
+    const root = document.documentElement;
+    const computedStyle = getComputedStyle(root);
+    const accent =
+      computedStyle.getPropertyValue('--accent').trim() || '#13d6aa';
 
-      // In a real app we'd parse the color, but for Canvas context
-      // we can rely on standard CSS color strings.
-      // Since --accent might be a hex or rgb, we'll construct the strings
-      // We will use globalAlpha in canvas for transparency instead of parsing
-      setThemeColor({
-        line: accent,
-        glow: accent,
-      });
+    themeColorRef.current = {
+      line: accent,
+      glow: accent,
     };
-
-    updateColors();
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.attributeName === 'data-theme') {
-          updateColors();
-        }
-      }
-    });
-
-    observer.observe(document.documentElement, { attributes: true });
-    return () => observer.disconnect();
   }, []);
 
   // Initialize wave parameters
@@ -163,10 +147,10 @@ export default function CanvasWaves({
 
           // Add glow effect
           ctx.shadowBlur = 12;
-          ctx.shadowColor = themeColor.glow;
+          ctx.shadowColor = themeColorRef.current.glow;
 
           ctx.lineWidth = wave.width;
-          ctx.strokeStyle = themeColor.line;
+          ctx.strokeStyle = themeColorRef.current.line;
           ctx.globalAlpha = wave.opacity * (0.2 + 0.8 * p); // Fade in opacity while sweeping
           ctx.stroke();
 
@@ -185,7 +169,7 @@ export default function CanvasWaves({
       if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [isActive, isVisible, themeColor]);
+  }, [isActive, isVisible]);
 
   return (
     <canvas

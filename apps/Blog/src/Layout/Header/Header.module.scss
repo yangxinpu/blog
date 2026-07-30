@@ -135,8 +135,7 @@
   }
 }
 
-.langToggle,
-.themeSwitch {
+.langToggle {
   padding: 0.4rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -160,19 +159,5 @@
   &:focus {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-  }
-}
-
-.themeSwitch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-
-  @media (max-width: 768px) {
-    width: 32px;
-    height: 32px;
   }
 }

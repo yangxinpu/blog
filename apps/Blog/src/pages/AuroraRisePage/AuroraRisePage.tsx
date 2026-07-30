@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -27,7 +27,6 @@ function FlowingLinesBackground({
   accentColor,
   speed,
   glowIntensity,
-  isDark,
   isActive,
 }: {
   primaryColor: string;
@@ -35,7 +34,6 @@ function FlowingLinesBackground({
   accentColor: string;
   speed: number;
   glowIntensity: number;
-  isDark: boolean;
   isActive: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -198,7 +196,7 @@ function FlowingLinesBackground({
         left: 0,
         width: '100%',
         height: '100%',
-        opacity: isDark ? 1 : 0.5,
+        opacity: 1,
         transition: 'opacity 0.5s ease',
       }}
     />
@@ -212,25 +210,7 @@ function AuroraRisePage() {
     rootMargin: '30% 0px 30% 0px',
     threshold: 0.15,
   });
-  const [isDark, setIsDark] = useState(
-    () => document.documentElement.getAttribute('data-theme') === 'dark'
-  );
   const titleRef = useRef<HTMLHeadingElement | null>(null);
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    const observer = new MutationObserver(() => {
-      setIsDark(root.getAttribute('data-theme') === 'dark');
-    });
-
-    observer.observe(root, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   // 标题滚动进入动画
   useGSAP(
@@ -265,7 +245,6 @@ function AuroraRisePage() {
         accentColor="#0ea387"
         speed={0.08}
         glowIntensity={0.25}
-        isDark={isDark}
         isActive={isActive}
       />
 

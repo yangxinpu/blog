@@ -165,7 +165,7 @@
   min-height: 228px;
   border-radius: 20px;
   border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
-  background: color-mix(in srgb, var(--bg) 94%, black 6%);
+  background: color-mix(in srgb, var(--bg) 92%, black 8%);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 8%, transparent);
   padding: clamp(1rem, 1.4vw, 1.35rem);
   display: flex;
@@ -201,10 +201,10 @@
   background:
     radial-gradient(
       circle at 26% 18%,
-      color-mix(in srgb, var(--accent) 24%, transparent) 0%,
-      transparent 58%
+      color-mix(in srgb, var(--accent) 20%, transparent) 0%,
+      transparent 60%
     ),
-    color-mix(in srgb, var(--bg) 92%, black 8%);
+    color-mix(in srgb, var(--bg) 86%, black 14%);
 }
 
 .meta {
@@ -235,22 +235,6 @@
   font-weight: 700;
   letter-spacing: 0.01em;
   user-select: none;
-}
-
-[data-theme='dark'] {
-  .card {
-    background: color-mix(in srgb, var(--bg) 92%, black 8%);
-  }
-
-  .featured {
-    background:
-      radial-gradient(
-        circle at 26% 18%,
-        color-mix(in srgb, var(--accent) 20%, transparent) 0%,
-        transparent 60%
-      ),
-      color-mix(in srgb, var(--bg) 86%, black 14%);
-  }
 }
 
 @keyframes fireflyDrift {

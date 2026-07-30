@@ -1,6 +1,6 @@
 # Blog 应用 - Agent 指南
 
-> **文档版本**: v1.1.0
+> **文档版本**: v1.2.0
 > **最后更新**: 2026-07-30
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
@@ -41,9 +41,9 @@
 
 ## 主题系统
 
-- 通过 `<html data-theme="light|dark">` 切换，CSS 变量定义在 [global.scss](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/global.scss)
-- 状态持久化到 `localStorage.theme`，**默认 dark**
-- 主题切换由 [App.tsx](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/App.tsx) 顶层管理，通过 props 下传到 MainContent → Header
+- **强制暗色模式**：`<html data-theme="dark">` 硬编码在 [index.html](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/index.html)，无主题切换功能
+- CSS 变量直接定义在 [global.scss](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/global.scss) 的 `:root`（已是暗色值，不再有 `[data-theme='dark']` 覆盖块）
+- 不要引入亮色样式或主题切换 UI
 
 ## i18n
 

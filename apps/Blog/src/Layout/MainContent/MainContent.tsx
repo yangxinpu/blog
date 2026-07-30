@@ -15,12 +15,7 @@ const PERSON_EMAIL = '1813481502@qq.com';
 
 type MessageType = 'success' | 'error' | 'warning' | 'info';
 
-interface MainContentProps {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
-}
-
-function MainContent({ theme, toggleTheme }: MainContentProps) {
+function MainContent() {
   const { t, i18n } = useTranslation();
   const [message, setMessage] = useState<{
     visible: boolean;
@@ -76,8 +71,6 @@ function MainContent({ theme, toggleTheme }: MainContentProps) {
       )}
 
       <Header
-        theme={theme}
-        toggleTheme={toggleTheme}
         changeLanguage={changeLanguage}
         scrollToSection={scrollToSection}
       />

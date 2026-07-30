@@ -8,22 +8,12 @@ const LOAD_THRESHOLD = 800;
 const pageLoadStartTime = performance.now();
 
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme === 'light' ? 'light' : 'dark';
-  });
-
   const [showLoading, setShowLoading] = useState(true);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
 
   useEffect(() => {
     const handleLoad = () => {
       const loadTime = performance.now() - pageLoadStartTime;
-      
+
       if (loadTime < LOAD_THRESHOLD) {
         const remainingTime = LOAD_THRESHOLD - loadTime;
         setTimeout(() => {
@@ -42,17 +32,13 @@ function App() {
     }
   }, []);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-  };
-
   if (showLoading) {
     return <Loading logo={logoImage} text="NAILUO" />;
   }
 
   return (
     <Suspense fallback={<Loading logo={logoImage} text="NAILUO" />}>
-      <MainContent theme={theme} toggleTheme={toggleTheme} />
+      <MainContent />
     </Suspense>
   );
 }

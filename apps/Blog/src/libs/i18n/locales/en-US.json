@@ -20,10 +20,6 @@
       "zhShort": "CN"
     }
   },
-  "theme": {
-    "dark": "Dark mode",
-    "light": "Light mode"
-  },
   "mottoSection": {
     "quotes": [
       "Melody in code, carnival on keyboard",
