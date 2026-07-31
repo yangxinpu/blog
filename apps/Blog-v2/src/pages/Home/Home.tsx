@@ -1,13 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-
-const HERO_IMAGE_URL =
-  'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' +
-  encodeURIComponent(
-    'abstract 3d geometric wireframe shapes and flowing data particles in teal cyan on near black background, modern developer aesthetic, depth of field, cinematic'
-  ) +
-  '&image_size=landscape_16_9'
+import { ChevronDown } from 'lucide-react'
 
 export function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -15,6 +9,7 @@ export function Home() {
   const roleRef = useRef<HTMLParagraphElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
@@ -37,20 +32,20 @@ export function Home() {
         spans.push(span)
       })
 
-      gsap.set(spans, { y: 24 })
+      gsap.set(spans, { y: 28 })
 
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
       tl.to(spans, {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        stagger: 0.05,
+        duration: 0.7,
+        stagger: 0.06,
       })
         .fromTo(
           roleRef.current,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.7 },
-          '-=0.3'
+          '-=0.35'
         )
         .fromTo(
           subRef.current,
@@ -64,6 +59,12 @@ export function Home() {
           { opacity: 1, y: 0, duration: 0.5 },
           '-=0.3'
         )
+        .fromTo(
+          scrollRef.current,
+          { opacity: 0, y: -8 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          '-=0.2'
+        )
     },
     { scope: containerRef }
   )
@@ -72,110 +73,86 @@ export function Home() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
 
-    const visual = containerRef.current?.querySelector('[data-hero-visual]') as HTMLElement | null
-    if (!visual) return
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window
-      const xPercent = (e.clientX / innerWidth - 0.5) * 2
-      const yPercent = (e.clientY / innerHeight - 0.5) * 2
-      gsap.to(visual, {
-        x: xPercent * 12,
-        y: yPercent * 8,
-        duration: 0.6,
-        ease: 'power2.out',
-      })
+    const tween = gsap.to(scrollRef.current, {
+      y: 8,
+      duration: 1.2,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1,
+    })
+    return () => {
+      tween.kill()
     }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   return (
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-[100dvh] overflow-hidden"
+      className="relative min-h-[100dvh] overflow-hidden flex items-center justify-center"
     >
-      <div className="relative z-10 min-h-[100dvh] flex items-center pt-24 md:pt-28 pb-16 px-5 md:px-8">
-        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
-          {/* Text */}
-          <div>
-            <p
-              ref={roleRef}
-              className="text-sm md:text-base mb-4 md:mb-5 font-medium tracking-wide"
-              style={{ color: 'var(--accent)' }}
-            >
-              前端工程师 / 动效开发
-            </p>
+      {/* 文字背后的径向暗化，保证可读性 */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at center, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.25) 45%, transparent 75%)',
+        }}
+      />
 
-            <h1
-              ref={titleRef}
-              data-text="NaiLuo"
-              className="font-bold mb-5 md:mb-7 leading-none"
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--text)',
-                fontSize: 'clamp(3rem, 10vw, 6rem)',
-                letterSpacing: '-0.04em',
-              }}
-            >
-              NaiLuo
-            </h1>
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-5 md:px-8 pt-24 md:pt-28 pb-24 text-center flex flex-col items-center">
+        <p
+          ref={roleRef}
+          className="text-xs md:text-sm mb-5 md:mb-7 font-medium tracking-[0.25em] uppercase"
+          style={{ color: 'var(--accent)' }}
+        >
+          前端工程师 / 动效开发
+        </p>
 
-            <p
-              ref={subRef}
-              className="text-base md:text-lg xl:text-xl leading-relaxed mb-7 md:mb-9 max-w-lg"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              用 React 与 TypeScript 构建可交互的界面，用 GSAP 编排有节奏的动效。
-              关注组件结构、渲染性能与细节反馈。
-            </p>
+        <h1
+          ref={titleRef}
+          data-text="NaiLuo"
+          className="font-bold mb-6 md:mb-8 leading-none"
+          style={{
+            fontFamily: 'var(--font-display)',
+            color: 'var(--text)',
+            fontSize: 'clamp(3.5rem, 14vw, 8rem)',
+            letterSpacing: '-0.045em',
+            textShadow: '0 0 60px rgba(25, 250, 198, 0.15)',
+          }}
+        >
+          NaiLuo
+        </h1>
 
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <button
-                className="btn-primary w-full sm:w-auto"
-                onClick={() => {
-                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                查看项目
-              </button>
-              <a
-                href="https://github.com/nailuo"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary w-full sm:w-auto"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
+        <p
+          ref={subRef}
+          className="text-base md:text-lg xl:text-xl leading-relaxed mb-9 md:mb-11 max-w-2xl"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          用 React 与 TypeScript 构建可交互的界面，用 GSAP 编排有节奏的动效。
+          关注组件结构、渲染性能与细节反馈。
+        </p>
 
-          {/* Image */}
-          <div className="hidden md:block">
-            <div
-              data-hero-visual
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden"
-              style={{
-                background: 'var(--bg-secondary)',
-                border: '1px solid var(--border-subtle)',
-              }}
-            >
-              <img
-                src={HERO_IMAGE_URL}
-                alt="抽象几何线框与流动粒子构成的开发者视觉"
-                className="w-full h-full object-cover"
-                loading="eager"
-                decoding="async"
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: 'var(--hero-overlay)' }}
-              />
-            </div>
-          </div>
+        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 md:gap-4">
+          <a
+            href="https://github.com/nailuo"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-primary w-full sm:w-auto"
+          >
+            GitHub
+          </a>
         </div>
+      </div>
+
+      {/* 滚动指示器 */}
+      <div
+        ref={scrollRef}
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5"
+        style={{ color: 'var(--text-muted)' }}
+      >
+        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <ChevronDown size={16} strokeWidth={1.5} />
       </div>
     </section>
   )

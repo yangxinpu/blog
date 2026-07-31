@@ -1,7 +1,7 @@
 # Blog-v2 应用 - Agent 指南
 
-> **文档版本**: v1.6.0
-> **最后更新**: 2026-07-31
+> **文档版本**: v1.8.0
+> **最后更新**: 2026-08-01
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
 
@@ -32,6 +32,7 @@
 | Tailwind CSS | 4.x | 原子化 CSS（通过 `@tailwindcss/vite` 插件集成） |
 | GSAP | 3.x | 动画引擎 |
 | Three.js | 0.183.x | 3D 渲染 |
+| ogl | 1.x | WebGL 着色器（FerrofluidBackground 流体背景） |
 | i18next | 25.x | 国际化 |
 | Lucide React | 0.577.x | 图标库 |
 
@@ -41,6 +42,7 @@
 |------|----------|------|
 | `gsap` + `@gsap/react` | `import gsap from 'gsap'`、`import { useGSAP } from '@gsap/react'`、`import { ScrollTrigger } from 'gsap/ScrollTrigger'` | 所有动画基于 GSAP。`useGSAP` 自带 `gsap.context` 清理，必须用 `scope` 限定作用域 |
 | `three` | `import * as THREE from 'three'` | 3D 场景渲染 |
+| `ogl` | `import { Renderer, Program, Mesh, Triangle } from 'ogl'` | **清理陷阱**：`Renderer` 无 `destroy()`、`Mesh` 无 `remove()`。正确清理 = `geometry.remove()` + `program.remove()` + `gl.getExtension('WEBGL_lose_context')?.loseContext()` + 移除 canvas |
 | `lucide-react` | 图标按需导入，如 `import { IconName } from 'lucide-react'` | |
 | `i18next` + `react-i18next` | `import i18n from 'i18next'`、`import { useTranslation } from 'react-i18next'` | 见 i18n 章节 |
 | `tailwindcss` | `@import "tailwindcss"` 在 CSS 中引入 | v4 通过 Vite 插件工作，无需 postcss |
@@ -62,8 +64,8 @@
 
 ```
 src/
-├── components/     # 可复用组件
-├── pages/          # 页面区块
+├── components/     # 可复用组件（Navbar、FerrofluidBackground）
+├── pages/          # 页面区块（当前仅 Home）
 ├── libs/           # hooks / i18n / utils
 ├── assets/Images/  # 图片资源
 ├── App.tsx         # 应用入口组件
@@ -71,6 +73,8 @@ src/
 ├── index.css       # 全局样式 + Tailwind 引入
 └── main.tsx        # 应用启动
 ```
+
+**当前页面结构**：仅包含首页（Home）和导航栏（Navbar）。About、TechStack、Projects、Blog、Contact、Footer 页面已移除。
 
 ## 样式约定
 
