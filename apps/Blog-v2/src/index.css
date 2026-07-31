@@ -8,7 +8,7 @@
 }
 
 :root {
-  /* 主色 - 与 Blog v1 保持一致 */
+  /* 主色 - 与 DESIGN.md 保持一致 */
   --primary-100: #d3fff3;
   --primary-200: #97fce4;
   --primary-300: #19fac6;
@@ -27,7 +27,18 @@
   --border-subtle: #2e2e2e;
   --accent: #19fac6;
   --accent-hover: var(--primary-200);
-  --shadow: rgba(0, 0, 0, 0.3) 0 2px 8px;
+  --shadow: rgba(0, 0, 0, 0.3);
+
+  /* Tag / Chip 变量 */
+  --tag-bg: rgba(25, 250, 198, 0.12);
+  --tag-bg-hover: rgba(25, 250, 198, 0.10);
+  --tag-border: rgba(25, 250, 198, 0.25);
+  --tag-border-hover: rgba(25, 250, 198, 0.22);
+
+  /* 渐变遮罩 */
+  --hero-overlay: linear-gradient(180deg, rgba(26, 26, 26, 0) 40%, rgba(26, 26, 26, 0.55) 100%);
+  --project-overlay: linear-gradient(180deg, rgba(26, 26, 26, 0.1) 30%, rgba(26, 26, 26, 0.92) 100%);
+  --accent-gradient-hero: linear-gradient(135deg, rgba(25, 250, 198, 0.08), rgba(25, 250, 198, 0.02));
 
   /* 字体 */
   --font-display: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -39,6 +50,14 @@
   --scrollbar-track: transparent;
   --scrollbar-thumb: rgba(64, 64, 64, 0.6);
   --scrollbar-thumb-hover: rgba(25, 250, 198, 0.5);
+
+  /* Navbar */
+  --navbar-bg: rgba(26, 26, 26, 0.85);
+  --navbar-bg-mobile: rgba(26, 26, 26, 0.98);
+
+  /* 半透明背景（让 3D 背景微微透出） */
+  --bg-translucent: rgba(26, 26, 26, 0.97);
+  --bg-secondary-translucent: rgba(42, 42, 42, 0.97);
 
   font-family: var(--font-sans);
   line-height: 1.5;
@@ -129,37 +148,6 @@ body {
   color: var(--bg);
 }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: var(--accent-hover);
-  }
-}
-
-button {
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background-color: var(--bg-secondary);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: var(--border);
-  }
-
-  &:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
 h1,
 h2,
 h3,
@@ -177,6 +165,64 @@ h6 {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Button: Primary — accent bg + bg text */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: scale(1.03);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Button: Secondary — transparent + accent border */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: var(--tag-bg);
+  border-color: var(--accent-hover);
+  color: var(--accent-hover);
+  transform: scale(1.03);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
 }
 
 /* Reduce motion */

@@ -8,6 +8,7 @@ interface Particle {
   radius: number
   color: string
   alpha: number
+  currentAlpha: number
 }
 
 interface ParticleBackgroundProps {
@@ -46,7 +47,8 @@ export function ParticleBackground({
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Create particles
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     const createParticles = (width: number, height: number) => {
       const particles: Particle[] = []
       const cols = Math.ceil(width / dotSpacing) + 1
@@ -56,6 +58,7 @@ export function ParticleBackground({
         for (let j = 0; j < rows; j++) {
           const x = i * dotSpacing
           const y = j * dotSpacing
+          const alpha = 0.3 + Math.random() * 0.4
           particles.push({
             x,
             y,
@@ -63,67 +66,73 @@ export function ParticleBackground({
             baseY: y,
             radius: dotRadius,
             color: baseColor,
-            alpha: 0.3 + Math.random() * 0.4,
+            alpha,
+            currentAlpha: alpha,
           })
         }
       }
       return particles
     }
 
-    // Draw function
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       const mouse = mouseRef.current
       const time = timeRef.current
 
       for (const p of particlesRef.current) {
-        // Wave effect
-        const waveOffset =
-          waveAmplitude * Math.sin(time * 2 + p.baseX * 0.01 + p.baseY * 0.01)
-        p.y = p.baseY + waveOffset
-
-        // Mouse interaction - bulge effect
-        const dx = p.x - mouse.x
-        const dy = p.y - mouse.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-
-        if (dist < cursorRadius) {
-          const force = (1 - dist / cursorRadius) * bulgeStrength
-          const angle = Math.atan2(dy, dx)
-          p.x = p.baseX + Math.cos(angle) * force
-          p.y = p.baseY + Math.sin(angle) * force + waveOffset
-          p.color = accentColor
-          p.radius = dotRadius + (1 - dist / cursorRadius) * 2
-        } else {
-          p.x += (p.baseX - p.x) * 0.1
-          p.y += (p.baseY + waveOffset - p.y) * 0.1
-          p.color = baseColor
+        if (reduce) {
+          p.x = p.baseX
+          p.y = p.baseY
           p.radius = dotRadius
+          p.currentAlpha = p.alpha
+        } else {
+          const waveOffset =
+            waveAmplitude * Math.sin(time * 2 + p.baseX * 0.01 + p.baseY * 0.01)
+          p.y = p.baseY + waveOffset
+
+          const dx = p.x - mouse.x
+          const dy = p.y - mouse.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+
+          if (dist < cursorRadius) {
+            const force = (1 - dist / cursorRadius) * bulgeStrength
+            const angle = Math.atan2(dy, dx)
+            p.x = p.baseX + Math.cos(angle) * force
+            p.y = p.baseY + Math.sin(angle) * force + waveOffset
+            p.color = accentColor
+            p.radius = dotRadius + (1 - dist / cursorRadius) * 2
+          } else {
+            p.x += (p.baseX - p.x) * 0.1
+            p.y += (p.baseY + waveOffset - p.y) * 0.1
+            p.color = baseColor
+            p.radius = dotRadius
+          }
+
+          p.currentAlpha = p.alpha
+          if (sparkle && Math.random() < 0.003) {
+            p.currentAlpha = 1
+            p.radius = dotRadius * 2
+          }
         }
 
-        // Sparkle effect
-        let alpha = p.alpha
-        if (sparkle && Math.random() < 0.003) {
-          alpha = 1
-          p.radius = dotRadius * 2
-        }
-
-        // Draw particle
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-        ctx.fillStyle = p.color.replace(/[\d.]+\)$/, `${alpha})`)
+        ctx.fillStyle = p.color
+        ctx.globalAlpha = p.currentAlpha
         ctx.fill()
       }
+
+      ctx.globalAlpha = 1
     }
 
-    // Animation loop
     const animate = () => {
-      timeRef.current += speed
+      if (!reduce) {
+        timeRef.current += speed
+      }
       draw()
       animationIdRef.current = requestAnimationFrame(animate)
     }
 
-    // Event handlers
     const handleResize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight

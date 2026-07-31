@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import logo from '../../assets/Images/logo.png'
 
 const navItems = [
   { id: 'home', label: '首页' },
@@ -14,6 +15,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const activeSectionRef = useRef('home')
   const sentinelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export function Navbar() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        let bestId = activeSection
+        let bestId = activeSectionRef.current
         let bestRatio = 0
         for (const entry of entries) {
           if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
@@ -48,7 +50,10 @@ export function Navbar() {
             bestId = entry.target.id
           }
         }
-        if (bestRatio > 0) setActiveSection(bestId)
+        if (bestRatio > 0 && bestId !== activeSectionRef.current) {
+          activeSectionRef.current = bestId
+          setActiveSection(bestId)
+        }
       },
       {
         rootMargin: '-20% 0px -60% 0px',
@@ -58,7 +63,7 @@ export function Navbar() {
 
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [activeSection])
+  }, [])
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -80,7 +85,7 @@ export function Navbar() {
   }
 
   const navBgStyle = isScrolled
-    ? { background: 'rgba(26, 26, 26, 0.85)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }
+    ? { background: 'var(--navbar-bg)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }
     : { background: 'transparent', backdropFilter: 'none', borderBottom: 'none' }
 
   return (
@@ -98,10 +103,15 @@ export function Navbar() {
               e.preventDefault()
               handleNavClick('home')
             }}
-            className="text-lg md:text-xl font-bold shrink-0"
-            style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}
+            className="flex items-center gap-2 shrink-0"
           >
-            NaiLuo
+            <img src={logo} alt="NaiLuo" className="h-8 md:h-9 w-auto object-contain" />
+            <span
+              className="text-lg md:text-xl font-bold"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}
+            >
+              NaiLuo
+            </span>
           </a>
 
           <div className="hidden md:flex items-center gap-7 h-full">
@@ -141,7 +151,7 @@ export function Navbar() {
           <div
             className="md:hidden fixed top-[64px] left-0 right-0 bottom-0 safe-bottom overflow-y-auto"
             style={{
-              background: 'rgba(26, 26, 26, 0.98)',
+              background: 'var(--navbar-bg-mobile)',
               backdropFilter: 'blur(12px)',
               borderTop: '1px solid var(--border)',
             }}

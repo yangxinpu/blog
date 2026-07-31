@@ -1,5 +1,5 @@
 ---
-version: "0.4.0"
+version: "0.5.0"
 name: NaiLuo Portfolio — Teal Dark
 description: 极简主义深色开发者作品集，以青色为强调色，GSAP 驱动的克制微动效
 colors:
@@ -336,7 +336,7 @@ components:
 
 - 粘性置顶（`fixed top-0`），z-index 50，高度 64px
 - 初始透明背景；滚动后背景变为 `rgba(26, 26, 26, 0.85)` + `backdrop-filter: blur(12px)` + `1px solid {border}` 底部边框
-- Logo 使用 `accent` 色 + Geist 字体字重 700
+- Logo 使用 `assets/Images/logo.png` 图片 + `accent` 色 Geist 字体文字组合
 - 选中导航项下方 `2px` `accent` 色下划线（通过 inline style `background: var(--accent)` 实现）
 - 移动端汉堡菜单展开时背景 `rgba(26, 26, 26, 0.98)` + 顶边框
 
@@ -348,6 +348,14 @@ components:
 - 背景：Canvas 粒子交互层（`ParticleBackground`），鼠标靠近粒子产生 bulging 效果
 - 入场动画：GSAP timeline，标题逐字符上浮（`stagger: 0.05`），其他元素依次淡入
 
+### 3D Scroll Background（全局 3D 滚动背景）
+
+- 固定全屏容器（`fixed inset-0`），`perspective: 1200px`，`z-index: 0`
+- 三层视差结构：wireframe grid（`translateZ(-500px)`）→ 浮动几何线框（`translateZ(-150~-300px)`）→ 点阵图案（`translateZ(-100px)`）
+- GSAP ScrollTrigger `scrub: 1.5` 驱动各层 `rotateX/rotateZ/yPercent` 随滚动变化
+- 各 section 使用 `--bg-translucent` / `--bg-secondary-translucent`（93% 不透明度）半透明背景，让 3D 层微微透出
+- 尊重 `prefers-reduced-motion`，降级为静态背景
+
 ### Section（通用板块）
 
 - 标题使用 `headline-lg/md` 或 `headline-sm`
@@ -356,8 +364,10 @@ components:
 
 ### Button（按钮）
 
-- **Primary**: `accent` 背景 + `bg` 文字色 + `full` 圆角 + hover `scale(1.03)` + 按压 `scale(0.98)`，可选 `boxShadow: 0 0 24px rgba(25, 250, 198, 0.25)` 发光
-- **Secondary**: 透明背景 + `1px solid {accent}` 边框 + `accent` 文字色 + `full` 圆角
+使用 CSS 类 `.btn-primary` / `.btn-secondary`（定义于 `index.css`），统一 hover/active/focus 状态：
+
+- **Primary** (`.btn-primary`): `accent` 背景 + `bg` 文字色 + `full` 圆角 + hover 变 `accent-hover` + `scale(1.03)` + 按压 `scale(0.98)`
+- **Secondary** (`.btn-secondary`): 透明背景 + `1px solid {accent}` 边框 + `accent` 文字色 + `full` 圆角 + hover 加 `tag-bg` 背景 tint + 边框/文字变 `accent-hover`
 - **Tertiary**: `bg-secondary` 背景 + `1px solid {border}` 边框 + 标准文字色 + `sm` 圆角
 
 ### Tag / Chip（标签）
@@ -400,7 +410,7 @@ components:
 ✅ **必须**在 `index.css` 的 `:root` 中维护所有 CSS 变量，组件通过 `var(--*)` 引用
 
 ❌ **禁止**使用玻璃拟态（backdrop-filter 仅用于导航栏滚动态）
-❌ **禁止**使用霓虹发光效果或 3D 透视变换
+❌ **禁止**使用霓虹发光效果（3D 透视变换仅允许用于全局背景滚动动画层）
 ❌ **禁止**在正文中使用纯白（`#ffffff`）或近纯白色
 ❌ **禁止**在同一页面混用超过 2 种字体
 ❌ **禁止**添加不必要的装饰性元素（渐变、阴影、纹理）

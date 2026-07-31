@@ -1,6 +1,6 @@
 # Blog-v2 应用 - Agent 指南
 
-> **文档版本**: v1.5.0
+> **文档版本**: v1.6.0
 > **最后更新**: 2026-07-31
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。

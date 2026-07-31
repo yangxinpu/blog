@@ -1,10 +1,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUpRight } from 'lucide-react'
-
-gsap.registerPlugin(ScrollTrigger)
 
 interface Project {
   title: string
@@ -61,50 +58,59 @@ export function Projects() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.projects-headline',
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 70%',
-            once: true,
-          },
-        }
-      )
+    gsap.fromTo(
+      '.projects-headline',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 70%',
+          once: true,
+        },
+      }
+    )
 
-      gsap.fromTo(
-        '.project-row',
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.projects-list',
-            start: 'top 72%',
-            once: true,
-          },
-        }
-      )
-    }, containerRef)
+    gsap.fromTo(
+      '.project-row',
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.projects-list',
+          start: 'top 72%',
+          once: true,
+        },
+      }
+    )
+  }, { scope: containerRef })
 
-    return () => ctx.revert()
-  }, [])
+  const openProject = (href: string) => {
+    if (href && href !== '#') {
+      window.open(href, '_blank', 'noreferrer')
+    }
+  }
+
+  const handleProjectKeyDown = (e: React.KeyboardEvent, href: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      openProject(href)
+    }
+  }
 
   return (
     <section
       id="projects"
       ref={containerRef}
       className="relative min-h-[100dvh] py-16 md:py-24 px-5 md:px-8"
-      style={{ background: 'var(--bg)' }}
+      style={{ background: 'var(--bg-translucent)' }}
     >
       <div className="max-w-6xl mx-auto w-full">
         <h2
@@ -123,19 +129,31 @@ export function Projects() {
         <div className="projects-list space-y-12 md:space-y-20">
           {projects.map((project, i) => {
             const imgSrc = img(project.prompt)
-            // Layout: zigzag with a break.
-            //  P1: image left / text right  (split)
-            //  P2: text left / image right  (split)
-            //  P3: full-width feature       (break - different family)
-            //  P4: image left / text right  (split resumes)
             const isBreak = i === 2
             const imageRight = i === 1
+
+            const tagStyle = i === 2
+              ? {
+                  background: 'var(--tag-bg)',
+                  color: 'var(--accent)',
+                  border: '1px solid var(--tag-border)',
+                }
+              : {
+                  background: 'var(--tag-bg-hover)',
+                  color: 'var(--accent)',
+                  border: '1px solid var(--tag-border-hover)',
+                }
 
             if (isBreak) {
               return (
                 <article
                   key={project.title}
+                  tabIndex={0}
+                  role="link"
+                  aria-label={`打开项目: ${project.title}`}
+                  onKeyDown={(e) => handleProjectKeyDown(e, project.href)}
                   className="project-row group cursor-pointer"
+                  onClick={() => openProject(project.href)}
                 >
                   <div
                     className="relative rounded-2xl overflow-hidden"
@@ -151,21 +169,14 @@ export function Projects() {
                     </div>
                     <div
                       className="absolute inset-0 flex flex-col justify-end p-5 md:p-10"
-                      style={{
-                        background:
-                          'linear-gradient(180deg, rgba(26,26,26,0.1) 30%, rgba(26,26,26,0.92) 100%)',
-                      }}
+                      style={{ background: 'var(--project-overlay)' }}
                     >
                       <div className="flex flex-wrap gap-2 mb-3">
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
                             className="px-2.5 py-0.5 rounded-full text-xs font-mono"
-                            style={{
-                              background: 'rgba(25,250,198,0.12)',
-                              color: 'var(--accent)',
-                              border: '1px solid rgba(25,250,198,0.25)',
-                            }}
+                            style={tagStyle}
                           >
                             {tag}
                           </span>
@@ -208,7 +219,12 @@ export function Projects() {
             return (
               <article
                 key={project.title}
+                tabIndex={0}
+                role="link"
+                aria-label={`打开项目: ${project.title}`}
+                onKeyDown={(e) => handleProjectKeyDown(e, project.href)}
                 className="project-row group grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center cursor-pointer"
+                onClick={() => openProject(project.href)}
               >
                 <div
                   className={`order-1 ${imageRight ? 'md:order-2' : 'md:order-1'} relative rounded-2xl overflow-hidden`}
@@ -230,11 +246,7 @@ export function Projects() {
                       <span
                         key={tag}
                         className="px-2.5 py-0.5 rounded-full text-xs font-mono"
-                        style={{
-                          background: 'rgba(25,250,198,0.10)',
-                          color: 'var(--accent)',
-                          border: '1px solid rgba(25,250,198,0.22)',
-                        }}
+                        style={tagStyle}
                       >
                         {tag}
                       </span>

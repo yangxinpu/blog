@@ -1,4 +1,5 @@
 import { Navbar } from './components/Navbar/Navbar'
+import { ScrollBackground3D } from './components/ScrollBackground3D/ScrollBackground3D'
 import { Home } from './pages/Home/Home'
 import { About } from './pages/About/About'
 import { TechStack } from './pages/TechStack/TechStack'
@@ -11,6 +12,7 @@ import './App.css'
 function App() {
   return (
     <div className="app">
+      <ScrollBackground3D />
       <Navbar />
       <main>
         <Home />

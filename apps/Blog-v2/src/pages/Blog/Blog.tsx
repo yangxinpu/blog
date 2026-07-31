@@ -1,10 +1,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUpRight } from 'lucide-react'
-
-gsap.registerPlugin(ScrollTrigger)
 
 interface Article {
   date: string
@@ -61,50 +58,54 @@ export function Blog() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.blog-headline',
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 70%',
-            once: true,
-          },
-        }
-      )
+    gsap.fromTo(
+      '.blog-headline',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 70%',
+          once: true,
+        },
+      }
+    )
 
-      gsap.fromTo(
-        '.blog-row',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.blog-list',
-            start: 'top 75%',
-            once: true,
-          },
-        }
-      )
-    }, containerRef)
+    gsap.fromTo(
+      '.blog-row',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.blog-list',
+          start: 'top 75%',
+          once: true,
+        },
+      }
+    )
+  }, { scope: containerRef })
 
-    return () => ctx.revert()
-  }, [])
+  const handleBlogKeyDown = (e: React.KeyboardEvent, article: Article) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      // TODO: navigate to article page when routing is implemented
+      void article
+    }
+  }
 
   return (
     <section
       id="blog"
       ref={containerRef}
       className="relative min-h-[100dvh] py-16 md:py-24 px-5 md:px-8"
-      style={{ background: 'var(--bg-secondary)' }}
+      style={{ background: 'var(--bg-secondary-translucent)' }}
     >
       <div className="max-w-5xl mx-auto w-full">
         <h2
@@ -120,16 +121,18 @@ export function Blog() {
           最近写的东西
         </h2>
 
-        {/* Editorial list: hairline rows, not cards */}
         <ol className="blog-list">
           {articles.map((article) => (
             <li
               key={article.title}
+              tabIndex={0}
+              role="link"
+              aria-label={`阅读文章: ${article.title}`}
+              onKeyDown={(e) => handleBlogKeyDown(e, article)}
               className="blog-row group cursor-pointer py-6 md:py-8"
               style={{ borderTop: '1px solid var(--border-subtle)' }}
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
-                {/* Left: meta column */}
                 <div className="md:col-span-3 flex flex-row md:flex-col gap-2 md:gap-2 items-baseline md:items-start">
                   <time
                     className="font-mono text-xs"
@@ -156,7 +159,6 @@ export function Blog() {
                   </div>
                 </div>
 
-                {/* Right: title + excerpt */}
                 <div className="md:col-span-9">
                   <h3
                     className="font-bold mb-2 transition-colors duration-300"

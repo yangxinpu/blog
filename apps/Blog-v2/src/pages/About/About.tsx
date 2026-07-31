@@ -1,9 +1,6 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
   { value: '4.5+', label: '年前端经验' },
@@ -26,83 +23,79 @@ export function About() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.about-headline',
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 70%',
-            once: true,
-          },
-        }
-      )
+    gsap.fromTo(
+      '.about-headline',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 70%',
+          once: true,
+        },
+      }
+    )
 
-      gsap.fromTo(
-        '.about-body',
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.about-body',
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      )
+    gsap.fromTo(
+      '.about-body',
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-body',
+          start: 'top 80%',
+          once: true,
+        },
+      }
+    )
 
-      gsap.fromTo(
-        '.about-stat',
-        { opacity: 0, y: 28 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.about-stats',
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      )
+    gsap.fromTo(
+      '.about-stat',
+      { opacity: 0, y: 28 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-stats',
+          start: 'top 80%',
+          once: true,
+        },
+      }
+    )
 
-      gsap.fromTo(
-        '.about-focus-item',
-        { opacity: 0, x: -20 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.about-focus',
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      )
-    }, containerRef)
-
-    return () => ctx.revert()
-  }, [])
+    gsap.fromTo(
+      '.about-focus-item',
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-focus',
+          start: 'top 80%',
+          once: true,
+        },
+      }
+    )
+  }, { scope: containerRef })
 
   return (
     <section
       id="about"
       ref={containerRef}
       className="relative min-h-[100dvh] py-20 md:py-24 px-5 md:px-8 flex items-center"
-      style={{ background: 'var(--bg)' }}
+      style={{ background: 'var(--bg-translucent)' }}
     >
       <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
         <div className="md:col-span-7">

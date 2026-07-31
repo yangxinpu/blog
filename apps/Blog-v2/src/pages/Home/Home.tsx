@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ParticleBackground } from '../../components/ParticleBackground/ParticleBackground'
 
 const HERO_IMAGE_URL =
   'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' +
@@ -26,7 +25,7 @@ export function Home() {
       if (!title) return
 
       const text = title.dataset.text ?? ''
-      title.innerHTML = ''
+      title.textContent = ''
       const chars = text.split('')
       const spans: HTMLSpanElement[] = []
       chars.forEach((ch) => {
@@ -98,21 +97,10 @@ export function Home() {
       ref={containerRef}
       className="relative min-h-[100dvh] overflow-hidden"
     >
-      <ParticleBackground
-        dotRadius={1.5}
-        dotSpacing={24}
-        cursorRadius={180}
-        bulgeStrength={40}
-        waveAmplitude={4}
-        sparkle={true}
-        baseColor="rgba(25, 250, 198, 0.10)"
-        accentColor="rgba(25, 250, 198, 0.6)"
-        speed={0.015}
-      />
-
-      <div className="relative z-10 min-h-[100dvh] flex items-center pt-20 md:pt-24 pb-12 px-5 md:px-8">
-        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
-          <div className="md:col-span-7 order-2 md:order-1">
+      <div className="relative z-10 min-h-[100dvh] flex items-center pt-24 md:pt-28 pb-16 px-5 md:px-8">
+        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+          {/* Text */}
+          <div>
             <p
               ref={roleRef}
               className="text-sm md:text-base mb-4 md:mb-5 font-medium tracking-wide"
@@ -128,7 +116,7 @@ export function Home() {
               style={{
                 fontFamily: 'var(--font-display)',
                 color: 'var(--text)',
-                fontSize: 'clamp(3rem, 10vw, 7.5rem)',
+                fontSize: 'clamp(3rem, 10vw, 6rem)',
                 letterSpacing: '-0.04em',
               }}
             >
@@ -137,7 +125,7 @@ export function Home() {
 
             <p
               ref={subRef}
-              className="text-base md:text-lg xl:text-xl leading-relaxed mb-7 md:mb-9 max-w-lg md:max-w-xl"
+              className="text-base md:text-lg xl:text-xl leading-relaxed mb-7 md:mb-9 max-w-lg"
               style={{ color: 'var(--text-secondary)' }}
             >
               用 React 与 TypeScript 构建可交互的界面，用 GSAP 编排有节奏的动效。
@@ -146,12 +134,7 @@ export function Home() {
 
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <button
-                className="w-full sm:w-auto px-6 md:px-7 py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-                style={{
-                  background: 'var(--accent)',
-                  color: 'var(--bg)',
-                  boxShadow: '0 0 24px rgba(25, 250, 198, 0.25)',
-                }}
+                className="btn-primary w-full sm:w-auto"
                 onClick={() => {
                   document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
                 }}
@@ -162,23 +145,22 @@ export function Home() {
                 href="https://github.com/nailuo"
                 target="_blank"
                 rel="noreferrer"
-                className="w-full sm:w-auto px-6 md:px-7 py-3 rounded-full font-medium text-center transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-                style={{
-                  background: 'transparent',
-                  border: '1px solid var(--accent)',
-                  color: 'var(--accent)',
-                }}
+                className="btn-secondary w-full sm:w-auto"
               >
                 GitHub
               </a>
             </div>
           </div>
 
-          <div className="md:col-span-5 order-1 md:order-2">
+          {/* Image */}
+          <div className="hidden md:block">
             <div
               data-hero-visual
-              className="relative aspect-[4/3] md:aspect-[4/5] lg:aspect-[4/3] rounded-2xl overflow-hidden max-w-sm mx-auto md:max-w-none"
-              style={{ border: '1px solid var(--border-subtle)' }}
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden"
+              style={{
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-subtle)',
+              }}
             >
               <img
                 src={HERO_IMAGE_URL}
@@ -189,10 +171,7 @@ export function Home() {
               />
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(180deg, rgba(26,26,26,0) 40%, rgba(26,26,26,0.55) 100%)',
-                }}
+                style={{ background: 'var(--hero-overlay)' }}
               />
             </div>
           </div>

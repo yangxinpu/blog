@@ -1,10 +1,8 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Github, Twitter, Linkedin } from 'lucide-react'
-
-gsap.registerPlugin(ScrollTrigger)
+import logo from '../../assets/Images/logo.png'
 
 const socials = [
   { icon: Github, href: 'https://github.com/nailuo' },
@@ -26,43 +24,44 @@ export function Footer() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.footer-content',
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 90%',
-            once: true,
-          },
-        }
-      )
-    }, containerRef)
-
-    return () => ctx.revert()
-  }, [])
+    gsap.fromTo(
+      '.footer-content',
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 90%',
+          once: true,
+        },
+      }
+    )
+  }, { scope: containerRef })
 
   return (
     <footer
       ref={containerRef}
       className="py-10 md:py-12 px-5 md:px-8"
       style={{
-        background: 'var(--bg)',
+        background: 'var(--bg-translucent)',
         borderTop: '1px solid var(--border-subtle)',
       }}
     >
       <div className="max-w-6xl mx-auto footer-content flex flex-col md:flex-row justify-between items-center gap-8">
         <a
           href="#home"
-          className="text-base md:text-lg font-bold"
-          style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}
+          className="flex items-center gap-2"
         >
-          NaiLuo
+          <img src={logo} alt="NaiLuo" className="h-8 md:h-9 w-auto object-contain" />
+          <span
+            className="text-base md:text-lg font-bold"
+            style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}
+          >
+            NaiLuo
+          </span>
         </a>
 
         <nav className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2">
@@ -79,11 +78,11 @@ export function Footer() {
         </nav>
 
         <div className="flex gap-3">
-          {socials.map((social, i) => {
+          {socials.map((social) => {
             const Icon = social.icon
             return (
               <a
-                key={i}
+                key={social.href}
                 href={social.href}
                 target="_blank"
                 rel="noreferrer"
@@ -93,7 +92,7 @@ export function Footer() {
                   border: '1px solid var(--border)',
                   color: 'var(--accent)',
                 }}
-                aria-label={`社交链接 ${i + 1}`}
+                aria-label={social.href}
               >
                 <Icon size={16} strokeWidth={1.5} />
               </a>
