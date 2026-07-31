@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Geist';
+  src: url('https://fonts.gstatic.com/s/geist/v1/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   /* 主色 - 与 Blog v1 保持一致 */
   --primary-100: #d3fff3;
@@ -12,16 +19,26 @@
   /* 语义色 */
   --text: #e0e0e0;
   --text-secondary: #b0b0b0;
+  --text-muted: #808080;
   --bg: #1a1a1a;
   --bg-secondary: #2a2a2a;
+  --bg-tertiary: #222222;
   --border: #404040;
+  --border-subtle: #2e2e2e;
   --accent: #19fac6;
   --accent-hover: var(--primary-200);
   --shadow: rgba(0, 0, 0, 0.3) 0 2px 8px;
 
   /* 字体 */
+  --font-display: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
+
+  /* 滚动条 */
+  --scrollbar-width: 8px;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(64, 64, 64, 0.6);
+  --scrollbar-thumb-hover: rgba(25, 250, 198, 0.5);
 
   font-family: var(--font-sans);
   line-height: 1.5;
@@ -37,15 +54,79 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+  overflow-x: hidden;
+}
+
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   font-size: 16px;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
+}
+
+/* WebKit scrollbar */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Thin scrollbar for horizontal scroll containers */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(64, 64, 64, 0.4) transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(64, 64, 64, 0.4);
+  border-radius: 2px;
+  border: none;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 a {
@@ -85,31 +166,36 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-display);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--text);
 }
 
-h1 {
-  font-size: 2rem;
+/* Focus-visible for keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-h2 {
-  font-size: 1.5rem;
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-h3 {
-  font-size: 1.25rem;
+/* Safe area for mobile notches */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0);
 }
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.75rem;
-  }
-  h2 {
-    font-size: 1.25rem;
-  }
-  h3 {
-    font-size: 1.1rem;
-  }
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }

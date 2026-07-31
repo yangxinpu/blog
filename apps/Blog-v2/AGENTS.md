@@ -1,7 +1,7 @@
 # Blog-v2 应用 - Agent 指南
 
-> **文档版本**: v1.1.0
-> **最后更新**: 2026-07-30
+> **文档版本**: v1.5.0
+> **最后更新**: 2026-07-31
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
 
@@ -79,7 +79,7 @@ src/
 - 全局样式只写在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/index.css)
 - 不要新增不必要的全局 `.css` 文件
 
-## 主色系统（必须与原 Blog 保持一致）
+## 主色系统（必须与 DESIGN.md 保持一致）
 
 采用青色系，CSS 变量定义在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/index.css)：
 
@@ -96,19 +96,54 @@ src/
   /* 语义色 */
   --text: #e0e0e0;
   --text-secondary: #b0b0b0;
+  --text-muted: #808080;
   --bg: #1a1a1a;
   --bg-secondary: #2a2a2a;
+  --bg-tertiary: #222222;
   --border: #404040;
+  --border-subtle: #2e2e2e;
   --accent: #19fac6;
   --accent-hover: var(--primary-200);
-  --shadow: rgba(0, 0, 0, 0.3) 0 2px 8px;
+  --shadow: rgba(0, 0, 0, 0.3);
+
+  /* 字体 */
+  --font-display: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
 }
 ```
 
 **约束**：
-- 主色 `--accent` 必须使用 `#19fac6`（青色），与原 Blog 一致
+- 主色 `--accent` 必须使用 `#19fac6`（青色），与 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/DESIGN.md) 保持一致
 - 不要更改色值，确保视觉风格统一
 - Tailwind 中可通过 `@theme` 映射这些变量
+
+## 设计系统（DESIGN.md）
+
+本项目以 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/DESIGN.md) 为**唯一设计真源**，采用 `@google/design.md` 规范格式。
+
+### 核心理念
+
+- **极简深色开发者风**：以青色 `#19fac6` 为唯一强调色，建立克制的视觉层次
+- **GSAP 驱动动效**：所有入场动画基于 `useGSAP` + `ScrollTrigger`，遵循"淡入上浮"基础形态
+- **不依赖阴影**：深度通过背景色差交替与细线分隔实现
+- **3D/玻璃拟态禁止**：保持纯粹的 flat design 风格
+
+### Agent 实现约束
+
+修改 UI 代码时，必须遵循 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/DESIGN.md) 中「Agent Implementation Constraints」章节：
+
+1. **主题来源**：所有视觉决策以 DESIGN.md 为准，禁止硬编码未定义的色值
+2. **CSS 变量**：新增 token 必须先在 `index.css` 的 `:root` 中定义，组件通过 `var(--*)` 引用
+3. **动画引擎**：统一使用 GSAP + `@gsap/react` 的 `useGSAP` hook + `scope` 限定作用域
+4. **无障碍**：所有动效必须尊重 `prefers-reduced-motion`，交互元素需有 `focus-visible`
+5. **响应式**：移动端单列，`md:` (768px) 以上启用多列布局
+
+### 验证命令
+
+```bash
+npx @google/design.md lint DESIGN.md    # 验证设计系统完整性
+```
 
 ## 国际化（必须与原 Blog 保持一致）
 

@@ -1,13 +1,20 @@
 .app {
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 2rem;
+  overflow-x: hidden;
 }
 
-.subtitle {
-  color: var(--text);
-  font-size: 1.125rem;
+main {
+  flex: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
 }
