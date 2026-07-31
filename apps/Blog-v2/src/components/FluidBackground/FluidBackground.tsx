@@ -1,17 +1,20 @@
 import { useEffect, useRef } from 'react'
 import { Renderer, Program, Mesh, Triangle } from 'ogl'
 
+/**
+ * React Bits Lightfall 兼容参数
+ * 直接对齐 https://www.reactbits.dev/backgrounds/lightfall 的 props
+ */
 export interface FluidParams {
   speed: number
-  scale: number
-  turbulence: number
-  fluidity: number
-  rimWidth: number
-  sharpness: number
-  shimmer: number
+  streakCount: number
+  streakWidth: number
+  streakLength: number
   glow: number
-  flowX: number
-  flowY: number
+  density: number
+  twinkle: number
+  zoom: number
+  backgroundGlow: number
 }
 
 interface FluidBackgroundProps {
@@ -24,24 +27,41 @@ interface FluidBackgroundProps {
   className?: string
 }
 
-function hexToRgb(hex: string): [number, number, number] {
-  const h = hex.replace('#', '')
-  const full =
-    h.length === 3
-      ? h
-          .split('')
-          .map((c) => c + c)
-          .join('')
-      : h
-  const num = parseInt(full, 16)
-  return [((num >> 16) & 255) / 255, ((num >> 8) & 255) / 255, (num & 255) / 255]
+type RGB = [number, number, number]
+
+const MAX_COLORS = 8
+
+function hexToRGB(hex: string): RGB {
+  const c = hex.replace('#', '').padEnd(6, '0')
+  const r = parseInt(c.slice(0, 2), 16) / 255
+  const g = parseInt(c.slice(2, 4), 16) / 255
+  const b = parseInt(c.slice(4, 6), 16) / 255
+  return [r, g, b]
+}
+
+function prepColors(input?: string[]) {
+  const base = (input && input.length ? input : ['#A6C8FF', '#5227FF', '#FF9FFC']).slice(0, MAX_COLORS)
+  const count = base.length
+  const arr: RGB[] = []
+  for (let i = 0; i < MAX_COLORS; i++) arr.push(hexToRGB(base[Math.min(i, base.length - 1)]))
+  const avg: RGB = [0, 0, 0]
+  for (let i = 0; i < count; i++) {
+    avg[0] += arr[i][0]
+    avg[1] += arr[i][1]
+    avg[2] += arr[i][2]
+  }
+  avg[0] /= count
+  avg[1] /= count
+  avg[2] /= count
+  return { arr, count, avg }
 }
 
 const VERT = /* glsl */ `
 attribute vec2 position;
+attribute vec2 uv;
 varying vec2 vUv;
 void main() {
-  vUv = position * 0.5 + 0.5;
+  vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
 }
 `
@@ -49,116 +69,136 @@ void main() {
 const FRAG = /* glsl */ `
 precision highp float;
 
-varying vec2 vUv;
+uniform vec3  iResolution;
+uniform vec2  iMouse;
+uniform float iTime;
 
-uniform vec2 uResolution;
-uniform float uTime;
-uniform vec3 uColor1;
-uniform vec3 uColor2;
-uniform vec3 uColor3;
+uniform vec3  uColor0;
+uniform vec3  uColor1;
+uniform vec3  uColor2;
+uniform vec3  uColor3;
+uniform vec3  uColor4;
+uniform vec3  uColor5;
+uniform vec3  uColor6;
+uniform vec3  uColor7;
+uniform int   uColorCount;
+
+uniform vec3  uBgColor;
+uniform vec3  uMouseColor;
 uniform float uSpeed;
-uniform float uScale;
-uniform float uTurbulence;
-uniform float uFluidity;
-uniform float uRimWidth;
-uniform float uSharpness;
-uniform float uShimmer;
+uniform int   uStreakCount;
+uniform float uStreakWidth;
+uniform float uStreakLength;
 uniform float uGlow;
-uniform vec2 uFlow;
-uniform vec2 uMouse;
+uniform float uDensity;
+uniform float uTwinkle;
+uniform float uZoom;
+uniform float uBgGlow;
+uniform float uOpacity;
+uniform float uMouseEnabled;
 uniform float uMouseStrength;
 uniform float uMouseRadius;
-uniform float uMouseActive;
 
-vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
+varying vec2 vUv;
 
-float snoise(vec2 v) {
-  const vec4 C = vec4(0.211324865405187, 0.366025403784439,
-           -0.577350269189626, 0.024390243902439);
-  vec2 i  = floor(v + dot(v, C.yy));
-  vec2 x0 = v - i + dot(i, C.xx);
-  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-  vec4 x12 = x0.xyxy + C.xxzz;
-  x12.xy -= i1;
-  i = mod(i, 289.0);
-  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0))
-        + i.x + vec3(0.0, i1.x, 1.0));
-  vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy),
-        dot(x12.zw, x12.zw)), 0.0);
-  m = m * m;
-  m = m * m;
-  vec3 x = 2.0 * fract(p * C.www) - 1.0;
-  vec3 h = abs(x) - 0.5;
-  vec3 ox = floor(x + 0.5);
-  vec3 a0 = x - ox;
-  m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);
-  vec3 g;
-  g.x  = a0.x * x0.x + h.x * x0.y;
-  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-  return 130.0 * dot(m, g);
+vec3 palette(float h) {
+  int count = uColorCount;
+  if (count < 1) count = 1;
+  int idx = int(floor(clamp(h, 0.0, 0.999999) * float(count)));
+  if (idx <= 0) return uColor0;
+  if (idx == 1) return uColor1;
+  if (idx == 2) return uColor2;
+  if (idx == 3) return uColor3;
+  if (idx == 4) return uColor4;
+  if (idx == 5) return uColor5;
+  if (idx == 6) return uColor6;
+  return uColor7;
 }
 
-float fbm(vec2 p) {
-  float v = 0.0;
-  float a = 0.5;
-  for (int i = 0; i < 4; i++) {
-    v += a * snoise(p);
-    p *= 2.0;
-    a *= 0.5;
+vec3 tanhv(vec3 x) {
+  vec3 e = exp(-2.0 * x);
+  return (1.0 - e) / (1.0 + e);
+}
+
+vec2 sceneC(vec2 frag, vec2 r) {
+  vec2 P = (frag + frag - r) / r.x;
+  float z = 0.0;
+  float d = 1e3;
+  vec4 O = vec4(0.0);
+  for (int k = 0; k < 39; k++) {
+    if (d <= 1e-4) break;
+    O = z * normalize(vec4(P, uZoom, 0.0)) - vec4(0.0, 4.0, 1.0, 0.0) / 4.5;
+    d = 1.0 - sqrt(length(O * O));
+    z += d;
   }
-  return v;
+  return vec2(O.x, atan(O.z, O.y));
+}
+
+void mainImage(out vec4 o, vec2 C) {
+  vec2 r = iResolution.xy;
+  vec2 uv0 = (C + C - r) / r.x;
+  float T = 0.1 * iTime * uSpeed + 9.0;
+  float angRings = max(1.0, floor(6.28318530718 * max(uDensity, 0.05) + 0.5));
+  vec2 Y = vec2(5e-3, 6.28318530718 / angRings);
+
+  vec2 c0 = sceneC(C, r);
+  vec2 cdx = sceneC(C + vec2(1.0, 0.0), r);
+  vec2 cdy = sceneC(C + vec2(0.0, 1.0), r);
+  vec2 dCx = cdx - c0;
+  vec2 dCy = cdy - c0;
+  dCx.y -= 6.28318530718 * floor(dCx.y / 6.28318530718 + 0.5);
+  dCy.y -= 6.28318530718 * floor(dCy.y / 6.28318530718 + 0.5);
+  vec2 fw = abs(dCx) + abs(dCy);
+  C = c0;
+
+  vec2 P = vec2(2.0, 1.0) * uv0 - (r / r.x) * vec2(0.0, 1.0);
+  vec4 O = vec4(uBgColor * 90.0 * uBgGlow / (1e3 * dot(P, P) + 6.0), 0.0);
+
+  float mGlow = 0.0;
+  if (uMouseEnabled > 0.5) {
+    vec2 mN = (iMouse + iMouse - r) / r.x;
+    float md = length(uv0 - mN);
+    mGlow = exp(-md * md / max(uMouseRadius * uMouseRadius, 1e-4)) * uMouseStrength;
+    O.rgb += uMouseColor * mGlow * 0.25;
+  }
+
+  float zr = 5e-4 * uStreakWidth;
+  vec2 rr = vec2(max(length(fw), 1e-5));
+  float tail = 19.0 / max(uStreakLength, 0.05);
+
+  for (int m = 0; m < 16; m++) {
+    if (m >= uStreakCount) break;
+    float jf = float(m) + 1.0;
+    float ic = fract(sin(dot(vec2(jf, floor(C.x / Y.x + 0.5)), vec2(7.0, 11.0)) * 73.0));
+    vec2 Pp = C - (T + T * ic) * vec2(0.0, 1.0);
+    Pp -= floor(Pp / Y + 0.5) * Y;
+    float h = fract(8663.0 * ic);
+    vec3 col = palette(h);
+    float weight = mix(1.5, 1.0 + sin(T + 7.0 * h + 4.0), uTwinkle);
+    weight *= (1.0 + mGlow * 2.0);
+    vec2 inner = vec2(length(max(Pp, vec2(-1.0, 0.0))), length(Pp) - zr) - zr;
+    vec2 sm = vec2(1.0) - smoothstep(-rr, rr, inner);
+    O.rgb += dot(sm, vec2(exp(tail * Pp.y), 3.0)) * col * weight;
+    C.x += Y.x / 8.0;
+  }
+
+  vec3 colr = sqrt(tanhv(max(O.rgb * uGlow - vec3(0.04, 0.08, 0.02), 0.0)));
+  o = vec4(colr, uOpacity);
 }
 
 void main() {
-  vec2 uv = vUv;
-  vec2 p = (gl_FragCoord.xy - 0.5 * uResolution) / min(uResolution.x, uResolution.y);
-  p *= uScale;
-
-  float t = uTime * uSpeed;
-
-  vec2 m = uMouse * uMouseRadius;
-  float md = length(p - m);
-  float mouseBulge = uMouseStrength * exp(-md * md * 2.0) * uMouseActive;
-
-  float distort = uTurbulence * 0.6;
-  vec2 q = p + distort * vec2(fbm(p + t * 0.3), fbm(p + t * 0.3 + 5.2));
-  q += vec2(t * uFlow.x, t * uFlow.y);
-
-  float n1 = fbm(q);
-  float n2 = fbm(q * 1.6 + 10.0 + t * 0.15);
-
-  float h = mix(n1, n2, uFluidity);
-  h += mouseBulge * 0.8;
-
-  float contour = fract(h * 2.0 + t * 0.03);
-  float rim = smoothstep(0.5 - uRimWidth, 0.5, contour)
-            - smoothstep(0.5, 0.5 + uRimWidth, contour);
-  rim = pow(max(rim, 0.0), uSharpness * 0.5 + 0.5);
-
-  float sh = snoise(p * 6.0 + t * 1.5);
-  rim *= 1.0 - uShimmer * 0.4 * (1.0 - sh);
-
-  float spike = mouseBulge * 1.0;
-
-  vec3 col = mix(uColor1, uColor2, smoothstep(-0.5, 0.5, h));
-  col = mix(col, uColor3, smoothstep(0.0, 1.0, h + spike * 0.2));
-
-  col = col * rim * uGlow * 0.65;
-  col += uColor3 * spike * 0.25;
-
-  float vig = 1.0 - dot(uv - 0.5, uv - 0.5) * 0.6;
-  col *= vig;
-
-  gl_FragColor = vec4(col, 1.0);
+  vec4 color;
+  mainImage(color, vUv * iResolution.xy);
+  gl_FragColor = color;
 }
 `
 
 export function FluidBackground({
   paramsRef,
-  colors = ['#0a6f5d', '#19fac6', '#7be9c9'],
-  backgroundColor = '#121212',
+  colors = ['#A6C8FF', '#5227FF', '#FF9FFC'],
+  backgroundColor = '#0A29FF',
   mouseStrength = 1,
-  mouseRadius = 0.35,
+  mouseRadius = 0.6,
   mouseDampening = 0.15,
   className,
 }: FluidBackgroundProps) {
@@ -172,115 +212,140 @@ export function FluidBackground({
 
     const renderer = new Renderer({
       dpr: Math.min(window.devicePixelRatio, 1.5),
-      alpha: false,
-      antialias: false,
+      alpha: true,
+      antialias: true,
     })
     const gl = renderer.gl
-    gl.clearColor(...hexToRgb(backgroundColor), 1)
+    gl.canvas.style.width = '100%'
+    gl.canvas.style.height = '100%'
+    gl.canvas.style.display = 'block'
     container.appendChild(gl.canvas)
 
+    const { arr, count, avg } = prepColors(colors)
+
     const geometry = new Triangle(gl)
+
+    const p = paramsRef.current
 
     const program = new Program(gl, {
       vertex: VERT,
       fragment: FRAG,
       uniforms: {
-        uTime: { value: 0 },
-        uResolution: { value: [1, 1] },
-        uColor1: { value: hexToRgb(colors[0] ?? '#0a6f5d') },
-        uColor2: { value: hexToRgb(colors[1] ?? '#19fac6') },
-        uColor3: { value: hexToRgb(colors[2] ?? '#d3fff3') },
-        uSpeed: { value: paramsRef.current.speed },
-        uScale: { value: paramsRef.current.scale },
-        uTurbulence: { value: paramsRef.current.turbulence },
-        uFluidity: { value: paramsRef.current.fluidity },
-        uRimWidth: { value: paramsRef.current.rimWidth },
-        uSharpness: { value: paramsRef.current.sharpness },
-        uShimmer: { value: paramsRef.current.shimmer },
-        uGlow: { value: paramsRef.current.glow },
-        uFlow: { value: [paramsRef.current.flowX, paramsRef.current.flowY] },
-        uMouse: { value: [0, 0] },
+        iResolution: { value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1] },
+        iMouse: { value: [0, 0] },
+        iTime: { value: 0 },
+        uColor0: { value: arr[0] },
+        uColor1: { value: arr[1] },
+        uColor2: { value: arr[2] },
+        uColor3: { value: arr[3] },
+        uColor4: { value: arr[4] },
+        uColor5: { value: arr[5] },
+        uColor6: { value: arr[6] },
+        uColor7: { value: arr[7] },
+        uColorCount: { value: count },
+        uBgColor: { value: hexToRGB(backgroundColor) },
+        uMouseColor: { value: avg },
+        uSpeed: { value: p.speed },
+        uStreakCount: { value: Math.max(1, Math.min(16, Math.round(p.streakCount))) },
+        uStreakWidth: { value: p.streakWidth },
+        uStreakLength: { value: p.streakLength },
+        uGlow: { value: p.glow },
+        uDensity: { value: p.density },
+        uTwinkle: { value: p.twinkle },
+        uZoom: { value: p.zoom },
+        uBgGlow: { value: p.backgroundGlow },
+        uOpacity: { value: 1 },
+        uMouseEnabled: { value: reduce ? 0 : 1 },
         uMouseStrength: { value: mouseStrength },
         uMouseRadius: { value: mouseRadius },
-        uMouseActive: { value: reduce ? 0 : 1 },
       },
     })
 
     const mesh = new Mesh(gl, { geometry, program })
 
-    const target = { x: 0.5, y: 0.5 }
-    const current = { x: 0.5, y: 0.5 }
+    const mouseTargetRef = { current: [0, 0] as [number, number] }
+    const lastTimeRef = { current: 0 }
 
     const onPointerMove = (e: PointerEvent) => {
-      target.x = e.clientX / window.innerWidth
-      target.y = 1 - e.clientY / window.innerHeight
+      const rect = gl.canvas.getBoundingClientRect()
+      const scale = renderer.dpr || 1
+      mouseTargetRef.current = [(e.clientX - rect.left) * scale, (rect.height - (e.clientY - rect.top)) * scale]
+      if (mouseDampening <= 0) {
+        program.uniforms.iMouse.value = mouseTargetRef.current
+      }
     }
     const onPointerLeave = () => {
-      target.x = 0.5
-      target.y = 0.5
+      mouseTargetRef.current = [0, 0]
     }
 
     if (!reduce) {
-      window.addEventListener('pointermove', onPointerMove)
+      gl.canvas.addEventListener('pointermove', onPointerMove)
       window.addEventListener('pointerleave', onPointerLeave)
     }
 
     const resize = () => {
-      const w = container.clientWidth
-      const h = container.clientHeight
-      renderer.setSize(w, h)
-      program.uniforms.uResolution.value = [w, h]
+      const rect = container.getBoundingClientRect()
+      renderer.setSize(rect.width, rect.height)
+      program.uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1]
     }
     resize()
 
     const ro = new ResizeObserver(resize)
     ro.observe(container)
 
-    const start = performance.now()
     let raf = 0
-    let last = start
 
-    const tick = (now: number) => {
-      raf = requestAnimationFrame(tick)
-      const dt = (now - last) / 1000
-      last = now
+    const loop = (t: number) => {
+      raf = requestAnimationFrame(loop)
+      program.uniforms.iTime.value = t * 0.001
 
-      if (!reduce) {
-        const k = mouseDampening > 0 ? 1 - Math.exp(-dt / mouseDampening) : 1
-        current.x += (target.x - current.x) * k
-        current.y += (target.y - current.y) * k
+      if (mouseDampening > 0) {
+        if (!lastTimeRef.current) lastTimeRef.current = t
+        const dt = (t - lastTimeRef.current) / 1000
+        lastTimeRef.current = t
+        const tau = Math.max(1e-4, mouseDampening)
+        let factor = 1 - Math.exp(-dt / tau)
+        if (factor > 1) factor = 1
+        const target = mouseTargetRef.current
+        const cur = program.uniforms.iMouse.value as number[]
+        cur[0] += (target[0] - cur[0]) * factor
+        cur[1] += (target[1] - cur[1]) * factor
+      } else {
+        lastTimeRef.current = t
       }
 
       const p = paramsRef.current
-      program.uniforms.uTime.value = (now - start) / 1000
       program.uniforms.uSpeed.value = p.speed
-      program.uniforms.uScale.value = p.scale
-      program.uniforms.uTurbulence.value = p.turbulence
-      program.uniforms.uFluidity.value = p.fluidity
-      program.uniforms.uRimWidth.value = p.rimWidth
-      program.uniforms.uSharpness.value = p.sharpness
-      program.uniforms.uShimmer.value = p.shimmer
+      program.uniforms.uStreakCount.value = Math.max(1, Math.min(16, Math.round(p.streakCount)))
+      program.uniforms.uStreakWidth.value = p.streakWidth
+      program.uniforms.uStreakLength.value = p.streakLength
       program.uniforms.uGlow.value = p.glow
-      program.uniforms.uFlow.value = [p.flowX, p.flowY]
-      program.uniforms.uMouse.value = [
-        (current.x - 0.5) * 2,
-        (current.y - 0.5) * 2,
-      ]
+      program.uniforms.uDensity.value = p.density
+      program.uniforms.uTwinkle.value = p.twinkle
+      program.uniforms.uZoom.value = p.zoom
+      program.uniforms.uBgGlow.value = p.backgroundGlow
+
       renderer.render({ scene: mesh })
     }
-    raf = requestAnimationFrame(tick)
+    raf = requestAnimationFrame(loop)
 
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
       if (!reduce) {
-        window.removeEventListener('pointermove', onPointerMove)
+        gl.canvas.removeEventListener('pointermove', onPointerMove)
         window.removeEventListener('pointerleave', onPointerLeave)
       }
-      geometry?.remove()
-      program?.remove()
-      const loseCtx = gl.getExtension('WEBGL_lose_context')
-      loseCtx?.loseContext()
+      const callIfFn = (obj: unknown, key: string) => {
+        const fn = obj && (obj as Record<string, unknown>)[key]
+        if (typeof fn === 'function') {
+          (fn as () => void).call(obj)
+        }
+      }
+      callIfFn(geometry, 'remove')
+      callIfFn(program, 'remove')
+      callIfFn(mesh, 'remove')
+      callIfFn(renderer, 'destroy')
       if (gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas)
       }

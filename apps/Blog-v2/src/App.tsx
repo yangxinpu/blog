@@ -9,98 +9,101 @@ import './App.css'
 gsap.registerPlugin(ScrollTrigger)
 
 /**
- * Fluid Motion Narrative — 流体运动叙事
+ * Lightfall Narrative — React Bits Lightfall 风格流式光束叙事
  *
- * 单一 WebGL 流体引擎，GSAP timeline 基于滚动进度动画 shader uniform，
- * 使流体在 6 个 section 中呈现连续的运动形态演变：
- *   A 静谧流动 → B 湍流漩涡 → C 波浪涌动 → D 结晶凝固 → E 极光散射 → F 星云归寂
+ * 单 WebGL 光束引擎（对齐 reactbits.dev/backgrounds/lightfall），
+ * GSAP timeline 基于滚动进度动画 shader uniform，
+ * 使光束在 6 个 section 中呈现连续的运动形态演变：
+ *   A 静谧晨露 → B 急流骤雨 → C 侧向风阵 → D 凝固星芒 → E 极光射流 → F 星云缓沉
  */
 
+// A：首屏 — 严格对齐 React Bits Lightfall 组件默认值
+//   speed=0.5, streakCount=2, streakWidth=1, streakLength=1
+//   glow=1, density=0.6, twinkle=1, zoom=3, backgroundGlow=0.5
 const PARAMS_A: FluidParams = {
-  speed: 0.3,
-  scale: 1.8,
-  turbulence: 0.6,
-  fluidity: 0.1,
-  rimWidth: 0.3,
-  sharpness: 2.0,
-  shimmer: 0.8,
-  glow: 0.7,
-  flowX: 0,
-  flowY: -1,
+  speed: 0.5,
+  streakCount: 2,
+  streakWidth: 1,
+  streakLength: 1,
+  glow: 1,
+  density: 0.6,
+  twinkle: 1,
+  zoom: 3,
+  backgroundGlow: 0.5,
 }
 
+// B：急流骤雨 Turbulent Shower — 更快速、更密集、更亮的光雨
 const PARAMS_B: FluidParams = {
-  speed: 0.8,
-  scale: 1.2,
-  turbulence: 2.2,
-  fluidity: 0.15,
-  rimWidth: 0.18,
-  sharpness: 3.5,
-  shimmer: 2.0,
-  glow: 0.9,
-  flowX: 0,
-  flowY: -1,
+  speed: 1.8,
+  streakCount: 6,
+  streakWidth: 1.2,
+  streakLength: 1.2,
+  glow: 1.2,
+  density: 1.5,
+  twinkle: 1.5,
+  zoom: 2.5,
+  backgroundGlow: 0.8,
 }
 
+// C：侧向风阵 Crosswind Drift — 宽光束、中速、适度闪烁
 const PARAMS_C: FluidParams = {
-  speed: 0.45,
-  scale: 2.2,
-  turbulence: 0.7,
-  fluidity: 0.08,
-  rimWidth: 0.55,
-  sharpness: 1.5,
-  shimmer: 0.3,
-  glow: 0.6,
-  flowX: -1,
-  flowY: 0,
+  speed: 0.9,
+  streakCount: 3,
+  streakWidth: 2.0,
+  streakLength: 1.5,
+  glow: 0.9,
+  density: 0.8,
+  twinkle: 0.6,
+  zoom: 3.0,
+  backgroundGlow: 0.6,
 }
 
+// D：凝固星芒 Frozen Stardust — 极慢、稀疏、尖锐短尾
 const PARAMS_D: FluidParams = {
-  speed: 0.12,
-  scale: 2.8,
-  turbulence: 0.25,
-  fluidity: 0.05,
-  rimWidth: 0.08,
-  sharpness: 6.0,
-  shimmer: 0.1,
-  glow: 1.0,
-  flowX: 0,
-  flowY: -1,
+  speed: 0.15,
+  streakCount: 1,
+  streakWidth: 0.8,
+  streakLength: 0.4,
+  glow: 1.1,
+  density: 0.3,
+  twinkle: 0.2,
+  zoom: 4.0,
+  backgroundGlow: 0.9,
 }
 
+// E：极光射流 Aurora Jets — 反向上升、高闪烁、高密度
 const PARAMS_E: FluidParams = {
-  speed: 0.2,
-  scale: 2.4,
-  turbulence: 1.2,
-  fluidity: 0.12,
-  rimWidth: 0.12,
-  sharpness: 3.5,
-  shimmer: 1.8,
-  glow: 0.85,
-  flowX: 1,
-  flowY: 1,
+  speed: 0.8,
+  streakCount: 5,
+  streakWidth: 1.0,
+  streakLength: 0.8,
+  glow: 1.3,
+  density: 1.2,
+  twinkle: 2.0,
+  zoom: 2.0,
+  backgroundGlow: 1.0,
 }
 
+// F：星云缓沉 Nebula Descent — 超宽、极慢、极柔、稀疏
 const PARAMS_F: FluidParams = {
-  speed: 0.08,
-  scale: 3.5,
-  turbulence: 0.15,
-  fluidity: 0.04,
-  rimWidth: 0.7,
-  sharpness: 1.0,
-  shimmer: 0.2,
-  glow: 0.5,
-  flowX: 0.3,
-  flowY: -0.2,
+  speed: 0.2,
+  streakCount: 1,
+  streakWidth: 3.0,
+  streakLength: 2.0,
+  glow: 0.6,
+  density: 0.25,
+  twinkle: 0.3,
+  zoom: 3.5,
+  backgroundGlow: 0.4,
 }
 
 const SECTIONS = [
-  { id: 'section-0', label: '静谧流动', en: 'Calm Flow' },
-  { id: 'section-1', label: '湍流漩涡', en: 'Turbulent Vortex' },
-  { id: 'section-2', label: '波浪涌动', en: 'Wave Surge' },
-  { id: 'section-3', label: '结晶凝固', en: 'Crystallization' },
-  { id: 'section-4', label: '极光散射', en: 'Aurora Scatter' },
-  { id: 'section-5', label: '星云归寂', en: 'Nebula Serenity' },
+  { id: 'section-0', label: '静谧晨露', en: 'Calm Dew' },
+  { id: 'section-1', label: '急流骤雨', en: 'Turbulent Shower' },
+  { id: 'section-2', label: '侧向风阵', en: 'Crosswind Drift' },
+  { id: 'section-3', label: '凝固星芒', en: 'Frozen Stardust' },
+  { id: 'section-4', label: '极光射流', en: 'Aurora Jets' },
+  { id: 'section-5', label: '星云缓沉', en: 'Nebula Descent' },
 ] as const
 
 function App() {
@@ -114,8 +117,7 @@ function App() {
 
       const p = paramsRef.current
 
-      // Scroll-driven timeline animating fluid parameters
-      // Timeline position = scroll progress (0 → 1)
+      // Scroll-driven timeline animating Lightfall shader parameters
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: document.body,
@@ -125,76 +127,77 @@ function App() {
         },
       })
 
-      // A → B: 20%~42% transition (turbulence surge, sharpening)
+      // A → B: 20%~42% (calm dew → turbulent shower)
       tl.to(p, {
         speed: PARAMS_B.speed,
-        turbulence: PARAMS_B.turbulence,
-        scale: PARAMS_B.scale,
-        sharpness: PARAMS_B.sharpness,
-        shimmer: PARAMS_B.shimmer,
+        streakCount: PARAMS_B.streakCount,
+        streakWidth: PARAMS_B.streakWidth,
+        streakLength: PARAMS_B.streakLength,
         glow: PARAMS_B.glow,
-        rimWidth: PARAMS_B.rimWidth,
+        density: PARAMS_B.density,
+        twinkle: PARAMS_B.twinkle,
+        zoom: PARAMS_B.zoom,
+        backgroundGlow: PARAMS_B.backgroundGlow,
         duration: 0.22,
         ease: 'power2.inOut',
       }, 0.2)
 
-      // B → C: 42%~65% transition (calm, widen, shift to horizontal flow)
+      // B → C: 42%~65% (turbulent → crosswind)
       tl.to(p, {
         speed: PARAMS_C.speed,
-        turbulence: PARAMS_C.turbulence,
-        scale: PARAMS_C.scale,
-        sharpness: PARAMS_C.sharpness,
-        shimmer: PARAMS_C.shimmer,
+        streakCount: PARAMS_C.streakCount,
+        streakWidth: PARAMS_C.streakWidth,
+        streakLength: PARAMS_C.streakLength,
         glow: PARAMS_C.glow,
-        rimWidth: PARAMS_C.rimWidth,
-        flowX: PARAMS_C.flowX,
-        flowY: PARAMS_C.flowY,
+        density: PARAMS_C.density,
+        twinkle: PARAMS_C.twinkle,
+        zoom: PARAMS_C.zoom,
+        backgroundGlow: PARAMS_C.backgroundGlow,
         duration: 0.22,
         ease: 'power2.inOut',
       }, 0.42)
 
-      // C → D: 65%~83% transition (slow, sharpen, crystallize)
+      // C → D: 65%~83% (crosswind → frozen stardust)
       tl.to(p, {
         speed: PARAMS_D.speed,
-        turbulence: PARAMS_D.turbulence,
-        scale: PARAMS_D.scale,
-        sharpness: PARAMS_D.sharpness,
-        shimmer: PARAMS_D.shimmer,
+        streakCount: PARAMS_D.streakCount,
+        streakWidth: PARAMS_D.streakWidth,
+        streakLength: PARAMS_D.streakLength,
         glow: PARAMS_D.glow,
-        rimWidth: PARAMS_D.rimWidth,
-        flowX: PARAMS_D.flowX,
-        flowY: PARAMS_D.flowY,
+        density: PARAMS_D.density,
+        twinkle: PARAMS_D.twinkle,
+        zoom: PARAMS_D.zoom,
+        backgroundGlow: PARAMS_D.backgroundGlow,
         duration: 0.22,
         ease: 'power2.inOut',
       }, 0.65)
 
-      // D → E: 83%~91% transition (crystal shatters into aurora)
+      // D → E: 83%~91% (frozen → aurora)
       tl.to(p, {
         speed: PARAMS_E.speed,
-        turbulence: PARAMS_E.turbulence,
-        scale: PARAMS_E.scale,
-        sharpness: PARAMS_E.sharpness,
-        shimmer: PARAMS_E.shimmer,
+        streakCount: PARAMS_E.streakCount,
+        streakWidth: PARAMS_E.streakWidth,
+        streakLength: PARAMS_E.streakLength,
         glow: PARAMS_E.glow,
-        rimWidth: PARAMS_E.rimWidth,
-        flowX: PARAMS_E.flowX,
-        flowY: PARAMS_E.flowY,
+        density: PARAMS_E.density,
+        twinkle: PARAMS_E.twinkle,
+        zoom: PARAMS_E.zoom,
+        backgroundGlow: PARAMS_E.backgroundGlow,
         duration: 0.12,
         ease: 'power2.inOut',
       }, 0.83)
 
-      // E → F: 91%~100% transition (aurora dissolves into nebula)
+      // E → F: 91%~100% (aurora → nebula)
       tl.to(p, {
         speed: PARAMS_F.speed,
-        turbulence: PARAMS_F.turbulence,
-        scale: PARAMS_F.scale,
-        sharpness: PARAMS_F.sharpness,
-        shimmer: PARAMS_F.shimmer,
+        streakCount: PARAMS_F.streakCount,
+        streakWidth: PARAMS_F.streakWidth,
+        streakLength: PARAMS_F.streakLength,
         glow: PARAMS_F.glow,
-        rimWidth: PARAMS_F.rimWidth,
-        flowX: PARAMS_F.flowX,
-        flowY: PARAMS_F.flowY,
-        fluidity: PARAMS_F.fluidity,
+        density: PARAMS_F.density,
+        twinkle: PARAMS_F.twinkle,
+        zoom: PARAMS_F.zoom,
+        backgroundGlow: PARAMS_F.backgroundGlow,
         duration: 0.12,
         ease: 'power2.inOut',
       }, 0.91)
@@ -224,11 +227,17 @@ function App() {
 
   return (
     <div className="app" ref={containerRef}>
-      {/* Single fluid engine — params animated by GSAP scroll timeline */}
-      <FluidBackground paramsRef={paramsRef} />
+      {/* Single Lightfall engine — params animated by GSAP scroll timeline */}
+      <FluidBackground
+        paramsRef={paramsRef}
+        colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
+        backgroundColor="#0A29FF"
+        mouseStrength={0.5}
+        mouseRadius={1}
+      />
 
       <main>
-        {/* Section 0: Calm Flow + Hero content */}
+        {/* Section 0: Calm Dew + Hero content */}
         <section
           id="section-0"
           className="relative min-h-[100dvh]"
@@ -237,7 +246,7 @@ function App() {
           <Home />
         </section>
 
-        {/* Section 1: Turbulent Vortex */}
+        {/* Section 1: Turbulent Shower */}
         <section
           id="section-1"
           className="relative min-h-[100dvh] flex items-center justify-center"
@@ -259,7 +268,7 @@ function App() {
           </div>
         </section>
 
-        {/* Section 2: Wave Surge */}
+        {/* Section 2: Crosswind Drift */}
         <section
           id="section-2"
           className="relative min-h-[100dvh] flex items-center justify-center"
@@ -281,7 +290,7 @@ function App() {
           </div>
         </section>
 
-        {/* Section 3: Crystallization */}
+        {/* Section 3: Frozen Stardust */}
         <section
           id="section-3"
           className="relative min-h-[100dvh] flex items-center justify-center"
@@ -303,7 +312,7 @@ function App() {
           </div>
         </section>
 
-        {/* Section 4: Aurora Scatter */}
+        {/* Section 4: Aurora Jets */}
         <section
           id="section-4"
           className="relative min-h-[100dvh] flex items-center justify-center"
@@ -325,7 +334,7 @@ function App() {
           </div>
         </section>
 
-        {/* Section 5: Nebula Serenity */}
+        {/* Section 5: Nebula Descent */}
         <section
           id="section-5"
           className="relative min-h-[100dvh] flex items-center justify-center"

@@ -1,7 +1,7 @@
 ---
-version: "1.1.0"
-name: NaiLuo Portfolio — Teal Dark
-description: 极简主义深色开发者作品集，以青色为强调色，GSAP 驱动的克制微动效
+version: "1.3.0"
+name: NaiLuo Portfolio — Lightfall
+description: React Bits Lightfall 风格的流式光束背景，GSAP 驱动的 6 段滚动叙事动画
 colors:
   primary: "#19fac6"
   primary-100: "#d3fff3"
@@ -458,142 +458,169 @@ gsap.fromTo(
 )
 ```
 
-## Fluid Motion Narrative（流体运动叙事）
+## Lightfall Narrative（流式光束叙事）
 
-> 整个页面的背景是**同一种流体在连续运动中呈现不同形态**。单一 WebGL 流体引擎驱动全屏，GSAP 时间线基于滚动进度动画 shader uniform，使流体在滚动过程中从静谧流动 → 湍流漩涡 → 波浪涌动 → 结晶凝固 → 极光散射 → 星云归寂，六段连续演变。
+> 整个页面的背景是**同一种流式光束（光雨）在连续运动中呈现不同形态**。参考 React Bits 的 Lightfall 效果，单一 WebGL 光束引擎驱动全屏，GSAP 时间线基于滚动进度动画 shader uniform，使光束在滚动过程中从静谧晨露 → 急流骤雨 → 侧向风阵 → 凝固星芒 → 极光射流 → 星云缓沉，六段连续演变。
+
+### 参考视觉
+
+- 参考来源：React Bits — [Lightfall](https://www.reactbits.dev/backgrounds/lightfall)
+- 核心视觉：数十至上百根独立光束以不同长度/粗细/颜色从上方垂直下落，每根光束拥有「明亮尖锐的头部 + 柔和衰减的长尾」，随机闪烁（twinkle）与轻微水平摆动（sway），光标附近有发光和横向推挤效果。
+- 落地实现：以 ogl + GLSL 单次全屏通道渲染，使用「3x3 网格邻域搜索」累加每格 1~2 根光束的贡献，避免边界截断。
 
 ### 核心架构
 
 - **单一引擎**：`FluidBackground` 组件（基于 ogl + GLSL shader），全屏 `fixed inset-0`
 - **连续变形**：GSAP `timeline` + `scrub: 0.85` 直接动画 shader 的 uniform 参数（speed, turbulence, scale, flow 等）
 - **无缝过渡**：参数之间使用 `power2.inOut` 缓动，22% 滚动宽度的交叉区间确保无跳变
-- **性能最优**：仅一个 WebGL 上下文、一次全屏着色器渲染
+- **性能最优**：仅一个 WebGL 上下文、一次全屏着色器渲染（9 格 × 最多 2 根/格 = 18 根 per pixel 光束累加）
+
+### 参数语义（流式光束版）
+
+| 参数 | 语义（新） | 典型范围 |
+|:-----|:---------|:---------|
+| `speed` | 光束下落/上升速度（整体时间倍率） | 0.1 (静) ~ 1.8 (急) |
+| `scale` | 光束网格密度（越大 = 越稀疏越大尺度） | 1.3 (密雨) ~ 3.8 (星云) |
+| `turbulence` | 光束水平摆动强度（simplex noise 驱动） | 0.1 (垂直) ~ 1.6 (极光) |
+| `fluidity` | 光束尾迹拉长系数（拖尾柔和度） | 0.2 ~ 0.55 |
+| `rimWidth` | 光束粗细（宽度倍率） | 0.15 (星芒) ~ 0.7 (星云) |
+| `sharpness` | 光束头部锐度（1=大头圆钝，6=针尖星点） | 1.0 ~ 6.0 |
+| `shimmer` | 光束 twinkle 闪烁强度 | 0.1 ~ 1.8 |
+| `glow` | 整体发光倍率 | 0.5 ~ 1.0 |
+| `flowX` | 水平漂移（侧风分量） | -1 ~ +1 |
+| `flowY` | 垂直方向（负=下落，正=上升）与倍率 | -1.3 ~ +1.3 |
 
 ### 六种运动形态
 
 六种形态共享同一套 shader，变化的只是 uniform 参数值：
 
-#### 形态 A：静谧流动（Calm Flow）
+#### 形态 A：静谧晨露（Calm Dew）
 
-滚动进度 0% ~ 20%，首屏默认状态。流体以缓慢、温和的节奏稳定向下流动，等高线圆润如绸缎。
+滚动进度 0% ~ 20%，首屏默认状态。稀疏、缓慢的细丝光束从画面上方滑落，偶有轻微闪烁，如清晨叶面露珠顺叶脉滴落。
 
 ```
 参数预设：
-  speed: 0.3        // 缓慢流动
-  turbulence: 0.6   // 温和扭曲
-  scale: 1.8        // 大面积块状
-  sharpness: 2.0    // 柔和边缘
-  shimmer: 0.8      // 平滑质感
+  speed: 0.5        // 慢速下落
+  scale: 2.5        // 稀疏，约 26 列
+  turbulence: 0.15  // 近垂直（微摆）
+  fluidity: 0.3     // 中等拖尾
+  rimWidth: 0.2     // 细光束
+  sharpness: 2.0    // 圆钝的亮头
+  shimmer: 0.3      // 柔和微闪
   glow: 0.7         // 克制发光
-  flow: (0, -1)     // 向下稳定流
-  rimWidth: 0.3     // 宽边轮廓
+  flow: (0, -1)     // 垂直下落
 ```
 
-#### 形态 B：湍流漩涡（Turbulent Vortex）
+#### 形态 B：急流骤雨（Turbulent Shower）
 
-滚动进度 20% ~ 42%。流体进入高度湍流状态，涡旋密集、边缘锐利破碎，像沸腾的金属熔体。
-
-```
-参数预设：
-  speed: 0.8        // 高速流动
-  turbulence: 2.2   // 剧烈扭曲
-  scale: 1.2        // 小块密集
-  sharpness: 3.5    // 锐利边缘
-  shimmer: 2.0      // 破碎质感
-  glow: 0.9         // 中度发光
-  flow: (0, -1)     // 向下但被湍流打散
-  rimWidth: 0.18    // 窄边轮廓
-```
-
-#### 形态 C：波浪涌动（Wave Surge）
-
-滚动进度 42% ~ 65%。流体转为水平方向的波浪涌动，大块柔和的浪涌如潮汐拍岸，等高线变成宽阔的波浪带。
+滚动进度 20% ~ 42%。光束密度陡增、速度加快、粗细参差并带轻微水平抖动，画面在一瞬间转为滂沱光雨。
 
 ```
 参数预设：
-  speed: 0.45       // 中速
-  turbulence: 0.7   // 温和扭曲
-  scale: 2.2        // 超大块（波浪形态）
-  sharpness: 1.5    // 极柔和
-  shimmer: 0.3      // 近乎平滑
-  glow: 0.6         // 微弱发光
-  flow: (-1, 0)     // 向右涌动
-  rimWidth: 0.55    // 极宽轮廓带
+  speed: 1.8        // 快速下落（最高速）
+  scale: 1.3        // 稠密，约 50 列
+  turbulence: 0.8   // 中等摆动 = 雨滴被风吹动的抖动
+  fluidity: 0.45    // 长拖尾 = 雨丝拉长
+  rimWidth: 0.35    // 中等偏粗光束
+  sharpness: 2.5    // 较亮但不尖锐的头部
+  shimmer: 1.5      // 高闪烁 = 雨点反光
+  glow: 0.95        // 高亮暴雨
+  flow: (0.1, -1)   // 略向右的侧风雨
 ```
 
-#### 形态 D：结晶凝固（Crystallization）
+#### 形态 C：侧向风阵（Crosswind Drift）
 
-滚动进度 65% ~ 83%。流体极度减速，流动趋于凝固，边缘变得极其锐利如水晶切面，等高线变成清晰的几何晶界。
-
-```
-参数预设：
-  speed: 0.12       // 极慢（近静止）
-  turbulence: 0.25  // 几乎无扭曲
-  scale: 2.8        // 超大块（结晶域）
-  sharpness: 6.0    // 极致锐利（晶界）
-  shimmer: 0.1      // 近乎完美平滑
-  glow: 1.0         // 晶面反光
-  flow: (0, -1)     // 极缓慢下沉
-  rimWidth: 0.08    // 极窄晶界线
-```
-
-#### 形态 E：极光散射（Aurora Scatter）
-
-滚动进度 83% ~ 91%。晶体沿着晶界碎裂，边缘衍射出极光般的彩色光幕，形态从锐利几何过渡为飘逸的羽毛状分层。整体亮度柔和地微微回升，流动方向从垂直下沉转为对角 45° 漂移。
+滚动进度 42% ~ 65%。下落方向转为强烈对角线倾斜，光束加宽变柔和，像横风裹挟的光幕掠过整个画面。
 
 ```
 参数预设：
-  speed: 0.2        // 慢速飘逸（比结晶略快）
-  turbulence: 1.2   // 中等扭曲：光幕的波动
-  scale: 2.4        // 中大尺度：极光幕布尺寸
-  sharpness: 3.5    // 锐利但柔和（光幕有明确边缘但不硬）
-  shimmer: 1.8      // 高闪烁：极光的星点闪烁
-  glow: 0.85        // 柔和发光，避免过亮
-  flow: (1, 1)      // 右下角 45° 漂移
-  rimWidth: 0.12    // 多层薄光幕带
+  speed: 0.9        // 中速
+  scale: 2.0        // 中等密度 约 32 列
+  turbulence: 0.4   // 中等摆动
+  fluidity: 0.55    // 长拖尾（最长）
+  rimWidth: 0.55    // 超宽光束 = 整片光幕
+  sharpness: 1.5    // 圆钝大头
+  shimmer: 0.5      // 中度闪烁
+  glow: 0.6         // 柔和发光（大面积不刺眼）
+  flow: (-0.8, -1)  // 右→左的倾斜下落
 ```
 
-**叙事含义**：晶体并非终点，解构后的重组以极光形态继续存在。
+#### 形态 D：凝固星芒（Frozen Stardust）
 
-#### 形态 F：星云归寂（Nebula Serenity）
-
-滚动进度 91% ~ 100%。光幕最终消散为宏大尺度的星云云团，速度降至几乎静止，等高线变得极宽极柔和，呈现深空大尺度气体云的漂浮质感。叙事在此收束，像一页结束后的深黑留白。
+滚动进度 65% ~ 83%。速度骤然降低，光束变稀疏、头部收束为极其锐利的针尖光点，闪烁极弱，像漫天星点被冻住悬浮。
 
 ```
 参数预设：
-  speed: 0.08       // 近乎静止，仅宇宙尺度的缓慢漂移
-  turbulence: 0.15  // 极低扭曲：气体云的自然扰动
-  scale: 3.5        // 超大尺度：星云级结构
-  sharpness: 1.0    // 完全柔化，无明确边界（云的羽化）
-  shimmer: 0.2      // 微闪：远星的隐约光点
-  glow: 0.5         // 最暗的柔光：深空的微弱自发光
-  flow: (0.3, -0.2) // 轻微右下倾斜漂浮
-  rimWidth: 0.7     // 极宽轮廓带：云团与暗区的柔和过渡
+  speed: 0.1        // 近乎静止
+  scale: 3.0        // 极稀疏 约 22 列
+  turbulence: 0.1   // 完全垂直
+  fluidity: 0.2     // 短拖尾，只留下针尖
+  rimWidth: 0.15    // 极细光针
+  sharpness: 6.0    // 极限锐利（pow head^4.5）
+  shimmer: 0.15     // 极弱闪烁
+  glow: 1.0         // 最大发光倍率，星点高光
+  flow: (0, -0.3)   // 极缓慢、几乎静止的下沉
 ```
 
-**叙事含义**：所有动与静最终归寂于宏大的星云。阅读/浏览体验在此以深呼吸的节奏结束。
+#### 形态 E：极光射流（Aurora Jets）
+
+滚动进度 83% ~ 91%。方向反转：光束从下方升起，大幅度水平摆动（极光幕布），闪烁强烈，像极光的彩色缎带向上翻涌。
+
+```
+参数预设：
+  speed: 0.8        // 快速上升
+  scale: 2.2        // 中密度 约 30 列
+  turbulence: 1.6   // 最大摆动 = 极光波浪翻滚
+  fluidity: 0.5     // 长拖尾
+  rimWidth: 0.28    // 中等宽度光幕带
+  sharpness: 3.2    // 锐利但有面积
+  shimmer: 1.8      // 最大闪烁
+  glow: 0.85        // 高亮发光
+  flow: (0.7, 1.3)  // 向右上方上升！（反转方向）
+```
+
+**叙事含义**：凝固不是终点，光会以极光的姿态重新向上生长。
+
+#### 形态 F：星云缓沉（Nebula Descent）
+
+滚动进度 91% ~ 100%。光束数量骤减、宽度极度放大，锐度降至最低，每根光束都成为柔和的气体云带，以几乎感知不到的速度缓慢倾斜下沉。叙事在此以「深呼吸」的节奏收束。
+
+```
+参数预设：
+  speed: 0.15       // 近静止的缓慢漂移
+  scale: 3.8        // 最稀疏，约 17 列，超宽光束
+  turbulence: 0.2   // 极低摆动（气体云的自然晃动）
+  fluidity: 0.35    // 中拖尾（云带衔接）
+  rimWidth: 0.7     // 最宽（云带）
+  sharpness: 1.0    // 完全柔化，无锐利边界
+  shimmer: 0.2      // 极弱闪烁（远星）
+  glow: 0.5         // 最弱发光（深空自发光）
+  flow: (0.2, -0.3) // 轻微右下倾斜缓沉
+```
+
+**叙事含义**：所有的急雨与极光，最终都化作深空中缓慢呼吸的星云。
 
 ### 参数过渡时间线
 
 ```
 scroll progress (0 → 1)
 │
-├── 0.00 ── A 静谧流动 ████████░░░░░░░░░░░░░░░░░░░░░░░░░ (0%~20% 稳定)
+├── 0.00 ── A 静谧晨露 ████████░░░░░░░░░░░░░░░░░░░░░░░░░ (0%~20%)
 │                          ↘ 20%~42% (22%) 过渡
 │
-├── 0.20 ── B 湍流漩涡 ░░░░████████████████████░░░░░░░░░░░ (20%~42% 稳定)
+├── 0.20 ── B 急流骤雨 ░░░░████████████████████░░░░░░░░░░░ (20%~42%)
 │                                             ↘ 42%~65% (23%) 过渡
 │
-├── 0.42 ── C 波浪涌动 ░░░░░░░░░░████████████████████░░░░ (42%~65% 稳定)
+├── 0.42 ── C 侧向风阵 ░░░░░░░░░░████████████████████░░░░ (42%~65%)
 │                                                      ↘ 65%~83% (18%) 过渡
 │
-├── 0.65 ── D 结晶凝固 ░░░░░░░░░░░░░░░░░██████████████░░░ (65%~83% 稳定)
+├── 0.65 ── D 凝固星芒 ░░░░░░░░░░░░░░░░░██████████████░░░ (65%~83%)
 │                                                          ↘ 83%~91% (8%) 过渡
 │
-├── 0.83 ── E 极光散射 ░░░░░░░░░░░░░░░░░░░░░░░░░░████████░ (83%~91% 稳定)
+├── 0.83 ── E 极光射流 ░░░░░░░░░░░░░░░░░░░░░░░░░░████████░ (83%~91%)
 │                                                                 ↘ 91%~100% (9%) 过渡
 │
-└── 0.91 ── F 星云归寂 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░███ (91%~100% 稳定)
+└── 0.91 ── F 星云缓沉 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░███ (91%~100%)
 ```
 
 ### 参数动画原理
@@ -602,22 +629,36 @@ GSAP timeline 的属性 tween 直接映射到 shader uniform：
 
 ```typescript
 gsap.timeline({ scrollTrigger: { trigger: document.body, scrub: 0.85 } })
-  .to(fluidRef, { // 20%~42%: A → B
-    turbulence: 2.2, speed: 0.8, sharpness: 3.5, shimmer: 2.0,
-    scale: 1.2, glow: 0.9, rimWidth: 0.18,
+  .to(fluidRef, { // 20%~42%: A → B (暴雨)
+    speed: 1.8, turbulence: 0.8, scale: 1.3,
+    sharpness: 2.5, shimmer: 1.5, glow: 0.95, rimWidth: 0.35,
+    fluidity: 0.45, flowX: 0.1, flowY: -1,
     duration: 0.22, ease: 'power2.inOut',
   }, 0.2)
-  .to(fluidRef, { // 42%~65%: B → C
-    turbulence: 0.7, speed: 0.45, sharpness: 1.5, shimmer: 0.3,
-    scale: 2.2, glow: 0.6, flowX: -1, flowY: 0, rimWidth: 0.55,
+  .to(fluidRef, { // 42%~65%: B → C (横风)
+    speed: 0.9, turbulence: 0.4, scale: 2.0,
+    sharpness: 1.5, shimmer: 0.5, glow: 0.6, rimWidth: 0.55,
+    fluidity: 0.55, flowX: -0.8, flowY: -1,
     duration: 0.22, ease: 'power2.inOut',
   }, 0.42)
-  .to(fluidRef, { // 65%~83%: C → D
-    turbulence: 0.25, speed: 0.12, sharpness: 6.0, shimmer: 0.1,
-    scale: 2.8, glow: 1.0, flowX: 0, flowY: -1, rimWidth: 0.08,
+  .to(fluidRef, { // 65%~83%: C → D (凝固)
+    speed: 0.1, turbulence: 0.1, scale: 3.0,
+    sharpness: 6.0, shimmer: 0.15, glow: 1.0, rimWidth: 0.15,
+    fluidity: 0.2, flowX: 0, flowY: -0.3,
     duration: 0.22, ease: 'power2.inOut',
   }, 0.65)
-  // ...以此类推 E / F
+  .to(fluidRef, { // 83%~91%: D → E (极光射流 反转)
+    speed: 0.8, turbulence: 1.6, scale: 2.2,
+    sharpness: 3.2, shimmer: 1.8, glow: 0.85, rimWidth: 0.28,
+    fluidity: 0.5, flowX: 0.7, flowY: 1.3,
+    duration: 0.12, ease: 'power2.inOut',
+  }, 0.83)
+  .to(fluidRef, { // 91%~100%: E → F (星云缓沉)
+    speed: 0.15, turbulence: 0.2, scale: 3.8,
+    sharpness: 1.0, shimmer: 0.2, glow: 0.5, rimWidth: 0.7,
+    fluidity: 0.35, flowX: 0.2, flowY: -0.3,
+    duration: 0.12, ease: 'power2.inOut',
+  }, 0.91)
 ```
 
 每帧 `requestAnimationFrame` 将 tween 目标值写入 `program.uniforms`。
@@ -625,21 +666,23 @@ gsap.timeline({ scrollTrigger: { trigger: document.body, scrub: 0.85 } })
 ### 共通规范
 
 - **容器**：`fixed inset-0 z-0 overflow-hidden pointer-events-none`
-- **颜色**：`primary-600 (#0a6f5d)` → `primary-300 (#19fac6)` → `primary-200 (#7be9c9)`
+- **颜色**：`primary-600 (#0a6f5d)` → `primary-300 (#19fac6)` → `primary-200 (#7be9c9)`（每根光束 hash 到三者之一）
+- **背景色**：`#0b0b10`（深近黑，留空间给光束发光）
+- **光标交互**：附近光束被横向推挤 + 亮度加成（cursor warp + glow）
 - **单一 WebGL 上下文**：全程仅创建一次 renderer、program、mesh
-- **降级**：`prefers-reduced-motion: reduce` 时渲染形态 A 的静态帧
-- **清理**：组件卸载时释放 WebGL 资源
+- **降级**：`prefers-reduced-motion: reduce` 时光标交互停用，直接以形态 A 速度的静态帧渲染
+- **清理**：组件卸载时释放 WebGL 资源（loseContext + 从容器 remove canvas）
 
 ### 对比表
 
 | 形态 | 运动特征 | 关键参数 | 视觉联想 |
 |:-----|:---------|:---------|:---------|
-| A 静谧流动 | 缓慢稳定 | speed: 0.3, turbulence: 0.6 | 绸缎、溪流 |
-| B 湍流漩涡 | 剧烈混沌 | speed: 0.8, turbulence: 2.2, sharpness: 3.5 | 沸腾金属、岩浆 |
-| C 波浪涌动 | 大片柔和 | scale: 2.2, flow: right, sharpness: 1.5 | 潮汐、海浪 |
-| D 结晶凝固 | 锐利静止 | speed: 0.12, sharpness: 6.0, scale: 2.8 | 水晶、晶界 |
-| E 极光散射 | 飘逸分层 | flow: ↘, shimmer: 1.8, rimWidth: 0.12 | 极光幕布、孔雀羽 |
-| F 星云归寂 | 大尺度漂浮 | speed: 0.08, sharpness: 1.0, rimWidth: 0.7 | 星云、深空气体云 |
+| A 静谧晨露 | 细、慢、稳 | speed: 0.5, scale: 2.5 | 叶脉露珠滑落 |
+| B 急流骤雨 | 密、快、参差抖动 | speed: 1.8, scale: 1.3, shimmer: 1.5 | 滂沱光雨 |
+| C 侧向风阵 | 倾斜宽光幕 | flowX: -0.8, rimWidth: 0.55 | 横风裹携的光幕 |
+| D 凝固星芒 | 静、锐、稀疏 | sharpness: 6.0, speed: 0.1 | 凝固的星点针芒 |
+| E 极光射流 | 上升 + 翻涌 | flowY: +1.3, turbulence: 1.6 | 北极光缎带 |
+| F 星云缓沉 | 大尺度、软、慢 | scale: 3.8, rimWidth: 0.7, sharpness: 1.0 | 深空气体云 |
 
 ## Do's and Don'ts
 
