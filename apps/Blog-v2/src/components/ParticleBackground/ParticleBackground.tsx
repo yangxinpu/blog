@@ -30,8 +30,8 @@ export function ParticleBackground({
   bulgeStrength = 50,
   waveAmplitude = 3,
   sparkle = true,
-  baseColor = 'rgba(25, 250, 198, 0.15)',
-  accentColor = 'rgba(25, 250, 198, 0.6)',
+  baseColor = 'rgba(23, 251, 198, 0.15)',
+  accentColor = 'rgba(23, 251, 198, 0.6)',
   speed = 0.02,
 }: ParticleBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)

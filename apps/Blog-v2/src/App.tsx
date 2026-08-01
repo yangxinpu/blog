@@ -13,48 +13,46 @@ gsap.registerPlugin(ScrollTrigger)
  *
  * 单 WebGL 光束引擎（对齐 reactbits.dev/backgrounds/lightfall），
  * GSAP timeline 基于滚动进度动画 shader uniform，
- * 使光束在 6 个 section 中呈现连续的运动形态演变：
- *   A 静谧晨露 → B 急流骤雨 → C 侧向风阵 → D 凝固星芒 → E 极光射流 → F 星云缓沉
+ * 使光束在 6 个 section 中呈现连续的向上运动形态演变：
+ *   A 静谧晨露 → B 急流骤升 → C 侧向风涌 → D 凝固星芒 → E 极光射流 → F 星云升腾
  */
 
-// A：首屏 — 严格对齐 React Bits Lightfall 组件默认值
-//   speed=0.5, streakCount=2, streakWidth=1, streakLength=1
-//   glow=1, density=0.6, twinkle=1, zoom=3, backgroundGlow=0.5
+// A：首屏 — 稀疏、缓慢上升
 const PARAMS_A: FluidParams = {
   speed: 0.5,
-  streakCount: 2,
+  streakCount: 1,
   streakWidth: 1,
   streakLength: 1,
   glow: 1,
-  density: 0.6,
+  density: 0.4,
   twinkle: 1,
-  zoom: 3,
+  zoom: 3.5,
   backgroundGlow: 0.5,
 }
 
-// B：急流骤雨 Turbulent Shower — 更快速、更密集、更亮的光雨
+// B：急流骤升 Turbulent Rise — 快速、中等稀疏、明亮
 const PARAMS_B: FluidParams = {
   speed: 1.8,
-  streakCount: 6,
+  streakCount: 2,
   streakWidth: 1.2,
   streakLength: 1.2,
   glow: 1.2,
-  density: 1.5,
+  density: 0.7,
   twinkle: 1.5,
-  zoom: 2.5,
+  zoom: 2.8,
   backgroundGlow: 0.8,
 }
 
-// C：侧向风阵 Crosswind Drift — 宽光束、中速、适度闪烁
+// C：侧向风涌 Crosswind Surge — 宽光束、中速、稀疏
 const PARAMS_C: FluidParams = {
   speed: 0.9,
-  streakCount: 3,
+  streakCount: 2,
   streakWidth: 2.0,
   streakLength: 1.5,
   glow: 0.9,
-  density: 0.8,
+  density: 0.5,
   twinkle: 0.6,
-  zoom: 3.0,
+  zoom: 3.2,
   backgroundGlow: 0.6,
 }
 
@@ -65,45 +63,45 @@ const PARAMS_D: FluidParams = {
   streakWidth: 0.8,
   streakLength: 0.4,
   glow: 1.1,
-  density: 0.3,
+  density: 0.25,
   twinkle: 0.2,
-  zoom: 4.0,
+  zoom: 4.5,
   backgroundGlow: 0.9,
 }
 
-// E：极光射流 Aurora Jets — 反向上升、高闪烁、高密度
+// E：极光射流 Aurora Jets — 强上升、高闪烁、中等稀疏
 const PARAMS_E: FluidParams = {
   speed: 0.8,
-  streakCount: 5,
+  streakCount: 2,
   streakWidth: 1.0,
   streakLength: 0.8,
   glow: 1.3,
-  density: 1.2,
+  density: 0.6,
   twinkle: 2.0,
-  zoom: 2.0,
+  zoom: 2.3,
   backgroundGlow: 1.0,
 }
 
-// F：星云缓沉 Nebula Descent — 超宽、极慢、极柔、稀疏
+// F：星云升腾 Nebula Ascent — 超宽、极慢、极柔、极稀疏
 const PARAMS_F: FluidParams = {
   speed: 0.2,
   streakCount: 1,
   streakWidth: 3.0,
   streakLength: 2.0,
   glow: 0.6,
-  density: 0.25,
+  density: 0.2,
   twinkle: 0.3,
-  zoom: 3.5,
+  zoom: 4.0,
   backgroundGlow: 0.4,
 }
 
 const SECTIONS = [
   { id: 'section-0', label: '静谧晨露', en: 'Calm Dew' },
-  { id: 'section-1', label: '急流骤雨', en: 'Turbulent Shower' },
-  { id: 'section-2', label: '侧向风阵', en: 'Crosswind Drift' },
+  { id: 'section-1', label: '急流骤升', en: 'Turbulent Rise' },
+  { id: 'section-2', label: '侧向风涌', en: 'Crosswind Surge' },
   { id: 'section-3', label: '凝固星芒', en: 'Frozen Stardust' },
   { id: 'section-4', label: '极光射流', en: 'Aurora Jets' },
-  { id: 'section-5', label: '星云缓沉', en: 'Nebula Descent' },
+  { id: 'section-5', label: '星云升腾', en: 'Nebula Ascent' },
 ] as const
 
 function App() {
@@ -230,8 +228,8 @@ function App() {
       {/* Single Lightfall engine — params animated by GSAP scroll timeline */}
       <FluidBackground
         paramsRef={paramsRef}
-        colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
-        backgroundColor="#0A29FF"
+        colors={['#E6FFF8', '#17FBC6', '#086550']}
+        backgroundColor="#0a2a26"
         mouseStrength={0.5}
         mouseRadius={1}
       />
@@ -246,7 +244,7 @@ function App() {
           <Home />
         </section>
 
-        {/* Section 1: Turbulent Shower */}
+        {/* Section 1: Turbulent Rise */}
         <section
           id="section-1"
           className="relative min-h-[100dvh] flex items-center justify-center"
@@ -268,7 +266,7 @@ function App() {
           </div>
         </section>
 
-        {/* Section 2: Crosswind Drift */}
+        {/* Section 2: Crosswind Surge */}
         <section
           id="section-2"
           className="relative min-h-[100dvh] flex items-center justify-center"
@@ -334,7 +332,7 @@ function App() {
           </div>
         </section>
 
-        {/* Section 5: Nebula Descent */}
+        {/* Section 5: Nebula Ascent */}
         <section
           id="section-5"
           className="relative min-h-[100dvh] flex items-center justify-center"

@@ -118,7 +118,7 @@ export function Home() {
             color: 'var(--text)',
             fontSize: 'clamp(3.5rem, 14vw, 8rem)',
             letterSpacing: '-0.045em',
-            textShadow: '0 0 60px rgba(25, 250, 198, 0.15)',
+            textShadow: '0 0 60px rgba(23, 251, 198, 0.15)',
           }}
         >
           NaiLuo

@@ -1,6 +1,6 @@
 # Blog-v2 应用 - Agent 指南
 
-> **文档版本**: v1.8.0
+> **文档版本**: v2.0.0
 > **最后更新**: 2026-08-01
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
@@ -90,12 +90,12 @@ src/
 ```css
 :root {
   /* 主色 */
-  --primary-100: #d3fff3;
-  --primary-200: #97fce4;
-  --primary-300: #19fac6;
-  --primary-400: #13d6aa;
-  --primary-500: #0ea387;
-  --primary-600: #0a6f5d;
+  --primary-100: #E6FFF8;
+  --primary-200: #8DFBDE;
+  --primary-300: #17FBC6;
+  --primary-400: #0EB890;
+  --primary-500: #0B8F70;
+  --primary-600: #086550;
 
   /* 语义色 */
   --text: #e0e0e0;
@@ -106,7 +106,7 @@ src/
   --bg-tertiary: #222222;
   --border: #404040;
   --border-subtle: #2e2e2e;
-  --accent: #19fac6;
+  --accent: #17FBC6;
   --accent-hover: var(--primary-200);
   --shadow: rgba(0, 0, 0, 0.3);
 
@@ -118,7 +118,7 @@ src/
 ```
 
 **约束**：
-- 主色 `--accent` 必须使用 `#19fac6`（青色），与 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/DESIGN.md) 保持一致
+- 主色 `--accent` 必须使用 `#17FBC6`（青色），与 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/DESIGN.md) 保持一致
 - 不要更改色值，确保视觉风格统一
 - Tailwind 中可通过 `@theme` 映射这些变量
 
@@ -128,7 +128,7 @@ src/
 
 ### 核心理念
 
-- **极简深色开发者风**：以青色 `#19fac6` 为唯一强调色，建立克制的视觉层次
+- **极简深色开发者风**：以青色 `#17FBC6` 为唯一强调色，建立克制的视觉层次
 - **GSAP 驱动动效**：所有入场动画基于 `useGSAP` + `ScrollTrigger`，遵循"淡入上浮"基础形态
 - **不依赖阴影**：深度通过背景色差交替与细线分隔实现
 - **3D/玻璃拟态禁止**：保持纯粹的 flat design 风格

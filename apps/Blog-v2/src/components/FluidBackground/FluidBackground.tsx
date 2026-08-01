@@ -170,7 +170,7 @@ void mainImage(out vec4 o, vec2 C) {
     if (m >= uStreakCount) break;
     float jf = float(m) + 1.0;
     float ic = fract(sin(dot(vec2(jf, floor(C.x / Y.x + 0.5)), vec2(7.0, 11.0)) * 73.0));
-    vec2 Pp = C - (T + T * ic) * vec2(0.0, 1.0);
+    vec2 Pp = C + (T + T * ic) * vec2(0.0, 1.0);
     Pp -= floor(Pp / Y + 0.5) * Y;
     float h = fract(8663.0 * ic);
     vec3 col = palette(h);
