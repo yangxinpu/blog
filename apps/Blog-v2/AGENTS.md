@@ -1,6 +1,6 @@
 # Blog-v2 应用 - Agent 指南
 
-> **文档版本**: v2.0.0
+> **文档版本**: v3.0.0
 > **最后更新**: 2026-08-01
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
@@ -30,9 +30,6 @@
 | Vite | 8.x | 构建工具 |
 | TypeScript | 6.x | 类型系统 |
 | Tailwind CSS | 4.x | 原子化 CSS（通过 `@tailwindcss/vite` 插件集成） |
-| GSAP | 3.x | 动画引擎 |
-| Three.js | 0.183.x | 3D 渲染 |
-| ogl | 1.x | WebGL 着色器（FerrofluidBackground 流体背景） |
 | i18next | 25.x | 国际化 |
 | Lucide React | 0.577.x | 图标库 |
 
@@ -40,9 +37,6 @@
 
 | 依赖 | 正确导入 | 注意 |
 |------|----------|------|
-| `gsap` + `@gsap/react` | `import gsap from 'gsap'`、`import { useGSAP } from '@gsap/react'`、`import { ScrollTrigger } from 'gsap/ScrollTrigger'` | 所有动画基于 GSAP。`useGSAP` 自带 `gsap.context` 清理，必须用 `scope` 限定作用域 |
-| `three` | `import * as THREE from 'three'` | 3D 场景渲染 |
-| `ogl` | `import { Renderer, Program, Mesh, Triangle } from 'ogl'` | **清理陷阱**：`Renderer` 无 `destroy()`、`Mesh` 无 `remove()`。正确清理 = `geometry.remove()` + `program.remove()` + `gl.getExtension('WEBGL_lose_context')?.loseContext()` + 移除 canvas |
 | `lucide-react` | 图标按需导入，如 `import { IconName } from 'lucide-react'` | |
 | `i18next` + `react-i18next` | `import i18n from 'i18next'`、`import { useTranslation } from 'react-i18next'` | 见 i18n 章节 |
 | `tailwindcss` | `@import "tailwindcss"` 在 CSS 中引入 | v4 通过 Vite 插件工作，无需 postcss |
@@ -64,7 +58,7 @@
 
 ```
 src/
-├── components/     # 可复用组件（Navbar、FerrofluidBackground）
+├── components/     # 可复用组件（Navbar）
 ├── pages/          # 页面区块（当前仅 Home）
 ├── libs/           # hooks / i18n / utils
 ├── assets/Images/  # 图片资源
@@ -101,11 +95,11 @@ src/
   --text: #e0e0e0;
   --text-secondary: #b0b0b0;
   --text-muted: #808080;
-  --bg: #1a1a1a;
-  --bg-secondary: #2a2a2a;
-  --bg-tertiary: #222222;
-  --border: #404040;
-  --border-subtle: #2e2e2e;
+  --bg: #0a2a26;
+  --bg-secondary: #0d3530;
+  --bg-tertiary: #0b2f2a;
+  --border: #1a4a42;
+  --border-subtle: #15352f;
   --accent: #17FBC6;
   --accent-hover: var(--primary-200);
   --shadow: rgba(0, 0, 0, 0.3);
@@ -129,7 +123,6 @@ src/
 ### 核心理念
 
 - **极简深色开发者风**：以青色 `#17FBC6` 为唯一强调色，建立克制的视觉层次
-- **GSAP 驱动动效**：所有入场动画基于 `useGSAP` + `ScrollTrigger`，遵循"淡入上浮"基础形态
 - **不依赖阴影**：深度通过背景色差交替与细线分隔实现
 - **3D/玻璃拟态禁止**：保持纯粹的 flat design 风格
 
@@ -139,9 +132,7 @@ src/
 
 1. **主题来源**：所有视觉决策以 DESIGN.md 为准，禁止硬编码未定义的色值
 2. **CSS 变量**：新增 token 必须先在 `index.css` 的 `:root` 中定义，组件通过 `var(--*)` 引用
-3. **动画引擎**：统一使用 GSAP + `@gsap/react` 的 `useGSAP` hook + `scope` 限定作用域
-4. **无障碍**：所有动效必须尊重 `prefers-reduced-motion`，交互元素需有 `focus-visible`
-5. **响应式**：移动端单列，`md:` (768px) 以上启用多列布局
+3. **响应式**：移动端单列，`md:` (768px) 以上启用多列布局
 
 ### 验证命令
 
