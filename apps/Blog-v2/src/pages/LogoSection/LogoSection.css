@@ -1,0 +1,31 @@
+.logo-section {
+  width: 100%;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-content {
+  width: 100%;
+  padding: 48px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.logo-content.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.logo-loop img {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+}
+
+.logo-loop:hover img {
+  opacity: 1;
+}
