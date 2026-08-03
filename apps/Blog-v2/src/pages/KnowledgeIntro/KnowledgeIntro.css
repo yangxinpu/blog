@@ -1,0 +1,230 @@
+.cursor-grid-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.cursor-grid-canvas {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ki-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 0;
+  background-color: var(--bg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.ki-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.ki-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.ki-header {
+  text-align: center;
+  margin-bottom: 64px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.ki-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+
+.ki-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.ki-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.ki-category-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  animation: cardFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.ki-category-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px rgba(23, 251, 198, 0.08);
+}
+
+.ki-category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ki-category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.ki-category-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(48%) sepia(100%) saturate(310%) hue-rotate(116deg) brightness(126%) contrast(117%);
+}
+
+.ki-category-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ki-category-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ki-category-title-en {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.ki-category-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ki-category-link {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 4px 10px;
+  transition: all 0.2s ease;
+}
+
+.ki-category-card:hover .ki-category-link {
+  color: var(--text);
+  background: var(--bg-secondary);
+}
+
+/* Animations */
+.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.animate-delay-0 {
+  transition: opacity 0.7s ease-out 0.1s, transform 0.7s ease-out 0.1s;
+}
+
+.animate-delay-1 {
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .ki-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ki-section {
+    padding: 60px 0;
+  }
+
+  .ki-container {
+    padding: 0 16px;
+  }
+
+  .ki-header {
+    margin-bottom: 40px;
+  }
+
+  .ki-categories {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .ki-category-card {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ki-header,
+  .ki-categories {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .ki-category-card {
+    animation: none;
+    opacity: 1;
+  }
+}

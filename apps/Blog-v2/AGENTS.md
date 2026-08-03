@@ -1,17 +1,10 @@
 # Blog-v2 应用 - Agent 指南
 
-> **文档版本**: v3.0.0
-> **最后更新**: 2026-08-01
+> **文档版本**: v4.0.0
+> **最后更新**: 2026-08-04
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
 
-## 项目定位
-
-**Blog-v2 是 [apps/Blog](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog) 的重构项目**，核心目标：
-
-- 用 **Tailwind CSS v4** 替代 SCSS Modules，提升样式开发效率
-- 继承原项目的国际化等能力
-- 优化代码结构和可维护性
 
 ## 版本管理规则
 
@@ -32,6 +25,12 @@
 | Tailwind CSS | 4.x | 原子化 CSS（通过 `@tailwindcss/vite` 插件集成） |
 | i18next | 25.x | 国际化 |
 | Lucide React | 0.577.x | 图标库 |
+| GSAP | 3.x | 动画库 |
+| @react-three/fiber | 9.x | React Three.js 绑定 |
+| @react-three/drei | 10.x | R3F 辅助组件 |
+| Three.js | 0.183.x | 3D 渲染 |
+| postprocessing | 6.x | 后处理效果 |
+| ogl | 1.x | WebGL 工具库 |
 
 ## 关键依赖
 
@@ -40,6 +39,10 @@
 | `lucide-react` | 图标按需导入，如 `import { IconName } from 'lucide-react'` | |
 | `i18next` + `react-i18next` | `import i18n from 'i18next'`、`import { useTranslation } from 'react-i18next'` | 见 i18n 章节 |
 | `tailwindcss` | `@import "tailwindcss"` 在 CSS 中引入 | v4 通过 Vite 插件工作，无需 postcss |
+| `@react-three/fiber` | `import { Canvas, useFrame, useThree } from '@react-three/fiber'` | React 19 兼容性需用类型断言 |
+| `@react-three/drei` | `import { ... } from '@react-three/drei'` | 辅助组件库 |
+| `three` | `import * as THREE from 'three'` | Three.js 核心 |
+| `gsap` + `@gsap/react` | `import { gsap } from 'gsap'` | 动画库 |
 
 ## Tailwind CSS v4
 
@@ -58,24 +61,38 @@
 
 ```
 src/
-├── components/     # 可复用组件（Navbar）
-├── pages/          # 页面区块（当前仅 Home）
-├── libs/           # hooks / i18n / utils
-├── assets/Images/  # 图片资源
-├── App.tsx         # 应用入口组件
-├── App.css         # App 级样式
-├── index.css       # 全局样式 + Tailwind 引入
-└── main.tsx        # 应用启动
+├── components/         # 可复用组件
+│   ├── Antigravity/    # 3D 粒子背景动画（R3F + Three.js）
+│   ├── CursorGrid/     # 鼠标追踪网格背景动画（Canvas）
+│   ├── PixelBlast/     # 像素粒子背景动画（Canvas）
+│   └── PixelTransition/ # 图片像素过渡动画（GSAP）
+├── pages/              # 页面区块
+│   ├── Home/           # 首页（Hero + PixelBlast 背景）
+│   ├── KnowledgeIntro/ # 知识库介绍页（CursorGrid 背景）
+│   ├── AboutSection/   # 自我介绍页（左右布局）
+│   └── QuoteSection/   # 名言页（Antigravity 3D 背景）
+├── libs/               # hooks / i18n / utils
+├── assets/Images/      # 图片资源
+├── App.tsx             # 应用入口组件
+├── App.css             # App 级样式
+├── index.css           # 全局样式 + Tailwind 引入 + CSS 变量
+├── r3f.d.ts            # React Three Fiber 类型声明
+└── main.tsx            # 应用启动
 ```
 
-**当前页面结构**：仅包含首页（Home）和导航栏（Navbar）。About、TechStack、Projects、Blog、Contact、Footer 页面已移除。
+**页面结构**（按 App.tsx 顺序）：
+1. **Home** — 首页 Hero，使用 PixelBlast 粒子背景
+2. **KnowledgeIntro** — 知识库介绍，使用 CursorGrid 网格背景
+3. **AboutSection** — 自我介绍，左右布局（文字 + 图片像素过渡）
+4. **QuoteSection** — 名言展示，使用 Antigravity 3D 粒子背景
 
 ## 样式约定
 
 - 优先使用 Tailwind 原子类
-- 需要复杂/可复用样式时，使用 CSS Modules（`.module.css`）
+- 需要复杂/可复用样式时，使用 CSS Modules（`.module.css`）或独立 `.css` 文件
 - 全局样式只写在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/index.css)
-- 不要新增不必要的全局 `.css` 文件
+- 页面级样式存放在对应页面目录下的 `.css` 文件
+- 组件级样式存放在对应组件目录下的 `.css` 文件
 
 ## 主色系统（必须与 DESIGN.md 保持一致）
 
@@ -95,26 +112,71 @@ src/
   --text: #e0e0e0;
   --text-secondary: #b0b0b0;
   --text-muted: #808080;
-  --bg: #0a2a26;
-  --bg-secondary: #0d3530;
-  --bg-tertiary: #0b2f2a;
-  --border: #1a4a42;
-  --border-subtle: #15352f;
+  --bg: #111111;
+  --bg-secondary: #111111;
+  --bg-tertiary: #0d0d0d;
+  --border: #2a2a2a;
+  --border-subtle: #1a1a1a;
   --accent: #17FBC6;
   --accent-hover: var(--primary-200);
   --shadow: rgba(0, 0, 0, 0.3);
 
+  /* Tag / Chip */
+  --tag-bg: rgba(23, 251, 198, 0.12);
+  --tag-bg-hover: rgba(23, 251, 198, 0.10);
+  --tag-border: rgba(23, 251, 198, 0.25);
+  --tag-border-hover: rgba(23, 251, 198, 0.22);
+
   /* 字体 */
-  --font-display: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
+
+  /* 半透明背景（让 3D 背景微微透出） */
+  --bg-translucent: rgba(26, 26, 26, 0.97);
+  --bg-secondary-translucent: rgba(42, 42, 42, 0.97);
 }
 ```
 
 **约束**：
 - 主色 `--accent` 必须使用 `#17FBC6`（青色），与 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/DESIGN.md) 保持一致
+- 背景色 `--bg` 使用 `#111111`
 - 不要更改色值，确保视觉风格统一
 - Tailwind 中可通过 `@theme` 映射这些变量
+
+## 3D 动画组件
+
+### Antigravity（3D 粒子背景）
+
+- 位置：[src/components/Antigravity/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/components/Antigravity/)
+- 技术栈：React Three Fiber + Three.js
+- 功能：3D 粒子环形系统，鼠标交互产生"反重力"效果
+- **React 19 兼容性**：需使用类型断言绕过 R3F JSX 类型检查
+  ```tsx
+  const R3F = {
+    InstancedMesh: 'instancedMesh' as unknown as React.ElementType,
+    // ...
+  };
+  ```
+- 类型声明：[src/r3f.d.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/r3f.d.ts) 引入 R3F 类型
+
+### CursorGrid（网格背景）
+
+- 位置：[src/components/CursorGrid/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/components/CursorGrid/)
+- 技术栈：Canvas 2D
+- 功能：鼠标追踪网格线动画，边缘内部模糊效果
+
+### PixelBlast（粒子背景）
+
+- 位置：[src/components/PixelBlast/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/components/PixelBlast/)
+- 技术栈：Canvas 2D
+- 功能：像素粒子背景动画
+
+### PixelTransition（图片过渡）
+
+- 位置：[src/components/PixelTransition/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/src/components/PixelTransition/)
+- 技术栈：GSAP
+- 功能：图片像素块过渡动画，支持 hover 触发
 
 ## 设计系统（DESIGN.md）
 
@@ -140,7 +202,7 @@ src/
 npx @google/design.md lint DESIGN.md    # 验证设计系统完整性
 ```
 
-## 国际化（必须与原 Blog 保持一致）
+## 国际化
 
 使用 `i18next` + `react-i18next`，配置要求：
 
@@ -192,6 +254,7 @@ pnpm --filter blog-v2 run build             # tsc -b && vite build
 - **ESLint 未用变量**：以 `_` 前缀命名（`argsIgnorePattern: '^_'`）
 - **ESLint 配置**：[eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/eslint.config.js) 使用 ESLint 10 flat config
 - **vendor 分包**：[vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/vite.config.ts) 后续可配置 `manualChunks`
+- **React 19 + R3F 类型兼容**：R3F JSX 元素需使用类型断言，参考 Antigravity 组件实现
 
 ## 开发服务器
 

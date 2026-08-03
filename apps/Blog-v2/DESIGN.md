@@ -201,16 +201,16 @@ components:
 
 ### Backgrounds（背景色）
 
-三级深青绿背景建立页面纵深，而非依赖色彩对比：
+三级灰黑背景建立页面纵深，通过微妙的灰度差异建立层次感：
 
-- **bg (`#0a2a26`)**: 页面主背景
-- **bg-secondary (`#0d3530`)**: 交替区块背景，用于 create visual rhythm
-- **bg-tertiary (`#0b2f2a`)**: 嵌套容器背景（标签、chip 等）
+- **bg (`#0a0a0a`)**: 页面主背景（最暗层，用于首页 Hero 区域）
+- **bg-secondary (`#111111`)**: 交替区块背景，用于 create visual rhythm（中间层，用于知识库等区块）
+- **bg-tertiary (`#0d0d0d`)**: 嵌套容器背景（卡片、标签容器等，介于主背景与交替背景之间）
 
 ### Border Colors（边框色）
 
-- **border (`#1a4a42`)**: 标准边框，用于按钮、输入框等交互元素
-- **border-subtle (`#15352f`)**: 微弱边框，用于区块分隔线、卡片边缘
+- **border (`#2a2a2a`)**: 标准边框，用于按钮、输入框等交互元素
+- **border-subtle (`#1a1a1a`)**: 微弱边框，用于区块分隔线、卡片边缘
 
 ### Shadow
 
