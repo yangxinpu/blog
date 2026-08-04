@@ -9,15 +9,19 @@ type Category = {
   links: { label: string; href: string }[];
 };
 
+const KB_BASE = import.meta.env.VITE_KB_BASE_URL ?? 'https://nailuo-knowledge-base.vercel.app';
+
+const kb = (path: string): string => `${KB_BASE}${path}`;
+
 const categories: Category[] = [
   {
     icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg',
     title: '前端',
     titleEn: 'Frontend',
     links: [
-      { label: 'JavaScript', href: '/kb/zh/前端/JavaScript/JS基础' },
-      { label: 'React', href: '/kb/zh/前端/React/React基础' },
-      { label: 'Vue', href: '/kb/zh/前端/Vue/Vue基础' },
+      { label: 'JavaScript', href: kb('/zh/前端/JavaScript/JS基础') },
+      { label: 'React', href: kb('/zh/前端/React/React基础') },
+      { label: 'Vue', href: kb('/zh/前端/Vue/Vue基础') },
     ],
   },
   {
@@ -25,8 +29,8 @@ const categories: Category[] = [
     title: '后端',
     titleEn: 'Backend',
     links: [
-      { label: 'Node.js', href: '/kb/zh/后端/' },
-      { label: '数据库', href: '/kb/zh/后端/' },
+      { label: 'Node.js', href: kb('/zh/后端/') },
+      { label: '数据库', href: kb('/zh/后端/') },
     ],
   },
   {
@@ -34,9 +38,9 @@ const categories: Category[] = [
     title: '测试',
     titleEn: 'Testing',
     links: [
-      { label: '单元测试', href: '/kb/zh/测试/单元测试' },
-      { label: '端到端测试', href: '/kb/zh/测试/端到端测试' },
-      { label: '性能测试', href: '/kb/zh/测试/性能测试' },
+      { label: '单元测试', href: kb('/zh/测试/单元测试') },
+      { label: '端到端测试', href: kb('/zh/测试/端到端测试') },
+      { label: '性能测试', href: kb('/zh/测试/性能测试') },
     ],
   },
   {
@@ -44,8 +48,8 @@ const categories: Category[] = [
     title: '运维',
     titleEn: 'DevOps',
     links: [
-      { label: 'Docker', href: '/kb/zh/运维/' },
-      { label: 'Nginx', href: '/kb/zh/运维/' },
+      { label: 'Docker', href: kb('/zh/运维/') },
+      { label: 'Nginx', href: kb('/zh/运维/') },
     ],
   },
   //不要修改icon这个URL
@@ -54,8 +58,8 @@ const categories: Category[] = [
     title: 'AI',
     titleEn: 'AI',
     links: [
-      { label: 'Ollama', href: '/kb/zh/AI/Ollama/Ollama基础' },
-      { label: 'Opencode', href: '/kb/zh/AI/Opencode/Opencode基础' },
+      { label: 'Ollama', href: kb('/zh/AI/Ollama/Ollama基础') },
+      { label: 'Opencode', href: kb('/zh/AI/Opencode/Opencode基础') },
     ],
   },
   //不要修改icon这个URL
@@ -64,8 +68,8 @@ const categories: Category[] = [
     title: '产品',
     titleEn: 'Product',
     links: [
-      { label: '产品设计', href: '/kb/zh/产品/' },
-      { label: '产品方法论', href: '/kb/zh/产品/' },
+      { label: '产品设计', href: kb('/zh/产品/') },
+      { label: '产品方法论', href: kb('/zh/产品/') },
     ],
   },
   {
@@ -73,8 +77,8 @@ const categories: Category[] = [
     title: 'Python',
     titleEn: 'Python',
     links: [
-      { label: 'Python 基础', href: '/kb/zh/Python/' },
-      { label: 'Python 进阶', href: '/kb/zh/Python/' },
+      { label: 'Python 基础', href: kb('/zh/Python/') },
+      { label: 'Python 进阶', href: kb('/zh/Python/') },
     ],
   },
   {
@@ -82,9 +86,9 @@ const categories: Category[] = [
     title: '其他',
     titleEn: 'Other',
     links: [
-      { label: 'Git', href: '/kb/zh/其他/Git/' },
-      { label: '算法', href: '/kb/zh/其他/算法/' },
-      { label: '计算机网络', href: '/kb/zh/其他/计算机网络/' },
+      { label: 'Git', href: kb('/zh/其他/Git/') },
+      { label: '算法', href: kb('/zh/其他/算法/') },
+      { label: '计算机网络', href: kb('/zh/其他/计算机网络/') },
     ],
   },
 ];
@@ -150,7 +154,7 @@ const KnowledgeIntro: React.FC = () => {
           {categories.map((category, index) => (
             <a
               key={category.title}
-              href={`/kb/zh/${category.title}/`}
+              href={kb(`/zh/${category.title}/`)}
               className="ki-category-card"
               style={{ animationDelay: `${index * 0.06}s` }}
               target="_blank"

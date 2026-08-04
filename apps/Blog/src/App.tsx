@@ -1,45 +1,21 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-import { Loading } from './components';
-import logoImage from './assets/Images/logo.png';
-
-const MainContent = lazy(() => import('./Layout/MainContent/MainContent'));
-
-const LOAD_THRESHOLD = 800;
-const pageLoadStartTime = performance.now();
+import Home from './pages/Home';
+import KnowledgeIntro from './pages/KnowledgeIntro';
+import LogoSection from './pages/LogoSection';
+import AboutSection from './pages/AboutSection';
+import QuoteSection from './pages/QuoteSection';
+import './App.css';
 
 function App() {
-  const [showLoading, setShowLoading] = useState(true);
-
-  useEffect(() => {
-    const handleLoad = () => {
-      const loadTime = performance.now() - pageLoadStartTime;
-
-      if (loadTime < LOAD_THRESHOLD) {
-        const remainingTime = LOAD_THRESHOLD - loadTime;
-        setTimeout(() => {
-          setShowLoading(false);
-        }, remainingTime);
-      } else {
-        setShowLoading(false);
-      }
-    };
-
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
-  if (showLoading) {
-    return <Loading logo={logoImage} text="NAILUO" />;
-  }
-
   return (
-    <Suspense fallback={<Loading logo={logoImage} text="NAILUO" />}>
-      <MainContent />
-    </Suspense>
+    <div className="app">
+      <main>
+        <Home />
+        <KnowledgeIntro />
+        <LogoSection />
+        <AboutSection />
+        <QuoteSection />
+      </main>
+    </div>
   );
 }
 

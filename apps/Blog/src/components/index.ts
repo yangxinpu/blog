@@ -1,5 +1,0 @@
-export { default as Message } from './Message/Message';
-export { default as Dropdown } from './Dropdown/Dropdown';
-export { default as MagicRingsBackground } from './MagicRingsBackground/MagicRingsBackground';
-export { default as FloatingLines } from './FloatingLines/FloatingLines';
-export { default as Loading } from './Loading/Loading';

@@ -76,7 +76,7 @@ const Home: React.FC = () => {
           </a>
 
           <a
-            href="https://nailuo-knowledge-base.vercel.app"
+            href={import.meta.env.VITE_KB_BASE_URL ?? 'https://nailuo-knowledge-base.vercel.app'}
             target="_blank"
             rel="noopener noreferrer"
             className="home-btn home-btn-secondary"

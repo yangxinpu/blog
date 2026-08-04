@@ -21,11 +21,11 @@ pnpm monorepo，`pnpm-workspace.yaml` 仅包含 `apps/*`。三个独立应用，
 | 应用 | 包名 | 框架 | 开发端口 | 部署路径 |
 |------|------|------|----------|----------|
 | [apps/Blog](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog) | `blog` | React 19 + Vite 8 + TypeScript | 3000 | `/` |
-| [apps/Blog-v2](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2) | `blog-v2` | React 19 + Vite 8 + Tailwind CSS 4 | 5173 | `/` |
+| [apps/Blog](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog) | `Blog` | React 19 + Vite 8 + Tailwind CSS 4 | 5173 | `/` |
 | [apps/KnowledgeBase](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase) | `knowledge-base` | VitePress 1.6 + Vue 3 + GSAP | 8080 | `/kb/`（生产） |
 
 - 三个应用互不依赖，可独立开发/构建/部署
-- Blog 用 React/TSX/SCSS，Blog-v2 用 React/TSX/Tailwind，KnowledgeBase 用 Vue/VitePress/Markdown —— 不要混用范式
+- Blog 用 React/TSX/SCSS，Blog 用 React/TSX/Tailwind，KnowledgeBase 用 Vue/VitePress/Markdown —— 不要混用范式
 - KnowledgeBase 有自己的 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/AGENTS.md)，包含双语文档工作流、SEO 规范、主题样式等详细约束，**修改 KnowledgeBase 前必读**
 
 ## 包管理器
@@ -40,11 +40,11 @@ pnpm monorepo，`pnpm-workspace.yaml` 仅包含 `apps/*`。三个独立应用，
 pnpm install                # 安装全部依赖
 pnpm dev                    # 同时启动所有应用
 pnpm dev:blog               # 仅启动 Blog（端口 3000）
-pnpm dev:blog-v2            # 仅启动 Blog-v2（端口 5173）
+pnpm dev:Blog            # 仅启动 Blog（端口 5173）
 pnpm dev:kb                 # 仅启动 KnowledgeBase（端口 8080）
 pnpm build                  # 构建全部
 pnpm build:blog             # 仅构建 Blog
-pnpm build:blog-v2          # 仅构建 Blog-v2
+pnpm build:Blog          # 仅构建 Blog
 pnpm build:kb               # 仅构建 KnowledgeBase
 pnpm lint                   # 对所有子包跑 lint
 pnpm lint:root              # 对根目录跑 eslint
@@ -57,8 +57,8 @@ pnpm format:check           # prettier 检查（CI 会跑）
 ```bash
 pnpm --filter blog run lint              # 仅 lint Blog
 pnpm --filter blog exec tsc --noEmit     # 仅 typecheck Blog
-pnpm --filter blog-v2 run lint           # 仅 lint Blog-v2
-pnpm --filter blog-v2 exec tsc --noEmit  # 仅 typecheck Blog-v2
+pnpm --filter Blog run lint           # 仅 lint Blog
+pnpm --filter Blog exec tsc --noEmit  # 仅 typecheck Blog
 pnpm --filter knowledge-base run build   # 仅构建 KnowledgeBase
 ```
 
@@ -77,9 +77,9 @@ pnpm --filter knowledge-base run build   # 仅构建 KnowledgeBase
 pnpm --filter blog run lint
 pnpm --filter blog exec tsc --noEmit
 pnpm --filter blog run build
-pnpm --filter blog-v2 run lint
-pnpm --filter blog-v2 exec tsc --noEmit
-pnpm --filter blog-v2 run build
+pnpm --filter Blog run lint
+pnpm --filter Blog exec tsc --noEmit
+pnpm --filter Blog run build
 pnpm --filter knowledge-base run build
 ```
 
@@ -91,8 +91,8 @@ CI 和 Vercel 构建时必须为各应用分别传入 base URL，否则资源路
 # Blog
 VITE_BASE_URL=/ pnpm --filter blog run build
 
-# Blog-v2
-VITE_BASE_URL=/ pnpm --filter blog-v2 run build
+# Blog
+VITE_BASE_URL=/ pnpm --filter Blog run build
 
 # KnowledgeBase
 VITEPRESS_BASE=/kb/ VITEPRESS_BLOG_URL=/ pnpm --filter knowledge-base run build
@@ -127,12 +127,12 @@ VITEPRESS_BASE=/kb/ VITEPRESS_BLOG_URL=/ pnpm --filter knowledge-base run build
 - **手动 vendor 分包**：[vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/vite.config.ts) 的 `manualChunks` 已配置 react-vendor / motion / i18n / lucide / vendor，新增大依赖时考虑是否需单独分包
 - **ESLint 配置继承**：[apps/Blog/eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/eslint.config.js) 继承根 [eslint.config.base.js](file:///Users/nailuo/Documents/GithubProject/blog/eslint.config.base.js)，并叠加 react-hooks + react-refresh 规则
 
-## Blog-v2 专属约束
+## Blog 专属约束
 
 - **Tailwind CSS v4**：通过 `@tailwindcss/vite` 插件集成，不要添加 postcss 配置
 - **样式优先**：优先使用 Tailwind 原子类，复杂样式用 `.module.css`
-- **ESLint 配置**：[eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/eslint.config.js) 使用 ESLint 10 flat config，未继承根配置
-- **独立约束**：详见 [apps/Blog-v2/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/AGENTS.md)
+- **ESLint 配置**：[eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/eslint.config.js) 使用 ESLint 10 flat config，未继承根配置
+- **独立约束**：详见 [apps/Blog/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/AGENTS.md)
 
 ## Agent 工作规则
 
@@ -163,5 +163,5 @@ VITEPRESS_BASE=/kb/ VITEPRESS_BLOG_URL=/ pnpm --filter knowledge-base run build
 
 - 根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)（本文件）
 - [apps/Blog/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/AGENTS.md)
-- [apps/Blog-v2/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog-v2/AGENTS.md)
+- [apps/Blog/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/AGENTS.md)
 - [apps/KnowledgeBase/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/KnowledgeBase/AGENTS.md)
