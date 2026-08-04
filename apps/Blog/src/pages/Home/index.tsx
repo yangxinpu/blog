@@ -1,43 +1,63 @@
 import React, { useEffect, useRef } from 'react';
-import { Github } from 'lucide-react';
+import { gsap } from 'gsap';
+import SplitText from 'gsap/SplitText';
 import PixelBlast from '../../components/PixelBlast/PixelBlast';
 import './Home.css';
 
-const Home: React.FC = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
+gsap.registerPlugin(SplitText);
 
+const Home: React.FC = () => {
   const accentColor =
     typeof window !== 'undefined'
       ? window.getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#17FBC6'
       : '#17FBC6';
 
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            el.classList.add('animate-in');
-            observer.unobserve(el);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      },
-    );
+    const titleEl = titleRef.current;
+    if (!titleEl) return;
 
-    const elements = [titleRef.current, buttonsRef.current].filter(Boolean);
+    const ctx = gsap.context(() => {
+      const leftEl = titleEl.querySelector('.home-title-part-left');
+      const rightEl = titleEl.querySelector('.home-title-part-right');
+      if (!leftEl || !rightEl) return;
 
-    elements.forEach((el) => {
-      if (el) observer.observe(el);
+      const splitLeft = new SplitText(leftEl, { types: 'chars' });
+
+      gsap.set(splitLeft.chars, {
+        opacity: 0,
+        yPercent: 80,
+        scale: 0.8,
+      });
+
+      gsap.set(rightEl, {
+        opacity: 0,
+        yPercent: 80,
+        scale: 0.8,
+      });
+
+      gsap.to(splitLeft.chars, {
+        opacity: 1,
+        yPercent: 0,
+        scale: 1,
+        stagger: { each: 0.04, from: 'start' },
+        duration: 0.9,
+        ease: 'expo.out',
+        delay: 0.2,
+      });
+
+      gsap.to(rightEl, {
+        opacity: 1,
+        yPercent: 0,
+        scale: 1,
+        duration: 0.9,
+        ease: 'expo.out',
+        delay: 0.6,
+      });
     });
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -59,31 +79,10 @@ const Home: React.FC = () => {
       <div className="home-overlay" />
 
       <div className="home-content">
-        <h1 ref={titleRef} className="home-title animate-delay-0">
-          Humans Steer,{' '}
-          <span className="home-title-accent">Agents Execute</span>
+        <h1 ref={titleRef} className="home-title">
+          <span className="home-title-part-left">Humans Steer,</span>
+          <span className="home-title-part-right home-title-accent">Agents Execute</span>
         </h1>
-
-        <div ref={buttonsRef} className="home-buttons animate-delay-1">
-          <a
-            href="https://github.com/yangxinpu"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="home-btn home-btn-primary"
-          >
-            <Github size={18} />
-            <span>GitHub</span>
-          </a>
-
-          <a
-            href={import.meta.env.VITE_KB_BASE_URL ?? 'https://nailuo-knowledge-base.vercel.app'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="home-btn home-btn-secondary"
-          >
-            <span>知识库</span>
-          </a>
-        </div>
       </div>
     </section>
   );
