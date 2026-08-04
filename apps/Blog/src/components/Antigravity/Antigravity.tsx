@@ -1,13 +1,14 @@
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, type ComponentType } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 // R3F JSX elements as type assertions for React 19 compatibility
-const R3F = {
-  InstancedMesh: 'instancedMesh' as unknown as React.ElementType,
-  MeshStandardMaterial: 'meshStandardMaterial' as unknown as React.ElementType,
-  AmbientLight: 'ambientLight' as unknown as React.ElementType,
-  PointLight: 'pointLight' as unknown as React.ElementType,
+type R3FEl = ComponentType<Record<string, unknown>>;
+const R3F: Record<string, R3FEl> = {
+  InstancedMesh: 'instancedMesh' as unknown as R3FEl,
+  MeshStandardMaterial: 'meshStandardMaterial' as unknown as R3FEl,
+  AmbientLight: 'ambientLight' as unknown as R3FEl,
+  PointLight: 'pointLight' as unknown as R3FEl,
 };
 
 interface AntigravityProps {
@@ -246,7 +247,6 @@ const Antigravity: React.FC<AntigravityProps> = ({
       <Canvas
         camera={{ position: [0, 0, 12], fov: 50 }}
         dpr={[1, 2]}
-        style={{ pointerEvents: 'none' }}
       >
         <R3F.AmbientLight intensity={0.3} />
         <R3F.PointLight position={[5, 5, 5]} intensity={0.8} color={color} />
