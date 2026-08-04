@@ -23,7 +23,7 @@ const Home: React.FC = () => {
       const rightEl = titleEl.querySelector('.home-title-part-right');
       if (!leftEl || !rightEl) return;
 
-      const splitLeft = new SplitText(leftEl, { types: 'chars' });
+      const splitLeft = new SplitText(leftEl, { type: 'chars' });
 
       gsap.set(splitLeft.chars, {
         opacity: 0,
