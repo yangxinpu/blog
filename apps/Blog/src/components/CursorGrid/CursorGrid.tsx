@@ -3,12 +3,10 @@ import React, { useRef, useEffect } from 'react';
 interface CursorGridProps {
   className?: string;
   gridSize?: number;
-  maxDistance?: number;
   lineWidth?: number;
   hoverColor?: string;
   baseColor?: string;
   fadeSpeed?: number;
-  idleDelay?: number;
 }
 
 const EDGE_BLUR = 80;
@@ -16,20 +14,19 @@ const EDGE_BLUR = 80;
 const CursorGrid: React.FC<CursorGridProps> = ({
   className = '',
   gridSize = 50,
-  maxDistance = 120,
   lineWidth = 1,
   hoverColor = '#17FBC6',
   baseColor = 'rgba(23, 251, 198, 0.12)',
   fadeSpeed = 0.03,
-  idleDelay = 500,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const maskCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
+  const prevCellRef = useRef<{ col: number; row: number } | null>(null);
+  const prevOpacityRef = useRef(0);
   const animationRef = useRef<number>(0);
   const opacityRef = useRef(0);
-  const idleTimerRef = useRef<number>(0);
   const isHoveringRef = useRef(false);
 
   useEffect(() => {
@@ -146,73 +143,30 @@ const CursorGrid: React.FC<CursorGridProps> = ({
             tempCtx.stroke();
           }
 
-          const clipX = Math.max(0, mouse.x - maxDistance);
-          const clipY = Math.max(0, mouse.y - maxDistance);
-          const clipW = Math.min(maxDistance * 2, rect.width - clipX);
-          const clipH = Math.min(maxDistance * 2, rect.height - clipY);
+          const col = Math.floor(mouse.x / gridSize);
+          const row = Math.floor(mouse.y / gridSize);
+          const cellX = col * gridSize;
+          const cellY = row * gridSize;
+          const pad = 3;
+          const cellSize = gridSize - pad * 2;
 
-          tempCtx.save();
-          tempCtx.beginPath();
-          tempCtx.rect(clipX, clipY, clipW, clipH);
-          tempCtx.clip();
+          const drawCell = (cx: number, cy: number, alpha: number) => {
+            if (alpha <= 0.01) return;
+            tempCtx.fillStyle = hoverColor;
+            tempCtx.globalAlpha = 0.12 * alpha;
+            tempCtx.fillRect(cx + pad, cy + pad, cellSize, cellSize);
+            tempCtx.strokeStyle = hoverColor;
+            tempCtx.globalAlpha = 1 * alpha;
+            tempCtx.lineWidth = 2;
+            tempCtx.strokeRect(cx + pad, cy + pad, cellSize, cellSize);
+          };
 
-          const startCol = Math.max(0, Math.floor(clipX / gridSize));
-          const endCol = Math.min(cols, Math.ceil((clipX + clipW) / gridSize));
-          const startRow = Math.max(0, Math.floor(clipY / gridSize));
-          const endRow = Math.min(rows, Math.ceil((clipY + clipH) / gridSize));
+          drawCell(cellX, cellY, opacity);
 
-          for (let col = startCol; col <= endCol; col++) {
-            const x = col * gridSize;
-            const distToMouse = Math.abs(x - mouse.x);
-
-            if (distToMouse < maxDistance) {
-              const intensity = 1 - distToMouse / maxDistance;
-              tempCtx.strokeStyle = hoverColor;
-              tempCtx.globalAlpha = intensity * 0.9 * opacity;
-              tempCtx.lineWidth = lineWidth + 0.5;
-              tempCtx.beginPath();
-              tempCtx.moveTo(x, clipY);
-              tempCtx.lineTo(x, clipY + clipH);
-              tempCtx.stroke();
-            }
+          const prev = prevCellRef.current;
+          if (prev && (prev.col !== col || prev.row !== row)) {
+            drawCell(prev.col * gridSize, prev.row * gridSize, prevOpacityRef.current * opacity);
           }
-
-          for (let row = startRow; row <= endRow; row++) {
-            const y = row * gridSize;
-            const distToMouse = Math.abs(y - mouse.y);
-
-            if (distToMouse < maxDistance) {
-              const intensity = 1 - distToMouse / maxDistance;
-              tempCtx.strokeStyle = hoverColor;
-              tempCtx.globalAlpha = intensity * 0.9 * opacity;
-              tempCtx.lineWidth = lineWidth + 0.5;
-              tempCtx.beginPath();
-              tempCtx.moveTo(clipX, y);
-              tempCtx.lineTo(clipX + clipW, y);
-              tempCtx.stroke();
-            }
-          }
-
-          for (let col = startCol; col <= endCol; col++) {
-            for (let row = startRow; row <= endRow; row++) {
-              const x = col * gridSize;
-              const y = row * gridSize;
-              const dx = x - mouse.x;
-              const dy = y - mouse.y;
-              const distance = Math.sqrt(dx * dx + dy * dy);
-
-              if (distance < maxDistance) {
-                const intensity = 1 - distance / maxDistance;
-                tempCtx.beginPath();
-                tempCtx.arc(x, y, 2 + intensity * 3, 0, Math.PI * 2);
-                tempCtx.fillStyle = hoverColor;
-                tempCtx.globalAlpha = intensity * opacity;
-                tempCtx.fill();
-              }
-            }
-          }
-
-          tempCtx.restore();
 
           if (maskCanvas) {
             ctx.drawImage(tempCanvas, 0, 0);
@@ -235,20 +189,6 @@ const CursorGrid: React.FC<CursorGridProps> = ({
     initCanvas();
     animationRef.current = requestAnimationFrame(animate);
 
-    const showGrid = () => {
-      if (idleTimerRef.current) {
-        clearTimeout(idleTimerRef.current);
-        idleTimerRef.current = 0;
-      }
-    };
-
-    const hideGrid = () => {
-      if (idleTimerRef.current) return;
-      idleTimerRef.current = window.setTimeout(() => {
-        idleTimerRef.current = 0;
-      }, idleDelay);
-    };
-
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const isOverContainer =
@@ -258,36 +198,27 @@ const CursorGrid: React.FC<CursorGridProps> = ({
         e.clientY <= rect.bottom;
 
       if (isOverContainer) {
-        isHoveringRef.current = true;
-        mouseRef.current = {
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        };
+        const newX = e.clientX - rect.left;
+        const newY = e.clientY - rect.top;
+        const newCol = Math.floor(newX / gridSize);
+        const newRow = Math.floor(newY / gridSize);
+        const oldCol = Math.floor(mouseRef.current.x / gridSize);
+        const oldRow = Math.floor(mouseRef.current.y / gridSize);
 
-        showGrid();
-        opacityRef.current = Math.min(1, opacityRef.current + fadeSpeed * 3);
-        hideGrid();
-      } else {
-        if (isHoveringRef.current) {
-          isHoveringRef.current = false;
-          mouseRef.current = { x: -1000, y: -1000 };
-          if (idleTimerRef.current) {
-            clearTimeout(idleTimerRef.current);
-            idleTimerRef.current = 0;
-          }
-          opacityRef.current = 0;
+        if (isHoveringRef.current && (newCol !== oldCol || newRow !== oldRow)) {
+          prevCellRef.current = { col: oldCol, row: oldRow };
+          prevOpacityRef.current = 1;
         }
+
+        isHoveringRef.current = true;
+        mouseRef.current = { x: newX, y: newY };
+      } else {
+        isHoveringRef.current = false;
       }
     };
 
     const handleMouseLeave = () => {
       isHoveringRef.current = false;
-      mouseRef.current = { x: -1000, y: -1000 };
-      if (idleTimerRef.current) {
-        clearTimeout(idleTimerRef.current);
-        idleTimerRef.current = 0;
-      }
-      opacityRef.current = 0;
     };
 
     const handleResize = () => {
@@ -295,8 +226,22 @@ const CursorGrid: React.FC<CursorGridProps> = ({
     };
 
     const fadeInterval = window.setInterval(() => {
-      if (!idleTimerRef.current && opacityRef.current > 0) {
-        opacityRef.current = Math.max(0, opacityRef.current - fadeSpeed);
+      if (isHoveringRef.current) {
+        if (opacityRef.current < 1) {
+          opacityRef.current = Math.min(1, opacityRef.current + fadeSpeed * 3);
+        }
+      } else {
+        if (opacityRef.current > 0) {
+          opacityRef.current = Math.max(0, opacityRef.current - fadeSpeed);
+        }
+      }
+
+      if (prevOpacityRef.current > 0) {
+        prevOpacityRef.current = Math.max(0, prevOpacityRef.current - fadeSpeed * 1.5);
+        if (prevOpacityRef.current <= 0.01) {
+          prevCellRef.current = null;
+          prevOpacityRef.current = 0;
+        }
       }
     }, 16);
 
@@ -311,7 +256,7 @@ const CursorGrid: React.FC<CursorGridProps> = ({
       container.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
     };
-  }, [gridSize, maxDistance, lineWidth, hoverColor, baseColor, fadeSpeed, idleDelay]);
+  }, [gridSize, lineWidth, hoverColor, baseColor, fadeSpeed]);
 
   return (
     <div ref={containerRef} className={`cursor-grid-container ${className}`}>

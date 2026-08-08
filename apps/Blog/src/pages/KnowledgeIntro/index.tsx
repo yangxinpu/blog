@@ -135,8 +135,7 @@ const KnowledgeIntro: React.FC = () => {
   return (
     <section className="ki-section">
       <CursorGrid
-        gridSize={50}
-        maxDistance={150}
+        gridSize={80}
         lineWidth={1}
         hoverColor={accentColor}
         baseColor="rgba(23, 251, 198, 0.12)"
