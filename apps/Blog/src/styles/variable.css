@@ -35,6 +35,8 @@
   --font-display: 'Space Grotesk', 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
+  /* Hero 标题专用等宽字体 */
+  --font-hero: 'JetBrains Mono', 'SF Mono', Monaco, 'Courier New', monospace;
 
   /* 滚动条 */
   --scrollbar-width: 8px;

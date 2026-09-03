@@ -11,7 +11,8 @@
 
 html {
   width: 100%;
-  scroll-behavior: smooth;
+  /* 平滑滚动由 GSAP ScrollSmoother / ScrollToPlugin 接管，避免与 JS 滚动冲突 */
+  scroll-behavior: auto;
   scroll-padding-top: 64px;
   overflow-x: clip;
 }

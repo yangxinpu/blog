@@ -1,3 +1,5 @@
+/* ---------- Hero ---------- */
+
 .home-section {
   position: relative;
   width: 100%;
@@ -24,16 +26,17 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: 24px;
   padding: 0 24px;
   max-width: 1200px;
 }
 
 .home-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 7vw, 5.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  font-family: var(--font-hero);
+  font-size: clamp(1.6rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin: 0;
   white-space: nowrap;
@@ -41,39 +44,54 @@
   display: inline-block;
 }
 
+.home-title .char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
 .home-title-part-left,
 .home-title-part-right {
   display: inline-block;
 }
 
-.home-title-part-left .title-char {
-  display: inline-block;
-  will-change: transform, opacity;
+.home-title-accent {
+  color: var(--accent);
 }
 
-.home-title-accent {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--primary-200) 50%, var(--accent) 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  will-change: transform, opacity;
+.home-subtitle {
+  margin: 0;
+  max-width: 700px;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  line-height: 1.7;
 }
+
+.home-subtitle-alt {
+  margin: 0;
+  max-width: 560px;
+  font-size: clamp(0.7rem, 1.7vw, 1rem);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ---------- 响应式 ---------- */
 
 @media (max-width: 768px) {
   .home-content {
     padding: 0 20px;
     max-width: 100%;
+    gap: 20px;
   }
 
   .home-title {
-    font-size: clamp(1.25rem, 6vw, 2rem);
+    font-size: clamp(1.1rem, 5.2vw, 1.9rem);
     white-space: normal;
   }
 }
 
+/* ---------- 减少动态效果 ---------- */
+
 @media (prefers-reduced-motion: reduce) {
-  .home-title .title-char,
+  .home-title .char,
   .home-title .home-title-accent {
     transform: none !important;
     opacity: 1 !important;
