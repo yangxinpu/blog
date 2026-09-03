@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Lint Blog
+      - name: Lint blog
         run: pnpm --filter blog run lint
 
       - name: Format check
@@ -62,7 +62,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: TypeCheck Blog
+      - name: TypeCheck blog
         run: pnpm --filter blog exec tsc --noEmit
 
   build:
@@ -87,27 +87,27 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build Blog
+      - name: Build blog
         run: pnpm --filter blog run build
         env:
           VITE_BASE_URL: /
 
-      - name: Build KnowledgeBase
+      - name: Build knowledge-base
         run: pnpm --filter knowledge-base run build
         env:
           VITEPRESS_BASE: /kb/
           VITEPRESS_BLOG_URL: /
 
-      - name: Upload Blog artifact
+      - name: Upload blog artifact
         uses: actions/upload-artifact@v5
         with:
           name: blog-dist
-          path: apps/Blog/dist
+          path: apps/blog/dist
           retention-days: 1
 
-      - name: Upload KnowledgeBase artifact
+      - name: Upload knowledge-base artifact
         uses: actions/upload-artifact@v5
         with:
           name: kb-dist
-          path: apps/KnowledgeBase/.vitepress/dist
+          path: apps/knowledge-base/.vitepress/dist
           retention-days: 1

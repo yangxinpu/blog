@@ -1,4 +1,4 @@
-# Blog
+# blog
 
 极简深色开发者作品集，基于 React 19 + TypeScript + Tailwind CSS v4 + Vite 8 构建。
 
@@ -22,10 +22,10 @@
 pnpm install
 
 # 启动开发服务器（端口 5173）
-pnpm --filter Blog run dev
+pnpm --filter blog run dev
 
 # 构建生产版本
-pnpm --filter Blog run build
+pnpm --filter blog run build
 ```
 
 ## 项目结构
@@ -52,15 +52,15 @@ src/
 
 | 命令 | 说明 |
 |------|------|
-| `pnpm --filter Blog run dev` | 启动开发服务器 |
-| `pnpm --filter Blog run build` | 构建生产版本 |
-| `pnpm --filter Blog run lint` | 代码检查 |
-| `pnpm --filter Blog exec tsc --noEmit` | 类型检查 |
+| `pnpm --filter blog run dev` | 启动开发服务器 |
+| `pnpm --filter blog run build` | 构建生产版本 |
+| `pnpm --filter blog run lint` | 代码检查 |
+| `pnpm --filter blog exec tsc --noEmit` | 类型检查 |
 
 ## 构建环境变量
 
 生产构建需传入 `VITE_BASE_URL`：
 
 ```bash
-VITE_BASE_URL=/ pnpm --filter Blog run build
+VITE_BASE_URL=/ pnpm --filter blog run build
 ```

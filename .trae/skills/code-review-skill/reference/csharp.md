@@ -180,7 +180,7 @@ await using var client = new DataClient();
 > 📖 通用原理和跨语言方案详见 [N+1 查询跨语言指南](cross-cutting/n-plus-one-queries.md)
 
 ```csharp
-// ❌ 经典 N+1——每个 Blog 触发一次查询获取 Posts
+// ❌ 经典 N+1——每个 blog 触发一次查询获取 Posts
 foreach (var blog in await context.Blogs.ToListAsync())
 {
     foreach (var post in blog.Posts) // 每次循环都查询数据库！
@@ -235,7 +235,7 @@ var posts = await context.Posts
 var blogs = await context.Blogs
     .Include(b => b.Posts)
     .Include(b => b.Tags)
-    .ToListAsync(); // 每行重复 Blog 数据
+    .ToListAsync(); // 每行重复 blog 数据
 
 // ✅ 使用 AsSplitQuery 拆分查询
 var blogs = await context.Blogs

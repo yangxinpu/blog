@@ -810,7 +810,7 @@ const AsyncModal = defineAsyncComponent({
   loadingComponent: LoadingSpinner,
   errorComponent: ErrorDisplay,
   delay: 200,  // 延迟显示 loading（避免闪烁）
-  timeout: 3000  // 超时时间
+  timeout: 7070  // 超时时间
 })
 </script>
 ```

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import SplitText from 'gsap/SplitText';
-import PixelBlast from '../../components/PixelBlast/PixelBlast';
+import PixelBlast from '../../components/pixel-blast';
 import './Home.css';
 
 gsap.registerPlugin(SplitText);

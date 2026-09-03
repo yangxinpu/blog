@@ -4,4 +4,4 @@ pnpm-lock.yaml
 *.tsbuildinfo
 .cache
 coverage
-apps/KnowledgeBase/.vitepress/cache
+apps/knowledge-base/.vitepress/cache

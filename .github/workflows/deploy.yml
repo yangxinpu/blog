@@ -36,12 +36,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build Blog
+      - name: Build blog
         run: pnpm --filter blog run build
         env:
           VITE_BASE_URL: /
 
-      - name: Build KnowledgeBase
+      - name: Build knowledge-base
         run: pnpm --filter knowledge-base run build
         env:
           VITEPRESS_BASE: /kb/
@@ -51,8 +51,8 @@ jobs:
         run: |
           mkdir -p dist
           mkdir -p dist/kb
-          cp -r apps/Blog/dist/* dist/
-          cp -r apps/KnowledgeBase/.vitepress/dist/* dist/kb/
+          cp -r apps/blog/dist/* dist/
+          cp -r apps/knowledge-base/.vitepress/dist/* dist/kb/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

@@ -1,4 +1,4 @@
-# Blog 应用 - Agent 指南
+# blog 应用 - Agent 指南
 
 > **文档版本**: v4.0.0
 > **最后更新**: 2026-08-04
@@ -46,7 +46,7 @@
 
 ## Tailwind CSS v4
 
-- 通过 `@tailwindcss/vite` 集成到 [vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/vite.config.ts)
+- 通过 `@tailwindcss/vite` 集成到 [vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/vite.config.ts)
 - **不需要** `tailwind.config.js` 或 `postcss.config.js`
 - 主题定制在 CSS 中用 `@theme` 块：
   ```css
@@ -90,13 +90,13 @@ src/
 
 - 优先使用 Tailwind 原子类
 - 需要复杂/可复用样式时，使用 CSS Modules（`.module.css`）或独立 `.css` 文件
-- 全局样式只写在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/index.css)
+- 全局样式只写在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/index.css)
 - 页面级样式存放在对应页面目录下的 `.css` 文件
 - 组件级样式存放在对应组件目录下的 `.css` 文件
 
 ## 主色系统（必须与 DESIGN.md 保持一致）
 
-采用青色系，CSS 变量定义在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/index.css)：
+采用青色系，CSS 变量定义在 [index.css](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/index.css)：
 
 ```css
 :root {
@@ -140,9 +140,9 @@ src/
 
 **约束**：
 
-本项目以 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/DESIGN.md) 为**唯一设计真源**，采用 `@google/design.md` 规范格式。
+本项目以 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/DESIGN.md) 为**唯一设计真源**，采用 `@google/design.md` 规范格式。
 
-修改 UI 代码时，必须遵循 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/DESIGN.md) 中「Agent Implementation Constraints」章节：
+修改 UI 代码时，必须遵循 [DESIGN.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/DESIGN.md) 中「Agent Implementation Constraints」章节：
 
 
 1. **主题来源**：所有视觉决策以 DESIGN.md 为准，禁止硬编码未定义的色值
@@ -159,7 +159,7 @@ npx @google/design.md lint DESIGN.md    # 验证设计系统完整性
 
 ### Antigravity（3D 粒子背景）
 
-- 位置：[src/components/Antigravity/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/components/Antigravity/)
+- 位置：[src/components/Antigravity/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/components/Antigravity/)
 - 技术栈：React Three Fiber + Three.js
 - 功能：3D 粒子环形系统，鼠标交互产生"反重力"效果
 - **React 19 兼容性**：需使用类型断言绕过 R3F JSX 类型检查
@@ -169,23 +169,23 @@ npx @google/design.md lint DESIGN.md    # 验证设计系统完整性
     // ...
   };
   ```
-- 类型声明：[src/r3f.d.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/r3f.d.ts) 引入 R3F 类型
+- 类型声明：[src/r3f.d.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/r3f.d.ts) 引入 R3F 类型
 
 ### CursorGrid（网格背景）
 
-- 位置：[src/components/CursorGrid/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/components/CursorGrid/)
+- 位置：[src/components/CursorGrid/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/components/CursorGrid/)
 - 技术栈：Canvas 2D
 - 功能：鼠标追踪网格线动画，边缘内部模糊效果
 
 ### PixelBlast（粒子背景）
 
-- 位置：[src/components/PixelBlast/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/components/PixelBlast/)
+- 位置：[src/components/PixelBlast/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/components/PixelBlast/)
 - 技术栈：Canvas 2D
 - 功能：像素粒子背景动画
 
 ### PixelTransition（图片过渡）
 
-- 位置：[src/components/PixelTransition/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/components/PixelTransition/)
+- 位置：[src/components/PixelTransition/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/components/PixelTransition/)
 - 技术栈：GSAP
 - 功能：图片像素块过渡动画，支持 hover 触发
 
@@ -221,7 +221,7 @@ i18n.use(initReactI18next).init({
 **约束**：
 - 两份 locale 文件的 key 必须完全一致
 - 切换语言使用 `i18n.changeLanguage(lang)`，不要重新初始化实例
-- 参考 [apps/Blog/src/libs/i18n/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/src/libs/i18n/) 目录结构
+- 参考 [apps/blog/src/libs/i18n/](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/src/libs/i18n/) 目录结构
 
 ## 环境变量
 
@@ -234,9 +234,9 @@ i18n.use(initReactI18next).init({
 ## 构建与验证
 
 ```bash
-pnpm --filter Blog run lint              # ESLint
-pnpm --filter Blog exec tsc --noEmit     # 类型检查
-pnpm --filter Blog run build             # tsc -b && vite build
+pnpm --filter blog run lint              # ESLint
+pnpm --filter blog exec tsc --noEmit     # 类型检查
+pnpm --filter blog run build             # tsc -b && vite build
 ```
 
 - `build` 脚本是 `tsc -b && vite build`
@@ -247,12 +247,12 @@ pnpm --filter Blog run build             # tsc -b && vite build
 
 - **TS 严格**：`noUnusedLocals` + `noUnusedParameters` + `verbatimModuleSyntax` —— 未用变量/导入必须删除
 - **ESLint 未用变量**：以 `_` 前缀命名（`argsIgnorePattern: '^_'`）
-- **ESLint 配置**：[eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/eslint.config.js) 使用 ESLint 10 flat config
-- **vendor 分包**：[vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/Blog/vite.config.ts) 后续可配置 `manualChunks`
+- **ESLint 配置**：[eslint.config.js](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/eslint.config.js) 使用 ESLint 10 flat config
+- **vendor 分包**：[vite.config.ts](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog/vite.config.ts) 后续可配置 `manualChunks`
 - **React 19 + R3F 类型兼容**：R3F JSX 元素需使用类型断言，参考 Antigravity 组件实现
 
 ## 开发服务器
 
 ```bash
-pnpm --filter Blog run dev    # 端口默认 7070
+pnpm --filter blog run dev    # 端口默认 7070
 ```

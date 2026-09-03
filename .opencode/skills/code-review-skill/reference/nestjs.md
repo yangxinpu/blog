@@ -254,7 +254,7 @@ export class LoggingInterceptor implements NestInterceptor {
 // ❌ 没有 whitelist——请求体中的额外属性直接传入
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  await app.listen(7070);
 }
 
 // ✅ 全局 ValidationPipe + whitelist 过滤未知属性
@@ -267,7 +267,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  await app.listen(3000);
+  await app.listen(7070);
 }
 ```
 
