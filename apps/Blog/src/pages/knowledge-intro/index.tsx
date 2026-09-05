@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import CursorGrid from './components/cursor-grid';
+import KnowledgeLogo from '../../assets/Images/knowlege-base-logo.png';
 import './index.css';
 
 type Category = {
@@ -154,9 +155,12 @@ const KnowledgeIntro: React.FC = () => {
 
       <div className="ki-container">
         <div ref={headerRef} className="ki-header animate-delay-0">
-          <h2 className="ki-title">NaiLuo知识库</h2>
+          <h2 className="ki-title">
+            <img src={KnowledgeLogo} alt="NaiLuo知识库" />            
+            <span>NaiLuo知识库</span>
+          </h2>
           <p className="ki-subtitle">
-            系统化的技术学习笔记，覆盖前端、后端、AI、运维等全栈领域
+            系统化的技术学习笔记，覆盖前端、后端、AI、运维、产品、测试等领域，如果你对其中任何一个领域感兴趣，都可以点击进入学习
           </p>
         </div>
 

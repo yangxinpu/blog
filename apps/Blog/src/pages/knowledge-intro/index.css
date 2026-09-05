@@ -41,6 +41,21 @@
   letter-spacing: -0.03em;
   color: var(--text);
   margin: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+}
+
+.ki-title span {
+  position: relative;
+}
+
+.ki-title img {
+  width: clamp(50px, 6vw, 64px);
+  height: clamp(50px, 6vw, 64px);
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .ki-subtitle {

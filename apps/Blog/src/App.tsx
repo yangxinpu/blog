@@ -6,6 +6,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import Home from './pages/home';
 import KnowledgeIntro from './pages/knowledge-intro';
 import LogoSection from './pages/logo-section';
+import TravelDisplay from './pages/travel-display';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
@@ -39,6 +40,7 @@ function App() {
             <Home />
             <KnowledgeIntro />
             <LogoSection />
+            <TravelDisplay />
           </main>
         </div>
       </div>

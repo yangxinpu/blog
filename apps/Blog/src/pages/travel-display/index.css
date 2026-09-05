@@ -1,0 +1,24 @@
+.travel-display {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 窄屏：单列，铺满视口宽度 */
+.travel-display-images-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* 宽屏：双列，居中限宽 */
+@media (min-width: 768px) {
+  .travel-display-images-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
