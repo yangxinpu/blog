@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress';
 
 const base = process.env.VITEPRESS_BASE || '/';
-const blogUrl = process.env.VITEPRESS_BLOG_URL || 'http://localhost:7070';
+const blogUrl = process.env.VITEPRESS_BLOG_URL || 'https://nailuo-blog.vercel.app';
 const kbUrl = process.env.VITEPRESS_KB_URL || 'https://nailuo-knowledge-base.vercel.app';
 
 export default defineConfig({

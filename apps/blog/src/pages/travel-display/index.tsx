@@ -19,6 +19,7 @@ export default function TravelDisplay() {
   return (
     <section className="travel-display">
       <TravelHero />
+
       <div className="travel-display-images-section">
         <TravelImages
           items={leftItems}
@@ -42,7 +43,7 @@ export default function TravelDisplay() {
           blurToFocus
           colorShiftOnHover
         />
-      </div>
+      </div>  
     </section>
   );
 }
