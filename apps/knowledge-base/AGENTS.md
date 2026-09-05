@@ -413,7 +413,7 @@ keywords: 关键词1, 关键词2, 关键词3
 
 #### 2. 全局通用 Skill
 
-存放位置：[.opencode/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills) 目录（Blog 项目根目录，跨应用共享）
+存放位置：[.opencode/skills/](file:///Users/NaiLuo/Documents/GithubProject/blog/.opencode/skills) 目录（blog 项目根目录，跨应用共享）
 
 | Skill 名称 | 说明 | 位置 |
 |-----------|------|------|

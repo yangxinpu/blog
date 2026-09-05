@@ -310,8 +310,6 @@ const LogoLoop = React.memo<LogoLoopProps>(
             height={item.height}
             alt={item.alt ?? ''}
             title={item.title}
-            loading="lazy"
-            decoding="async"
             draggable={false}
           />
         );

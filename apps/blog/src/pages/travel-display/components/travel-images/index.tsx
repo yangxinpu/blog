@@ -116,10 +116,8 @@ const TravelImages: React.FC<MasonryProps> = ({
   useLayoutEffect(() => {
     if (!imagesReady || !containerRef.current || !grid.length) return;
 
+    // 初始位置：避免 getBoundingClientRect 强制同步布局，直接用 grid 已知尺寸
     const getInitialPosition = (item: GridItem) => {
-      const containerRect = containerRef.current?.getBoundingClientRect();
-      if (!containerRect) return { x: item.x, y: item.y };
-
       let direction: MasonryProps['animateFrom'] = animateFrom;
 
       if (animateFrom === 'random') {
@@ -131,15 +129,15 @@ const TravelImages: React.FC<MasonryProps> = ({
         case 'top':
           return { x: item.x, y: -200 };
         case 'bottom':
-          return { x: item.x, y: containerRect.height + 200 };
+          return { x: item.x, y: gridHeight + 200 };
         case 'left':
           return { x: -200, y: item.y };
         case 'right':
-          return { x: containerRect.width + 200, y: item.y };
+          return { x: width + 200, y: item.y };
         case 'center':
           return {
-            x: containerRect.width / 2 - item.w / 2,
-            y: containerRect.height / 2 - item.h / 2
+            x: width / 2 - item.w / 2,
+            y: gridHeight / 2 - item.h / 2
           };
         default:
           return { x: item.x, y: item.y + 100 };
@@ -150,11 +148,10 @@ const TravelImages: React.FC<MasonryProps> = ({
       if (!hasAnimated.current) {
         grid.forEach(item => {
           const initialPos = getInitialPosition(item);
+          // 只设置 transform/opacity/filter，不碰 width/height（避免触发布局）
           gsap.set(`[data-key="${item.id}"]`, {
             x: initialPos.x,
             y: initialPos.y,
-            width: item.w,
-            height: item.h,
             opacity: 0,
             ...(blurToFocus && { filter: 'blur(10px)' })
           });
@@ -172,13 +169,12 @@ const TravelImages: React.FC<MasonryProps> = ({
         });
 
         grid.forEach((item, index) => {
+          // 只动画 transform(x,y) + opacity + filter，绝不动画 width/height
           tl.to(
             `[data-key="${item.id}"]`,
             {
               x: item.x,
               y: item.y,
-              width: item.w,
-              height: item.h,
               opacity: 1,
               ...(blurToFocus && { filter: 'blur(0px)' }),
               duration: 0.8,
@@ -192,8 +188,6 @@ const TravelImages: React.FC<MasonryProps> = ({
           gsap.to(`[data-key="${item.id}"]`, {
             x: item.x,
             y: item.y,
-            width: item.w,
-            height: item.h,
             duration: duration,
             ease: ease,
             overwrite: 'auto'
@@ -203,7 +197,7 @@ const TravelImages: React.FC<MasonryProps> = ({
     }, containerRef.current);
 
     return () => ctx.revert();
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, containerRef]);
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, width, gridHeight, containerRef]);
 
   const handleMouseEnter = (_e: React.MouseEvent, item: GridItem) => {
     const selector = `[data-key="${item.id}"]`;
@@ -257,11 +251,15 @@ const TravelImages: React.FC<MasonryProps> = ({
             key={item.id}
             data-key={item.id}
             className="travel-display-images-section-item-wrapper"
+            // width/height 通过 inline style 固定，GSAP 不碰它们（避免 reflow）
+            style={{ width: item.w, height: item.h }}
             onClick={() => window.open(item.url, '_blank', 'noopener')}
             onMouseEnter={e => handleMouseEnter(e, item)}
             onMouseLeave={e => handleMouseLeave(e, item)}
           >
-            <div className="travel-display-images-section-item-img" style={{ backgroundImage: `url(${item.img})` }}>
+            <div className="travel-display-images-section-item-img">
+              {/* 用 <img> 替代 background-image：原生异步解码，合成层更友好 */}
+              <img src={item.img} alt="" loading="eager" decoding="async" draggable={false} />
               {colorShiftOnHover && (
                 <div
                   className="color-overlay"
