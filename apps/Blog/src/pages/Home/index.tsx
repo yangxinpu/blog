@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitText from 'gsap/SplitText';
-import PixelBlast from '../../components/pixel-blast';
+import PixelBlast from './components/pixel-blast';
 import './home.css';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -70,21 +70,21 @@ const Home = () => {
     return () => ctx.revert();
   }, []);
 
+  
   return (
     <div ref={rootRef} className="home-page">
       <section className="home-section">
         <PixelBlast
-          variant="circle"
+          variant={'diamond'}
           pixelSize={6}
           color={accentColor}
-          patternScale={2}
-          patternDensity={1.2}
-          speed={0.5}
-          edgeFade={0.2}
-          enableRipples
-          rippleSpeed={0.4}
-          rippleThickness={0.08}
-          rippleIntensityScale={1.2}
+          patternScale={1}
+          patternDensity={1.5}
+          pixelSizeJitter={1}
+          speed={0.6}
+          edgeFade={0.1}
+          antialias={true}
+          enableRipples={false}
         />
 
         <div className="home-overlay" />

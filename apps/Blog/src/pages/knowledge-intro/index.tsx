@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import CursorGrid from '../../components/cursor-grid';
+import CursorGrid from './components/cursor-grid';
 import './knowledge-intro.css';
 
 type Category = {
