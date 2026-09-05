@@ -23,24 +23,28 @@ const useMeasure = <T extends HTMLElement>() => {
   return [ref, size] as const;
 };
 
-const preloadImages = async (urls: string[]): Promise<void> => {
-  await Promise.all(
+// 预加载图片并采集原始宽高
+const loadImageSizes = async (
+  urls: string[]
+): Promise<Record<string, { w: number; h: number }>> => {
+  const entries = await Promise.all(
     urls.map(
       src =>
-        new Promise<void>(resolve => {
+        new Promise<[string, { w: number; h: number }]>(resolve => {
           const img = new Image();
+          img.onload = () => resolve([src, { w: img.naturalWidth, h: img.naturalHeight }]);
+          img.onerror = () => resolve([src, { w: 1, h: 1 }]);
           img.src = src;
-          img.onload = img.onerror = () => resolve();
         })
     )
   );
+  return Object.fromEntries(entries);
 };
 
 interface Item {
   id: string;
   img: string;
   url: string;
-  height: number;
 }
 
 interface GridItem extends Item {
@@ -73,33 +77,36 @@ const TravelImages: React.FC<MasonryProps> = ({
   blurToFocus = true,
   colorShiftOnHover = false
 }) => {
-  const columns = 2; // 单列瀑布流，图片宽度由外层 flex 决定，不在这里拆分
+  const columns = 2;
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
-  const [imagesReady, setImagesReady] = useState(false);
+  const [sizes, setSizes] = useState<Record<string, { w: number; h: number }>>({});
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
+    loadImageSizes(items.map(i => i.img)).then(setSizes);
   }, [items]);
 
-  // masonry 自然摆放：每张图片 height = child.height / 2，不缩放
+  const imagesReady = Object.keys(sizes).length === items.length && items.length > 0;
+
+  // 根据图片原始宽高比 × 容器宽度，得到自然显示高度
   const grid = useMemo<GridItem[]>(() => {
-    if (!width) return [];
+    if (!width || !imagesReady) return [];
 
     const colHeights = new Array(columns).fill(0);
     const columnWidth = width / columns;
 
     return items.map(child => {
+      const ratio = sizes[child.img] ? sizes[child.img].h / sizes[child.img].w : 1;
+      const h = columnWidth * ratio;
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = columnWidth * col;
-      const h = child.height / 2;
       const y = colHeights[col];
       colHeights[col] += h;
 
       return { ...child, x, y, w: columnWidth, h };
     });
-  }, [columns, items, width]);
+  }, [columns, items, width, sizes, imagesReady]);
 
   const gridHeight = useMemo(() => {
     if (!grid.length) return 0;
@@ -141,7 +148,6 @@ const TravelImages: React.FC<MasonryProps> = ({
 
     const ctx = gsap.context(() => {
       if (!hasAnimated.current) {
-        // 还没入场过：先 set 初始状态（opacity:0），等 ScrollTrigger 触发
         grid.forEach(item => {
           const initialPos = getInitialPosition(item);
           gsap.set(`[data-key="${item.id}"]`, {
@@ -182,7 +188,6 @@ const TravelImages: React.FC<MasonryProps> = ({
           );
         });
       } else {
-        // resize 后重新定位（不重播入场动画）
         grid.forEach(item => {
           gsap.to(`[data-key="${item.id}"]`, {
             x: item.x,

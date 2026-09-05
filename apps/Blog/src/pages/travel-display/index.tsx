@@ -2,30 +2,51 @@ import './index.css';
 import TravelImages from './components/travel-images';
 import TravelHero from './components/travel-hero';
 
+import travel01 from '../../assets/Images/travel/travel-01.jpg';
+import travel02 from '../../assets/Images/travel/travel-02.jpg';
+import travel03 from '../../assets/Images/travel/travel-03.jpg';
+import travel04 from '../../assets/Images/travel/travel-04.jpg';
+import travel05 from '../../assets/Images/travel/travel-05.jpg';
+import travel06 from '../../assets/Images/travel/travel-06.jpg';
+import travel07 from '../../assets/Images/travel/travel-07.jpg';
+import travel08 from '../../assets/Images/travel/travel-08.jpg';
+import travel09 from '../../assets/Images/travel/travel-09.jpg';
+import travel10 from '../../assets/Images/travel/travel-10.jpg';
+import travel11 from '../../assets/Images/travel/travel-11.jpg';
+import travel12 from '../../assets/Images/travel/travel-12.jpg';
+import travel13 from '../../assets/Images/travel/travel-13.jpg';
+import travel14 from '../../assets/Images/travel/travel-14.jpg';
+import travel15 from '../../assets/Images/travel/travel-15.jpg';
+import travel16 from '../../assets/Images/travel/travel-16.jpg';
+import travel17 from '../../assets/Images/travel/travel-17.jpg';
+import travel18 from '../../assets/Images/travel/travel-18.jpeg';
+import travel19 from '../../assets/Images/travel/travel-19.jpg';
+import travel20 from '../../assets/Images/travel/travel-20.jpg';
+
 const leftItems = [
-  { id: '1', img: 'https://picsum.photos/id/1015/600/900', url: 'https://example.com/item-1', height: 640 },
-  { id: '2', img: 'https://picsum.photos/id/1018/600/900', url: 'https://example.com/item-2', height: 580 },
-  { id: '3', img: 'https://picsum.photos/id/1019/600/900', url: 'https://example.com/item-3', height: 720 },
-  { id: '4', img: 'https://picsum.photos/id/1035/600/900', url: 'https://example.com/item-4', height: 500 },
-  { id: '5', img: 'https://picsum.photos/id/1036/600/900', url: 'https://example.com/item-5', height: 800 },
-  { id: '6', img: 'https://picsum.photos/id/1039/600/900', url: 'https://example.com/item-6', height: 900 },
-  { id: '7', img: 'https://picsum.photos/id/1043/600/900', url: 'https://example.com/item-7', height: 680 },
-  { id: '8', img: 'https://picsum.photos/id/1048/600/900', url: 'https://example.com/item-8', height: 760 },
-  { id: '9', img: 'https://picsum.photos/id/1051/600/900', url: 'https://example.com/item-9', height: 550 },
-  { id: '10', img: 'https://picsum.photos/id/1052/600/900', url: 'https://example.com/item-10', height: 850 },
+  { id: '1',  img: travel01,  url: '#' },
+  { id: '2',  img: travel02,  url: '#' },
+  { id: '3',  img: travel03,  url: '#' },
+  { id: '4',  img: travel04,  url: '#' },
+  { id: '5',  img: travel05,  url: '#' },
+  { id: '6',  img: travel06,  url: '#' },
+  { id: '7',  img: travel07,  url: '#' },
+  { id: '8',  img: travel08,  url: '#' },
+  { id: '9',  img: travel09,  url: '#' },
+  { id: '10', img: travel10,  url: '#' },
 ];
 
 const rightItems = [
-  { id: '11', img: 'https://picsum.photos/id/1060/600/900', url: 'https://example.com/item-11', height: 620 },
-  { id: '12', img: 'https://picsum.photos/id/1061/600/900', url: 'https://example.com/item-12', height: 700 },
-  { id: '13', img: 'https://picsum.photos/id/1074/600/900', url: 'https://example.com/item-13', height: 880 },
-  { id: '14', img: 'https://picsum.photos/id/1075/600/900', url: 'https://example.com/item-14', height: 520 },
-  { id: '15', img: 'https://picsum.photos/id/1076/600/900', url: 'https://example.com/item-15', height: 780 },
-  { id: '16', img: 'https://picsum.photos/id/1080/600/900', url: 'https://example.com/item-16', height: 650 },
-  { id: '17', img: 'https://picsum.photos/id/1081/600/900', url: 'https://example.com/item-17', height: 920 },
-  { id: '18', img: 'https://picsum.photos/id/1084/600/900', url: 'https://example.com/item-18', height: 560 },
-  { id: '19', img: 'https://picsum.photos/id/1083/600/900', url: 'https://example.com/item-19', height: 820 },
-  { id: '20', img: 'https://picsum.photos/id/1096/600/900', url: 'https://example.com/item-20', height: 740 },
+  { id: '11', img: travel11,  url: '#' },
+  { id: '12', img: travel12,  url: '#' },
+  { id: '13', img: travel13,  url: '#' },
+  { id: '14', img: travel14,  url: '#' },
+  { id: '15', img: travel15,  url: '#' },
+  { id: '16', img: travel16,  url: '#' },
+  { id: '17', img: travel17,  url: '#' },
+  { id: '18', img: travel18,  url: '#' },
+  { id: '19', img: travel19,  url: '#' },
+  { id: '20', img: travel20,  url: '#' },
 ];
 
 export default function TravelDisplay() {

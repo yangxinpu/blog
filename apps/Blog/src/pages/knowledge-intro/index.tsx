@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import CursorGrid from './components/cursor-grid';
-import KnowledgeLogo from '../../assets/Images/knowlege-base-logo.png';
+import KnowledgeLogo from '../../assets/Images/common/knowlege-base-logo.png';
 import './index.css';
 
 type Category = {
