@@ -52,8 +52,8 @@
 }
 
 .ki-title img {
-  width: clamp(50px, 6vw, 64px);
-  height: clamp(50px, 6vw, 64px);
+  width: clamp(36px, 5vw, 56px);
+  height: clamp(36px, 5vw, 56px);
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -70,32 +70,34 @@
 .ki-categories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 20px;
   opacity: 0;
   transform: translateY(30px);
 }
 
-.ki-category-card {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 24px;
+.ki-category-link {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+  display: block;
+  pointer-events: auto;
+  animation: cardFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.ki-category-card {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  animation: cardFadeIn 0.6s ease-out forwards;
-  opacity: 0;
-  pointer-events: auto;
+  height: 100%;
+  transition: transform 0.3s ease;
 }
 
-.ki-category-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 40px rgba(23, 251, 198, 0.08);
+.ki-category-content {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .ki-category-header {
@@ -110,9 +112,9 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: var(--bg);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   flex-shrink: 0;
 }
 
@@ -120,7 +122,6 @@
   width: 28px;
   height: 28px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(48%) sepia(100%) saturate(310%) hue-rotate(116deg) brightness(126%) contrast(117%);
 }
 
 .ki-category-title-group {
@@ -151,18 +152,18 @@
   gap: 6px;
 }
 
-.ki-category-link {
+.ki-category-link-tag {
   font-size: 12px;
   color: var(--text-secondary);
-  background: var(--bg);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
   padding: 4px 10px;
   transition: all 0.2s ease;
 }
 
-.ki-category-card:hover .ki-category-link {
+.ki-category-link:hover .ki-category-link-tag {
   color: var(--text);
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* Animations */
@@ -214,7 +215,7 @@
     gap: 12px;
   }
 
-  .ki-category-card {
+  .ki-category-content {
     padding: 20px;
   }
 }
@@ -227,7 +228,7 @@
     transition: none !important;
   }
 
-  .ki-category-card {
+  .ki-category-link {
     animation: none;
     opacity: 1;
   }

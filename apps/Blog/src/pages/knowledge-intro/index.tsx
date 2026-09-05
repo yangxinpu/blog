@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import CursorGrid from './components/cursor-grid';
+import BorderGlow from './components/border-glow';
 import KnowledgeLogo from '../../assets/Images/common/knowlege-base-logo.png';
 import './index.css';
 
@@ -16,7 +17,7 @@ const kb = (path: string): string => `${KB_BASE}${path}`;
 
 const categories: Category[] = [
   {
-    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg',
+    icon: 'https://cdn.simpleicons.org/javascript/17FBC6',
     title: '前端',
     titleEn: 'Frontend',
     links: [
@@ -26,7 +27,7 @@ const categories: Category[] = [
     ],
   },
   {
-    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg',
+    icon: 'https://cdn.simpleicons.org/nodedotjs/17FBC6',
     title: '后端',
     titleEn: 'Backend',
     links: [
@@ -35,17 +36,16 @@ const categories: Category[] = [
     ],
   },
   {
-    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vitest.svg',
+    icon: 'https://cdn.simpleicons.org/vitest/17FBC6',
     title: '测试',
     titleEn: 'Testing',
     links: [
       { label: '单元测试', href: kb('/zh/测试/单元测试') },
       { label: '端到端测试', href: kb('/zh/测试/端到端测试') },
-      { label: '性能测试', href: kb('/zh/测试/性能测试') },
     ],
   },
   {
-    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg',
+    icon: 'https://cdn.simpleicons.org/docker/17FBC6',
     title: '运维',
     titleEn: 'DevOps',
     links: [
@@ -53,9 +53,8 @@ const categories: Category[] = [
       { label: 'Nginx', href: kb('/zh/运维/') },
     ],
   },
-  //不要修改icon这个URL
   {
-    icon: 'https://cdn.simpleicons.org/anthropic/FFFFFF',
+    icon: 'https://cdn.simpleicons.org/anthropic/17FBC6',
     title: 'AI',
     titleEn: 'AI',
     links: [
@@ -63,9 +62,8 @@ const categories: Category[] = [
       { label: 'Opencode', href: kb('/zh/AI/Opencode/Opencode基础') },
     ],
   },
-  //不要修改icon这个URL
   {
-    icon: 'https://cdn.simpleicons.org/linear/5E6AD2',
+    icon: 'https://cdn.simpleicons.org/linear/17FBC6',
     title: '产品',
     titleEn: 'Product',
     links: [
@@ -74,7 +72,7 @@ const categories: Category[] = [
     ],
   },
   {
-    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/python.svg',
+    icon: 'https://cdn.simpleicons.org/python/17FBC6',
     title: 'Python',
     titleEn: 'Python',
     links: [
@@ -83,7 +81,7 @@ const categories: Category[] = [
     ],
   },
   {
-    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg',
+    icon: 'https://cdn.simpleicons.org/git/17FBC6',
     title: '其他',
     titleEn: 'Other',
     links: [
@@ -156,8 +154,8 @@ const KnowledgeIntro: React.FC = () => {
       <div className="ki-container">
         <div ref={headerRef} className="ki-header animate-delay-0">
           <h2 className="ki-title">
-            <img src={KnowledgeLogo} alt="NaiLuo知识库" />            
             <span>NaiLuo知识库</span>
+            <img src={KnowledgeLogo} alt="NaiLuo知识库" />
           </h2>
           <p className="ki-subtitle">
             系统化的技术学习笔记，覆盖前端、后端、AI、运维、产品、测试等领域，如果你对其中任何一个领域感兴趣，都可以点击进入学习
@@ -169,27 +167,42 @@ const KnowledgeIntro: React.FC = () => {
             <a
               key={category.title}
               href={kb(`/zh/${category.title}/`)}
-              className="ki-category-card"
-              style={{ animationDelay: `${index * 0.06}s` }}
+              className="ki-category-link"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ animationDelay: `${index * 0.06}s` }}
             >
-              <div className="ki-category-header">
-                <span className="ki-category-icon">
-                  <img src={category.icon} alt={category.title} />
-                </span>
-                <div className="ki-category-title-group">
-                  <h3 className="ki-category-title">{category.title}</h3>
-                  <span className="ki-category-title-en">{category.titleEn}</span>
+              <BorderGlow
+                edgeSensitivity={0}
+                glowColor="165 97 70"
+                backgroundColor="#120F17"
+                borderRadius={10}
+                glowRadius={40}
+                glowIntensity={1}
+                coneSpread={25}
+                animated={true}
+                colors={['#17FBC6', '#8DFBDE', '#0EB890']}
+                className="ki-category-card"
+              >
+                <div className="ki-category-content">
+                  <div className="ki-category-header">
+                    <span className="ki-category-icon">
+                      <img src={category.icon} alt={category.title} />
+                    </span>
+                    <div className="ki-category-title-group">
+                      <h3 className="ki-category-title">{category.title}</h3>
+                      <span className="ki-category-title-en">{category.titleEn}</span>
+                    </div>
+                  </div>
+                  <div className="ki-category-links">
+                    {category.links.map((link) => (
+                      <span key={link.label} className="ki-category-link-tag">
+                        {link.label}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="ki-category-links">
-                {category.links.map((link) => (
-                  <span key={link.label} className="ki-category-link">
-                    {link.label}
-                  </span>
-                ))}
-              </div>
+              </BorderGlow>
             </a>
           ))}
         </div>
