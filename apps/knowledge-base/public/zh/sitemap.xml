@@ -4,7 +4,7 @@
   
     <url>
       <loc>https://nailuo.com/zh/</loc>
-      <lastmod>2026-07-28</lastmod>
+      <lastmod>2026-09-05</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/"/>
@@ -139,7 +139,7 @@
 
     <url>
       <loc>https://nailuo.com/zh/前端/JavaScript/DOM</loc>
-      <lastmod>2026-07-20</lastmod>
+      <lastmod>2026-07-29</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/JavaScript/DOM"/>
@@ -157,7 +157,7 @@
 
     <url>
       <loc>https://nailuo.com/zh/前端/JavaScript/JS基础</loc>
-      <lastmod>2026-07-20</lastmod>
+      <lastmod>2026-09-03</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/JavaScript/JS基础"/>
@@ -202,7 +202,7 @@
 
     <url>
       <loc>https://nailuo.com/zh/前端/JavaScript/前后端通信</loc>
-      <lastmod>2026-07-26</lastmod>
+      <lastmod>2026-09-03</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/JavaScript/前后端通信"/>
@@ -220,7 +220,7 @@
 
     <url>
       <loc>https://nailuo.com/zh/前端/React/React基础</loc>
-      <lastmod>2026-07-26</lastmod>
+      <lastmod>2026-09-03</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/React/React基础"/>
@@ -238,7 +238,7 @@
 
     <url>
       <loc>https://nailuo.com/zh/前端/Vue/Vue3基础</loc>
-      <lastmod>2026-07-20</lastmod>
+      <lastmod>2026-09-03</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
       <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/Vue/Vue3基础"/>

@@ -1,3 +1,9 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter blog run build",
+  "outputDirectory": "apps/blog/dist",
+  "framework": "vite",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
