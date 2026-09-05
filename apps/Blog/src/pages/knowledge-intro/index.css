@@ -1,18 +1,6 @@
-.cursor-grid-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: auto;
-  z-index: 1;
-}
-
-.cursor-grid-canvas {
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
 .ki-section {
   position: relative;
+  z-index: 2;
   width: 100%;
   min-height: 100vh;
   padding: 100px 0;
@@ -22,12 +10,11 @@
   align-items: center;
 }
 
-.ki-section::after {
-  content: '';
+.ki-grid {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 4;
+  width: 100%;
+  height: 100%;
 }
 
 .ki-container {
@@ -36,6 +23,7 @@
   padding: 0 24px;
   position: relative;
   z-index: 10;
+  pointer-events: none;
 }
 
 .ki-header {
@@ -86,6 +74,7 @@
   cursor: pointer;
   animation: cardFadeIn 0.6s ease-out forwards;
   opacity: 0;
+  pointer-events: auto;
 }
 
 .ki-category-card:hover {

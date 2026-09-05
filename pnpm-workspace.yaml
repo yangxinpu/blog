@@ -2,4 +2,6 @@ packages:
   - 'apps/*'
 allowBuilds:
   '@parcel/watcher': true
+  '@vgpu/adapter-node': true
   esbuild: true
+  webgpu: true

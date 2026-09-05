@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import CursorGrid from './components/cursor-grid';
-import './knowledge-intro.css';
+import './index.css';
 
 type Category = {
   icon: string;
@@ -134,12 +134,23 @@ const KnowledgeIntro: React.FC = () => {
 
   return (
     <section className="ki-section">
-      <CursorGrid
-        gridSize={80}
-        lineWidth={1}
-        hoverColor={accentColor}
-        baseColor="rgba(23, 251, 198, 0.12)"
-      />
+      <div className="ki-grid">
+        <CursorGrid
+          cellSize={70}
+          color={accentColor}
+          radius={140}
+          falloff="smooth"
+          holdTime={400}
+          fadeDuration={800}
+          lineWidth={1.2}
+          maxOpacity={1}
+          fillOpacity={0}
+          gridOpacity={0}
+          cellRadius={0}
+          clickPulse
+          pulseSpeed={600}
+        />
+      </div>
 
       <div className="ki-container">
         <div ref={headerRef} className="ki-header animate-delay-0">

@@ -2,18 +2,14 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitText from 'gsap/SplitText';
-import PixelBlast from './components/pixel-blast';
-import './home.css';
+import AeroShards from './components/aero-shards';
+import './index.css';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Home = () => {
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const accentColor =
-    typeof window !== 'undefined'
-      ? window.getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#17FBC6'
-      : '#17FBC6';
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -73,22 +69,42 @@ const Home = () => {
   
   return (
     <div ref={rootRef} className="home-page">
+
       <section className="home-section">
-        <PixelBlast
-          variant={'diamond'}
-          pixelSize={6}
-          color={accentColor}
-          patternScale={1}
-          patternDensity={1.5}
-          pixelSizeJitter={1}
-          speed={0.6}
-          edgeFade={0.1}
-          antialias={true}
-          enableRipples={false}
+      <div className="home-shards">
+          <AeroShards
+            backgroundColor="#111111"
+            shardColor="#0EB890"
+            accentColor="#17FBC6"
+            placement="full"
+            flow="stream"
+            material="pearl"
+            detail="balanced"
+            effect="none"
+            scale={0.7}
+            spread={1}
+            depth={1}
+            speed={1}
+            spin={1}
+            interaction="repel"
+            density={1.5}
+            shardSize={1.1}
+            stretch={1}
+            turbulence={1}
+            glow={1}
+            edgeSoftness={2}
+            bloom={0.5}
+            grain={0.05}
+            chromaticAberration={0.0075}
+            transitionDuration={1}
+            interactionRadius={1.5}
+            interactionStrength={0.5}
+            rippleIntensity={1}
+            holdToGather
+            paused={false}
         />
-
-        <div className="home-overlay" />
-
+      </div>
+      <div className="home-overlay" />
         <div className="home-content">
           <h1 className="home-title">
             <span className="home-title-part-left">Humans Steer, </span>

@@ -1,266 +1,325 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import './index.css';
 
-interface CursorGridProps {
-  className?: string;
-  gridSize?: number;
+type Falloff = 'linear' | 'smooth' | 'sharp';
+
+export interface CursorGridProps {
+  cellSize?: number;
+  color?: string;
+  radius?: number;
+  falloff?: Falloff;
+  holdTime?: number;
+  fadeDuration?: number;
   lineWidth?: number;
-  hoverColor?: string;
-  baseColor?: string;
-  fadeSpeed?: number;
+  maxOpacity?: number;
+  fillOpacity?: number;
+  gridOpacity?: number;
+  cellRadius?: number;
+  clickPulse?: boolean;
+  pulseSpeed?: number;
+  className?: string;
 }
 
-const EDGE_BLUR = 80;
+interface GridConfig {
+  cellSize: number;
+  color: string;
+  radius: number;
+  falloff: Falloff;
+  holdTime: number;
+  fadeDuration: number;
+  lineWidth: number;
+  maxOpacity: number;
+  fillOpacity: number;
+  gridOpacity: number;
+  cellRadius: number;
+  clickPulse: boolean;
+  pulseSpeed: number;
+}
 
-const CursorGrid: React.FC<CursorGridProps> = ({
-  className = '',
-  gridSize = 50,
-  lineWidth = 1,
-  hoverColor = '#17FBC6',
-  baseColor = 'rgba(23, 251, 198, 0.12)',
-  fadeSpeed = 0.03,
-}) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+interface Pulse {
+  x: number;
+  y: number;
+  t0: number;
+}
+
+const FALLOFF_CURVES: Record<Falloff, (t: number) => number> = {
+  linear: t => t,
+  smooth: t => t * t * (3 - 2 * t),
+  sharp: t => t * t * t
+};
+
+const hexToRgb = (hex: string): [number, number, number] => {
+  const h = hex.replace('#', '');
+  const v = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+  const num = parseInt(v.slice(0, 6), 16);
+  return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+};
+
+const CursorGrid = ({
+  cellSize = 70,
+  color = '#D946EF',
+  radius = 140,
+  falloff = 'smooth',
+  holdTime = 400,
+  fadeDuration = 800,
+  lineWidth = 1.2,
+  maxOpacity = 1,
+  fillOpacity = 0,
+  gridOpacity = 0,
+  cellRadius = 0,
+  clickPulse = true,
+  pulseSpeed = 600,
+  className = ''
+}: CursorGridProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const maskCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
-  const prevCellRef = useRef<{ col: number; row: number } | null>(null);
-  const prevOpacityRef = useRef(0);
-  const animationRef = useRef<number>(0);
-  const opacityRef = useRef(0);
-  const isHoveringRef = useRef(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const propsRef = useRef<GridConfig>({} as GridConfig);
+  const wakeRef = useRef<(() => void) | null>(null);
+
+  propsRef.current = {
+    cellSize,
+    color,
+    radius,
+    falloff,
+    holdTime,
+    fadeDuration,
+    lineWidth,
+    maxOpacity,
+    fillOpacity,
+    gridOpacity,
+    cellRadius,
+    clickPulse,
+    pulseSpeed
+  };
 
   useEffect(() => {
     const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!canvas || !container) return;
+    if (!container || !canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    if (!maskCanvasRef.current) {
-      maskCanvasRef.current = document.createElement('canvas');
-    }
+    // Grid state: one alpha + timestamp pair per cell, indexed row-major.
+    let cols = 0;
+    let rows = 0;
+    let offX = 0;
+    let offY = 0;
+    let alphas = new Float32Array(0);
+    let touched = new Float64Array(0);
+    let w = 0;
+    let h = 0;
+    const pulses: Pulse[] = [];
+    let raf = 0;
+    let running = false;
+    let lastFrame = 0;
 
-    const initCanvas = () => {
-      const rect = container.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      const maskCanvas = maskCanvasRef.current!;
-
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-
-      maskCanvas.width = rect.width;
-      maskCanvas.height = rect.height;
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-
-      createMask(rect.width, rect.height);
+    const rebuild = () => {
+      const p = propsRef.current;
+      w = container.offsetWidth;
+      h = container.offsetHeight;
+      canvas.width = Math.max(1, Math.round(w * dpr));
+      canvas.height = Math.max(1, Math.round(h * dpr));
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(w / p.cellSize) + 1;
+      rows = Math.ceil(h / p.cellSize) + 1;
+      // Center the lattice so edge cells crop evenly on both sides
+      offX = (w - cols * p.cellSize) / 2;
+      offY = (h - rows * p.cellSize) / 2;
+      alphas = new Float32Array(cols * rows);
+      touched = new Float64Array(cols * rows);
     };
 
-    const createMask = (w: number, h: number) => {
-      const maskCanvas = maskCanvasRef.current!;
-      const maskCtx = maskCanvas.getContext('2d');
-      if (!maskCtx) return;
-
-      maskCtx.clearRect(0, 0, w, h);
-
-      // 中心区域完全可见
-      maskCtx.fillStyle = 'rgba(255, 255, 255, 1)';
-      maskCtx.fillRect(0, 0, w, h);
-
-      // 顶部边缘模糊 (从透明到可见)
-      const topGradient = maskCtx.createLinearGradient(0, 0, 0, EDGE_BLUR);
-      topGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
-      topGradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
-      maskCtx.fillStyle = topGradient;
-      maskCtx.fillRect(0, 0, w, EDGE_BLUR);
-
-      // 底部边缘模糊
-      const bottomGradient = maskCtx.createLinearGradient(0, h - EDGE_BLUR, 0, h);
-      bottomGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      bottomGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      maskCtx.fillStyle = bottomGradient;
-      maskCtx.fillRect(0, h - EDGE_BLUR, w, EDGE_BLUR);
-
-      // 左侧边缘模糊
-      const leftGradient = maskCtx.createLinearGradient(0, 0, EDGE_BLUR, 0);
-      leftGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
-      leftGradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
-      maskCtx.fillStyle = leftGradient;
-      maskCtx.fillRect(0, 0, EDGE_BLUR, h);
-
-      // 右侧边缘模糊
-      const rightGradient = maskCtx.createLinearGradient(w - EDGE_BLUR, 0, w, 0);
-      rightGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      rightGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      maskCtx.fillStyle = rightGradient;
-      maskCtx.fillRect(w - EDGE_BLUR, 0, EDGE_BLUR, h);
+    const cellCenter = (i: number): [number, number] => {
+      const p = propsRef.current;
+      const cx = offX + (i % cols) * p.cellSize + p.cellSize / 2;
+      const cy = offY + Math.floor(i / cols) * p.cellSize + p.cellSize / 2;
+      return [cx, cy];
     };
 
-    const animate = () => {
+    // Light up every cell whose center falls inside the radius, with the
+    // configured falloff curve mapping distance to brightness.
+    const energize = (x: number, y: number, boost?: number) => {
+      const p = propsRef.current;
+      const r = Math.max(p.radius, 1);
+      const ease = FALLOFF_CURVES[p.falloff] ?? FALLOFF_CURVES.linear;
+      const now = performance.now();
+      const minCol = Math.max(0, Math.floor((x - r - offX) / p.cellSize));
+      const maxCol = Math.min(cols - 1, Math.floor((x + r - offX) / p.cellSize));
+      const minRow = Math.max(0, Math.floor((y - r - offY) / p.cellSize));
+      const maxRow = Math.min(rows - 1, Math.floor((y + r - offY) / p.cellSize));
+      for (let cRow = minRow; cRow <= maxRow; cRow++) {
+        for (let cCol = minCol; cCol <= maxCol; cCol++) {
+          const i = cRow * cols + cCol;
+          const [cx, cy] = cellCenter(i);
+          const dist = Math.hypot(cx - x, cy - y);
+          if (dist > r) continue;
+          const level = ease(1 - dist / r) * p.maxOpacity * (boost ?? 1);
+          if (level > alphas[i]) {
+            alphas[i] = level;
+            touched[i] = now;
+          } else if (level > 0) {
+            touched[i] = now;
+          }
+        }
+      }
+    };
+
+    const draw = (now: number) => {
+      const p = propsRef.current;
+      const dt = Math.min(now - lastFrame, 50);
+      lastFrame = now;
+      ctx.clearRect(0, 0, w, h);
+      const [cr, cg, cb] = hexToRgb(p.color);
+
+      // Optional faint static lattice
+      if (p.gridOpacity > 0) {
+        ctx.strokeStyle = `rgba(${cr}, ${cg}, ${cb}, ${p.gridOpacity})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let cCol = 0; cCol <= cols; cCol++) {
+          const x = Math.round(offX + cCol * p.cellSize) + 0.5;
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+        }
+        for (let cRow = 0; cRow <= rows; cRow++) {
+          const y = Math.round(offY + cRow * p.cellSize) + 0.5;
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+        }
+        ctx.stroke();
+      }
+
+      // Expanding click pulses hand their energy to cells as they pass
+      for (let pi = pulses.length - 1; pi >= 0; pi--) {
+        const pulse = pulses[pi];
+        const age = (now - pulse.t0) / 1000;
+        const ringR = age * p.pulseSpeed;
+        if (ringR > Math.hypot(w, h)) {
+          pulses.splice(pi, 1);
+          continue;
+        }
+        const band = p.cellSize;
+        const minCol = Math.max(0, Math.floor((pulse.x - ringR - band - offX) / p.cellSize));
+        const maxCol = Math.min(cols - 1, Math.floor((pulse.x + ringR + band - offX) / p.cellSize));
+        const minRow = Math.max(0, Math.floor((pulse.y - ringR - band - offY) / p.cellSize));
+        const maxRow = Math.min(rows - 1, Math.floor((pulse.y + ringR + band - offY) / p.cellSize));
+        for (let cRow = minRow; cRow <= maxRow; cRow++) {
+          for (let cCol = minCol; cCol <= maxCol; cCol++) {
+            const i = cRow * cols + cCol;
+            const [cx, cy] = cellCenter(i);
+            const dist = Math.hypot(cx - pulse.x, cy - pulse.y);
+            if (Math.abs(dist - ringR) < band / 2 && p.maxOpacity > alphas[i]) {
+              alphas[i] = p.maxOpacity;
+              touched[i] = now;
+            }
+          }
+        }
+      }
+
+      let anyVisible = pulses.length > 0;
+      const fadeStep = dt / Math.max(p.fadeDuration, 16);
+      const half = p.cellSize / 2;
+
+      for (let i = 0; i < alphas.length; i++) {
+        let a = alphas[i];
+        if (a <= 0) continue;
+        if (now - touched[i] > p.holdTime) {
+          a = Math.max(0, a - fadeStep);
+          alphas[i] = a;
+          if (a <= 0) continue;
+        }
+        anyVisible = true;
+
+        const [cx, cy] = cellCenter(i);
+        const gradient = ctx.createRadialGradient(cx, cy, half * 0.1, cx, cy, p.cellSize);
+        gradient.addColorStop(0, `rgba(${cr}, ${cg}, ${cb}, ${a})`);
+        gradient.addColorStop(1, `rgba(${cr}, ${cg}, ${cb}, 0)`);
+
+        const x = cx - half + 0.5;
+        const y = cy - half + 0.5;
+        const s = p.cellSize - 1;
+
+        ctx.beginPath();
+        if (p.cellRadius > 0) {
+          ctx.roundRect(x, y, s, s, p.cellRadius);
+        } else {
+          ctx.rect(x, y, s, s);
+        }
+        if (p.fillOpacity > 0) {
+          ctx.fillStyle = `rgba(${cr}, ${cg}, ${cb}, ${a * p.fillOpacity})`;
+          ctx.fill();
+        }
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = p.lineWidth;
+        ctx.stroke();
+      }
+
+      if (anyVisible) {
+        raf = requestAnimationFrame(draw);
+      } else {
+        running = false;
+        if (propsRef.current.gridOpacity <= 0) ctx.clearRect(0, 0, w, h);
+      }
+    };
+
+    const wake = () => {
+      if (running) return;
+      running = true;
+      lastFrame = performance.now();
+      raf = requestAnimationFrame(draw);
+    };
+    wakeRef.current = wake;
+
+    const toLocal = (e: PointerEvent): [number, number] => {
       const rect = canvas.getBoundingClientRect();
-      const mouse = mouseRef.current;
-      const maskCanvas = maskCanvasRef.current;
-
-      ctx.clearRect(0, 0, rect.width, rect.height);
-
-      const opacity = opacityRef.current;
-
-      if (opacity > 0.01) {
-        const cols = Math.floor(rect.width / gridSize) + 1;
-        const rows = Math.floor(rect.height / gridSize) + 1;
-
-        ctx.save();
-
-        const tempCanvas = document.createElement('canvas');
-        const tempCtx = tempCanvas.getContext('2d');
-        if (tempCtx) {
-          tempCanvas.width = rect.width;
-          tempCanvas.height = rect.height;
-
-          for (let col = 0; col <= cols; col++) {
-            const x = col * gridSize;
-            tempCtx.strokeStyle = baseColor;
-            tempCtx.globalAlpha = opacity;
-            tempCtx.lineWidth = lineWidth;
-            tempCtx.beginPath();
-            tempCtx.moveTo(x, 0);
-            tempCtx.lineTo(x, rect.height);
-            tempCtx.stroke();
-          }
-
-          for (let row = 0; row <= rows; row++) {
-            const y = row * gridSize;
-            tempCtx.strokeStyle = baseColor;
-            tempCtx.globalAlpha = opacity;
-            tempCtx.lineWidth = lineWidth;
-            tempCtx.beginPath();
-            tempCtx.moveTo(0, y);
-            tempCtx.lineTo(rect.width, y);
-            tempCtx.stroke();
-          }
-
-          const col = Math.floor(mouse.x / gridSize);
-          const row = Math.floor(mouse.y / gridSize);
-          const cellX = col * gridSize;
-          const cellY = row * gridSize;
-          const pad = 3;
-          const cellSize = gridSize - pad * 2;
-
-          const drawCell = (cx: number, cy: number, alpha: number) => {
-            if (alpha <= 0.01) return;
-            tempCtx.fillStyle = hoverColor;
-            tempCtx.globalAlpha = 0.12 * alpha;
-            tempCtx.fillRect(cx + pad, cy + pad, cellSize, cellSize);
-            tempCtx.strokeStyle = hoverColor;
-            tempCtx.globalAlpha = 1 * alpha;
-            tempCtx.lineWidth = 2;
-            tempCtx.strokeRect(cx + pad, cy + pad, cellSize, cellSize);
-          };
-
-          drawCell(cellX, cellY, opacity);
-
-          const prev = prevCellRef.current;
-          if (prev && (prev.col !== col || prev.row !== row)) {
-            drawCell(prev.col * gridSize, prev.row * gridSize, prevOpacityRef.current * opacity);
-          }
-
-          if (maskCanvas) {
-            ctx.drawImage(tempCanvas, 0, 0);
-            ctx.globalCompositeOperation = 'destination-in';
-            ctx.drawImage(maskCanvas, 0, 0);
-            ctx.globalCompositeOperation = 'source-over';
-          } else {
-            ctx.drawImage(tempCanvas, 0, 0);
-          }
-        }
-
-        ctx.restore();
-      }
-
-      ctx.globalAlpha = 1;
-      ctx.lineWidth = lineWidth;
-      animationRef.current = requestAnimationFrame(animate);
+      return [e.clientX - rect.left, e.clientY - rect.top];
     };
 
-    initCanvas();
-    animationRef.current = requestAnimationFrame(animate);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const isOverContainer =
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom;
-
-      if (isOverContainer) {
-        const newX = e.clientX - rect.left;
-        const newY = e.clientY - rect.top;
-        const newCol = Math.floor(newX / gridSize);
-        const newRow = Math.floor(newY / gridSize);
-        const oldCol = Math.floor(mouseRef.current.x / gridSize);
-        const oldRow = Math.floor(mouseRef.current.y / gridSize);
-
-        if (isHoveringRef.current && (newCol !== oldCol || newRow !== oldRow)) {
-          prevCellRef.current = { col: oldCol, row: oldRow };
-          prevOpacityRef.current = 1;
-        }
-
-        isHoveringRef.current = true;
-        mouseRef.current = { x: newX, y: newY };
-      } else {
-        isHoveringRef.current = false;
-      }
+    const onPointerMove = (e: PointerEvent) => {
+      const [x, y] = toLocal(e);
+      energize(x, y);
+      wake();
     };
 
-    const handleMouseLeave = () => {
-      isHoveringRef.current = false;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!propsRef.current.clickPulse) return;
+      const [x, y] = toLocal(e);
+      pulses.push({ x, y, t0: performance.now() });
+      wake();
     };
 
-    const handleResize = () => {
-      initCanvas();
-    };
+    const ro = new ResizeObserver(() => {
+      rebuild();
+      wake();
+    });
+    ro.observe(container);
+    rebuild();
+    wake();
 
-    const fadeInterval = window.setInterval(() => {
-      if (isHoveringRef.current) {
-        if (opacityRef.current < 1) {
-          opacityRef.current = Math.min(1, opacityRef.current + fadeSpeed * 3);
-        }
-      } else {
-        if (opacityRef.current > 0) {
-          opacityRef.current = Math.max(0, opacityRef.current - fadeSpeed);
-        }
-      }
-
-      if (prevOpacityRef.current > 0) {
-        prevOpacityRef.current = Math.max(0, prevOpacityRef.current - fadeSpeed * 1.5);
-        if (prevOpacityRef.current <= 0.01) {
-          prevCellRef.current = null;
-          prevOpacityRef.current = 0;
-        }
-      }
-    }, 16);
-
-    window.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('resize', handleResize);
+    container.addEventListener('pointermove', onPointerMove);
+    container.addEventListener('pointerdown', onPointerDown);
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
-      clearInterval(fadeInterval);
-      window.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      container.removeEventListener('pointermove', onPointerMove);
+      container.removeEventListener('pointerdown', onPointerDown);
     };
-  }, [gridSize, lineWidth, hoverColor, baseColor, fadeSpeed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cellSize]);
+
+  // Repaint static layers when visual props change while idle
+  useEffect(() => {
+    wakeRef.current?.();
+  }, [gridOpacity, color, lineWidth, maxOpacity, fillOpacity, cellRadius]);
 
   return (
-    <div ref={containerRef} className={`cursor-grid-container ${className}`}>
-      <canvas ref={canvasRef} className="cursor-grid-canvas" />
+    <div ref={containerRef} className={`cursor-grid${className ? ` ${className}` : ''}`}>
+      <canvas ref={canvasRef} className="cursor-grid__canvas" />
     </div>
   );
 };
