@@ -9,6 +9,7 @@ import LogoSection from './pages/logo-section';
 import TravelDisplay from './pages/travel-display';
 import Preloader from './components/preloader';
 import TransitSection from './pages/transit-section';
+import SpriteScroll from './pages/sprite-scroll';
 
 import { ALL_PRELOAD_IMAGES } from './assets/preload';
 import './App.css';
@@ -56,6 +57,7 @@ function App() {
             <Home />
             <KnowledgeIntro />
             <LogoSection />
+            <SpriteScroll />
             <TransitSection />
             <TravelDisplay />
 

@@ -1,0 +1,210 @@
+/* ============================================================
+   雪碧 SPRITE —— 滚动驱动帧动画区块（仅暗黑，背景 #111111）
+   - WebP 帧序列横跨整个轨道随滚动只播放一遍
+   - 变体文案分段切换，元素随滚动错开入场（JS 直接驱动，可逆）
+   - 主题色由当前变体通过 --sprite-accent 注入
+   ============================================================ */
+
+.sprite-scroll {
+  position: relative;
+  background: #111111;
+  color: #f2f4f3;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  overflow: clip;
+}
+
+/* 轨道高度 = 100vh（舞台）+ 每个变体约 130vh 的滚动叙事距离 */
+.sprite-scroll-track {
+  position: relative;
+  height: calc(100vh + 130vh * 3);
+}
+
+.sprite-scroll-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #111111;
+  will-change: transform;
+}
+
+.sprite-scroll-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 功能性压暗层：以 #111111 为基色，仅保证左侧文字可读性 */
+.sprite-scroll-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(17, 17, 17, 0.82) 0%, rgba(17, 17, 17, 0.45) 38%, rgba(17, 17, 17, 0.06) 68%),
+    linear-gradient(0deg, rgba(17, 17, 17, 0.5) 0%, rgba(17, 17, 17, 0) 22%),
+    linear-gradient(180deg, rgba(17, 17, 17, 0.4) 0%, rgba(17, 17, 17, 0) 18%);
+}
+
+.sprite-scroll-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ———— 左侧覆盖文案 ———— */
+
+.sprite-scroll-copy {
+  position: absolute;
+  left: clamp(20px, 6vw, 96px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(90vw, 620px);
+}
+
+.sprite-scroll-brand,
+.sprite-scroll-title,
+.sprite-scroll-subtitle,
+.sprite-scroll-desc,
+.sprite-scroll-number-text {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.sprite-scroll-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sprite-accent);
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  transition: color 0.6s ease;
+}
+
+.sprite-scroll-brand-name {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.sprite-scroll-series {
+  margin-left: 4px;
+  color: rgba(240, 244, 242, 0.4);
+  letter-spacing: 0.18em;
+}
+
+.sprite-scroll-title {
+  margin: 22px 0 0;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(3.4rem, 8.5vw, 7.4rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.sprite-scroll-subtitle {
+  margin: 20px 0 0;
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.sprite-scroll-subtitle em {
+  display: block;
+  margin-top: 12px;
+  font-style: normal;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  color: var(--sprite-accent);
+  transition: color 0.6s ease;
+}
+
+.sprite-scroll-desc {
+  margin: 22px 0 0;
+  max-width: 440px;
+  font-size: 15px;
+  line-height: 1.95;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ———— 右侧大号序号 ———— */
+
+.sprite-scroll-number {
+  position: absolute;
+  right: clamp(20px, 4.5vw, 72px);
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+.sprite-scroll-number-text {
+  display: block;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(5rem, 12vw, 11rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
+}
+
+/* ———— 加载：简单旋转圆环 ———— */
+
+.sprite-scroll-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111111;
+}
+
+.sprite-scroll-spinner {
+  width: 42px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--sprite-accent);
+  border-radius: 50%;
+  animation: sprite-scroll-spin 0.8s linear infinite;
+  transition: border-top-color 0.6s ease;
+}
+
+@keyframes sprite-scroll-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ———— 响应式 ———— */
+
+@media (max-width: 767px) {
+  .sprite-scroll-copy {
+    top: 44%;
+    width: calc(100% - 40px);
+  }
+
+  .sprite-scroll-title {
+    font-size: clamp(3rem, 15vw, 4.6rem);
+  }
+
+  .sprite-scroll-number {
+    top: auto;
+    bottom: 40px;
+    right: 20px;
+    transform: none;
+  }
+
+  .sprite-scroll-number-text {
+    font-size: 3.4rem;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  }
+}

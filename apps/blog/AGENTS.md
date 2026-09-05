@@ -1,7 +1,7 @@
 # blog 应用 - Agent 指南
 
-> **文档版本**: v4.2.0
-> **最后更新**: 2026-09-03
+> **文档版本**: v4.5.1
+> **最后更新**: 2026-09-06
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
 
@@ -70,7 +70,8 @@ src/
 │   ├── Home/           # 首页（Hero + PixelBlast 背景）
 │   ├── KnowledgeIntro/ # 知识库介绍页（CursorGrid 背景）
 │   ├── AboutSection/   # 自我介绍页（左右布局）
-│   └── QuoteSection/   # 名言页（Antigravity 3D 背景）
+│   ├── QuoteSection/   # 名言页（Antigravity 3D 背景）
+│   └── sprite-scroll/  # 雪碧饮料视差页（Canvas WebP 帧序列 + 滚动 scrub，数据见 variants.ts）
 ├── libs/               # hooks / i18n / utils
 ├── assets/Images/      # 图片资源
 ├── App.tsx             # 应用入口组件
