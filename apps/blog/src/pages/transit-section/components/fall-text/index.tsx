@@ -132,7 +132,11 @@ const FallingText: React.FC<FallingTextProps> = ({
 
     const mouse = Mouse.create(containerRef.current);
     // 移除 Matter.js 绑定的 wheel 监听器（它会 preventDefault 导致页面无法滚动）
-    containerRef.current.removeEventListener('wheel', mouse.mousewheel);
+    // @types/matter-js 未声明运行时存在的 mousewheel 属性，这里用断言补充
+    containerRef.current.removeEventListener(
+      'wheel',
+      (mouse as Matter.Mouse & { mousewheel: EventListener }).mousewheel
+    );
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
       constraint: {

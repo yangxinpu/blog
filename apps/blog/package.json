@@ -28,6 +28,7 @@
     "@eslint/js": "^10.0.1",
     "@google/design.md": "^0.4.0",
     "@tailwindcss/vite": "^4.1.0",
+    "@types/matter-js": "^0.20.2",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
