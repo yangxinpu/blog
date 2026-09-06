@@ -13,10 +13,13 @@
   overflow: clip;
 }
 
-/* 轨道高度 = 100vh（舞台）+ 每个变体约 130vh 的滚动叙事距离 */
+/* 轨道高度 = 100vh（舞台）+ 滚动叙事距离。
+   叙事距离由 JS 按帧数注入 --sprite-scroll-distance（每帧约 15vh）：
+   帧数增加时轨道自动加长，保证「每帧滚动距离」不变、帧切换不拥挤；
+   390vh 为旧 26 帧时代的回退值。 */
 .sprite-scroll-track {
   position: relative;
-  height: calc(100vh + 130vh * 3);
+  height: calc(100vh + var(--sprite-scroll-distance, 390vh));
 }
 
 .sprite-scroll-stage {

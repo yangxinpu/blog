@@ -52,10 +52,10 @@
   color: var(--accent);
 }
 
-/* SplitText 生成的 char wrapper 需要 inline-block 才能被 stagger */
+/* SplitText 生成的 char wrapper 需要 inline-block 才能被 stagger；
+   动画期间 GSAP 自动提升合成层，无需常驻 will-change（动画结束后字符静止） */
 .travel-hero-title .char {
   display: inline-block;
-  will-change: transform, opacity;
 }
 
 /* 副标题 */

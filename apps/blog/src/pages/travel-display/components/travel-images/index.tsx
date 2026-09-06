@@ -116,8 +116,9 @@ const TravelImages: React.FC<MasonryProps> = ({
   useLayoutEffect(() => {
     if (!imagesReady || !containerRef.current || !grid.length) return;
 
-    // 初始位置：避免 getBoundingClientRect 强制同步布局，直接用 grid 已知尺寸
-    const getInitialPosition = (item: GridItem) => {
+    // 入场偏移量：静止位置由 left/top 布局承载（见 JSX inline style），
+    // 这里只返回相对静止位置的 transform 偏移，动画结束后 transform 被完全清除
+    const getInitialOffset = (item: GridItem) => {
       let direction: MasonryProps['animateFrom'] = animateFrom;
 
       if (animateFrom === 'random') {
@@ -127,36 +128,27 @@ const TravelImages: React.FC<MasonryProps> = ({
 
       switch (direction) {
         case 'top':
-          return { x: item.x, y: -200 };
+          return { x: 0, y: -item.y - 200 };
         case 'bottom':
-          return { x: item.x, y: gridHeight + 200 };
+          return { x: 0, y: gridHeight + 200 - item.y };
         case 'left':
-          return { x: -200, y: item.y };
+          return { x: -item.x - 200, y: 0 };
         case 'right':
-          return { x: width + 200, y: item.y };
+          return { x: width + 200 - item.x, y: 0 };
         case 'center':
           return {
-            x: width / 2 - item.w / 2,
-            y: gridHeight / 2 - item.h / 2
+            x: width / 2 - item.w / 2 - item.x,
+            y: gridHeight / 2 - item.h / 2 - item.y
           };
         default:
-          return { x: item.x, y: item.y + 100 };
+          return { x: 0, y: 100 };
       }
     };
 
-    const ctx = gsap.context(() => {
-      if (!hasAnimated.current) {
-        grid.forEach(item => {
-          const initialPos = getInitialPosition(item);
-          // 只设置 transform/opacity/filter，不碰 width/height（避免触发布局）
-          gsap.set(`[data-key="${item.id}"]`, {
-            x: initialPos.x,
-            y: initialPos.y,
-            opacity: 0,
-            ...(blurToFocus && { filter: 'blur(10px)' })
-          });
-        });
+    const ctx = gsap.context(self => {
+      const q = self.selector as (selector: string) => HTMLElement[];
 
+      if (!hasAnimated.current) {
         const tl = gsap.timeline({
           onComplete: () => {
             hasAnimated.current = true;
@@ -169,72 +161,80 @@ const TravelImages: React.FC<MasonryProps> = ({
         });
 
         grid.forEach((item, index) => {
-          // 只动画 transform(x,y) + opacity + filter，绝不动画 width/height
+          const el = q(`[data-key="${item.id}"]`)[0];
+          if (!el) return;
+          const offset = getInitialOffset(item);
+          // 仅动画期间存在 transform/filter：GSAP 自动提升合成层，结束后 clearProps 释放
+          gsap.set(el, {
+            x: offset.x,
+            y: offset.y,
+            opacity: 0,
+            ...(blurToFocus && { filter: 'blur(6px)' })
+          });
+
           tl.to(
-            `[data-key="${item.id}"]`,
+            el,
             {
-              x: item.x,
-              y: item.y,
+              x: 0,
+              y: 0,
               opacity: 1,
               ...(blurToFocus && { filter: 'blur(0px)' }),
-              duration: 0.8,
-              ease: 'power3.out'
+              duration,
+              ease,
+              // 动画结束即清除内联 transform/filter/opacity：
+              // 静止状态零合成提示，20 张图回归同一内容层随页面滚动
+              clearProps: blurToFocus ? 'transform,filter,opacity' : 'transform,opacity'
             },
             index * stagger
           );
         });
       } else {
-        grid.forEach(item => {
-          gsap.to(`[data-key="${item.id}"]`, {
-            x: item.x,
-            y: item.y,
-            duration: duration,
-            ease: ease,
-            overwrite: 'auto'
-          });
-        });
+        // resize 后：left/top 已由 React 重新布局，清除所有动画残留即可
+        gsap.set(q('[data-key]'), { clearProps: 'transform,filter,opacity' });
       }
     }, containerRef.current);
 
     return () => ctx.revert();
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, width, gridHeight, containerRef]);
 
-  const handleMouseEnter = (_e: React.MouseEvent, item: GridItem) => {
-    const selector = `[data-key="${item.id}"]`;
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
 
     if (scaleOnHover) {
-      gsap.to(selector, {
+      gsap.to(el, {
         scale: hoverScale,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        overwrite: true
       });
     }
 
     if (colorShiftOnHover) {
-      const el = document.querySelector(`[data-key="${item.id}"]`) as HTMLElement | null;
-      const overlay = el?.querySelector('.color-overlay') as HTMLElement | null;
+      const overlay = el.querySelector('.color-overlay');
       if (overlay) {
-        gsap.to(overlay, { opacity: 0.3, duration: 0.3 });
+        gsap.to(overlay, { opacity: 0.3, duration: 0.3, overwrite: true });
       }
     }
   };
 
-  const handleMouseLeave = (_e: React.MouseEvent, item: GridItem) => {
-    const selector = `[data-key="${item.id}"]`;
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
 
     if (scaleOnHover) {
-      gsap.to(selector, {
+      gsap.to(el, {
         scale: 1,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        overwrite: true,
+        // hover 结束后同样释放 transform，避免静态卡片残留合成层
+        clearProps: 'transform'
       });
     }
 
     if (colorShiftOnHover) {
-      const el = document.querySelector(`[data-key="${item.id}"]`) as HTMLElement | null;
-      const overlay = el?.querySelector('.color-overlay') as HTMLElement | null;
+      const overlay = el.querySelector('.color-overlay');
       if (overlay) {
-        gsap.to(overlay, { opacity: 0, duration: 0.3 });
+        gsap.to(overlay, { opacity: 0, duration: 0.3, overwrite: true });
       }
     }
   };
@@ -251,11 +251,12 @@ const TravelImages: React.FC<MasonryProps> = ({
             key={item.id}
             data-key={item.id}
             className="travel-display-images-section-item-wrapper"
-            // width/height 通过 inline style 固定，GSAP 不碰它们（避免 reflow）
-            style={{ width: item.w, height: item.h }}
+            // 静止位置由布局（left/top/width/height）承载，GSAP 动画期间才写 transform，
+            // 结束后 clearProps 释放 —— 静态滚动时不产生任何常驻合成层
+            style={{ width: item.w, height: item.h, left: item.x, top: item.y }}
             onClick={() => window.open(item.url, '_blank', 'noopener')}
-            onMouseEnter={e => handleMouseEnter(e, item)}
-            onMouseLeave={e => handleMouseLeave(e, item)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="travel-display-images-section-item-img">
               {/* 用 <img> 替代 background-image：原生异步解码，合成层更友好 */}

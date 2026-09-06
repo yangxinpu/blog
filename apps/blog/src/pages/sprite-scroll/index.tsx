@@ -20,6 +20,17 @@ const SEGMENT_COUNT = DRINK_VARIANTS.length;
 /** 滚动中播放的胶片序列（目前三个变体共用这一组镜头） */
 const FILM_FRAMES = DRINK_VARIANTS[0].frames;
 
+/**
+ * 每一帧占用的滚动叙事距离（vh）。
+ * 帧数增加时保持该值不变，即可让「滚动多少 px 切一帧」与之前一致，
+ * 避免帧切换过密导致快速滚动时 drawImage 峰值卡顿；
+ * 调大 = 帧切换更稀疏、滚动更轻松，调小 = 更跟手。
+ * （26 帧 × 15vh = 390vh；51 帧 × 15vh = 765vh）
+ */
+const SCROLL_VH_PER_FRAME = 15;
+/** 整个胶片序列的滚动叙事距离（vh），注入 CSS 决定轨道高度 */
+const SCROLL_DISTANCE_VH = FILM_FRAMES.length * SCROLL_VH_PER_FRAME;
+
 /** 各元素在「段内进度」中的入场区间（start, end），实现错开出场 */
 const REVEAL_RANGES = {
   brand: [0.05, 0.22],
@@ -34,24 +45,38 @@ const EXIT_START = 0.9;
 
 /**
  * 惯性强度：以 60fps 为基准，每帧向目标进度趋近的比例。
- * 值越小滑行越长、惯性越强（0.08 ≈ 停下后约 500~700ms 滑到位；
- * 0.12 ≈ 300~400ms；过小会让持续滚动时动画明显滞后），仅作用于
- * 帧动画与文案出场；舞台钉固位置始终与滚动 1:1，不参与平滑。
+ * 值越小滑行越长、惯性越强，值越大播放越快、越跟手：
+ *   0.12 ≈ 停手后 300~400ms 到位（几乎无惯性）
+ *   0.08 ≈ 500~700ms 滑到位
+ *   0.015 ≈ 播放跟手 + 明显惯性：滚动中帧动画滞后约 1s，
+ *           停手后滑行尾巴约 4~6s（当前值）
+ *   0.01 ≈ 强惯性：明显滑行 2~3s，帧动画尾巴约 8s
+ *   0.007 ≈ 过强：滚动中帧动画滞后约 2.4s，尾巴可达 10s 以上，播放显慢
+ * 过小会让持续滚动时帧动画/文案明显滞后；仅作用于
+ * 帧动画与文案出场，舞台钉固位置始终与滚动 1:1，不参与平滑。
  */
-const SMOOTH_FACTOR = 0.01;
+const SMOOTH_FACTOR = 0.015;
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
-/** 预加载一组帧，返回解码完成的 Image 数组 */
+/** 预加载一组帧并提前在离屏线程解码，返回就绪的 Image 数组 */
 function preloadFrames(urls: string[]): Promise<HTMLImageElement[]> {
   return Promise.all(
     urls.map(
       (url) =>
         new Promise<HTMLImageElement>((resolve) => {
           const img = new Image();
+          img.decoding = 'async';
           img.src = url;
-          img.onload = () => resolve(img);
+          img.onload = () => {
+            // 51 帧逐张首次绘制时在主线程解码会造成滚动掉帧，
+            // 这里加载后立即 decode()，把解码提前到滚动开始之前
+            img.decode().then(
+              () => resolve(img),
+              () => resolve(img),
+            );
+          };
           img.onerror = () => resolve(img);
         }),
     ),
@@ -130,6 +155,7 @@ const SpriteScroll: React.FC = () => {
     // 动画会带一点惯性继续滑行到目标位置，向下/向上滚动时整体可逆。
     let smoothProgress = 0;
     let progressInited = false;
+    let lastStageY = -1;
 
     const update = (_time: number, deltaMs: number) => {
       const track = trackRef.current;
@@ -140,7 +166,11 @@ const SpriteScroll: React.FC = () => {
       const vh = window.innerHeight;
       const maxY = Math.max(track.offsetHeight - vh, 0);
       const y = Math.min(Math.max(-rect.top, 0), maxY);
-      stage.style.transform = `translate3d(0, ${y}px, 0)`;
+      // 钉固位置不变时（停滚 / 区块外）跳过样式写入，避免每帧无效的样式失效
+      if (y !== lastStageY) {
+        stage.style.transform = `translate3d(0, ${y}px, 0)`;
+        lastStageY = y;
+      }
 
       // 目标进度直接来自滚动位置；平滑进度每帧向它指数趋近（帧率无关）
       const target = maxY > 0 ? y / maxY : 0;
@@ -261,7 +291,11 @@ const SpriteScroll: React.FC = () => {
       style={{ '--sprite-accent': variant.accent } as CSSProperties}
       aria-label="雪碧风味滚动展示"
     >
-      <div className="sprite-scroll-track" ref={trackRef}>
+      <div
+        className="sprite-scroll-track"
+        ref={trackRef}
+        style={{ '--sprite-scroll-distance': `${SCROLL_DISTANCE_VH}vh` } as CSSProperties}
+      >
         <div className="sprite-scroll-stage" ref={stageRef}>
           <canvas ref={canvasRef} className="sprite-scroll-canvas" aria-hidden="true" />
           <div className="sprite-scroll-scrim" />

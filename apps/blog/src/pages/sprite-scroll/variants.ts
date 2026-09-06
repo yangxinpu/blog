@@ -28,7 +28,7 @@ export interface DrinkVariant {
   frames: string[];
 }
 
-/** 经典柠檬帧序列（当前素材目录下的 26 帧 WebP） */
+/** 经典柠檬帧序列（当前素材目录下的 51 帧 WebP） */
 const classicFrameModules = import.meta.glob('../../assets/Images/sprite/*.webp', {
   eager: true,
   query: '?url',

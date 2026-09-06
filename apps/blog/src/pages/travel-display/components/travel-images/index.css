@@ -9,12 +9,9 @@
   left: 0;
   padding: 6px;
   cursor: pointer;
-  /* 只保留实际会变化的属性，避免 width/height 占用额外 GPU 层 */
-  will-change: transform, opacity;
-  /* 隔离绘制区域，滚动时只重绘自身 */
-  contain: paint;
-  /* 提升到独立合成层，滚动时由 GPU 直接移动 */
-  transform: translateZ(0);
+  /* 静止状态不写 will-change / transform / contain：
+     20 张图常驻独立合成层会长期占用显存并让 ScrollSmoother 每帧同步 20+ 层。
+     合成层只在 GSAP 动画（入场/hover）期间由引擎临时提升，结束即释放。 */
   box-sizing: border-box;
 }
 
