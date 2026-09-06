@@ -3,7 +3,7 @@
  * 所有需要在首屏加载完成前就绪的图片都在此声明
  */
 
-// 旅行展示图片（20 张）
+// 旅行展示图片（12 张，文件名 travel-01 ~ travel-12 连续编号）
 import travel01 from './Images/travel/travel-01.webp';
 import travel02 from './Images/travel/travel-02.webp';
 import travel03 from './Images/travel/travel-03.webp';
@@ -16,24 +16,14 @@ import travel09 from './Images/travel/travel-09.webp';
 import travel10 from './Images/travel/travel-10.webp';
 import travel11 from './Images/travel/travel-11.webp';
 import travel12 from './Images/travel/travel-12.webp';
-import travel13 from './Images/travel/travel-13.webp';
-import travel14 from './Images/travel/travel-14.webp';
-import travel15 from './Images/travel/travel-15.webp';
-import travel16 from './Images/travel/travel-16.webp';
-import travel17 from './Images/travel/travel-17.webp';
-import travel18 from './Images/travel/travel-18.webp';
-import travel19 from './Images/travel/travel-19.webp';
-import travel20 from './Images/travel/travel-20.webp';
 
 // 知识库 Logo
 import knowledgeLogo from './Images/common/knowlege-base-logo.png';
 
 // 旅行图片列表（供 travel-display 复用，避免重复导入）
 export const travelImages = [
-  travel01, travel02, travel03, travel04, travel05,
-  travel06, travel07, travel08, travel09, travel10,
-  travel11, travel12, travel13, travel14, travel15,
-  travel16, travel17, travel18, travel19, travel20,
+  travel01, travel02, travel03, travel04, travel05, travel06,
+  travel07, travel08, travel09, travel10, travel11, travel12,
 ];
 
 // 技术栈 Logo（与 logo-section 保持一致）

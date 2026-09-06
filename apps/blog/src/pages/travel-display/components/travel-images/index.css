@@ -9,10 +9,14 @@
   left: 0;
   padding: 6px;
   cursor: pointer;
-  /* 静止状态不写 will-change / transform / contain：
-     20 张图常驻独立合成层会长期占用显存并让 ScrollSmoother 每帧同步 20+ 层。
+  /* 静止状态不写 will-change / transform：
      合成层只在 GSAP 动画（入场/hover）期间由引擎临时提升，结束即释放。 */
   box-sizing: border-box;
+  /* 渲染时间分片（浏览器原生）：视口外的卡片整体跳过布局/绘制，
+     大图光栅化不再占用主线程与光栅线程，把每一帧让给 ScrollSmoother 滚动。
+     宽高为内联显式值，跳过期间占位不变，不会引起滚动条抖动。 */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px 420px;
 }
 
 .travel-display-images-section-item-img {
@@ -33,4 +37,76 @@
   object-fit: cover;
   border-radius: inherit;
   pointer-events: none;
+}
+
+/* ———— hover 黑色透明遮罩（层级契约：图片 0 / 遮罩 1 / 文案 2） ———— */
+
+.travel-display-images-section-item-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 0.4s ease;
+}
+
+.travel-display-images-section-item-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: clamp(14px, 1.8vw, 22px);
+  pointer-events: none;
+}
+
+.travel-display-images-section-item-caption-title,
+.travel-display-images-section-item-caption-content {
+  /* 标题与描述同时从下方上滑出场（相同时长、相同延迟） */
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease;
+}
+
+.travel-display-images-section-item-caption-title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+
+.travel-display-images-section-item-caption-content {
+  margin: 0;
+  font-size: clamp(0.75rem, 0.95vw, 0.9rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* hover：遮罩淡入，标题与描述同时上滑淡入 */
+.travel-display-images-section-item-wrapper:hover .travel-display-images-section-item-mask {
+  opacity: 1;
+}
+
+.travel-display-images-section-item-wrapper:hover
+  .travel-display-images-section-item-caption-title,
+.travel-display-images-section-item-wrapper:hover
+  .travel-display-images-section-item-caption-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 减少动态效果：直接呈现，不做位移/淡入 */
+@media (prefers-reduced-motion: reduce) {
+  .travel-display-images-section-item-mask,
+  .travel-display-images-section-item-caption-title,
+  .travel-display-images-section-item-caption-content {
+    transition: none;
+  }
 }

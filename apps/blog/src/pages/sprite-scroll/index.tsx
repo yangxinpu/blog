@@ -57,6 +57,15 @@ const EXIT_START = 0.9;
  */
 const SMOOTH_FACTOR = 0.015;
 
+/**
+ * 画布帧绘制的最小间隔（ms）。
+ * 「时间分片」策略：滚动进行中画布最多按此节奏绘制（≈30fps），
+ * 期间产生的中间帧直接丢弃、只绘制最新一帧（类似 React 只渲染最新 state），
+ * 把主线程预算让给 ScrollSmoother 的滚动跟随；滚动停止（进度到位）时
+ * 不受此间隔限制，立即补画最终帧，保证停手后画面精确。
+ */
+const FRAME_DRAW_MIN_INTERVAL = 33;
+
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
@@ -103,6 +112,8 @@ const SpriteScroll: React.FC = () => {
   const reducedRef = useRef(false);
   const dirtyRef = useRef(true);
   const rafRef = useRef(0);
+  /** 平滑进度是否已追到目标（滚动/惯性停止），供绘制循环判断何时立即补画 */
+  const settledRef = useRef(true);
 
   const variant = DRINK_VARIANTS[variantIndex];
 
@@ -125,7 +136,9 @@ const SpriteScroll: React.FC = () => {
   const resizeCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // 源帧仅 1280×720，DPR 封顶 1.5：画布像素量比 2.0 少约 44%，
+    // 显著降低每帧 drawImage 的纹理上传/填充开销，肉眼差异可忽略
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const { clientWidth: w, clientHeight: h } = canvas;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
@@ -140,10 +153,16 @@ const SpriteScroll: React.FC = () => {
     const ro = new ResizeObserver(resizeCanvas);
     if (canvasRef.current) ro.observe(canvasRef.current);
 
-    const renderLoop = () => {
+    let lastDrawAt = 0;
+    const renderLoop = (now: number) => {
       if (dirtyRef.current) {
-        drawFrame();
-        dirtyRef.current = false;
+        // 时间分片：滚动/惯性进行中按 ~30fps 节流绘制，中间帧直接丢弃；
+        // 进度到位（settled）时立即补画最新帧，保证停手后画面精确不丢帧
+        if (settledRef.current || now - lastDrawAt >= FRAME_DRAW_MIN_INTERVAL) {
+          drawFrame();
+          dirtyRef.current = false;
+          lastDrawAt = now;
+        }
       }
       rafRef.current = requestAnimationFrame(renderLoop);
     };
@@ -186,6 +205,8 @@ const SpriteScroll: React.FC = () => {
         if (Math.abs(target - smoothProgress) < 0.0005) smoothProgress = target;
       }
       const progress = smoothProgress;
+      // 进度已追到目标（含减少动态/首帧对齐/收敛 snap）：通知绘制循环立即补画
+      settledRef.current = progress === target;
 
       // 帧序列：横跨整个轨道只播放一遍
       const imgs = filmRef.current;

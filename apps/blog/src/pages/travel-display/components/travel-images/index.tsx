@@ -45,6 +45,10 @@ interface Item {
   id: string;
   img: string;
   url: string;
+  /** hover 时展示的标题（主色），与 content 同时从下方上滑出场 */
+  title?: string;
+  /** hover 时展示的描述文案 */
+  content?: string;
 }
 
 interface GridItem extends Item {
@@ -190,7 +194,7 @@ const TravelImages: React.FC<MasonryProps> = ({
         });
       } else {
         // resize 后：left/top 已由 React 重新布局，清除所有动画残留即可
-        gsap.set(q('[data-key]'), { clearProps: 'transform,filter,opacity' });
+        gsap.set(q('[data-key]'), { clearProps: 'transform,filter,opacit' });
       }
     }, containerRef.current);
 
@@ -261,6 +265,25 @@ const TravelImages: React.FC<MasonryProps> = ({
             <div className="travel-display-images-section-item-img">
               {/* 用 <img> 替代 background-image：原生异步解码，合成层更友好 */}
               <img src={item.img} alt="" loading="eager" decoding="async" draggable={false} />
+              {(item.title || item.content) && (
+                <>
+                  {/* 黑色透明遮罩：z-1，hover 淡入 */}
+                  <div className="travel-display-images-section-item-mask" />
+                  {/* 文案层：z-2，标题 + 描述同时从下方上滑出场 */}
+                  <div className="travel-display-images-section-item-caption">
+                    {item.title && (
+                      <h3 className="travel-display-images-section-item-caption-title">
+                        {item.title}
+                      </h3>
+                    )}
+                    {item.content && (
+                      <p className="travel-display-images-section-item-caption-content">
+                        {item.content}
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
               {colorShiftOnHover && (
                 <div
                   className="color-overlay"

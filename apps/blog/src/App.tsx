@@ -10,6 +10,9 @@ import TravelDisplay from './pages/travel-display';
 import Preloader from './components/preloader';
 import TransitSection from './pages/transit-section';
 //import SpriteScroll from './pages/sprite-scroll';
+//import Footer from './pages/footer';
+
+
 
 import { ALL_PRELOAD_IMAGES } from './assets/preload';
 import './App.css';
@@ -60,7 +63,7 @@ function App() {
             {/* <SpriteScroll />  效果不是很好，未启用*/} 
             <TransitSection />
             <TravelDisplay />
-
+            {/* <Footer /> */}
           </main>
         </div>
       </div>
