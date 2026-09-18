@@ -5,10 +5,130 @@
     <link>https://nailuo.com/zh/</link>
     <description>前端技术知识库 - JavaScript、React、Vue、Node.js、性能优化等技术学习笔记</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 18 Sep 2026 06:02:00 GMT</pubDate>
-    <lastBuildDate>Fri, 18 Sep 2026 06:02:00 GMT</lastBuildDate>
+    <pubDate>Fri, 18 Sep 2026 06:23:45 GMT</pubDate>
+    <lastBuildDate>Fri, 18 Sep 2026 06:23:45 GMT</lastBuildDate>
     <atom:link href="https://nailuo.com/zh/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/基础语法</link>
+      <description><![CDATA[JavaScript 是一门区分大小写的语言，标识符、关键字、变量名均严格区分大小写，`myVar` 与 `myvar` 是两个不同的标识符。]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:15:37 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/基础语法</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/代理与反射</link>
+      <description><![CDATA[Proxy 与 Reflect 是 ES6 引入的一对配套元编程 API：Proxy 负责拦截对象的底层操作，Reflect 提供与这些操作对应的标准化默认实现。二者通常配合使用，是实现响应式系统、数据校验、权限控制等高级特性的核心基础]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/代理与反射</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/迭代器与生成器</link>
+      <description><![CDATA[迭代器（Iterator）和生成器（Generator）是 JavaScript 中处理序列数据的核心机制，它们基于标准化的迭代协议，让不同数据结构拥有了一致的遍历方式，同时支持惰性求值、状态暂停等高级特性。]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/迭代器与生成器</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/对象与继承</link>
+      <description><![CDATA[ECMAScript 规范中，对象的属性键仅支持 String 和 Symbol 两种类型。如果使用数字、对象、布尔等其他类型作为键，会先执行隐式类型转换，转为字符串后再作为属性名（Map 的键没有该限制，可以直接使用任何类型的值作为键）；]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/对象与继承</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/类型系统</link>
+      <description><![CDATA[JavaScript 一共有 8 种数据类型，其中包含 7 种原始类型，剩下 1 种为对象类型：]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/类型系统</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/浏览器环境</link>
+      <description><![CDATA[现代浏览器采用多进程架构，核心目的是安全隔离与稳定性—— 单个页面崩溃不会影响整个浏览器，不同站点之间通过进程沙箱隔离数据：]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/浏览器环境</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/模块化</link>
+      <description><![CDATA[ES Module（简称 ESM）是ES6正式引入的官方标准模块系统，通过静态的 `import` 和 `export` 声明定义模块依赖与对外接口。它替代了早期社区提出的 CommonJS、AMD 等非标准方案，目前已成为浏览器、Node.js 等所有现代 JavaScript 环境的原生模块标准；]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/模块化</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/异步编程</link>
+      <description><![CDATA[Promise 是 ES6 引入的异步编程标准解决方案，它代表一个异步操作的最终完成（或失败）及其结果值。它统一了异步操作的状态管理、结果传递和错误传播方式，解决了传统回调嵌套过深形成的「回调地狱」问题，是现代 JavaScript 异步编程（async/await、fetch 等）的核心基石]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/异步编程</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/异常处理</link>
+      <description><![CDATA[在 JavaScript 中，异常处理是保证程序健壮性的核心机制，用于捕获和处理程序运行中出现的非预期错误，避免程序直接崩溃；]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/异常处理</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/语言概述</link>
+      <description><![CDATA[JavaScript 由三部分组成，分别承担语言核心、网页内容操作和浏览器交互的职责：]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/语言概述</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/运行原理</link>
+      <description><![CDATA[JavaScript 代码的执行逻辑由ECMAScript规范、JS 引擎、宿主环境三者共同支撑：]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/运行原理</guid>
+    </item>
+  
+
+    <item>
+      <title>Untitled</title>
+      <link>https://nailuo.com/zh/前端/作用域与函数</link>
+      <description><![CDATA[JavaScript 的作用域（变量的有效访问范围）采用词法作用域，也叫静态作用域，变量查找、作用域范围由代码书写定义位置决定，和函数调用位置无关；函数在定义时就确定了作用域链，调用的时候只会沿用定义时的作用域链；]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:10:09 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/zh/前端/作用域与函数</guid>
+    </item>
+  
+
     <item>
       <title>文档正在开发</title>
       <link>https://nailuo.com/zh/其他/under-development</link>

@@ -156,6 +156,114 @@
   
 
     <url>
+      <loc>https://nailuo.com/zh/前端/代理与反射</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/代理与反射"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/作用域与函数</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/作用域与函数"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/基础语法</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/基础语法"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/对象与继承</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/对象与继承"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/异常处理</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/异常处理"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/异步编程</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/异步编程"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/模块化</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/模块化"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/浏览器环境</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/浏览器环境"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/类型系统</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/类型系统"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/语言概述</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/语言概述"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/运行原理</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/运行原理"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/zh/前端/迭代器与生成器</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://nailuo.com/en/前端/迭代器与生成器"/>
+    </url>
+  
+
+    <url>
       <loc>https://nailuo.com/zh/后端/</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>weekly</changefreq>

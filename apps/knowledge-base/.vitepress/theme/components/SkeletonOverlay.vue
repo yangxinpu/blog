@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vitepress';
 import { useLoadingState } from '../composables/useLoadingState';
 import { getCategoryPath as getBaseCategoryPath } from '../composables/useSidebarStateStore';
 
 const router = useRouter();
 const route = useRoute();
-const { setLoading, markPageReady, isLoading, resetForNavigation } = useLoadingState();
+const { setLoading, markPageReady, resetForNavigation } = useLoadingState();
 
 const isVisible = ref(false);
 const isActive = ref(false);
@@ -19,11 +19,11 @@ const isHomePage = computed(() => {
 const SHOW_DELAY = 300;
 const MIN_DISPLAY_TIME = 400;
 const FADE_DURATION = 420;
+const RENDER_SETTLE_FRAMES = 2;
 
 let showTimer: number | null = null;
 let hideTimer: number | null = null;
 let minDisplayTimer: number | null = null;
-let safetyTimer: number | null = null;
 let loadingStartTime = 0;
 let navId = 0;
 let currentNavId = 0;
@@ -41,10 +41,35 @@ function clearTimers() {
     window.clearTimeout(minDisplayTimer);
     minDisplayTimer = null;
   }
-  if (safetyTimer !== null) {
-    window.clearTimeout(safetyTimer);
-    safetyTimer = null;
+}
+
+function removeInlineSkeleton() {
+  if (typeof window !== 'undefined' && (window as any).removeInlineSkeleton) {
+    (window as any).removeInlineSkeleton();
+  } else {
+    const inlineSkeleton = document.getElementById('inline-skeleton');
+    if (inlineSkeleton && inlineSkeleton.parentNode) {
+      inlineSkeleton.parentNode.removeChild(inlineSkeleton);
+    }
   }
+
+  const inlineSkeleton = document.getElementById('inline-skeleton');
+  if (!inlineSkeleton) {
+    document.documentElement.classList.remove('is-loading');
+    return;
+  }
+
+  window.setTimeout(() => {
+    document.documentElement.classList.remove('is-loading');
+  }, FADE_DURATION);
+}
+
+function removeInlineSkeletonImmediately() {
+  const inlineSkeleton = document.getElementById('inline-skeleton');
+  if (inlineSkeleton?.parentNode) {
+    inlineSkeleton.parentNode.removeChild(inlineSkeleton);
+  }
+  document.documentElement.classList.remove('is-loading');
 }
 
 function showOverlay() {
@@ -55,7 +80,31 @@ function showOverlay() {
   });
 }
 
+function showOverlayImmediately() {
+  if (showTimer !== null) {
+    window.clearTimeout(showTimer);
+    showTimer = null;
+  }
+
+  if (!isVisible.value) {
+    showOverlay();
+  }
+
+  if (minDisplayTimer === null) {
+    minDisplayTimer = window.setTimeout(() => {
+      minDisplayTimer = null;
+    }, MIN_DISPLAY_TIME);
+  }
+}
+
 function hideOverlay() {
+  if (!isVisible.value) {
+    isActive.value = false;
+    document.body.style.overflow = '';
+    markPageReady();
+    return;
+  }
+
   isActive.value = false;
   document.body.style.overflow = '';
   hideTimer = window.setTimeout(() => {
@@ -127,8 +176,88 @@ function getCategoryPath(path: string): string {
   return getBaseCategoryPath(filteredPath);
 }
 
-function onRouteChangeEnd() {
-  if (navId !== currentNavId) return;
+function waitForAnimationFrame(): Promise<void> {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame(() => resolve());
+  });
+}
+
+async function waitForRenderSettle(): Promise<void> {
+  for (let i = 0; i < RENDER_SETTLE_FRAMES; i++) {
+    await waitForAnimationFrame();
+  }
+}
+
+function getCurrentPageImages(): HTMLImageElement[] {
+  const contentRoot = document.querySelector('#VPContent') || document.querySelector('.Layout');
+  const root = contentRoot || document.body;
+  return Array.from(root.querySelectorAll<HTMLImageElement>('img')).filter((img) => {
+    return !img.closest('.kb-skeleton') && !img.closest('#inline-skeleton');
+  });
+}
+
+function waitForImageLoad(img: HTMLImageElement): Promise<void> {
+  if (img.loading === 'lazy') {
+    img.loading = 'eager';
+  }
+
+  if (img.complete) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const cleanup = () => {
+      img.removeEventListener('load', handleDone);
+      img.removeEventListener('error', handleDone);
+    };
+    const handleDone = () => {
+      cleanup();
+      resolve();
+    };
+
+    img.addEventListener('load', handleDone, { once: true });
+    img.addEventListener('error', handleDone, { once: true });
+  });
+}
+
+async function waitForImageDecode(img: HTMLImageElement): Promise<void> {
+  await waitForImageLoad(img);
+
+  if (img.naturalWidth > 0 && typeof img.decode === 'function') {
+    await img.decode().catch(() => undefined);
+  }
+}
+
+async function waitForCurrentPageImages(expectedNavId: number): Promise<void> {
+  await nextTick();
+  await waitForAnimationFrame();
+
+  if (expectedNavId !== currentNavId) return;
+
+  const images = getCurrentPageImages();
+  if (images.length === 0) {
+    await waitForRenderSettle();
+    return;
+  }
+
+  const hasPendingImages = images.some((img) => !img.complete);
+  if (hasPendingImages) {
+    showOverlayImmediately();
+  }
+
+  await Promise.all(images.map(waitForImageDecode));
+  await waitForRenderSettle();
+}
+
+async function onRouteChangeEnd() {
+  const endingNavId = currentNavId;
+  if (navId !== endingNavId) return;
+
+  await waitForCurrentPageImages(endingNavId);
+
+  if (navId !== endingNavId) return;
+
+  removeInlineSkeleton();
 
   const elapsed = Date.now() - loadingStartTime;
   const categoryPath = getCategoryPath(window.location.pathname);
@@ -139,6 +268,7 @@ function onRouteChangeEnd() {
     showTimer = null;
     setLoading(false);
     markPageReady();
+    removeInlineSkeletonImmediately();
     return;
   }
 
@@ -158,46 +288,30 @@ function onRouteChangeEnd() {
   }
 }
 
-let prevBeforeRouteChange: ((to: string) => boolean | void | Promise<boolean | void>) | undefined = undefined;
-let prevAfterPageLoad: ((to: string) => void | Promise<void>) | undefined = undefined;
+let prevBeforeRouteChange: typeof router.onBeforeRouteChange = undefined;
+let prevAfterPageLoad: typeof router.onAfterPageLoad = undefined;
 
 onMounted(() => {
-  if (typeof window !== 'undefined' && (window as any).removeInlineSkeleton) {
-    (window as any).removeInlineSkeleton();
-  } else {
-    const inlineSkeleton = document.getElementById('inline-skeleton');
-    if (inlineSkeleton && inlineSkeleton.parentNode) {
-      inlineSkeleton.parentNode.removeChild(inlineSkeleton);
-    }
-  }
-
   clearTimers();
   navId++;
   currentNavId = navId;
   loadingStartTime = Date.now();
   resetForNavigation();
-  setLoading(false);
+  setLoading(true);
 
-  console.log('[SkeletonOverlay] Vue mounted, inline skeleton removed');
+  console.log('[SkeletonOverlay] Vue mounted, waiting for page images');
 
-  safetyTimer = window.setTimeout(() => {
-    safetyTimer = null;
-    if (document.readyState === 'complete') {
-      onRouteChangeEnd();
-    }
-  }, 1000);
+  showTimer = window.setTimeout(() => {
+    showTimer = null;
+    if (navId !== currentNavId) return;
+    showOverlay();
 
-  if (typeof window !== 'undefined') {
-    if (document.readyState === 'complete') {
-      console.log('[SkeletonOverlay] Document already complete');
-      markPageReady();
-    } else {
-      window.addEventListener('load', () => {
-        console.log('[SkeletonOverlay] Window load event');
-        markPageReady();
-      }, { once: true });
-    }
-  }
+    minDisplayTimer = window.setTimeout(() => {
+      minDisplayTimer = null;
+    }, MIN_DISPLAY_TIME);
+  }, SHOW_DELAY);
+
+  void onRouteChangeEnd();
 
   prevBeforeRouteChange = router.onBeforeRouteChange;
   router.onBeforeRouteChange = async (to) => {
