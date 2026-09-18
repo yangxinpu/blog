@@ -1,6 +1,6 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.8.0
+> **文档版本**: v1.9.1
 > **最后更新**: 2026-09-18
 
 ## 版本管理规则
@@ -14,7 +14,7 @@
 
 ## 项目概述
 
-本项目是基于 **VitePress** 构建的多语言技术知识库，涵盖前端、后端、运维、AI、产品、Python 等多个技术领域，支持简体中文和英文双语切换。站点强制暗色模式，部署于 Vercel。
+本项目是基于 **VitePress** 构建的多语言技术知识库，涵盖前端、后端、运维、AI、产品等多个技术领域，支持简体中文和英文双语切换。站点强制暗色模式，部署于 Vercel。
 
 ### 技术栈
 
@@ -44,13 +44,12 @@ knowledge-base/
 │   │   └── style.css        # 全局自定义样式（仅暗色模式）
 │   ├── docs/                    # 文档内容目录（srcDir）
 │   │   ├── zh/                  # 中文文档
-│   │   │   ├── 前端/            # 前端（JavaScript / React / Vue / Vite / Webpack / 性能优化）
-│   │   │   ├── 后端/            # 后端（Node.js / 数据库）
+│   │   │   ├── 前端/            # 前端（HTML / CSS / JavaScript / React / Vue / Vite / Webpack / 前端工程化 / 性能优化）
+│   │   │   ├── 后端/            # 后端（Node.js / MySQL / Redis / Golang）
 │   │   │   ├── 测试/            # 测试（单元测试 / 集成测试 / E2E / 性能测试）
 │   │   │   ├── 运维/            # 运维（Docker / Linux / Nginx / 服务器工具）
 │   │   │   ├── AI/              # AI（Harness工程 / 上下文工程 / MCP / RAG / 大模型 / Ollama / Opencode）
 │   │   │   ├── 产品/            # 产品
-│   │   │   ├── Python/          # Python
 │   │   │   ├── 其他/            # 其他（计算机网络 / Git / 算法 / 书籍）
 │   │   │   └── index.md         # 中文首页
 │   │   └── en/                  # 英文文档（结构与中文一致）
@@ -73,21 +72,26 @@ knowledge-base/
 
 ### 知识模块
 
-知识库顶部导航栏按以下顺序排列七大主模块 + 其他 + 博客：前端、后端、测试、运维、AI、产品、Python、其他、博客。
+知识库顶部导航栏按以下顺序排列六大主模块 + 其他 + 博客：前端、后端、测试、运维、AI、产品、其他、博客。
 
-当前技术正文页统一处于重建状态：各模块与技术概览 `index.md` 保留，侧边栏技术条目统一指向模块内的 `under-development.md` 占位页，确保占位页仍匹配当前模块侧边栏；后端侧边栏仅保留 Node.js 和数据库分组。
+当前技术正文页统一处于重建状态：各模块与技术概览 `index.md` 保留，侧边栏技术条目统一指向技术分组内唯一的 `under-development.md` 占位页（如 `/zh/前端/javascript/under-development`），确保占位页仍匹配当前模块侧边栏，且不会因多个分组使用同一链接导致全部展开；后端侧边栏保留 Node.js、MySQL、Redis、Golang 分组。
 
 #### 1. 前端
+- **HTML**: HTML 基础、语义化、表单、多媒体
+- **CSS**: CSS 基础、布局、响应式、动画
 - **JavaScript**: JS 基础、JS 提高、BOM、DOM、DOM 事件、内置对象、函数 & 面向对象、前后端通信、Web API
 - **React**: React 基础、React 提高、React 原理
 - **Vue**: Vue 基础、Vue3 基础、Vue3 提高
 - **Vite**: Vite 基础、Vite 进阶
 - **Webpack**: Webpack 基础、Webpack 进阶
+- **前端工程化**: 规范、构建、质量、发布流程
 - **性能优化**: 前端性能、打包优化
 
 #### 2. 后端
 - **Node.js**: Node 基础、Express、Koa
-- **数据库**: MySQL、MongoDB、Redis
+- **MySQL**: SQL、索引、事务、性能优化
+- **Redis**: 缓存、数据结构、持久化
+- **Golang**: Go 基础、并发、服务端开发
 
 #### 3. 测试
 - **单元测试**: Vitest、Jest
@@ -113,10 +117,7 @@ knowledge-base/
 #### 6. 产品
 - **产品**: 产品设计、产品方法论
 
-#### 7. Python
-- **Python**: Python 基础、Python 进阶、Python 框架
-
-#### 8. 其他
+#### 7. 其他
 聚合计算机网络、Git、算法、书籍等模块：
 - **计算机网络** - 计算机网络基础知识（待补充）
 - **Git** - Git 版本控制学习笔记（待补充）

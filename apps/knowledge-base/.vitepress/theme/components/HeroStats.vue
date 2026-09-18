@@ -79,6 +79,8 @@ const stats = [
 ]
 
 const techStacks = computed(() => [
+  { name: 'HTML', icon: 'html5', color: '#E34F26', bg: 'rgba(227, 79, 38, 0.15)' },
+  { name: 'CSS', icon: 'css', color: '#663399', bg: 'rgba(102, 51, 153, 0.15)' },
   { name: 'JavaScript', icon: 'javascript', color: '#F7DF1E', bg: 'rgba(247, 223, 30, 0.15)' },
   { name: 'TypeScript', icon: 'typescript', color: '#3178C6', bg: 'rgba(49, 120, 198, 0.15)' },
   { name: 'React', icon: 'react', color: '#61DAFB', bg: 'rgba(97, 218, 251, 0.15)' },
@@ -86,13 +88,12 @@ const techStacks = computed(() => [
   { name: 'Node.js', icon: 'nodedotjs', color: '#339933', bg: 'rgba(51, 153, 51, 0.15)' },
   { name: 'Vite', icon: 'vite', color: '#646CFF', bg: 'rgba(100, 108, 255, 0.15)' },
   { name: 'MySQL', icon: 'mysql', color: '#4479A1', bg: 'rgba(68, 121, 161, 0.15)' },
-  { name: 'MongoDB', icon: 'mongodb', color: '#47A248', bg: 'rgba(71, 162, 72, 0.15)' },
   { name: 'Redis', icon: 'redis', color: '#DC382D', bg: 'rgba(220, 56, 45, 0.15)' },
+  { name: 'Golang', icon: 'go', color: '#00ADD8', bg: 'rgba(0, 173, 216, 0.15)' },
   { name: 'Docker', icon: 'docker', color: '#2496ED', bg: 'rgba(36, 150, 237, 0.15)' },
   { name: 'Nginx', icon: 'nginx', color: '#009639', bg: 'rgba(0, 150, 57, 0.15)' },
   { name: 'Linux', icon: 'linux', color: '#FCC624', bg: 'rgba(252, 198, 36, 0.15)' },
   { name: 'Git', icon: 'git', color: '#F05032', bg: 'rgba(240, 80, 50, 0.15)' },
-  { name: 'Python', icon: 'python', color: '#3776AB', bg: 'rgba(55, 118, 171, 0.15)' },
   { name: 'Vitest', icon: 'vitest', color: '#10B981', bg: 'rgba(16, 185, 129, 0.15)' },
   { name: 'AI/LLM', icon: 'anthropic', color: '#FFFFFF', bg: 'rgba(255, 255, 255, 0.1)' },
   { name: 'MCP', icon: 'modelcontextprotocol', color: '#FFFFFF', bg: 'rgba(255, 255, 255, 0.1)' },

@@ -1,6 +1,6 @@
 # blog Monorepo - Agent 指南
 
-> **文档版本**: v1.4.0
+> **文档版本**: v1.5.1
 > **最后更新**: 2026-09-18
 
 > 本文件仅记录「不看就会踩坑」的仓库专属事实。通用最佳实践不在此赘述。
@@ -155,7 +155,7 @@ VITEPRESS_BASE=/kb/ VITEPRESS_BLOG_URL=/ pnpm --filter knowledge-base run build
 ### 规则文件
 
 - [apps/knowledge-base/assets/RULES.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/knowledge-base/assets/RULES.md) —— 知识库内容规则
-- [apps/knowledge-base/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/knowledge-base/AGENTS.md) —— knowledge-base 专属 Agent 指南（v1.6.0）
+- [apps/knowledge-base/AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/knowledge-base/AGENTS.md) —— knowledge-base 专属 Agent 指南（v1.9.1）
 
 ## 版本管理
 

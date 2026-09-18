@@ -4,4 +4,7 @@
 
 ## 模块概览
 
-待补充。
+- **Node.js** - 服务端 JavaScript 运行时
+- **MySQL** - 关系型数据库
+- **Redis** - 缓存与内存数据结构
+- **Golang** - Go 后端开发

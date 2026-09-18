@@ -13,12 +13,12 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/javascript/F7DF1E
     title: Frontend
-    details: JavaScript, React, Vue, Vite, Webpack, Performance
+    details: HTML, CSS, JavaScript, React, Vue, Vite, Webpack, Frontend Engineering, Performance
     link: /en/前端/
   - icon:
       src: https://cdn.simpleicons.org/nodedotjs/339933
     title: Backend
-    details: Node.js, Express, Koa, MySQL, MongoDB, Redis
+    details: Node.js, MySQL, Redis, Golang
     link: /en/后端/
   - icon:
       src: https://cdn.simpleicons.org/vitest/10B981
@@ -35,11 +35,6 @@ features:
     title: AI Engineering
     details: Harness, Context Engineering, MCP, RAG, LLM, Ollama, Opencode
     link: /en/AI/
-  - icon:
-      src: https://cdn.simpleicons.org/python/3776AB
-    title: Python
-    details: Python Basics, Advanced, Frameworks
-    link: /en/Python/
   - icon:
       src: https://cdn.simpleicons.org/linear/5E6AD2
     title: Product

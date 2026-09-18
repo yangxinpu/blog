@@ -3,15 +3,15 @@ import { defineConfig } from 'vitepress';
 const base = process.env.VITEPRESS_BASE || '/';
 const blogUrl = process.env.VITEPRESS_BLOG_URL || 'https://nailuo-blog.vercel.app';
 
-// 技术文档清空后，侧边栏统一指向当前模块内的占位提示页。
+// 技术文档清空后，侧边栏统一指向当前技术分组内的占位提示页。
 const pendingDocSlug = 'under-development';
 
-// 使用模块路径承载占位页，确保 VitePress 能匹配对应模块的 sidebar。
-const zhPendingItems = (sectionPath: string) => [
-  { text: '文档正在开发', link: `${sectionPath}/${pendingDocSlug}` },
+// 使用唯一分组路径承载占位页，避免相同链接导致多个折叠组同时 active。
+const zhPendingItems = (sectionPath: string, topicSlug: string) => [
+  { text: '文档正在开发', link: `${sectionPath}/${topicSlug}/${pendingDocSlug}` },
 ];
-const enPendingItems = (sectionPath: string) => [
-  { text: 'Documentation in progress', link: `${sectionPath}/${pendingDocSlug}` },
+const enPendingItems = (sectionPath: string, topicSlug: string) => [
+  { text: 'Documentation in progress', link: `${sectionPath}/${topicSlug}/${pendingDocSlug}` },
 ];
 
 export default defineConfig({
@@ -511,155 +511,172 @@ export default defineConfig({
           { text: '运维', link: '/zh/运维/', activeMatch: '^/zh/运维' },
           { text: 'AI', link: '/zh/AI/', activeMatch: '^/zh/AI' },
           { text: '产品', link: '/zh/产品/', activeMatch: '^/zh/产品' },
-          { text: 'Python', link: '/zh/Python/', activeMatch: '^/zh/Python' },
           { text: '其他', link: '/zh/其他/', activeMatch: '^/zh/其他' },
           { text: '博客', link: blogUrl },
         ],
         sidebar: {
           '/zh/前端/': [
             {
+              text: 'HTML',
+              collapsed: true,
+              items: zhPendingItems('/zh/前端', 'html'),
+            },
+            {
+              text: 'CSS',
+              collapsed: true,
+              items: zhPendingItems('/zh/前端', 'css'),
+            },
+            {
               text: 'JavaScript',
               collapsed: true,
-              items: zhPendingItems('/zh/前端'),
+              items: zhPendingItems('/zh/前端', 'javascript'),
             },
             {
               text: 'React',
               collapsed: true,
-              items: zhPendingItems('/zh/前端'),
+              items: zhPendingItems('/zh/前端', 'react'),
             },
             {
               text: 'Vue',
               collapsed: true,
-              items: zhPendingItems('/zh/前端'),
+              items: zhPendingItems('/zh/前端', 'vue'),
             },
             {
               text: 'Vite',
               collapsed: true,
-              items: zhPendingItems('/zh/前端'),
+              items: zhPendingItems('/zh/前端', 'vite'),
             },
             {
               text: 'Webpack',
               collapsed: true,
-              items: zhPendingItems('/zh/前端'),
+              items: zhPendingItems('/zh/前端', 'webpack'),
+            },
+            {
+              text: '前端工程化',
+              collapsed: true,
+              items: zhPendingItems('/zh/前端', 'frontend-engineering'),
             },
             {
               text: '性能优化',
               collapsed: true,
-              items: zhPendingItems('/zh/前端'),
+              items: zhPendingItems('/zh/前端', 'performance'),
             },
           ],
           '/zh/后端/': [
             {
               text: 'Node.js',
               collapsed: true,
-              items: zhPendingItems('/zh/后端'),
+              items: zhPendingItems('/zh/后端', 'nodejs'),
             },
             {
-              text: '数据库',
+              text: 'MySQL',
               collapsed: true,
-              items: zhPendingItems('/zh/后端'),
+              items: zhPendingItems('/zh/后端', 'mysql'),
+            },
+            {
+              text: 'Redis',
+              collapsed: true,
+              items: zhPendingItems('/zh/后端', 'redis'),
+            },
+            {
+              text: 'Golang',
+              collapsed: true,
+              items: zhPendingItems('/zh/后端', 'golang'),
             },
           ],
           '/zh/测试/': [
             {
               text: '测试',
               collapsed: true,
-              items: zhPendingItems('/zh/测试'),
+              items: zhPendingItems('/zh/测试', 'testing'),
             },
           ],
           '/zh/运维/': [
             {
               text: 'Docker',
               collapsed: true,
-              items: zhPendingItems('/zh/运维'),
+              items: zhPendingItems('/zh/运维', 'docker'),
             },
             {
               text: 'Linux',
               collapsed: true,
-              items: zhPendingItems('/zh/运维'),
+              items: zhPendingItems('/zh/运维', 'linux'),
             },
             {
               text: 'Nginx',
               collapsed: true,
-              items: zhPendingItems('/zh/运维'),
+              items: zhPendingItems('/zh/运维', 'nginx'),
             },
             {
               text: '服务器工具',
               collapsed: true,
-              items: zhPendingItems('/zh/运维'),
+              items: zhPendingItems('/zh/运维', 'server-tools'),
             },
           ],
           '/zh/AI/': [
             {
               text: 'Harness工程',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'harness-engineering'),
             },
             {
               text: '上下文工程',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'context-engineering'),
             },
             {
               text: 'MCP',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'mcp'),
             },
             {
               text: 'RAG',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'rag'),
             },
             {
               text: '大模型',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'llm'),
             },
             {
               text: 'Ollama',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'Ollama'),
             },
             {
               text: 'Opencode',
               collapsed: true,
-              items: zhPendingItems('/zh/AI'),
+              items: zhPendingItems('/zh/AI', 'Opencode'),
             },
           ],
           '/zh/产品/': [
             {
               text: '产品',
               collapsed: true,
-              items: zhPendingItems('/zh/产品'),
-            },
-          ],
-          '/zh/Python/': [
-            {
-              text: 'Python',
-              collapsed: true,
-              items: zhPendingItems('/zh/Python'),
+              items: zhPendingItems('/zh/产品', 'product'),
             },
           ],
           '/zh/其他/': [
             {
               text: '计算机网络',
               collapsed: true,
-              items: zhPendingItems('/zh/其他'),
+              items: zhPendingItems('/zh/其他', 'network'),
             },
             {
               text: 'Git',
               collapsed: true,
-              items: zhPendingItems('/zh/其他'),
+              items: zhPendingItems('/zh/其他', 'Git'),
             },
             {
               text: '算法',
               collapsed: true,
-              items: zhPendingItems('/zh/其他'),
+              items: zhPendingItems('/zh/其他', 'algorithm'),
             },
             {
               text: '书籍',
               collapsed: true,
-              items: zhPendingItems('/zh/其他'),
+              items: zhPendingItems('/zh/其他', 'books'),
             },
           ],
         },
@@ -697,155 +714,172 @@ export default defineConfig({
           { text: 'DevOps', link: '/en/运维/', activeMatch: '^/en/运维' },
           { text: 'AI', link: '/en/AI/', activeMatch: '^/en/AI' },
           { text: 'Product', link: '/en/产品/', activeMatch: '^/en/产品' },
-          { text: 'Python', link: '/en/Python/', activeMatch: '^/en/Python' },
           { text: 'Other', link: '/en/其他/', activeMatch: '^/en/其他' },
           { text: 'blog', link: blogUrl },
         ],
         sidebar: {
           '/en/前端/': [
             {
+              text: 'HTML',
+              collapsed: true,
+              items: enPendingItems('/en/前端', 'html'),
+            },
+            {
+              text: 'CSS',
+              collapsed: true,
+              items: enPendingItems('/en/前端', 'css'),
+            },
+            {
               text: 'JavaScript',
               collapsed: true,
-              items: enPendingItems('/en/前端'),
+              items: enPendingItems('/en/前端', 'javascript'),
             },
             {
               text: 'React',
               collapsed: true,
-              items: enPendingItems('/en/前端'),
+              items: enPendingItems('/en/前端', 'react'),
             },
             {
               text: 'Vue',
               collapsed: true,
-              items: enPendingItems('/en/前端'),
+              items: enPendingItems('/en/前端', 'vue'),
             },
             {
               text: 'Vite',
               collapsed: true,
-              items: enPendingItems('/en/前端'),
+              items: enPendingItems('/en/前端', 'vite'),
             },
             {
               text: 'Webpack',
               collapsed: true,
-              items: enPendingItems('/en/前端'),
+              items: enPendingItems('/en/前端', 'webpack'),
+            },
+            {
+              text: 'Frontend Engineering',
+              collapsed: true,
+              items: enPendingItems('/en/前端', 'frontend-engineering'),
             },
             {
               text: 'Performance',
               collapsed: true,
-              items: enPendingItems('/en/前端'),
+              items: enPendingItems('/en/前端', 'performance'),
             },
           ],
           '/en/后端/': [
             {
               text: 'Node.js',
               collapsed: true,
-              items: enPendingItems('/en/后端'),
+              items: enPendingItems('/en/后端', 'nodejs'),
             },
             {
-              text: 'Database',
+              text: 'MySQL',
               collapsed: true,
-              items: enPendingItems('/en/后端'),
+              items: enPendingItems('/en/后端', 'mysql'),
+            },
+            {
+              text: 'Redis',
+              collapsed: true,
+              items: enPendingItems('/en/后端', 'redis'),
+            },
+            {
+              text: 'Golang',
+              collapsed: true,
+              items: enPendingItems('/en/后端', 'golang'),
             },
           ],
           '/en/测试/': [
             {
               text: 'Testing',
               collapsed: true,
-              items: enPendingItems('/en/测试'),
+              items: enPendingItems('/en/测试', 'testing'),
             },
           ],
           '/en/运维/': [
             {
               text: 'Docker',
               collapsed: true,
-              items: enPendingItems('/en/运维'),
+              items: enPendingItems('/en/运维', 'docker'),
             },
             {
               text: 'Linux',
               collapsed: true,
-              items: enPendingItems('/en/运维'),
+              items: enPendingItems('/en/运维', 'linux'),
             },
             {
               text: 'Nginx',
               collapsed: true,
-              items: enPendingItems('/en/运维'),
+              items: enPendingItems('/en/运维', 'nginx'),
             },
             {
               text: 'Server Tools',
               collapsed: true,
-              items: enPendingItems('/en/运维'),
+              items: enPendingItems('/en/运维', 'server-tools'),
             },
           ],
           '/en/AI/': [
             {
               text: 'Harness Engineering',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'harness-engineering'),
             },
             {
               text: 'Context Engineering',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'context-engineering'),
             },
             {
               text: 'MCP',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'mcp'),
             },
             {
               text: 'RAG',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'rag'),
             },
             {
               text: 'LLM',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'llm'),
             },
             {
               text: 'Ollama',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'Ollama'),
             },
             {
               text: 'Opencode',
               collapsed: true,
-              items: enPendingItems('/en/AI'),
+              items: enPendingItems('/en/AI', 'Opencode'),
             },
           ],
           '/en/产品/': [
             {
               text: 'Product',
               collapsed: true,
-              items: enPendingItems('/en/产品'),
-            },
-          ],
-          '/en/Python/': [
-            {
-              text: 'Python',
-              collapsed: true,
-              items: enPendingItems('/en/Python'),
+              items: enPendingItems('/en/产品', 'product'),
             },
           ],
           '/en/其他/': [
             {
               text: 'Network',
               collapsed: true,
-              items: enPendingItems('/en/其他'),
+              items: enPendingItems('/en/其他', 'network'),
             },
             {
               text: 'Git',
               collapsed: true,
-              items: enPendingItems('/en/其他'),
+              items: enPendingItems('/en/其他', 'Git'),
             },
             {
               text: 'Algorithm',
               collapsed: true,
-              items: enPendingItems('/en/其他'),
+              items: enPendingItems('/en/其他', 'algorithm'),
             },
             {
               text: 'Books',
               collapsed: true,
-              items: enPendingItems('/en/其他'),
+              items: enPendingItems('/en/其他', 'books'),
             },
           ],
         },

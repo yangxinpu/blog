@@ -5,87 +5,307 @@
     <link>https://nailuo.com/en/</link>
     <description>Frontend Tech Knowledge Base - JavaScript, React, Vue, Node.js, Performance Optimization</description>
     <language>en-US</language>
-    <pubDate>Fri, 18 Sep 2026 06:23:45 GMT</pubDate>
-    <lastBuildDate>Fri, 18 Sep 2026 06:23:45 GMT</lastBuildDate>
+    <pubDate>Fri, 18 Sep 2026 06:38:27 GMT</pubDate>
+    <lastBuildDate>Fri, 18 Sep 2026 06:38:27 GMT</lastBuildDate>
     <atom:link href="https://nailuo.com/en/rss.xml" rel="self" type="application/rss+xml"/>
     
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/其他/under-development</link>
+      <link>https://nailuo.com/en/其他/algorithm/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>其他</category>
-      <guid isPermaLink="true">https://nailuo.com/en/其他/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>其他 > algorithm</category>
+      <guid isPermaLink="true">https://nailuo.com/en/其他/algorithm/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/Python/under-development</link>
+      <link>https://nailuo.com/en/其他/books/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>Python</category>
-      <guid isPermaLink="true">https://nailuo.com/en/Python/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>其他 > books</category>
+      <guid isPermaLink="true">https://nailuo.com/en/其他/books/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/产品/under-development</link>
+      <link>https://nailuo.com/en/其他/Git/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>产品</category>
-      <guid isPermaLink="true">https://nailuo.com/en/产品/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>其他 > Git</category>
+      <guid isPermaLink="true">https://nailuo.com/en/其他/Git/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/AI/under-development</link>
+      <link>https://nailuo.com/en/其他/network/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>AI</category>
-      <guid isPermaLink="true">https://nailuo.com/en/AI/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>其他 > network</category>
+      <guid isPermaLink="true">https://nailuo.com/en/其他/network/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/运维/under-development</link>
+      <link>https://nailuo.com/en/AI/Opencode/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>运维</category>
-      <guid isPermaLink="true">https://nailuo.com/en/运维/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > Opencode</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/Opencode/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/测试/under-development</link>
+      <link>https://nailuo.com/en/产品/product/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>测试</category>
-      <guid isPermaLink="true">https://nailuo.com/en/测试/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>产品 > product</category>
+      <guid isPermaLink="true">https://nailuo.com/en/产品/product/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/后端/under-development</link>
+      <link>https://nailuo.com/en/AI/Ollama/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>后端</category>
-      <guid isPermaLink="true">https://nailuo.com/en/后端/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > Ollama</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/Ollama/under-development</guid>
     </item>
   
 
     <item>
       <title>Documentation in progress</title>
-      <link>https://nailuo.com/en/前端/under-development</link>
+      <link>https://nailuo.com/en/AI/llm/under-development</link>
       <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
-      <category>前端</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/under-development</guid>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > llm</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/llm/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/AI/mcp/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > mcp</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/mcp/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/AI/rag/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > rag</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/rag/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/AI/context-engineering/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > context-engineering</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/context-engineering/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/AI/harness-engineering/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>AI > harness-engineering</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/harness-engineering/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/运维/server-tools/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>运维 > server-tools</category>
+      <guid isPermaLink="true">https://nailuo.com/en/运维/server-tools/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/运维/nginx/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>运维 > nginx</category>
+      <guid isPermaLink="true">https://nailuo.com/en/运维/nginx/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/运维/docker/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>运维 > docker</category>
+      <guid isPermaLink="true">https://nailuo.com/en/运维/docker/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/运维/linux/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>运维 > linux</category>
+      <guid isPermaLink="true">https://nailuo.com/en/运维/linux/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/后端/golang/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>后端 > golang</category>
+      <guid isPermaLink="true">https://nailuo.com/en/后端/golang/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/测试/testing/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>测试 > testing</category>
+      <guid isPermaLink="true">https://nailuo.com/en/测试/testing/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/后端/mysql/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>后端 > mysql</category>
+      <guid isPermaLink="true">https://nailuo.com/en/后端/mysql/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/后端/redis/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>后端 > redis</category>
+      <guid isPermaLink="true">https://nailuo.com/en/后端/redis/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/后端/nodejs/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>后端 > nodejs</category>
+      <guid isPermaLink="true">https://nailuo.com/en/后端/nodejs/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/frontend-engineering/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > frontend-engineering</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/frontend-engineering/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/performance/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > performance</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/performance/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/vite/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > vite</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/vite/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/webpack/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > webpack</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/webpack/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/vue/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > vue</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/vue/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/javascript/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > javascript</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/javascript/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/react/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > react</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/react/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/css/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > css</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/css/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/html/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 06:36:28 GMT</pubDate>
+      <category>前端 > html</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/html/under-development</guid>
     </item>
   
   </channel>

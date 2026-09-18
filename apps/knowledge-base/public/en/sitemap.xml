@@ -30,6 +30,15 @@
   
 
     <url>
+      <loc>https://nailuo.com/en/AI/Ollama/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/Ollama/under-development"/>
+    </url>
+  
+
+    <url>
       <loc>https://nailuo.com/en/AI/Opencode/</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>weekly</changefreq>
@@ -39,29 +48,56 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/AI/under-development</loc>
+      <loc>https://nailuo.com/en/AI/Opencode/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/Opencode/under-development"/>
     </url>
   
 
     <url>
-      <loc>https://nailuo.com/en/Python/</loc>
+      <loc>https://nailuo.com/en/AI/context-engineering/under-development</loc>
       <lastmod>2026-09-18</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/Python/"/>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/context-engineering/under-development"/>
     </url>
   
 
     <url>
-      <loc>https://nailuo.com/en/Python/under-development</loc>
+      <loc>https://nailuo.com/en/AI/harness-engineering/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/Python/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/harness-engineering/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/AI/llm/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/llm/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/AI/mcp/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/mcp/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/AI/rag/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/AI/rag/under-development"/>
     </url>
   
 
@@ -75,11 +111,11 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/产品/under-development</loc>
+      <loc>https://nailuo.com/en/产品/product/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/产品/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/产品/product/under-development"/>
     </url>
   
 
@@ -102,11 +138,38 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/其他/under-development</loc>
+      <loc>https://nailuo.com/en/其他/Git/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/Git/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/algorithm/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/algorithm/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/books/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/books/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/其他/network/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/其他/network/under-development"/>
     </url>
   
 
@@ -147,11 +210,83 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/前端/under-development</loc>
+      <loc>https://nailuo.com/en/前端/css/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/css/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/frontend-engineering/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/frontend-engineering/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/html/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/html/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/javascript/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/javascript/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/performance/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/performance/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/react/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/react/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/vite/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/vite/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/vue/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/vue/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/前端/webpack/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/前端/webpack/under-development"/>
     </url>
   
 
@@ -165,11 +300,38 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/后端/under-development</loc>
+      <loc>https://nailuo.com/en/后端/golang/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/后端/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/后端/golang/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/后端/mysql/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/后端/mysql/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/后端/nodejs/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/后端/nodejs/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/后端/redis/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/后端/redis/under-development"/>
     </url>
   
 
@@ -183,11 +345,11 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/测试/under-development</loc>
+      <loc>https://nailuo.com/en/测试/testing/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/测试/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/测试/testing/under-development"/>
     </url>
   
 
@@ -201,11 +363,38 @@
   
 
     <url>
-      <loc>https://nailuo.com/en/运维/under-development</loc>
+      <loc>https://nailuo.com/en/运维/docker/under-development</loc>
       <lastmod>2026-09-18</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
-      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/运维/under-development"/>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/运维/docker/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/运维/linux/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/运维/linux/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/运维/nginx/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/运维/nginx/under-development"/>
+    </url>
+  
+
+    <url>
+      <loc>https://nailuo.com/en/运维/server-tools/under-development</loc>
+      <lastmod>2026-09-18</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+      <xhtml:link rel="alternate" hreflang="zh" href="https://nailuo.com/zh/运维/server-tools/under-development"/>
     </url>
   
 </urlset>

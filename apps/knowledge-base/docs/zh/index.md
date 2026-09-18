@@ -13,12 +13,12 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/javascript/F7DF1E
     title: 前端开发
-    details: JavaScript、React、Vue、Vite、Webpack、性能优化
+    details: HTML、CSS、JavaScript、React、Vue、Vite、Webpack、前端工程化、性能优化
     link: /zh/前端/
   - icon:
       src: https://cdn.simpleicons.org/nodedotjs/339933
     title: 后端开发
-    details: Node.js、Express、Koa、MySQL、MongoDB、Redis
+    details: Node.js、MySQL、Redis、Golang
     link: /zh/后端/
   - icon:
       src: https://cdn.simpleicons.org/vitest/10B981
@@ -35,11 +35,6 @@ features:
     title: AI 工程
     details: Harness、上下文工程、MCP、RAG、LLM、Ollama、Opencode
     link: /zh/AI/
-  - icon:
-      src: https://cdn.simpleicons.org/python/3776AB
-    title: Python
-    details: Python 基础、进阶、框架
-    link: /zh/Python/
   - icon:
       src: https://cdn.simpleicons.org/linear/5E6AD2
     title: 产品设计
