@@ -18,7 +18,7 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/nodedotjs/339933
     title: 后端开发
-    details: Node.js、Express、Koa、MySQL、MongoDB、Redis、Bun
+    details: Node.js、Express、Koa、MySQL、MongoDB、Redis
     link: /zh/后端/
   - icon:
       src: https://cdn.simpleicons.org/vitest/10B981

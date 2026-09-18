@@ -1,3 +1,5 @@
 # Ollama
 
-<router-link to="/zh/AI/Ollama/Ollama基础">Ollama 基础</router-link>
+Ollama 文档正在重新整理。
+
+[查看文档状态](/zh/AI/under-development)

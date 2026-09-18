@@ -1,7 +1,7 @@
 # NaiLuo 知识库 - Agent 指南
 
-> **文档版本**: v1.6.0
-> **最后更新**: 2026-07-29
+> **文档版本**: v1.7.2
+> **最后更新**: 2026-09-18
 
 ## 版本管理规则
 
@@ -43,7 +43,7 @@ knowledge-base/
 │   ├── docs/                    # 文档内容目录（srcDir）
 │   │   ├── zh/                  # 中文文档
 │   │   │   ├── 前端/            # 前端（JavaScript / React / Vue / Vite / Webpack / 性能优化）
-│   │   │   ├── 后端/            # 后端（Node.js / 数据库 / Bun）
+│   │   │   ├── 后端/            # 后端（Node.js / 数据库）
 │   │   │   ├── 测试/            # 测试（单元测试 / 集成测试 / E2E / 性能测试）
 │   │   │   ├── 运维/            # 运维（Docker / Linux / Nginx / 服务器工具）
 │   │   │   ├── AI/              # AI（Harness工程 / 上下文工程 / MCP / RAG / 大模型 / Ollama / Opencode）
@@ -73,6 +73,8 @@ knowledge-base/
 
 知识库顶部导航栏按以下顺序排列七大主模块 + 其他 + 博客：前端、后端、测试、运维、AI、产品、Python、其他、博客。
 
+当前技术正文页统一处于重建状态：各模块与技术概览 `index.md` 保留，侧边栏技术条目统一指向模块内的 `under-development.md` 占位页，确保占位页仍匹配当前模块侧边栏；后端侧边栏仅保留 Node.js 和数据库分组。
+
 #### 1. 前端
 - **JavaScript**: JS 基础、JS 提高、BOM、DOM、DOM 事件、内置对象、函数 & 面向对象、前后端通信、Web API
 - **React**: React 基础、React 提高、React 原理
@@ -84,7 +86,6 @@ knowledge-base/
 #### 2. 后端
 - **Node.js**: Node 基础、Express、Koa
 - **数据库**: MySQL、MongoDB、Redis
-- **Bun**: Bun 基础
 
 #### 3. 测试
 - **单元测试**: Vitest、Jest

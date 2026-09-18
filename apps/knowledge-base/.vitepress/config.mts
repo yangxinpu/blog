@@ -2,7 +2,17 @@ import { defineConfig } from 'vitepress';
 
 const base = process.env.VITEPRESS_BASE || '/';
 const blogUrl = process.env.VITEPRESS_BLOG_URL || 'https://nailuo-blog.vercel.app';
-const kbUrl = process.env.VITEPRESS_KB_URL || 'https://nailuo-knowledge-base.vercel.app';
+
+// 技术文档清空后，侧边栏统一指向当前模块内的占位提示页。
+const pendingDocSlug = 'under-development';
+
+// 使用模块路径承载占位页，确保 VitePress 能匹配对应模块的 sidebar。
+const zhPendingItems = (sectionPath: string) => [
+  { text: '文档正在开发', link: `${sectionPath}/${pendingDocSlug}` },
+];
+const enPendingItems = (sectionPath: string) => [
+  { text: 'Documentation in progress', link: `${sectionPath}/${pendingDocSlug}` },
+];
 
 export default defineConfig({
   title: 'NaiLuo 知识库',
@@ -509,252 +519,147 @@ export default defineConfig({
           '/zh/前端/': [
             {
               text: 'JavaScript',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg',
               collapsed: true,
-              items: [
-                { text: 'JS 基础', link: '/zh/前端/JavaScript/JS基础' },
-                { text: 'JS 提高', link: '/zh/前端/JavaScript/JS提高' },
-                { text: 'BOM', link: '/zh/前端/JavaScript/BOM' },
-                { text: 'DOM', link: '/zh/前端/JavaScript/DOM' },
-                { text: 'DOM 事件', link: '/zh/前端/JavaScript/DOM事件' },
-                { text: '内置对象', link: '/zh/前端/JavaScript/内置对象' },
-                {
-                  text: '函数&面向对象',
-                  link: '/zh/前端/JavaScript/函数&面向对象',
-                },
-                { text: '前后端通信', link: '/zh/前端/JavaScript/前后端通信' },
-                { text: 'Web API', link: '/zh/前端/JavaScript/Web  API' },
-              ],
+              items: zhPendingItems('/zh/前端'),
             },
             {
               text: 'React',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg',
               collapsed: true,
-              items: [
-                { text: 'React 基础', link: '/zh/前端/React/React基础' },
-                { text: 'React 提高', link: '/zh/前端/React/React提高' },
-                { text: 'React 原理', link: '/zh/前端/React/React原理' },
-              ],
+              items: zhPendingItems('/zh/前端'),
             },
             {
               text: 'Vue',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vuedotjs.svg',
               collapsed: true,
-              items: [
-                { text: 'Vue 基础', link: '/zh/前端/Vue/Vue基础' },
-                { text: 'Vue3 基础', link: '/zh/前端/Vue/Vue3基础' },
-                { text: 'Vue3 提高', link: '/zh/前端/Vue/Vue3提高' },
-              ],
+              items: zhPendingItems('/zh/前端'),
             },
             {
               text: 'Vite',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vite.svg',
               collapsed: true,
-              items: [
-                { text: 'Vite 基础', link: '/zh/前端/Vite/Vite基础' },
-                { text: 'Vite 进阶', link: '/zh/前端/Vite/Vite进阶' },
-              ],
+              items: zhPendingItems('/zh/前端'),
             },
             {
               text: 'Webpack',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/webpack.svg',
               collapsed: true,
-              items: [
-                { text: 'Webpack 基础', link: '/zh/前端/Webpack/Webpack基础' },
-                { text: 'Webpack 进阶', link: '/zh/前端/Webpack/Webpack进阶' },
-              ],
+              items: zhPendingItems('/zh/前端'),
             },
             {
               text: '性能优化',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/speedtest.svg',
               collapsed: true,
-              items: [
-                { text: '前端性能', link: '/zh/前端/性能优化/前端性能' },
-                { text: '打包优化', link: '/zh/前端/性能优化/打包优化' },
-              ],
+              items: zhPendingItems('/zh/前端'),
             },
           ],
           '/zh/后端/': [
             {
               text: 'Node.js',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg',
               collapsed: true,
-              items: [
-                { text: 'Node 基础', link: '/zh/后端/Node/Node基础' },
-                { text: 'Express', link: '/zh/后端/Node/Express' },
-                { text: 'Koa', link: '/zh/后端/Node/Koa' },
-              ],
+              items: zhPendingItems('/zh/后端'),
             },
             {
               text: '数据库',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/database.svg',
               collapsed: true,
-              items: [
-                { text: 'MySQL', link: '/zh/后端/数据库/MySQL' },
-                { text: 'MongoDB', link: '/zh/后端/数据库/MongoDB' },
-                { text: 'Redis', link: '/zh/后端/数据库/Redis' },
-              ],
-            },
-            {
-              text: 'Bun',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bun.svg',
-              collapsed: true,
-              items: [
-                { text: 'Bun 基础', link: '/zh/后端/Bun/Bun基础' },
-              ],
+              items: zhPendingItems('/zh/后端'),
             },
           ],
           '/zh/测试/': [
             {
               text: '测试',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vitest.svg',
               collapsed: true,
-              items: [
-                { text: '单元测试', link: '/zh/测试/单元测试' },
-                { text: '集成测试', link: '/zh/测试/集成测试' },
-                { text: '端到端测试', link: '/zh/测试/端到端测试' },
-                { text: '性能测试', link: '/zh/测试/性能测试' },
-              ],
+              items: zhPendingItems('/zh/测试'),
             },
           ],
           '/zh/运维/': [
             {
               text: 'Docker',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg',
               collapsed: true,
-              items: [
-                { text: 'Docker 基础', link: '/zh/运维/Docker/Docker基础' },
-                { text: 'Docker Compose', link: '/zh/运维/Docker/DockerCompose' },
-              ],
+              items: zhPendingItems('/zh/运维'),
             },
             {
               text: 'Linux',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linux.svg',
               collapsed: true,
-              items: [
-                { text: 'Linux 基础', link: '/zh/运维/Linux/Linux基础' },
-                { text: 'Shell 脚本', link: '/zh/运维/Linux/Shell脚本' },
-              ],
+              items: zhPendingItems('/zh/运维'),
             },
             {
               text: 'Nginx',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg',
               collapsed: true,
-              items: [
-                { text: 'Nginx 基础', link: '/zh/运维/Nginx/Nginx基础' },
-                { text: 'Nginx 配置', link: '/zh/运维/Nginx/Nginx配置' },
-              ],
+              items: zhPendingItems('/zh/运维'),
             },
             {
               text: '服务器工具',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/terminal.svg',
               collapsed: true,
-              items: [
-                { text: 'Git Hooks', link: '/zh/运维/服务器工具/GitHooks' },
-                { text: 'CI/CD', link: '/zh/运维/服务器工具/CICD' },
-              ],
+              items: zhPendingItems('/zh/运维'),
             },
           ],
           '/zh/AI/': [
             {
               text: 'Harness工程',
               collapsed: true,
-              items: [
-                { text: 'Harness 基础', link: '/zh/AI/Harness工程/Harness基础' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
             {
               text: '上下文工程',
               collapsed: true,
-              items: [
-                { text: 'Prompt 工程', link: '/zh/AI/上下文工程/Prompt工程' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
             {
               text: 'MCP',
               collapsed: true,
-              items: [
-                { text: 'MCP 基础', link: '/zh/AI/MCP/MCP基础' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
             {
               text: 'RAG',
               collapsed: true,
-              items: [
-                { text: 'RAG 基础', link: '/zh/AI/RAG/RAG基础' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
             {
               text: '大模型',
               collapsed: true,
-              items: [
-                { text: 'LLM 基础', link: '/zh/AI/大模型/LLM基础' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
             {
               text: 'Ollama',
               collapsed: true,
-              items: [
-                { text: 'Ollama 基础', link: '/zh/AI/Ollama/Ollama基础' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
             {
               text: 'Opencode',
               collapsed: true,
-              items: [
-                { text: 'Opencode 基础', link: '/zh/AI/Opencode/Opencode基础' },
-              ],
+              items: zhPendingItems('/zh/AI'),
             },
           ],
           '/zh/产品/': [
             {
               text: '产品',
               collapsed: true,
-              items: [
-                { text: '产品设计', link: '/zh/产品/产品设计' },
-                { text: '产品方法论', link: '/zh/产品/产品方法论' },
-              ],
+              items: zhPendingItems('/zh/产品'),
             },
           ],
           '/zh/Python/': [
             {
               text: 'Python',
               collapsed: true,
-              items: [
-                { text: 'Python 基础', link: '/zh/Python/Python基础' },
-                { text: 'Python 进阶', link: '/zh/Python/Python进阶' },
-                { text: 'Python 框架', link: '/zh/Python/Python框架' },
-              ],
+              items: zhPendingItems('/zh/Python'),
             },
           ],
           '/zh/其他/': [
             {
               text: '计算机网络',
               collapsed: true,
-              items: [
-                { text: '计算机网络', link: '/zh/其他/计算机网络/' },
-              ],
+              items: zhPendingItems('/zh/其他'),
             },
             {
               text: 'Git',
               collapsed: true,
-              items: [
-                { text: 'Git', link: '/zh/其他/Git/' },
-              ],
+              items: zhPendingItems('/zh/其他'),
             },
             {
               text: '算法',
               collapsed: true,
-              items: [
-                { text: '算法', link: '/zh/其他/算法/' },
-              ],
+              items: zhPendingItems('/zh/其他'),
             },
             {
               text: '书籍',
               collapsed: true,
-              items: [
-                { text: '书籍', link: '/zh/其他/书籍/' },
-              ],
+              items: zhPendingItems('/zh/其他'),
             },
           ],
         },
@@ -800,255 +705,147 @@ export default defineConfig({
           '/en/前端/': [
             {
               text: 'JavaScript',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg',
               collapsed: true,
-              items: [
-                { text: 'JS Basics', link: '/en/前端/JavaScript/JS基础' },
-                { text: 'JS Advanced', link: '/en/前端/JavaScript/JS提高' },
-                { text: 'BOM', link: '/en/前端/JavaScript/BOM' },
-                { text: 'DOM', link: '/en/前端/JavaScript/DOM' },
-                { text: 'DOM Events', link: '/en/前端/JavaScript/DOM事件' },
-                { text: 'Built-in Objects', link: '/en/前端/JavaScript/内置对象' },
-                {
-                  text: 'Functions & OOP',
-                  link: '/en/前端/JavaScript/函数&面向对象',
-                },
-                {
-                  text: 'Client-Server Communication',
-                  link: '/en/前端/JavaScript/前后端通信',
-                },
-                { text: 'Web API', link: '/en/前端/JavaScript/Web  API' },
-              ],
+              items: enPendingItems('/en/前端'),
             },
             {
               text: 'React',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg',
               collapsed: true,
-              items: [
-                { text: 'React Basics', link: '/en/前端/React/React基础' },
-                { text: 'React Advanced', link: '/en/前端/React/React提高' },
-                { text: 'React Principles', link: '/en/前端/React/React原理' },
-              ],
+              items: enPendingItems('/en/前端'),
             },
             {
               text: 'Vue',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vuedotjs.svg',
               collapsed: true,
-              items: [
-                { text: 'Vue Basics', link: '/en/前端/Vue/Vue基础' },
-                { text: 'Vue3 Basics', link: '/en/前端/Vue/Vue3基础' },
-                { text: 'Vue3 Advanced', link: '/en/前端/Vue/Vue3提高' },
-              ],
+              items: enPendingItems('/en/前端'),
             },
             {
               text: 'Vite',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vite.svg',
               collapsed: true,
-              items: [
-                { text: 'Vite Basics', link: '/en/前端/Vite/Vite基础' },
-                { text: 'Vite Advanced', link: '/en/前端/Vite/Vite进阶' },
-              ],
+              items: enPendingItems('/en/前端'),
             },
             {
               text: 'Webpack',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/webpack.svg',
               collapsed: true,
-              items: [
-                { text: 'Webpack Basics', link: '/en/前端/Webpack/Webpack基础' },
-                { text: 'Webpack Advanced', link: '/en/前端/Webpack/Webpack进阶' },
-              ],
+              items: enPendingItems('/en/前端'),
             },
             {
               text: 'Performance',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/speedtest.svg',
               collapsed: true,
-              items: [
-                { text: 'Frontend Performance', link: '/en/前端/性能优化/前端性能' },
-                { text: 'Bundle Optimization', link: '/en/前端/性能优化/打包优化' },
-              ],
+              items: enPendingItems('/en/前端'),
             },
           ],
           '/en/后端/': [
             {
               text: 'Node.js',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg',
               collapsed: true,
-              items: [
-                { text: 'Node Basics', link: '/en/后端/Node/Node基础' },
-                { text: 'Express', link: '/en/后端/Node/Express' },
-                { text: 'Koa', link: '/en/后端/Node/Koa' },
-              ],
+              items: enPendingItems('/en/后端'),
             },
             {
               text: 'Database',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/database.svg',
               collapsed: true,
-              items: [
-                { text: 'MySQL', link: '/en/后端/数据库/MySQL' },
-                { text: 'MongoDB', link: '/en/后端/数据库/MongoDB' },
-                { text: 'Redis', link: '/en/后端/数据库/Redis' },
-              ],
-            },
-            {
-              text: 'Bun',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bun.svg',
-              collapsed: true,
-              items: [
-                { text: 'Bun Basics', link: '/en/后端/Bun/Bun基础' },
-              ],
+              items: enPendingItems('/en/后端'),
             },
           ],
           '/en/测试/': [
             {
               text: 'Testing',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vitest.svg',
               collapsed: true,
-              items: [
-                { text: 'Unit Testing', link: '/en/测试/单元测试' },
-                { text: 'Integration Testing', link: '/en/测试/集成测试' },
-                { text: 'E2E Testing', link: '/en/测试/端到端测试' },
-                { text: 'Performance Testing', link: '/en/测试/性能测试' },
-              ],
+              items: enPendingItems('/en/测试'),
             },
           ],
           '/en/运维/': [
             {
               text: 'Docker',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg',
               collapsed: true,
-              items: [
-                { text: 'Docker Basics', link: '/en/运维/Docker/Docker基础' },
-                { text: 'Docker Compose', link: '/en/运维/Docker/DockerCompose' },
-              ],
+              items: enPendingItems('/en/运维'),
             },
             {
               text: 'Linux',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linux.svg',
               collapsed: true,
-              items: [
-                { text: 'Linux Basics', link: '/en/运维/Linux/Linux基础' },
-                { text: 'Shell Scripting', link: '/en/运维/Linux/Shell脚本' },
-              ],
+              items: enPendingItems('/en/运维'),
             },
             {
               text: 'Nginx',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg',
               collapsed: true,
-              items: [
-                { text: 'Nginx Basics', link: '/en/运维/Nginx/Nginx基础' },
-                { text: 'Nginx Configuration', link: '/en/运维/Nginx/Nginx配置' },
-              ],
+              items: enPendingItems('/en/运维'),
             },
             {
               text: 'Server Tools',
-              icon: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/terminal.svg',
               collapsed: true,
-              items: [
-                { text: 'Git Hooks', link: '/en/运维/服务器工具/GitHooks' },
-                { text: 'CI/CD', link: '/en/运维/服务器工具/CICD' },
-              ],
+              items: enPendingItems('/en/运维'),
             },
           ],
           '/en/AI/': [
             {
               text: 'Harness Engineering',
               collapsed: true,
-              items: [
-                { text: 'Harness Basics', link: '/en/AI/Harness工程/Harness基础' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
             {
               text: 'Context Engineering',
               collapsed: true,
-              items: [
-                { text: 'Prompt Engineering', link: '/en/AI/上下文工程/Prompt工程' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
             {
               text: 'MCP',
               collapsed: true,
-              items: [
-                { text: 'MCP Basics', link: '/en/AI/MCP/MCP基础' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
             {
               text: 'RAG',
               collapsed: true,
-              items: [
-                { text: 'RAG Basics', link: '/en/AI/RAG/RAG基础' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
             {
               text: 'LLM',
               collapsed: true,
-              items: [
-                { text: 'LLM Basics', link: '/en/AI/大模型/LLM基础' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
             {
               text: 'Ollama',
               collapsed: true,
-              items: [
-                { text: 'Ollama Basics', link: '/en/AI/Ollama/Ollama基础' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
             {
               text: 'Opencode',
               collapsed: true,
-              items: [
-                { text: 'Opencode Basics', link: '/en/AI/Opencode/Opencode基础' },
-              ],
+              items: enPendingItems('/en/AI'),
             },
           ],
           '/en/产品/': [
             {
               text: 'Product',
               collapsed: true,
-              items: [
-                { text: 'Product Design', link: '/en/产品/产品设计' },
-                { text: 'Product Methodology', link: '/en/产品/产品方法论' },
-              ],
+              items: enPendingItems('/en/产品'),
             },
           ],
           '/en/Python/': [
             {
               text: 'Python',
               collapsed: true,
-              items: [
-                { text: 'Python Basics', link: '/en/Python/Python基础' },
-                { text: 'Python Advanced', link: '/en/Python/Python进阶' },
-                { text: 'Python Frameworks', link: '/en/Python/Python框架' },
-              ],
+              items: enPendingItems('/en/Python'),
             },
           ],
           '/en/其他/': [
             {
               text: 'Network',
               collapsed: true,
-              items: [
-                { text: 'Network', link: '/en/其他/计算机网络/' },
-              ],
+              items: enPendingItems('/en/其他'),
             },
             {
               text: 'Git',
               collapsed: true,
-              items: [
-                { text: 'Git', link: '/en/其他/Git/' },
-              ],
+              items: enPendingItems('/en/其他'),
             },
             {
               text: 'Algorithm',
               collapsed: true,
-              items: [
-                { text: 'Algorithm', link: '/en/其他/算法/' },
-              ],
+              items: enPendingItems('/en/其他'),
             },
             {
               text: 'Books',
               collapsed: true,
-              items: [
-                { text: 'Books', link: '/en/其他/书籍/' },
-              ],
+              items: enPendingItems('/en/其他'),
             },
           ],
         },

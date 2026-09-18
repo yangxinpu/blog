@@ -18,7 +18,7 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/nodedotjs/339933
     title: Backend
-    details: Node.js, Express, Koa, MySQL, MongoDB, Redis, Bun
+    details: Node.js, Express, Koa, MySQL, MongoDB, Redis
     link: /en/后端/
   - icon:
       src: https://cdn.simpleicons.org/vitest/10B981

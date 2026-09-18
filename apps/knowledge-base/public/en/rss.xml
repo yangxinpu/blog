@@ -5,217 +5,87 @@
     <link>https://nailuo.com/en/</link>
     <description>Frontend Tech Knowledge Base - JavaScript, React, Vue, Node.js, Performance Optimization</description>
     <language>en-US</language>
-    <pubDate>Sat, 05 Sep 2026 15:13:16 GMT</pubDate>
-    <lastBuildDate>Sat, 05 Sep 2026 15:13:16 GMT</lastBuildDate>
+    <pubDate>Fri, 18 Sep 2026 06:02:00 GMT</pubDate>
+    <lastBuildDate>Fri, 18 Sep 2026 06:02:00 GMT</lastBuildDate>
     <atom:link href="https://nailuo.com/en/rss.xml" rel="self" type="application/rss+xml"/>
     
     <item>
-      <title>Utility APIs</title>
-      <link>https://nailuo.com/en/前端/JavaScript/Web  API</link>
-      <description><![CDATA[Parameter is character's index in string, returns encoding value of character at specified position]]></description>
-      <pubDate>Thu, 03 Sep 2026 12:20:57 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/Web  API</guid>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/其他/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>其他</category>
+      <guid isPermaLink="true">https://nailuo.com/en/其他/under-development</guid>
     </item>
   
 
     <item>
-      <title>Ajax</title>
-      <link>https://nailuo.com/en/前端/JavaScript/前后端通信</link>
-      <description><![CDATA[**AJAX** (Asynchronous JavaScript and XML), a technology for exchanging data with server and updating partial webpage content without refreshing entire page;]]></description>
-      <pubDate>Thu, 03 Sep 2026 12:20:57 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/前后端通信</guid>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/Python/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>Python</category>
+      <guid isPermaLink="true">https://nailuo.com/en/Python/under-development</guid>
     </item>
   
 
     <item>
-      <title>React Basics</title>
-      <link>https://nailuo.com/en/前端/React/React基础</link>
-      <description><![CDATA[react package: React core library, defines the UI abstraction model]]></description>
-      <pubDate>Thu, 03 Sep 2026 12:20:57 GMT</pubDate>
-      <category>前端 > React</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/React/React基础</guid>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/产品/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>产品</category>
+      <guid isPermaLink="true">https://nailuo.com/en/产品/under-development</guid>
     </item>
   
 
     <item>
-      <title>Performance Testing</title>
-      <link>https://nailuo.com/en/测试/性能测试</link>
-      <description><![CDATA[Performance testing validates system behavior under various load conditions.]]></description>
-      <pubDate>Mon, 27 Jul 2026 15:26:07 GMT</pubDate>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/AI/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>AI</category>
+      <guid isPermaLink="true">https://nailuo.com/en/AI/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/运维/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>运维</category>
+      <guid isPermaLink="true">https://nailuo.com/en/运维/under-development</guid>
+    </item>
+  
+
+    <item>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/测试/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
       <category>测试</category>
-      <guid isPermaLink="true">https://nailuo.com/en/测试/性能测试</guid>
+      <guid isPermaLink="true">https://nailuo.com/en/测试/under-development</guid>
     </item>
   
 
     <item>
-      <title>End-to-End Testing</title>
-      <link>https://nailuo.com/en/测试/端到端测试</link>
-      <description><![CDATA[End-to-End (E2E) testing verifies complete user workflows from start to finish.]]></description>
-      <pubDate>Mon, 27 Jul 2026 15:26:05 GMT</pubDate>
-      <category>测试</category>
-      <guid isPermaLink="true">https://nailuo.com/en/测试/端到端测试</guid>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/后端/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>后端</category>
+      <guid isPermaLink="true">https://nailuo.com/en/后端/under-development</guid>
     </item>
   
 
     <item>
-      <title>Integration Testing</title>
-      <link>https://nailuo.com/en/测试/集成测试</link>
-      <description><![CDATA[Integration testing verifies that different modules work correctly when combined together.]]></description>
-      <pubDate>Mon, 27 Jul 2026 15:26:03 GMT</pubDate>
-      <category>测试</category>
-      <guid isPermaLink="true">https://nailuo.com/en/测试/集成测试</guid>
-    </item>
-  
-
-    <item>
-      <title>Unit Testing</title>
-      <link>https://nailuo.com/en/测试/单元测试</link>
-      <description><![CDATA[Unit testing is a software testing method where individual units of source code are tested to ensure they work correctly.]]></description>
-      <pubDate>Mon, 27 Jul 2026 15:26:01 GMT</pubDate>
-      <category>测试</category>
-      <guid isPermaLink="true">https://nailuo.com/en/测试/单元测试</guid>
-    </item>
-  
-
-    <item>
-      <title>View only Anthropic provider's model list</title>
-      <link>https://nailuo.com/en/AI/Opencode/Opencode基础</link>
-      <description><![CDATA[Opencode is an open-source AI Coding Agent, positioned as an open-source alternative to Claude Code. It can call various large language models to help you complete the entire development workflow.]]></description>
-      <pubDate>Mon, 27 Jul 2026 10:19:00 GMT</pubDate>
-      <category>AI > Opencode</category>
-      <guid isPermaLink="true">https://nailuo.com/en/AI/Opencode/Opencode基础</guid>
-    </item>
-  
-
-    <item>
-      <title>Example output</title>
-      <link>https://nailuo.com/en/AI/Ollama/Ollama基础</link>
-      <description><![CDATA[Ollama is a tool for locally deploying large language models (LLM). It encapsulates model downloading, management, inference, and API services, allowing developers to run AI models locally as easily a]]></description>
-      <pubDate>Mon, 27 Jul 2026 10:16:25 GMT</pubDate>
-      <category>AI > Ollama</category>
-      <guid isPermaLink="true">https://nailuo.com/en/AI/Ollama/Ollama基础</guid>
-    </item>
-  
-
-    <item>
-      <title>React Advanced</title>
-      <link>https://nailuo.com/en/前端/React/React提高</link>
-      <description><![CDATA[React's traditional scaffold is create-react-app (CRA), which wraps Webpack configuration through react-scripts, handling JSX transpilation, ES6+ syntax downgrade (via Babel), CSS parsing, static asse]]></description>
-      <pubDate>Sun, 26 Jul 2026 03:08:27 GMT</pubDate>
-      <category>前端 > React</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/React/React提高</guid>
-    </item>
-  
-
-    <item>
-      <title>Functions & OOP</title>
-      <link>https://nailuo.com/en/前端/JavaScript/函数&面向对象</link>
-      <description><![CDATA[Functions are essentially objects; can be assigned, passed as parameters, returned as values, have properties attached;]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/函数&面向对象</guid>
-    </item>
-  
-
-    <item>
-      <title>React Principles</title>
-      <link>https://nailuo.com/en/前端/React/React原理</link>
-      <description><![CDATA[The original React architecture was synchronous rendering (stack reconciler, through tree structure + recursive comparison of old and new DOM), meaning all DOM updates and calculations were completed ]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > React</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/React/React原理</guid>
-    </item>
-  
-
-    <item>
-      <title>Vue3 Basics</title>
-      <link>https://nailuo.com/en/前端/Vue/Vue3基础</link>
-      <description><![CDATA[```bash]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > Vue</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/Vue/Vue3基础</guid>
-    </item>
-  
-
-    <item>
-      <title>Vue3 Advanced</title>
-      <link>https://nailuo.com/en/前端/Vue/Vue3提高</link>
-      <description><![CDATA[Vue Router is the official router for Vue.js;]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > Vue</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/Vue/Vue3提高</guid>
-    </item>
-  
-
-    <item>
-      <title>Vue Basics</title>
-      <link>https://nailuo.com/en/前端/Vue/Vue基础</link>
-      <description><![CDATA[MVVM is an architectural pattern that divides an application into three parts: Model (data layer), View (UI layer), and ViewModel (bridge layer between View and Model);]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > Vue</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/Vue/Vue基础</guid>
-    </item>
-  
-
-    <item>
-      <title>BOM (Browser Object Model)</title>
-      <link>https://nailuo.com/en/前端/JavaScript/BOM</link>
-      <description><![CDATA[Browser Object Model; covers all objects and functions related to browser window operations, including navigator, location, document, history, screen, alert(), console and other APIs. All BOM operatio]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/BOM</guid>
-    </item>
-  
-
-    <item>
-      <title>DOM</title>
-      <link>https://nailuo.com/en/前端/JavaScript/DOM</link>
-      <description><![CDATA[DOM (Document Object Model) is an interface that presents HTML documents as a **tree structure** composed of nodes and objects, for manipulation using JS;]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/DOM</guid>
-    </item>
-  
-
-    <item>
-      <title>DOM Events</title>
-      <link>https://nailuo.com/en/前端/JavaScript/DOM事件</link>
-      <description><![CDATA[Operations that trigger JS responses; every element in a webpage can produce certain events that trigger JS]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/DOM事件</guid>
-    </item>
-  
-
-    <item>
-      <title>JavaScript Basics</title>
-      <link>https://nailuo.com/en/前端/JavaScript/JS基础</link>
-      <description><![CDATA[Attributes of the script tag:]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/JS基础</guid>
-    </item>
-  
-
-    <item>
-      <title>JavaScript Advanced</title>
-      <link>https://nailuo.com/en/前端/JavaScript/JS提高</link>
-      <description><![CDATA[JavaScript is single-threaded, while browsers are multi-threaded. Capabilities like network requests, timers, and DOM events are handled by other browser threads. When JavaScript calls these Web APIs ]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/JS提高</guid>
-    </item>
-  
-
-    <item>
-      <title>Built-in Objects</title>
-      <link>https://nailuo.com/en/前端/JavaScript/内置对象</link>
-      <description><![CDATA[Base class for all objects; Object's keys can only be string or symbol type; if written as other types, automatically converts to string;]]></description>
-      <pubDate>Mon, 20 Jul 2026 15:46:05 GMT</pubDate>
-      <category>前端 > JavaScript</category>
-      <guid isPermaLink="true">https://nailuo.com/en/前端/JavaScript/内置对象</guid>
+      <title>Documentation in progress</title>
+      <link>https://nailuo.com/en/前端/under-development</link>
+      <description><![CDATA[This technical document is being prepared and will be expanded later.]]></description>
+      <pubDate>Fri, 18 Sep 2026 05:58:19 GMT</pubDate>
+      <category>前端</category>
+      <guid isPermaLink="true">https://nailuo.com/en/前端/under-development</guid>
     </item>
   
   </channel>

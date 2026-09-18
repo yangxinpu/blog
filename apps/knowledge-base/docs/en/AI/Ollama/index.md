@@ -1,3 +1,5 @@
 # Ollama
 
-<router-link to="/en/AI/Ollama/Ollama基础">Ollama Basics</router-link>
+Ollama documents are being reorganized.
+
+[View document status](/en/AI/under-development)
