@@ -75,6 +75,68 @@
   transform-origin: center;
 }
 
+/* 预加载遮罩：图片就绪前用不透明深色盖住海报墙（含青绿 reveal 兜底层），
+   z-index 高于 section 内的 scrim(5)/shade(6)/标题浮层(10)；ready 后整体淡出 */
+.travel-marquee__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background-color: #111111;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.6s ease,
+    visibility 0s linear;
+}
+
+.travel-marquee--ready .travel-marquee__loader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* visibility 延迟到淡出结束后再隐藏 */
+  transition:
+    opacity 0.6s ease,
+    visibility 0s linear 0.6s;
+}
+
+.travel-marquee__spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--accent);
+  animation: travel-marquee-spin 0.9s linear infinite;
+}
+
+.travel-marquee__loader-text {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+@keyframes travel-marquee-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .travel-marquee__spinner {
+    animation: none;
+    border-top-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .travel-marquee__loader {
+    transition: none;
+  }
+}
+
 /* 整个海报墙唯一的青绿半椭圆：rx=50% 墙宽、ry=100% 墙高，半径恒定
    → 宽度永远满屏、高度固定为满屏，滚动中不收缩不变形；
    圆心横向恒在 50%，纵向 cy=(--p-1)*100%：--p=1 时 cy=0（圆心在顶部中心，
