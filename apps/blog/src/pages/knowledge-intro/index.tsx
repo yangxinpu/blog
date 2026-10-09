@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 import CursorGrid from './components/cursor-grid';
 import BorderGlow from './components/border-glow';
 import KnowledgeLogo from '../../assets/Images/common/knowlege-base-logo.png';
@@ -102,16 +103,69 @@ const getAccentColor = (): string => {
 const KnowledgeIntro: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
+  // 卡片汇集完成后赋予正值，触发各卡片 BorderGlow 自身的扫光动画
+  const [sweepToken, setSweepToken] = useState(0);
   const accentColor = getAccentColor();
 
   useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const grid = categoriesRef.current;
+    if (!grid) return;
+    const cards = gsap.utils.toArray<HTMLElement>('.ki-category-link', grid);
+    let convergeTween: gsap.core.Tween | null = null;
+
+    // 卡片从四周汇集的初始散布状态：方向/距离由每张卡相对网格中心的几何位置算出，
+    // 4 列/2 列/1 列任何断点都自适应（单列横向分量自动为 0）
+    const setScattered = () => {
+      if (prefersReduced || !cards.length) return;
+      const gr = grid.getBoundingClientRect();
+      gsap.set(cards, { opacity: 0 });
+      cards.forEach((card) => {
+        const r = card.getBoundingClientRect();
+        const nx = (r.left + r.width / 2 - (gr.left + gr.width / 2)) / (gr.width / 2);
+        const ny = (r.top + r.height / 2 - (gr.top + gr.height / 2)) / (gr.height / 2);
+        gsap.set(card, { x: nx * 320, y: ny * 260, scale: 0.9 });
+      });
+    };
+
+    const playConverge = () => {
+      if (prefersReduced || !cards.length) return;
+      convergeTween?.kill();
+      setScattered();
+      convergeTween = gsap.to(cards, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.85,
+        ease: 'power3.out',
+        stagger: 0.06,
+        clearProps: 'x,y,scale',
+        onComplete: () => setSweepToken(performance.now()),
+      });
+    };
+
+    const resetAll = () => {
+      convergeTween?.kill();
+      // 令牌归零：未起播的扫光取消、进行中的扫光隐藏
+      setSweepToken(0);
+      setScattered();
+    };
+
+    // 初始先藏到四周（首屏在区块外时不可见）
+    setScattered();
+
+    // 持续观察：每次滚入重播汇集+扫光，滚出复位，下次进入可再次播放
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
             el.classList.add('animate-in');
-            observer.unobserve(el);
+            if (el === grid) playConverge();
+          } else {
+            el.classList.remove('animate-in');
+            if (el === grid) resetAll();
           }
         });
       },
@@ -121,13 +175,11 @@ const KnowledgeIntro: React.FC = () => {
       },
     );
 
-    const elements = [headerRef.current, categoriesRef.current].filter(Boolean);
-    elements.forEach((el) => {
-      if (el) observer.observe(el);
-    });
+    [headerRef.current, grid].forEach((el) => el && observer.observe(el));
 
     return () => {
       observer.disconnect();
+      convergeTween?.kill();
     };
   }, []);
 
@@ -154,11 +206,11 @@ const KnowledgeIntro: React.FC = () => {
       <div className="ki-container">
         <div ref={headerRef} className="ki-header animate-delay-0">
           <h2 className="ki-title">
-            <span>NaiLuo知识库</span>
             <img src={KnowledgeLogo} alt="NaiLuo知识库" />
+            <span>NaiLuo知识库</span>
           </h2>
           <p className="ki-subtitle">
-            系统化的技术学习笔记，覆盖前端、后端、AI、运维、产品、测试等领域，如果你对其中任何一个领域感兴趣，都可以点击进入学习
+            系统化的技术学习笔记，覆盖前端、后端、AI、运维、产品、测试等领域
           </p>
         </div>
 
@@ -170,7 +222,6 @@ const KnowledgeIntro: React.FC = () => {
               className="ki-category-link"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ animationDelay: `${index * 0.06}s` }}
             >
               <BorderGlow
                 edgeSensitivity={0}
@@ -183,6 +234,8 @@ const KnowledgeIntro: React.FC = () => {
                 animated={true}
                 colors={['#17FBC6', '#8DFBDE', '#0EB890']}
                 className="ki-category-card"
+                sweepToken={sweepToken}
+                sweepDelay={index * 70}
               >
                 <div className="ki-category-content">
                   <div className="ki-category-header">

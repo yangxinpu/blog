@@ -52,7 +52,9 @@
   display: inline-block;
 }
 
-.home-title .char {
+.home-title .char,
+.home-subtitle .char,
+.home-subtitle-alt .char {
   display: inline-block;
   will-change: transform, opacity;
 }
@@ -64,6 +66,7 @@
 
 .home-title-accent {
   color: var(--accent);
+  will-change: transform;
 }
 
 .home-subtitle {
@@ -78,7 +81,6 @@
   max-width: 560px;
   font-size: clamp(0.7rem, 1.7vw, 1rem);
   line-height: 1.7;
-  font-style: italic;
 }
 
 /* ---------- 响应式 ---------- */
@@ -100,9 +102,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .home-title .char,
+  .home-subtitle .char,
+  .home-subtitle-alt .char,
   .home-title .home-title-accent {
     transform: none !important;
     opacity: 1 !important;
+    filter: none !important;
     transition: none !important;
   }
 }

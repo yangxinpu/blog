@@ -1,0 +1,125 @@
+/* 全屏海报墙背景：绝对定位铺满父级（被 pin 的 100dvh section） */
+.travel-marquee {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+  background-color: #111111;
+  pointer-events: none;
+  /* --p：椭圆遮罩圆心位移进度 1→0（GSAP 按滚动写入）；1 为 JS 生效前防闪烁兜底（圆心在顶） */
+  --p: 1;
+}
+
+/* 行：高度递减（第一行最高），flex 分配保证三行 + 间距总高永远不超出视口 */
+.travel-marquee__row {
+  flex: 1.35;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.travel-marquee__row:nth-child(2) {
+  flex: 1;
+}
+
+.travel-marquee__row:nth-child(3) {
+  flex: 0.8;
+}
+
+/* 轨道：两份 set 首尾相接，xPercent:-50 精确无缝 */
+.travel-marquee__track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+
+.travel-marquee__set {
+  display: flex;
+  flex-shrink: 0;
+  gap: 18px;
+  /* 右内边距 = 卡片间距：补上两份 set 之间的间隔 */
+  padding-right: 18px;
+  height: 100%;
+}
+
+/* 卡片：行内等高铺满行高，宽度由宽高比推出，形成横向宽窄错落；卡片本身不带任何遮罩 */
+.travel-marquee__card {
+  position: relative;
+  flex-shrink: 0;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #111111;
+}
+
+/* zoom 层：GSAP 在 0.84→1 间补间（明显弹性推近），与 img 自身 overscan 相乘 */
+.travel-marquee__zoom {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  will-change: transform;
+}
+
+.travel-marquee__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  /* 1.2 倍 overscan 基准：zoom 最小 0.84 时合成 ≈1.01 仍满幅，
+     缩放全过程不露出卡片底色，终态整体推近 20%；transform-origin 中心保证裁切对称 */
+  transform: scale(1.2);
+  transform-origin: center;
+}
+
+/* 整个海报墙唯一的青绿半椭圆：rx=50% 墙宽、ry=100% 墙高，半径恒定
+   → 宽度永远满屏、高度固定为满屏，滚动中不收缩不变形；
+   圆心横向恒在 50%，纵向 cy=(--p-1)*100%：--p=1 时 cy=0（圆心在顶部中心，
+   下半椭圆垂下遮住整屏），随滚动 --p→0，cy→-100%，椭圆沿中轴整体向上移出，
+   至 cy=-100% 时下缘 cy+ry=0 刚好完全离开墙顶、不再遮挡；
+   99.9% 青绿 → 100% 透明为硬切边：椭圆内实色、椭圆外透明
+   （渐变结束形状之外默认会被最后色标填满，故最后色标必须透明） */
+.travel-marquee__reveal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    ellipse 50% 100% at 50% calc((var(--p) - 1) * 100%),
+    #17fbc6 0%,
+    #17fbc6 99.9%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .travel-marquee {
+    gap: 12px;
+  }
+
+  .travel-marquee__set {
+    gap: 12px;
+    padding-right: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .travel-marquee__track {
+    will-change: auto;
+  }
+
+  /* 降级：整墙遮罩不出现、zoom/图片均无缩放，保持满幅 */
+  .travel-marquee__reveal {
+    display: none;
+  }
+
+  .travel-marquee__zoom {
+    will-change: auto;
+  }
+
+  .travel-marquee__img {
+    transform: none;
+  }
+}

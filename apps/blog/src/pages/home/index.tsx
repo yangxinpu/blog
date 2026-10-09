@@ -18,35 +18,107 @@ const Home = () => {
     const ctx = gsap.context((self) => {
       const q = self.selector as (selector: string) => HTMLElement[];
 
-      // 整个标题一次性 SplitText，两行的所有字符共享同一套交错动画
       const titleEl = q('.home-title')[0];
+      const accentEl = q('.home-title-accent')[0];
+      const subtitleEls = [q('.home-subtitle')[0], q('.home-subtitle-alt')[0]].filter(
+        (el): el is HTMLElement => Boolean(el),
+      );
+
       if (titleEl) {
-        const split = new SplitText(titleEl, { type: 'chars' });
+        const titleSplit = new SplitText(titleEl, { type: 'chars' });
+        const tl = gsap.timeline({ delay: 0.15 });
 
-        gsap.set(split.chars, {
+        // 标题：自中心向两侧波浪式弹入，每个字符带随机小倾角与回弹
+        tl.from(titleSplit.chars, {
           opacity: 0,
-          yPercent: 80,
-          scale: 0.8,
+          yPercent: 115,
+          scale: 0.65,
+          rotation: () => gsap.utils.random(-10, 10),
+          duration: 1.05,
+          ease: 'back.out(1.6)',
+          stagger: { each: 0.03, from: 'center' },
         });
 
-        gsap.to(split.chars, {
-          opacity: 1,
-          yPercent: 0,
-          scale: 1,
-          stagger: { each: 0.04, from: 'start' },
-          duration: 0.9,
-          ease: 'expo.out',
-          delay: 0.2,
+        // 副标题：逐字轻盈浮现，整段同步失焦 → 对焦
+        subtitleEls.forEach((el, i) => {
+          const split = new SplitText(el, { type: 'chars' });
+          const position = 0.55 + i * 0.28;
+
+          tl.from(
+            split.chars,
+            {
+              opacity: 0,
+              y: 16,
+              duration: 0.55,
+              ease: 'power3.out',
+              stagger: 0.025,
+            },
+            position,
+          );
+          tl.from(
+            el,
+            {
+              filter: 'blur(10px)',
+              duration: 0.8,
+              ease: 'power2.out',
+            },
+            position,
+          );
         });
+
+        // 强调语入场完成后保持轻柔漂浮，灵气收尾
+        if (accentEl) {
+          gsap.to(accentEl, {
+            y: -4,
+            duration: 2.2,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+            delay: 1.7,
+          });
+        }
       }
 
-      gsap.from(q('.home-subtitle, .home-subtitle-alt'), {
-        opacity: 0,
-        y: 24,
-        duration: 0.8,
-        ease: 'expo.out',
-        stagger: 0.12,
-        delay: 1.1,
+      // 鼠标景深视差：文字被指针轻微吸引，呈现漂浮的灵动感（仅精细指针设备）
+      const mm = gsap.matchMedia();
+      mm.add('(pointer: fine) and (min-width: 769px)', () => {
+        const section = q('.home-section')[0];
+        if (!section) return;
+
+        const layers: { el: HTMLElement; dx: number; dy: number }[] = [];
+        if (titleEl) layers.push({ el: titleEl, dx: 12, dy: 8 });
+        subtitleEls.forEach((el) => layers.push({ el, dx: 6, dy: 4 }));
+
+        const tracked = layers.map(({ el, dx, dy }) => ({
+          dx,
+          dy,
+          xTo: gsap.quickTo(el, 'x', { duration: 0.9, ease: 'power3.out' }),
+          yTo: gsap.quickTo(el, 'y', { duration: 0.9, ease: 'power3.out' }),
+        }));
+
+        const onPointerMove = (e: PointerEvent) => {
+          const rect = section.getBoundingClientRect();
+          const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+          const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+          tracked.forEach(({ xTo, yTo, dx, dy }) => {
+            xTo(nx * dx);
+            yTo(ny * dy);
+          });
+        };
+
+        const onPointerLeave = () => {
+          tracked.forEach(({ xTo, yTo }) => {
+            xTo(0);
+            yTo(0);
+          });
+        };
+
+        section.addEventListener('pointermove', onPointerMove);
+        section.addEventListener('pointerleave', onPointerLeave);
+        return () => {
+          section.removeEventListener('pointermove', onPointerMove);
+          section.removeEventListener('pointerleave', onPointerLeave);
+        };
       });
 
       // Hero 滚动视差淡出

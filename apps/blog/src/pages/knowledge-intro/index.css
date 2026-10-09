@@ -3,7 +3,8 @@
   z-index: 2;
   width: 100%;
   min-height: 100vh;
-  padding: 100px 0;
+  /* 区块上下留白随视口高度流式缩放：矮屏/窄屏 60px → 宽屏 100px */
+  padding: clamp(60px, 9vh, 100px) 0;
   background-color: var(--bg);
   overflow: hidden;
   display: flex;
@@ -18,9 +19,10 @@
 }
 
 .ki-container {
-  max-width: 1200px;
+  /* 容器宽度随视口流式变化：不再被 1200px 封死，宽屏可放到 1360px */
+  width: min(1360px, 94vw);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0;
   position: relative;
   z-index: 10;
   pointer-events: none;
@@ -28,7 +30,7 @@
 
 .ki-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: clamp(40px, 5vw, 72px);
   opacity: 0;
   transform: translateY(30px);
 }
@@ -52,8 +54,8 @@
 }
 
 .ki-title img {
-  width: clamp(36px, 5vw, 56px);
-  height: clamp(36px, 5vw, 56px);
+  width: clamp(48px, 6.5vw, 76px);
+  height: clamp(48px, 6.5vw, 76px);
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -70,7 +72,8 @@
 .ki-categories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  /* 卡片间距随视口宽度流式缩放：窄屏 12px → 宽屏 24px */
+  gap: clamp(12px, 1.7vw, 24px);
   opacity: 0;
   transform: translateY(30px);
 }
@@ -81,46 +84,50 @@
   cursor: pointer;
   display: block;
   pointer-events: auto;
-  animation: cardFadeIn 0.6s ease-out forwards;
+  /* 入场由 GSAP 接管：初始不可见，滚入视口时从四周汇集归位 */
   opacity: 0;
 }
 
 .ki-category-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(12px, 1.3vw, 18px);
+  /* 卡片最小高度随宽度缩放：宽度增大卡片同步变高，grid stretch 保证同行等高 */
+  min-height: clamp(148px, 13vw, 210px);
   height: 100%;
   transition: transform 0.3s ease;
 }
 
 .ki-category-content {
-  padding: 28px;
+  /* 卡片内边距随宽度缩放，卡片整体观感同步放大/缩小 */
+  padding: clamp(18px, 2.2vw, 32px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(12px, 1.3vw, 18px);
+  height: 100%;
 }
 
 .ki-category-header {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: clamp(10px, 1.2vw, 14px);
 }
 
 .ki-category-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: clamp(40px, 4vw, 54px);
+  height: clamp(40px, 4vw, 54px);
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: clamp(9px, 1vw, 13px);
   flex-shrink: 0;
 }
 
 .ki-category-icon img {
-  width: 28px;
-  height: 28px;
+  width: clamp(22px, 2.6vw, 32px);
+  height: clamp(22px, 2.6vw, 32px);
   object-fit: contain;
 }
 
@@ -132,7 +139,7 @@
 
 .ki-category-title {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: clamp(15px, 1.4vw, 20px);
   font-weight: 600;
   color: var(--text);
   margin: 0;
@@ -141,7 +148,7 @@
 
 .ki-category-title-en {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: clamp(10px, 0.9vw, 12px);
   color: var(--text-muted);
   letter-spacing: 0.05em;
 }
@@ -149,15 +156,16 @@
 .ki-category-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: clamp(6px, 0.8vw, 10px);
+  margin-top: auto;
 }
 
 .ki-category-link-tag {
-  font-size: 12px;
+  font-size: clamp(11px, 1.05vw, 13.5px);
   color: var(--text-secondary);
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
-  padding: 4px 10px;
+  border-radius: clamp(5px, 0.7vw, 8px);
+  padding: clamp(3px, 0.5vw, 5px) clamp(8px, 1vw, 12px);
   transition: all 0.2s ease;
 }
 
@@ -180,17 +188,6 @@
   transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
 }
 
-@keyframes cardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 1024px) {
   .ki-categories {
     grid-template-columns: repeat(2, 1fr);
@@ -198,25 +195,9 @@
 }
 
 @media (max-width: 640px) {
-  .ki-section {
-    padding: 60px 0;
-  }
-
-  .ki-container {
-    padding: 0 16px;
-  }
-
-  .ki-header {
-    margin-bottom: 40px;
-  }
-
+  /* 其余尺寸全部由 clamp 流式缩到下限，此处只切单列布局 */
   .ki-categories {
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .ki-category-content {
-    padding: 20px;
   }
 }
 
@@ -229,7 +210,7 @@
   }
 
   .ki-category-link {
-    animation: none;
-    opacity: 1;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

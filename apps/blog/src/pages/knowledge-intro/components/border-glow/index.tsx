@@ -14,6 +14,10 @@ interface BorderGlowProps {
   animated?: boolean;
   colors?: string[];
   fillOpacity?: number;
+  /** 扫光播放令牌：保持 0 不播；变为任意正数时播放一次（供父级在入场动画结束后触发） */
+  sweepToken?: number;
+  /** 收到 sweepToken 后延迟播放（ms），用于多张卡片依次起扫 */
+  sweepDelay?: number;
 }
 
 function parseHSL(hslStr: string): { h: number; s: number; l: number } {
@@ -91,6 +95,8 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   animated = false,
   colors = ['#17FBC6', '#8DFBDE', '#0EB890'],
   fillOpacity = 0.5,
+  sweepToken = 0,
+  sweepDelay = 0,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -137,25 +143,41 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   }, [getEdgeProximity, getCursorAngle]);
 
   useEffect(() => {
-    if (!animated || !cardRef.current) return;
-    const card = cardRef.current;
-    const angleStart = 110;
-    const angleEnd = 465;
-    card.classList.add('sweep-active');
-    card.style.setProperty('--cursor-angle', `${angleStart}deg`);
+    // sweepToken 为 0 时不自动播放（等父级入场汇集完成后赋予正值触发）
+    if (!animated || !cardRef.current || sweepToken <= 0) return;
+    const cardEl = cardRef.current;
+    let cancelled = false;
+    const startTimer = window.setTimeout(() => {
+      if (cancelled) return;
+      const card = cardEl;
+      const angleStart = 110;
+      const angleEnd = 465;
+      card.classList.add('sweep-active');
+      card.style.setProperty('--cursor-angle', `${angleStart}deg`);
 
-    animateValue({ duration: 500, onUpdate: v => card.style.setProperty('--edge-proximity', `${v}`) });
-    animateValue({ ease: easeInCubic, duration: 1500, end: 50, onUpdate: v => {
-      card.style.setProperty('--cursor-angle', `${(angleEnd - angleStart) * (v / 100) + angleStart}deg`);
-    }});
-    animateValue({ ease: easeOutCubic, delay: 1500, duration: 2250, start: 50, end: 100, onUpdate: v => {
-      card.style.setProperty('--cursor-angle', `${(angleEnd - angleStart) * (v / 100) + angleStart}deg`);
-    }});
-    animateValue({ ease: easeInCubic, delay: 2500, duration: 1500, start: 100, end: 0,
-      onUpdate: v => card.style.setProperty('--edge-proximity', `${v}`),
-      onEnd: () => card.classList.remove('sweep-active'),
-    });
-  }, [animated]);
+      // 所有 raf 回调都带 cancelled 守卫：若期间触发重播/复位，旧链不得再写变量或删 class
+      animateValue({ duration: 500, onUpdate: v => { if (!cancelled) card.style.setProperty('--edge-proximity', `${v}`); } });
+      animateValue({ ease: easeInCubic, duration: 1500, end: 50, onUpdate: v => {
+        if (!cancelled) card.style.setProperty('--cursor-angle', `${(angleEnd - angleStart) * (v / 100) + angleStart}deg`);
+      }});
+      animateValue({ ease: easeOutCubic, delay: 1500, duration: 2250, start: 50, end: 100, onUpdate: v => {
+        if (!cancelled) card.style.setProperty('--cursor-angle', `${(angleEnd - angleStart) * (v / 100) + angleStart}deg`);
+      }});
+      animateValue({ ease: easeInCubic, delay: 2500, duration: 1500, start: 100, end: 0,
+        onUpdate: v => { if (!cancelled) card.style.setProperty('--edge-proximity', `${v}`); },
+        onEnd: () => { if (!cancelled) card.classList.remove('sweep-active'); },
+      });
+    }, sweepDelay);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(startTimer);
+      // 令牌变化（重播或归零）时立即摘掉扫光态：进行中的旧 raf 链即便继续写变量，
+      // 视觉层因缺少 .sweep-active 也保持隐藏
+      cardEl.classList.remove('sweep-active');
+      cardEl.style.setProperty('--edge-proximity', '0');
+    };
+  }, [animated, sweepToken, sweepDelay]);
 
   const glowVars = buildGlowVars(glowColor, glowIntensity);
   const lightSurface = isLightColor(backgroundColor);

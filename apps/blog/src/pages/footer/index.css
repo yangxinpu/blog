@@ -1,0 +1,148 @@
+.footer {
+  position: relative;
+  width: 100%;
+  height: 556px;
+  background-color: #111111;
+  overflow: hidden;
+}
+
+.footer__inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 48px 24px 40px;
+}
+
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.footer__brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer__name {
+  font-family: var(--font-hero);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.footer__tagline {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer__github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  background: #ffffff;
+  color: #111111;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.footer__github:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 相关网站：顶部行的中间栏，与左侧品牌、右侧 GitHub 图标同高；链接竖直排列、整体左对齐 */
+.footer__sites {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer__sites-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.footer__sites-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer__site-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer__site-arrow {
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.footer__site-link:hover {
+  color: var(--accent);
+}
+
+.footer__site-link:hover .footer__site-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .footer__inner {
+    padding: 40px 20px 32px;
+  }
+
+  .footer__top {
+    margin-bottom: 40px;
+  }
+}

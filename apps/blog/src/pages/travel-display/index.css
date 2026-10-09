@@ -1,24 +1,87 @@
 .travel-display {
+  position: relative;
+  z-index: 20;
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: #111111;
 }
 
-/* 窄屏：单列，铺满视口宽度 */
-.travel-display-images-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+/* 纯色压暗层：均匀压暗海报，保证浮层文字可读 */
+.travel-display__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
 }
 
-/* 宽屏：双列，居中限宽 */
-@media (min-width: 768px) {
-  .travel-display-images-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-direction: row;
-    align-items: flex-start;
-  }
+/* 底部黑色阴影：下方向 #111111 渐隐，承托文字浮层 */
+.travel-display__shade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  height: 42%;
+  background: linear-gradient(
+    to bottom,
+    rgba(17, 17, 17, 0) 0%,
+    rgba(17, 17, 17, 0.55) 55%,
+    #111111 100%
+  );
+  pointer-events: none;
+}
+
+/* 文字浮层：水平居中、贴底 */
+.travel-display__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  padding: 0 24px clamp(3rem, 8vh, 6rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.travel-display__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  /* "Nature" 沿用主色青绿 */
+  color: var(--accent);
+}
+
+/* "and"：青绿 → 蓝 横向渐变文字 */
+.travel-display__title-grad {
+  display: inline-block;
+  background-image: linear-gradient(90deg, #17fbc6 0%, #3aa1fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* "Life"：蓝色 */
+.travel-display__title-life {
+  color: #3aa1fe;
+}
+
+/* 副标题：强制单行，字号随视口缩放避免溢出 */
+.travel-display__subtitle {
+  margin: 0;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 2.7vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
 }
