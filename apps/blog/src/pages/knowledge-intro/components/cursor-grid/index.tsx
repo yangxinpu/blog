@@ -57,7 +57,7 @@ const hexToRgb = (hex: string): [number, number, number] => {
 
 const CursorGrid = ({
   cellSize = 70,
-  color = '#D946EF',
+  color = '#17FBC6',
   radius = 140,
   falloff = 'smooth',
   holdTime = 400,

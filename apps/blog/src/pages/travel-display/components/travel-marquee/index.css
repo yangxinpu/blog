@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: 18px;
   overflow: hidden;
-  background-color: #111111;
+  background-color: var(--bg);
   pointer-events: none;
   /* --p：椭圆遮罩圆心位移进度 1→0（GSAP 按滚动写入）；1 为 JS 生效前防闪烁兜底（圆心在顶） */
   --p: 1;
@@ -51,7 +51,7 @@
   height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #111111;
+  background-color: var(--bg);
 }
 
 /* zoom 层：GSAP 在 0.84→1 间补间（明显弹性推近），与 img 自身 overscan 相乘 */
@@ -86,7 +86,7 @@
   align-items: center;
   justify-content: center;
   gap: 18px;
-  background-color: #111111;
+  background-color: var(--bg);
   opacity: 1;
   visibility: visible;
   transition:
@@ -109,7 +109,7 @@
   height: 46px;
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.12);
-  border-top-color: var(--accent);
+  border-top-color: var(--accent-blue);
   animation: travel-marquee-spin 0.9s linear infinite;
 }
 
@@ -150,8 +150,8 @@
   pointer-events: none;
   background-image: radial-gradient(
     ellipse 50% 100% at 50% calc((var(--p) - 1) * 100%),
-    #17fbc6 0%,
-    #17fbc6 99.9%,
+    var(--accent) 0%,
+    var(--accent) 99.9%,
     transparent 100%
   );
 }

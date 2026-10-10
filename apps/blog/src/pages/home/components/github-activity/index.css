@@ -1,25 +1,57 @@
-
 .github-activity {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: center;
+  gap: 10px;
   width: 100%;
   min-width: 0;
   height: 100%;
-  padding: 16px 20px;
+  padding: 12px 14px;
+}
+
+.github-activity__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.github-activity__heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+}
+
+.github-activity__title {
+  margin: 0;
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.github-activity__year {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
 }
 
 .github-activity__graph {
   width: 100%;
   min-width: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: visible;
 }
 
 .github-activity__graph .ghContributionGraph {
-  width: max-content;
-  min-width: max-content;
   margin: 0 auto;
+  /* 桌面基准：10px 单元格，53 周完整放下（表格宽约 686px） */
+  --gh-cell-size: 10px !important;
+  --gh-cell-gap: 3px !important;
 }
 
 .github-activity__graph .ghCalendarCard {
@@ -33,9 +65,22 @@
   text-align: center !important;
 }
 
+/* 未启用星期标签：清零首列 28px 占位（thead 与 tbody 每行都有） */
+.github-activity__graph .ghCalendarTable tr > td:first-child {
+  width: 0 !important;
+  padding: 0 !important;
+}
+
+.github-activity__graph .ghCalendarLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
 .github-activity__state {
-  width: min(760px, 100%);
-  height: 94px;
+  width: 100%;
+  height: 118px;
   border-radius: 8px;
   background:
     repeating-linear-gradient(
@@ -51,9 +96,64 @@
   opacity: 0.6;
 }
 
-@media (max-width: 640px) {
+/*
+ * 窄屏：绿墙分三档——
+ * 大屏手机/小平板：完整展示（格子随宽度收窄）；
+ * 放不下时退化为隐藏滚动条的横滑，保证格子与标签始终清晰可读。
+ * 表格固有宽 ≈ 53*cell + 52*gap；内容可用宽 ≈ 100vw - 68
+ */
+@media (max-width: 899px) {
   .github-activity {
-    min-height: 180px;
-    padding: 14px;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .github-activity__graph .ghContributionGraph {
+    --gh-cell-size: 11px !important;
+    --gh-cell-gap: 3px !important;
+  }
+
+  .github-activity__graph .ghCalendarLabel {
+    font-size: 11px;
+  }
+
+  .github-activity__state {
+    height: 118px;
+  }
+}
+
+/* 807px 以下：11px 格子放不下，收窄到 9px（表格宽约 581px） */
+@media (max-width: 807px) {
+  .github-activity__graph .ghContributionGraph {
+    --gh-cell-size: 9px !important;
+    --gh-cell-gap: 2px !important;
+  }
+
+  .github-activity__graph .ghCalendarLabel {
+    font-size: 10px;
+  }
+}
+
+/* 手机宽度：9px 也放不下，改为原生 11px 横滑并彻底隐藏滚动条 */
+@media (max-width: 649px) {
+  .github-activity__graph {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .github-activity__graph::-webkit-scrollbar {
+    display: none;
+  }
+
+  .github-activity__graph .ghContributionGraph {
+    width: max-content;
+    --gh-cell-size: 11px !important;
+    --gh-cell-gap: 3px !important;
+  }
+
+  .github-activity__graph .ghCalendarLabel {
+    font-size: 11px;
   }
 }

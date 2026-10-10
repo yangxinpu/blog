@@ -11,7 +11,7 @@ const Footer = () => (
           <img className="footer__avatar" src={avatarCat} alt="NaiLuo 头像" />
           <div className="footer__brand-text">
             <span className="footer__name">NaiLuo</span>
-            <p className="footer__tagline">Humans Steer, Agents Execute</p>
+            <p className="footer__tagline">奈落之炎</p>
           </div>
         </div>
 
@@ -25,21 +25,6 @@ const Footer = () => (
               rel="noreferrer"
             >
               NaiLuo知识库
-              <svg
-                className="footer__site-arrow"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
             </a>
             <a
               className="footer__site-link"
@@ -48,21 +33,6 @@ const Footer = () => (
               rel="noreferrer"
             >
               林下之风
-              <svg
-                className="footer__site-arrow"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
             </a>
           </div>
         </nav>

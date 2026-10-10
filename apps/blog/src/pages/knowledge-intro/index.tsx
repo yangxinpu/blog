@@ -93,19 +93,15 @@ const categories: Category[] = [
   },
 ];
 
-const getAccentColor = (): string => {
-  if (typeof window === 'undefined') return '#17FBC6';
-  return getComputedStyle(document.documentElement)
-    .getPropertyValue('--accent')
-    .trim() || '#17FBC6';
-};
+
 
 const KnowledgeIntro: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
   // 卡片汇集完成后赋予正值，触发各卡片 BorderGlow 自身的扫光动画
   const [sweepToken, setSweepToken] = useState(0);
-  const accentColor = getAccentColor();
+
+
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -188,7 +184,7 @@ const KnowledgeIntro: React.FC = () => {
       <div className="ki-grid">
         <CursorGrid
           cellSize={70}
-          color={accentColor}
+          color="#17FBC6"
           radius={140}
           falloff="smooth"
           holdTime={400}
@@ -207,7 +203,7 @@ const KnowledgeIntro: React.FC = () => {
         <div ref={headerRef} className="ki-header animate-delay-0">
           <h2 className="ki-title">
             <img src={KnowledgeLogo} alt="NaiLuo知识库" />
-            <span>NaiLuo知识库</span>
+            <span className="ki-title-accent">NaiLuo<span className="ki-title-accent-blue">知识库</span></span>
           </h2>
           <p className="ki-subtitle">
             系统化的技术学习笔记，覆盖前端、后端、AI、运维、产品、测试等领域
@@ -225,14 +221,14 @@ const KnowledgeIntro: React.FC = () => {
             >
               <BorderGlow
                 edgeSensitivity={0}
-                glowColor="165 97 70"
-                backgroundColor="#120F17"
+                glowColor="210 99 62"
+                backgroundColor="#111111"
                 borderRadius={10}
                 glowRadius={40}
                 glowIntensity={1}
                 coneSpread={25}
                 animated={true}
-                colors={['#17FBC6', '#8DFBDE', '#0EB890']}
+                colors={['#3AA1FE', '#8FC9FE', '#1E7FD6']}
                 className="ki-category-card"
                 sweepToken={sweepToken}
                 sweepDelay={index * 70}

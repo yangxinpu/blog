@@ -781,7 +781,8 @@ fn vs_main(
     let fresnel = fresnelSquared * fresnelSquared;
     let facet = mix(0.76, 1.0, smoothstep(-0.08, 0.08, normal.x));
     let depthFog = smoothstep(-0.68, 0.58, renderPosition.z);
-    let depthTint = mix(view.accentColor.rgb * 0.52, view.baseColor.rgb, depthFog);
+    let laneColor = mix(view.baseColor.rgb, view.accentColor.rgb, step(0.5, seedLane));
+    let depthTint = mix(laneColor * 0.52, laneColor, depthFog);
     var color = depthTint * (0.1 + diffuse * 0.3) * facet;
     color += view.highlightColor.rgb * (broad * mix(0.3, 0.86, 1.0 - roughness)) * (1.0 + glow * 0.14);
     color += view.accentColor.rgb * strip * (0.12 + fresnel * 0.42);
@@ -801,7 +802,7 @@ fn vs_main(
     }
 
     // A light page acts as a broad fill light, keeping shaded facets in the chosen palette.
-    let fill = mix(view.accentColor.rgb, view.baseColor.rgb, depthFog)
+    let fill = mix(laneColor * 0.6, laneColor, depthFog)
       * (0.38 + diffuse * 0.12) * facet * view.environment.x;
     color += fill;
     creaseColor += fill;

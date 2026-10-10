@@ -69,7 +69,7 @@ body {
 /* Thin scrollbar for horizontal scroll containers */
 .thin-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(64, 64, 64, 0.4) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 .thin-scrollbar::-webkit-scrollbar {
@@ -78,7 +78,7 @@ body {
 }
 
 .thin-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(64, 64, 64, 0.4);
+  background: var(--scrollbar-thumb);
   border-radius: 2px;
   border: none;
 }
