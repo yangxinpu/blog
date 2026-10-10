@@ -1,0 +1,59 @@
+
+.github-activity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 16px 20px;
+}
+
+.github-activity__graph {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.github-activity__graph .ghContributionGraph {
+  width: max-content;
+  min-width: max-content;
+  margin: 0 auto;
+}
+
+.github-activity__graph .ghCalendarCard {
+  background: transparent;
+  border: 0;
+}
+
+.github-activity__graph .ghCalendarCanvas {
+  margin-inline: 0 !important;
+  padding-top: 0 !important;
+  text-align: center !important;
+}
+
+.github-activity__state {
+  width: min(760px, 100%);
+  height: 94px;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--border-subtle) 0 11px,
+      transparent 11px 14px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 11px,
+      var(--bg-translucent) 11px 14px
+    );
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .github-activity {
+    min-height: 180px;
+    padding: 14px;
+  }
+}

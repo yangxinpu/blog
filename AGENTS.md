@@ -1,6 +1,6 @@
 # blog Monorepo - Agent 指南
 
-> **文档版本**: v1.23.1
+> **文档版本**: v1.23.6
 > **最后更新**: 2026-10-10
 
 > 本文件仅记录「不看就会踩坑」的仓库专属事实。通用最佳实践不在此赘述。
@@ -24,8 +24,8 @@ pnpm monorepo，`pnpm-workspace.yaml` 仅包含 `apps/*`。三个独立应用，
 | [apps/blog](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/blog) | `blog` | React 19 + Vite 8 + Tailwind CSS 4 | 5173 | `/` |
 | [apps/knowledge-base](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/knowledge-base) | `knowledge-base` | VitePress 1.6 + Vue 3 + GSAP | 8080 | `/kb/`（生产） |
 
-- 三个应用互不依赖，可独立开发/构建/部署
-- blog 用 React/TSX/SCSS，blog 用 React/TSX/Tailwind，knowledge-base 用 Vue/VitePress/Markdown —— 不要混用范式
+- 两个应用互不依赖，可独立开发/构建/部署
+- blog 用 React/TSX/CSS，blog 用 React/TSX/Tailwind，knowledge-base 用 Vue/VitePress/Markdown —— 不要混用范式
 - knowledge-base 有自己的 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/apps/knowledge-base/AGENTS.md)，包含双语文档工作流、SEO 规范、主题样式等详细约束，**修改 knowledge-base 前必读**
 
 ## 包管理器

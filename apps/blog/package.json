@@ -13,6 +13,7 @@
     "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.7.0",
+    "github-contrib-graph": "^3.1.1",
     "gsap": "^3.15.0",
     "i18next": "^25.10.3",
     "lucide-react": "^0.577.0",

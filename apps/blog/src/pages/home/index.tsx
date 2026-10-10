@@ -2,7 +2,10 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitText from 'gsap/SplitText';
+import catImage from '../../assets/Images/common/cat.webp';
+import nailuoImage from '../../assets/Images/common/Nailuozhiyan.png';
 import AeroShards from './components/aero-shards';
+import GitHubActivity from './components/github-activity';
 import './index.css';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -23,6 +26,7 @@ const Home = () => {
       const subtitleEls = [q('.home-subtitle')[0], q('.home-subtitle-alt')[0]].filter(
         (el): el is HTMLElement => Boolean(el),
       );
+      const cardMotionEls = q('.home-card-motion');
 
       if (titleEl) {
         const titleSplit = new SplitText(titleEl, { type: 'chars' });
@@ -77,6 +81,30 @@ const Home = () => {
             delay: 1.7,
           });
         }
+      }
+
+      if (cardMotionEls.length > 0) {
+        gsap.fromTo(
+          cardMotionEls,
+          {
+            autoAlpha: 0,
+            y: 36,
+            scale: 0.96,
+            rotationZ: (i) => [-0.8, 0.6, 0][i] ?? 0,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            rotationZ: 0,
+            duration: 0.82,
+            ease: 'power3.out',
+            stagger: 0.11,
+            delay: 0.85,
+            force3D: true,
+            overwrite: 'auto',
+          },
+        );
       }
 
       // 鼠标景深视差：文字被指针轻微吸引，呈现漂浮的灵动感（仅精细指针设备）
@@ -141,9 +169,8 @@ const Home = () => {
   
   return (
     <div ref={rootRef} className="home-page">
-
       <section className="home-section">
-      <div className="home-shards">
+        <div className="home-shards">
           <AeroShards
             backgroundColor="#111111"
             shardColor="#0EB890"
@@ -174,21 +201,48 @@ const Home = () => {
             rippleIntensity={1}
             holdToGather
             paused={false}
-        />
-      </div>
-      <div className="home-overlay" />
+          />
+        </div>
+        <div className="home-overlay" />
         <div className="home-content">
-          <h1 className="home-title">
-            <span className="home-title-part-left">Humans Steer, </span>
-            <span className="home-title-part-right home-title-accent">Agents Execute</span>
-          </h1>
+          <div className="home-hero-copy">
+            <h1 className="home-title">
+              <span className="home-title-part-left">Humans Steer, </span>
+              <span className="home-title-part-right home-title-accent">Agents Execute</span>
+            </h1>
 
-          <p className="home-subtitle">
-            我是 NaiLuo，一名致力于学习和成为前端工程与 AI Agent 工作流的全栈开发者
-          </p>
-          <p className="home-subtitle-alt">
-            积硅步，至千里 —— 只有持续学习和实践，才能成为更好的开发者。
-          </p>
+            <p className="home-subtitle">
+              我是 NaiLuo，一名致力于学习和成为前端工程与 AI Agent 工作流的全栈开发者
+            </p>
+            <p className="home-subtitle-alt">
+              积硅步，至千里 —— 只有持续学习和实践，才能成为更好的开发者。
+            </p>
+          </div>
+
+          <div className="home-card-grid" aria-label="主页内容卡片">
+            <div className="home-card-motion">
+              <article className="home-card home-profile-card">
+                <img className="home-profile-card__image" src={catImage} alt="NaiLuo 的猫咪头像" />
+                <div className="home-profile-card__body">
+                  <span className="home-card__eyebrow">ABOUT</span>
+                  <h2>全栈开发者</h2>
+                  <p>
+                    关注前端工程化、交互体验与 AI Agent 工作流，把持续学习沉淀成可复用的知识和作品。
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <div className="home-card-motion">
+              <GitHubActivity />
+            </div>
+
+            <div className="home-card-motion">
+              <figure className="home-card home-portrait-card">
+                <img className="home-portrait-card__image" src={nailuoImage} alt="NaiLuo 之眼" />
+              </figure>
+            </div>
+          </div>
         </div>
       </section>
     </div>

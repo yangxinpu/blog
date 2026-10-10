@@ -5,7 +5,7 @@
   width: 100%;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   overflow: hidden;
   background-color: var(--bg);
@@ -29,14 +29,25 @@
 .home-content {
   position: relative;
   z-index: 10;
+  width: 100%;
+  min-height: 100dvh;
+  max-width: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  gap: 24px;
-  padding: 0 24px;
-  max-width: 1200px;
+  gap: 48px;
+  padding: 72px 24px 24px;
+}
+
+.home-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 980px;
 }
 
 .home-title {
@@ -44,7 +55,7 @@
   font-size: clamp(1.6rem, 6vw, 4.5rem);
   font-weight: 700;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--text);
   margin: 0;
   white-space: nowrap;
@@ -74,6 +85,7 @@
   max-width: 700px;
   font-size: clamp(1rem, 1.7vw, 1.2rem);
   line-height: 1.7;
+  color: var(--text);
 }
 
 .home-subtitle-alt {
@@ -81,20 +93,165 @@
   max-width: 560px;
   font-size: clamp(0.7rem, 1.7vw, 1rem);
   line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.home-card-grid {
+  width: min(1180px, calc(100vw - 48px));
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.16fr) minmax(0, 0.92fr);
+  gap: 16px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.home-card-motion {
+  display: flex;
+  min-width: 0;
+  height: 224px;
+  will-change: transform, opacity;
+}
+
+.home-card {
+  min-width: 0;
+  height: 100%;
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  background: var(--bg-translucent);
+  overflow: hidden;
+  transition:
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    transform 0.28s ease;
+}
+
+.home-card:hover {
+  border-color: var(--tag-border-hover);
+  background: var(--bg-secondary-translucent);
+  transform: translateY(-8px);
+}
+
+.home-profile-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.home-profile-card__image {
+  width: 100%;
+  height: 112px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.home-profile-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+}
+
+.home-card__eyebrow {
+  width: fit-content;
+  padding: 4px 10px;
+  border: 1px solid var(--tag-border);
+  border-radius: 9999px;
+  background: var(--tag-bg);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.home-profile-card h2 {
+  margin: 0;
+  font-size: clamp(1.08rem, 1.6vw, 1.32rem);
+  letter-spacing: 0;
+}
+
+.home-profile-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.58;
+}
+
+.home-portrait-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  background: var(--bg-tertiary);
+}
+
+.home-portrait-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ---------- 响应式 ---------- */
 
+@media (max-width: 1024px) {
+  .home-content {
+    padding-top: 80px;
+    padding-bottom: 48px;
+  }
+
+  .home-card-grid {
+    width: min(960px, calc(100vw - 40px));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-card-motion {
+    height: 212px;
+  }
+
+  .home-portrait-card__image {
+    min-height: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .home-content {
-    padding: 0 20px;
+    padding: 72px 20px 40px;
     max-width: 100%;
-    gap: 20px;
+    gap: 32px;
   }
 
   .home-title {
     font-size: clamp(1.1rem, 5.2vw, 1.9rem);
     white-space: normal;
+  }
+
+  .home-card-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .home-card,
+  .home-portrait-card,
+  .home-portrait-card__image,
+  .home-card-motion {
+    height: auto;
+    min-height: auto;
+  }
+
+  .home-profile-card__image {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .home-profile-card__body {
+    padding: 20px;
+  }
+
+  .home-portrait-card__image {
+    aspect-ratio: 4 / 3;
+    height: auto;
   }
 }
 
@@ -104,7 +261,8 @@
   .home-title .char,
   .home-subtitle .char,
   .home-subtitle-alt .char,
-  .home-title .home-title-accent {
+  .home-title .home-title-accent,
+  .home-card-motion {
     transform: none !important;
     opacity: 1 !important;
     filter: none !important;
