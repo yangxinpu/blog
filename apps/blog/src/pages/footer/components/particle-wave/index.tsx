@@ -5,7 +5,7 @@ export interface ParticleWaveProps {
   /** 粒子颜色（十六进制），远景（地平线方向）颜色，默认白色 */
   color?: string;
   /** 近景（屏幕底部几行）颜色；提供后粒子按纵深从 color 渐变到此色，默认不渐变 */
-  nearColor?: string;
+  nearColor?: string | null;
   /** 波浪运动速度倍率，默认 1 */
   speed?: number;
   /** 粒子疏密倍率，越小越密，默认 1 */
