@@ -1,0 +1,145 @@
+.game-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+  overflow: hidden;
+  background: #0a0a12;
+  /* 上下阴影，增强沉浸感 */
+  box-shadow:
+    inset 0 100px 140px -50px rgba(0, 0, 0, 0.85),
+    inset 0 -100px 140px -50px rgba(0, 0, 0, 0.85);
+}
+
+/* 全屏视频背景 */
+.game-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 暗色遮罩，保证文字可读 */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 18, 0.65) 0%, rgba(10, 10, 18, 0.25) 30%, rgba(10, 10, 18, 0.5) 70%, rgba(10, 10, 18, 0.85) 100%),
+    radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 18, 0.4) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.game-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(48px, 8vh, 120px) clamp(16px, 4vw, 64px) clamp(40px, 6vh, 80px);
+}
+
+.game-title {
+  font-family: var(--font-hero);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+  color: #ffffff;
+}
+
+.game-title-accent,
+.game-title-blue {
+  color: #ffffff;
+}
+
+/* 卡片轮播容器 */
+.game-track-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* 水平方向由 pointer 事件接管，垂直允许原生滚动 */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.game-track-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.game-track {
+  display: flex;
+  gap: clamp(12px, 1.6vw, 24px);
+  /* 两侧内边距 = 容器一半 - 卡片半宽，使首尾卡片可滚动到正中 */
+  padding: clamp(24px, 4vw, 48px) calc(50% - clamp(80px, 9vw, 130px));
+  justify-content: flex-start;
+}
+
+/* 单张游戏卡片 */
+.game-card {
+  flex: 0 0 auto;
+  position: relative;
+  width: clamp(160px, 18vw, 260px);
+  aspect-ratio: 3 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: #1a1a24;
+  will-change: transform;
+}
+
+.game-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+/* 平板 */
+@media (max-width: 1024px) {
+  .game-track {
+    gap: clamp(10px, 1.4vw, 18px);
+    padding: clamp(20px, 3.5vw, 40px) calc(50% - clamp(70px, 10vw, 110px));
+  }
+
+  .game-card {
+    width: clamp(140px, 20vw, 220px);
+  }
+}
+
+/* 手机 */
+@media (max-width: 640px) {
+  .game-content {
+    padding: clamp(36px, 8vh, 72px) clamp(12px, 4vw, 24px) clamp(28px, 5vh, 48px);
+  }
+
+  .game-track {
+    gap: clamp(10px, 2.5vw, 16px);
+    padding: clamp(16px, 4vw, 28px) calc(50% - clamp(60px, 22vw, 85px));
+  }
+
+  .game-card {
+    width: clamp(120px, 44vw, 170px);
+  }
+}

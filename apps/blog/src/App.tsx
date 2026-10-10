@@ -7,6 +7,8 @@ import Home from './pages/home';
 import KnowledgeIntro from './pages/knowledge-intro';
 import TravelDisplay from './pages/travel-display';
 import Introduction from './pages/introduction';
+import Game from './pages/game';
+
 import Footer from './pages/footer';
 
 import './App.css';
@@ -14,7 +16,7 @@ import './App.css';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
 
 // 参与整屏吸附的区块（顺序即屏幕顺序）
-const SNAP_SELECTOR = '.home-section, .intro-section, .ki-section, .travel-display, .footer';
+const SNAP_SELECTOR = '.home-section, .intro-section, .ki-section, .travel-display, .game-section, .footer';
 // 触控板/滚轮累计滚动阈值，超过才触发一次整屏切换
 const WHEEL_THRESHOLD = 24;
 // 无连续事件后累计值的重置时间
@@ -126,6 +128,8 @@ function App() {
 
     const onWheel = (e: WheelEvent) => {
       if (isFormTarget(e)) return;
+      // 游戏卡片轮播区自行处理横向滚动，不触发整屏吸附
+      if (e.target instanceof Element && e.target.closest('.game-track-wrap') !== null) return;
       if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
 
       // 始终拦截，防止 ScrollSmoother 吃到原生滚动产生位移
@@ -200,6 +204,7 @@ function App() {
             <KnowledgeIntro />
             <Introduction />
             <TravelDisplay />
+            <Game />
             <Footer />
           </main>
         </div>
