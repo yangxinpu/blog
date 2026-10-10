@@ -6,6 +6,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import Home from './pages/home';
 import KnowledgeIntro from './pages/knowledge-intro';
 import TravelDisplay from './pages/travel-display';
+import Introduction from './pages/introduction';
 import Footer from './pages/footer';
 
 import './App.css';
@@ -13,7 +14,7 @@ import './App.css';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
 
 // 参与整屏吸附的区块（顺序即屏幕顺序）
-const SNAP_SELECTOR = '.home-section, .ki-section, .travel-display, .footer';
+const SNAP_SELECTOR = '.home-section, .intro-section, .ki-section, .travel-display, .footer';
 // 触控板/滚轮累计滚动阈值，超过才触发一次整屏切换
 const WHEEL_THRESHOLD = 24;
 // 无连续事件后累计值的重置时间
@@ -197,6 +198,7 @@ function App() {
           <main>
             <Home />
             <KnowledgeIntro />
+            <Introduction />
             <TravelDisplay />
             <Footer />
           </main>
