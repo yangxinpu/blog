@@ -46,28 +46,37 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: clamp(48px, 8vh, 120px) clamp(16px, 4vw, 64px) clamp(40px, 6vh, 80px);
+  justify-content: flex-end;
+  align-items: stretch;
+  /* 左右 padding 设为 0，让走马灯满宽、渐变到屏幕边缘 */
+  padding: clamp(40px, 8vh, 100px) 0 clamp(24px, 4vh, 48px);
 }
 
 .game-title {
-  font-family: var(--font-hero);
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin: 0;
+  align-self: flex-start;
+  width: fit-content;
+  font-family: var(--font-chinese-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin: 0 0 clamp(8px, 2vh, 20px) clamp(16px, 4vw, 64px);
   color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
 }
 
-.game-title-accent,
+.game-title-accent {
+  color: var(--accent);
+}
+
 .game-title-blue {
-  color: #ffffff;
+  color: var(--accent-blue);
 }
 
 /* 卡片轮播容器 */
 .game-track-wrap {
+  position: relative;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -79,6 +88,21 @@
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
+  /* 两侧渐变淡出（mask 作用于容器本身，不随内容滚动） */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
 }
 
 .game-track-wrap::-webkit-scrollbar {
@@ -87,24 +111,25 @@
 
 .game-track {
   display: flex;
-  gap: clamp(12px, 1.6vw, 24px);
+  gap: clamp(12px, 1.6vw, 22px);
   /* 两侧内边距 = 容器一半 - 卡片半宽，使首尾卡片可滚动到正中 */
-  padding: clamp(24px, 4vw, 48px) calc(50% - clamp(80px, 9vw, 130px));
+  padding: clamp(16px, 3vw, 36px) calc(50% - clamp(55px, 9vw, 90px));
   justify-content: flex-start;
 }
 
-/* 单张游戏卡片 */
+/* 单张游戏卡片（宽度 < 屏幕 30%） */
 .game-card {
   flex: 0 0 auto;
   position: relative;
-  width: clamp(160px, 18vw, 260px);
-  aspect-ratio: 3 / 5;
-  border-radius: 16px;
+  width: clamp(110px, 18vw, 180px);
+  aspect-ratio: 2 / 3;
+  border-radius: 14px;
   overflow: hidden;
   scroll-snap-align: center;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
   background: #1a1a24;
-  will-change: transform;
+  will-change: transform, opacity;
+  cursor: pointer;
 }
 
 .game-card-img {
@@ -120,26 +145,31 @@
 @media (max-width: 1024px) {
   .game-track {
     gap: clamp(10px, 1.4vw, 18px);
-    padding: clamp(20px, 3.5vw, 40px) calc(50% - clamp(70px, 10vw, 110px));
+    padding: clamp(14px, 3vw, 30px) calc(50% - clamp(50px, 10vw, 80px));
   }
 
   .game-card {
-    width: clamp(140px, 20vw, 220px);
+    width: clamp(100px, 20vw, 160px);
   }
 }
 
 /* 手机 */
 @media (max-width: 640px) {
   .game-content {
-    padding: clamp(36px, 8vh, 72px) clamp(12px, 4vw, 24px) clamp(28px, 5vh, 48px);
+    padding: clamp(32px, 8vh, 72px) 0 clamp(20px, 4vh, 36px);
+  }
+
+  .game-title {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    margin-left: clamp(12px, 4vw, 24px);
   }
 
   .game-track {
     gap: clamp(10px, 2.5vw, 16px);
-    padding: clamp(16px, 4vw, 28px) calc(50% - clamp(60px, 22vw, 85px));
+    padding: clamp(12px, 3.5vw, 24px) calc(50% - clamp(45px, 12vw, 65px));
   }
 
   .game-card {
-    width: clamp(120px, 44vw, 170px);
+    width: clamp(90px, 24vw, 130px);
   }
 }

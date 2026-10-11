@@ -31,6 +31,8 @@
   --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
   /* Hero 标题专用等宽字体 */
   --font-hero: 'JetBrains Mono', 'SF Mono', Monaco, 'Courier New', monospace;
+  /* 中文标题专用字体（站酷小薇，优雅衬线感） */
+  --font-chinese-display: 'ZCOOL XiaoWei', 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
 
   /* 滚动条 */
   --scrollbar-width: 8px;
