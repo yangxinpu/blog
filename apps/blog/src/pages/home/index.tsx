@@ -157,9 +157,9 @@ const Home = () => {
       <section className="home-section">
         <div className="home-shards">
           <AeroShards
-            backgroundColor="#111111"
-            shardColor="#0EB890"
-            accentColor="#3AA1FE"
+            backgroundColor="var(--bg)"
+            shardColor="var(--primary-400)"
+            accentColor="var(--accent-blue)"
             placement="full"
             flow="stream"
             material="pearl"

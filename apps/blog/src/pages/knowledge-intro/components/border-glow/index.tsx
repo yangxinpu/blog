@@ -52,8 +52,14 @@ function buildGradientVars(colors: string[]): Record<string, string> {
   return vars;
 }
 
+function resolveCssColor(color: string): string {
+  const match = /^var\((--[\w-]+)\)$/.exec(color.trim());
+  if (!match) return color;
+  return getComputedStyle(document.documentElement).getPropertyValue(match[1]).trim() || color;
+}
+
 function isLightColor(color: string): boolean {
-  const value = color.trim().replace('#', '');
+  const value = resolveCssColor(color).trim().replace('#', '');
   if (!/^[\da-f]{3}([\da-f]{3})?$/i.test(value)) return false;
   const hex = value.length === 3 ? value.split('').map(char => char + char).join('') : value;
   const red = parseInt(hex.slice(0, 2), 16);
@@ -87,13 +93,13 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   className = '',
   edgeSensitivity = 30,
   glowColor = '165 97 70',
-  backgroundColor = '#111111',
+  backgroundColor = 'var(--bg)',
   borderRadius = 28,
   glowRadius = 40,
   glowIntensity = 1.0,
   coneSpread = 25,
   animated = false,
-  colors = ['#17FBC6', '#8DFBDE', '#0EB890'],
+  colors = ['var(--accent)', 'var(--primary-200)', 'var(--primary-400)'],
   fillOpacity = 0.5,
   sweepToken = 0,
   sweepDelay = 0,

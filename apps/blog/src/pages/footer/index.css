@@ -69,8 +69,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--white);
-  background: var(--white);
+  border: 1px solid var(--accent);
+  background: var(--accent);
   color: var(--bg);
   transition:
     color 0.3s ease,
@@ -78,8 +78,8 @@
 }
 
 .footer__github:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  background: var(--primary-200);
+  border-color: var(--primary-200);
 }
 
 /* 相关网站：顶部行的中间栏，与左侧品牌、右侧 GitHub 图标同高；链接竖直排列、整体左对齐 */

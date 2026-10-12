@@ -289,6 +289,8 @@ const mixColor = (from: Color, to: Color, amount: number): Color => [
   from[2] + (to[2] - from[2]) * amount,
   1
 ];
+const ACCENT_COLOR: Color = [23 / 255, 251 / 255, 198 / 255, 1];
+const PRIMARY_400_COLOR: Color = [14 / 255, 184 / 255, 144 / 255, 1];
 
 const SHARD_SHADER = `
 struct ViewParams {
@@ -1158,9 +1160,17 @@ fn fs_main(@location(0) uv: vec2f, @builtin(position) pixel: vec4f) -> @location
 }
 `;
 
+const resolveCssColor = (value: string): string => {
+  const match = /^var\((--[\w-]+)\)$/.exec(value.trim());
+  if (!match) return value;
+  return getComputedStyle(document.documentElement).getPropertyValue(match[1]).trim() || value;
+};
+
 const parseColor = (value: string, fallback: string): Color => {
-  const match = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(value);
-  const source = match || /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(fallback)!;
+  const resolvedValue = resolveCssColor(value);
+  const resolvedFallback = resolveCssColor(fallback);
+  const match = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(resolvedValue);
+  const source = match || /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(resolvedFallback)!;
   return [parseInt(source[1], 16) / 255, parseInt(source[2], 16) / 255, parseInt(source[3], 16) / 255, 1];
 };
 
@@ -1206,9 +1216,9 @@ const createRenderGraph = (
     material: [0.46, MATERIALS.pearl, 0.92, 0.54],
     light: [-0.321, 0.49, 0.845, 0],
     environment: [0, 0, 0, 0],
-    baseColor: [137 / 255, 106 / 255, 189 / 255, 1],
-    highlightColor: mixColor([168 / 255, 85 / 255, 247 / 255, 1], [1, 1, 1, 1], MATERIAL_PRESETS.pearl.highlightMix),
-    accentColor: [168 / 255, 85 / 255, 247 / 255, 1]
+    baseColor: PRIMARY_400_COLOR,
+    highlightColor: mixColor(ACCENT_COLOR, [1, 1, 1, 1], MATERIAL_PRESETS.pearl.highlightMix),
+    accentColor: ACCENT_COLOR
   });
   const postParams = uniforms(gpu, {
     viewport: [outputSize[0], outputSize[1], 1 / outputSize[0], 1 / outputSize[1]],
@@ -1355,9 +1365,9 @@ const prepareRenderGraph = async (graph: ReturnType<typeof createRenderGraph>, o
 };
 
 export default function AeroShards({
-  backgroundColor = '#111111',
-  shardColor = '#0EB890',
-  accentColor = '#17FBC6',
+  backgroundColor = 'var(--bg)',
+  shardColor = 'var(--primary-400)',
+  accentColor = 'var(--accent)',
   placement = 'full',
   flow = 'stream',
   material = 'pearl',
@@ -1412,9 +1422,9 @@ export default function AeroShards({
   const effectDetail = resolvedEffect === EFFECTS.none ? 1 : 0.4;
   const effectSize = resolvedEffect === EFFECTS.none ? 1 : 1.75;
   const resolvedScale = clamp(scale, 0.5, 2.5);
-  const resolvedBackground = parseColor(backgroundColor, '#111111');
-  const resolvedShardColor = parseColor(shardColor, '#0EB890');
-  const resolvedAccentColor = parseColor(accentColor, '#17FBC6');
+  const resolvedBackground = parseColor(backgroundColor, 'var(--bg)');
+  const resolvedShardColor = parseColor(shardColor, 'var(--primary-400)');
+  const resolvedAccentColor = parseColor(accentColor, 'var(--accent)');
   const resolvedSpread = clamp(spread, 0.15, 1.1);
   const resolvedDepth = clamp(depth, 0, 1.25);
   const resolvedSpeed = clamp(speed, 0, 2);
@@ -1437,7 +1447,7 @@ export default function AeroShards({
   const lightBackground = clamp((backgroundLuma - 0.58) / 0.24, 0, 1);
   const lightSurface = lightBackground * lightBackground * (3 - 2 * lightBackground);
 
-  settingsRef.current = {
+  const currentSettings: AeroSettings = {
     background: resolvedBackground,
     shard: resolvedShardColor,
     highlight: mixColor(resolvedAccentColor, [1, 1, 1, 1], resolvedMaterial.highlightMix),
@@ -1504,12 +1514,14 @@ export default function AeroShards({
       paused
     ].join('|')
   };
-  const settingsSignature = settingsRef.current.signature;
-  onErrorRef.current = onError;
+  useEffect(() => {
+    settingsRef.current = currentSettings;
+    wakeRef.current();
+  });
 
   useEffect(() => {
-    wakeRef.current();
-  }, [settingsSignature]);
+    onErrorRef.current = onError;
+  }, [onError]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

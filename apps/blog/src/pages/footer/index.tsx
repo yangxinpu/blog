@@ -4,7 +4,7 @@ import './index.css';
 
 const Footer = () => (
   <footer className="footer">
-    <ParticleWave nearColor="#17FBC6" />
+    <ParticleWave nearColor="var(--accent)" />
     <div className="footer__inner">
       <div className="footer__top">
         <div className="footer__brand">

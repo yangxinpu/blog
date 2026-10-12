@@ -70,7 +70,7 @@ function Introduction() {
       </div>
 
       <div className="intro-ball">
-        <CrystalizedBall color="#17FBC6" color2="#3AA1FE" size={0.92} strands={1} glow={0} interactive={false} />
+        <CrystalizedBall color="var(--accent)" color2="var(--accent-blue)" size={0.92} strands={1} glow={0} interactive={false} />
       </div>
 
       <div className="intro-side intro-side--right" ref={rightRef}>

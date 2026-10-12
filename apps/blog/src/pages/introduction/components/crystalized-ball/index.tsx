@@ -98,7 +98,7 @@ interface DustLayer {
 
 const BALL_PRESETS: Record<Preset, PresetValues> = {
   plasma: {
-    color: '#F25BD0',
+    color: 'var(--accent)',
     strands: 6,
     crackle: 0.85,
     flares: 0.65,
@@ -115,7 +115,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 1
   },
   aurora: {
-    color: '#5CFFC8',
+    color: 'var(--primary-300)',
     strands: 5,
     crackle: 0.6,
     flares: 0.5,
@@ -132,7 +132,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 1
   },
   nebula: {
-    color: '#9478FF',
+    color: 'var(--primary-200)',
     strands: 6,
     crackle: 1,
     flares: 0.5,
@@ -149,7 +149,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 1.2
   },
   ember: {
-    color: '#FF8A2A',
+    color: 'var(--primary-400)',
     strands: 5,
     crackle: 0.9,
     flares: 0.8,
@@ -166,7 +166,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 1.6
   },
   frost: {
-    color: '#BFE6FF',
+    color: 'var(--primary-100)',
     strands: 3,
     crackle: 0.3,
     flares: 0.3,
@@ -183,7 +183,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 0.7
   },
   solar: {
-    color: '#FFD36E',
+    color: 'var(--primary-200)',
     strands: 6,
     crackle: 0.7,
     flares: 1,
@@ -200,7 +200,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 1
   },
   eclipse: {
-    color: '#FFFFFF',
+    color: 'var(--text)',
     strands: 4,
     crackle: 0.5,
     flares: 0.4,
@@ -217,7 +217,7 @@ const BALL_PRESETS: Record<Preset, PresetValues> = {
     dustSpeed: 0.8
   },
   abyss: {
-    color: '#3F7BFF',
+    color: 'var(--primary-500)',
     strands: 5,
     crackle: 0.55,
     flares: 0.6,
@@ -256,12 +256,18 @@ const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 const mixColor = (a: number[], b: number[], t: number): Rgb => a.map((v, i) => v + (b[i] - v) * t) as Rgb;
 const wrapAngle = (a: number) => a - Math.PI * 2 * Math.floor((a + Math.PI) / (Math.PI * 2));
 
+const resolveCssColor = (value: string): string => {
+  const match = /^var\((--[\w-]+)\)$/.exec(value.trim());
+  if (!match) return value;
+  return getComputedStyle(document.documentElement).getPropertyValue(match[1]).trim() || value;
+};
+
 const parseColor = (value: string, fallback: Rgb): Rgb => {
   try {
     const ctx = document.createElement('canvas').getContext('2d');
     if (!ctx) return fallback;
     ctx.fillStyle = '#000000';
-    ctx.fillStyle = value;
+    ctx.fillStyle = resolveCssColor(value);
     const resolved = ctx.fillStyle;
     if (resolved.startsWith('#')) {
       const n = parseInt(resolved.slice(1), 16);
@@ -340,7 +346,7 @@ const buildPalette = (color: Rgb, light: boolean, color2?: Rgb): Palette => {
   let tones = genTones(color);
   if (color2) {
     const tones2 = genTones(color2);
-    // 交错使用两种主色：偶数位取 color，奇数位取 color2，使粒子青绿与蓝色并存
+    // 交错使用两档主色：偶数位取 color，奇数位取 color2，使粒子保持青绿层次
     tones = [tones[0], tones2[1], tones[2], tones2[3], tones[4]];
   }
 
@@ -955,7 +961,7 @@ const CrystalizedBall = ({
   const colors = useMemo(() => {
     const light = theme === 'light';
     const second = color2 ? parseColor(color2, [0.23, 0.63, 1]) : undefined;
-    return { light, palette: buildPalette(parseColor(tint, [0.95, 0.36, 0.82]), light, second) };
+    return { light, palette: buildPalette(parseColor(tint, [0.09, 0.98, 0.78]), light, second) };
   }, [tint, theme, color2]);
 
   useEffect(() => {

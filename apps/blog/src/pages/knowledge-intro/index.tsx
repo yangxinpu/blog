@@ -184,7 +184,7 @@ const KnowledgeIntro: React.FC = () => {
       <div className="ki-grid">
         <CursorGrid
           cellSize={70}
-          color="#17FBC6"
+          color="var(--accent)"
           radius={140}
           falloff="smooth"
           holdTime={400}
@@ -222,13 +222,13 @@ const KnowledgeIntro: React.FC = () => {
               <BorderGlow
                 edgeSensitivity={0}
                 glowColor="210 99 62"
-                backgroundColor="#111111"
+                backgroundColor="var(--bg)"
                 borderRadius={10}
                 glowRadius={40}
                 glowIntensity={1}
                 coneSpread={25}
                 animated={true}
-                colors={['#3AA1FE', '#8FC9FE', '#1E7FD6']}
+                colors={['var(--accent-blue)', 'var(--accent-blue-light)', 'var(--accent-blue-deep)']}
                 className="ki-category-card"
                 sweepToken={sweepToken}
                 sweepDelay={index * 70}

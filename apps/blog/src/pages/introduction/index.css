@@ -10,7 +10,7 @@
   justify-items: center;
   column-gap: clamp(16px, 4vw, 56px);
   overflow: hidden;
-  background: #111111;
+  background: var(--bg);
   padding: 0 clamp(16px, 4vw, 64px);
 }
 

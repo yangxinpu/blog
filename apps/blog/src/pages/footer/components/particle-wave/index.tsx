@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import './index.css';
 
 export interface ParticleWaveProps {
-  /** 粒子颜色（十六进制），远景（地平线方向）颜色，默认白色 */
+  /** 粒子颜色（十六进制或 CSS 变量），远景（地平线方向）颜色，默认主色浅阶 */
   color?: string;
   /** 近景（屏幕底部几行）颜色；提供后粒子按纵深从 color 渐变到此色，默认不渐变 */
   nearColor?: string | null;
@@ -23,8 +23,14 @@ interface WaveConfig {
   rows: number;
 }
 
+const resolveCssColor = (value: string): string => {
+  const match = /^var\((--[\w-]+)\)$/.exec(value.trim());
+  if (!match) return value;
+  return getComputedStyle(document.documentElement).getPropertyValue(match[1]).trim() || value;
+};
+
 const hexToRgb = (hex: string): [number, number, number] => {
-  const h = hex.replace('#', '');
+  const h = resolveCssColor(hex).replace('#', '');
   const v = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
   const num = parseInt(v.slice(0, 6), 16);
   return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
@@ -50,7 +56,7 @@ const mixHex = (from: string, to: string, m: number): string => {
  * 前景粒子更大更亮，波峰处亮度增强。Canvas 2D + 离屏精灵渲染。
  */
 const ParticleWave = ({
-  color = '#FFFFFF',
+  color = 'var(--primary-200)',
   nearColor = null,
   speed = 1,
   density = 1,

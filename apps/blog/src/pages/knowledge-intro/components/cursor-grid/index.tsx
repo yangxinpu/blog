@@ -48,8 +48,14 @@ const FALLOFF_CURVES: Record<Falloff, (t: number) => number> = {
   sharp: t => t * t * t
 };
 
+const resolveCssColor = (value: string): string => {
+  const match = /^var\((--[\w-]+)\)$/.exec(value.trim());
+  if (!match) return value;
+  return getComputedStyle(document.documentElement).getPropertyValue(match[1]).trim() || value;
+};
+
 const hexToRgb = (hex: string): [number, number, number] => {
-  const h = hex.replace('#', '');
+  const h = resolveCssColor(hex).replace('#', '');
   const v = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
   const num = parseInt(v.slice(0, 6), 16);
   return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
@@ -57,7 +63,7 @@ const hexToRgb = (hex: string): [number, number, number] => {
 
 const CursorGrid = ({
   cellSize = 70,
-  color = '#17FBC6',
+  color = 'var(--accent)',
   radius = 140,
   falloff = 'smooth',
   holdTime = 400,
@@ -76,21 +82,24 @@ const CursorGrid = ({
   const propsRef = useRef<GridConfig>({} as GridConfig);
   const wakeRef = useRef<(() => void) | null>(null);
 
-  propsRef.current = {
-    cellSize,
-    color,
-    radius,
-    falloff,
-    holdTime,
-    fadeDuration,
-    lineWidth,
-    maxOpacity,
-    fillOpacity,
-    gridOpacity,
-    cellRadius,
-    clickPulse,
-    pulseSpeed
-  };
+  useEffect(() => {
+    propsRef.current = {
+      cellSize,
+      color,
+      radius,
+      falloff,
+      holdTime,
+      fadeDuration,
+      lineWidth,
+      maxOpacity,
+      fillOpacity,
+      gridOpacity,
+      cellRadius,
+      clickPulse,
+      pulseSpeed
+    };
+    wakeRef.current?.();
+  });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -309,7 +318,6 @@ const CursorGrid = ({
       container.removeEventListener('pointermove', onPointerMove);
       container.removeEventListener('pointerdown', onPointerDown);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellSize]);
 
   // Repaint static layers when visual props change while idle

@@ -128,8 +128,8 @@
   justify-content: center;
   width: clamp(40px, 4vw, 54px);
   height: clamp(40px, 4vw, 54px);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface-tint);
+  border: 1px solid var(--surface-tint-border);
   border-radius: clamp(9px, 1vw, 13px);
   flex-shrink: 0;
 }
@@ -170,15 +170,15 @@
 
 .ki-category-link-tag {
   font-size: clamp(11px, 1.05vw, 13.5px);
-  color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent);
+  background: var(--tag-bg);
   border-radius: clamp(5px, 0.7vw, 8px);
   padding: clamp(3px, 0.5vw, 5px) clamp(8px, 1vw, 12px);
   transition: all 0.2s ease;
 }
 
 .ki-category-link:hover .ki-category-link-tag {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--surface-tint-hover);
 }
 
 /* Animations */

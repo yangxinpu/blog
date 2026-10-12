@@ -16,10 +16,18 @@
   --border-subtle: #1a1a1a;
   --accent: #17FBC6;
   --accent-blue: #3AA1FE;
+  --accent-blue-light: #8FC9FE;
+  --accent-blue-deep: #1E7FD6;
   --accent-hover: var(--primary-200);
-
-  /* 通用色（非主色系，用于按钮、遮罩等场景） */
-  --white: #FFFFFF;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-strong: rgba(0, 0, 0, 0.85);
+  --shadow-soft: rgba(0, 0, 0, 0.1);
+  --surface-tint: rgba(23, 251, 198, 0.06);
+  --surface-tint-hover: rgba(23, 251, 198, 0.12);
+  --surface-tint-border: rgba(23, 251, 198, 0.18);
+  --scrim: rgba(0, 0, 0, 0.28);
+  --scrim-soft: rgba(0, 0, 0, 0.25);
+  --scrim-mid: rgba(0, 0, 0, 0.5);
 
   /* Tag / Chip 变量 */
   --tag-bg: rgba(23, 251, 198, 0.12);

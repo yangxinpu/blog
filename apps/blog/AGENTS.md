@@ -1,6 +1,6 @@
 # blog 应用 - Agent 指南
 
-> **文档版本**: v4.40.6
+> **文档版本**: v4.40.8
 > **最后更新**: 2026-10-12
 
 > 本文件仅记录「不看就会踩坑」的应用专属事实。monorepo 层面的事实见根 [AGENTS.md](file:///Users/NaiLuo/Documents/GithubProject/blog/AGENTS.md)。
@@ -119,6 +119,9 @@ src/
   --border: #2a2a2a;
   --border-subtle: #1a1a1a;
   --accent: #17FBC6;
+  --accent-blue: #3AA1FE;
+  --accent-blue-light: #8FC9FE;
+  --accent-blue-deep: #1E7FD6;
   --accent-hover: var(--primary-200);
   --shadow: rgba(0, 0, 0, 0.3);
 

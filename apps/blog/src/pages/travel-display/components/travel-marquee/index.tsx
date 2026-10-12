@@ -32,7 +32,7 @@ const CARD_RATIOS = [4 / 3, 1, 16 / 10, 3 / 4, 5 / 4];
  * 并发受控的图片预加载：
  * - 只对去重后的唯一 URL 发请求（轨道里每张图要复制 6 份，DOM 节点共享缓存）
  * - decode() 预热位图，ready 后再挂载全部 <img>，避免 72 个节点同时解码卡顿
- * - 失败也放行，卡片底色 #111 兜底，绝不让加载层永久卡住
+ * - 失败也放行，卡片底色由 --bg 兜底，绝不让加载层永久卡住
  */
 const preloadImages = (srcs: string[], onProgress: (done: number) => void) =>
   new Promise<void>((resolve) => {

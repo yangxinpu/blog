@@ -108,7 +108,7 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.12);
+  border: 3px solid var(--surface-tint);
   border-top-color: var(--accent-blue);
   animation: travel-marquee-spin 0.9s linear infinite;
 }
@@ -129,7 +129,7 @@
 @media (prefers-reduced-motion: reduce) {
   .travel-marquee__spinner {
     animation: none;
-    border-top-color: rgba(255, 255, 255, 0.35);
+    border-top-color: var(--primary-200);
   }
 
   .travel-marquee__loader {
