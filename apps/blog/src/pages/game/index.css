@@ -1,4 +1,6 @@
 .game-section {
+  --game-reveal-progress: 1;
+
   position: relative;
   width: 100%;
   height: 100vh;
@@ -134,7 +136,7 @@
   overflow: hidden;
   scroll-snap-align: center;
   transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-  background: var(--bg-translucent);
+  background: transparent;
   will-change: transform, opacity;
   cursor: pointer;
 }
@@ -144,7 +146,7 @@
   height: 100%;
   border-radius: inherit;
   overflow: hidden;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .game-card-img {
@@ -154,6 +156,19 @@
   object-position: center bottom;
   display: block;
   pointer-events: none;
+}
+
+.game-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image: radial-gradient(
+    ellipse 50% 100% at 50% calc((var(--game-reveal-progress) - 1) * 100%),
+    black 0%,
+    black 99.9%,
+    transparent 100%
+  );
 }
 
 /* 平板 */
@@ -186,5 +201,11 @@
 
   .game-card {
     width: clamp(80px, 20vw, 110px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-reveal {
+    display: none;
   }
 }

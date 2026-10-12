@@ -68,13 +68,6 @@
   display: inline-block;
 }
 
-/* SplitText 当前版本把拆出的字符包成无类名 div：标题字符在 span 内，副标题字符为直接子元素 */
-.home-title div,
-.home-subtitle > div,
-.home-subtitle-alt > div {
-  will-change: transform, opacity;
-}
-
 .home-title-part-left,
 .home-title-part-right {
   display: inline-block;
@@ -164,7 +157,7 @@
 /* ---------- 减少动态效果 ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  /* reduced-motion 下 JS 不执行 SplitText，文字直出；仅保留强调语兜底 */
+  /* reduced-motion 下 JS 不执行入场动画，文字直出 */
   .home-title .home-title-accent {
     transform: none !important;
     opacity: 1 !important;

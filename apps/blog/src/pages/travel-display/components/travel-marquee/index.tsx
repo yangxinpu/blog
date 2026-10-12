@@ -149,12 +149,12 @@ const TravelMarquee: React.FC<TravelMarqueeProps> = ({ rows }) => {
           trigger: root,
           start: 'top bottom',
           end: 'top top',
-          scrub: 1,
+          scrub: 3.4,
         },
       });
 
       gsap.set(root, { '--p': 1 });
-      revealTl.to(root, { '--p': 0, duration: 0.9, ease: 'power3.out' }, 0);
+      revealTl.to(root, { '--p': 0, duration: 2, ease: 'power3.out' }, 0);
 
       rows.forEach((_, rowIndex) => {
         const zooms = gsap.utils.toArray<HTMLElement>(
@@ -167,7 +167,7 @@ const TravelMarquee: React.FC<TravelMarqueeProps> = ({ rows }) => {
         gsap.set(zooms, { scale: 0.84 });
         revealTl.to(
           zooms,
-          { scale: 1, duration: 0.9, ease: 'back.out(1.5)' },
+          { scale: 1, duration: 1.7, ease: 'back.out(1.5)' },
           rowIndex * 0.12
         );
       });

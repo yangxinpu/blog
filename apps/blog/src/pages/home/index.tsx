@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SplitText from 'gsap/SplitText';
 import AeroShards from './components/aero-shards';
 import './index.css';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -19,77 +18,30 @@ const Home = () => {
       const q = self.selector as (selector: string) => HTMLElement[];
 
       const titleEl = q('.home-title')[0];
-      const accentEl = q('.home-title-accent')[0];
       const subtitleEls = [q('.home-subtitle')[0], q('.home-subtitle-alt')[0]].filter(
         (el): el is HTMLElement => Boolean(el),
       );
 
+      const introTimeline = gsap.timeline({ delay: 0.15 });
       if (titleEl) {
-        const titleSplit = new SplitText(titleEl, { type: 'chars' });
-        const tl = gsap.timeline({ delay: 0.15 });
-
-        // 标题：自中心向两侧波浪式弹入，每个字符带随机小倾角与回弹
-        tl.from(titleSplit.chars, {
+        introTimeline.from(titleEl, {
           opacity: 0,
-          yPercent: 115,
-          scale: 0.65,
-          rotation: () => gsap.utils.random(-10, 10),
-          duration: 1.05,
-          ease: 'back.out(1.6)',
-          stagger: { each: 0.03, from: 'center' },
+          y: 84,
+          duration: 1.1,
+          ease: 'power3.out',
         });
-
-        // 副标题：字符自中心向两侧波浪旋出、虚化对焦；落定后保留错峰轻起伏，如呼吸涟漪
-        subtitleEls.forEach((el, i) => {
-          const split = new SplitText(el, { type: 'chars' });
-          const position = 0.55 + i * 0.28;
-
-          tl.from(
-            split.chars,
-            {
-              opacity: 0,
-              yPercent: 120,
-              scale: 0.7,
-              rotationZ: () => gsap.utils.random(-10, 10),
-              duration: 0.75,
-              ease: 'back.out(1.8)',
-              stagger: { each: 0.025, from: 'center' },
-            },
-            position,
-          );
-          tl.from(
-            el,
-            {
-              filter: 'blur(10px)',
-              duration: 0.9,
-              ease: 'power2.out',
-            },
-            position,
-          );
-
-          // 入场落定后：字符沿中心向两侧错峰呼吸，形成持续而克制的涟漪
-          gsap.to(split.chars, {
-            y: -3,
-            duration: 1.9,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            delay: position + 1.1,
-            stagger: { each: 0.04, from: 'center', repeat: -1, yoyo: true },
-          });
-        });
-
-        // 强调语入场完成后保持轻柔漂浮，灵气收尾
-        if (accentEl) {
-          gsap.to(accentEl, {
-            y: -4,
-            duration: 2.2,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            delay: 1.7,
-          });
-        }
+      }
+      if (subtitleEls.length > 0) {
+        introTimeline.from(
+          subtitleEls,
+          {
+            opacity: 0,
+            y: 64,
+            duration: 0.9,
+            ease: 'power3.out',
+          },
+          0.68,
+        );
       }
 
       // 鼠标景深视差：文字被指针轻微吸引，呈现漂浮的灵动感（仅精细指针设备）

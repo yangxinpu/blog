@@ -131,6 +131,17 @@ function Game() {
     const ctx = gsap.context(() => {
       if (prefersReduced) return;
 
+      const revealTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: 3.4,
+        },
+      });
+      gsap.set(section, { '--game-reveal-progress': 1 });
+      revealTl.to(section, { '--game-reveal-progress': 0, duration: 2, ease: 'power3.out' }, 0);
+
       // 标题入场
       if (titleRef.current) {
         gsap.fromTo(
@@ -159,21 +170,21 @@ function Game() {
         gsap.fromTo(
           cardReveals,
           {
-            y: 42,
+            y: 96,
             opacity: 0,
-            filter: 'blur(14px)',
-            rotateX: -10,
+            scale: 0.78,
+            rotateX: 14,
             transformOrigin: '50% 100%',
           },
           {
             y: 0,
             opacity: 1,
-            filter: 'blur(0px)',
+            scale: 1,
             rotateX: 0,
-            duration: 0.85,
-            ease: 'power3.out',
+            duration: 1.1,
+            ease: 'back.out(1.45)',
             stagger: {
-              amount: 0.38,
+              amount: 0.58,
               from: 'center',
             },
             scrollTrigger: {
@@ -183,7 +194,7 @@ function Game() {
             },
             onComplete: () => {
               cardReveals.forEach((reveal) => {
-                gsap.set(reveal, { clearProps: 'transform,opacity,filter,transformOrigin' });
+                gsap.set(reveal, { clearProps: 'transform,opacity,transformOrigin' });
               });
               applyCoverFlow();
             },
@@ -407,6 +418,7 @@ function Game() {
           </div>
         </div>
       </div>
+      <div className="game-reveal" aria-hidden="true" />
     </section>
   );
 }
