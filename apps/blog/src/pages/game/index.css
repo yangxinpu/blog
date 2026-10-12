@@ -60,7 +60,7 @@
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.2;
-  margin: 0 0 clamp(8px, 2vh, 20px) clamp(16px, 4vw, 64px);
+  margin: 0 0 clamp(2px, 0.8vh, 8px) clamp(16px, 4vw, 64px);
   color: #ffffff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
@@ -86,8 +86,10 @@
   scrollbar-width: none;
   /* 水平方向由 pointer 事件接管，垂直允许原生滚动 */
   touch-action: pan-y;
+  overscroll-behavior-x: contain;
   user-select: none;
   -webkit-user-select: none;
+  cursor: grab;
   /* 两侧渐变淡出（mask 作用于容器本身，不随内容滚动） */
   -webkit-mask-image: linear-gradient(
     to right,
@@ -109,11 +111,16 @@
   display: none;
 }
 
+.game-track-wrap.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
 .game-track {
   display: flex;
   gap: clamp(12px, 1.6vw, 22px);
   /* 两侧内边距 = 容器一半 - 卡片半宽，使首尾卡片可滚动到正中 */
-  padding: clamp(16px, 3vw, 36px) calc(50% - clamp(55px, 9vw, 90px));
+  padding: clamp(14px, 2.6vw, 30px) calc(50% - clamp(48px, 7.5vw, 75px));
   justify-content: flex-start;
 }
 
@@ -121,22 +128,30 @@
 .game-card {
   flex: 0 0 auto;
   position: relative;
-  width: clamp(110px, 18vw, 180px);
-  aspect-ratio: 2 / 3;
+  width: clamp(96px, 15vw, 150px);
+  aspect-ratio: 112 / 230;
   border-radius: 14px;
   overflow: hidden;
   scroll-snap-align: center;
   transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-  background: #1a1a24;
+  background: var(--bg-translucent);
   will-change: transform, opacity;
   cursor: pointer;
+}
+
+.game-card-reveal {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  will-change: transform, opacity, filter;
 }
 
 .game-card-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
   display: block;
   pointer-events: none;
 }
@@ -145,11 +160,11 @@
 @media (max-width: 1024px) {
   .game-track {
     gap: clamp(10px, 1.4vw, 18px);
-    padding: clamp(14px, 3vw, 30px) calc(50% - clamp(50px, 10vw, 80px));
+    padding: clamp(12px, 2.6vw, 26px) calc(50% - clamp(44px, 8vw, 68px));
   }
 
   .game-card {
-    width: clamp(100px, 20vw, 160px);
+    width: clamp(88px, 16vw, 136px);
   }
 }
 
@@ -166,10 +181,10 @@
 
   .game-track {
     gap: clamp(10px, 2.5vw, 16px);
-    padding: clamp(12px, 3.5vw, 24px) calc(50% - clamp(45px, 12vw, 65px));
+    padding: clamp(10px, 3vw, 20px) calc(50% - clamp(40px, 10vw, 55px));
   }
 
   .game-card {
-    width: clamp(90px, 24vw, 130px);
+    width: clamp(80px, 20vw, 110px);
   }
 }
